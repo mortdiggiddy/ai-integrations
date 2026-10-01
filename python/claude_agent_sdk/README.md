@@ -1,5 +1,13 @@
 # Durable Claude Agent SDK agents on Temporal
 
+## Development fork goal
+
+This fork targets validated native Claude skills that run unmodified as recoverable Temporal operations. The integration is intended for application authored Temporal Workflows and a later adapter into [temporal-agent-harness](https://github.com/temporal-community/temporal-agent-harness), not one fixed demo Workflow. Claude owns skill execution; the integration must preserve conversation checkpoints, workspace files, approvals and recorded outcomes. These are target requirements, not implemented guarantees.
+
+![Target recovery responsibilities, not shipped behavior: Claude executes the skill, Temporal governs the run, and a replacement Worker restores conversation, workspace and control records before continuing.](docs/skill-recovery-goals.svg)
+
+See the [fork README](https://github.com/mortdiggiddy/ai-integrations/tree/design-base#readme) for project goals, current status, the recommended hybrid recovery investigation and the role of Mods. The APIs below describe the current implementation. Policy mode cannot yet complete an effectful coding skill.
+
 ## Opt in built in tool policy
 
 `ToolPolicy` and `ToolPolicyEntry` provide an experimental explicit inventory.
