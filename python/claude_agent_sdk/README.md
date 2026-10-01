@@ -8,6 +8,8 @@ This fork targets validated native Claude skills that run unmodified as recovera
 
 See the [fork README](https://github.com/mortdiggiddy/ai-integrations/tree/design-base#readme) for project goals, current status, the recommended hybrid recovery investigation and the role of Mods. The APIs below describe the current implementation. Policy mode cannot yet complete an effectful coding skill.
 
+The canonical recovery documentation is the [specification](docs/skill-recovery/spec.md), [implementation plan](docs/skill-recovery/plan.md), [evidence ledger](docs/skill-recovery/evidence.md) and [work items](docs/skill-recovery/work-items.md). These describe the target and its remaining proof requirements, not additional implemented guarantees.
+
 ## Opt in built in tool policy
 
 `ToolPolicy` and `ToolPolicyEntry` provide an experimental explicit inventory.
