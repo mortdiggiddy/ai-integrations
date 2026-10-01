@@ -60,6 +60,8 @@ def decide(event: dict[str, Any]) -> dict[str, Any]:
     Returns:
         The hook decision.
     """
+    if os.environ.get("TCA_POLICY_MODE") == "1":
+        return _policy_decide(event)
     tool_use_id = str(event.get("tool_use_id") or "")
     answered = set(os.environ.get("TCA_ANSWERED_IDS", "").split())
     run_dir = os.environ.get("TCA_HOOK_DIR")
@@ -98,13 +100,160 @@ def decide(event: dict[str, Any]) -> dict[str, Any]:
     return output
 
 
+def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    value: dict[str, Any] = {}
+    for key, item in pairs:
+        if key in value:
+            raise ValueError("Duplicate JSON key")
+        value[key] = item
+    return value
+
+
+def _reject_constant(value: str) -> Any:
+    raise ValueError(f"Nonfinite JSON constant: {value}")
+
+
+def _check_json(value: Any) -> None:
+    if isinstance(value, dict):
+        if any(not isinstance(key, str) for key in value):
+            raise ValueError("JSON object keys must be strings")
+        for item in value.values():
+            _check_json(item)
+    elif isinstance(value, list):
+        for item in value:
+            _check_json(item)
+    elif value is not None and not isinstance(value, (str, int, float, bool)):
+        raise ValueError("Tool input must contain JSON values")
+
+
+def _request_identity(identity: Any, name: Any, tool_input: Any) -> str:
+    """Return strict canonical JSON for one complete paused request."""
+    if not isinstance(identity, str) or not identity:
+        raise ValueError("Policy tool call has no valid identity")
+    if not isinstance(name, str) or not name:
+        raise ValueError("Policy tool call has no valid name")
+    if not isinstance(tool_input, dict):
+        raise ValueError("Policy tool input must be an object")
+    try:
+        _check_json(tool_input)
+        return json.dumps(
+            {"id": identity, "name": name, "input": tool_input},
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        )
+    except RecursionError as err:
+        raise ValueError("Policy tool input nesting is too deep") from err
+
+
+def _read_paused_request(marker: str) -> dict[str, Any]:
+    """Read a complete strict JSON request, rejecting legacy or corrupt markers."""
+    try:
+        with open(marker, encoding="utf-8") as handle:
+            request = json.load(
+                handle,
+                object_pairs_hook=_unique_object,
+                parse_constant=_reject_constant,
+            )
+    except RecursionError as err:
+        raise ValueError("Paused policy request nesting is too deep") from err
+    if not isinstance(request, dict) or set(request) != {"id", "name", "input"}:
+        raise ValueError("Invalid paused policy request")
+    _request_identity(request["id"], request["name"], request["input"])
+    return request
+
+
+def _policy_decide(event: dict[str, Any]) -> dict[str, Any]:
+    directory = os.environ.get("TCA_HOOK_DIR")
+    if not directory or not os.path.isdir(directory):
+        return _deny(STOPPED)
+    try:
+        with open(os.path.join(directory, "policy.json"), encoding="utf-8") as handle:
+            document = json.load(handle)
+        entries = {row["name"]: row for row in document["entries"]}
+        name = event.get("tool_name")
+        row = entries.get(name)
+        event_name = event.get("hook_event_name", "PreToolUse")
+        if event_name in ("PostToolUse", "PostToolUseFailure"):
+            if row is None or row["class"] in ("effect", "ask"):
+                with open(
+                    os.path.join(directory, "observed_effects"), "a", encoding="utf-8"
+                ) as handle:
+                    handle.write(json.dumps({"name": name, "event": event_name}) + "\n")
+            return {"hookEventName": event_name}
+        if row is None:
+            return _deny("Tool is not offered by policy.")
+        if os.path.exists(os.path.join(directory, "stop")):
+            return _deny(STOPPED)
+        marker = os.path.join(directory, "paused_call")
+        tool_use_id = event.get("tool_use_id")
+        request = _request_identity(tool_use_id, name, event.get("tool_input", {}))
+        if os.path.exists(marker):
+            paused = _read_paused_request(marker)
+            if (
+                _request_identity(paused["id"], paused["name"], paused["input"])
+                != request
+                or row["class"] == "read"
+            ):
+                return _deny()
+        if row["class"] == "read":
+            if name == "Skill":
+                return _deny("Skill requires a validated package configuration.")
+            tool_input = event.get("tool_input") or {}
+            path = tool_input.get("file_path" if name == "Read" else "path")
+            if name == "Read" and (not isinstance(path, str) or not path):
+                return _deny("Read requires a file path.")
+            if path is None:
+                path = document["workspace_root"]
+            if not isinstance(path, str):
+                return _deny("Read path must be a string.")
+            root = document["workspace_root"]
+            target = os.path.realpath(os.path.join(root, path))
+            if os.path.commonpath([root, target]) != root:
+                return _deny("Read path is outside the workspace root.")
+            return {"hookEventName": "PreToolUse"}
+        if row["class"] not in ("effect", "ask"):
+            return _deny("Invalid policy classification.")
+        answered = set(os.environ.get("TCA_ANSWERED_IDS", "").split())
+        if tool_use_id not in answered:
+            try:
+                fd = os.open(marker, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+                with os.fdopen(fd, "w", encoding="utf-8") as handle:
+                    handle.write(request)
+            except FileExistsError:
+                paused = _read_paused_request(marker)
+                if (
+                    _request_identity(paused["id"], paused["name"], paused["input"])
+                    != request
+                ):
+                    return _deny()
+        return {"hookEventName": "PreToolUse", "permissionDecision": "defer"}
+    except (OSError, ValueError, KeyError, TypeError, RecursionError):
+        return _deny("Policy configuration is unavailable or invalid.")
+
+
 def main() -> None:
     """Read one event from stdin and print the decision.
 
     The engine sends UTF-8; read bytes, so a Windows code page cannot garble or
     reject the tool input. The answer is ASCII (``json.dumps`` escapes the rest).
     """
-    event = json.loads(sys.stdin.buffer.read().decode("utf-8"))
+    payload = sys.stdin.buffer.read()
+    if os.environ.get("TCA_POLICY_MODE") == "1":
+        try:
+            raw = payload.decode("utf-8")
+            event = json.loads(
+                raw, object_pairs_hook=_unique_object, parse_constant=_reject_constant
+            )
+            if not isinstance(event, dict):
+                raise ValueError("Hook event must be an object")
+        except (TypeError, ValueError, RecursionError):
+            print(
+                json.dumps({"hookSpecificOutput": _deny("Invalid policy hook event.")})
+            )
+            return
+    else:
+        event = json.loads(payload.decode("utf-8"))
     print(json.dumps({"hookSpecificOutput": decide(event)}))
 
 

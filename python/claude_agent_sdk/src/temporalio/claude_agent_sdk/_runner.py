@@ -53,12 +53,14 @@ from claude_agent_sdk import (
     AssistantMessage,
     ClaudeAgentOptions,
     MirrorErrorMessage,
+    PermissionResultDeny,
     ResultError,
     ResultMessage,
     SessionStore,
     SystemMessage,
     TextBlock,
     ToolResultBlock,
+    ToolUseBlock,
     UserMessage,
     create_sdk_mcp_server,
     fork_session_via_store,
@@ -68,9 +70,21 @@ from claude_agent_sdk import (
 )
 from temporalio import activity
 
-from ._defer_hook import STOPPED
+from ._defer_hook import STOPPED, _read_paused_request, _request_identity
 from ._events import emit
 from ._models import DeferredCall, SegmentInput, SegmentOutput, ToolOutcome, ToolSpec
+from ._policy import ToolPolicy, policy_extra_options
+
+
+async def _deny_policy_permission(
+    tool_name: str, tool_input: dict[str, Any], context: Any
+) -> PermissionResultDeny:
+    """Never grant engine execution when permission handling is reached."""
+    del tool_input, context
+    return PermissionResultDeny(
+        message=f"Policy denies engine execution of {tool_name}"
+    )
+
 
 ENV_AUTH = (
     "ANTHROPIC_API_KEY",
@@ -480,6 +494,7 @@ class ClaudeAgentSdkRunner:
         one_tool_at_a_time: bool = True,
         model: str | None = None,
         max_budget_usd: float | None = None,
+        tool_policy: ToolPolicy | None = None,
     ) -> None:
         """Create the runner.
 
@@ -503,6 +518,9 @@ class ClaudeAgentSdkRunner:
             one_tool_at_a_time: Ask Claude for one tool call per message.
             model: Default model when the agent does not set one.
             max_budget_usd: Cost cap per segment.
+            tool_policy: Optional runner bound inventory. When set, every segment
+                must carry the same policy. Policy extras are validated here.
+                When unset, a segment can opt in and is validated before startup.
 
         Raises:
             ValueError: If ``extra_options`` sets an option the plugin manages, or
@@ -511,6 +529,12 @@ class ClaudeAgentSdkRunner:
                 path, or a path given in another form than its real one).
         """
         _check_extra_options(extra_options or {})
+        self._policy = tool_policy
+        self._policy_extra = (
+            policy_extra_options(extra_options or {})
+            if tool_policy is not None
+            else None
+        )
         directory = cwd or os.getcwd()
         mismatch = _key_mismatch(directory)
         if mismatch is not None:
@@ -525,6 +549,11 @@ class ClaudeAgentSdkRunner:
         self._env = env or {}
         self._cli_path = cli_path
         self._extra = extra_options or {}
+        self._extra_snapshot = dict(extra_options or {})
+        if isinstance(self._extra_snapshot.get("extra_args"), dict):
+            self._extra_snapshot["extra_args"] = dict(
+                self._extra_snapshot["extra_args"]
+            )
         self._one_tool = one_tool_at_a_time
         self._model = model
         self._max_budget = max_budget_usd
@@ -655,6 +684,13 @@ class ClaudeAgentSdkRunner:
             RuntimeError: If the transcript did not reach the session store (Temporal
                 retries the segment).
         """
+        policy = self._effective_policy(inp)
+        if policy is not None:
+            policy_extra_options(
+                self._policy_extra
+                if self._policy_extra is not None
+                else self._extra_snapshot
+            )
         reported = await self._engine_version()
         if reported is not None and _too_old(reported):
             return _too_old_output(inp.session_id, reported)  # before the engine starts
@@ -691,6 +727,8 @@ class ClaudeAgentSdkRunner:
         """
         # Durable tools the engine ran itself (must stay empty).
         ran_inside: list[str] = []
+        policy = self._effective_policy(inp)
+        seen_tools: dict[str, str] = {}
 
         def make_stub(spec: ToolSpec) -> Any:
             @tool(spec.name, spec.description, spec.input_schema)
@@ -709,6 +747,16 @@ class ClaudeAgentSdkRunner:
 
         hook_dir = tempfile.mkdtemp(prefix="tca-hook-")
         settings_file = Path(hook_dir) / "settings.json"
+        if policy is not None:
+            Path(hook_dir, "policy.json").write_text(
+                json.dumps(
+                    {
+                        "entries": json.loads(policy.canonical_json()),
+                        "workspace_root": os.path.realpath(self._cwd or os.getcwd()),
+                    }
+                ),
+                encoding="utf-8",
+            )
         settings_file.write_text(
             json.dumps(
                 {
@@ -719,7 +767,15 @@ class ClaudeAgentSdkRunner:
                                 "matcher": ".*",
                                 "hooks": [_hook_entry()],
                             }
-                        ]
+                        ],
+                        **(
+                            {
+                                event: [{"matcher": ".*", "hooks": [_hook_entry()]}]
+                                for event in ("PostToolUse", "PostToolUseFailure")
+                            }
+                            if policy is not None
+                            else {}
+                        ),
                     }
                 }
             ),
@@ -746,8 +802,11 @@ class ClaudeAgentSdkRunner:
         result: ResultMessage | None = None
         engine_version = "(unknown version)"
         paused_by_hook: str | None = None
+        paused_request: dict[str, Any] | None = None
+        marker_error: str | None = None
         last_assistant: str | None = None
         store_error: str | None = None
+        query_error: Exception | None = None
         stopped_by_hook = False
         # When the Activity is cancelled or times out, deny every later tool call
         # while the SDK shuts the engine down.
@@ -771,29 +830,107 @@ class ClaudeAgentSdkRunner:
                 ):
                     last_assistant = message.uuid or last_assistant
                     for block in message.content:
+                        if isinstance(block, ToolUseBlock):
+                            seen_tools[block.id] = block.name
                         if isinstance(block, TextBlock) and block.text.strip():
                             emit({"type": "text", "text": block.text})
                 elif isinstance(message, UserMessage):
                     stopped_by_hook = stopped_by_hook or _hook_said_stopped(message)
+                    if policy is not None and not isinstance(message.content, str):
+                        for block in message.content:
+                            if (
+                                isinstance(block, ToolResultBlock)
+                                and block.tool_use_id not in injected
+                                and not block.is_error
+                            ):
+                                name = seen_tools.get(block.tool_use_id)
+                                if name is not None:
+                                    try:
+                                        classification = policy.lookup(name).tool_class
+                                    except ValueError:
+                                        classification = "effect"
+                                    if classification in ("effect", "ask"):
+                                        ran_inside.append(name)
                 elif isinstance(message, ResultMessage):
                     result = message
             marker = Path(hook_dir) / "paused_call"  # written when the hook defers
-            if marker.exists():
+            if policy is None and marker.exists():
                 paused_by_hook = marker.read_text(encoding="utf-8").strip() or None
         except ResultError as err:
-            final = err.subtype in FINAL_RESULT_ERRORS or _final_api_error(err)
-            if not final:
-                raise  # other engine errors: let Temporal retry the segment
-            # Retrying will not help.
-            return SegmentOutput(session_id=session_id, is_error=True, error=str(err))
+            if policy is not None:
+                query_error = err
+            else:
+                final = err.subtype in FINAL_RESULT_ERRORS or _final_api_error(err)
+                if not final:
+                    raise
+                return SegmentOutput(
+                    session_id=session_id, is_error=True, error=str(err)
+                )
         except RuntimeError as err:
-            if _moved(err):
+            if policy is not None:
+                query_error = err
+            elif _moved(err):
                 raise _SessionMoved(str(err)) from err
-            raise
+            else:
+                raise
+        except Exception as err:
+            if policy is not None:
+                query_error = err
+            else:
+                raise
         finally:
             if stopper is not None:
                 stopper.cancel()
+            if policy is not None:
+                marker = Path(hook_dir, "paused_call")
+                try:
+                    if marker.exists():
+                        paused_request = _read_paused_request(str(marker))
+                        paused_by_hook = paused_request["id"]
+                except (OSError, ValueError, KeyError, TypeError) as err:
+                    marker_error = f"Invalid paused policy request: {err}"
+                observations = Path(hook_dir, "observed_effects")
+                try:
+                    if observations.exists():
+                        for row in observations.read_text(
+                            encoding="utf-8"
+                        ).splitlines():
+                            observed = json.loads(row)
+                            ran_inside.append(str(observed["name"]))
+                except (OSError, ValueError, KeyError, TypeError, RecursionError):
+                    ran_inside.append("(unreadable execution observation)")
             shutil.rmtree(hook_dir, ignore_errors=True)  # the hook denies from now on
+
+        if policy is not None and ran_inside:
+            return SegmentOutput(
+                session_id=result.session_id if result is not None else session_id,
+                is_error=True,
+                error=self._pause_contract_problem(
+                    ran_inside,
+                    None,
+                    None,
+                    set(),
+                    engine_version,
+                    None,
+                    policy_mode=True,
+                ),
+                cost_usd=float(result.total_cost_usd or 0) if result is not None else 0,
+            )
+        if marker_error is not None:
+            return SegmentOutput(
+                session_id=session_id, is_error=True, error=marker_error
+            )
+        if query_error is not None:
+            if isinstance(query_error, ResultError):
+                if query_error.subtype in FINAL_RESULT_ERRORS or _final_api_error(
+                    query_error
+                ):
+                    return SegmentOutput(
+                        session_id=session_id, is_error=True, error=str(query_error)
+                    )
+            elif isinstance(query_error, RuntimeError) and _moved(query_error):
+                raise _SessionMoved(str(query_error)) from query_error
+            raise query_error
 
         if stopped_by_hook:
             # Not cancelled, yet the hook denied a call as stopped: it could not see
@@ -806,7 +943,13 @@ class ClaudeAgentSdkRunner:
                     "The pause hook could not see this step's folder "
                     f"({hook_dir}), so it denied Claude's tool calls. Run Claude Code "
                     "where it sees the Worker's temporary folder (for example, not in "
-                    "a sandbox with its own /tmp). No tool ran."
+                    "a sandbox with its own /tmp). "
+                    + (
+                        "The segment stops; absence of observations does not prove "
+                        "that no effect ran."
+                        if policy is not None
+                        else "No tool ran."
+                    )
                 ),
             )
         if store_error is not None:
@@ -827,6 +970,27 @@ class ClaudeAgentSdkRunner:
         sid = result.session_id or session_id
         cost = float(result.total_cost_usd or 0.0)
         deferred = result.deferred_tool_use
+        if policy is not None and deferred is not None:
+            try:
+                entry = policy.lookup(deferred.name)
+                if entry.tool_class == "read":
+                    raise ValueError("Read tool was unexpectedly deferred")
+                if paused_request is None:
+                    raise ValueError("Deferred tool has no recorded policy request")
+                if _request_identity(
+                    deferred.id, deferred.name, deferred.input
+                ) != _request_identity(
+                    paused_request["id"],
+                    paused_request["name"],
+                    paused_request["input"],
+                ):
+                    raise ValueError(
+                        "Deferred tool does not match the paused policy request"
+                    )
+            except (TypeError, ValueError) as err:
+                return SegmentOutput(
+                    session_id=sid, is_error=True, error=str(err), cost_usd=cost
+                )
         broken = self._pause_contract_problem(
             ran_inside,
             paused_by_hook,
@@ -834,6 +998,7 @@ class ClaudeAgentSdkRunner:
             set(injected),
             engine_version,
             result.stop_reason,
+            policy_mode=policy is not None,
         )
         if broken:
             return SegmentOutput(
@@ -877,7 +1042,16 @@ class ClaudeAgentSdkRunner:
         durable_server: Any,
     ) -> dict[str, Any]:
         """The ``ClaudeAgentOptions`` fields of one engine run, ``extra_options`` merged in."""
-        extra = dict(self._extra)
+        policy = self._effective_policy(inp)
+        extra = (
+            policy_extra_options(
+                self._policy_extra
+                if self._policy_extra is not None
+                else self._extra_snapshot
+            )
+            if policy is not None
+            else dict(self._extra)
+        )
         default_prompt = extra.pop("system_prompt", None)
         hint = ONE_TOOL_HINT if self._one_tool else None
         system_prompt: Any
@@ -944,7 +1118,36 @@ class ClaudeAgentSdkRunner:
         options.update(
             extra
         )  # only options the plugin leaves alone (checked in __init__)
+        if policy is not None:
+            options["tools"] = [entry.name for entry in policy.entries]
+            options["allowed_tools"] = [
+                entry.name
+                for entry in policy.entries
+                if entry.tool_class == "read" and entry.name != "Skill"
+            ]
+            options["permission_mode"] = "default"
+            options["can_use_tool"] = _deny_policy_permission
+            options["env"]["TCA_POLICY_MODE"] = "1"
         return options
+
+    def _effective_policy(self, inp: SegmentInput) -> ToolPolicy | None:
+        policy = (
+            ToolPolicy.from_json(inp.tool_policy)
+            if inp.tool_policy is not None
+            else None
+        )
+        if self._policy is not None:
+            if policy is None or policy.policy_version != self._policy.policy_version:
+                raise ValueError("Segment policy must match the runner policy")
+            policy = self._policy
+        if policy is not None:
+            if inp.tools:
+                raise ValueError("Policy mode does not support author tools")
+            if len(inp.builtin_tools) != len(policy.entries) or set(
+                inp.builtin_tools
+            ) != {entry.name for entry in policy.entries}:
+                raise ValueError("Segment builtin_tools must match the tool policy")
+        return policy
 
     @staticmethod
     def _pause_contract_problem(
@@ -954,6 +1157,7 @@ class ClaudeAgentSdkRunner:
         answered: set[str],
         version: str,
         stop_reason: Any,
+        policy_mode: bool = False,
     ) -> str | None:
         """Fail closed if the engine did not honor the pause.
 
@@ -961,15 +1165,26 @@ class ClaudeAgentSdkRunner:
             An error message, or None if the engine behaved.
         """
         if ran_inside:
+            if policy_mode:
+                return (
+                    f"Claude Code {version} observed execution or an execution attempt "
+                    f"for policy tool(s) {', '.join(sorted(set(ran_inside)))} inside "
+                    "the engine. The segment stops; detection cannot undo an effect."
+                )
             return (
                 f"Claude Code {version} ran durable tool(s) "
                 f"{', '.join(sorted(set(ran_inside)))} inside the engine instead of "
                 f"pausing. {PAUSE_CONTRACT}"
             )
+        suffix = (
+            "The policy segment stops. Execution safety requires independent engine proof."
+            if policy_mode
+            else PAUSE_CONTRACT
+        )
         if deferred is not None and deferred.id in answered:
             return (
                 f"Claude Code {version} paused again at tool call {deferred.id}, whose "
-                f"result was just delivered. {PAUSE_CONTRACT}"
+                f"result was just delivered. {suffix}"
             )
         if paused_by_hook and (deferred is None or deferred.id != paused_by_hook):
             got = (
@@ -977,7 +1192,7 @@ class ClaudeAgentSdkRunner:
             )
             return (
                 f"The pause hook deferred tool call {paused_by_hook}, but Claude Code "
-                f"{version} {got} (stop_reason={stop_reason}). {PAUSE_CONTRACT}"
+                f"{version} {got} (stop_reason={stop_reason}). {suffix}"
             )
         return None
 

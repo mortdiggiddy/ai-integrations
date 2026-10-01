@@ -63,6 +63,8 @@ class SegmentInput:
         model: Optional model name.
         max_turns: Optional cap on engine turns within the segment.
         builtin_tools: Claude Code built-in tools to enable inside the engine.
+        tool_policy: Canonical JSON table text from ToolPolicy.canonical_json().
+            None keeps legacy behavior. Text keeps Activity payloads wire safe.
         checkpoint: Where the session's last committed segment ended, or None when
             nothing is committed yet (the segment starts a new session).
         injected: Tool results to deliver to Claude, by ``tool_use_id``.
@@ -80,6 +82,7 @@ class SegmentInput:
     model: str | None = None
     max_turns: int | None = None
     builtin_tools: list[str] = field(default_factory=list)
+    tool_policy: str | None = None
     checkpoint: str | None = None
     injected: dict[str, ToolOutcome] = field(default_factory=dict)
     segment_index: int = 0
@@ -125,6 +128,8 @@ class AgentState:
         task_prompt: The prompt of the unfinished task, or None when idle.
         task_segments: Segments used by the unfinished task so far.
         pending: Tool results not yet delivered to Claude, by ``tool_use_id``.
+        blocked_policy_call: A deferred built in call with no installed executor.
+            Its presence prevents further segments, including after handover.
         recent_call_ids: The most recent tool calls that already ran, so none can run
             again in a later run.
         segments: Segments run by this agent across all runs.
@@ -142,6 +147,7 @@ class AgentState:
     task_prompt: str | None = None
     task_segments: int = 0
     pending: dict[str, ToolOutcome] = field(default_factory=dict)
+    blocked_policy_call: DeferredCall | None = None
     recent_call_ids: list[str] = field(default_factory=list)
     segments: int = 0
     tool_calls: int = 0

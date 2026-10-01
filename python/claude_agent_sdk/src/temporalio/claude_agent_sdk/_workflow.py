@@ -24,6 +24,7 @@ from ._models import (
     ToolOutcome,
     ToolSpec,
 )
+from ._policy import ToolPolicy
 
 SEGMENT_ACTIVITY_NAME = "run_claude_segment"
 """Name of the Activity that runs one model segment."""
@@ -192,6 +193,7 @@ class DurableClaudeAgent:
         model: str | None = None,
         max_turns: int | None = None,
         builtin_tools: Sequence[str] = (),
+        tool_policy: ToolPolicy | None = None,
         segment_timeout: timedelta = timedelta(minutes=10),
         segment_heartbeat_timeout: timedelta | None = timedelta(seconds=30),
         segment_retry_policy: RetryPolicy | None = None,
@@ -217,7 +219,10 @@ class DurableClaudeAgent:
             model: Optional model name.
             max_turns: Optional cap on engine turns within one segment.
             builtin_tools: Claude Code built-in tools to enable inside the engine.
-                They run inside the segment Activity, not as their own Activities.
+                Without a policy they run inside the segment Activity.
+            tool_policy: Optional immutable inventory for built in interception.
+                None preserves legacy behavior. Policy effects and questions
+                cannot complete until their executor or handler is installed.
             segment_timeout: Timeout of each model segment attempt.
             segment_heartbeat_timeout: Heartbeat timeout of each segment attempt.
                 It also bounds how late a cancel reaches a running segment: the
@@ -271,6 +276,14 @@ class DurableClaudeAgent:
         self._model = model
         self._max_turns = max_turns
         self._builtin_tools = list(builtin_tools)
+        if tool_policy is not None:
+            if tools:
+                raise ValueError("Policy mode does not support author tools")
+            offered = [entry.name for entry in tool_policy.entries]
+            if builtin_tools and list(builtin_tools) != offered:
+                raise ValueError("builtin_tools must match the tool policy inventory")
+            self._builtin_tools = offered
+        self._tool_policy = tool_policy
         self._segment_timeout = segment_timeout
         self._segment_heartbeat_timeout = segment_heartbeat_timeout
         self._segment_retry_policy = segment_retry_policy
@@ -408,6 +421,7 @@ class DurableClaudeAgent:
             task_prompt=s.task_prompt,
             task_segments=s.task_segments,
             pending=dict(s.pending),
+            blocked_policy_call=s.blocked_policy_call,
             recent_call_ids=list(s.recent_call_ids),
             segments=s.segments,
             tool_calls=s.tool_calls,
@@ -531,6 +545,12 @@ class DurableClaudeAgent:
             state.task_prompt = prompt
             state.task_segments = 0
             self._publish({"type": "prompt", "text": prompt})
+        if state.blocked_policy_call is not None:
+            raise ApplicationError(
+                f"Policy tool {state.blocked_policy_call.name} has no installed executor",
+                type="PolicyExecutorUnavailable",
+                non_retryable=True,
+            )
         if state.session_id is None:
             state.session_id = str(workflow.uuid4())
         self._running = True
@@ -564,6 +584,11 @@ class DurableClaudeAgent:
                         model=self._model,
                         max_turns=self._max_turns,
                         builtin_tools=self._builtin_tools,
+                        tool_policy=(
+                            self._tool_policy.canonical_json()
+                            if self._tool_policy is not None
+                            else None
+                        ),
                         checkpoint=state.checkpoint,
                         injected=dict(state.pending),
                         segment_index=index,
@@ -672,6 +697,21 @@ class DurableClaudeAgent:
             self._topic.publish(cap_event({**event, "at": workflow.now().isoformat()}))
 
     async def _run_tool(self, call: DeferredCall) -> ToolOutcome:
+        if self._tool_policy is not None:
+            try:
+                self._tool_policy.lookup(call.name)
+            except ValueError as err:
+                raise ApplicationError(
+                    str(err), type="PolicyToolNotOffered", non_retryable=True
+                ) from err
+            self._state.blocked_policy_call = call
+            # No executor or signed question handler is installed yet. Keep the
+            # paused call, and never return a synthetic result or start a segment.
+            raise ApplicationError(
+                f"Policy tool {call.name} is deferred; its executor is not installed",
+                type="PolicyExecutorUnavailable",
+                non_retryable=True,
+            )
         record: dict[str, Any] = {
             "id": call.id,
             "name": call.name,

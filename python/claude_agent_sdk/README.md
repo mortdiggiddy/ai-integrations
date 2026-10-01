@@ -1,5 +1,53 @@
 # Durable Claude Agent SDK agents on Temporal
 
+## Opt in built in tool policy
+
+`ToolPolicy` and `ToolPolicyEntry` provide an experimental explicit inventory.
+Pass the same policy to `DurableClaudeAgent(tool_policy=...)` and optionally to
+`ClaudeAgentSdkRunner(tool_policy=...)`. A runner bound to a policy rejects
+segments without that exact table. An unbound runner validates policy inputs
+before starting the engine. Leave both unset for the existing behavior.
+
+Supported classifications are Read, Grep, Glob and Skill as `read`; Write and
+Edit as `effect` with `repeatable` mode; Bash as `effect` with `claimed` mode;
+and AskUserQuestion as `ask`. Names are exact; a prefix grants no authority.
+Skill remains denied until validated package configuration is implemented.
+The policy digest includes every field. Timeouts and output caps describe the
+future effect executor; they are not enforced by the engine hook.
+
+Effects and questions are offered but not automatically approved. The hook defers them and denies every new call after a pause, and every call after a stop. An identical reannouncement of the paused call can defer again, never allow. In policy mode, the private pause marker binds the complete call ID, exact name and strict canonical JSON inputs; changing the name or input while reusing an ID is denied. Equivalent JSON object order is accepted. The runner compares the returned deferred request to that marker before committing a checkpoint. Invalid, incomplete, nonfinite or legacy plain ID markers stop the policy segment. Legacy mode retains its original plain ID behavior. These are additional plugin checks, not a guarantee supplied by the engine.
+
+The engine's [documented defer protocol](https://code.claude.com/docs/en/hooks#defer-a-tool-call-for-later) permits repeated deferral of a resumed call. Already answered IDs still defer without occupying the new paused slot. Their name and input are not yet bound to a durable cross segment answer ledger; that requires separate future validation. Offline tests do not settle batching, which the protocol documents as ignoring deferral.
+
+A permission callback only denies. The hook checks basic read paths against the runner working directory; this is not full filesystem or process isolation.
+
+The effect executor and signed question handler are not installed yet. A
+deferred policy call stops with `PolicyExecutorUnavailable`, retains the call
+in agent state, and prevents another segment. This API cannot yet complete an
+effectful coding task. It does not promise safe recovery or retry of Bash.
+
+For policy enabled segments, the initial `extra_options` allowlist is:
+
+| Key | Accepted value | Reason |
+|---|---|---|
+| `system_prompt` | String only | Preserve prompt composition without file, preset, or snapshot loading. |
+| `extra_args` | Empty dictionary only | Accept an explicit empty configuration without admitting raw flags. |
+
+All other extras, including permission fields, callbacks, grants, environment,
+MCP servers, settings, plugins, agents, directories, inference controls and
+diagnostic flags, are rejected. These remain available under legacy behavior
+where applicable. Policy extras are copied at construction and revalidated
+before use. Provider environment and binary selection are separate trusted
+Worker configuration, not protected by this allowlist.
+
+PostToolUse and PostToolUseFailure observations stop a segment for policy
+effects or questions. Successful streamed tool results provide a second
+detector when matched to a requested tool and not an injected host result.
+Requests alone do not prove execution, and failure observations are treated
+conservatively as possible execution. Detection cannot undo an effect.
+Offline tests do not establish engine batching, callback precedence, or real
+model defer and resume behavior.
+
 > ⚠️ **Experimental.** The API may change.
 
 Temporal integration for Anthropic's [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview), published as [`temporalio-claude-agent-sdk`](https://pypi.org/project/temporalio-claude-agent-sdk/) and imported as `temporalio.claude_agent_sdk`.

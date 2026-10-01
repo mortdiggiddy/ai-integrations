@@ -20,6 +20,7 @@ from temporalio.claude_agent_sdk._models import (
     ToolSpec,
 )
 from temporalio.claude_agent_sdk._plugin import ClaudeAgentPlugin
+from temporalio.claude_agent_sdk._policy import ToolPolicy, ToolPolicyEntry
 from temporalio.claude_agent_sdk._runner import ClaudeAgentSdkRunner
 from temporalio.claude_agent_sdk._session_store import FileSessionStore
 from temporalio.claude_agent_sdk._workflow import (
@@ -44,6 +45,8 @@ __all__ = [
     "SegmentOutput",
     "SegmentRunner",
     "ToolOutcome",
+    "ToolPolicy",
+    "ToolPolicyEntry",
     "ToolSpec",
     "activity_as_tool",
     "follow_agent",
