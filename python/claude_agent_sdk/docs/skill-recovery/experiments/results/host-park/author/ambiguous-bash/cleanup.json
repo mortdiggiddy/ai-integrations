@@ -1,0 +1,132 @@
+[
+  {
+    "children": [
+      {
+        "pid": 1742982,
+        "state": "R",
+        "parent": 1742959,
+        "start_ticks": "13340362"
+      },
+      {
+        "pid": 1742983,
+        "state": "S",
+        "parent": 1742959,
+        "start_ticks": "13340363"
+      },
+      {
+        "pid": 1742986,
+        "state": "Z",
+        "parent": 1742983,
+        "start_ticks": "13340365"
+      },
+      {
+        "pid": 1742987,
+        "state": "Z",
+        "parent": 1742983,
+        "start_ticks": "13340366"
+      },
+      {
+        "pid": 1743015,
+        "state": "Z",
+        "parent": 1742983,
+        "start_ticks": "13340384"
+      },
+      {
+        "pid": 1743020,
+        "state": "Z",
+        "parent": 1742983,
+        "start_ticks": "13340389"
+      },
+      {
+        "pid": 1743021,
+        "state": "Z",
+        "parent": 1742983,
+        "start_ticks": "13340389"
+      },
+      {
+        "pid": 1743022,
+        "state": "Z",
+        "parent": 1742983,
+        "start_ticks": "13340389"
+      },
+      {
+        "pid": 1743045,
+        "state": "Z",
+        "parent": 1742983,
+        "start_ticks": "13340432"
+      },
+      {
+        "pid": 1743046,
+        "state": "S",
+        "parent": 1742983,
+        "start_ticks": "13340435"
+      },
+      {
+        "pid": 1743060,
+        "state": "S",
+        "parent": 1743046,
+        "start_ticks": "13340438"
+      },
+      {
+        "pid": 1743086,
+        "state": "S",
+        "parent": 1742983,
+        "start_ticks": "13340442"
+      },
+      {
+        "pid": 1743088,
+        "state": "S",
+        "parent": 1743086,
+        "start_ticks": "13340442"
+      }
+    ],
+    "survivors_after_kill": [
+      {
+        "pid": 1742983,
+        "state": "S",
+        "parent": 1723176,
+        "start_ticks": "13340363"
+      },
+      {
+        "pid": 1743086,
+        "state": "S",
+        "parent": 1742983,
+        "start_ticks": "13340442"
+      },
+      {
+        "pid": 1743088,
+        "state": "S",
+        "parent": 1743086,
+        "start_ticks": "13340442"
+      }
+    ],
+    "remaining_active": [],
+    "final_states": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "children": [],
+    "survivors_after_kill": [],
+    "remaining_active": [],
+    "final_states": []
+  },
+  {
+    "children": [],
+    "survivors_after_kill": [],
+    "remaining_active": [],
+    "final_states": []
+  }
+]

@@ -1,0 +1,104 @@
+[
+  {
+    "children": [
+      {
+        "pid": 1746002,
+        "state": "S",
+        "parent": 1745990,
+        "start_ticks": "13351449"
+      },
+      {
+        "pid": 1746005,
+        "state": "Z",
+        "parent": 1746002,
+        "start_ticks": "13351451"
+      },
+      {
+        "pid": 1746006,
+        "state": "Z",
+        "parent": 1746002,
+        "start_ticks": "13351451"
+      },
+      {
+        "pid": 1746033,
+        "state": "Z",
+        "parent": 1746002,
+        "start_ticks": "13351471"
+      },
+      {
+        "pid": 1746034,
+        "state": "Z",
+        "parent": 1746002,
+        "start_ticks": "13351471"
+      },
+      {
+        "pid": 1746035,
+        "state": "Z",
+        "parent": 1746002,
+        "start_ticks": "13351471"
+      },
+      {
+        "pid": 1746051,
+        "state": "D",
+        "parent": 1746002,
+        "start_ticks": "13351485"
+      },
+      {
+        "pid": 1746088,
+        "state": "S",
+        "parent": 1746002,
+        "start_ticks": "13351489"
+      },
+      {
+        "pid": 1746090,
+        "state": "S",
+        "parent": 1746088,
+        "start_ticks": "13351489"
+      }
+    ],
+    "survivors_after_kill": [
+      {
+        "pid": 1746002,
+        "state": "R",
+        "parent": 1723176,
+        "start_ticks": "13351449"
+      },
+      {
+        "pid": 1746088,
+        "state": "S",
+        "parent": 1746002,
+        "start_ticks": "13351489"
+      },
+      {
+        "pid": 1746090,
+        "state": "S",
+        "parent": 1746088,
+        "start_ticks": "13351489"
+      }
+    ],
+    "remaining_active": [],
+    "final_states": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "children": [],
+    "survivors_after_kill": [],
+    "remaining_active": [],
+    "final_states": []
+  },
+  {
+    "children": [],
+    "survivors_after_kill": [],
+    "remaining_active": [],
+    "final_states": []
+  }
+]

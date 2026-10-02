@@ -1,0 +1,204 @@
+{
+  "mode": "approve",
+  "status": "PASS",
+  "identity_before": {
+    "id": "original-echo",
+    "name": "echo",
+    "arguments": {
+      "approval": true,
+      "n": 7
+    },
+    "attempt": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa74-7072-7c9e-babd-f0d332faa1df:1:1"
+    },
+    "transcript_uuid": "81cb1f34-4ef1-48f1-b1f9-477979effe9b",
+    "subpath": ""
+  },
+  "identity_after": {
+    "id": "original-echo",
+    "name": "echo",
+    "arguments": {
+      "approval": true,
+      "n": 7
+    },
+    "attempt": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa74-7072-7c9e-babd-f0d332faa1df:1:1"
+    },
+    "transcript_uuid": "81cb1f34-4ef1-48f1-b1f9-477979effe9b",
+    "subpath": ""
+  },
+  "original_host_outcome": null,
+  "published_outcome": {
+    "text": "{\"idempotency_key\":\"experimental-main-822cfe85666145108ae5274dc32e4e57:tool-original-echo\",\"n\":7}",
+    "is_error": false
+  },
+  "expected_recovery_block": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "{\"idempotency_key\":\"experimental-main-822cfe85666145108ae5274dc32e4e57:tool-original-echo\",\"n\":7}",
+    "is_error": false
+  },
+  "stored_recovery_block": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "{\"idempotency_key\":\"experimental-main-822cfe85666145108ae5274dc32e4e57:tool-original-echo\",\"n\":7}",
+    "is_error": false
+  },
+  "model_received_result": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "{\"idempotency_key\":\"experimental-main-822cfe85666145108ae5274dc32e4e57:tool-original-echo\",\"n\":7}",
+    "is_error": false
+  },
+  "unresolved_original_request": {
+    "id": "original-echo",
+    "name": "mcp__durable__echo",
+    "input": {
+      "n": 7,
+      "approval": true
+    },
+    "key": {
+      "project_key": "-tmp-recovery-main-lead-run-approve",
+      "session_id": "c08a7482-d130-4df8-ab4c-f910c3e31d5c"
+    },
+    "transcript_uuid": "81cb1f34-4ef1-48f1-b1f9-477979effe9b"
+  },
+  "model_requests_before_replacement": 1,
+  "model_requests_total": 2,
+  "tool_invocations": [
+    {
+      "id": "original-echo",
+      "worker_number": 2
+    }
+  ],
+  "scheduled_tools": [
+    "tool-original-echo"
+  ],
+  "history_replay": "PASS",
+  "approval_preflight": {
+    "no_new_cli": true,
+    "no_new_model_request": true,
+    "duplicate_decision": "accepted",
+    "conflicting_decision": "refused"
+  },
+  "proof_scope": "Synthetic MCP echo outcomes and tuple approvals; no native effect metadata, signed decisions, protected claims or Bash effects",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1689781,
+          "state": "S",
+          "parent": 1689770,
+          "start_ticks": "13074709"
+        },
+        {
+          "pid": 1689784,
+          "state": "Z",
+          "parent": 1689781,
+          "start_ticks": "13074711"
+        },
+        {
+          "pid": 1689785,
+          "state": "Z",
+          "parent": 1689781,
+          "start_ticks": "13074711"
+        },
+        {
+          "pid": 1689795,
+          "state": "Z",
+          "parent": 1689781,
+          "start_ticks": "13074728"
+        },
+        {
+          "pid": 1689796,
+          "state": "Z",
+          "parent": 1689781,
+          "start_ticks": "13074728"
+        },
+        {
+          "pid": 1689797,
+          "state": "Z",
+          "parent": 1689781,
+          "start_ticks": "13074729"
+        }
+      ],
+      "survivors_after_kill": [
+        {
+          "pid": 1689781,
+          "state": "R",
+          "parent": 425765,
+          "start_ticks": "13074709"
+        }
+      ],
+      "remaining_active": [],
+      "final_states": [
+        {
+          "pid": 1689781,
+          "state": "Z",
+          "parent": 425765,
+          "start_ticks": "13074709"
+        },
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "children": [
+        {
+          "pid": 1689931,
+          "state": "Z",
+          "parent": 1689811,
+          "start_ticks": "13076246"
+        },
+        {
+          "pid": 1689934,
+          "state": "Z",
+          "parent": 1689931,
+          "start_ticks": "13076248"
+        },
+        {
+          "pid": 1689935,
+          "state": "Z",
+          "parent": 1689931,
+          "start_ticks": "13076248"
+        },
+        {
+          "pid": 1689956,
+          "state": "Z",
+          "parent": 1689931,
+          "start_ticks": "13076266"
+        },
+        {
+          "pid": 1689957,
+          "state": "Z",
+          "parent": 1689931,
+          "start_ticks": "13076266"
+        },
+        {
+          "pid": 1689958,
+          "state": "Z",
+          "parent": 1689931,
+          "start_ticks": "13076266"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "orphan_observed": true
+}

@@ -1,0 +1,108 @@
+{
+  "status": "passed",
+  "sdk_version": "0.2.162",
+  "temporal_version": "1.33.0",
+  "installed_recovery_file": "<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk/_internal/main_agent_recovery.py",
+  "recovery_source_sha256": "7ccd84f73b9fc9f3138dfb20f35b81f61986817ac29a406d826d13a0627837ed",
+  "cases": [
+    {
+      "case": "wrong-result-id",
+      "status": "passed",
+      "error": {
+        "type": "ValueError",
+        "message": "Recovery result must match the original native tool-use ID"
+      },
+      "store_loads": 1,
+      "append_attempts": 0,
+      "commits": 0,
+      "transport_start_attempts": 0,
+      "cli_spawns": 0,
+      "model_requests": 0,
+      "actual_bash_invocations": 0,
+      "synthetic_prior_effect_markers": 0
+    },
+    {
+      "case": "missing-transcript",
+      "status": "passed",
+      "error": {
+        "type": "RuntimeError",
+        "message": "Requested recovery transcript is missing from session storage"
+      },
+      "store_loads": 1,
+      "append_attempts": 0,
+      "commits": 0,
+      "transport_start_attempts": 0,
+      "cli_spawns": 0,
+      "model_requests": 0,
+      "actual_bash_invocations": 0,
+      "synthetic_prior_effect_markers": 0
+    },
+    {
+      "case": "changed-input",
+      "status": "passed",
+      "error": {
+        "type": "AcceptedIdentityMismatch",
+        "message": "Stored call differs from accepted ledger inputs"
+      },
+      "store_loads": 1,
+      "append_attempts": 0,
+      "commits": 0,
+      "transport_start_attempts": 0,
+      "cli_spawns": 0,
+      "model_requests": 0,
+      "actual_bash_invocations": 0,
+      "synthetic_prior_effect_markers": 0
+    },
+    {
+      "case": "failed-append",
+      "status": "passed",
+      "error": {
+        "type": "OSError",
+        "message": "Injected recovery append failure"
+      },
+      "store_loads": 1,
+      "append_attempts": 1,
+      "commits": 0,
+      "transport_start_attempts": 0,
+      "cli_spawns": 0,
+      "model_requests": 0,
+      "actual_bash_invocations": 0,
+      "synthetic_prior_effect_markers": 0
+    },
+    {
+      "case": "readback-mismatch",
+      "status": "passed",
+      "error": {
+        "type": "RuntimeError",
+        "message": "Session storage did not retain the exact recovery transcript"
+      },
+      "store_loads": 2,
+      "append_attempts": 1,
+      "commits": 1,
+      "transport_start_attempts": 0,
+      "cli_spawns": 0,
+      "model_requests": 0,
+      "actual_bash_invocations": 0,
+      "synthetic_prior_effect_markers": 0
+    },
+    {
+      "case": "bash-park",
+      "status": "passed",
+      "error": {
+        "type": "ParkUnknownOutcome",
+        "message": "Unknown Bash outcome; host parks before resume"
+      },
+      "store_loads": 1,
+      "append_attempts": 0,
+      "commits": 0,
+      "transport_start_attempts": 0,
+      "cli_spawns": 0,
+      "model_requests": 0,
+      "actual_bash_invocations": 0,
+      "synthetic_prior_effect_markers": 1
+    }
+  ],
+  "cas_race": "not executed",
+  "lease_claim": false,
+  "paid_model_calls": false
+}

@@ -1,0 +1,14 @@
+{
+  "versions": {
+    "claude-agent-sdk": "0.2.162",
+    "temporalio": "1.33.0"
+  },
+  "python": "3.13.15",
+  "fixture_revision": "2ab873cc23a1b3224531a5634c1f6d1c8ef0ea1f",
+  "fixture_files_verified": 28,
+  "script_sha256": "bea160667ae3a90b2223d8549cf89b717193bcffefb4d6750c020c6269349e33",
+  "seed_store_sha256": "dd3844e8628fd85f89c32ba76c13a87cfc8a294ba78e3f2317b352b3e4d95ef4",
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "server_sha256": "eff36463f7c0fbfcfd50f117370fc582fe964912a62cf271b91af05447d1fdfe",
+  "accounting_only": false
+}

@@ -1,0 +1,37 @@
+{
+  "attempts": {
+    "0": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa74-2ed4-7ee2-ac39-82c0f27c9add:1:1"
+    }
+  },
+  "ledger": {
+    "original-echo": {
+      "call": {
+        "id": "original-echo",
+        "name": "echo",
+        "arguments": {
+          "n": 7
+        },
+        "attempt": {
+          "burst": 0,
+          "number": 1,
+          "token": "01a0fa74-2ed4-7ee2-ac39-82c0f27c9add:1:1"
+        },
+        "transcript_uuid": "7be91c9f-6720-469b-9745-dfdf79d04da8",
+        "subpath": ""
+      },
+      "approved": null,
+      "scheduled": true,
+      "outcome": {
+        "text": "synthetic recorded MCP error",
+        "is_error": true
+      }
+    }
+  },
+  "checkpoints": [],
+  "turns": {},
+  "suspend_requested": null,
+  "pending": null
+}

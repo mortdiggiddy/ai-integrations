@@ -1,0 +1,64 @@
+{
+  "children": [
+    {
+      "pid": 1689187,
+      "state": "R",
+      "parent": 1689183,
+      "start_ticks": "13071095"
+    },
+    {
+      "pid": 1689188,
+      "state": "R",
+      "parent": 1689183,
+      "start_ticks": "13071097"
+    },
+    {
+      "pid": 1689191,
+      "state": "Z",
+      "parent": 1689188,
+      "start_ticks": "13071102"
+    },
+    {
+      "pid": 1689192,
+      "state": "Z",
+      "parent": 1689188,
+      "start_ticks": "13071103"
+    },
+    {
+      "pid": 1689222,
+      "state": "Z",
+      "parent": 1689188,
+      "start_ticks": "13071125"
+    },
+    {
+      "pid": 1689224,
+      "state": "Z",
+      "parent": 1689188,
+      "start_ticks": "13071129"
+    },
+    {
+      "pid": 1689225,
+      "state": "Z",
+      "parent": 1689188,
+      "start_ticks": "13071129"
+    },
+    {
+      "pid": 1689226,
+      "state": "Z",
+      "parent": 1689188,
+      "start_ticks": "13071130"
+    }
+  ],
+  "survivors_after_kill": [],
+  "remaining_active": [],
+  "final_states": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ]
+}

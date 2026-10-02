@@ -1,0 +1,35 @@
+{
+  "attempts": {
+    "0": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa74-b31c-73e7-8b33-f50f2fc0a6a8:1:1"
+    }
+  },
+  "ledger": {
+    "original-echo": {
+      "call": {
+        "id": "original-echo",
+        "name": "echo",
+        "arguments": {
+          "approval": true,
+          "n": 7
+        },
+        "attempt": {
+          "burst": 0,
+          "number": 1,
+          "token": "01a0fa74-b31c-73e7-8b33-f50f2fc0a6a8:1:1"
+        },
+        "transcript_uuid": "66d33970-6487-42a3-9b0d-95797a87fe79",
+        "subpath": ""
+      },
+      "approved": null,
+      "scheduled": false,
+      "outcome": null
+    }
+  },
+  "checkpoints": [],
+  "turns": {},
+  "suspend_requested": null,
+  "pending": null
+}

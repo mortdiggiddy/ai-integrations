@@ -1,0 +1,37 @@
+{
+  "attempts": {
+    "0": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa9f-2de4-743c-a1e6-55b7341bebfd:1:1"
+    }
+  },
+  "ledger": {
+    "original-echo": {
+      "call": {
+        "id": "original-echo",
+        "name": "echo",
+        "arguments": {
+          "n": 7
+        },
+        "attempt": {
+          "burst": 0,
+          "number": 1,
+          "token": "01a0fa9f-2de4-743c-a1e6-55b7341bebfd:1:1"
+        },
+        "transcript_uuid": "7354a5d5-5d99-42fd-9959-cf337ba0f7e3",
+        "subpath": ""
+      },
+      "approved": null,
+      "scheduled": true,
+      "outcome": {
+        "text": "{\"idempotency_key\": \"experimental-main-32321d027f6a43fea30b4c693cb84bd8:tool-original-echo\", \"n\": 7}",
+        "is_error": false
+      }
+    }
+  },
+  "checkpoints": [],
+  "turns": {},
+  "suspend_requested": null,
+  "pending": null
+}

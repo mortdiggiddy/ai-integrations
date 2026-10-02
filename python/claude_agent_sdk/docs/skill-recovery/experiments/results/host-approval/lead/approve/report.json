@@ -1,0 +1,241 @@
+{
+  "status": "PASS",
+  "approved": true,
+  "public_key": "8fdaa5d0b1ff2fb987fc4aee15e23a92490fe46120af40399b983dda6e355da7",
+  "signed_token": {
+    "body": {
+      "version": 1,
+      "key_id": "experiment-key",
+      "workflow": "signed-comparison-be9535a237be459d8db68897333c9847",
+      "session": "dc39be81-65bd-416d-9671-dadaa0553575",
+      "id": "signed-echo",
+      "digest": "2408f02f174b2f199bc79f15bd8a2fdde26f2bda51bf27722b66f71c4e771492",
+      "approved": true,
+      "expires": 1790914884
+    },
+    "signature": "c88d70ee8ed1e3d4a90e38b74ced5cc888472bbb753beb4a02a8468f605e30168fac57f88d34e5af1277c05238ad1eb8b17bddf47db26c060be1a576fcc6d607"
+  },
+  "rejected": [
+    {
+      "case": "unsigned legacy tuple",
+      "error": "RuntimeError: Failed decoding arguments",
+      "failure_type": "RuntimeError",
+      "history_before": 24
+    },
+    {
+      "case": "forged signature",
+      "error": "InvalidSignature: Application error",
+      "failure_type": "InvalidSignature",
+      "history_before": 24
+    },
+    {
+      "case": "other workflow",
+      "error": "ValueError: decision does not bind accepted request",
+      "failure_type": "ValueError",
+      "history_before": 24
+    },
+    {
+      "case": "other session",
+      "error": "ValueError: decision does not bind accepted request",
+      "failure_type": "ValueError",
+      "history_before": 24
+    },
+    {
+      "case": "other call",
+      "error": "ValueError: unknown accepted request",
+      "failure_type": "ValueError",
+      "history_before": 24
+    },
+    {
+      "case": "changed accepted input",
+      "error": "ValueError: decision does not bind accepted request",
+      "failure_type": "ValueError",
+      "history_before": 24
+    },
+    {
+      "case": "expired",
+      "error": "ValueError: expired decision",
+      "failure_type": "ValueError",
+      "history_before": 24
+    },
+    {
+      "case": "unknown key",
+      "error": "ValueError: unsupported signing identity",
+      "failure_type": "ValueError",
+      "history_before": 24
+    },
+    {
+      "case": "unsupported version",
+      "error": "ValueError: unsupported signing identity",
+      "failure_type": "ValueError",
+      "history_before": 24
+    },
+    {
+      "case": "conflicting signed decision",
+      "error": "ValueError: conflicting signed decision",
+      "failure_type": "ValueError",
+      "history_before": 39
+    },
+    {
+      "case": "conflict after second replacement",
+      "error": "ValueError: conflicting signed decision",
+      "failure_type": "ValueError",
+      "history_before": 61
+    }
+  ],
+  "accepted_review_updates": 3,
+  "restored_signed_state": {
+    "completed": true,
+    "decisions": {
+      "signed-echo": true
+    }
+  },
+  "tool_invocations": [
+    {
+      "id": "signed-echo",
+      "worker": 2
+    }
+  ],
+  "model_requests_before_decision": 1,
+  "model_requests_total": 2,
+  "history_replay": "PASS",
+  "final_outcome": {
+    "text": "{\"idempotency_key\": \"signed-comparison-be9535a237be459d8db68897333c9847:tool-signed-echo\", \"n\": 7}",
+    "is_error": false
+  },
+  "proof_scope": "Disposable Ed25519 verifier and exact main MCP request; cryptography and fixture Workflow imported through sandbox passthrough. No production gateway, key rotation, subclass security, Continue-As-New, unsigned migration or general executor proof. Harness supplies sequential ownership and cleanup.",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1754608,
+          "state": "S",
+          "parent": 1754590,
+          "start_ticks": "13370175"
+        },
+        {
+          "pid": 1754611,
+          "state": "Z",
+          "parent": 1754608,
+          "start_ticks": "13370177"
+        },
+        {
+          "pid": 1754612,
+          "state": "Z",
+          "parent": 1754608,
+          "start_ticks": "13370178"
+        },
+        {
+          "pid": 1754641,
+          "state": "Z",
+          "parent": 1754608,
+          "start_ticks": "13370198"
+        },
+        {
+          "pid": 1754642,
+          "state": "Z",
+          "parent": 1754608,
+          "start_ticks": "13370198"
+        },
+        {
+          "pid": 1754643,
+          "state": "Z",
+          "parent": 1754608,
+          "start_ticks": "13370199"
+        }
+      ],
+      "survivors_after_kill": [
+        {
+          "pid": 1754608,
+          "state": "R",
+          "parent": 1723176,
+          "start_ticks": "13370175"
+        }
+      ],
+      "remaining_active": [],
+      "final_states": [
+        {
+          "pid": 1754608,
+          "state": "Z",
+          "parent": 1723176,
+          "start_ticks": "13370175"
+        },
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "children": [
+        {
+          "pid": 1755270,
+          "state": "R",
+          "parent": 1754659,
+          "start_ticks": "13371723"
+        },
+        {
+          "pid": 1755273,
+          "state": "Z",
+          "parent": 1754659,
+          "start_ticks": "13371726"
+        },
+        {
+          "pid": 1755276,
+          "state": "Z",
+          "parent": 1755273,
+          "start_ticks": "13371728"
+        },
+        {
+          "pid": 1755277,
+          "state": "Z",
+          "parent": 1755273,
+          "start_ticks": "13371729"
+        },
+        {
+          "pid": 1755297,
+          "state": "Z",
+          "parent": 1755273,
+          "start_ticks": "13371747"
+        },
+        {
+          "pid": 1755302,
+          "state": "Z",
+          "parent": 1755273,
+          "start_ticks": "13371750"
+        },
+        {
+          "pid": 1755303,
+          "state": "Z",
+          "parent": 1755273,
+          "start_ticks": "13371750"
+        },
+        {
+          "pid": 1755304,
+          "state": "Z",
+          "parent": 1755273,
+          "start_ticks": "13371750"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "children": [],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": []
+    }
+  ]
+}

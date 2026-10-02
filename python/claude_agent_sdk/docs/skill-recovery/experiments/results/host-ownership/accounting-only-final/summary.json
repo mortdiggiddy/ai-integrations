@@ -1,0 +1,5 @@
+{
+  "status": "FAILED; no completion claim",
+  "accounting_only": true,
+  "traceback": "Traceback (most recent call last):\n  File \"<experiments>/host_ownership.py\", line 355, in run\n    await main_recovery.temporal_case(args, root, \"success\")\n  File \"<experiments>/main_recovery.py\", line 442, in temporal_case\n    assert len(api.requests) == 2 and api.errors == []\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+}

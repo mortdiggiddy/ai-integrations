@@ -1,0 +1,297 @@
+{
+  "mode": "success",
+  "status": "PASS",
+  "identity_before": {
+    "id": "original-echo",
+    "name": "echo",
+    "arguments": {
+      "n": 7
+    },
+    "attempt": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa9f-2de4-743c-a1e6-55b7341bebfd:1:1"
+    },
+    "transcript_uuid": "7354a5d5-5d99-42fd-9959-cf337ba0f7e3",
+    "subpath": ""
+  },
+  "identity_after": {
+    "id": "original-echo",
+    "name": "echo",
+    "arguments": {
+      "n": 7
+    },
+    "attempt": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa9f-2de4-743c-a1e6-55b7341bebfd:1:1"
+    },
+    "transcript_uuid": "7354a5d5-5d99-42fd-9959-cf337ba0f7e3",
+    "subpath": ""
+  },
+  "original_host_outcome": {
+    "text": "{\"idempotency_key\": \"experimental-main-32321d027f6a43fea30b4c693cb84bd8:tool-original-echo\", \"n\": 7}",
+    "is_error": false
+  },
+  "published_outcome": {
+    "text": "{\"idempotency_key\": \"experimental-main-32321d027f6a43fea30b4c693cb84bd8:tool-original-echo\", \"n\": 7}",
+    "is_error": false
+  },
+  "expected_recovery_block": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "{\"idempotency_key\": \"experimental-main-32321d027f6a43fea30b4c693cb84bd8:tool-original-echo\", \"n\": 7}",
+    "is_error": false
+  },
+  "stored_recovery_block": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "{\"idempotency_key\": \"experimental-main-32321d027f6a43fea30b4c693cb84bd8:tool-original-echo\", \"n\": 7}",
+    "is_error": false
+  },
+  "model_received_result": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "{\"idempotency_key\": \"experimental-main-32321d027f6a43fea30b4c693cb84bd8:tool-original-echo\", \"n\": 7}",
+    "is_error": false
+  },
+  "unresolved_original_request": {
+    "id": "original-echo",
+    "name": "mcp__durable__echo",
+    "input": {
+      "n": 7
+    },
+    "key": {
+      "project_key": "-tmp-recovery-host-ownership-lead-success",
+      "session_id": "9758de3d-63ca-49fe-9aeb-e6546621fdb6"
+    },
+    "transcript_uuid": "7354a5d5-5d99-42fd-9959-cf337ba0f7e3"
+  },
+  "model_requests_before_replacement": 1,
+  "model_requests_total": 2,
+  "tool_invocations": [
+    {
+      "id": "original-echo",
+      "worker_number": 1
+    }
+  ],
+  "scheduled_tools": [
+    "tool-original-echo"
+  ],
+  "history_replay": "PASS",
+  "approval_preflight": null,
+  "proof_scope": "Synthetic MCP echo outcomes and tuple approvals; no native effect metadata, signed decisions, protected claims or Bash effects",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1746636,
+          "state": "S",
+          "parent": 1746630,
+          "start_ticks": "13354728"
+        },
+        {
+          "pid": 1746670,
+          "state": "S",
+          "parent": 1746630,
+          "start_ticks": "13354813"
+        },
+        {
+          "pid": 1746673,
+          "state": "Z",
+          "parent": 1746670,
+          "start_ticks": "13354815"
+        },
+        {
+          "pid": 1746674,
+          "state": "Z",
+          "parent": 1746670,
+          "start_ticks": "13354815"
+        },
+        {
+          "pid": 1746682,
+          "state": "Z",
+          "parent": 1746670,
+          "start_ticks": "13354833"
+        },
+        {
+          "pid": 1746685,
+          "state": "Z",
+          "parent": 1746670,
+          "start_ticks": "13354839"
+        },
+        {
+          "pid": 1746686,
+          "state": "Z",
+          "parent": 1746670,
+          "start_ticks": "13354839"
+        },
+        {
+          "pid": 1746687,
+          "state": "Z",
+          "parent": 1746670,
+          "start_ticks": "13354840"
+        }
+      ],
+      "survivors_after_kill": [
+        {
+          "pid": 1746636,
+          "state": "T",
+          "parent": 1723176,
+          "start_ticks": "13354728"
+        },
+        {
+          "pid": 1746670,
+          "state": "T",
+          "parent": 1723176,
+          "start_ticks": "13354813"
+        }
+      ],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "owner_before_loss": {
+        "pid": 1746630,
+        "state": "S",
+        "parent": 1746449,
+        "start_ticks": "13354723"
+      },
+      "replacement_before_cleanup": "owned-processes-unresolved",
+      "blocked_worker_exit": 23,
+      "orphan_model_requests_during_admission_probe": 0,
+      "contained_during_admission_probe": [
+        {
+          "pid": 1746636,
+          "state": "S",
+          "parent": 1723176,
+          "start_ticks": "13354728"
+        },
+        {
+          "pid": 1746670,
+          "state": "R",
+          "parent": 1723176,
+          "start_ticks": "13354813"
+        },
+        {
+          "pid": 1746636,
+          "state": "S",
+          "parent": 1723176,
+          "start_ticks": "13354728"
+        },
+        {
+          "pid": 1746670,
+          "state": "R",
+          "parent": 1723176,
+          "start_ticks": "13354813"
+        }
+      ],
+      "blocked_worker_reached_sdk": false,
+      "blocked_worker_new_cli_starts": 0,
+      "replacement_after_cleanup": "allowed",
+      "controlled_descendant": {
+        "pid": 1746636,
+        "state": "R",
+        "parent": 1746630,
+        "start_ticks": "13354728"
+      }
+    },
+    {
+      "children": [
+        {
+          "pid": 1746725,
+          "state": "S",
+          "parent": 1746718,
+          "start_ticks": "13354886"
+        },
+        {
+          "pid": 1747509,
+          "state": "R",
+          "parent": 1746718,
+          "start_ticks": "13356314"
+        },
+        {
+          "pid": 1747510,
+          "state": "Z",
+          "parent": 1746718,
+          "start_ticks": "13356315"
+        },
+        {
+          "pid": 1747513,
+          "state": "Z",
+          "parent": 1747510,
+          "start_ticks": "13356317"
+        },
+        {
+          "pid": 1747514,
+          "state": "Z",
+          "parent": 1747510,
+          "start_ticks": "13356317"
+        },
+        {
+          "pid": 1747523,
+          "state": "Z",
+          "parent": 1747510,
+          "start_ticks": "13356333"
+        }
+      ],
+      "survivors_after_kill": [
+        {
+          "pid": 1746725,
+          "state": "T",
+          "parent": 1723176,
+          "start_ticks": "13354886"
+        }
+      ],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "owner_before_loss": {
+        "pid": 1746718,
+        "state": "S",
+        "parent": 1746449,
+        "start_ticks": "13354881"
+      },
+      "replacement_before_cleanup": "owned-processes-unresolved",
+      "blocked_worker_exit": 23,
+      "orphan_model_requests_during_admission_probe": 0,
+      "contained_during_admission_probe": [
+        {
+          "pid": 1746725,
+          "state": "S",
+          "parent": 1723176,
+          "start_ticks": "13354886"
+        },
+        {
+          "pid": 1746725,
+          "state": "S",
+          "parent": 1723176,
+          "start_ticks": "13354886"
+        }
+      ],
+      "blocked_worker_reached_sdk": false,
+      "blocked_worker_new_cli_starts": 0,
+      "replacement_after_cleanup": "allowed",
+      "controlled_descendant": {
+        "pid": 1746725,
+        "state": "R",
+        "parent": 1746718,
+        "start_ticks": "13354886"
+      }
+    }
+  ],
+  "orphan_observed": true
+}

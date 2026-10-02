@@ -1,0 +1,111 @@
+[
+  {
+    "children": [
+      {
+        "pid": 1743617,
+        "state": "S",
+        "parent": 1743548,
+        "start_ticks": "13341982"
+      },
+      {
+        "pid": 1743620,
+        "state": "Z",
+        "parent": 1743617,
+        "start_ticks": "13341984"
+      },
+      {
+        "pid": 1743621,
+        "state": "Z",
+        "parent": 1743617,
+        "start_ticks": "13341984"
+      },
+      {
+        "pid": 1743639,
+        "state": "Z",
+        "parent": 1743617,
+        "start_ticks": "13342004"
+      },
+      {
+        "pid": 1743640,
+        "state": "Z",
+        "parent": 1743617,
+        "start_ticks": "13342004"
+      },
+      {
+        "pid": 1743641,
+        "state": "Z",
+        "parent": 1743617,
+        "start_ticks": "13342005"
+      },
+      {
+        "pid": 1743652,
+        "state": "S",
+        "parent": 1743617,
+        "start_ticks": "13342018"
+      },
+      {
+        "pid": 1743679,
+        "state": "R",
+        "parent": 1743652,
+        "start_ticks": "13342020"
+      },
+      {
+        "pid": 1743689,
+        "state": "S",
+        "parent": 1743617,
+        "start_ticks": "13342022"
+      },
+      {
+        "pid": 1743691,
+        "state": "S",
+        "parent": 1743689,
+        "start_ticks": "13342023"
+      }
+    ],
+    "survivors_after_kill": [
+      {
+        "pid": 1743617,
+        "state": "R",
+        "parent": 1723176,
+        "start_ticks": "13341982"
+      },
+      {
+        "pid": 1743689,
+        "state": "S",
+        "parent": 1743617,
+        "start_ticks": "13342022"
+      },
+      {
+        "pid": 1743691,
+        "state": "S",
+        "parent": 1743689,
+        "start_ticks": "13342023"
+      }
+    ],
+    "remaining_active": [],
+    "final_states": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "children": [],
+    "survivors_after_kill": [],
+    "remaining_active": [],
+    "final_states": []
+  },
+  {
+    "children": [],
+    "survivors_after_kill": [],
+    "remaining_active": [],
+    "final_states": []
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "tested_script_sha256": "bea160667ae3a90b2223d8549cf89b717193bcffefb4d6750c020c6269349e33",
+  "current_script_sha256": "bfa05a2a018640c4d2ec2e81ef802124ff73cbde60d7c09aa43c88b9c5fb2056",
+  "change_scope": "Archive normalization only; runtime lease, supervision, fake model and Temporal rig unchanged",
+  "normalization": "Hostname, repository, operator home, fixture and scratch paths including encoded JSON payloads",
+  "normalized_history_replay": "PASS",
+  "decoded_identifier_scan": "PASS",
+  "raw_run_retained": true
+}

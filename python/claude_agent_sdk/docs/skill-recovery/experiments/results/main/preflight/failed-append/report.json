@@ -1,0 +1,87 @@
+{
+  "case": "failed-append",
+  "status": "passed",
+  "fixture_kind": "synthetic parent-linked pending transcript and in-memory test store",
+  "entry_point": "ClaudeSDKClient.connect with default transport selection",
+  "transport_start_guard": "Only SubprocessCLITransport.connect is guarded; no custom transport supplied",
+  "error": {
+    "type": "OSError",
+    "message": "Injected recovery append failure"
+  },
+  "pending_seen": [
+    {
+      "id": "toolu_preflight_original",
+      "name": "mcp__durable__echo",
+      "input": {
+        "n": 1
+      },
+      "key": {
+        "project_key": "-tmp-recovery-main-preflight-lead-failed-append",
+        "session_id": "6f24db00-ddfe-47e3-bc7f-bb76ede24934"
+      },
+      "transcript_uuid": "2a0fd10e-f953-4e14-80d3-0c340c8d3ba7"
+    }
+  ],
+  "store_loads": 1,
+  "append_attempts": 1,
+  "commits": 0,
+  "transport_start_attempts": 0,
+  "cli_spawns": 0,
+  "model_requests": 0,
+  "actual_bash_invocations": 0,
+  "synthetic_prior_effect_markers": 0,
+  "post_park_tool_result_publications": null,
+  "input_refusal_owner": null,
+  "park_owner": null,
+  "original_entries": [
+    {
+      "type": "assistant",
+      "uuid": "2a0fd10e-f953-4e14-80d3-0c340c8d3ba7",
+      "parentUuid": null,
+      "isSidechain": false,
+      "sessionId": "6f24db00-ddfe-47e3-bc7f-bb76ede24934",
+      "cwd": "<scratch>/failed-append",
+      "version": "2.1.274",
+      "message": {
+        "id": "msg_preflight_synthetic",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "toolu_preflight_original",
+            "name": "mcp__durable__echo",
+            "input": {
+              "n": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "stored_entries_after": [
+    {
+      "type": "assistant",
+      "uuid": "2a0fd10e-f953-4e14-80d3-0c340c8d3ba7",
+      "parentUuid": null,
+      "isSidechain": false,
+      "sessionId": "6f24db00-ddfe-47e3-bc7f-bb76ede24934",
+      "cwd": "<scratch>/failed-append",
+      "version": "2.1.274",
+      "message": {
+        "id": "msg_preflight_synthetic",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "toolu_preflight_original",
+            "name": "mcp__durable__echo",
+            "input": {
+              "n": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "unsupported": "No native CLI effect, real transcript, durable park state, Worker recovery or session lease is proved"
+}

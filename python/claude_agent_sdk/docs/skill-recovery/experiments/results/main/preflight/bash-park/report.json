@@ -1,0 +1,87 @@
+{
+  "case": "bash-park",
+  "status": "passed",
+  "fixture_kind": "synthetic parent-linked pending transcript and in-memory test store",
+  "entry_point": "ClaudeSDKClient.connect with default transport selection",
+  "transport_start_guard": "Only SubprocessCLITransport.connect is guarded; no custom transport supplied",
+  "error": {
+    "type": "ParkUnknownOutcome",
+    "message": "Unknown Bash outcome; host parks before resume"
+  },
+  "pending_seen": [
+    {
+      "id": "toolu_preflight_original",
+      "name": "Bash",
+      "input": {
+        "command": "synthetic previously started Bash request"
+      },
+      "key": {
+        "project_key": "-tmp-recovery-main-preflight-lead-bash-park",
+        "session_id": "900aa093-94a4-4fe6-93bd-d08c2f6e733e"
+      },
+      "transcript_uuid": "fd32c879-979c-437c-9199-e31d76513272"
+    }
+  ],
+  "store_loads": 1,
+  "append_attempts": 0,
+  "commits": 0,
+  "transport_start_attempts": 0,
+  "cli_spawns": 0,
+  "model_requests": 0,
+  "actual_bash_invocations": 0,
+  "synthetic_prior_effect_markers": 1,
+  "post_park_tool_result_publications": 0,
+  "input_refusal_owner": null,
+  "park_owner": "host callback exception",
+  "original_entries": [
+    {
+      "type": "assistant",
+      "uuid": "fd32c879-979c-437c-9199-e31d76513272",
+      "parentUuid": null,
+      "isSidechain": false,
+      "sessionId": "900aa093-94a4-4fe6-93bd-d08c2f6e733e",
+      "cwd": "<scratch>/bash-park",
+      "version": "2.1.274",
+      "message": {
+        "id": "msg_preflight_synthetic",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "toolu_preflight_original",
+            "name": "Bash",
+            "input": {
+              "command": "synthetic previously started Bash request"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "stored_entries_after": [
+    {
+      "type": "assistant",
+      "uuid": "fd32c879-979c-437c-9199-e31d76513272",
+      "parentUuid": null,
+      "isSidechain": false,
+      "sessionId": "900aa093-94a4-4fe6-93bd-d08c2f6e733e",
+      "cwd": "<scratch>/bash-park",
+      "version": "2.1.274",
+      "message": {
+        "id": "msg_preflight_synthetic",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "toolu_preflight_original",
+            "name": "Bash",
+            "input": {
+              "command": "synthetic previously started Bash request"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "unsupported": "No native CLI effect, real transcript, durable park state, Worker recovery or session lease is proved"
+}

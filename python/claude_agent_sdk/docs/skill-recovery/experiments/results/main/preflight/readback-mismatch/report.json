@@ -1,0 +1,108 @@
+{
+  "case": "readback-mismatch",
+  "status": "passed",
+  "fixture_kind": "synthetic parent-linked pending transcript and in-memory test store",
+  "entry_point": "ClaudeSDKClient.connect with default transport selection",
+  "transport_start_guard": "Only SubprocessCLITransport.connect is guarded; no custom transport supplied",
+  "error": {
+    "type": "RuntimeError",
+    "message": "Session storage did not retain the exact recovery transcript"
+  },
+  "pending_seen": [
+    {
+      "id": "toolu_preflight_original",
+      "name": "mcp__durable__echo",
+      "input": {
+        "n": 1
+      },
+      "key": {
+        "project_key": "-tmp-recovery-main-preflight-lead-readback-mismatch",
+        "session_id": "7e679865-8dd0-418c-a01b-8791e268fdec"
+      },
+      "transcript_uuid": "3caa8399-e02f-4682-b5b3-78699bf1a34f"
+    }
+  ],
+  "store_loads": 2,
+  "append_attempts": 1,
+  "commits": 1,
+  "transport_start_attempts": 0,
+  "cli_spawns": 0,
+  "model_requests": 0,
+  "actual_bash_invocations": 0,
+  "synthetic_prior_effect_markers": 0,
+  "post_park_tool_result_publications": null,
+  "input_refusal_owner": null,
+  "park_owner": null,
+  "original_entries": [
+    {
+      "type": "assistant",
+      "uuid": "3caa8399-e02f-4682-b5b3-78699bf1a34f",
+      "parentUuid": null,
+      "isSidechain": false,
+      "sessionId": "7e679865-8dd0-418c-a01b-8791e268fdec",
+      "cwd": "<scratch>/readback-mismatch",
+      "version": "2.1.274",
+      "message": {
+        "id": "msg_preflight_synthetic",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "toolu_preflight_original",
+            "name": "mcp__durable__echo",
+            "input": {
+              "n": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "stored_entries_after": [
+    {
+      "type": "assistant",
+      "uuid": "3caa8399-e02f-4682-b5b3-78699bf1a34f",
+      "parentUuid": null,
+      "isSidechain": false,
+      "sessionId": "7e679865-8dd0-418c-a01b-8791e268fdec",
+      "cwd": "<scratch>/readback-mismatch",
+      "version": "2.1.274",
+      "message": {
+        "id": "msg_preflight_synthetic",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "toolu_preflight_original",
+            "name": "mcp__durable__echo",
+            "input": {
+              "n": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "user",
+      "uuid": "da59c573-334f-51e7-b923-bf9684de3ddc",
+      "parentUuid": "3caa8399-e02f-4682-b5b3-78699bf1a34f",
+      "isSidechain": false,
+      "sessionId": "7e679865-8dd0-418c-a01b-8791e268fdec",
+      "timestamp": "2026-10-02T02:24:08.518107Z",
+      "message": {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_preflight_original",
+            "content": "RECORDED_RESULT",
+            "is_error": false
+          }
+        ]
+      },
+      "cwd": "<scratch>/readback-mismatch",
+      "version": "2.1.274"
+    }
+  ],
+  "unsupported": "No native CLI effect, real transcript, durable park state, Worker recovery or session lease is proved"
+}

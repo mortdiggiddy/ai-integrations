@@ -1,0 +1,206 @@
+{
+  "mode": "error",
+  "status": "PASS",
+  "identity_before": {
+    "id": "original-echo",
+    "name": "echo",
+    "arguments": {
+      "n": 7
+    },
+    "attempt": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa74-2ed4-7ee2-ac39-82c0f27c9add:1:1"
+    },
+    "transcript_uuid": "7be91c9f-6720-469b-9745-dfdf79d04da8",
+    "subpath": ""
+  },
+  "identity_after": {
+    "id": "original-echo",
+    "name": "echo",
+    "arguments": {
+      "n": 7
+    },
+    "attempt": {
+      "burst": 0,
+      "number": 1,
+      "token": "01a0fa74-2ed4-7ee2-ac39-82c0f27c9add:1:1"
+    },
+    "transcript_uuid": "7be91c9f-6720-469b-9745-dfdf79d04da8",
+    "subpath": ""
+  },
+  "original_host_outcome": {
+    "text": "synthetic recorded MCP error",
+    "is_error": true
+  },
+  "published_outcome": {
+    "text": "synthetic recorded MCP error",
+    "is_error": true
+  },
+  "expected_recovery_block": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "synthetic recorded MCP error",
+    "is_error": true
+  },
+  "stored_recovery_block": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "synthetic recorded MCP error",
+    "is_error": true
+  },
+  "model_received_result": {
+    "type": "tool_result",
+    "tool_use_id": "original-echo",
+    "content": "synthetic recorded MCP error",
+    "is_error": true
+  },
+  "unresolved_original_request": {
+    "id": "original-echo",
+    "name": "mcp__durable__echo",
+    "input": {
+      "n": 7
+    },
+    "key": {
+      "project_key": "-tmp-recovery-main-lead-run-error",
+      "session_id": "1dddb2a4-dd97-49ba-bf8e-bd7f36e79e2b"
+    },
+    "transcript_uuid": "7be91c9f-6720-469b-9745-dfdf79d04da8"
+  },
+  "model_requests_before_replacement": 1,
+  "model_requests_total": 2,
+  "tool_invocations": [
+    {
+      "id": "original-echo",
+      "worker_number": 1
+    }
+  ],
+  "scheduled_tools": [
+    "tool-original-echo"
+  ],
+  "history_replay": "PASS",
+  "approval_preflight": null,
+  "proof_scope": "Synthetic MCP echo outcomes and tuple approvals; no native effect metadata, signed decisions, protected claims or Bash effects",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1689519,
+          "state": "S",
+          "parent": 1689508,
+          "start_ticks": "13073030"
+        },
+        {
+          "pid": 1689522,
+          "state": "Z",
+          "parent": 1689519,
+          "start_ticks": "13073032"
+        },
+        {
+          "pid": 1689523,
+          "state": "Z",
+          "parent": 1689519,
+          "start_ticks": "13073033"
+        },
+        {
+          "pid": 1689534,
+          "state": "Z",
+          "parent": 1689519,
+          "start_ticks": "13073050"
+        },
+        {
+          "pid": 1689535,
+          "state": "Z",
+          "parent": 1689519,
+          "start_ticks": "13073050"
+        },
+        {
+          "pid": 1689536,
+          "state": "Z",
+          "parent": 1689519,
+          "start_ticks": "13073051"
+        }
+      ],
+      "survivors_after_kill": [
+        {
+          "pid": 1689519,
+          "state": "R",
+          "parent": 425765,
+          "start_ticks": "13073030"
+        }
+      ],
+      "remaining_active": [],
+      "final_states": [
+        {
+          "pid": 1689519,
+          "state": "Z",
+          "parent": 425765,
+          "start_ticks": "13073030"
+        },
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "children": [
+        {
+          "pid": 1689707,
+          "state": "Z",
+          "parent": 1689550,
+          "start_ticks": "13074533"
+        },
+        {
+          "pid": 1689710,
+          "state": "Z",
+          "parent": 1689707,
+          "start_ticks": "13074535"
+        },
+        {
+          "pid": 1689711,
+          "state": "Z",
+          "parent": 1689707,
+          "start_ticks": "13074536"
+        },
+        {
+          "pid": 1689734,
+          "state": "Z",
+          "parent": 1689707,
+          "start_ticks": "13074550"
+        },
+        {
+          "pid": 1689736,
+          "state": "Z",
+          "parent": 1689707,
+          "start_ticks": "13074554"
+        },
+        {
+          "pid": 1689737,
+          "state": "Z",
+          "parent": 1689707,
+          "start_ticks": "13074554"
+        },
+        {
+          "pid": 1689738,
+          "state": "Z",
+          "parent": 1689707,
+          "start_ticks": "13074554"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "orphan_observed": true
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "unrelated_before": {
+    "pid": 1744612,
+    "state": "R",
+    "parent": 1744542,
+    "start_ticks": "13346114"
+  },
+  "unrelated_after": {
+    "pid": 1744612,
+    "state": "S",
+    "parent": 1744542,
+    "start_ticks": "13346114"
+  },
+  "scope": "Controlled tool descendant and actual CLI descendants inventoried by PID/start ticks. Replacement refuses until matching active processes are gone. No arbitrary daemon or remote-host containment claim."
+}

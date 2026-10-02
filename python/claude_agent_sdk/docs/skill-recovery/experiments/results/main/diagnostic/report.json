@@ -1,0 +1,123 @@
+{
+  "mode": "success",
+  "status": "FAILED; no completion claim",
+  "exception": "AssertionError: ",
+  "traceback": "Traceback (most recent call last):\n  File \"<experiment-script>\", line 398, in temporal_case\n    assert final.outcome.is_error == error\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1684752,
+          "state": "S",
+          "parent": 1684741,
+          "start_ticks": "13003555"
+        },
+        {
+          "pid": 1684755,
+          "state": "Z",
+          "parent": 1684752,
+          "start_ticks": "13003557"
+        },
+        {
+          "pid": 1684756,
+          "state": "Z",
+          "parent": 1684752,
+          "start_ticks": "13003557"
+        },
+        {
+          "pid": 1684787,
+          "state": "Z",
+          "parent": 1684752,
+          "start_ticks": "13003579"
+        },
+        {
+          "pid": 1684788,
+          "state": "Z",
+          "parent": 1684752,
+          "start_ticks": "13003579"
+        },
+        {
+          "pid": 1684789,
+          "state": "Z",
+          "parent": 1684752,
+          "start_ticks": "13003579"
+        }
+      ],
+      "survivors_after_kill": [
+        {
+          "pid": 1684752,
+          "state": "R",
+          "parent": 425765,
+          "start_ticks": "13003555"
+        }
+      ],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "children": [
+        {
+          "pid": 1684834,
+          "state": "S",
+          "parent": 1684804,
+          "start_ticks": "13005059"
+        },
+        {
+          "pid": 1684837,
+          "state": "Z",
+          "parent": 1684834,
+          "start_ticks": "13005061"
+        },
+        {
+          "pid": 1684838,
+          "state": "Z",
+          "parent": 1684834,
+          "start_ticks": "13005062"
+        },
+        {
+          "pid": 1684857,
+          "state": "Z",
+          "parent": 1684834,
+          "start_ticks": "13005076"
+        },
+        {
+          "pid": 1684859,
+          "state": "Z",
+          "parent": 1684834,
+          "start_ticks": "13005079"
+        },
+        {
+          "pid": 1684860,
+          "state": "Z",
+          "parent": 1684834,
+          "start_ticks": "13005079"
+        },
+        {
+          "pid": 1684861,
+          "state": "Z",
+          "parent": 1684834,
+          "start_ticks": "13005079"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "orphan_observed": true
+}

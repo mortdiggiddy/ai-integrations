@@ -1,0 +1,1418 @@
+{
+  "source_revision": "3ac4b25733d1302c89d0dadd13cab268e64d1213",
+  "commands": [
+    {
+      "argv": [
+        "<baseline-venv>/bin/python",
+        "-c",
+        "\nimport hashlib,importlib.metadata,json,pathlib,sys\nout={\"prefix\":sys.prefix,\"python\":sys.version,\"distributions\":{}}\nfor d in importlib.metadata.distributions():\n name=d.metadata[\"Name\"].lower().replace(\"_\",\"-\")\n out[\"distributions\"][name]={\"version\":d.version,\"metadata_sha256\":hashlib.sha256(d.read_text(\"METADATA\").encode()).hexdigest(),\"path\":str(d._path)}\nprint(json.dumps(out,sort_keys=True))\n"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "{\"distributions\":{\"annotated-types\":{\"metadata_sha256\":\"614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/annotated_types-0.8.0.dist-info\",\"version\":\"0.8.0\"},\"anyio\":{\"metadata_sha256\":\"043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/anyio-4.15.1.dist-info\",\"version\":\"4.15.1\"},\"attrs\":{\"metadata_sha256\":\"4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/attrs-26.1.0.dist-info\",\"version\":\"26.1.0\"},\"basedpyright\":{\"metadata_sha256\":\"e1491217c4ccad6a806dfeef9be012adcfc9d7f8597df71517bc2f50c1c49ecb\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/basedpyright-1.34.0.dist-info\",\"version\":\"1.34.0\"},\"cffi\":{\"metadata_sha256\":\"558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/cffi-2.1.1.dist-info\",\"version\":\"2.1.1\"},\"claude-agent-sdk\":{\"metadata_sha256\":\"632a3756c4aead954aad591e57f91febd9e930f656d0dc8e3f318592cfbdf72d\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.154.dist-info\",\"version\":\"0.2.154\"},\"click\":{\"metadata_sha256\":\"e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/click-8.5.0.dist-info\",\"version\":\"8.5.0\"},\"cryptography\":{\"metadata_sha256\":\"8e9b5570da4686848ee5c6bb83fffc224bcddf9793136731dd050ce0c05fffe2\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/cryptography-50.0.1.dist-info\",\"version\":\"50.0.1\"},\"execnet\":{\"metadata_sha256\":\"7343015d62b2eaa1841ec06a7c7c132aeb482921f73ab6e0fd18331495684c61\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/execnet-2.1.2.dist-info\",\"version\":\"2.1.2\"},\"h11\":{\"metadata_sha256\":\"28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/h11-0.16.0.dist-info\",\"version\":\"0.16.0\"},\"httpcore2\":{\"metadata_sha256\":\"b948af04be9aed66d7486d18de5ac9dfbf46ef3aba2908afba9f1febada85311\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/httpcore2-2.13.0.dist-info\",\"version\":\"2.13.0\"},\"httpx2\":{\"metadata_sha256\":\"192d199ceef38a49dc1964623d87546b14fc416933a7a778a4c007e3c5dcfc48\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/httpx2-2.13.0.dist-info\",\"version\":\"2.13.0\"},\"idna\":{\"metadata_sha256\":\"4d113161aca8582e8d28fddf3ea50f19b607209c2b3e4364379a163454680084\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/idna-3.19.dist-info\",\"version\":\"3.19\"},\"iniconfig\":{\"metadata_sha256\":\"40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/iniconfig-2.3.0.dist-info\",\"version\":\"2.3.0\"},\"jsonschema\":{\"metadata_sha256\":\"05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/jsonschema-4.26.0.dist-info\",\"version\":\"4.26.0\"},\"jsonschema-specifications\":{\"metadata_sha256\":\"35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/jsonschema_specifications-2025.9.1.dist-info\",\"version\":\"2025.9.1\"},\"markdown-it-py\":{\"metadata_sha256\":\"72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info\",\"version\":\"4.2.0\"},\"mcp\":{\"metadata_sha256\":\"dffdec58283e1c0964a57f5fba19aa80272686ab5b03283d9398f7daac4fe45a\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mcp-2.2.0.dist-info\",\"version\":\"2.2.0\"},\"mcp-types\":{\"metadata_sha256\":\"f29cd43b57497e73976271607090609e7cf79d50c3ea3362196ac36275cdd0f0\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mcp_types-2.2.0.dist-info\",\"version\":\"2.2.0\"},\"mdurl\":{\"metadata_sha256\":\"b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mdurl-0.1.2.dist-info\",\"version\":\"0.1.2\"},\"mypy\":{\"metadata_sha256\":\"3a1bd2ab3db5f8ffa441d267c7dd3efa79eb3fe656148d1f0532c2d562178a32\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mypy-1.18.2.dist-info\",\"version\":\"1.18.2\"},\"mypy-extensions\":{\"metadata_sha256\":\"2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info\",\"version\":\"1.1.0\"},\"nexus-rpc\":{\"metadata_sha256\":\"2edebf00f8b3a2861049b5eb89457001d94b80356a7aac9a4cef114535ffcc4d\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/nexus_rpc-1.4.0.dist-info\",\"version\":\"1.4.0\"},\"nodeenv\":{\"metadata_sha256\":\"a8424896a12fd1be10526834176fc754cd296c900f40da655fb2e03c1b7eb921\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/nodeenv-1.10.0.dist-info\",\"version\":\"1.10.0\"},\"nodejs-wheel-binaries\":{\"metadata_sha256\":\"eb97ca861b7b1f4908e480a6ee14b26ee79fbfce8fbbed7c505b60f1c2e25484\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/nodejs_wheel_binaries-24.19.0.dist-info\",\"version\":\"24.19.0\"},\"opentelemetry-api\":{\"metadata_sha256\":\"42aabbbacd266627b5c3839a515150ca90c18f80c9d85ca6f6fa10d440a7eeaa\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/opentelemetry_api-1.44.0.dist-info\",\"version\":\"1.44.0\"},\"packaging\":{\"metadata_sha256\":\"70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/packaging-26.3.dist-info\",\"version\":\"26.3\"},\"pathspec\":{\"metadata_sha256\":\"68de3f158b6592f086e78754c962092f32a761944ab66a660c0d62ad79c4b69b\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pathspec-1.1.1.dist-info\",\"version\":\"1.1.1\"},\"pluggy\":{\"metadata_sha256\":\"7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pluggy-1.6.0.dist-info\",\"version\":\"1.6.0\"},\"protobuf\":{\"metadata_sha256\":\"947ed3f132e70411555388d7fcd36712fdd60c8db6345001fb23bb56a2c6cab7\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/protobuf-7.36.1.dist-info\",\"version\":\"7.36.1\"},\"pycparser\":{\"metadata_sha256\":\"f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pycparser-3.0.dist-info\",\"version\":\"3.0\"},\"pydantic\":{\"metadata_sha256\":\"0685830d13647bd6f3f05526043d32a8b2a221d86b53773053d6c52bb17a9c07\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pydantic-2.13.5.dist-info\",\"version\":\"2.13.5\"},\"pydantic-core\":{\"metadata_sha256\":\"29768c038c0bb3564c0a87ef50ef78d18a2372474bdef0ba356a8c0fd4bd6028\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pydantic_core-2.46.5.dist-info\",\"version\":\"2.46.5\"},\"pydocstyle\":{\"metadata_sha256\":\"c6c78756d88aed0336f974871b4ef4f351cc13ef6576145995118105d6b007b4\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pydocstyle-6.3.0.dist-info\",\"version\":\"6.3.0\"},\"pygments\":{\"metadata_sha256\":\"1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pygments-2.21.0.dist-info\",\"version\":\"2.21.0\"},\"pyjwt\":{\"metadata_sha256\":\"b854eb461aaeef80469612210786ac1fbf6d1064f1d51af5ee2619b7bbddb1ba\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pyjwt-2.14.0.dist-info\",\"version\":\"2.14.0\"},\"pyright\":{\"metadata_sha256\":\"1733517425e2e812cf12fcca6617d71233119797cf0b8bb138bab97424509933\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pyright-1.1.403.dist-info\",\"version\":\"1.1.403\"},\"pytest\":{\"metadata_sha256\":\"c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest-9.1.1.dist-info\",\"version\":\"9.1.1\"},\"pytest-asyncio\":{\"metadata_sha256\":\"627afb1674d04853976b354eccc447a25a664c9ba3f143a06dbaea0c3070cbe2\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_asyncio-0.21.2.dist-info\",\"version\":\"0.21.2\"},\"pytest-pretty\":{\"metadata_sha256\":\"28c47a5d6434e39143e8087f16fe4ca3a1fad2df6179d52fc72be225019c2581\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_pretty-1.3.0.dist-info\",\"version\":\"1.3.0\"},\"pytest-rerunfailures\":{\"metadata_sha256\":\"ed20d2e49086ce82db5543fcf89a97954dfaf52ae337712852779c953ba0800c\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_rerunfailures-16.6.1.dist-info\",\"version\":\"16.6.1\"},\"pytest-timeout\":{\"metadata_sha256\":\"8b79be0dfb1db4a0166b9d997ad95553e7a7e61445bcfc0ddbfbd409bae421ff\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_timeout-2.4.0.dist-info\",\"version\":\"2.4.0\"},\"pytest-xdist\":{\"metadata_sha256\":\"298f16af52794d340c358fc2eb20b054a29db2922f22fea90a35b459ecbcc18f\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_xdist-3.8.0.dist-info\",\"version\":\"3.8.0\"},\"python-multipart\":{\"metadata_sha256\":\"e9d399d7dea5eddf0e4d24b5c24687a82e7e50bf2c2b30f8f8a06a64d887dd86\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/python_multipart-0.0.32.dist-info\",\"version\":\"0.0.32\"},\"referencing\":{\"metadata_sha256\":\"c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/referencing-0.37.0.dist-info\",\"version\":\"0.37.0\"},\"rich\":{\"metadata_sha256\":\"fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/rich-15.0.0.dist-info\",\"version\":\"15.0.0\"},\"rpds-py\":{\"metadata_sha256\":\"f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/rpds_py-2026.6.3.dist-info\",\"version\":\"2026.6.3\"},\"ruff\":{\"metadata_sha256\":\"c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/ruff-0.15.22.dist-info\",\"version\":\"0.15.22\"},\"sniffio\":{\"metadata_sha256\":\"e87e83bd780638c08d4ae02ba8c36a89c6b55e2ea910d441aa20ad0b30e51fb6\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/sniffio-1.3.1.dist-info\",\"version\":\"1.3.1\"},\"snowballstemmer\":{\"metadata_sha256\":\"6c06c375da8e0a963410b6af906e3d72acc337a5fde985944a4b74e24b10479a\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/snowballstemmer-3.1.1.dist-info\",\"version\":\"3.1.1\"},\"sse-starlette\":{\"metadata_sha256\":\"0d2b7e974db957ca4aa20053918516a6f28a8433eff401728483cbb235e483a4\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/sse_starlette-3.4.11.dist-info\",\"version\":\"3.4.11\"},\"starlette\":{\"metadata_sha256\":\"43f6240f976044f4cf9a573506d96d895391094717c55682700c931d5cd3c5a2\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/starlette-1.6.0.dist-info\",\"version\":\"1.6.0\"},\"temporalio\":{\"metadata_sha256\":\"332cba195a53a199f5e0d4811c0f969e86b9f45e3e8c2e8846d2b54c86b19f76\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/temporalio-1.33.0.dist-info\",\"version\":\"1.33.0\"},\"temporalio-claude-agent-sdk\":{\"metadata_sha256\":\"f6638d71b2776c77043ca6c6b02854922b76d345272ad611c2fd073cd0b7cfec\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/temporalio_claude_agent_sdk-0.0.0.dist-info\",\"version\":\"0.0.0\"},\"truststore\":{\"metadata_sha256\":\"509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/truststore-0.10.4.dist-info\",\"version\":\"0.10.4\"},\"types-protobuf\":{\"metadata_sha256\":\"d6b703bab3eedbc4e56bae2b1d77ad447d89df2308316e750da906322aed66db\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/types_protobuf-7.35.1.20260906.dist-info\",\"version\":\"7.35.1.20260906\"},\"typing-extensions\":{\"metadata_sha256\":\"b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info\",\"version\":\"4.16.0\"},\"typing-inspection\":{\"metadata_sha256\":\"bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/typing_inspection-0.4.4.dist-info\",\"version\":\"0.4.4\"},\"uvicorn\":{\"metadata_sha256\":\"bcfb3b631d31e3ff7c6992428b0480a09d407ec829905aa9301f736bd854cb45\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/uvicorn-0.53.0.dist-info\",\"version\":\"0.53.0\"}},\"prefix\":\"<baseline-venv>\",\"python\":\"3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]\"}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<baseline-venv>/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude",
+        "--version"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "2.1.274 (Claude Code)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cp",
+        "-a",
+        "<baseline-venv>",
+        "<isolated-venv>"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<isolated-venv>/bin/python",
+        "-c",
+        "\nimport hashlib,importlib.metadata,json,pathlib,sys\nout={\"prefix\":sys.prefix,\"python\":sys.version,\"distributions\":{}}\nfor d in importlib.metadata.distributions():\n name=d.metadata[\"Name\"].lower().replace(\"_\",\"-\")\n out[\"distributions\"][name]={\"version\":d.version,\"metadata_sha256\":hashlib.sha256(d.read_text(\"METADATA\").encode()).hexdigest(),\"path\":str(d._path)}\nprint(json.dumps(out,sort_keys=True))\n"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "{\"distributions\":{\"annotated-types\":{\"metadata_sha256\":\"614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/annotated_types-0.8.0.dist-info\",\"version\":\"0.8.0\"},\"anyio\":{\"metadata_sha256\":\"043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/anyio-4.15.1.dist-info\",\"version\":\"4.15.1\"},\"attrs\":{\"metadata_sha256\":\"4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/attrs-26.1.0.dist-info\",\"version\":\"26.1.0\"},\"basedpyright\":{\"metadata_sha256\":\"e1491217c4ccad6a806dfeef9be012adcfc9d7f8597df71517bc2f50c1c49ecb\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/basedpyright-1.34.0.dist-info\",\"version\":\"1.34.0\"},\"cffi\":{\"metadata_sha256\":\"558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/cffi-2.1.1.dist-info\",\"version\":\"2.1.1\"},\"claude-agent-sdk\":{\"metadata_sha256\":\"632a3756c4aead954aad591e57f91febd9e930f656d0dc8e3f318592cfbdf72d\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.154.dist-info\",\"version\":\"0.2.154\"},\"click\":{\"metadata_sha256\":\"e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/click-8.5.0.dist-info\",\"version\":\"8.5.0\"},\"cryptography\":{\"metadata_sha256\":\"8e9b5570da4686848ee5c6bb83fffc224bcddf9793136731dd050ce0c05fffe2\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/cryptography-50.0.1.dist-info\",\"version\":\"50.0.1\"},\"execnet\":{\"metadata_sha256\":\"7343015d62b2eaa1841ec06a7c7c132aeb482921f73ab6e0fd18331495684c61\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/execnet-2.1.2.dist-info\",\"version\":\"2.1.2\"},\"h11\":{\"metadata_sha256\":\"28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/h11-0.16.0.dist-info\",\"version\":\"0.16.0\"},\"httpcore2\":{\"metadata_sha256\":\"b948af04be9aed66d7486d18de5ac9dfbf46ef3aba2908afba9f1febada85311\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/httpcore2-2.13.0.dist-info\",\"version\":\"2.13.0\"},\"httpx2\":{\"metadata_sha256\":\"192d199ceef38a49dc1964623d87546b14fc416933a7a778a4c007e3c5dcfc48\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/httpx2-2.13.0.dist-info\",\"version\":\"2.13.0\"},\"idna\":{\"metadata_sha256\":\"4d113161aca8582e8d28fddf3ea50f19b607209c2b3e4364379a163454680084\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/idna-3.19.dist-info\",\"version\":\"3.19\"},\"iniconfig\":{\"metadata_sha256\":\"40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/iniconfig-2.3.0.dist-info\",\"version\":\"2.3.0\"},\"jsonschema\":{\"metadata_sha256\":\"05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/jsonschema-4.26.0.dist-info\",\"version\":\"4.26.0\"},\"jsonschema-specifications\":{\"metadata_sha256\":\"35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/jsonschema_specifications-2025.9.1.dist-info\",\"version\":\"2025.9.1\"},\"markdown-it-py\":{\"metadata_sha256\":\"72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info\",\"version\":\"4.2.0\"},\"mcp\":{\"metadata_sha256\":\"dffdec58283e1c0964a57f5fba19aa80272686ab5b03283d9398f7daac4fe45a\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mcp-2.2.0.dist-info\",\"version\":\"2.2.0\"},\"mcp-types\":{\"metadata_sha256\":\"f29cd43b57497e73976271607090609e7cf79d50c3ea3362196ac36275cdd0f0\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mcp_types-2.2.0.dist-info\",\"version\":\"2.2.0\"},\"mdurl\":{\"metadata_sha256\":\"b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mdurl-0.1.2.dist-info\",\"version\":\"0.1.2\"},\"mypy\":{\"metadata_sha256\":\"3a1bd2ab3db5f8ffa441d267c7dd3efa79eb3fe656148d1f0532c2d562178a32\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mypy-1.18.2.dist-info\",\"version\":\"1.18.2\"},\"mypy-extensions\":{\"metadata_sha256\":\"2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info\",\"version\":\"1.1.0\"},\"nexus-rpc\":{\"metadata_sha256\":\"2edebf00f8b3a2861049b5eb89457001d94b80356a7aac9a4cef114535ffcc4d\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/nexus_rpc-1.4.0.dist-info\",\"version\":\"1.4.0\"},\"nodeenv\":{\"metadata_sha256\":\"a8424896a12fd1be10526834176fc754cd296c900f40da655fb2e03c1b7eb921\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/nodeenv-1.10.0.dist-info\",\"version\":\"1.10.0\"},\"nodejs-wheel-binaries\":{\"metadata_sha256\":\"eb97ca861b7b1f4908e480a6ee14b26ee79fbfce8fbbed7c505b60f1c2e25484\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/nodejs_wheel_binaries-24.19.0.dist-info\",\"version\":\"24.19.0\"},\"opentelemetry-api\":{\"metadata_sha256\":\"42aabbbacd266627b5c3839a515150ca90c18f80c9d85ca6f6fa10d440a7eeaa\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/opentelemetry_api-1.44.0.dist-info\",\"version\":\"1.44.0\"},\"packaging\":{\"metadata_sha256\":\"70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/packaging-26.3.dist-info\",\"version\":\"26.3\"},\"pathspec\":{\"metadata_sha256\":\"68de3f158b6592f086e78754c962092f32a761944ab66a660c0d62ad79c4b69b\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pathspec-1.1.1.dist-info\",\"version\":\"1.1.1\"},\"pluggy\":{\"metadata_sha256\":\"7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pluggy-1.6.0.dist-info\",\"version\":\"1.6.0\"},\"protobuf\":{\"metadata_sha256\":\"947ed3f132e70411555388d7fcd36712fdd60c8db6345001fb23bb56a2c6cab7\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/protobuf-7.36.1.dist-info\",\"version\":\"7.36.1\"},\"pycparser\":{\"metadata_sha256\":\"f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pycparser-3.0.dist-info\",\"version\":\"3.0\"},\"pydantic\":{\"metadata_sha256\":\"0685830d13647bd6f3f05526043d32a8b2a221d86b53773053d6c52bb17a9c07\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pydantic-2.13.5.dist-info\",\"version\":\"2.13.5\"},\"pydantic-core\":{\"metadata_sha256\":\"29768c038c0bb3564c0a87ef50ef78d18a2372474bdef0ba356a8c0fd4bd6028\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pydantic_core-2.46.5.dist-info\",\"version\":\"2.46.5\"},\"pydocstyle\":{\"metadata_sha256\":\"c6c78756d88aed0336f974871b4ef4f351cc13ef6576145995118105d6b007b4\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pydocstyle-6.3.0.dist-info\",\"version\":\"6.3.0\"},\"pygments\":{\"metadata_sha256\":\"1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pygments-2.21.0.dist-info\",\"version\":\"2.21.0\"},\"pyjwt\":{\"metadata_sha256\":\"b854eb461aaeef80469612210786ac1fbf6d1064f1d51af5ee2619b7bbddb1ba\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pyjwt-2.14.0.dist-info\",\"version\":\"2.14.0\"},\"pyright\":{\"metadata_sha256\":\"1733517425e2e812cf12fcca6617d71233119797cf0b8bb138bab97424509933\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pyright-1.1.403.dist-info\",\"version\":\"1.1.403\"},\"pytest\":{\"metadata_sha256\":\"c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest-9.1.1.dist-info\",\"version\":\"9.1.1\"},\"pytest-asyncio\":{\"metadata_sha256\":\"627afb1674d04853976b354eccc447a25a664c9ba3f143a06dbaea0c3070cbe2\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_asyncio-0.21.2.dist-info\",\"version\":\"0.21.2\"},\"pytest-pretty\":{\"metadata_sha256\":\"28c47a5d6434e39143e8087f16fe4ca3a1fad2df6179d52fc72be225019c2581\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_pretty-1.3.0.dist-info\",\"version\":\"1.3.0\"},\"pytest-rerunfailures\":{\"metadata_sha256\":\"ed20d2e49086ce82db5543fcf89a97954dfaf52ae337712852779c953ba0800c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_rerunfailures-16.6.1.dist-info\",\"version\":\"16.6.1\"},\"pytest-timeout\":{\"metadata_sha256\":\"8b79be0dfb1db4a0166b9d997ad95553e7a7e61445bcfc0ddbfbd409bae421ff\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_timeout-2.4.0.dist-info\",\"version\":\"2.4.0\"},\"pytest-xdist\":{\"metadata_sha256\":\"298f16af52794d340c358fc2eb20b054a29db2922f22fea90a35b459ecbcc18f\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_xdist-3.8.0.dist-info\",\"version\":\"3.8.0\"},\"python-multipart\":{\"metadata_sha256\":\"e9d399d7dea5eddf0e4d24b5c24687a82e7e50bf2c2b30f8f8a06a64d887dd86\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/python_multipart-0.0.32.dist-info\",\"version\":\"0.0.32\"},\"referencing\":{\"metadata_sha256\":\"c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/referencing-0.37.0.dist-info\",\"version\":\"0.37.0\"},\"rich\":{\"metadata_sha256\":\"fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/rich-15.0.0.dist-info\",\"version\":\"15.0.0\"},\"rpds-py\":{\"metadata_sha256\":\"f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/rpds_py-2026.6.3.dist-info\",\"version\":\"2026.6.3\"},\"ruff\":{\"metadata_sha256\":\"c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/ruff-0.15.22.dist-info\",\"version\":\"0.15.22\"},\"sniffio\":{\"metadata_sha256\":\"e87e83bd780638c08d4ae02ba8c36a89c6b55e2ea910d441aa20ad0b30e51fb6\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/sniffio-1.3.1.dist-info\",\"version\":\"1.3.1\"},\"snowballstemmer\":{\"metadata_sha256\":\"6c06c375da8e0a963410b6af906e3d72acc337a5fde985944a4b74e24b10479a\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/snowballstemmer-3.1.1.dist-info\",\"version\":\"3.1.1\"},\"sse-starlette\":{\"metadata_sha256\":\"0d2b7e974db957ca4aa20053918516a6f28a8433eff401728483cbb235e483a4\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/sse_starlette-3.4.11.dist-info\",\"version\":\"3.4.11\"},\"starlette\":{\"metadata_sha256\":\"43f6240f976044f4cf9a573506d96d895391094717c55682700c931d5cd3c5a2\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/starlette-1.6.0.dist-info\",\"version\":\"1.6.0\"},\"temporalio\":{\"metadata_sha256\":\"332cba195a53a199f5e0d4811c0f969e86b9f45e3e8c2e8846d2b54c86b19f76\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/temporalio-1.33.0.dist-info\",\"version\":\"1.33.0\"},\"temporalio-claude-agent-sdk\":{\"metadata_sha256\":\"f6638d71b2776c77043ca6c6b02854922b76d345272ad611c2fd073cd0b7cfec\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/temporalio_claude_agent_sdk-0.0.0.dist-info\",\"version\":\"0.0.0\"},\"truststore\":{\"metadata_sha256\":\"509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/truststore-0.10.4.dist-info\",\"version\":\"0.10.4\"},\"types-protobuf\":{\"metadata_sha256\":\"d6b703bab3eedbc4e56bae2b1d77ad447d89df2308316e750da906322aed66db\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/types_protobuf-7.35.1.20260906.dist-info\",\"version\":\"7.35.1.20260906\"},\"typing-extensions\":{\"metadata_sha256\":\"b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info\",\"version\":\"4.16.0\"},\"typing-inspection\":{\"metadata_sha256\":\"bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/typing_inspection-0.4.4.dist-info\",\"version\":\"0.4.4\"},\"uvicorn\":{\"metadata_sha256\":\"bcfb3b631d31e3ff7c6992428b0480a09d407ec829905aa9301f736bd854cb45\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/uvicorn-0.53.0.dist-info\",\"version\":\"0.53.0\"}},\"prefix\":\"<isolated-venv>\",\"python\":\"3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]\"}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<home>/.local/bin/uv",
+        "pip",
+        "install",
+        "--python",
+        "<isolated-venv>/bin/python",
+        "--no-index",
+        "--find-links",
+        "<installation-scratch>/artifacts",
+        "--no-deps",
+        "--require-hashes",
+        "-r",
+        "<installation-scratch>/build-requirements.txt"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Using Python 3.13.15 environment at: <isolated-venv>\nResolved 2 packages in 2ms\nPrepared 2 packages in 3ms\nInstalled 2 packages in 2ms\n + hatchling==1.27.0\n + trove-classifiers==2026.6.1.19\n"
+    },
+    {
+      "argv": [
+        "<isolated-venv>/bin/python",
+        "-c",
+        "from hatchling.build import build_wheel; print(build_wheel('<installation-scratch>/built-wheel'))"
+      ],
+      "cwd": "<sdk-source>",
+      "returncode": 0,
+      "stdout": "claude_agent_sdk-0.2.162-py3-none-any.whl\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<home>/.local/bin/uv",
+        "pip",
+        "install",
+        "--python",
+        "<isolated-venv>/bin/python",
+        "--no-index",
+        "--no-deps",
+        "<installation-scratch>/built-wheel/claude_agent_sdk-0.2.162-py3-none-any.whl"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Using Python 3.13.15 environment at: <isolated-venv>\nResolved 1 package in 2ms\nPrepared 1 package in 4ms\nUninstalled 1 package in 12ms\nInstalled 1 package in 0.48ms\n - claude-agent-sdk==0.2.154\n + claude-agent-sdk==0.2.162 (from file://<installation-scratch>/built-wheel/claude_agent_sdk-0.2.162-py3-none-any.whl)\n"
+    },
+    {
+      "argv": [
+        "<isolated-venv>/bin/python",
+        "-c",
+        "\nimport hashlib,importlib.metadata,json,pathlib,sys\nout={\"prefix\":sys.prefix,\"python\":sys.version,\"distributions\":{}}\nfor d in importlib.metadata.distributions():\n name=d.metadata[\"Name\"].lower().replace(\"_\",\"-\")\n out[\"distributions\"][name]={\"version\":d.version,\"metadata_sha256\":hashlib.sha256(d.read_text(\"METADATA\").encode()).hexdigest(),\"path\":str(d._path)}\nprint(json.dumps(out,sort_keys=True))\n"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "{\"distributions\":{\"annotated-types\":{\"metadata_sha256\":\"614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/annotated_types-0.8.0.dist-info\",\"version\":\"0.8.0\"},\"anyio\":{\"metadata_sha256\":\"043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/anyio-4.15.1.dist-info\",\"version\":\"4.15.1\"},\"attrs\":{\"metadata_sha256\":\"4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/attrs-26.1.0.dist-info\",\"version\":\"26.1.0\"},\"basedpyright\":{\"metadata_sha256\":\"e1491217c4ccad6a806dfeef9be012adcfc9d7f8597df71517bc2f50c1c49ecb\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/basedpyright-1.34.0.dist-info\",\"version\":\"1.34.0\"},\"cffi\":{\"metadata_sha256\":\"558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/cffi-2.1.1.dist-info\",\"version\":\"2.1.1\"},\"claude-agent-sdk\":{\"metadata_sha256\":\"b3d7b3b964bdf88302f0098f17a2c98d4389b68dfe954640f6cbe2e5cdedb08c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.162.dist-info\",\"version\":\"0.2.162\"},\"click\":{\"metadata_sha256\":\"e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/click-8.5.0.dist-info\",\"version\":\"8.5.0\"},\"cryptography\":{\"metadata_sha256\":\"8e9b5570da4686848ee5c6bb83fffc224bcddf9793136731dd050ce0c05fffe2\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/cryptography-50.0.1.dist-info\",\"version\":\"50.0.1\"},\"execnet\":{\"metadata_sha256\":\"7343015d62b2eaa1841ec06a7c7c132aeb482921f73ab6e0fd18331495684c61\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/execnet-2.1.2.dist-info\",\"version\":\"2.1.2\"},\"h11\":{\"metadata_sha256\":\"28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/h11-0.16.0.dist-info\",\"version\":\"0.16.0\"},\"hatchling\":{\"metadata_sha256\":\"a224ea37d2658f75ccf569e61d849ff7e9297cdac2396022278e82a47b9fed3e\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/hatchling-1.27.0.dist-info\",\"version\":\"1.27.0\"},\"httpcore2\":{\"metadata_sha256\":\"b948af04be9aed66d7486d18de5ac9dfbf46ef3aba2908afba9f1febada85311\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/httpcore2-2.13.0.dist-info\",\"version\":\"2.13.0\"},\"httpx2\":{\"metadata_sha256\":\"192d199ceef38a49dc1964623d87546b14fc416933a7a778a4c007e3c5dcfc48\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/httpx2-2.13.0.dist-info\",\"version\":\"2.13.0\"},\"idna\":{\"metadata_sha256\":\"4d113161aca8582e8d28fddf3ea50f19b607209c2b3e4364379a163454680084\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/idna-3.19.dist-info\",\"version\":\"3.19\"},\"iniconfig\":{\"metadata_sha256\":\"40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/iniconfig-2.3.0.dist-info\",\"version\":\"2.3.0\"},\"jsonschema\":{\"metadata_sha256\":\"05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/jsonschema-4.26.0.dist-info\",\"version\":\"4.26.0\"},\"jsonschema-specifications\":{\"metadata_sha256\":\"35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/jsonschema_specifications-2025.9.1.dist-info\",\"version\":\"2025.9.1\"},\"markdown-it-py\":{\"metadata_sha256\":\"72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info\",\"version\":\"4.2.0\"},\"mcp\":{\"metadata_sha256\":\"dffdec58283e1c0964a57f5fba19aa80272686ab5b03283d9398f7daac4fe45a\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mcp-2.2.0.dist-info\",\"version\":\"2.2.0\"},\"mcp-types\":{\"metadata_sha256\":\"f29cd43b57497e73976271607090609e7cf79d50c3ea3362196ac36275cdd0f0\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mcp_types-2.2.0.dist-info\",\"version\":\"2.2.0\"},\"mdurl\":{\"metadata_sha256\":\"b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mdurl-0.1.2.dist-info\",\"version\":\"0.1.2\"},\"mypy\":{\"metadata_sha256\":\"3a1bd2ab3db5f8ffa441d267c7dd3efa79eb3fe656148d1f0532c2d562178a32\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mypy-1.18.2.dist-info\",\"version\":\"1.18.2\"},\"mypy-extensions\":{\"metadata_sha256\":\"2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info\",\"version\":\"1.1.0\"},\"nexus-rpc\":{\"metadata_sha256\":\"2edebf00f8b3a2861049b5eb89457001d94b80356a7aac9a4cef114535ffcc4d\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/nexus_rpc-1.4.0.dist-info\",\"version\":\"1.4.0\"},\"nodeenv\":{\"metadata_sha256\":\"a8424896a12fd1be10526834176fc754cd296c900f40da655fb2e03c1b7eb921\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/nodeenv-1.10.0.dist-info\",\"version\":\"1.10.0\"},\"nodejs-wheel-binaries\":{\"metadata_sha256\":\"eb97ca861b7b1f4908e480a6ee14b26ee79fbfce8fbbed7c505b60f1c2e25484\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/nodejs_wheel_binaries-24.19.0.dist-info\",\"version\":\"24.19.0\"},\"opentelemetry-api\":{\"metadata_sha256\":\"42aabbbacd266627b5c3839a515150ca90c18f80c9d85ca6f6fa10d440a7eeaa\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/opentelemetry_api-1.44.0.dist-info\",\"version\":\"1.44.0\"},\"packaging\":{\"metadata_sha256\":\"70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/packaging-26.3.dist-info\",\"version\":\"26.3\"},\"pathspec\":{\"metadata_sha256\":\"68de3f158b6592f086e78754c962092f32a761944ab66a660c0d62ad79c4b69b\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pathspec-1.1.1.dist-info\",\"version\":\"1.1.1\"},\"pluggy\":{\"metadata_sha256\":\"7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pluggy-1.6.0.dist-info\",\"version\":\"1.6.0\"},\"protobuf\":{\"metadata_sha256\":\"947ed3f132e70411555388d7fcd36712fdd60c8db6345001fb23bb56a2c6cab7\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/protobuf-7.36.1.dist-info\",\"version\":\"7.36.1\"},\"pycparser\":{\"metadata_sha256\":\"f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pycparser-3.0.dist-info\",\"version\":\"3.0\"},\"pydantic\":{\"metadata_sha256\":\"0685830d13647bd6f3f05526043d32a8b2a221d86b53773053d6c52bb17a9c07\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pydantic-2.13.5.dist-info\",\"version\":\"2.13.5\"},\"pydantic-core\":{\"metadata_sha256\":\"29768c038c0bb3564c0a87ef50ef78d18a2372474bdef0ba356a8c0fd4bd6028\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pydantic_core-2.46.5.dist-info\",\"version\":\"2.46.5\"},\"pydocstyle\":{\"metadata_sha256\":\"c6c78756d88aed0336f974871b4ef4f351cc13ef6576145995118105d6b007b4\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pydocstyle-6.3.0.dist-info\",\"version\":\"6.3.0\"},\"pygments\":{\"metadata_sha256\":\"1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pygments-2.21.0.dist-info\",\"version\":\"2.21.0\"},\"pyjwt\":{\"metadata_sha256\":\"b854eb461aaeef80469612210786ac1fbf6d1064f1d51af5ee2619b7bbddb1ba\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pyjwt-2.14.0.dist-info\",\"version\":\"2.14.0\"},\"pyright\":{\"metadata_sha256\":\"1733517425e2e812cf12fcca6617d71233119797cf0b8bb138bab97424509933\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pyright-1.1.403.dist-info\",\"version\":\"1.1.403\"},\"pytest\":{\"metadata_sha256\":\"c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest-9.1.1.dist-info\",\"version\":\"9.1.1\"},\"pytest-asyncio\":{\"metadata_sha256\":\"627afb1674d04853976b354eccc447a25a664c9ba3f143a06dbaea0c3070cbe2\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_asyncio-0.21.2.dist-info\",\"version\":\"0.21.2\"},\"pytest-pretty\":{\"metadata_sha256\":\"28c47a5d6434e39143e8087f16fe4ca3a1fad2df6179d52fc72be225019c2581\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_pretty-1.3.0.dist-info\",\"version\":\"1.3.0\"},\"pytest-rerunfailures\":{\"metadata_sha256\":\"ed20d2e49086ce82db5543fcf89a97954dfaf52ae337712852779c953ba0800c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_rerunfailures-16.6.1.dist-info\",\"version\":\"16.6.1\"},\"pytest-timeout\":{\"metadata_sha256\":\"8b79be0dfb1db4a0166b9d997ad95553e7a7e61445bcfc0ddbfbd409bae421ff\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_timeout-2.4.0.dist-info\",\"version\":\"2.4.0\"},\"pytest-xdist\":{\"metadata_sha256\":\"298f16af52794d340c358fc2eb20b054a29db2922f22fea90a35b459ecbcc18f\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/pytest_xdist-3.8.0.dist-info\",\"version\":\"3.8.0\"},\"python-multipart\":{\"metadata_sha256\":\"e9d399d7dea5eddf0e4d24b5c24687a82e7e50bf2c2b30f8f8a06a64d887dd86\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/python_multipart-0.0.32.dist-info\",\"version\":\"0.0.32\"},\"referencing\":{\"metadata_sha256\":\"c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/referencing-0.37.0.dist-info\",\"version\":\"0.37.0\"},\"rich\":{\"metadata_sha256\":\"fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/rich-15.0.0.dist-info\",\"version\":\"15.0.0\"},\"rpds-py\":{\"metadata_sha256\":\"f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/rpds_py-2026.6.3.dist-info\",\"version\":\"2026.6.3\"},\"ruff\":{\"metadata_sha256\":\"c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/ruff-0.15.22.dist-info\",\"version\":\"0.15.22\"},\"sniffio\":{\"metadata_sha256\":\"e87e83bd780638c08d4ae02ba8c36a89c6b55e2ea910d441aa20ad0b30e51fb6\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/sniffio-1.3.1.dist-info\",\"version\":\"1.3.1\"},\"snowballstemmer\":{\"metadata_sha256\":\"6c06c375da8e0a963410b6af906e3d72acc337a5fde985944a4b74e24b10479a\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/snowballstemmer-3.1.1.dist-info\",\"version\":\"3.1.1\"},\"sse-starlette\":{\"metadata_sha256\":\"0d2b7e974db957ca4aa20053918516a6f28a8433eff401728483cbb235e483a4\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/sse_starlette-3.4.11.dist-info\",\"version\":\"3.4.11\"},\"starlette\":{\"metadata_sha256\":\"43f6240f976044f4cf9a573506d96d895391094717c55682700c931d5cd3c5a2\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/starlette-1.6.0.dist-info\",\"version\":\"1.6.0\"},\"temporalio\":{\"metadata_sha256\":\"332cba195a53a199f5e0d4811c0f969e86b9f45e3e8c2e8846d2b54c86b19f76\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/temporalio-1.33.0.dist-info\",\"version\":\"1.33.0\"},\"temporalio-claude-agent-sdk\":{\"metadata_sha256\":\"f6638d71b2776c77043ca6c6b02854922b76d345272ad611c2fd073cd0b7cfec\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/temporalio_claude_agent_sdk-0.0.0.dist-info\",\"version\":\"0.0.0\"},\"trove-classifiers\":{\"metadata_sha256\":\"72629166a4dc87540d6fd5d01962115414f8f4f26f11e3c58f8853cd8499cf90\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/trove_classifiers-2026.6.1.19.dist-info\",\"version\":\"2026.6.1.19\"},\"truststore\":{\"metadata_sha256\":\"509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/truststore-0.10.4.dist-info\",\"version\":\"0.10.4\"},\"types-protobuf\":{\"metadata_sha256\":\"d6b703bab3eedbc4e56bae2b1d77ad447d89df2308316e750da906322aed66db\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/types_protobuf-7.35.1.20260906.dist-info\",\"version\":\"7.35.1.20260906\"},\"typing-extensions\":{\"metadata_sha256\":\"b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info\",\"version\":\"4.16.0\"},\"typing-inspection\":{\"metadata_sha256\":\"bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/typing_inspection-0.4.4.dist-info\",\"version\":\"0.4.4\"},\"uvicorn\":{\"metadata_sha256\":\"bcfb3b631d31e3ff7c6992428b0480a09d407ec829905aa9301f736bd854cb45\",\"path\":\"<isolated-venv>/lib/python3.13/site-packages/uvicorn-0.53.0.dist-info\",\"version\":\"0.53.0\"}},\"prefix\":\"<isolated-venv>\",\"python\":\"3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]\"}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<isolated-venv>/bin/python",
+        "-c",
+        "\nimport hashlib,importlib.metadata,importlib.util,json,pathlib,sys\nimport claude_agent_sdk\nfrom claude_agent_sdk import ClaudeAgentOptions\nfields=ClaudeAgentOptions.__dataclass_fields__\nprint(json.dumps({\"prefix\":sys.prefix,\"sdk_file\":claude_agent_sdk.__file__,\"sdk_version\":importlib.metadata.version(\"claude-agent-sdk\"),\"temporal_version\":importlib.metadata.version(\"temporalio\"),\"recover_pending_tool\":\"recover_pending_tool\" in fields,\"parallel_tool_recovery\":\"parallel_tool_recovery\" in fields,\"recovery_module\":importlib.util.find_spec(\"claude_agent_sdk._internal.main_agent_recovery\").origin},sort_keys=True))\n"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "{\"parallel_tool_recovery\":true,\"prefix\":\"<isolated-venv>\",\"recover_pending_tool\":true,\"recovery_module\":\"<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk/_internal/main_agent_recovery.py\",\"sdk_file\":\"<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk/__init__.py\",\"sdk_version\":\"0.2.162\",\"temporal_version\":\"1.33.0\"}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<baseline-venv>/bin/python",
+        "-c",
+        "\nimport hashlib,importlib.metadata,json,pathlib,sys\nout={\"prefix\":sys.prefix,\"python\":sys.version,\"distributions\":{}}\nfor d in importlib.metadata.distributions():\n name=d.metadata[\"Name\"].lower().replace(\"_\",\"-\")\n out[\"distributions\"][name]={\"version\":d.version,\"metadata_sha256\":hashlib.sha256(d.read_text(\"METADATA\").encode()).hexdigest(),\"path\":str(d._path)}\nprint(json.dumps(out,sort_keys=True))\n"
+      ],
+      "cwd": null,
+      "returncode": 0,
+      "stdout": "{\"distributions\":{\"annotated-types\":{\"metadata_sha256\":\"614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/annotated_types-0.8.0.dist-info\",\"version\":\"0.8.0\"},\"anyio\":{\"metadata_sha256\":\"043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/anyio-4.15.1.dist-info\",\"version\":\"4.15.1\"},\"attrs\":{\"metadata_sha256\":\"4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/attrs-26.1.0.dist-info\",\"version\":\"26.1.0\"},\"basedpyright\":{\"metadata_sha256\":\"e1491217c4ccad6a806dfeef9be012adcfc9d7f8597df71517bc2f50c1c49ecb\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/basedpyright-1.34.0.dist-info\",\"version\":\"1.34.0\"},\"cffi\":{\"metadata_sha256\":\"558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/cffi-2.1.1.dist-info\",\"version\":\"2.1.1\"},\"claude-agent-sdk\":{\"metadata_sha256\":\"632a3756c4aead954aad591e57f91febd9e930f656d0dc8e3f318592cfbdf72d\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.154.dist-info\",\"version\":\"0.2.154\"},\"click\":{\"metadata_sha256\":\"e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/click-8.5.0.dist-info\",\"version\":\"8.5.0\"},\"cryptography\":{\"metadata_sha256\":\"8e9b5570da4686848ee5c6bb83fffc224bcddf9793136731dd050ce0c05fffe2\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/cryptography-50.0.1.dist-info\",\"version\":\"50.0.1\"},\"execnet\":{\"metadata_sha256\":\"7343015d62b2eaa1841ec06a7c7c132aeb482921f73ab6e0fd18331495684c61\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/execnet-2.1.2.dist-info\",\"version\":\"2.1.2\"},\"h11\":{\"metadata_sha256\":\"28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/h11-0.16.0.dist-info\",\"version\":\"0.16.0\"},\"httpcore2\":{\"metadata_sha256\":\"b948af04be9aed66d7486d18de5ac9dfbf46ef3aba2908afba9f1febada85311\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/httpcore2-2.13.0.dist-info\",\"version\":\"2.13.0\"},\"httpx2\":{\"metadata_sha256\":\"192d199ceef38a49dc1964623d87546b14fc416933a7a778a4c007e3c5dcfc48\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/httpx2-2.13.0.dist-info\",\"version\":\"2.13.0\"},\"idna\":{\"metadata_sha256\":\"4d113161aca8582e8d28fddf3ea50f19b607209c2b3e4364379a163454680084\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/idna-3.19.dist-info\",\"version\":\"3.19\"},\"iniconfig\":{\"metadata_sha256\":\"40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/iniconfig-2.3.0.dist-info\",\"version\":\"2.3.0\"},\"jsonschema\":{\"metadata_sha256\":\"05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/jsonschema-4.26.0.dist-info\",\"version\":\"4.26.0\"},\"jsonschema-specifications\":{\"metadata_sha256\":\"35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/jsonschema_specifications-2025.9.1.dist-info\",\"version\":\"2025.9.1\"},\"markdown-it-py\":{\"metadata_sha256\":\"72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info\",\"version\":\"4.2.0\"},\"mcp\":{\"metadata_sha256\":\"dffdec58283e1c0964a57f5fba19aa80272686ab5b03283d9398f7daac4fe45a\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mcp-2.2.0.dist-info\",\"version\":\"2.2.0\"},\"mcp-types\":{\"metadata_sha256\":\"f29cd43b57497e73976271607090609e7cf79d50c3ea3362196ac36275cdd0f0\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mcp_types-2.2.0.dist-info\",\"version\":\"2.2.0\"},\"mdurl\":{\"metadata_sha256\":\"b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mdurl-0.1.2.dist-info\",\"version\":\"0.1.2\"},\"mypy\":{\"metadata_sha256\":\"3a1bd2ab3db5f8ffa441d267c7dd3efa79eb3fe656148d1f0532c2d562178a32\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mypy-1.18.2.dist-info\",\"version\":\"1.18.2\"},\"mypy-extensions\":{\"metadata_sha256\":\"2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info\",\"version\":\"1.1.0\"},\"nexus-rpc\":{\"metadata_sha256\":\"2edebf00f8b3a2861049b5eb89457001d94b80356a7aac9a4cef114535ffcc4d\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/nexus_rpc-1.4.0.dist-info\",\"version\":\"1.4.0\"},\"nodeenv\":{\"metadata_sha256\":\"a8424896a12fd1be10526834176fc754cd296c900f40da655fb2e03c1b7eb921\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/nodeenv-1.10.0.dist-info\",\"version\":\"1.10.0\"},\"nodejs-wheel-binaries\":{\"metadata_sha256\":\"eb97ca861b7b1f4908e480a6ee14b26ee79fbfce8fbbed7c505b60f1c2e25484\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/nodejs_wheel_binaries-24.19.0.dist-info\",\"version\":\"24.19.0\"},\"opentelemetry-api\":{\"metadata_sha256\":\"42aabbbacd266627b5c3839a515150ca90c18f80c9d85ca6f6fa10d440a7eeaa\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/opentelemetry_api-1.44.0.dist-info\",\"version\":\"1.44.0\"},\"packaging\":{\"metadata_sha256\":\"70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/packaging-26.3.dist-info\",\"version\":\"26.3\"},\"pathspec\":{\"metadata_sha256\":\"68de3f158b6592f086e78754c962092f32a761944ab66a660c0d62ad79c4b69b\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pathspec-1.1.1.dist-info\",\"version\":\"1.1.1\"},\"pluggy\":{\"metadata_sha256\":\"7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pluggy-1.6.0.dist-info\",\"version\":\"1.6.0\"},\"protobuf\":{\"metadata_sha256\":\"947ed3f132e70411555388d7fcd36712fdd60c8db6345001fb23bb56a2c6cab7\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/protobuf-7.36.1.dist-info\",\"version\":\"7.36.1\"},\"pycparser\":{\"metadata_sha256\":\"f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pycparser-3.0.dist-info\",\"version\":\"3.0\"},\"pydantic\":{\"metadata_sha256\":\"0685830d13647bd6f3f05526043d32a8b2a221d86b53773053d6c52bb17a9c07\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pydantic-2.13.5.dist-info\",\"version\":\"2.13.5\"},\"pydantic-core\":{\"metadata_sha256\":\"29768c038c0bb3564c0a87ef50ef78d18a2372474bdef0ba356a8c0fd4bd6028\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pydantic_core-2.46.5.dist-info\",\"version\":\"2.46.5\"},\"pydocstyle\":{\"metadata_sha256\":\"c6c78756d88aed0336f974871b4ef4f351cc13ef6576145995118105d6b007b4\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pydocstyle-6.3.0.dist-info\",\"version\":\"6.3.0\"},\"pygments\":{\"metadata_sha256\":\"1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pygments-2.21.0.dist-info\",\"version\":\"2.21.0\"},\"pyjwt\":{\"metadata_sha256\":\"b854eb461aaeef80469612210786ac1fbf6d1064f1d51af5ee2619b7bbddb1ba\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pyjwt-2.14.0.dist-info\",\"version\":\"2.14.0\"},\"pyright\":{\"metadata_sha256\":\"1733517425e2e812cf12fcca6617d71233119797cf0b8bb138bab97424509933\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pyright-1.1.403.dist-info\",\"version\":\"1.1.403\"},\"pytest\":{\"metadata_sha256\":\"c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest-9.1.1.dist-info\",\"version\":\"9.1.1\"},\"pytest-asyncio\":{\"metadata_sha256\":\"627afb1674d04853976b354eccc447a25a664c9ba3f143a06dbaea0c3070cbe2\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_asyncio-0.21.2.dist-info\",\"version\":\"0.21.2\"},\"pytest-pretty\":{\"metadata_sha256\":\"28c47a5d6434e39143e8087f16fe4ca3a1fad2df6179d52fc72be225019c2581\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_pretty-1.3.0.dist-info\",\"version\":\"1.3.0\"},\"pytest-rerunfailures\":{\"metadata_sha256\":\"ed20d2e49086ce82db5543fcf89a97954dfaf52ae337712852779c953ba0800c\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_rerunfailures-16.6.1.dist-info\",\"version\":\"16.6.1\"},\"pytest-timeout\":{\"metadata_sha256\":\"8b79be0dfb1db4a0166b9d997ad95553e7a7e61445bcfc0ddbfbd409bae421ff\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_timeout-2.4.0.dist-info\",\"version\":\"2.4.0\"},\"pytest-xdist\":{\"metadata_sha256\":\"298f16af52794d340c358fc2eb20b054a29db2922f22fea90a35b459ecbcc18f\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/pytest_xdist-3.8.0.dist-info\",\"version\":\"3.8.0\"},\"python-multipart\":{\"metadata_sha256\":\"e9d399d7dea5eddf0e4d24b5c24687a82e7e50bf2c2b30f8f8a06a64d887dd86\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/python_multipart-0.0.32.dist-info\",\"version\":\"0.0.32\"},\"referencing\":{\"metadata_sha256\":\"c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/referencing-0.37.0.dist-info\",\"version\":\"0.37.0\"},\"rich\":{\"metadata_sha256\":\"fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/rich-15.0.0.dist-info\",\"version\":\"15.0.0\"},\"rpds-py\":{\"metadata_sha256\":\"f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/rpds_py-2026.6.3.dist-info\",\"version\":\"2026.6.3\"},\"ruff\":{\"metadata_sha256\":\"c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/ruff-0.15.22.dist-info\",\"version\":\"0.15.22\"},\"sniffio\":{\"metadata_sha256\":\"e87e83bd780638c08d4ae02ba8c36a89c6b55e2ea910d441aa20ad0b30e51fb6\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/sniffio-1.3.1.dist-info\",\"version\":\"1.3.1\"},\"snowballstemmer\":{\"metadata_sha256\":\"6c06c375da8e0a963410b6af906e3d72acc337a5fde985944a4b74e24b10479a\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/snowballstemmer-3.1.1.dist-info\",\"version\":\"3.1.1\"},\"sse-starlette\":{\"metadata_sha256\":\"0d2b7e974db957ca4aa20053918516a6f28a8433eff401728483cbb235e483a4\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/sse_starlette-3.4.11.dist-info\",\"version\":\"3.4.11\"},\"starlette\":{\"metadata_sha256\":\"43f6240f976044f4cf9a573506d96d895391094717c55682700c931d5cd3c5a2\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/starlette-1.6.0.dist-info\",\"version\":\"1.6.0\"},\"temporalio\":{\"metadata_sha256\":\"332cba195a53a199f5e0d4811c0f969e86b9f45e3e8c2e8846d2b54c86b19f76\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/temporalio-1.33.0.dist-info\",\"version\":\"1.33.0\"},\"temporalio-claude-agent-sdk\":{\"metadata_sha256\":\"f6638d71b2776c77043ca6c6b02854922b76d345272ad611c2fd073cd0b7cfec\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/temporalio_claude_agent_sdk-0.0.0.dist-info\",\"version\":\"0.0.0\"},\"truststore\":{\"metadata_sha256\":\"509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/truststore-0.10.4.dist-info\",\"version\":\"0.10.4\"},\"types-protobuf\":{\"metadata_sha256\":\"d6b703bab3eedbc4e56bae2b1d77ad447d89df2308316e750da906322aed66db\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/types_protobuf-7.35.1.20260906.dist-info\",\"version\":\"7.35.1.20260906\"},\"typing-extensions\":{\"metadata_sha256\":\"b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info\",\"version\":\"4.16.0\"},\"typing-inspection\":{\"metadata_sha256\":\"bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/typing_inspection-0.4.4.dist-info\",\"version\":\"0.4.4\"},\"uvicorn\":{\"metadata_sha256\":\"bcfb3b631d31e3ff7c6992428b0480a09d407ec829905aa9301f736bd854cb45\",\"path\":\"<baseline-venv>/lib/python3.13/site-packages/uvicorn-0.53.0.dist-info\",\"version\":\"0.53.0\"}},\"prefix\":\"<baseline-venv>\",\"python\":\"3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]\"}",
+      "stderr": ""
+    }
+  ],
+  "downloads": [
+    {
+      "name": "hatchling-1.27.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/08/e7/ae38d7a6dfba0533684e0b2136817d667588ae3ec984c1a4e5df5eb88482/hatchling-1.27.0-py3-none-any.whl",
+      "sha256": "d3a2f3567c4f926ea39849cdf924c7e99e6686c9c8e288ae1037c8fa2a5d937b",
+      "actual_sha256": "d3a2f3567c4f926ea39849cdf924c7e99e6686c9c8e288ae1037c8fa2a5d937b",
+      "bytes": 75794
+    },
+    {
+      "name": "trove_classifiers-2026.6.1.19-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/7c/a4/81502f486f01db95bc8320646a8a12511f5e556cb63d5e224d91816605c4/trove_classifiers-2026.6.1.19-py3-none-any.whl",
+      "sha256": "ab4c4ec93cc4a4e7815fa759906e05e6bb3f2fbd92ea0f897288c6a43efd15b3",
+      "actual_sha256": "ab4c4ec93cc4a4e7815fa759906e05e6bb3f2fbd92ea0f897288c6a43efd15b3",
+      "bytes": 14211
+    },
+    {
+      "name": "sdk-source.tar.gz",
+      "url": "https://codeload.github.com/brianstrauch/claude-agent-sdk-python/tar.gz/3ac4b25733d1302c89d0dadd13cab268e64d1213",
+      "sha256": "364ec9f343f793dd5ce9c8aa4bc685101286c732b47a19d90171b15e1db6a022",
+      "actual_sha256": "364ec9f343f793dd5ce9c8aa4bc685101286c732b47a19d90171b15e1db6a022",
+      "bytes": 434723
+    }
+  ],
+  "status": "passed",
+  "baseline_before": {
+    "distributions": {
+      "annotated-types": {
+        "metadata_sha256": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/annotated_types-0.8.0.dist-info",
+        "version": "0.8.0"
+      },
+      "anyio": {
+        "metadata_sha256": "043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/anyio-4.15.1.dist-info",
+        "version": "4.15.1"
+      },
+      "attrs": {
+        "metadata_sha256": "4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/attrs-26.1.0.dist-info",
+        "version": "26.1.0"
+      },
+      "basedpyright": {
+        "metadata_sha256": "e1491217c4ccad6a806dfeef9be012adcfc9d7f8597df71517bc2f50c1c49ecb",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/basedpyright-1.34.0.dist-info",
+        "version": "1.34.0"
+      },
+      "cffi": {
+        "metadata_sha256": "558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/cffi-2.1.1.dist-info",
+        "version": "2.1.1"
+      },
+      "claude-agent-sdk": {
+        "metadata_sha256": "632a3756c4aead954aad591e57f91febd9e930f656d0dc8e3f318592cfbdf72d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.154.dist-info",
+        "version": "0.2.154"
+      },
+      "click": {
+        "metadata_sha256": "e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/click-8.5.0.dist-info",
+        "version": "8.5.0"
+      },
+      "cryptography": {
+        "metadata_sha256": "8e9b5570da4686848ee5c6bb83fffc224bcddf9793136731dd050ce0c05fffe2",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/cryptography-50.0.1.dist-info",
+        "version": "50.0.1"
+      },
+      "execnet": {
+        "metadata_sha256": "7343015d62b2eaa1841ec06a7c7c132aeb482921f73ab6e0fd18331495684c61",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/execnet-2.1.2.dist-info",
+        "version": "2.1.2"
+      },
+      "h11": {
+        "metadata_sha256": "28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/h11-0.16.0.dist-info",
+        "version": "0.16.0"
+      },
+      "httpcore2": {
+        "metadata_sha256": "b948af04be9aed66d7486d18de5ac9dfbf46ef3aba2908afba9f1febada85311",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/httpcore2-2.13.0.dist-info",
+        "version": "2.13.0"
+      },
+      "httpx2": {
+        "metadata_sha256": "192d199ceef38a49dc1964623d87546b14fc416933a7a778a4c007e3c5dcfc48",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/httpx2-2.13.0.dist-info",
+        "version": "2.13.0"
+      },
+      "idna": {
+        "metadata_sha256": "4d113161aca8582e8d28fddf3ea50f19b607209c2b3e4364379a163454680084",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/idna-3.19.dist-info",
+        "version": "3.19"
+      },
+      "iniconfig": {
+        "metadata_sha256": "40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/iniconfig-2.3.0.dist-info",
+        "version": "2.3.0"
+      },
+      "jsonschema": {
+        "metadata_sha256": "05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/jsonschema-4.26.0.dist-info",
+        "version": "4.26.0"
+      },
+      "jsonschema-specifications": {
+        "metadata_sha256": "35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/jsonschema_specifications-2025.9.1.dist-info",
+        "version": "2025.9.1"
+      },
+      "markdown-it-py": {
+        "metadata_sha256": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info",
+        "version": "4.2.0"
+      },
+      "mcp": {
+        "metadata_sha256": "dffdec58283e1c0964a57f5fba19aa80272686ab5b03283d9398f7daac4fe45a",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mcp-2.2.0.dist-info",
+        "version": "2.2.0"
+      },
+      "mcp-types": {
+        "metadata_sha256": "f29cd43b57497e73976271607090609e7cf79d50c3ea3362196ac36275cdd0f0",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mcp_types-2.2.0.dist-info",
+        "version": "2.2.0"
+      },
+      "mdurl": {
+        "metadata_sha256": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mdurl-0.1.2.dist-info",
+        "version": "0.1.2"
+      },
+      "mypy": {
+        "metadata_sha256": "3a1bd2ab3db5f8ffa441d267c7dd3efa79eb3fe656148d1f0532c2d562178a32",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mypy-1.18.2.dist-info",
+        "version": "1.18.2"
+      },
+      "mypy-extensions": {
+        "metadata_sha256": "2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info",
+        "version": "1.1.0"
+      },
+      "nexus-rpc": {
+        "metadata_sha256": "2edebf00f8b3a2861049b5eb89457001d94b80356a7aac9a4cef114535ffcc4d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/nexus_rpc-1.4.0.dist-info",
+        "version": "1.4.0"
+      },
+      "nodeenv": {
+        "metadata_sha256": "a8424896a12fd1be10526834176fc754cd296c900f40da655fb2e03c1b7eb921",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/nodeenv-1.10.0.dist-info",
+        "version": "1.10.0"
+      },
+      "nodejs-wheel-binaries": {
+        "metadata_sha256": "eb97ca861b7b1f4908e480a6ee14b26ee79fbfce8fbbed7c505b60f1c2e25484",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/nodejs_wheel_binaries-24.19.0.dist-info",
+        "version": "24.19.0"
+      },
+      "opentelemetry-api": {
+        "metadata_sha256": "42aabbbacd266627b5c3839a515150ca90c18f80c9d85ca6f6fa10d440a7eeaa",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/opentelemetry_api-1.44.0.dist-info",
+        "version": "1.44.0"
+      },
+      "packaging": {
+        "metadata_sha256": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/packaging-26.3.dist-info",
+        "version": "26.3"
+      },
+      "pathspec": {
+        "metadata_sha256": "68de3f158b6592f086e78754c962092f32a761944ab66a660c0d62ad79c4b69b",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pathspec-1.1.1.dist-info",
+        "version": "1.1.1"
+      },
+      "pluggy": {
+        "metadata_sha256": "7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pluggy-1.6.0.dist-info",
+        "version": "1.6.0"
+      },
+      "protobuf": {
+        "metadata_sha256": "947ed3f132e70411555388d7fcd36712fdd60c8db6345001fb23bb56a2c6cab7",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/protobuf-7.36.1.dist-info",
+        "version": "7.36.1"
+      },
+      "pycparser": {
+        "metadata_sha256": "f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pycparser-3.0.dist-info",
+        "version": "3.0"
+      },
+      "pydantic": {
+        "metadata_sha256": "0685830d13647bd6f3f05526043d32a8b2a221d86b53773053d6c52bb17a9c07",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pydantic-2.13.5.dist-info",
+        "version": "2.13.5"
+      },
+      "pydantic-core": {
+        "metadata_sha256": "29768c038c0bb3564c0a87ef50ef78d18a2372474bdef0ba356a8c0fd4bd6028",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pydantic_core-2.46.5.dist-info",
+        "version": "2.46.5"
+      },
+      "pydocstyle": {
+        "metadata_sha256": "c6c78756d88aed0336f974871b4ef4f351cc13ef6576145995118105d6b007b4",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pydocstyle-6.3.0.dist-info",
+        "version": "6.3.0"
+      },
+      "pygments": {
+        "metadata_sha256": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pygments-2.21.0.dist-info",
+        "version": "2.21.0"
+      },
+      "pyjwt": {
+        "metadata_sha256": "b854eb461aaeef80469612210786ac1fbf6d1064f1d51af5ee2619b7bbddb1ba",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pyjwt-2.14.0.dist-info",
+        "version": "2.14.0"
+      },
+      "pyright": {
+        "metadata_sha256": "1733517425e2e812cf12fcca6617d71233119797cf0b8bb138bab97424509933",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pyright-1.1.403.dist-info",
+        "version": "1.1.403"
+      },
+      "pytest": {
+        "metadata_sha256": "c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest-9.1.1.dist-info",
+        "version": "9.1.1"
+      },
+      "pytest-asyncio": {
+        "metadata_sha256": "627afb1674d04853976b354eccc447a25a664c9ba3f143a06dbaea0c3070cbe2",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_asyncio-0.21.2.dist-info",
+        "version": "0.21.2"
+      },
+      "pytest-pretty": {
+        "metadata_sha256": "28c47a5d6434e39143e8087f16fe4ca3a1fad2df6179d52fc72be225019c2581",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_pretty-1.3.0.dist-info",
+        "version": "1.3.0"
+      },
+      "pytest-rerunfailures": {
+        "metadata_sha256": "ed20d2e49086ce82db5543fcf89a97954dfaf52ae337712852779c953ba0800c",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_rerunfailures-16.6.1.dist-info",
+        "version": "16.6.1"
+      },
+      "pytest-timeout": {
+        "metadata_sha256": "8b79be0dfb1db4a0166b9d997ad95553e7a7e61445bcfc0ddbfbd409bae421ff",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_timeout-2.4.0.dist-info",
+        "version": "2.4.0"
+      },
+      "pytest-xdist": {
+        "metadata_sha256": "298f16af52794d340c358fc2eb20b054a29db2922f22fea90a35b459ecbcc18f",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_xdist-3.8.0.dist-info",
+        "version": "3.8.0"
+      },
+      "python-multipart": {
+        "metadata_sha256": "e9d399d7dea5eddf0e4d24b5c24687a82e7e50bf2c2b30f8f8a06a64d887dd86",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/python_multipart-0.0.32.dist-info",
+        "version": "0.0.32"
+      },
+      "referencing": {
+        "metadata_sha256": "c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/referencing-0.37.0.dist-info",
+        "version": "0.37.0"
+      },
+      "rich": {
+        "metadata_sha256": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/rich-15.0.0.dist-info",
+        "version": "15.0.0"
+      },
+      "rpds-py": {
+        "metadata_sha256": "f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/rpds_py-2026.6.3.dist-info",
+        "version": "2026.6.3"
+      },
+      "ruff": {
+        "metadata_sha256": "c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/ruff-0.15.22.dist-info",
+        "version": "0.15.22"
+      },
+      "sniffio": {
+        "metadata_sha256": "e87e83bd780638c08d4ae02ba8c36a89c6b55e2ea910d441aa20ad0b30e51fb6",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/sniffio-1.3.1.dist-info",
+        "version": "1.3.1"
+      },
+      "snowballstemmer": {
+        "metadata_sha256": "6c06c375da8e0a963410b6af906e3d72acc337a5fde985944a4b74e24b10479a",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/snowballstemmer-3.1.1.dist-info",
+        "version": "3.1.1"
+      },
+      "sse-starlette": {
+        "metadata_sha256": "0d2b7e974db957ca4aa20053918516a6f28a8433eff401728483cbb235e483a4",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/sse_starlette-3.4.11.dist-info",
+        "version": "3.4.11"
+      },
+      "starlette": {
+        "metadata_sha256": "43f6240f976044f4cf9a573506d96d895391094717c55682700c931d5cd3c5a2",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/starlette-1.6.0.dist-info",
+        "version": "1.6.0"
+      },
+      "temporalio": {
+        "metadata_sha256": "332cba195a53a199f5e0d4811c0f969e86b9f45e3e8c2e8846d2b54c86b19f76",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/temporalio-1.33.0.dist-info",
+        "version": "1.33.0"
+      },
+      "temporalio-claude-agent-sdk": {
+        "metadata_sha256": "f6638d71b2776c77043ca6c6b02854922b76d345272ad611c2fd073cd0b7cfec",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/temporalio_claude_agent_sdk-0.0.0.dist-info",
+        "version": "0.0.0"
+      },
+      "truststore": {
+        "metadata_sha256": "509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/truststore-0.10.4.dist-info",
+        "version": "0.10.4"
+      },
+      "types-protobuf": {
+        "metadata_sha256": "d6b703bab3eedbc4e56bae2b1d77ad447d89df2308316e750da906322aed66db",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/types_protobuf-7.35.1.20260906.dist-info",
+        "version": "7.35.1.20260906"
+      },
+      "typing-extensions": {
+        "metadata_sha256": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info",
+        "version": "4.16.0"
+      },
+      "typing-inspection": {
+        "metadata_sha256": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/typing_inspection-0.4.4.dist-info",
+        "version": "0.4.4"
+      },
+      "uvicorn": {
+        "metadata_sha256": "bcfb3b631d31e3ff7c6992428b0480a09d407ec829905aa9301f736bd854cb45",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/uvicorn-0.53.0.dist-info",
+        "version": "0.53.0"
+      }
+    },
+    "prefix": "<baseline-venv>",
+    "python": "3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]"
+  },
+  "cli": {
+    "path": "<baseline-venv>/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude",
+    "sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+    "version": "2.1.274 (Claude Code)"
+  },
+  "copied_before": {
+    "distributions": {
+      "annotated-types": {
+        "metadata_sha256": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/annotated_types-0.8.0.dist-info",
+        "version": "0.8.0"
+      },
+      "anyio": {
+        "metadata_sha256": "043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/anyio-4.15.1.dist-info",
+        "version": "4.15.1"
+      },
+      "attrs": {
+        "metadata_sha256": "4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/attrs-26.1.0.dist-info",
+        "version": "26.1.0"
+      },
+      "basedpyright": {
+        "metadata_sha256": "e1491217c4ccad6a806dfeef9be012adcfc9d7f8597df71517bc2f50c1c49ecb",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/basedpyright-1.34.0.dist-info",
+        "version": "1.34.0"
+      },
+      "cffi": {
+        "metadata_sha256": "558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/cffi-2.1.1.dist-info",
+        "version": "2.1.1"
+      },
+      "claude-agent-sdk": {
+        "metadata_sha256": "632a3756c4aead954aad591e57f91febd9e930f656d0dc8e3f318592cfbdf72d",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.154.dist-info",
+        "version": "0.2.154"
+      },
+      "click": {
+        "metadata_sha256": "e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/click-8.5.0.dist-info",
+        "version": "8.5.0"
+      },
+      "cryptography": {
+        "metadata_sha256": "8e9b5570da4686848ee5c6bb83fffc224bcddf9793136731dd050ce0c05fffe2",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/cryptography-50.0.1.dist-info",
+        "version": "50.0.1"
+      },
+      "execnet": {
+        "metadata_sha256": "7343015d62b2eaa1841ec06a7c7c132aeb482921f73ab6e0fd18331495684c61",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/execnet-2.1.2.dist-info",
+        "version": "2.1.2"
+      },
+      "h11": {
+        "metadata_sha256": "28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/h11-0.16.0.dist-info",
+        "version": "0.16.0"
+      },
+      "httpcore2": {
+        "metadata_sha256": "b948af04be9aed66d7486d18de5ac9dfbf46ef3aba2908afba9f1febada85311",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/httpcore2-2.13.0.dist-info",
+        "version": "2.13.0"
+      },
+      "httpx2": {
+        "metadata_sha256": "192d199ceef38a49dc1964623d87546b14fc416933a7a778a4c007e3c5dcfc48",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/httpx2-2.13.0.dist-info",
+        "version": "2.13.0"
+      },
+      "idna": {
+        "metadata_sha256": "4d113161aca8582e8d28fddf3ea50f19b607209c2b3e4364379a163454680084",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/idna-3.19.dist-info",
+        "version": "3.19"
+      },
+      "iniconfig": {
+        "metadata_sha256": "40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/iniconfig-2.3.0.dist-info",
+        "version": "2.3.0"
+      },
+      "jsonschema": {
+        "metadata_sha256": "05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/jsonschema-4.26.0.dist-info",
+        "version": "4.26.0"
+      },
+      "jsonschema-specifications": {
+        "metadata_sha256": "35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/jsonschema_specifications-2025.9.1.dist-info",
+        "version": "2025.9.1"
+      },
+      "markdown-it-py": {
+        "metadata_sha256": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info",
+        "version": "4.2.0"
+      },
+      "mcp": {
+        "metadata_sha256": "dffdec58283e1c0964a57f5fba19aa80272686ab5b03283d9398f7daac4fe45a",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mcp-2.2.0.dist-info",
+        "version": "2.2.0"
+      },
+      "mcp-types": {
+        "metadata_sha256": "f29cd43b57497e73976271607090609e7cf79d50c3ea3362196ac36275cdd0f0",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mcp_types-2.2.0.dist-info",
+        "version": "2.2.0"
+      },
+      "mdurl": {
+        "metadata_sha256": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mdurl-0.1.2.dist-info",
+        "version": "0.1.2"
+      },
+      "mypy": {
+        "metadata_sha256": "3a1bd2ab3db5f8ffa441d267c7dd3efa79eb3fe656148d1f0532c2d562178a32",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mypy-1.18.2.dist-info",
+        "version": "1.18.2"
+      },
+      "mypy-extensions": {
+        "metadata_sha256": "2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info",
+        "version": "1.1.0"
+      },
+      "nexus-rpc": {
+        "metadata_sha256": "2edebf00f8b3a2861049b5eb89457001d94b80356a7aac9a4cef114535ffcc4d",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/nexus_rpc-1.4.0.dist-info",
+        "version": "1.4.0"
+      },
+      "nodeenv": {
+        "metadata_sha256": "a8424896a12fd1be10526834176fc754cd296c900f40da655fb2e03c1b7eb921",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/nodeenv-1.10.0.dist-info",
+        "version": "1.10.0"
+      },
+      "nodejs-wheel-binaries": {
+        "metadata_sha256": "eb97ca861b7b1f4908e480a6ee14b26ee79fbfce8fbbed7c505b60f1c2e25484",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/nodejs_wheel_binaries-24.19.0.dist-info",
+        "version": "24.19.0"
+      },
+      "opentelemetry-api": {
+        "metadata_sha256": "42aabbbacd266627b5c3839a515150ca90c18f80c9d85ca6f6fa10d440a7eeaa",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/opentelemetry_api-1.44.0.dist-info",
+        "version": "1.44.0"
+      },
+      "packaging": {
+        "metadata_sha256": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/packaging-26.3.dist-info",
+        "version": "26.3"
+      },
+      "pathspec": {
+        "metadata_sha256": "68de3f158b6592f086e78754c962092f32a761944ab66a660c0d62ad79c4b69b",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pathspec-1.1.1.dist-info",
+        "version": "1.1.1"
+      },
+      "pluggy": {
+        "metadata_sha256": "7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pluggy-1.6.0.dist-info",
+        "version": "1.6.0"
+      },
+      "protobuf": {
+        "metadata_sha256": "947ed3f132e70411555388d7fcd36712fdd60c8db6345001fb23bb56a2c6cab7",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/protobuf-7.36.1.dist-info",
+        "version": "7.36.1"
+      },
+      "pycparser": {
+        "metadata_sha256": "f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pycparser-3.0.dist-info",
+        "version": "3.0"
+      },
+      "pydantic": {
+        "metadata_sha256": "0685830d13647bd6f3f05526043d32a8b2a221d86b53773053d6c52bb17a9c07",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pydantic-2.13.5.dist-info",
+        "version": "2.13.5"
+      },
+      "pydantic-core": {
+        "metadata_sha256": "29768c038c0bb3564c0a87ef50ef78d18a2372474bdef0ba356a8c0fd4bd6028",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pydantic_core-2.46.5.dist-info",
+        "version": "2.46.5"
+      },
+      "pydocstyle": {
+        "metadata_sha256": "c6c78756d88aed0336f974871b4ef4f351cc13ef6576145995118105d6b007b4",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pydocstyle-6.3.0.dist-info",
+        "version": "6.3.0"
+      },
+      "pygments": {
+        "metadata_sha256": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pygments-2.21.0.dist-info",
+        "version": "2.21.0"
+      },
+      "pyjwt": {
+        "metadata_sha256": "b854eb461aaeef80469612210786ac1fbf6d1064f1d51af5ee2619b7bbddb1ba",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pyjwt-2.14.0.dist-info",
+        "version": "2.14.0"
+      },
+      "pyright": {
+        "metadata_sha256": "1733517425e2e812cf12fcca6617d71233119797cf0b8bb138bab97424509933",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pyright-1.1.403.dist-info",
+        "version": "1.1.403"
+      },
+      "pytest": {
+        "metadata_sha256": "c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest-9.1.1.dist-info",
+        "version": "9.1.1"
+      },
+      "pytest-asyncio": {
+        "metadata_sha256": "627afb1674d04853976b354eccc447a25a664c9ba3f143a06dbaea0c3070cbe2",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_asyncio-0.21.2.dist-info",
+        "version": "0.21.2"
+      },
+      "pytest-pretty": {
+        "metadata_sha256": "28c47a5d6434e39143e8087f16fe4ca3a1fad2df6179d52fc72be225019c2581",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_pretty-1.3.0.dist-info",
+        "version": "1.3.0"
+      },
+      "pytest-rerunfailures": {
+        "metadata_sha256": "ed20d2e49086ce82db5543fcf89a97954dfaf52ae337712852779c953ba0800c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_rerunfailures-16.6.1.dist-info",
+        "version": "16.6.1"
+      },
+      "pytest-timeout": {
+        "metadata_sha256": "8b79be0dfb1db4a0166b9d997ad95553e7a7e61445bcfc0ddbfbd409bae421ff",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_timeout-2.4.0.dist-info",
+        "version": "2.4.0"
+      },
+      "pytest-xdist": {
+        "metadata_sha256": "298f16af52794d340c358fc2eb20b054a29db2922f22fea90a35b459ecbcc18f",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_xdist-3.8.0.dist-info",
+        "version": "3.8.0"
+      },
+      "python-multipart": {
+        "metadata_sha256": "e9d399d7dea5eddf0e4d24b5c24687a82e7e50bf2c2b30f8f8a06a64d887dd86",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/python_multipart-0.0.32.dist-info",
+        "version": "0.0.32"
+      },
+      "referencing": {
+        "metadata_sha256": "c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/referencing-0.37.0.dist-info",
+        "version": "0.37.0"
+      },
+      "rich": {
+        "metadata_sha256": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/rich-15.0.0.dist-info",
+        "version": "15.0.0"
+      },
+      "rpds-py": {
+        "metadata_sha256": "f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/rpds_py-2026.6.3.dist-info",
+        "version": "2026.6.3"
+      },
+      "ruff": {
+        "metadata_sha256": "c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/ruff-0.15.22.dist-info",
+        "version": "0.15.22"
+      },
+      "sniffio": {
+        "metadata_sha256": "e87e83bd780638c08d4ae02ba8c36a89c6b55e2ea910d441aa20ad0b30e51fb6",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/sniffio-1.3.1.dist-info",
+        "version": "1.3.1"
+      },
+      "snowballstemmer": {
+        "metadata_sha256": "6c06c375da8e0a963410b6af906e3d72acc337a5fde985944a4b74e24b10479a",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/snowballstemmer-3.1.1.dist-info",
+        "version": "3.1.1"
+      },
+      "sse-starlette": {
+        "metadata_sha256": "0d2b7e974db957ca4aa20053918516a6f28a8433eff401728483cbb235e483a4",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/sse_starlette-3.4.11.dist-info",
+        "version": "3.4.11"
+      },
+      "starlette": {
+        "metadata_sha256": "43f6240f976044f4cf9a573506d96d895391094717c55682700c931d5cd3c5a2",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/starlette-1.6.0.dist-info",
+        "version": "1.6.0"
+      },
+      "temporalio": {
+        "metadata_sha256": "332cba195a53a199f5e0d4811c0f969e86b9f45e3e8c2e8846d2b54c86b19f76",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/temporalio-1.33.0.dist-info",
+        "version": "1.33.0"
+      },
+      "temporalio-claude-agent-sdk": {
+        "metadata_sha256": "f6638d71b2776c77043ca6c6b02854922b76d345272ad611c2fd073cd0b7cfec",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/temporalio_claude_agent_sdk-0.0.0.dist-info",
+        "version": "0.0.0"
+      },
+      "truststore": {
+        "metadata_sha256": "509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/truststore-0.10.4.dist-info",
+        "version": "0.10.4"
+      },
+      "types-protobuf": {
+        "metadata_sha256": "d6b703bab3eedbc4e56bae2b1d77ad447d89df2308316e750da906322aed66db",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/types_protobuf-7.35.1.20260906.dist-info",
+        "version": "7.35.1.20260906"
+      },
+      "typing-extensions": {
+        "metadata_sha256": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info",
+        "version": "4.16.0"
+      },
+      "typing-inspection": {
+        "metadata_sha256": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/typing_inspection-0.4.4.dist-info",
+        "version": "0.4.4"
+      },
+      "uvicorn": {
+        "metadata_sha256": "bcfb3b631d31e3ff7c6992428b0480a09d407ec829905aa9301f736bd854cb45",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/uvicorn-0.53.0.dist-info",
+        "version": "0.53.0"
+      }
+    },
+    "prefix": "<isolated-venv>",
+    "python": "3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]"
+  },
+  "source": "<sdk-source>",
+  "wheel": {
+    "path": "<installation-scratch>/built-wheel/claude_agent_sdk-0.2.162-py3-none-any.whl",
+    "sha256": "ef22fdf2f98cf4858a8b6cd7523ae2a6e52d05bb503e1ae7e339595974d15cac",
+    "metadata": "Metadata-Version: 2.4\nName: claude-agent-sdk\nVersion: 0.2.162\nSummary: Python SDK for Claude Code\nProject-URL: Homepage, https://github.com/anthropics/claude-agent-sdk-python\nProject-URL: Documentation, https://docs.anthropic.com/en/docs/claude-code/sdk\nProject-URL: Issues, https://github.com/anthropics/claude-agent-sdk-python/issues\nAuthor-email: Anthropic <support@anthropic.com>\nLicense: MIT\nLicense-File: LICENSE\nKeywords: ai,anthropic,claude,sdk\nClassifier: Development Status :: 3 - Alpha\nClassifier: Intended Audience :: Developers\nClassifier: License :: OSI Approved :: MIT License\nClassifier: Programming Language :: Python :: 3\nClassifier: Programming Language :: Python :: 3.10\nClassifier: Programming Language :: Python :: 3.11\nClassifier: Programming Language :: Python :: 3.12\nClassifier: Programming Language :: Python :: 3.13\nClassifier: Typing :: Typed\nRequires-Python: >=3.10\nRequires-Dist: anyio>=4.0.0\nRequires-Dist: jsonschema>=4.20.0\nRequires-Dist: mcp<3.0.0,>=1.23.0\nRequires-Dist: sniffio>=1.0.0\nRequires-Dist: typing-extensions>=4.0.0; python_version < '3.11'\nProvides-Extra: dev\nRequires-Dist: anyio[trio]>=4.0.0; extra == 'dev'\nRequires-Dist: mypy>=1.0.0; extra == 'dev'\nRequires-Dist: pytest-cov>=4.0.0; extra == 'dev'\nRequires-Dist: pytest>=7.0.0; extra == 'dev'\nRequires-Dist: ruff>=0.1.0; extra == 'dev'\nProvides-Extra: examples\nRequires-Dist: asyncpg>=0.27.0; extra == 'examples'\nRequires-Dist: boto3>=1.28.0; extra == 'examples'\nRequires-Dist: fakeredis>=2.20.0; extra == 'examples'\nRequires-Dist: moto[s3]>=5.0.0; extra == 'examples'\nRequires-Dist: redis>=4.2.0; extra == 'examples'\nProvides-Extra: otel\nRequires-Dist: opentelemetry-api>=1.20.0; extra == 'otel'\nDescription-Content-Type: text/markdown\n\n# Claude Agent SDK for Python\n\nPython SDK for Claude Agent. See the [Claude Agent SDK documentation](https://platform.claude.com/docs/en/agent-sdk/python) for more information.\n\n## Installation\n\n```bash\npip install claude-agent-sdk\n```\n\n**Prerequisites:**\n\n- Python 3.10+\n\n**Note:** The Claude Code CLI is automatically bundled with the package - no separate installation required! The SDK will use the bundled CLI by default. If you prefer to use a system-wide installation or a specific version, you can:\n\n- Install Claude Code separately: `curl -fsSL https://claude.ai/install.sh | bash`\n- Specify a custom path: `ClaudeAgentOptions(cli_path=\"/path/to/claude\")`\n\n## Quick Start\n\n```python\nimport anyio\nfrom claude_agent_sdk import query\n\nasync def main():\n    async for message in query(prompt=\"What is 2 + 2?\"):\n        print(message)\n\nanyio.run(main)\n```\n\n## Basic Usage: query()\n\n`query()` is an async function for querying Claude Code. It returns an `AsyncIterator` of response messages. See [src/claude_agent_sdk/query.py](src/claude_agent_sdk/query.py).\n\n```python\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, TextBlock\n\n# Simple query\nasync for message in query(prompt=\"Hello Claude\"):\n    if isinstance(message, AssistantMessage):\n        for block in message.content:\n            if isinstance(block, TextBlock):\n                print(block.text)\n\n# With options\noptions = ClaudeAgentOptions(\n    system_prompt=\"You are a helpful assistant\",\n    max_turns=1\n)\n\nasync for message in query(prompt=\"Tell me a joke\", options=options):\n    print(message)\n```\n\n### Using Tools\n\nBy default, Claude has access to the full [Claude Code toolset](https://code.claude.com/docs/en/settings#tools-available-to-claude) (Read, Write, Edit, Bash, and others). `allowed_tools` is a permission allowlist: listed tools are auto-approved, and unlisted tools fall through to `permission_mode` and `can_use_tool` for a decision. It does not remove tools from Claude's toolset. To block specific tools, use `disallowed_tools`. See the [permissions guide](https://platform.claude.com/docs/en/agent-sdk/permissions) for the full evaluation order.\n\n```python\noptions = ClaudeAgentOptions(\n    allowed_tools=[\"Read\", \"Write\", \"Bash\"],  # auto-approve these tools\n    permission_mode='acceptEdits'  # auto-accept file edits\n)\n\nasync for message in query(\n    prompt=\"Create a hello.py file\",\n    options=options\n):\n    # Process tool use and results\n    pass\n```\n\n### Working Directory\n\n```python\nfrom pathlib import Path\n\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\"  # or Path(\"/path/to/project\")\n)\n```\n\n### System Prompt\n\nBy default, Claude Code builds the system prompt on a session's first request, records it, and reuses it on every later request, including after you resume the session. A changed custom prompt, or changed `append` text on the `claude_code` preset, then has no effect until the session is compacted or you start a new session. To rebuild the prompt on every request instead, for example while you iterate on its wording, set `snapshot` to `False` in the `{\"type\": \"preset\", ...}` or `{\"type\": \"custom\", ...}` dict:\n\n```python\noptions = ClaudeAgentOptions(\n    system_prompt={\"type\": \"custom\", \"prompt\": \"You are a release bot.\", \"snapshot\": False}\n)\n```\n\nRequires Claude Code CLI 2.1.257 or later. Before 2.1.265, a session with an `append` or custom prompt recorded it only when `snapshot` was True. See [Modifying system prompts](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts#change-the-prompt-of-an-existing-session) for details.\n\n## ClaudeSDKClient\n\n`ClaudeSDKClient` supports bidirectional, interactive conversations with Claude\nCode. See [src/claude_agent_sdk/client.py](src/claude_agent_sdk/client.py).\n\nUnlike `query()`, `ClaudeSDKClient` additionally enables **custom tools** and **hooks**, both of which can be defined as Python functions.\n\n### Custom Tools (as In-Process SDK MCP Servers)\n\nA **custom tool** is a Python function that you can offer to Claude, for Claude to invoke as needed.\n\nCustom tools are implemented in-process MCP servers that run directly within your Python application, eliminating the need for separate processes that regular MCP servers require.\n\nFor an end-to-end example, see [MCP Calculator](examples/mcp_calculator.py).\n\n#### Creating a Simple Tool\n\n```python\nfrom claude_agent_sdk import tool, create_sdk_mcp_server, ClaudeAgentOptions, ClaudeSDKClient\n\n# Define a tool using the @tool decorator\n@tool(\"greet\", \"Greet a user\", {\"name\": str})\nasync def greet_user(args):\n    return {\n        \"content\": [\n            {\"type\": \"text\", \"text\": f\"Hello, {args['name']}!\"}\n        ]\n    }\n\n# Create an SDK MCP server\nserver = create_sdk_mcp_server(\n    name=\"my-tools\",\n    version=\"1.0.0\",\n    tools=[greet_user]\n)\n\n# Use it with Claude. allowed_tools pre-approves the tool so it runs\n# without a permission prompt; it does not control tool availability.\noptions = ClaudeAgentOptions(\n    mcp_servers={\"tools\": server},\n    allowed_tools=[\"mcp__tools__greet\"]\n)\n\nasync with ClaudeSDKClient(options=options) as client:\n    await client.query(\"Greet Alice\")\n\n    # Extract and print response\n    async for msg in client.receive_response():\n        print(msg)\n```\n\n#### Benefits Over External MCP Servers\n\n- **No subprocess management** - Runs in the same process as your application\n- **Better performance** - No IPC overhead for tool calls\n- **Simpler deployment** - Single Python process instead of multiple\n- **Easier debugging** - All code runs in the same process\n- **Type safety** - Direct Python function calls with type hints\n\n#### Migration from External Servers\n\n```python\n# BEFORE: External MCP server (separate process)\noptions = ClaudeAgentOptions(\n    mcp_servers={\n        \"calculator\": {\n            \"type\": \"stdio\",\n            \"command\": \"python\",\n            \"args\": [\"-m\", \"calculator_server\"]\n        }\n    }\n)\n\n# AFTER: SDK MCP server (in-process)\nfrom my_tools import add, subtract  # Your tool functions\n\ncalculator = create_sdk_mcp_server(\n    name=\"calculator\",\n    tools=[add, subtract]\n)\n\noptions = ClaudeAgentOptions(\n    mcp_servers={\"calculator\": calculator}\n)\n```\n\n#### Mixed Server Support\n\nYou can use both SDK and external MCP servers together:\n\n```python\noptions = ClaudeAgentOptions(\n    mcp_servers={\n        \"internal\": sdk_server,      # In-process SDK server\n        \"external\": {                # External subprocess server\n            \"type\": \"stdio\",\n            \"command\": \"external-server\"\n        }\n    }\n)\n```\n\n### Hooks\n\nA **hook** is a Python function that the Claude Code _application_ (_not_ Claude) invokes at specific points of the Claude agent loop. Hooks can provide deterministic processing and automated feedback for Claude. Read more in [Intercept and control agent behavior with hooks](https://platform.claude.com/docs/en/agent-sdk/hooks).\n\nFor more examples, see examples/hooks.py.\n\n#### Example\n\n```python\nfrom claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient, HookMatcher\n\nasync def check_bash_command(input_data, tool_use_id, context):\n    tool_name = input_data[\"tool_name\"]\n    tool_input = input_data[\"tool_input\"]\n    if tool_name != \"Bash\":\n        return {}\n    command = tool_input.get(\"command\", \"\")\n    block_patterns = [\"foo.sh\"]\n    for pattern in block_patterns:\n        if pattern in command:\n            return {\n                \"hookSpecificOutput\": {\n                    \"hookEventName\": \"PreToolUse\",\n                    \"permissionDecision\": \"deny\",\n                    \"permissionDecisionReason\": f\"Command contains invalid pattern: {pattern}\",\n                }\n            }\n    return {}\n\noptions = ClaudeAgentOptions(\n    allowed_tools=[\"Bash\"],\n    hooks={\n        \"PreToolUse\": [\n            HookMatcher(matcher=\"Bash\", hooks=[check_bash_command]),\n        ],\n    }\n)\n\nasync with ClaudeSDKClient(options=options) as client:\n    # Test 1: Command with forbidden pattern (will be blocked)\n    await client.query(\"Run the bash command: ./foo.sh --help\")\n    async for msg in client.receive_response():\n        print(msg)\n\n    print(\"\\n\" + \"=\" * 50 + \"\\n\")\n\n    # Test 2: Safe command that should work\n    await client.query(\"Run the bash command: echo 'Hello from hooks example!'\")\n    async for msg in client.receive_response():\n        print(msg)\n```\n\n## Types\n\nSee [src/claude_agent_sdk/types.py](src/claude_agent_sdk/types.py) for complete type definitions:\n\n- `ClaudeAgentOptions` - Configuration options\n- `AssistantMessage`, `UserMessage`, `SystemMessage`, `ResultMessage` - Message types\n- `TextBlock`, `ToolUseBlock`, `ToolResultBlock` - Content blocks\n\n## Error Handling\n\n```python\nfrom claude_agent_sdk import (\n    ClaudeSDKError,      # Base error\n    CLINotFoundError,    # Claude Code not installed\n    CLIConnectionError,  # Connection issues\n    ProcessError,        # Process failed\n    ResultError,         # Run ended with an error result (subclass of ProcessError)\n    CLIJSONDecodeError,  # JSON parsing issues\n)\n\ntry:\n    async for message in query(prompt=\"Hello\"):\n        pass\nexcept CLINotFoundError:\n    print(\"Please install Claude Code\")\nexcept ResultError as e:\n    # The CLI reported a terminal error result (also yielded as the final\n    # ResultMessage) and exited. Structured fields are on the exception.\n    print(f\"Run failed: {e.subtype=} {e.terminal_reason=} {e.api_error_status=}\")\n    print(e.result or e.errors)\nexcept ProcessError as e:\n    print(f\"Process failed with exit code: {e.exit_code}\")\nexcept CLIJSONDecodeError as e:\n    print(f\"Failed to parse response: {e}\")\n```\n\nSee [src/claude_agent_sdk/\\_errors.py](src/claude_agent_sdk/_errors.py) for all error types.\n\n## Available Tools\n\nSee the [Claude Code documentation](https://code.claude.com/docs/en/settings#tools-available-to-claude) for a complete list of available tools.\n\n## Examples\n\nSee [examples/quick_start.py](examples/quick_start.py) for a complete working example.\n\nSee [examples/streaming_mode.py](examples/streaming_mode.py) for comprehensive examples involving `ClaudeSDKClient`. You can even run interactive examples in IPython from [examples/streaming_mode_ipython.py](examples/streaming_mode_ipython.py).\n\n## Migrating from Claude Code SDK\n\nIf you're upgrading from the Claude Code SDK (versions < 0.1.0), please see the [CHANGELOG.md](CHANGELOG.md#010) for details on breaking changes and new features, including:\n\n- `ClaudeCodeOptions` \u2192 `ClaudeAgentOptions` rename\n- Merged system prompt configuration\n- Settings isolation and explicit control\n- New programmatic subagents and session forking features\n\n## Development\n\nIf you're contributing to this project, run the initial setup script to install git hooks:\n\n```bash\n./scripts/initial-setup.sh\n```\n\nThis installs a pre-push hook that runs lint checks before pushing, matching the CI workflow. To skip the hook temporarily, use `git push --no-verify`.\n\n### Building Wheels Locally\n\nTo build wheels with the bundled Claude Code CLI:\n\n```bash\n# Install build dependencies\npip install build twine\n\n# Build wheel with bundled CLI\npython scripts/build_wheel.py\n\n# Build with specific version\npython scripts/build_wheel.py --version 0.1.4\n\n# Build with specific CLI version\npython scripts/build_wheel.py --cli-version 2.0.0\n\n# Clean bundled CLI after building\npython scripts/build_wheel.py --clean\n\n# Skip CLI download (use existing)\npython scripts/build_wheel.py --skip-download\n```\n\nThe build script:\n\n1. Downloads Claude Code CLI for your platform\n2. Bundles it in the wheel\n3. Builds both wheel and source distribution\n4. Checks the package with twine\n\nSee `python scripts/build_wheel.py --help` for all options.\n\n### Release Workflow\n\nThe package is published to PyPI via the GitHub Actions workflow in `.github/workflows/publish.yml`. To create a new release:\n\n1. **Trigger the workflow** manually from the Actions tab with two inputs:\n   - `version`: The package version to publish (e.g., `0.1.5`)\n   - `claude_code_version`: The Claude Code CLI version to bundle (e.g., `2.0.0` or `latest`)\n\n2. **The workflow will**:\n   - Build platform-specific wheels for macOS, Linux, and Windows\n   - Bundle the specified Claude Code CLI version in each wheel\n   - Build a source distribution\n   - Publish all artifacts to PyPI\n   - Create a release branch with version updates\n   - Open a PR to main with:\n     - Updated `pyproject.toml` version\n     - Updated `src/claude_agent_sdk/_version.py`\n     - Updated `src/claude_agent_sdk/_cli_version.py` with bundled CLI version\n     - Auto-generated `CHANGELOG.md` entry\n\n3. **Review and merge** the release PR to update main with the new version information\n\nThe workflow tracks both the package version and the bundled CLI version separately, allowing you to release a new package version with an updated CLI without code changes.\n\n## License and terms\n\nUse of this SDK is governed by Anthropic's [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms), including when you use it to power products and services that you make available to your own customers and end users, except to the extent a specific component or dependency is covered by a different license as indicated in that component's LICENSE file.\n\n\n### Main-agent recovery with a session store\n\n`ClaudeAgentOptions.recover_pending_tool` is an opt-in recovery callback for\nmain-agent calls that were stored before a process died. During resume, the SDK\nfinds unresolved native tool IDs on the active conversation branch, including\nall streamed blocks belonging to the same assistant response. It invokes the\ncallback before creating the CLI, persists ordinary `tool_result` entries, and\nloads them back to verify durability. The CLI therefore receives a conversation\nwith the original calls answered; it does not have to reconstruct lost Python\ncallbacks or ask the model to generate replacement calls.\n\n```python\nfrom claude_agent_sdk import ClaudeAgentOptions, PendingToolUse, ToolResultBlock\n\nasync def recover(call: PendingToolUse) -> ToolResultBlock:\n    # Your durable ledger must validate the name/input for this native ID,\n    # await any approval or existing execution, and reuse completed outcomes.\n    outcome = await ledger.get_or_wait(call.key, call.id, call.name, call.input)\n    return ToolResultBlock(call.id, outcome.content, outcome.is_error)\n\noptions = ClaudeAgentOptions(\n    resume=session_id,\n    session_store=store,\n    recover_pending_tool=recover,\n)\n```\n\nThe callback runs in original call order by default. Set\n`parallel_tool_recovery=True` only when its scheduling policy preserves the\nconfigured tools' concurrency constraints. The callback can be invoked again\nafter a crash or a failed storage acknowledgment; it must use durable IDs and\nidempotency when starting external work. Approval rejection is an ordinary\n`ToolResultBlock(..., is_error=True)`. Exceptions and cancellation abort resume\nbefore a CLI starts.\n\nThe store must implement the optional\n`append_if_unchanged(key, expected_last_uuid, entries)` method. Compare the last\nUUID-bearing transcript entry and append the complete batch in one transaction\nserialized with ordinary `append` calls. Return `False` without writing on a\nhead mismatch, or `True` only after durable commit. Preserve the batch exactly\nand provide consistent read-after-write behavior. `InMemorySessionStore` includes\na development implementation; persistent adapters need their own transaction\nor compare-and-swap implementation. The SDK refuses to resume if the transcript\nchanges or results cannot be verified in storage. An explicit recovery resume\nwith a missing transcript or invalid session UUID also fails before CLI startup;\nit never falls back to local-disk resume or creates replacement calls.\n\nThe host must hold exclusive session ownership through CLI teardown, fence old\nexecution attempts, and ensure the original request reaches durable storage\nbefore executing a live tool. This recovery callback does not provide an\nexecution ledger, a session lease, or exactly-once external effects. It leaves\nnormal live MCP execution unchanged.\n\nThis implementation covers main-agent tools only. It excludes active subagent\nrestoration, custom transports, and truncating or in-process fork resumes.\nExplicit `fork_session_via_store` results can be recovered after the application\ndefines ownership of the fork and its original tool IDs. Results already stored\n(including terminal interruption errors from an earlier ordinary resume) are\npreserved rather than overwritten. The CLI's transcript encoding is internal;\nmalformed or incomplete ancestry fails before callbacks run. Real-CLI validation\nand version-specific compatibility results live in the consuming prototype.\n"
+  },
+  "copied_after": {
+    "distributions": {
+      "annotated-types": {
+        "metadata_sha256": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/annotated_types-0.8.0.dist-info",
+        "version": "0.8.0"
+      },
+      "anyio": {
+        "metadata_sha256": "043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/anyio-4.15.1.dist-info",
+        "version": "4.15.1"
+      },
+      "attrs": {
+        "metadata_sha256": "4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/attrs-26.1.0.dist-info",
+        "version": "26.1.0"
+      },
+      "basedpyright": {
+        "metadata_sha256": "e1491217c4ccad6a806dfeef9be012adcfc9d7f8597df71517bc2f50c1c49ecb",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/basedpyright-1.34.0.dist-info",
+        "version": "1.34.0"
+      },
+      "cffi": {
+        "metadata_sha256": "558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/cffi-2.1.1.dist-info",
+        "version": "2.1.1"
+      },
+      "claude-agent-sdk": {
+        "metadata_sha256": "b3d7b3b964bdf88302f0098f17a2c98d4389b68dfe954640f6cbe2e5cdedb08c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.162.dist-info",
+        "version": "0.2.162"
+      },
+      "click": {
+        "metadata_sha256": "e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/click-8.5.0.dist-info",
+        "version": "8.5.0"
+      },
+      "cryptography": {
+        "metadata_sha256": "8e9b5570da4686848ee5c6bb83fffc224bcddf9793136731dd050ce0c05fffe2",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/cryptography-50.0.1.dist-info",
+        "version": "50.0.1"
+      },
+      "execnet": {
+        "metadata_sha256": "7343015d62b2eaa1841ec06a7c7c132aeb482921f73ab6e0fd18331495684c61",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/execnet-2.1.2.dist-info",
+        "version": "2.1.2"
+      },
+      "h11": {
+        "metadata_sha256": "28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/h11-0.16.0.dist-info",
+        "version": "0.16.0"
+      },
+      "hatchling": {
+        "metadata_sha256": "a224ea37d2658f75ccf569e61d849ff7e9297cdac2396022278e82a47b9fed3e",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/hatchling-1.27.0.dist-info",
+        "version": "1.27.0"
+      },
+      "httpcore2": {
+        "metadata_sha256": "b948af04be9aed66d7486d18de5ac9dfbf46ef3aba2908afba9f1febada85311",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/httpcore2-2.13.0.dist-info",
+        "version": "2.13.0"
+      },
+      "httpx2": {
+        "metadata_sha256": "192d199ceef38a49dc1964623d87546b14fc416933a7a778a4c007e3c5dcfc48",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/httpx2-2.13.0.dist-info",
+        "version": "2.13.0"
+      },
+      "idna": {
+        "metadata_sha256": "4d113161aca8582e8d28fddf3ea50f19b607209c2b3e4364379a163454680084",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/idna-3.19.dist-info",
+        "version": "3.19"
+      },
+      "iniconfig": {
+        "metadata_sha256": "40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/iniconfig-2.3.0.dist-info",
+        "version": "2.3.0"
+      },
+      "jsonschema": {
+        "metadata_sha256": "05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/jsonschema-4.26.0.dist-info",
+        "version": "4.26.0"
+      },
+      "jsonschema-specifications": {
+        "metadata_sha256": "35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/jsonschema_specifications-2025.9.1.dist-info",
+        "version": "2025.9.1"
+      },
+      "markdown-it-py": {
+        "metadata_sha256": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info",
+        "version": "4.2.0"
+      },
+      "mcp": {
+        "metadata_sha256": "dffdec58283e1c0964a57f5fba19aa80272686ab5b03283d9398f7daac4fe45a",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mcp-2.2.0.dist-info",
+        "version": "2.2.0"
+      },
+      "mcp-types": {
+        "metadata_sha256": "f29cd43b57497e73976271607090609e7cf79d50c3ea3362196ac36275cdd0f0",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mcp_types-2.2.0.dist-info",
+        "version": "2.2.0"
+      },
+      "mdurl": {
+        "metadata_sha256": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mdurl-0.1.2.dist-info",
+        "version": "0.1.2"
+      },
+      "mypy": {
+        "metadata_sha256": "3a1bd2ab3db5f8ffa441d267c7dd3efa79eb3fe656148d1f0532c2d562178a32",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mypy-1.18.2.dist-info",
+        "version": "1.18.2"
+      },
+      "mypy-extensions": {
+        "metadata_sha256": "2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info",
+        "version": "1.1.0"
+      },
+      "nexus-rpc": {
+        "metadata_sha256": "2edebf00f8b3a2861049b5eb89457001d94b80356a7aac9a4cef114535ffcc4d",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/nexus_rpc-1.4.0.dist-info",
+        "version": "1.4.0"
+      },
+      "nodeenv": {
+        "metadata_sha256": "a8424896a12fd1be10526834176fc754cd296c900f40da655fb2e03c1b7eb921",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/nodeenv-1.10.0.dist-info",
+        "version": "1.10.0"
+      },
+      "nodejs-wheel-binaries": {
+        "metadata_sha256": "eb97ca861b7b1f4908e480a6ee14b26ee79fbfce8fbbed7c505b60f1c2e25484",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/nodejs_wheel_binaries-24.19.0.dist-info",
+        "version": "24.19.0"
+      },
+      "opentelemetry-api": {
+        "metadata_sha256": "42aabbbacd266627b5c3839a515150ca90c18f80c9d85ca6f6fa10d440a7eeaa",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/opentelemetry_api-1.44.0.dist-info",
+        "version": "1.44.0"
+      },
+      "packaging": {
+        "metadata_sha256": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/packaging-26.3.dist-info",
+        "version": "26.3"
+      },
+      "pathspec": {
+        "metadata_sha256": "68de3f158b6592f086e78754c962092f32a761944ab66a660c0d62ad79c4b69b",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pathspec-1.1.1.dist-info",
+        "version": "1.1.1"
+      },
+      "pluggy": {
+        "metadata_sha256": "7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pluggy-1.6.0.dist-info",
+        "version": "1.6.0"
+      },
+      "protobuf": {
+        "metadata_sha256": "947ed3f132e70411555388d7fcd36712fdd60c8db6345001fb23bb56a2c6cab7",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/protobuf-7.36.1.dist-info",
+        "version": "7.36.1"
+      },
+      "pycparser": {
+        "metadata_sha256": "f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pycparser-3.0.dist-info",
+        "version": "3.0"
+      },
+      "pydantic": {
+        "metadata_sha256": "0685830d13647bd6f3f05526043d32a8b2a221d86b53773053d6c52bb17a9c07",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pydantic-2.13.5.dist-info",
+        "version": "2.13.5"
+      },
+      "pydantic-core": {
+        "metadata_sha256": "29768c038c0bb3564c0a87ef50ef78d18a2372474bdef0ba356a8c0fd4bd6028",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pydantic_core-2.46.5.dist-info",
+        "version": "2.46.5"
+      },
+      "pydocstyle": {
+        "metadata_sha256": "c6c78756d88aed0336f974871b4ef4f351cc13ef6576145995118105d6b007b4",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pydocstyle-6.3.0.dist-info",
+        "version": "6.3.0"
+      },
+      "pygments": {
+        "metadata_sha256": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pygments-2.21.0.dist-info",
+        "version": "2.21.0"
+      },
+      "pyjwt": {
+        "metadata_sha256": "b854eb461aaeef80469612210786ac1fbf6d1064f1d51af5ee2619b7bbddb1ba",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pyjwt-2.14.0.dist-info",
+        "version": "2.14.0"
+      },
+      "pyright": {
+        "metadata_sha256": "1733517425e2e812cf12fcca6617d71233119797cf0b8bb138bab97424509933",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pyright-1.1.403.dist-info",
+        "version": "1.1.403"
+      },
+      "pytest": {
+        "metadata_sha256": "c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest-9.1.1.dist-info",
+        "version": "9.1.1"
+      },
+      "pytest-asyncio": {
+        "metadata_sha256": "627afb1674d04853976b354eccc447a25a664c9ba3f143a06dbaea0c3070cbe2",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_asyncio-0.21.2.dist-info",
+        "version": "0.21.2"
+      },
+      "pytest-pretty": {
+        "metadata_sha256": "28c47a5d6434e39143e8087f16fe4ca3a1fad2df6179d52fc72be225019c2581",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_pretty-1.3.0.dist-info",
+        "version": "1.3.0"
+      },
+      "pytest-rerunfailures": {
+        "metadata_sha256": "ed20d2e49086ce82db5543fcf89a97954dfaf52ae337712852779c953ba0800c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_rerunfailures-16.6.1.dist-info",
+        "version": "16.6.1"
+      },
+      "pytest-timeout": {
+        "metadata_sha256": "8b79be0dfb1db4a0166b9d997ad95553e7a7e61445bcfc0ddbfbd409bae421ff",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_timeout-2.4.0.dist-info",
+        "version": "2.4.0"
+      },
+      "pytest-xdist": {
+        "metadata_sha256": "298f16af52794d340c358fc2eb20b054a29db2922f22fea90a35b459ecbcc18f",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/pytest_xdist-3.8.0.dist-info",
+        "version": "3.8.0"
+      },
+      "python-multipart": {
+        "metadata_sha256": "e9d399d7dea5eddf0e4d24b5c24687a82e7e50bf2c2b30f8f8a06a64d887dd86",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/python_multipart-0.0.32.dist-info",
+        "version": "0.0.32"
+      },
+      "referencing": {
+        "metadata_sha256": "c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/referencing-0.37.0.dist-info",
+        "version": "0.37.0"
+      },
+      "rich": {
+        "metadata_sha256": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/rich-15.0.0.dist-info",
+        "version": "15.0.0"
+      },
+      "rpds-py": {
+        "metadata_sha256": "f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/rpds_py-2026.6.3.dist-info",
+        "version": "2026.6.3"
+      },
+      "ruff": {
+        "metadata_sha256": "c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/ruff-0.15.22.dist-info",
+        "version": "0.15.22"
+      },
+      "sniffio": {
+        "metadata_sha256": "e87e83bd780638c08d4ae02ba8c36a89c6b55e2ea910d441aa20ad0b30e51fb6",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/sniffio-1.3.1.dist-info",
+        "version": "1.3.1"
+      },
+      "snowballstemmer": {
+        "metadata_sha256": "6c06c375da8e0a963410b6af906e3d72acc337a5fde985944a4b74e24b10479a",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/snowballstemmer-3.1.1.dist-info",
+        "version": "3.1.1"
+      },
+      "sse-starlette": {
+        "metadata_sha256": "0d2b7e974db957ca4aa20053918516a6f28a8433eff401728483cbb235e483a4",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/sse_starlette-3.4.11.dist-info",
+        "version": "3.4.11"
+      },
+      "starlette": {
+        "metadata_sha256": "43f6240f976044f4cf9a573506d96d895391094717c55682700c931d5cd3c5a2",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/starlette-1.6.0.dist-info",
+        "version": "1.6.0"
+      },
+      "temporalio": {
+        "metadata_sha256": "332cba195a53a199f5e0d4811c0f969e86b9f45e3e8c2e8846d2b54c86b19f76",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/temporalio-1.33.0.dist-info",
+        "version": "1.33.0"
+      },
+      "temporalio-claude-agent-sdk": {
+        "metadata_sha256": "f6638d71b2776c77043ca6c6b02854922b76d345272ad611c2fd073cd0b7cfec",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/temporalio_claude_agent_sdk-0.0.0.dist-info",
+        "version": "0.0.0"
+      },
+      "trove-classifiers": {
+        "metadata_sha256": "72629166a4dc87540d6fd5d01962115414f8f4f26f11e3c58f8853cd8499cf90",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/trove_classifiers-2026.6.1.19.dist-info",
+        "version": "2026.6.1.19"
+      },
+      "truststore": {
+        "metadata_sha256": "509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/truststore-0.10.4.dist-info",
+        "version": "0.10.4"
+      },
+      "types-protobuf": {
+        "metadata_sha256": "d6b703bab3eedbc4e56bae2b1d77ad447d89df2308316e750da906322aed66db",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/types_protobuf-7.35.1.20260906.dist-info",
+        "version": "7.35.1.20260906"
+      },
+      "typing-extensions": {
+        "metadata_sha256": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info",
+        "version": "4.16.0"
+      },
+      "typing-inspection": {
+        "metadata_sha256": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/typing_inspection-0.4.4.dist-info",
+        "version": "0.4.4"
+      },
+      "uvicorn": {
+        "metadata_sha256": "bcfb3b631d31e3ff7c6992428b0480a09d407ec829905aa9301f736bd854cb45",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/uvicorn-0.53.0.dist-info",
+        "version": "0.53.0"
+      }
+    },
+    "prefix": "<isolated-venv>",
+    "python": "3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]"
+  },
+  "version_changes": {
+    "claude-agent-sdk": {
+      "before": {
+        "metadata_sha256": "632a3756c4aead954aad591e57f91febd9e930f656d0dc8e3f318592cfbdf72d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.154.dist-info",
+        "version": "0.2.154"
+      },
+      "after": {
+        "metadata_sha256": "b3d7b3b964bdf88302f0098f17a2c98d4389b68dfe954640f6cbe2e5cdedb08c",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.162.dist-info",
+        "version": "0.2.162"
+      }
+    },
+    "hatchling": {
+      "before": null,
+      "after": {
+        "metadata_sha256": "a224ea37d2658f75ccf569e61d849ff7e9297cdac2396022278e82a47b9fed3e",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/hatchling-1.27.0.dist-info",
+        "version": "1.27.0"
+      }
+    },
+    "trove-classifiers": {
+      "before": null,
+      "after": {
+        "metadata_sha256": "72629166a4dc87540d6fd5d01962115414f8f4f26f11e3c58f8853cd8499cf90",
+        "path": "<isolated-venv>/lib/python3.13/site-packages/trove_classifiers-2026.6.1.19.dist-info",
+        "version": "2026.6.1.19"
+      }
+    }
+  },
+  "provenance": {
+    "parallel_tool_recovery": true,
+    "prefix": "<isolated-venv>",
+    "recover_pending_tool": true,
+    "recovery_module": "<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk/_internal/main_agent_recovery.py",
+    "sdk_file": "<isolated-venv>/lib/python3.13/site-packages/claude_agent_sdk/__init__.py",
+    "sdk_version": "0.2.162",
+    "temporal_version": "1.33.0"
+  },
+  "baseline_after": {
+    "distributions": {
+      "annotated-types": {
+        "metadata_sha256": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/annotated_types-0.8.0.dist-info",
+        "version": "0.8.0"
+      },
+      "anyio": {
+        "metadata_sha256": "043aecb571af7189e8a6c528f5d8e32545f1b2cdfaaf761d51e6d5b67ea3ca81",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/anyio-4.15.1.dist-info",
+        "version": "4.15.1"
+      },
+      "attrs": {
+        "metadata_sha256": "4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/attrs-26.1.0.dist-info",
+        "version": "26.1.0"
+      },
+      "basedpyright": {
+        "metadata_sha256": "e1491217c4ccad6a806dfeef9be012adcfc9d7f8597df71517bc2f50c1c49ecb",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/basedpyright-1.34.0.dist-info",
+        "version": "1.34.0"
+      },
+      "cffi": {
+        "metadata_sha256": "558bafb9093a8e790175d9ecff9688382981d744877dad86fd6770db0f4dc918",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/cffi-2.1.1.dist-info",
+        "version": "2.1.1"
+      },
+      "claude-agent-sdk": {
+        "metadata_sha256": "632a3756c4aead954aad591e57f91febd9e930f656d0dc8e3f318592cfbdf72d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/claude_agent_sdk-0.2.154.dist-info",
+        "version": "0.2.154"
+      },
+      "click": {
+        "metadata_sha256": "e87bce0bd194de70dfb8e708e0a6b0483009f25611804eaf87bfeb63e6c20501",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/click-8.5.0.dist-info",
+        "version": "8.5.0"
+      },
+      "cryptography": {
+        "metadata_sha256": "8e9b5570da4686848ee5c6bb83fffc224bcddf9793136731dd050ce0c05fffe2",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/cryptography-50.0.1.dist-info",
+        "version": "50.0.1"
+      },
+      "execnet": {
+        "metadata_sha256": "7343015d62b2eaa1841ec06a7c7c132aeb482921f73ab6e0fd18331495684c61",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/execnet-2.1.2.dist-info",
+        "version": "2.1.2"
+      },
+      "h11": {
+        "metadata_sha256": "28f326098ac09fcba79b8f180f96087c841fe2456215cb7b872a9c7d5cd19d64",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/h11-0.16.0.dist-info",
+        "version": "0.16.0"
+      },
+      "httpcore2": {
+        "metadata_sha256": "b948af04be9aed66d7486d18de5ac9dfbf46ef3aba2908afba9f1febada85311",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/httpcore2-2.13.0.dist-info",
+        "version": "2.13.0"
+      },
+      "httpx2": {
+        "metadata_sha256": "192d199ceef38a49dc1964623d87546b14fc416933a7a778a4c007e3c5dcfc48",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/httpx2-2.13.0.dist-info",
+        "version": "2.13.0"
+      },
+      "idna": {
+        "metadata_sha256": "4d113161aca8582e8d28fddf3ea50f19b607209c2b3e4364379a163454680084",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/idna-3.19.dist-info",
+        "version": "3.19"
+      },
+      "iniconfig": {
+        "metadata_sha256": "40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/iniconfig-2.3.0.dist-info",
+        "version": "2.3.0"
+      },
+      "jsonschema": {
+        "metadata_sha256": "05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/jsonschema-4.26.0.dist-info",
+        "version": "4.26.0"
+      },
+      "jsonschema-specifications": {
+        "metadata_sha256": "35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/jsonschema_specifications-2025.9.1.dist-info",
+        "version": "2025.9.1"
+      },
+      "markdown-it-py": {
+        "metadata_sha256": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info",
+        "version": "4.2.0"
+      },
+      "mcp": {
+        "metadata_sha256": "dffdec58283e1c0964a57f5fba19aa80272686ab5b03283d9398f7daac4fe45a",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mcp-2.2.0.dist-info",
+        "version": "2.2.0"
+      },
+      "mcp-types": {
+        "metadata_sha256": "f29cd43b57497e73976271607090609e7cf79d50c3ea3362196ac36275cdd0f0",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mcp_types-2.2.0.dist-info",
+        "version": "2.2.0"
+      },
+      "mdurl": {
+        "metadata_sha256": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mdurl-0.1.2.dist-info",
+        "version": "0.1.2"
+      },
+      "mypy": {
+        "metadata_sha256": "3a1bd2ab3db5f8ffa441d267c7dd3efa79eb3fe656148d1f0532c2d562178a32",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mypy-1.18.2.dist-info",
+        "version": "1.18.2"
+      },
+      "mypy-extensions": {
+        "metadata_sha256": "2c4a44936d885f30433181ca40bbf62457351f1f6b0871b11f8789564f87477f",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info",
+        "version": "1.1.0"
+      },
+      "nexus-rpc": {
+        "metadata_sha256": "2edebf00f8b3a2861049b5eb89457001d94b80356a7aac9a4cef114535ffcc4d",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/nexus_rpc-1.4.0.dist-info",
+        "version": "1.4.0"
+      },
+      "nodeenv": {
+        "metadata_sha256": "a8424896a12fd1be10526834176fc754cd296c900f40da655fb2e03c1b7eb921",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/nodeenv-1.10.0.dist-info",
+        "version": "1.10.0"
+      },
+      "nodejs-wheel-binaries": {
+        "metadata_sha256": "eb97ca861b7b1f4908e480a6ee14b26ee79fbfce8fbbed7c505b60f1c2e25484",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/nodejs_wheel_binaries-24.19.0.dist-info",
+        "version": "24.19.0"
+      },
+      "opentelemetry-api": {
+        "metadata_sha256": "42aabbbacd266627b5c3839a515150ca90c18f80c9d85ca6f6fa10d440a7eeaa",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/opentelemetry_api-1.44.0.dist-info",
+        "version": "1.44.0"
+      },
+      "packaging": {
+        "metadata_sha256": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/packaging-26.3.dist-info",
+        "version": "26.3"
+      },
+      "pathspec": {
+        "metadata_sha256": "68de3f158b6592f086e78754c962092f32a761944ab66a660c0d62ad79c4b69b",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pathspec-1.1.1.dist-info",
+        "version": "1.1.1"
+      },
+      "pluggy": {
+        "metadata_sha256": "7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pluggy-1.6.0.dist-info",
+        "version": "1.6.0"
+      },
+      "protobuf": {
+        "metadata_sha256": "947ed3f132e70411555388d7fcd36712fdd60c8db6345001fb23bb56a2c6cab7",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/protobuf-7.36.1.dist-info",
+        "version": "7.36.1"
+      },
+      "pycparser": {
+        "metadata_sha256": "f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pycparser-3.0.dist-info",
+        "version": "3.0"
+      },
+      "pydantic": {
+        "metadata_sha256": "0685830d13647bd6f3f05526043d32a8b2a221d86b53773053d6c52bb17a9c07",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pydantic-2.13.5.dist-info",
+        "version": "2.13.5"
+      },
+      "pydantic-core": {
+        "metadata_sha256": "29768c038c0bb3564c0a87ef50ef78d18a2372474bdef0ba356a8c0fd4bd6028",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pydantic_core-2.46.5.dist-info",
+        "version": "2.46.5"
+      },
+      "pydocstyle": {
+        "metadata_sha256": "c6c78756d88aed0336f974871b4ef4f351cc13ef6576145995118105d6b007b4",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pydocstyle-6.3.0.dist-info",
+        "version": "6.3.0"
+      },
+      "pygments": {
+        "metadata_sha256": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pygments-2.21.0.dist-info",
+        "version": "2.21.0"
+      },
+      "pyjwt": {
+        "metadata_sha256": "b854eb461aaeef80469612210786ac1fbf6d1064f1d51af5ee2619b7bbddb1ba",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pyjwt-2.14.0.dist-info",
+        "version": "2.14.0"
+      },
+      "pyright": {
+        "metadata_sha256": "1733517425e2e812cf12fcca6617d71233119797cf0b8bb138bab97424509933",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pyright-1.1.403.dist-info",
+        "version": "1.1.403"
+      },
+      "pytest": {
+        "metadata_sha256": "c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest-9.1.1.dist-info",
+        "version": "9.1.1"
+      },
+      "pytest-asyncio": {
+        "metadata_sha256": "627afb1674d04853976b354eccc447a25a664c9ba3f143a06dbaea0c3070cbe2",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_asyncio-0.21.2.dist-info",
+        "version": "0.21.2"
+      },
+      "pytest-pretty": {
+        "metadata_sha256": "28c47a5d6434e39143e8087f16fe4ca3a1fad2df6179d52fc72be225019c2581",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_pretty-1.3.0.dist-info",
+        "version": "1.3.0"
+      },
+      "pytest-rerunfailures": {
+        "metadata_sha256": "ed20d2e49086ce82db5543fcf89a97954dfaf52ae337712852779c953ba0800c",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_rerunfailures-16.6.1.dist-info",
+        "version": "16.6.1"
+      },
+      "pytest-timeout": {
+        "metadata_sha256": "8b79be0dfb1db4a0166b9d997ad95553e7a7e61445bcfc0ddbfbd409bae421ff",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_timeout-2.4.0.dist-info",
+        "version": "2.4.0"
+      },
+      "pytest-xdist": {
+        "metadata_sha256": "298f16af52794d340c358fc2eb20b054a29db2922f22fea90a35b459ecbcc18f",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/pytest_xdist-3.8.0.dist-info",
+        "version": "3.8.0"
+      },
+      "python-multipart": {
+        "metadata_sha256": "e9d399d7dea5eddf0e4d24b5c24687a82e7e50bf2c2b30f8f8a06a64d887dd86",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/python_multipart-0.0.32.dist-info",
+        "version": "0.0.32"
+      },
+      "referencing": {
+        "metadata_sha256": "c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/referencing-0.37.0.dist-info",
+        "version": "0.37.0"
+      },
+      "rich": {
+        "metadata_sha256": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/rich-15.0.0.dist-info",
+        "version": "15.0.0"
+      },
+      "rpds-py": {
+        "metadata_sha256": "f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/rpds_py-2026.6.3.dist-info",
+        "version": "2026.6.3"
+      },
+      "ruff": {
+        "metadata_sha256": "c6ed46ea59f2bf6f229c2e38005c342f31de495c3d6e62ae49043b227e2fa0aa",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/ruff-0.15.22.dist-info",
+        "version": "0.15.22"
+      },
+      "sniffio": {
+        "metadata_sha256": "e87e83bd780638c08d4ae02ba8c36a89c6b55e2ea910d441aa20ad0b30e51fb6",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/sniffio-1.3.1.dist-info",
+        "version": "1.3.1"
+      },
+      "snowballstemmer": {
+        "metadata_sha256": "6c06c375da8e0a963410b6af906e3d72acc337a5fde985944a4b74e24b10479a",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/snowballstemmer-3.1.1.dist-info",
+        "version": "3.1.1"
+      },
+      "sse-starlette": {
+        "metadata_sha256": "0d2b7e974db957ca4aa20053918516a6f28a8433eff401728483cbb235e483a4",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/sse_starlette-3.4.11.dist-info",
+        "version": "3.4.11"
+      },
+      "starlette": {
+        "metadata_sha256": "43f6240f976044f4cf9a573506d96d895391094717c55682700c931d5cd3c5a2",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/starlette-1.6.0.dist-info",
+        "version": "1.6.0"
+      },
+      "temporalio": {
+        "metadata_sha256": "332cba195a53a199f5e0d4811c0f969e86b9f45e3e8c2e8846d2b54c86b19f76",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/temporalio-1.33.0.dist-info",
+        "version": "1.33.0"
+      },
+      "temporalio-claude-agent-sdk": {
+        "metadata_sha256": "f6638d71b2776c77043ca6c6b02854922b76d345272ad611c2fd073cd0b7cfec",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/temporalio_claude_agent_sdk-0.0.0.dist-info",
+        "version": "0.0.0"
+      },
+      "truststore": {
+        "metadata_sha256": "509a7b67bff99f2d04f57251b5bdb761bd9429467e1cebc453b7f96be4108f5b",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/truststore-0.10.4.dist-info",
+        "version": "0.10.4"
+      },
+      "types-protobuf": {
+        "metadata_sha256": "d6b703bab3eedbc4e56bae2b1d77ad447d89df2308316e750da906322aed66db",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/types_protobuf-7.35.1.20260906.dist-info",
+        "version": "7.35.1.20260906"
+      },
+      "typing-extensions": {
+        "metadata_sha256": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info",
+        "version": "4.16.0"
+      },
+      "typing-inspection": {
+        "metadata_sha256": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/typing_inspection-0.4.4.dist-info",
+        "version": "0.4.4"
+      },
+      "uvicorn": {
+        "metadata_sha256": "bcfb3b631d31e3ff7c6992428b0480a09d407ec829905aa9301f736bd854cb45",
+        "path": "<baseline-venv>/lib/python3.13/site-packages/uvicorn-0.53.0.dist-info",
+        "version": "0.53.0"
+      }
+    },
+    "prefix": "<baseline-venv>",
+    "python": "3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]"
+  },
+  "isolated_python": "<isolated-venv>/bin/python"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "tool_result",
+  "tool_use_id": "original-echo",
+  "content": "{\"idempotency_key\":\"experimental-main-533ad7354e234aed8ebe601af74055c2:tool-original-echo\",\"n\":7}",
+  "is_error": false
+}

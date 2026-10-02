@@ -1,0 +1,173 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "status": "PASS",
+      "case": "ambiguous-bash",
+      "park": {
+        "phase": "parked",
+        "reason": "Bash outcome absent after claimed actual effect"
+      },
+      "history_replay": "PASS",
+      "actual_initial_bash_effects": 1,
+      "replacement_model_requests": 0,
+      "replacement_cli_spawns": 0,
+      "published_tool_results": 0,
+      "second_replacement_park_unchanged": true,
+      "transport_start_events": [
+        {
+          "worker": 1
+        }
+      ],
+      "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+      "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+    },
+    {
+      "status": "PASS",
+      "case": "changed-filesystem",
+      "park": {
+        "phase": "parked",
+        "reason": "filesystem state or generation changed"
+      },
+      "history_replay": "PASS",
+      "actual_initial_bash_effects": 1,
+      "replacement_model_requests": 0,
+      "replacement_cli_spawns": 0,
+      "published_tool_results": 0,
+      "second_replacement_park_unchanged": true,
+      "transport_start_events": [
+        {
+          "worker": 1
+        }
+      ],
+      "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+      "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+    },
+    {
+      "status": "PASS",
+      "case": "changed-request",
+      "park": {
+        "phase": "parked",
+        "reason": "accepted request changed"
+      },
+      "history_replay": "PASS",
+      "actual_initial_bash_effects": 1,
+      "replacement_model_requests": 0,
+      "replacement_cli_spawns": 0,
+      "published_tool_results": 0,
+      "second_replacement_park_unchanged": true,
+      "transport_start_events": [
+        {
+          "worker": 1
+        }
+      ],
+      "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+      "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+    },
+    {
+      "status": "PASS",
+      "case": "missing-claims",
+      "park": {
+        "phase": "parked",
+        "reason": "required claim missing"
+      },
+      "history_replay": "PASS",
+      "actual_initial_bash_effects": 1,
+      "replacement_model_requests": 0,
+      "replacement_cli_spawns": 0,
+      "published_tool_results": 0,
+      "second_replacement_park_unchanged": true,
+      "transport_start_events": [
+        {
+          "worker": 1
+        }
+      ],
+      "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+      "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+    },
+    {
+      "status": "PASS",
+      "case": "missing-filesystem",
+      "park": {
+        "phase": "parked",
+        "reason": "required filesystem state missing"
+      },
+      "history_replay": "PASS",
+      "actual_initial_bash_effects": 1,
+      "replacement_model_requests": 0,
+      "replacement_cli_spawns": 0,
+      "published_tool_results": 0,
+      "second_replacement_park_unchanged": true,
+      "transport_start_events": [
+        {
+          "worker": 1
+        }
+      ],
+      "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+      "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+    },
+    {
+      "status": "PASS",
+      "case": "missing-manifest",
+      "park": {
+        "phase": "parked",
+        "reason": "filesystem manifest missing"
+      },
+      "history_replay": "PASS",
+      "actual_initial_bash_effects": 1,
+      "replacement_model_requests": 0,
+      "replacement_cli_spawns": 0,
+      "published_tool_results": 0,
+      "second_replacement_park_unchanged": true,
+      "transport_start_events": [
+        {
+          "worker": 1
+        }
+      ],
+      "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+      "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+    },
+    {
+      "status": "PASS",
+      "case": "missing-request",
+      "park": {
+        "phase": "parked",
+        "reason": "accepted request missing"
+      },
+      "history_replay": "PASS",
+      "actual_initial_bash_effects": 1,
+      "replacement_model_requests": 0,
+      "replacement_cli_spawns": 0,
+      "published_tool_results": 0,
+      "second_replacement_park_unchanged": true,
+      "transport_start_events": [
+        {
+          "worker": 1
+        }
+      ],
+      "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+      "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+    },
+    {
+      "status": "PASS",
+      "case": "missing-transcript",
+      "park": {
+        "phase": "parked",
+        "reason": "conversation transcript missing"
+      },
+      "history_replay": "PASS",
+      "actual_initial_bash_effects": 1,
+      "replacement_model_requests": 0,
+      "replacement_cli_spawns": 0,
+      "published_tool_results": 0,
+      "second_replacement_park_unchanged": true,
+      "transport_start_events": [
+        {
+          "worker": 1
+        }
+      ],
+      "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+      "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+    }
+  ]
+}

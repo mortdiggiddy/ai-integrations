@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "history_replay": "PASS",
+  "contracts": [
+    "exclusive local admission",
+    "lease through CLI teardown",
+    "Worker loss orphan gate",
+    "PID/start identity cleanup",
+    "unrelated process survival",
+    "replacement outcome reuse"
+  ],
+  "sdk_provided_lease": false,
+  "distributed_fencing": "unexecuted",
+  "arbitrary_daemon_containment": "unsupported"
+}

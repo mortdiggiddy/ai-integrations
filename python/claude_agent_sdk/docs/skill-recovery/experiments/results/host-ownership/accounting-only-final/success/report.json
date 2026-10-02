@@ -1,0 +1,181 @@
+{
+  "mode": "success",
+  "status": "FAILED; no completion claim",
+  "exception": "AssertionError: ",
+  "traceback": "Traceback (most recent call last):\n  File \"<experiments>/main_recovery.py\", line 442, in temporal_case\n    assert len(api.requests) == 2 and api.errors == []\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1747692,
+          "state": "S",
+          "parent": 1747691,
+          "start_ticks": "13357027"
+        },
+        {
+          "pid": 1747709,
+          "state": "S",
+          "parent": 1747691,
+          "start_ticks": "13357105"
+        },
+        {
+          "pid": 1747712,
+          "state": "Z",
+          "parent": 1747709,
+          "start_ticks": "13357107"
+        },
+        {
+          "pid": 1747713,
+          "state": "Z",
+          "parent": 1747709,
+          "start_ticks": "13357108"
+        },
+        {
+          "pid": 1747723,
+          "state": "Z",
+          "parent": 1747709,
+          "start_ticks": "13357127"
+        },
+        {
+          "pid": 1747724,
+          "state": "Z",
+          "parent": 1747709,
+          "start_ticks": "13357127"
+        },
+        {
+          "pid": 1747725,
+          "state": "Z",
+          "parent": 1747709,
+          "start_ticks": "13357127"
+        }
+      ],
+      "survivors_after_kill": [
+        {
+          "pid": 1747692,
+          "state": "S",
+          "parent": 1723176,
+          "start_ticks": "13357027"
+        },
+        {
+          "pid": 1747709,
+          "state": "S",
+          "parent": 1723176,
+          "start_ticks": "13357105"
+        }
+      ],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "owner_before_loss": {
+        "pid": 1747691,
+        "state": "S",
+        "parent": 1747598,
+        "start_ticks": "13357022"
+      },
+      "replacement_before_cleanup": "owned-processes-unresolved",
+      "blocked_worker_exit": 23,
+      "orphan_model_requests_during_admission_probe": 1,
+      "contained_during_admission_probe": [],
+      "blocked_worker_reached_sdk": false,
+      "blocked_worker_new_cli_starts": 0,
+      "replacement_after_cleanup": "allowed",
+      "controlled_descendant": {
+        "pid": 1747692,
+        "state": "R",
+        "parent": 1747691,
+        "start_ticks": "13357027"
+      }
+    },
+    {
+      "children": [
+        {
+          "pid": 1747743,
+          "state": "S",
+          "parent": 1747742,
+          "start_ticks": "13357260"
+        },
+        {
+          "pid": 1747991,
+          "state": "Z",
+          "parent": 1747742,
+          "start_ticks": "13358609"
+        },
+        {
+          "pid": 1747994,
+          "state": "Z",
+          "parent": 1747991,
+          "start_ticks": "13358611"
+        },
+        {
+          "pid": 1747995,
+          "state": "Z",
+          "parent": 1747991,
+          "start_ticks": "13358611"
+        },
+        {
+          "pid": 1748021,
+          "state": "Z",
+          "parent": 1747991,
+          "start_ticks": "13358631"
+        },
+        {
+          "pid": 1748022,
+          "state": "Z",
+          "parent": 1747991,
+          "start_ticks": "13358631"
+        },
+        {
+          "pid": 1748023,
+          "state": "Z",
+          "parent": 1747991,
+          "start_ticks": "13358631"
+        }
+      ],
+      "survivors_after_kill": [
+        {
+          "pid": 1747743,
+          "state": "S",
+          "parent": 1723176,
+          "start_ticks": "13357260"
+        }
+      ],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "owner_before_loss": {
+        "pid": 1747742,
+        "state": "S",
+        "parent": 1747598,
+        "start_ticks": "13357254"
+      },
+      "replacement_before_cleanup": "owned-processes-unresolved",
+      "blocked_worker_exit": 23,
+      "orphan_model_requests_during_admission_probe": 0,
+      "contained_during_admission_probe": [],
+      "blocked_worker_reached_sdk": false,
+      "blocked_worker_new_cli_starts": 0,
+      "replacement_after_cleanup": "allowed",
+      "controlled_descendant": {
+        "pid": 1747743,
+        "state": "R",
+        "parent": 1747742,
+        "start_ticks": "13357260"
+      }
+    }
+  ],
+  "orphan_observed": true
+}

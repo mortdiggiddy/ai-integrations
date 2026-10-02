@@ -152,7 +152,7 @@ The narrower native replay route is now a supported candidate for these bounded 
 
 ### Experimental main recovery dependency proposal
 
-Status: proposed, not installed or built.
+Status: prerequisite proposal executed only in the disposable experiment below. The baseline installation is unchanged.
 
 The installed SDK is 0.2.154 and does not expose `ClaudeAgentOptions.recover_pending_tool` or `parallel_tool_recovery`. The experimental source at revision `3ac4b25733d1302c89d0dadd13cab268e64d1213` declares SDK version 0.2.162. This proposal changes only a disposable environment for fake model recovery experiments. It does not change repository manifests, lockfiles, the installed baseline environment, or the selected CLI.
 
@@ -165,7 +165,7 @@ The installed SDK is 0.2.154 and does not expose `ClaudeAgentOptions.recover_pen
 | Existing CLI | `2.1.274 (Claude Code)` |
 | Existing CLI SHA256 | `15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07` |
 
-The source archive was streamed to a hash command for inspection. It was not saved, extracted, built or installed. The existing CLI remains selected by explicit `cli_path`; compatibility with the experimental SDK remains a runtime experiment, not a conclusion from the SDK version.
+During proposal preparation, the source archive was streamed to a hash command for inspection. It was not saved, extracted, built or installed at that stage. The existing CLI remains selected by explicit `cli_path`; compatibility with the experimental SDK remains a runtime experiment, not a conclusion from the SDK version.
 
 #### New build dependencies
 
@@ -184,7 +184,7 @@ The pinned [pyproject](https://github.com/brianstrauch/claude-agent-sdk-python/b
 
 Use `hatchling.build.build_wheel` directly from the approved isolated environment, with the source directory as the subprocess working directory. Keep the source `_bundled` directory free of CLI binaries and use the existing external CLI through `cli_path`. This needs no `build`, `wheel`, `twine`, `zopfli`, CLI download, platform retagging or source version edit.
 
-#### Proposed build procedure (unexecuted)
+#### Disposable build procedure
 
 1. Copy the existing noneditable environment into a disposable prefix using `cp -a <baseline-venv> <isolated-venv>`. Invoke its Python directly and pass that exact executable to every `uv pip --python` command. Do not activate the copied environment or invoke copied console scripts, whose shebangs can still point at the original prefix. Confirm the copied interpreter's `sys.prefix` and installed distributions resolve under the disposable prefix before modifying it. Capture every baseline distribution and version before and after; only the SDK replacement and the two named build additions may differ. The baseline directory is never an installation target.
 2. Download only the two listed wheels and the immutable SDK archive. Verify the stated SHA256 hashes before use. Install the two build wheels into the disposable environment using `uv pip install --python <isolated-python> --no-index --find-links <verified-wheel-directory> --no-deps --require-hashes -r <approved-build-requirements>`; the requirement file contains only these two pins and hashes. Give uv a scratch cache directory. No resolver updates are allowed.
@@ -193,3 +193,121 @@ Use `hatchling.build.build_wheel` directly from the approved isolated environmen
 5. Run the separately reviewed fake model recovery cases against the Temporal rig with credentials absent. Capture exact request/result identity, approval reuse, session ownership, process cleanup and replacement histories. Declared child recovery exclusions remain excluded. Any missing dependency, build incompatibility or CLI incompatibility stops the batch and requires a revised proposal before an addition or version change.
 
 No step grants adoption, executor implementation, a repository commit, push, paid model call or external contact. Only the disposable SDK version changes under this proposal.
+
+## Bounded experimental main recovery comparison (2026-10-01)
+
+The pinned experimental SDK was built and installed in a copied disposable environment. [Installation records](experiments/results/main/installation/install.json) and [independent provenance checks](experiments/results/main/installation/provenance.json) distinguish that environment from the unchanged baseline. Only the SDK replacement to 0.2.162 and the two build additions in the preceding proposal changed. The baseline distribution versions, metadata hashes and CLI hash remained unchanged; a fresh independent verifier rechecked them after the experiments.
+
+The source archive and build wheel hashes are respectively `364ec9f343f793dd5ce9c8aa4bc685101286c732b47a19d90171b15e1db6a022` and `ef22fdf2f98cf4858a8b6cd7523ae2a6e52d05bb503e1ae7e339595974d15cac`. Provenance checks verified 32 wheel members against installed bytes, 36 installed RECORD entries and 29 SDK package files against the extracted immutable source. The installer supplies no CLI binary. Its local wheel provenance URL contains no embedded archive hash; the explicit wheel hash and byte checks establish the measured provenance.
+
+The experimental lane uses Linux, Python 3.13.15, SDK 0.2.162, Temporal 1.33.0, plugin 0.0.0 and the unchanged CLI 2.1.274. [Invocation](experiments/results/main/invocation.json) and [versions](experiments/results/main/versions.json) record the identities. The CLI and cached server hashes match the preceding native lane. Temporal uses the default local development namespace, in-memory persistence and no custom dynamic configuration. This is one host and dependency lane, not cross platform acceptance.
+
+### Runtime source and reproducible commands
+
+The [main rig](experiments/main_recovery.py) imports unchanged pinned `Burst`, `HybridActivities`, `HybridWorkflow` and `TranscriptStore`. Its runtime source closure is nine files from the existing [source manifest](experiments/results/native-source-manifest.json): `tests/hybrid/{activities,engine,models,store,workflows}.py`, `tests/helpers/fake_messages_api.py` and the three package initializers. The fetched `tests/hybrid/policy.py` is verified but unused by this rig. The native manifest's role labels describe the earlier native rig; this list describes the main rig. The source pytest configuration, source Worker entry point and provisioning fixtures are not executed.
+
+Run from the repository root. Choose fresh scratch roots; the helpers refuse an existing destination. The [installer](experiments/install_experimental_sdk.py) copies the existing noneditable environment, verifies the downloaded pins, invokes the Hatch backend directly and installs with no resolver updates. The [verifier](experiments/verify_experimental_sdk.py) uses static inspection code, not executable command content loaded from a result file. Experimental execution uses its Python directly, not copied console scripts. Retrieve the pinned fixture closure with the existing fetch helper before the main rig.
+
+```bash
+python3 python/claude_agent_sdk/docs/skill-recovery/experiments/install_experimental_sdk.py --baseline python/claude_agent_sdk/.venv --root /tmp/recovery-main-install --uv "$(command -v uv)"
+/tmp/recovery-main-install/venv/bin/python python/claude_agent_sdk/docs/skill-recovery/experiments/verify_experimental_sdk.py --root /tmp/recovery-main-install
+python3 python/claude_agent_sdk/docs/skill-recovery/experiments/fetch_native_source.py --root /tmp/recovery-main-source
+RECOVERY_CLI="$(python/claude_agent_sdk/.venv/bin/python -c 'from pathlib import Path; import claude_agent_sdk; print(Path(claude_agent_sdk.__file__).parent / "_bundled" / "claude")')"
+/tmp/recovery-main-install/venv/bin/python python/claude_agent_sdk/docs/skill-recovery/experiments/main_recovery.py --source-root /tmp/recovery-main-source --root /tmp/recovery-main-run --cli-path "$RECOVERY_CLI" --supervision-helper python/claude_agent_sdk/docs/skill-recovery/experiments/native_replay.py --server /tmp/temporal-v1.8.3-server-1.32.0-162.0
+/tmp/recovery-main-install/venv/bin/python python/claude_agent_sdk/docs/skill-recovery/experiments/main_preflight.py --root /tmp/recovery-main-preflight --cli "$RECOVERY_CLI" --source-root /tmp/recovery-main-install/source/claude-agent-sdk-python-3ac4b25733d1302c89d0dadd13cab268e64d1213
+/tmp/recovery-main-install/venv/bin/python python/claude_agent_sdk/docs/skill-recovery/experiments/main_owners.py --source-root /tmp/recovery-main-source --root /tmp/recovery-main-owners --cli-path "$RECOVERY_CLI" --supervision-helper python/claude_agent_sdk/docs/skill-recovery/experiments/native_replay.py --seed-store /tmp/recovery-main-run/store.db
+```
+
+The rig offers only the read-only MCP echo fixture. Provider credentials, inherited provider selection flags and proxies are removed; a local fake endpoint, synthetic credentials, isolated configuration and empty setting sources supply the CLI environment. The initial compatibility case verifies an actual SDK/CLI tool round and two fake model requests. Model requests stay local. Remote retrieval is limited to the pinned public source and dependency artifacts; communication with external people remains deferred. The SQLite effect fixture is a local deduplication service, not proof of arbitrary external effects.
+
+### Replacement Worker results
+
+The lead executed the four corrected cases; an independent reviewer checked the scripts, original unresolved transcripts, accepted ledger identities, result blocks, raw fake model requests and process cleanup.
+
+| Case | Tool invocations | Tool Activities scheduled | Result |
+|---|---:|---:|---|
+| [Recorded success before delivery](experiments/results/main/success/report.json) | 1, first Worker | 1 | Replacement reuses the exact ledger Reply text and error flag. |
+| [Recorded synthetic MCP error before delivery](experiments/results/main/error/report.json) | 1, first Worker | 1 | Replacement reuses the error content and preserves `is_error=true`. |
+| [Pending approval, then approve](experiments/results/main/approve/report.json) | 1, replacement Worker | 1 | Same accepted call waits during SDK recovery before CLI startup; approval permits its execution. |
+| [Pending approval, then reject](experiments/results/main/reject/report.json) | 0 | 0 | Rejection produces the recorded error outcome without executing a tool. |
+
+At each fault, the SDK pending parser identifies exactly one unresolved original request: full MCP name, ID, inputs, session key and assistant transcript UUID match the accepted call, with no original tool result. The final ledger retains that original call identity. Each case has one fake model request before the fault and one continuation after recovery; the original effect request is not regenerated.
+
+Stored recovery blocks equal the raw model received blocks in ID, content and error flag. This proves ledger Reply reuse through an ordinary SDK `ToolResultBlock`; it does not prove identical native MCP result carrier metadata or `toolUseResult` preservation. All four exported histories pass Workflow replay. In both approval cases, the replacement has registered its new attempt but starts no new CLI, model request or tool while approval remains pending. Repeating the same tuple decision is accepted; a conflicting decision is refused. These are synthetic business approvals, not signed decisions or native permission recovery.
+
+All four original Worker losses left a live CLI orphan. The harness records PID and process start identity, kills surviving owned descendants and requires no active owned process before replacement. Final cleanup records are empty of active owned processes. This demonstrates the supplied supervisor boundary; the candidate alone does not prevent orphans. Conversation state and the Workflow ledger survive through retained SQLite and Temporal storage on the same host. Original disk removal, shared production volumes, workspace packages, protected claims and general file restoration were not tested here.
+
+The [diagnostic report](experiments/results/main/diagnostic/report.json), [original ledger](experiments/results/main/diagnostic/original-ledger.json), [Worker log](experiments/results/main/diagnostic/worker-log.json) and [history](experiments/results/main/diagnostic/history.json) preserve the initial rig failure. An untyped wrapper Activity received a dictionary rather than `Call` and failed before tool execution. The wrapper now declares `Call` and `Reply`; the candidate source and dependencies were unchanged. That diagnostic is a harness failure, not a candidate compatibility verdict.
+
+### Preflight refusal and ownership results
+
+The [preflight script](experiments/main_preflight.py) uses actual `ClaudeSDKClient.connect` and the installed recovery implementation with synthetic parent linked transcripts and an in-memory test store. It supplies no custom transport. A guard on default transport startup prevents an accidental process from escaping the probe; every case records zero guard attempts and zero CLI or model continuation. The lead independently reran all six cases.
+
+| Case | Observation |
+|---|---|
+| Wrong returned tool ID | SDK rejects before recovery append or transport startup. |
+| Missing transcript | SDK refuses before invoking the host callback. |
+| Changed accepted inputs | The authored host ledger binding rejects; this is not an SDK supplied approval binding. |
+| Failed append | Storage failure propagates before CLI startup. |
+| Mismatched readback | SDK refuses after one recovery commit because exact transcript readback differs. |
+| Synthetic pending Bash | Host callback parking exception propagates before append, CLI startup or model continuation. |
+
+[Preflight summary](experiments/results/main/preflight/summary.json) and per-case reports retain the exceptions, pending blocks and store counts. The Bash marker was created by Python, with zero actual Bash invocations. The host exception is not converted into a tool error that could let the model continue. This establishes callback abort ordering only; actual Bash uncertainty recovery, durable parked Workflow state and protected effect claims remain unproved.
+
+The [completed transcript owner probe](experiments/results/main/owners/report.json) independently reproduced two simultaneous CLIs for the same stored session. Both were live before the release barrier, when there were zero model requests; both then continued successfully, producing two model requests and zero recovery callbacks. Cleanup accounted for all owned processes. The seed is an actual completed CLI transcript copied unchanged under a new shared project key, retaining its session and entry metadata. This probe uses no Temporal replacement or pending effect. It is a counterexample to relying on SDK recovery for exclusive ownership, not a defect in a promised SDK lease.
+
+The SDK explicitly requires a host lease through CLI teardown. Missing result conditional append is not that lease: callbacks run before append contention is resolved, and completed transcripts skip conditional append. Pending callback CAS contention was inspected in source but not executed. Subagent recovery, custom transports, truncating or in-process fork resumes, native skill validation, signed decisions, permission bypass routes and graceful suspension equivalence remain excluded or unexecuted.
+
+### Bounded recommendation
+
+Retain defer as the implementation baseline with executor entry blocked. Do not adopt either hybrid candidate yet. The released SDK native route supports the measured one file replay cases; experimental main recovery now supports the measured MCP outcome and pending approval cases and rejects invalid result identity before continuation. The latter is the stronger pending conversation recovery seam for further evaluation, but it still requires host ownership, orphan containment, durable Bash parking, signed decision binding and general workspace/claims proof.
+
+Mods remains unsupported for interception in the tested invocation. A-57 retains that bounded unsupported disposition; A-58 remains open because both owner contention and orphan observations fail without host controls; A-59 remains open for general filesystem and protected state recovery. No candidate, dependency promotion or general executor architecture is adopted by this comparison.
+
+Archived records normalize machine paths, host names and ephemeral device identifiers, including encoded history payloads. Source, wheel, dependency and CLI hashes describe the original verified artifacts; normalization is not a replacement integrity receipt. Conversation, filesystem/claims and approval/outcome recovery remain separate acceptance obligations.
+
+## Bounded host contract comparison (2026-10-01)
+
+This second batch adds disposable host adapters, not a general executor or adopted integration. It preserves all earlier comparison results. The SDK alone still lacks the observed host lease, process containment, signed gateway and durable uncertainty park. The adapter results below establish bounded local mechanisms that can be evaluated before any adoption decision.
+
+The lead fetched all 28 pinned integration fixture files afresh with [fetch_native_source.py](experiments/fetch_native_source.py) and verified their canonical manifest hashes. [verify_experimental_sdk.py](experiments/verify_experimental_sdk.py) rechecked the approved wheel, installation and source, retained dependency versions/metadata and unchanged baseline CLI. The SDK source remains `3ac4b25733d1302c89d0dadd13cab268e64d1213`, declared SDK `0.2.162`; fixture revision remains `2ab873cc23a1b3224531a5634c1f6d1c8ef0ea1f`. Python `3.13.15`, Temporal SDK `1.33.0`, local plugin `0.0.0`, CLI `2.1.274` and cached server `1.8.3-server-1.32.0-162.0` remain unchanged. Cryptography `50.0.1` was already installed in the baseline and copied disposable environment; no package was added for signing. Approved wheel SHA256 remains `ef22fdf2f98cf4858a8b6cd7523ae2a6e52d05bb503e1ae7e339595974d15cac`; CLI SHA256 remains `15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07`; server SHA256 remains `eff36463f7c0fbfcfd50f117370fc582fe964912a62cf271b91af05447d1fdfe`. Paid model calls stayed disabled with loopback fake endpoints, isolated configuration and explicit CLI selection.
+
+### Ownership and process supervision
+
+[host_ownership.py](experiments/host_ownership.py) adds a same host Linux `flock` admission lease separate from transcript conditional append. Concurrent completed transcript resumes produced one CLI/model continuation; a contender refused before SDK startup. The winner retained the lease through CLI close, and admission reopened after teardown. A real Temporal replacement case refused a replacement while matching inventoried processes survived, then safely cleaned owned PID/start identities and reused the saved original outcome with one physical tool invocation. An unrelated process survived cleanup. The [final lead archive](experiments/results/host-ownership/lead-final/) includes contention, provenance, process records, result pairing, model requests and captured history.
+
+The [accounting only negative control](experiments/results/host-ownership/accounting-only-final/) observed three model requests: the orphan CLI delivered an interrupted tool error to the model during blocked replacement admission, followed later by the recovered recorded success. Refusing a replacement does not stop an old CLI from continuing. The positive controller suspends only matching inventoried descendants at its controlled Worker loss boundary before the admission probe, then performs identity checked cleanup. Its two total model requests prove that bounded controller ordering, not automatic SDK containment. The controlled sleeping child is a supervision fixture, not an actual Bash descendant; actual native Bash descendants are separately inventoried in the park rig. Polling can miss detached descendants, PID reuse can race a check and signal, and the same host lock is not distributed fencing. Spontaneous loss, remote host partition, arbitrary daemon containment and a production supervisor remain unproved. Timing of the accounting only counterexample can vary; the captured failure is evidence, not a deterministic guarantee of when an orphan continues.
+
+### Actual Bash uncertainty and required persisted state
+
+[host_park.py](experiments/host_park.py) uses an actual native CLI Bash command to append one harmless scratch marker and sleep. The first Worker is lost while the original call is pending and before a native outcome is published. After owned descendant cleanup, the replacement's host preflight returns a refusal that the disposable Temporal Workflow records as parked state. A third Worker reconstructs that park without scheduling another effect. No resolution handler exists and no uncertainty bypass is offered.
+
+All eight [lead reports](experiments/results/host-park/lead/summary.json) passed: ambiguous Bash with retained state, missing accepted request, changed accepted request, missing conversation transcript, missing filesystem marker, changed marker, missing claims and missing manifest. Each began with the actual local Bash effect and ended in durable park. Assertions recorded one initial transport start, zero replacement CLI/transport starts, zero replacement model requests and zero published tool result blocks. The retained marker stayed unchanged where the fault did not deliberately remove or change it. Bash process spawn count is bounded by the one requested call/transport and marker observations, rather than a separate syscall trace. All eight normalized captured histories replayed. The [author archive](experiments/results/host-park/author/) records the separate initial proving run.
+
+These refusals distinguish conversation, filesystem/claim and Workflow state. They do not restore absent files or claims, prove protected claim isolation, prove arbitrary corruption handling, or demonstrate another host/storage topology. Missing or changed state parks through the disposable adapter; the SDK does not infer filesystem recovery from history. Changed claim content, malformed JSON/SQLite, arbitrary snapshot loss and production volume semantics remain unexecuted. Earlier one file rollback/repeated Edit evidence retains its original limits.
+
+### Signed approval integrity
+
+[host_approval.py](experiments/host_approval.py) and [host_approval_workflow.py](experiments/host_approval_workflow.py) add a disposable Ed25519 signing/verifying adapter around the fixture's exact pending MCP call. Tokens bind Workflow ID, session, call ID, tool name, canonical input, transcript UUID, child subpath, decision, expiry, key ID and version. The signing key is generated in the test controller; only the public key enters Workflow input. This is a local test signer, not a production approval gateway.
+
+The [strict lead approve](experiments/results/host-approval/lead/approve/report.json) and [reject](experiments/results/host-approval/lead/reject/report.json) cases passed through two Worker replacements. Before a valid decision, there was one original model request, no new CLI and no tool invocation. Each refused eleven concrete cases: unsigned tuple, forged signature, other Workflow/session/call, changed request digest, expiry, unknown key, unsupported version, conflicting signed decision and conflict after the further replacement. Identical valid decisions were accepted twice before that replacement and once after it, while state retained one accepted decision; the history contains exactly three accepted `review` Updates. Approval executed the tool once and rejection executed it zero times, with one subsequent model request receiving the corresponding original result. Both captured histories replayed.
+
+The [diagnostic record](experiments/results/host-approval/diagnostic.md) preserves a Worker abort on a forged signature with partial cryptography import passthrough, plus authored refusal assertion and preflight failures. Final passing runs explicitly pass through the existing cryptography extension in Worker and Replayer. A production verification package outside the passthrough set, gateway authorization/key rotation, registration and subclass enforcement, historical unsigned migration, Continue-As-New and reset binding remain unproved. Independent review corrected the initial generic exception refusal check; final reports require specific decoder/validator failure types and do not count RPC failure or timeout as refusal.
+
+### Reproduction and disposition
+
+From the plugin directory, reuse the approved disposable environment and supply portable absolute paths through task specific variables. Every output root and archive below must be fresh. Obtain `SOURCE_ROOT` through the canonical fetch helper, `CLI_PATH` from the explicitly selected unchanged baseline bundled CLI, `SERVER_PATH` from the pinned cached server, and `SEED_STORE` from a completed actual CLI compatibility transcript produced by [main_recovery.py](experiments/main_recovery.py). The seed does not authorize restoration of another workspace. The ownership provenance records its hash.
+
+```bash
+"$PYTHON" docs/skill-recovery/experiments/verify_experimental_sdk.py --root "$INSTALL_ROOT"
+"$PYTHON" docs/skill-recovery/experiments/fetch_native_source.py --root "$SOURCE_ROOT"
+"$PYTHON" docs/skill-recovery/experiments/host_ownership.py --source-root "$SOURCE_ROOT" --root "$OWNER_ROOT" --archive "$OWNER_ARCHIVE" --cli-path "$CLI_PATH" --seed-store "$SEED_STORE" --server "$SERVER_PATH"
+"$PYTHON" docs/skill-recovery/experiments/host_park.py --source-root "$SOURCE_ROOT" --root "$PARK_ROOT" --archive "$PARK_ARCHIVE" --cli "$CLI_PATH" --server "$SERVER_PATH"
+"$PYTHON" docs/skill-recovery/experiments/host_approval.py --source-root "$SOURCE_ROOT" --root "$APPROVAL_ROOT" --archive "$APPROVAL_ARCHIVE" --cli-path "$CLI_PATH" --server "$SERVER_PATH" --supervision-helper docs/skill-recovery/experiments/native_replay.py
+```
+
+Ownership `--accounting-only` reproduces the negative supervision configuration under separate fresh roots; an extra orphan continuation is timing dependent, and a failure report is retained. Replay uses the matching disposable Workflow definition; signed replay must use the explicit cryptography passthrough configuration and the captured Workflow ID from the signed token, never a fabricated replay ID. Normalization removes private runtime paths and host identity, including encoded payloads, and normalized histories are replayed separately. Hash receipts describe original runtime artifacts rather than normalized bytes.
+
+The [independent review and lead verification record](experiments/results/host-review.md) records fresh full rig reruns, independent normalized history replay and the corrected refusal assertion. Ownership's [normalization receipt](experiments/results/host-ownership/lead-final/normalization-receipt.json) distinguishes runtime-tested source from final archive-only normalization changes.
+
+Retain defer as baseline, keep executor entry blocked and treat experimental SDK recovery as a promising candidate with measured local host adapters. This batch narrows local ownership, uncertainty parking and signed request binding gaps; it does not settle deployment ownership, production process supervision, general filesystem/claims recovery, native skill/permission coverage or a production signed gateway. A-58 and A-59 remain open, A-57 retains the tested Mods invocation limitation, and integration adoption remains OPEN. The bounded comparison remains IN PROGRESS; no broad acceptance criterion is closed by these local results.

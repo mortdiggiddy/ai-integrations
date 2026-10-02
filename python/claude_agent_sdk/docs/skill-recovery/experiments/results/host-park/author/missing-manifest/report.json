@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "case": "missing-manifest",
+  "park": {
+    "phase": "parked",
+    "reason": "filesystem manifest missing"
+  },
+  "history_replay": "PASS",
+  "actual_initial_bash_effects": 1,
+  "replacement_model_requests": 0,
+  "replacement_cli_spawns": 0,
+  "published_tool_results": 0,
+  "second_replacement_park_unchanged": true,
+  "transport_start_events": [
+    {
+      "worker": 1
+    }
+  ],
+  "claim": "Disposable host preflight plus Workflow state owns refusal; candidate SDK alone does not provide this contract",
+  "limits": "Same host injected loss; no distributed storage, fencing, remote effect, arbitrary child containment or resolution procedure proved"
+}

@@ -1,0 +1,489 @@
+[
+  {
+    "type": "queue-operation",
+    "operation": "enqueue",
+    "timestamp": "2026-10-02T02:31:36.808Z",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "content": "work"
+  },
+  {
+    "type": "queue-operation",
+    "operation": "dequeue",
+    "timestamp": "2026-10-02T02:31:36.815Z",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff"
+  },
+  {
+    "parentUuid": null,
+    "isSidechain": false,
+    "promptId": "17b162ba-91fe-40da-92de-1cc2894e0765",
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": "work"
+    },
+    "uuid": "82247db5-0b3d-4fae-977a-fe411f3f082b",
+    "timestamp": "2026-10-02T02:31:36.827Z",
+    "permissionMode": "default",
+    "promptSource": "sdk",
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "82247db5-0b3d-4fae-977a-fe411f3f082b",
+    "isSidechain": false,
+    "attachment": {
+      "type": "environment",
+      "snapshot": {
+        "workingDirectory": "<scratch>/success",
+        "isWorktree": false,
+        "isGitRepo": false,
+        "additionalWorkingDirectories": [],
+        "platform": "linux",
+        "shell": "bash",
+        "osVersion": "Linux 6.6.114.1-microsoft-standard-WSL2"
+      }
+    },
+    "type": "attachment",
+    "uuid": "00b369cd-7df3-45bf-9ac0-849c2467d775",
+    "timestamp": "2026-10-02T02:31:36.827Z",
+    "rendered": [
+      {
+        "content": "<system-reminder>\n# Environment\nYou have been invoked in the following environment: \n - Primary working directory: <scratch>/success\n - Is a git repository: false\n - Platform: linux\n - Shell: bash\n - OS Version: Linux 6.6.114.1-microsoft-standard-WSL2\n</system-reminder>"
+      }
+    ],
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "00b369cd-7df3-45bf-9ac0-849c2467d775",
+    "isSidechain": false,
+    "attachment": {
+      "type": "model",
+      "identity": {
+        "modelId": "claude-opus-5[1m]",
+        "marketingName": "Opus 5 (1M context)",
+        "knowledgeCutoff": "May 2026"
+      },
+      "text": "You are powered by the model named Opus 5 (1M context). The exact model ID is claude-opus-5[1m]. Assistant knowledge cutoff is May 2026."
+    },
+    "type": "attachment",
+    "uuid": "18d5d610-eb2c-4dc2-9f5b-7a23a009bdd3",
+    "timestamp": "2026-10-02T02:31:36.827Z",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nYou are powered by the model named Opus 5 (1M context). The exact model ID is claude-opus-5[1m]. Assistant knowledge cutoff is May 2026.\n</system-reminder>"
+      }
+    ],
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "18d5d610-eb2c-4dc2-9f5b-7a23a009bdd3",
+    "isSidechain": false,
+    "attachment": {
+      "type": "total_tokens_reminder",
+      "text": "<total_tokens>15000000 tokens left</total_tokens>"
+    },
+    "type": "attachment",
+    "uuid": "04115a1b-5660-4dae-b37a-72201befe0ba",
+    "timestamp": "2026-10-02T02:31:36.827Z",
+    "rendered": [
+      {
+        "content": "<system-reminder>\n<total_tokens>15000000 tokens left</total_tokens>\n</system-reminder>"
+      }
+    ],
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "type": "atis-latch",
+    "atis": "",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff"
+  },
+  {
+    "parentUuid": "04115a1b-5660-4dae-b37a-72201befe0ba",
+    "isSidechain": false,
+    "attachment": {
+      "type": "session_context",
+      "context": {}
+    },
+    "type": "attachment",
+    "uuid": "2a7e374f-8745-4419-8c4f-28048b352716",
+    "timestamp": "2026-10-02T02:31:36.842Z",
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "2a7e374f-8745-4419-8c4f-28048b352716",
+    "isSidechain": false,
+    "attachment": {
+      "type": "date",
+      "date": "2026-10-01"
+    },
+    "type": "attachment",
+    "uuid": "31c4c742-8e47-4878-81a1-6803e8bff185",
+    "timestamp": "2026-10-02T02:31:36.843Z",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nToday's date is 2026-10-01.\n</system-reminder>"
+      }
+    ],
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "31c4c742-8e47-4878-81a1-6803e8bff185",
+    "isSidechain": false,
+    "attachment": {
+      "type": "prompt_snapshot",
+      "systemPrompt": [
+        ""
+      ]
+    },
+    "type": "attachment",
+    "uuid": "458175c2-df56-415c-a686-cc320fac670b",
+    "timestamp": "2026-10-02T02:31:36.843Z",
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "458175c2-df56-415c-a686-cc320fac670b",
+    "isSidechain": false,
+    "message": {
+      "id": "msg_fake0001",
+      "type": "message",
+      "role": "assistant",
+      "model": "claude-opus-5",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "original-echo",
+          "name": "mcp__durable__echo",
+          "input": {
+            "n": 7
+          }
+        }
+      ],
+      "stop_reason": "tool_use",
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 12,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 20,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "stop_details": null
+    },
+    "apiBlockIndex": 0,
+    "type": "assistant",
+    "uuid": "5d5034e3-49ac-4576-a53e-2fe5264d3ffc",
+    "timestamp": "2026-10-02T02:31:36.861Z",
+    "effort": "high",
+    "perTurnEffort": null,
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "type": "user",
+    "uuid": "40575d8b-a25b-52eb-9c14-8f40a520a661",
+    "parentUuid": "5d5034e3-49ac-4576-a53e-2fe5264d3ffc",
+    "isSidechain": false,
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "timestamp": "2026-10-02T02:31:51.529873Z",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "original-echo",
+          "content": "{\"idempotency_key\":\"experimental-main-533ad7354e234aed8ebe601af74055c2:tool-original-echo\",\"n\":7}",
+          "is_error": false
+        }
+      ]
+    },
+    "cwd": "<scratch>/success",
+    "version": "2.1.274",
+    "gitBranch": "HEAD",
+    "userType": "external",
+    "entrypoint": "sdk-py"
+  },
+  {
+    "type": "queue-operation",
+    "operation": "enqueue",
+    "timestamp": "2026-10-02T02:31:51.864Z",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "content": "work"
+  },
+  {
+    "type": "queue-operation",
+    "operation": "dequeue",
+    "timestamp": "2026-10-02T02:31:51.879Z",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff"
+  },
+  {
+    "parentUuid": "40575d8b-a25b-52eb-9c14-8f40a520a661",
+    "isSidechain": false,
+    "promptId": "e3f8750c-2870-4018-9883-3a408b8b5877",
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "Continue from where you left off."
+        }
+      ]
+    },
+    "isMeta": true,
+    "uuid": "8c8aa312-bb2c-47cb-8214-b3321f12d06a",
+    "timestamp": "2026-10-02T02:31:51.785Z",
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "8c8aa312-bb2c-47cb-8214-b3321f12d06a",
+    "isSidechain": false,
+    "type": "assistant",
+    "uuid": "2457b767-6852-416b-a52a-cfaa627ac719",
+    "timestamp": "2026-10-02T02:31:51.785Z",
+    "message": {
+      "diagnostics": null,
+      "id": "00608755-eddb-432a-a8c6-777c8fac5461",
+      "container": null,
+      "model": "<synthetic>",
+      "role": "assistant",
+      "stop_details": null,
+      "stop_reason": "stop_sequence",
+      "stop_sequence": "",
+      "type": "message",
+      "usage": {
+        "output_tokens_details": null,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": null,
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": null,
+        "iterations": null,
+        "speed": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "No response requested."
+        }
+      ],
+      "context_management": null
+    },
+    "isApiErrorMessage": false,
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "2457b767-6852-416b-a52a-cfaa627ac719",
+    "isSidechain": false,
+    "promptId": "e3f8750c-2870-4018-9883-3a408b8b5877",
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": "work"
+    },
+    "uuid": "8188ca9c-dddd-4a24-baa3-8dda2ea2cf55",
+    "timestamp": "2026-10-02T02:31:51.891Z",
+    "permissionMode": "default",
+    "promptSource": "sdk",
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "8188ca9c-dddd-4a24-baa3-8dda2ea2cf55",
+    "isSidechain": false,
+    "attachment": {
+      "type": "total_tokens_reminder",
+      "text": "<total_tokens>15000000 tokens left</total_tokens>"
+    },
+    "type": "attachment",
+    "uuid": "b9db4d2c-a402-4286-bb47-9317af596282",
+    "timestamp": "2026-10-02T02:31:51.891Z",
+    "rendered": [
+      {
+        "content": "<system-reminder>\n<total_tokens>15000000 tokens left</total_tokens>\n</system-reminder>"
+      }
+    ],
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "b9db4d2c-a402-4286-bb47-9317af596282",
+    "isSidechain": false,
+    "message": {
+      "id": "msg_fake0002",
+      "type": "message",
+      "role": "assistant",
+      "model": "claude-opus-5",
+      "content": [
+        {
+          "type": "text",
+          "text": "DONE recorded result"
+        }
+      ],
+      "stop_reason": "end_turn",
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 12,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 20,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "stop_details": null
+    },
+    "apiBlockIndex": 0,
+    "type": "assistant",
+    "uuid": "536c3eb9-5aad-43ea-ab65-a52bba94feba",
+    "timestamp": "2026-10-02T02:31:51.923Z",
+    "effort": "high",
+    "perTurnEffort": null,
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  },
+  {
+    "parentUuid": "536c3eb9-5aad-43ea-ab65-a52bba94feba",
+    "isSidechain": false,
+    "attachment": {
+      "type": "prompt_snapshot",
+      "systemPrompt": [
+        ""
+      ],
+      "tools": [
+        {
+          "name": "mcp__durable__echo",
+          "description": "Echo a number.",
+          "schema": {
+            "name": "mcp__durable__echo",
+            "description": "Echo a number.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "n": {
+                  "type": "integer"
+                },
+                "approval": {
+                  "type": "boolean"
+                },
+                "delay": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "n"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "server": "durable"
+        }
+      ],
+      "cliPrefix": "You are a Claude agent, built on Anthropic's Claude Agent SDK."
+    },
+    "type": "attachment",
+    "uuid": "aedc3153-5961-416f-817c-0cdca1682e2d",
+    "timestamp": "2026-10-02T02:31:51.947Z",
+    "userType": "external",
+    "entrypoint": "sdk-py",
+    "cwd": "<scratch>/success",
+    "sessionId": "7e2184b2-3726-43c5-8380-edf380e472ff",
+    "version": "2.1.274",
+    "gitBranch": "HEAD"
+  }
+]

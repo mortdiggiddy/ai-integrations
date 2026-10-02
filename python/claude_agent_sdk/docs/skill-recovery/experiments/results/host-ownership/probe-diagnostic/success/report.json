@@ -1,0 +1,8 @@
+{
+  "mode": "success",
+  "status": "FAILED; no completion claim",
+  "exception": "AssertionError: ",
+  "traceback": "Traceback (most recent call last):\n  File \"<experiments>/main_recovery.py\", line 358, in temporal_case\n    cleanup.append(await supervision.stop(proc))\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<experiments>/host_ownership.py\", line 149, in stop\n    assert len(proc._api.requests) == requests_before\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "cleanup": [],
+  "orphan_observed": false
+}

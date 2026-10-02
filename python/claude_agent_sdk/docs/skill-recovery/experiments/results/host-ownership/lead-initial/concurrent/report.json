@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "competing_resume": "refused before CLI or model",
+  "model_requests": 1,
+  "lease_through_teardown": "PASS",
+  "after_teardown": "allowed",
+  "cli_owner": {
+    "cli": {
+      "pid": 1746522,
+      "state": "S",
+      "parent": 1746468,
+      "start_ticks": "13354605"
+    }
+  },
+  "scope": "Same-host Linux flock admission. Lease spans CLI open, query and close; transcript append is independent. No distributed fencing."
+}

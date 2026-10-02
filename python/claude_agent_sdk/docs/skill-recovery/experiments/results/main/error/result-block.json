@@ -1,0 +1,6 @@
+{
+  "type": "tool_result",
+  "tool_use_id": "original-echo",
+  "content": "synthetic recorded MCP error",
+  "is_error": true
+}

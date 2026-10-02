@@ -1,0 +1,15 @@
+{
+  "id": "signed-echo",
+  "name": "echo",
+  "arguments": {
+    "approval": true,
+    "n": 7
+  },
+  "attempt": {
+    "burst": 0,
+    "number": 1,
+    "token": "01a0faa1-8615-7577-b7b0-60d3baea5425:1:1"
+  },
+  "transcript_uuid": "9be2b424-bfd2-4c3d-908a-45250b48399a",
+  "subpath": ""
+}

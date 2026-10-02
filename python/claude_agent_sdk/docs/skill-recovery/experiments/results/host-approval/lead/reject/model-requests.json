@@ -1,0 +1,204 @@
+[
+  {
+    "model": "claude-opus-5",
+    "messages": [
+      {
+        "role": "user",
+        "content": "work"
+      },
+      {
+        "role": "system",
+        "content": [
+          {
+            "type": "text",
+            "text": "# Environment\nYou have been invoked in the following environment: \n - Primary working directory: <scratch>/reject\n - Is a git repository: false\n - Platform: linux\n - Shell: bash\n - OS Version: Linux 6.6.114.1-microsoft-standard-WSL2\n\nYou are powered by the model named Opus 5 (1M context). The exact model ID is claude-opus-5[1m]. Assistant knowledge cutoff is May 2026.\n\n<total_tokens>15000000 tokens left</total_tokens>\n\nToday's date is 2026-10-01.",
+            "cache_control": {
+              "type": "ephemeral"
+            }
+          }
+        ]
+      }
+    ],
+    "system": [
+      {
+        "type": "text",
+        "text": "x-anthropic-billing-header: cc_version=2.1.274.834; cc_entrypoint=sdk-py;"
+      },
+      {
+        "type": "text",
+        "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      }
+    ],
+    "tools": [
+      {
+        "name": "mcp__durable__echo",
+        "description": "Echo a number.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "n": {
+              "type": "integer"
+            },
+            "approval": {
+              "type": "boolean"
+            },
+            "delay": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "n"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ],
+    "metadata": {
+      "user_id": "{\"device_id\":\"eeb483585b647539b3779a2d33c7be73b1f8a40972c413c1d6d44acfee1156e2\",\"account_uuid\":\"\",\"session_id\":\"460f963b-697c-4e1a-968a-c2b413085f3b\"}"
+    },
+    "max_tokens": 64000,
+    "thinking": {
+      "type": "adaptive"
+    },
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_thinking_20251015",
+          "keep": "all"
+        }
+      ]
+    },
+    "output_config": {
+      "effort": "high"
+    },
+    "stream": true
+  },
+  {
+    "model": "claude-opus-5",
+    "messages": [
+      {
+        "role": "user",
+        "content": "work"
+      },
+      {
+        "role": "system",
+        "content": "# Environment\nYou have been invoked in the following environment: \n - Primary working directory: <scratch>/reject\n - Is a git repository: false\n - Platform: linux\n - Shell: bash\n - OS Version: Linux 6.6.114.1-microsoft-standard-WSL2\n\nYou are powered by the model named Opus 5 (1M context). The exact model ID is claude-opus-5[1m]. Assistant knowledge cutoff is May 2026.\n\n<total_tokens>15000000 tokens left</total_tokens>\n\nToday's date is 2026-10-01."
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "signed-echo",
+            "name": "mcp__durable__echo",
+            "input": {
+              "n": 7,
+              "approval": true
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "signed-echo",
+            "content": "rejected by reviewer",
+            "is_error": true
+          },
+          {
+            "type": "text",
+            "text": "Continue from where you left off."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "No response requested."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "work"
+      },
+      {
+        "role": "system",
+        "content": [
+          {
+            "type": "text",
+            "text": "<total_tokens>15000000 tokens left</total_tokens>",
+            "cache_control": {
+              "type": "ephemeral"
+            }
+          }
+        ]
+      }
+    ],
+    "system": [
+      {
+        "type": "text",
+        "text": "x-anthropic-billing-header: cc_version=2.1.274.834; cc_entrypoint=sdk-py;"
+      },
+      {
+        "type": "text",
+        "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      }
+    ],
+    "tools": [
+      {
+        "name": "mcp__durable__echo",
+        "description": "Echo a number.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "n": {
+              "type": "integer"
+            },
+            "approval": {
+              "type": "boolean"
+            },
+            "delay": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "n"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ],
+    "metadata": {
+      "user_id": "{\"device_id\":\"b326f0488a3f72be30b4c93cd81f9187c51c8c4a3676b0e8f34994ab3eb094cf\",\"account_uuid\":\"\",\"session_id\":\"460f963b-697c-4e1a-968a-c2b413085f3b\"}"
+    },
+    "max_tokens": 64000,
+    "thinking": {
+      "type": "adaptive"
+    },
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_thinking_20251015",
+          "keep": "all"
+        }
+      ]
+    },
+    "output_config": {
+      "effort": "high"
+    },
+    "stream": true
+  }
+]

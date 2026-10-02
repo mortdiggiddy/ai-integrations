@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "result": "DONE recorded result",
+  "calls": [
+    {
+      "id": "original-echo",
+      "name": "echo",
+      "arguments": {
+        "n": 7
+      },
+      "transcript_uuid": "5e96ca2a-003e-4861-83e9-4c9100a46969"
+    }
+  ],
+  "checkpoint": [
+    "f01b55b6-40c0-4109-aa6d-3d6e95ff44d4",
+    [
+      "original-echo"
+    ]
+  ],
+  "cli_pid": 1689188,
+  "source_reported_cli": "2.1.274"
+}
