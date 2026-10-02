@@ -23,8 +23,13 @@ Status: IN PROGRESS
 
 Dependencies: model testing requirements in [deployment prerequisites](#deployment-prerequisites). Offline construction exists; real model completion remains blocked.
 
+Inspection checkpoint (2026-10-02): `tests/helpers/offline_harness.py` always refuses paid execution and patches the SDK stream, version query and checkpoint. Its configuration contains per run USD/token caps and a credential environment reference, but no approved model allowlist, phase ledger or preventive token enforcement. The runner forwards `max_budget_usd` per segment; this does not establish a cap across resumed segments or the phase. Complete the following bounded harness work before selected result delivery uses a real model. The passing deferred checkpoint feasibility check does not change this gate.
+
 - [x] Offline harness tests cover records, overlapping run refusal and paid execution refusal; simulated versions, usage, transcript and checkpoint are not runtime proof. See [evidence](evidence.md).
 - [ ] Refuse real model startup when credential, cap or model identifier is absent; a deliberately low cap stops with a non passing outcome.
+- [ ] Enforce the approved exact model allowlist and explicit credential route without ambient provider fallback. Keep paid execution disabled until separate execution authorization and verified enforcement exist.
+- [ ] Reserve and reconcile per run and phase budgets across resumed segments, retries and overlapping processes. Incomplete usage or a lost process must not release an unresolved reservation or permit an unaccounted continuation. Keep Phase 5 accounting separate.
+- [ ] Verify preventive token limits before provider requests, including resumed requests, rather than treating result usage as enforcement. If the selected route cannot meet the approved token boundary, stop for an explicit budget design decision before paid execution.
 - [ ] A bounded real run records SDK wheel, printed CLI version, model, usage, cost and full transcript without credential values. Observed token counts after a result are not a preventive token cap.
 - [ ] Record minimum and selected newest engine lanes and any explicit cooldown exception. Run required default tests with no model credentials.
 
