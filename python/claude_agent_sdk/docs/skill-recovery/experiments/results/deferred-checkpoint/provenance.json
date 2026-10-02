@@ -1,0 +1,43 @@
+{
+  "plugin_version": "0.0.0",
+  "sdk_version": "0.2.162",
+  "plugin_files": {
+    "_runner.py": {
+      "sha256": "c89d667bff8fd02ebd22e46baaf3d688053adab34b6fa83f6dd3ac4edbfcd205",
+      "installed_matches_source": true
+    },
+    "_defer_hook.py": {
+      "sha256": "b0fd7b1e551c70ecb3d22915d632dc72fbb34e1eea333bd85211a79d678864c4",
+      "installed_matches_source": true
+    },
+    "_policy.py": {
+      "sha256": "df3c9c78d3dcd378a6c2134c0c3633ba319517798d8563dc1cff6b8cdce970fd",
+      "installed_matches_source": true
+    },
+    "_session_store.py": {
+      "sha256": "1e0961b29903eeb0814906a6ad713579179308d5692bf404116cb0c31a858778",
+      "installed_matches_source": true
+    }
+  },
+  "recovery_source_sha256": "7ccd84f73b9fc9f3138dfb20f35b81f61986817ac29a406d826d13a0627837ed",
+  "sdk_verification": {
+    "status": "passed",
+    "prefix": "<disposable-install>/venv",
+    "sdk_version": "0.2.162",
+    "wheel_sha256": "ef22fdf2f98cf4858a8b6cd7523ae2a6e52d05bb503e1ae7e339595974d15cac",
+    "wheel_members_verified": 32,
+    "installed_record_entries_verified": 36,
+    "source_package_files_verified": 29,
+    "direct_url": {
+      "url": "file://<disposable-install>/built-wheel/claude_agent_sdk-0.2.162-py3-none-any.whl",
+      "archive_info": {}
+    },
+    "direct_url_hash_provided": false,
+    "baseline_distribution_snapshot_unchanged": true,
+    "baseline_distribution_snapshot_rechecked": true,
+    "approved_artifacts_rechecked": true,
+    "isolated_dependency_versions_rechecked": true
+  },
+  "comparison_checkpoint": "6d220335ff614e96115cb9ee1048a27d4f9b65d4",
+  "normalization": "Reports replace scratch and plugin prefixes. Runtime transcript hashes describe pre-normalization bytes."
+}

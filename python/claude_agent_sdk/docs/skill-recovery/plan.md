@@ -14,11 +14,15 @@ The [second bounded host contract batch](evidence.md#bounded-host-contract-compa
 
 ## Direction and adoption boundary
 
+The [deferred checkpoint feasibility check](evidence.md#deferred-checkpoint-feasibility-2026-10-02) now passes on unchanged actual Write transcripts through SDK preflight. It used an in-memory append fixture and blocked resumed transport, so external outcome delivery, production storage and real model acceptance remain open. The next execution gate is model budget/credential/harness completion; no paid call is authorized by this local pass.
+
+The [approved comparison disposition](comparison-disposition.md) selects experimental main recovery for Phase 1 proof, rejects Mods for the tested invocation and preserves defer as the implemented baseline. Comparison completion is bounded to local evidence and explicit dispositions. Original disk loss remains required in filesystem/session conformance, permission/alternate routes at engine exit, complete skill composition at application acceptance and general cancellation at process/shutdown gates. Selected result delivery rebaseline and deferred checkpoint feasibility are recorded; model budget decisions and the remaining [real model harness](work-items.md#real-model-harness) work execute next. Those prerequisites still gate paid proof and engine exit review still gates executor implementation.
+
 Investigate the hybrid long running CLI and experimental main agent SDK recovery first. Compare them with the implemented defer path, and evaluate Mods as candidate interception plumbing. Research priority is not adoption. The hybrid prototype, experimental recovery fork and Mods have separate immutable source pins in [evidence](evidence.md).
 
-The comparison uses one validated skill with a resource read, a generated file, a pending human decision and a claimed Bash boundary. It must run through the actual Python SDK and chosen engine. A standalone CLI demonstration or hook unit test is insufficient. Replacement Worker and durable approval cases require a Temporal test environment; isolated defer seam checks do not.
+The bounded comparison records separate actual SDK fixtures and their limits. The originally planned complete validated skill scenario (resource read, generated file, pending human decision and claimed Bash) remains unexecuted and required by validated skill invocation and application Workflow acceptance. Individual fixtures do not satisfy that scenario. Replacement Worker and durable approval cases require a Temporal test environment; isolated defer seam checks do not.
 
-The current design remains the defer and synthetic result proposal until a separate integration decision selects a proven alternative. Before executor implementation, revise the specification, this plan and affected work criteria if selection changes execution placement, result delivery or session ownership. Candidate rejection settles only that candidate's scope; it does not prove the retained path.
+The implemented design remains defer and synthetic result delivery; the approved Phase 1 target tests experimental main recovery with external effect Activity placement unchanged. Before executor implementation, revise the specification, this plan and affected work criteria if selection changes execution placement, result delivery or session ownership. Candidate rejection settles only that candidate's scope; it does not prove the retained path.
 
 ## Runtime shape
 

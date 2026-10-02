@@ -41,47 +41,56 @@ Dependencies: [specification](spec.md). Construction precedes the preventive con
 
 ## Bounded recovery comparison
 
-Status: IN PROGRESS
+Status: DONE (2026-10-02, bounded research disposition)
 
-The [second host contract batch](evidence.md#bounded-host-contract-comparison-2026-10-01) passed local concurrent admission and teardown gating, controlled owned descendant cleanup before replacement, eight durable native Bash/missing-state park cases, and disposable signed approve/reject integrity across replacement. Accounting alone still allowed an orphan error fallback/model continuation. The host adapters, local disk faults and explicit cryptography passthrough constrain these findings; distributed lease/fencing, spontaneous loss supervision, arbitrary descendant containment, general filesystem/claim restoration, production gateway/registration and complete native skill/permission coverage remain open. None of the broad criteria below closes from these bounded passes, and integration adoption remains OPEN.
+The [approved acceptance disposition](comparison-disposition.md#acceptance-map) closes bounded research through local proof, candidate rejection, route exclusion and needs host implementation outcomes. Permission/alternate routes, original disk loss, complete skill composition and general cancellation remain unexecuted and required at their engine, filesystem/session, application and process/shutdown gates. Completion does not establish production compatibility.
+
+The [second host contract batch](evidence.md#bounded-host-contract-comparison-2026-10-01) passed local concurrent admission and teardown gating, controlled owned descendant cleanup before replacement, eight durable native Bash/missing-state park cases, and disposable signed approve/reject integrity across replacement. Accounting alone still allowed an orphan error fallback/model continuation. The host adapters, local disk faults and explicit cryptography passthrough constrain these findings; distributed lease/fencing, spontaneous loss supervision, arbitrary descendant containment, general filesystem/claim restoration, production gateway/registration and complete native skill/permission coverage remain open. The checked comparison criteria below record approved research dispositions; no broad runtime requirement passes from these local results.
 
 The existing dependency batch is [recorded in evidence](evidence.md#bounded-comparison-on-the-existing-dependency-lane-2026-10-01), followed by the [bounded native file comparison](evidence.md#bounded-native-file-replay-comparison-2026-10-01). The latter verifies recorded native success/error reuse and an unpublished Edit replay after restoring a single file snapshot, with two physical Edit invocations and one committed outcome. General filesystem/claims, production ownership and process supervision remain open. The [experimental main comparison](evidence.md#bounded-experimental-main-recovery-comparison-2026-10-01) verifies four replacement Worker MCP outcome/approval cases and six SDK preflight refusals in a disposable installation. Concurrent completed resumes launched two CLIs, and Worker losses left orphans requiring harness cleanup. That earlier batch did not prove actual Bash effects, durable parking, signed decisions or general filesystem/claims recovery; the host batch above adds only its stated local proof. Research status does not authorize adoption or executor implementation.
 
 Dependencies: [real model harness](#real-model-harness) for paid cases and [deployment prerequisites](#deployment-prerequisites) for required test controls. Offline checks require no paid call.
 
-- [ ] Investigate hybrid CLI/main agent recovery first, use implemented defer as baseline, and evaluate Mods interception. Record immutable candidate sources, actual SDK/CLI builds, loading configuration, reproducible commands and every case's disposition.
-- [ ] Run the actual SDK invocation with a unique Mods hook marker and correlated request/result, or reject Mods as unsupported for that invocation. Record local `state` versus persisted `store` and local persistence versus cross Worker durability.
-- [ ] Recover the exact ID/name/canonical inputs and a previously recorded result or error without executing its effect again. Changed inputs or missing state refuse continuation; unsupported pending child recovery remains excluded, not regenerated as new work.
-- [ ] Test permission ordering, mixed calls, model and slash skill invocation, hidden/bundled skills and child/plugin/background routes. Independently prevent uncovered effects or reject the candidate's offered scope.
-- [ ] Missing, disabled, throwing, over budget and malformed interception cannot permit core fallback effects. Record zero effect markers with independent control, or explicit candidate rejection; successful hooks are not sufficient.
-- [ ] On a Temporal test rig, lose the original Worker with a pending approval, accept its durable answer once on a replacement, and prove exclusive session ownership plus stale CLI/orphan supervision. Record server configuration and Workflow histories.
-- [ ] Remove original local disk and compare conversation checkpoint, generated file hashes, manifest, claims and published outcome separately. Missing or conflicting state blocks recovery. Controlled hard stop and graceful suspension remain distinct cases.
-- [ ] Inject crashes before execution, after a file mutation and before outcome publication. Prove a consistent supported outcome or blocked recovery. Bash after effect/before publication parks with one effect marker and zero subsequent model turns.
-- [ ] Separate source support, fake model results, real model results, unsupported scope and unexecuted cases. The prototype's bounded file snapshot is not general workspace proof. Send retain/reject/propose adoption recommendations to [integration adoption](#integration-adoption).
+- [x] Record ordered comparison, immutable builds, loading, commands and every case disposition in the approved map.
+- [x] Reject Mods for the tested invocation and its five unexecuted hook negatives through the explicit rejection branch; other builds remain unexecuted.
+- [x] Record bounded call/result/error identity recovery and SDK versus host refusal controls; exclude unsupported pending children and alternate transport/fork routes.
+- [x] Record permission/mixed/skill/child/plugin/background routes as unexecuted and excluded from comparison compatibility. Actual prevention and confinement remain required before engine exit.
+- [x] Record pending approval replacement, failed SDK ownership/orphans, local host lease/control-loss proof and accounting only failure; production host implementation remains required.
+- [x] Record bounded native file gap and actual Bash uncertainty park without claiming general filesystem/claims restoration.
+- [x] Assign original disk loss to replacement Worker filesystem proof and session storage conformance; retain general cancellation/graceful suspension in process/shutdown proofs.
+- [x] Retain the complete validated skill scenario in validated skill invocation/application Workflow acceptance; individual fixtures do not prove it.
+- [x] Record selected Phase 1 seam and A-57/A-58/A-59 dispositions without unsupported runtime closure.
 
 ## Integration adoption
 
-Status: OPEN
+Status: DONE (2026-10-02, Phase 1 proof target only)
+
+The [approved decision](comparison-disposition.md#options-and-recommendation) selects experimental main recovery for Phase 1 proof with exact pins and mandatory host controls. Dependency promotion and production/native effect adoption remain gated; the implemented baseline is unchanged.
 
 Dependencies: [bounded recovery comparison](#bounded-recovery-comparison).
 
-- [ ] Record retain, adopt or redesign with a reason for every unsupported/rejected candidate; research priority alone does not select the implementation.
-- [ ] State exact supported versions, released versus experimental API status, integration boundary and any separate dependency promotion prerequisites.
-- [ ] Allocate conversation, workspace/claims and approval/outcome state plus replacement ownership/orphan responsibilities without claiming local Mods storage is distributed atomicity.
-- [ ] Preserve native skill execution in application authored Workflows under required registration/security/policy; the [harness adapter](#harness-adapter) remains separate.
-- [ ] Update spec, plan and affected acceptance criteria before executor work. Give each previous result delivery criterion an explicit retained or replaced disposition, preserve Bash uncertainty blocking, and do not reinterpret old proof as evidence of a new mechanism.
+- [x] Record retain, adopt or redesign with a reason for every unsupported/rejected candidate; research priority alone does not select the implementation.
+- [x] State exact supported versions, released versus experimental API status, integration boundary and any separate dependency promotion prerequisites.
+- [x] Allocate conversation, workspace/claims and approval/outcome state plus replacement ownership/orphan responsibilities without claiming local Mods storage is distributed atomicity.
+- [x] Preserve native skill execution in application authored Workflows under required registration/security/policy; the [harness adapter](#harness-adapter) remains separate.
+- [x] Update spec, plan and affected acceptance criteria before executor work. Give each previous result delivery criterion an explicit retained or replaced disposition, preserve Bash uncertainty blocking, and do not reinterpret old proof as evidence of a new mechanism.
 
 ## Selected result delivery
 
-Status: OPEN
+Status: IN PROGRESS (2026-10-02, rebaseline and offline feasibility only)
+
+[Deferred checkpoint feasibility](evidence.md#deferred-checkpoint-feasibility-2026-10-02) passed in separate author/lead runs with unchanged actual Write transcripts. This establishes the callback seam before deliberately blocked transport. All retained real model result delivery criteria below remain unchecked; the in-memory result/store fixture does not satisfy external Activity, resumed model or production recovery acceptance.
 
 Dependencies: [integration adoption](#integration-adoption), [real model harness](#real-model-harness), [policy and pause identity](#policy-and-pause-identity).
 
-- [ ] On the retained defer route, a deferred Write creates no file in the engine and its exact host result reaches a real model. Deferred Bash creates no engine command marker and delivers the recorded error result unchanged. Record complete transcripts and resume hook decisions, which stay `defer`, not `allow`.
-- [ ] If another route is adopted, execute its explicit exact result/error reuse proof with zero additional effect executions. Map the old synthetic criteria before testing; candidate research does not close this item.
-- [ ] A read before an effect survives; a read after pause is denied visibly. Test two effects in one message without losing a call, or record prompts tried and the unsupported real model shape rather than claiming success.
-- [ ] Repeat the decisive cases on the production integration, not only a spike copy. A failure stops executor entry and produces a documented redesign or supported fallback.
-- [ ] Record the official resume protocol and its documented scope. Synthetic host injection and batching behavior remain separate proof obligations, not inferred from official allow on resume behavior.
+- [ ] Before real model execution, establish with an actual deferred checkpoint and pinned experimental SDK that the accepted ID/name/input/transcript UUID reaches recovery before transport startup. Do not edit the transcript to manufacture an unresolved call. Failure stops for redesign.
+- [ ] Prove deferred Write creates no engine file before accepted segment commit; external effect Activity success is recorded once and exact recovery to the original pending call executes no additional effect.
+- [ ] Prove deferred Bash creates no engine marker before external dispatch; deliver a recorded error unchanged, reject without execution and preserve ambiguous park without result/model continuation.
+- [ ] Replace candidate synthetic injection/resume hook assertions with callback-before-transport, serial recovery and full identity/state refusal. Preserve the old synthetic path as baseline regression only.
+- [ ] Retain two effects without silent loss, read before effect and visible denial after pause; record real model response or prompts tried if the required shape is not emitted.
+- [ ] Retain complete transcripts, exact SDK/CLI/model versions, tool counts, filesystem checks and per run/aggregate spend. Harness and budget gates remain mandatory; cap stop is non passing.
+- [ ] Repeat decisive cases on the production integration before completion; fixture/spike evidence does not close real model acceptance. Failures stop executor entry pending redesign or proved fallback.
+- [ ] Separate official resume scope from experimental recovery; no released skill/batch/permission support is inferred.
 
 ## Preventive control
 
@@ -191,6 +200,7 @@ Status: OPEN
 
 Dependencies: [claimed Bash execution](#claimed-bash-execution), [prepared workspace and effect identity](#prepared-workspace-and-effect-identity).
 
+- [ ] Distinguish controlled hard stop from graceful cancellation/suspension, inventory surviving owned CLI/tool processes and forbid continuation while ownership or Bash uncertainty is unresolved.
 - [ ] Heartbeat all effects, bound silent engine behavior, and distinguish a silent engine from a quiet healthy effect.
 - [ ] Preserve cancellation; claimed cancellation waits for in flight completion and reachable process trees end before reporting. Test `setsid` and shell background descendants or name the residual.
 - [ ] A 3 MB Write and 5 MB command output stay under the declared history/result caps, with full output stored separately by reference/hash; truncate failure stderr.
@@ -285,6 +295,7 @@ Status: OPEN
 
 Dependencies: [workspace lifecycle](#workspace-lifecycle), [repeatable file execution](#repeatable-file-execution), selected volume/rig.
 
+- [ ] Remove original local backing disk access and reconstruct accepted transcript, generated files, validated package, manifest/generation, protected claims and outcome from independently retained state. Refuse missing/conflicting state; same host SQLite/snapshot fixtures do not satisfy this check.
 - [ ] On two containers, prepared package/hash and generated files are visible across Workers, with consistent numeric ownership. Remove original Worker local disk and restore generated files, package, manifest, claims, session checkpoint and decision/outcome identity independently.
 - [ ] Missing/conflicting state refuses continuation; adopted native paths include post mutation/pre publication crashes. Conversation history alone never satisfies file proof.
 - [ ] Concurrent exclusive claim creation gives one success and one existing file refusal over stated rounds; the other Worker sees the claim and spawns nothing. Test supported per run serialization semantics.
@@ -334,6 +345,7 @@ Status: OPEN
 
 Dependencies: session storage decision, [bounded recovery comparison](#bounded-recovery-comparison), [replacement Worker filesystem proof](#replacement-worker-filesystem-proof).
 
+- [ ] With original local backing disk unavailable, recover the exact accepted pending transcript/request from the retained store. Coordinate workspace/claims/outcome checks with replacement Worker filesystem proof; refuse inconsistent state before transport startup.
 - [ ] Separate processes with no shared local state read each other's entries; stored bytes contain no plaintext transcript marker and repeated UUID write yields one entry.
 - [ ] Dropped/partial writes fail safely without publishing a wrong checkpoint; selected integration restores exact pending calls on replacement without original disk.
 - [ ] Missing/mismatched state refuses. Session conformance explicitly excludes filesystem and durable approval/outcome publication, which have their own proving work.
@@ -373,6 +385,7 @@ Status: OPEN
 
 Dependencies: all retained engine/effect/decision/workspace/hardening outcomes, model testing prerequisites.
 
+- [ ] Execute the complete validated skill scenario with resource read, generated file, pending signed decision and claimed Bash in one application Workflow; separate comparison fixtures do not prove this composition.
 - [ ] An application authored Workflow with documented registration/policy/security runs the validated unmodified package under its cap, with complete source, configuration, history and credential free run record.
 - [ ] Cover resource reading, generated file preservation, a signed effect approval and a human question; record the model's response and pending call/result identity. Native Claude remains the loop, not a replacement custom skill interpreter.
 - [ ] Cover two effects in one message, read before/after pause and denial visibility. Every effect is durably recorded; none bypasses the selected governance boundary.

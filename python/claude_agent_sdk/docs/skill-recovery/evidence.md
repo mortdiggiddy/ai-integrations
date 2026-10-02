@@ -2,7 +2,25 @@
 
 This is the public evidence ledger for the [specification](spec.md), [plan](plan.md) and [work items](work-items.md). It separates source contracts, prototype reports, this fork's offline checks and evidence still required. A source example is not this fork's recovery proof. Live documentation links are mutable; repository sources below are pinned.
 
+## Deferred checkpoint feasibility (2026-10-02)
+
+Following the approved Phase 1 selection, [deferred_checkpoint.py](experiments/deferred_checkpoint.py) ran one actual native Write through the installed plugin's policy runner and the approved experimental SDK. The runner returned the original deferred call and checkpoint without creating the target file. The unchanged captured transcript contains exactly one unresolved Write with matching ID/name/inputs/session and assistant transcript UUID. The SDK recovered that call before resumed transport startup and persisted/read back one fixture result. A transport guard deliberately raised before starting another CLI, so each [author](experiments/results/deferred-checkpoint/author/report.json) and [lead](experiments/results/deferred-checkpoint/lead/report.json) run made one local fake model request, zero resumed model requests and zero effects. Complete original/preflight transcripts and raw model requests are archived beside each report.
+
+This proves deferred checkpoint callback feasibility only. The result is a test fixture supplied through an in-memory conditional append store, not a recorded external effect Activity outcome. It does not prove resumed CLI interpretation, fresh Worker recovery, production storage or real model behavior. The baseline FileSessionStore has no conditional append implementation and cannot be promoted as the production experimental recovery adapter. A supported host store with conditional append and exclusive ownership remains required. Estimated cost in the fake engine result is not paid spend.
+
+Two diagnostics remain: [native selection](experiments/results/deferred-checkpoint/diagnostic-native-selection/report.json) recorded a fake endpoint that selected scripted responses only for MCP and answered native Write with text; [store head](experiments/results/deferred-checkpoint/diagnostic-store-head/report.json) recorded the synthetic MemoryStore helper's assumption that the last raw record had a UUID. The corrected native response adapter selects offered Write; the test store checks the last UUID-bearing record, as the SDK contract requires, without changing transcript entries. These are fixture failures, not SDK compatibility verdicts. The corrected author and separate lead runs passed.
+
+[Provenance](experiments/results/deferred-checkpoint/provenance.json) records fresh wheel/install/source/baseline verification and installed runner/hook/policy/store equality to the fork source. SDK source, wheel, CLI, runtime and dependencies retain the approved comparison pins. Reproduce with the existing disposable Python and unchanged explicit CLI, a fresh scratch output root and no dependency synchronization:
+
+```bash
+"$PYTHON" docs/skill-recovery/experiments/deferred_checkpoint.py --root "$PROBE_ROOT" --cli "$CLI_PATH"
+```
+
+The approved comparison and integration decision are complete as dispositions; selected result delivery and A-01/A-02/A-58 remain open. The next real model stage requires budget owner, credential type/location/readers, exact allowed model IDs, currency/token caps, cap change authority and the harness's preventive paid-run enforcement. No such execution is authorized here.
+
 ## Implementation baseline
+
+The [approved comparison disposition](comparison-disposition.md) records Phase 1 experimental main selection and comparison proof deferrals approved on 2026-10-02. The comparison closes bounded research through explicit dispositions; runtime assumptions and production requirements remain open. Historical recommendations below retain their original predecision state.
 
 The original Claude integration is at [`69f5497d3d3dec7ad3269c72ff266c2931c9f379`](https://github.com/osamastro7-droid/ai-integrations/tree/69f5497d3d3dec7ad3269c72ff266c2931c9f379/python/claude_agent_sdk). The development fork adds a [dependency lock repair](https://github.com/mortdiggiddy/ai-integrations/commit/d70ce0b13a3b3eca07707ccc88c8a9494bd58032) and [offline policy and harness implementation](https://github.com/mortdiggiddy/ai-integrations/commit/99fb461a074debfcaff6308cb0a3454b93991ed2). The [README and responsibility diagram](https://github.com/mortdiggiddy/ai-integrations/commit/2acc081998407f9c88fdba349103f5392dab2d73) clarify the target but add no runtime proof.
 

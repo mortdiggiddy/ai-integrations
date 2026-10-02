@@ -1,0 +1,66 @@
+{
+  "sdk_version": "0.2.162",
+  "temporal_version": "1.33.0",
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "paid_model_calls": 0,
+  "effect_executions": 0,
+  "scope": "Actual policy runner Write defer; SDK preflight only, no resumed CLI",
+  "segment": {
+    "session_id": "f760c7b7-024b-4872-897e-45f86f498080",
+    "result": null,
+    "deferred": {
+      "id": "toolu_deferred_write_original",
+      "name": "Write",
+      "input": {
+        "file_path": "<scratch>/work/engine-write.txt",
+        "content": "DEFERRED_WRITE_MARKER\n"
+      }
+    },
+    "checkpoint": "cb315f64-9522-4bcc-8eaa-5577f43e70a7",
+    "cost_usd": 0.0005600000000000001,
+    "is_error": false,
+    "error": null
+  },
+  "engine_marker_exists": false,
+  "stub_calls": 0,
+  "original_transcript_sha256": "ff8b69c727fc8aeb100a2c8b6eb214145984f18c510be3c6dd8129b4be6c8677",
+  "pending": [
+    {
+      "id": "toolu_deferred_write_original",
+      "name": "Write",
+      "input": {
+        "file_path": "<scratch>/work/engine-write.txt",
+        "content": "DEFERRED_WRITE_MARKER\n"
+      },
+      "key": {
+        "project_key": "-tmp-deferred-checkpoint-20261002-final-work",
+        "session_id": "f760c7b7-024b-4872-897e-45f86f498080"
+      },
+      "transcript_uuid": "97bc51db-74c7-4fde-8403-64550c737cab"
+    }
+  ],
+  "message_leaf_uuid": "97bc51db-74c7-4fde-8403-64550c737cab",
+  "recovery_callbacks": [
+    {
+      "id": "toolu_deferred_write_original",
+      "name": "Write",
+      "input": {
+        "file_path": "<scratch>/work/engine-write.txt",
+        "content": "DEFERRED_WRITE_MARKER\n"
+      },
+      "key": {
+        "project_key": "-tmp-deferred-checkpoint-20261002-final-work",
+        "session_id": "f760c7b7-024b-4872-897e-45f86f498080"
+      },
+      "transcript_uuid": "97bc51db-74c7-4fde-8403-64550c737cab"
+    }
+  ],
+  "guarded_transport_attempts": [
+    "SubprocessCLITransport"
+  ],
+  "recovery_commits": 1,
+  "status": "passed: actual deferred call recovered before transport",
+  "limits": "In-memory conditional append fixture, no external effect Activity/result, no resumed CLI/model, no replacement Worker, no real model proof",
+  "model_requests": 1,
+  "api_errors": []
+}
