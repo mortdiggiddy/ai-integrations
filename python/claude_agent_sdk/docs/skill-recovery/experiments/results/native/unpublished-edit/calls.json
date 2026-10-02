@@ -1,0 +1,31 @@
+[
+  {
+    "id": "original-read",
+    "name": "Read",
+    "arguments": {
+      "file_path": "<scratch>/unpublished-edit/workspace/note.txt"
+    },
+    "session_id": "8b4bda60-dcba-4678-9b52-17d74597a3ce",
+    "round": 0,
+    "position": 0,
+    "batch_id": "01a0fa3d-db5b-7c96-b74b-615ab9ae32fb:decision-0:1",
+    "digest": "16f169a49063e425699b8ca4bfeb43e04264266eb6f122f953b14bc4a2a4aaca",
+    "transcript_uuid": "144919a0-eb25-4265-bf5b-4ad8cb4a0509"
+  },
+  {
+    "id": "original-edit",
+    "name": "Edit",
+    "arguments": {
+      "file_path": "<scratch>/unpublished-edit/workspace/note.txt",
+      "new_string": "AFTER",
+      "old_string": "BEFORE",
+      "replace_all": false
+    },
+    "session_id": "8b4bda60-dcba-4678-9b52-17d74597a3ce",
+    "round": 1,
+    "position": 0,
+    "batch_id": "01a0fa3d-db5b-7c96-b74b-615ab9ae32fb:decision-1:1",
+    "digest": "ac30b2397ca004a634911759a524a3f63c60ea6738157666d9fd3e2c9e037d0c",
+    "transcript_uuid": "1d7299a5-b527-4a8b-84be-a298f5b7141b"
+  }
+]

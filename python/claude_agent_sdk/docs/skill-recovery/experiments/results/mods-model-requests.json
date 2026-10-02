@@ -1,0 +1,223 @@
+[
+  {
+    "model": "claude-sonnet-4-5",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "<system-reminder>\n# Environment\nYou have been invoked in the following environment: \n - Primary working directory: <scratch>\n - Is a git repository: false\n - Platform: linux\n - Shell: bash\n - OS Version: Linux 6.6.114.1-microsoft-standard-WSL2\n</system-reminder>"
+          },
+          {
+            "type": "text",
+            "text": "<system-reminder>\nYou are powered by the model named Sonnet 4.5. The exact model ID is claude-sonnet-4-5. Assistant knowledge cutoff is January 2025.\n</system-reminder>"
+          },
+          {
+            "type": "text",
+            "text": "<system-reminder>\n<total_tokens>15000000 tokens left</total_tokens>\n</system-reminder>"
+          },
+          {
+            "type": "text",
+            "text": "<system-reminder>\nToday's date is 2026-10-01.\n</system-reminder>\n"
+          },
+          {
+            "type": "text",
+            "text": "Read the input file once.",
+            "cache_control": {
+              "type": "ephemeral"
+            }
+          }
+        ]
+      }
+    ],
+    "system": [
+      {
+        "type": "text",
+        "text": "x-anthropic-billing-header: cc_version=2.1.274.c1e; cc_entrypoint=sdk-py;"
+      },
+      {
+        "type": "text",
+        "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      }
+    ],
+    "tools": [
+      {
+        "name": "Read",
+        "description": "Reads a file from the local filesystem. You can access any file directly by using this tool.\nAssume this tool is able to read all files on the machine. If the User provides a path to a file assume that path is valid. It is okay to read a file that does not exist; an error will be returned.\n\nUsage:\n- The file_path parameter must be an absolute path, not a relative path\n- By default, it reads up to 2000 lines starting from the beginning of the file\n- When you already know which part of the file you need, only read that part. This can be important for larger files.\n- Results are returned using cat -n format, with line numbers starting at 1\n- This tool allows Claude Code to read images (eg PNG, JPG, etc). When reading an image file the contents are presented visually as Claude Code is a multimodal LLM.\n- This tool can read PDF files (.pdf). For large PDFs (more than 10 pages), you MUST provide the pages parameter to read specific page ranges (e.g., pages: \"1-5\"). Reading a large PDF without the pages parameter will fail. Maximum 20 pages per request.\n- This tool can read Jupyter notebooks (.ipynb files) and returns all cells with their outputs, combining code, text, and visualizations.\n- This tool can only read files, not directories. To list files in a directory, use the registered shell tool.\n- You will regularly be asked to read screenshots. If the user provides a path to a screenshot, ALWAYS use this tool to view the file at the path. This tool will work with all temporary file paths.\n- If you read a file that exists but has empty contents you will receive a system reminder warning in place of file contents.\n- Do NOT re-read a file you just edited to verify \u2014 Edit/Write would have errored if the change failed, and the harness tracks file state for you.",
+        "input_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "file_path": {
+              "description": "The absolute path to the file to read",
+              "type": "string"
+            },
+            "offset": {
+              "description": "The line number to start reading from. Only provide if the file is too large to read at once",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "limit": {
+              "description": "The number of lines to read. Only provide if the file is too large to read at once.",
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991
+            },
+            "pages": {
+              "description": "Page range for PDF files (e.g., \"1-5\", \"3\", \"10-20\"). Only applicable to PDF files. Maximum 20 pages per request.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "file_path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ],
+    "metadata": {
+      "user_id": "{\"device_id\":\"d638f26f94df0ba1d8a5132fcf3112ace3a1f3083569bbc14785c01b0ef10674\",\"account_uuid\":\"\",\"session_id\":\"c951e53f-ec1d-4d51-8ccc-665458ebbd96\"}"
+    },
+    "max_tokens": 32000,
+    "thinking": {
+      "budget_tokens": 31999,
+      "type": "enabled"
+    },
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_thinking_20251015",
+          "keep": "all"
+        }
+      ]
+    },
+    "stream": true
+  },
+  {
+    "model": "claude-sonnet-4-5",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "<system-reminder>\n# Environment\nYou have been invoked in the following environment: \n - Primary working directory: <scratch>\n - Is a git repository: false\n - Platform: linux\n - Shell: bash\n - OS Version: Linux 6.6.114.1-microsoft-standard-WSL2\n</system-reminder>"
+          },
+          {
+            "type": "text",
+            "text": "<system-reminder>\nYou are powered by the model named Sonnet 4.5. The exact model ID is claude-sonnet-4-5. Assistant knowledge cutoff is January 2025.\n</system-reminder>"
+          },
+          {
+            "type": "text",
+            "text": "<system-reminder>\n<total_tokens>15000000 tokens left</total_tokens>\n</system-reminder>"
+          },
+          {
+            "type": "text",
+            "text": "<system-reminder>\nToday's date is 2026-10-01.\n</system-reminder>\n"
+          },
+          {
+            "type": "text",
+            "text": "Read the input file once."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "toolu_mods_unique_read",
+            "name": "Read",
+            "input": {
+              "file_path": "<scratch>/input.txt"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "tool_use_id": "toolu_mods_unique_read",
+            "type": "tool_result",
+            "content": "1\tHARMLESS_READ_EFFECT_20261001\n2\n\n<system-reminder>\n<total_tokens>14999968 tokens left</total_tokens>\n</system-reminder>",
+            "cache_control": {
+              "type": "ephemeral"
+            }
+          }
+        ]
+      }
+    ],
+    "system": [
+      {
+        "type": "text",
+        "text": "x-anthropic-billing-header: cc_version=2.1.274.c1e; cc_entrypoint=sdk-py;"
+      },
+      {
+        "type": "text",
+        "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      }
+    ],
+    "tools": [
+      {
+        "name": "Read",
+        "description": "Reads a file from the local filesystem. You can access any file directly by using this tool.\nAssume this tool is able to read all files on the machine. If the User provides a path to a file assume that path is valid. It is okay to read a file that does not exist; an error will be returned.\n\nUsage:\n- The file_path parameter must be an absolute path, not a relative path\n- By default, it reads up to 2000 lines starting from the beginning of the file\n- When you already know which part of the file you need, only read that part. This can be important for larger files.\n- Results are returned using cat -n format, with line numbers starting at 1\n- This tool allows Claude Code to read images (eg PNG, JPG, etc). When reading an image file the contents are presented visually as Claude Code is a multimodal LLM.\n- This tool can read PDF files (.pdf). For large PDFs (more than 10 pages), you MUST provide the pages parameter to read specific page ranges (e.g., pages: \"1-5\"). Reading a large PDF without the pages parameter will fail. Maximum 20 pages per request.\n- This tool can read Jupyter notebooks (.ipynb files) and returns all cells with their outputs, combining code, text, and visualizations.\n- This tool can only read files, not directories. To list files in a directory, use the registered shell tool.\n- You will regularly be asked to read screenshots. If the user provides a path to a screenshot, ALWAYS use this tool to view the file at the path. This tool will work with all temporary file paths.\n- If you read a file that exists but has empty contents you will receive a system reminder warning in place of file contents.\n- Do NOT re-read a file you just edited to verify \u2014 Edit/Write would have errored if the change failed, and the harness tracks file state for you.",
+        "input_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "file_path": {
+              "description": "The absolute path to the file to read",
+              "type": "string"
+            },
+            "offset": {
+              "description": "The line number to start reading from. Only provide if the file is too large to read at once",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "limit": {
+              "description": "The number of lines to read. Only provide if the file is too large to read at once.",
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991
+            },
+            "pages": {
+              "description": "Page range for PDF files (e.g., \"1-5\", \"3\", \"10-20\"). Only applicable to PDF files. Maximum 20 pages per request.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "file_path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ],
+    "metadata": {
+      "user_id": "{\"device_id\":\"d638f26f94df0ba1d8a5132fcf3112ace3a1f3083569bbc14785c01b0ef10674\",\"account_uuid\":\"\",\"session_id\":\"c951e53f-ec1d-4d51-8ccc-665458ebbd96\"}"
+    },
+    "max_tokens": 32000,
+    "thinking": {
+      "budget_tokens": 31999,
+      "type": "enabled"
+    },
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_thinking_20251015",
+          "keep": "all"
+        }
+      ]
+    },
+    "stream": true
+  }
+]

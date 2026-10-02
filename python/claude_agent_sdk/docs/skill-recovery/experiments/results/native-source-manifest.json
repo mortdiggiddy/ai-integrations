@@ -1,0 +1,232 @@
+{
+  "repository": "temporalio/ai-integrations",
+  "revision": "2ab873cc23a1b3224531a5634c1f6d1c8ef0ea1f",
+  "files": [
+    {
+      "path": "python/claude_agent_sdk/tests/__init__.py",
+      "relative_path": "tests/__init__.py",
+      "sha256": "8d6fbc1af865fbef1a4c69c10b5b4c90bdbbf2017226a2f20ed3960a01032000",
+      "git_blob": "eff2c8adb41fb1dc3d2501b944d3f62b032ce0c4",
+      "bytes": 59,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/conftest.py",
+      "relative_path": "tests/conftest.py",
+      "sha256": "a4b3c3e5eb188a5dfe4f1e671bab6b0b9dac606fb1a6fc9fe2d74633c327e902",
+      "git_blob": "748f0189206f24fa084a58b9984e9dfc123e1152",
+      "bytes": 7427,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/helpers/__init__.py",
+      "relative_path": "tests/helpers/__init__.py",
+      "sha256": "567eb1314523a1780f3f99ed694b175c12e8d32ee328ed40e83ed9f0c9eca0e9",
+      "git_blob": "51682c7ef3ce3bd2d76bd4fbe22b3b9a7829f649",
+      "bytes": 41,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/helpers/fake_messages_api.py",
+      "relative_path": "tests/helpers/fake_messages_api.py",
+      "sha256": "cf9ba66c4ebab1dd26f83cd01730a8af02cb2d0c4e3139e369ebaeec3ae5dbfe",
+      "git_blob": "109a9fba049df646dacc5057b164b9572257d398",
+      "bytes": 13915,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/helpers/storage.py",
+      "relative_path": "tests/helpers/storage.py",
+      "sha256": "11d3bd5b3a75ac4e93b91bedcc8ced44c24bd79ef758983ae93d75068b7da8f0",
+      "git_blob": "e8159e18864be676e84550cd2059f68a3f92cd25",
+      "bytes": 2045,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/__init__.py",
+      "relative_path": "tests/hybrid/__init__.py",
+      "sha256": "f354ac28d2ef14583df734913180b2222e2872e58f84d78b2b22f3c0646bacf3",
+      "git_blob": "a72d0c9019ed04c1620af099de7a6daa9828eeda",
+      "bytes": 86,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/activities.py",
+      "relative_path": "tests/hybrid/activities.py",
+      "sha256": "07988adb70d4228e0f8f26a7b2009e2749870a406ac7f40379cfdfbc183e55ab",
+      "git_blob": "4bad2cec62627d0173895657ef1c021df330950e",
+      "bytes": 9453,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/engine.py",
+      "relative_path": "tests/hybrid/engine.py",
+      "sha256": "a941b64eeb61ab9a57d2b63b2a9997f0b08b536b936631b0329014f599d92220",
+      "git_blob": "63e18c1774ea767949d5f56c2399a8a91c410742",
+      "bytes": 20227,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/executor_models.py",
+      "relative_path": "tests/hybrid/executor_models.py",
+      "sha256": "266f79d695ded6e51900c8c7e782d3fe68ed3fb7a69fda93dcee0c1e0b338f28",
+      "git_blob": "d98dfa70db0b20d5c66b7a858eead443d45b6d05",
+      "bytes": 812,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/executor_store.py",
+      "relative_path": "tests/hybrid/executor_store.py",
+      "sha256": "2a291427afc0679c9559095c0114dd74fc5cf9fbc35d03c640d23e863e56cfa5",
+      "git_blob": "56f1d6bb04974a96a66107573b009d6d7bca3b25",
+      "bytes": 13138,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/executor_workflow.py",
+      "relative_path": "tests/hybrid/executor_workflow.py",
+      "sha256": "7b3a53368c6df544abf54987cf1e459d3137027be4fd857426e027548a5ba7c0",
+      "git_blob": "fa4dcce5de5fb8e8d24f411f93386f159f3429b7",
+      "bytes": 2027,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/models.py",
+      "relative_path": "tests/hybrid/models.py",
+      "sha256": "3ef4b71a8010394c3a43bdd37361dadc3d962930b5a36da34be26c1b31833db5",
+      "git_blob": "867df54a93f8aaa9bd453d86bf0a0c26ef1dcdca",
+      "bytes": 2339,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/native.py",
+      "relative_path": "tests/hybrid/native.py",
+      "sha256": "20d637aee26908ed1993d1529abf47fcc69e8af7880a96f54b603f50565d7d11",
+      "git_blob": "add3b9e7e441bf760eb3f4c614ba1ca660d4b46c",
+      "bytes": 14454,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/native_executor.py",
+      "relative_path": "tests/hybrid/native_executor.py",
+      "sha256": "ac31670a2685c75857aa9b63b029b1c495c0f4ab8d2290cb76e9deabd2d8a68c",
+      "git_blob": "e091e4fd0246f1a280422db4ef3e17c80570f5a1",
+      "bytes": 20702,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/native_replay.py",
+      "relative_path": "tests/hybrid/native_replay.py",
+      "sha256": "eda790051d7ebffee2d65e5051a0004f70621b49e0fb6208cdd562011be01ce0",
+      "git_blob": "b8f5e24f880d353461ac23906a3e419465b61944",
+      "bytes": 15494,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/native_store.py",
+      "relative_path": "tests/hybrid/native_store.py",
+      "sha256": "0a05cb3f987c49f5388c23d98cc5045a8ab9c1a2c2a751cf6bd5bd6470822f78",
+      "git_blob": "ca35b53336b702d095eaef445ffc73dcb286b9ab",
+      "bytes": 10567,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/policy.py",
+      "relative_path": "tests/hybrid/policy.py",
+      "sha256": "1869bc9dc15264a4556a405bf6bb631b3317ae2baf9b58f891a2aca65b8e873d",
+      "git_blob": "84a626e1f0f5017f1bb28094c43b1301285a07f9",
+      "bytes": 1817,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/replay_models.py",
+      "relative_path": "tests/hybrid/replay_models.py",
+      "sha256": "9f0df0ffa77d3e9986786018533bf7d080725d9c1aea9b560644f5f013648341",
+      "git_blob": "5f3be7549e85733794daa9cb0d7712fedb1433c3",
+      "bytes": 715,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/replay_store.py",
+      "relative_path": "tests/hybrid/replay_store.py",
+      "sha256": "18646e00d992b477780d00335ad8435c9c84d8d39f21f83cc25b1dde63f0719a",
+      "git_blob": "4714a2c495656412a44f125fa5dc5ad4dd19c8b6",
+      "bytes": 17807,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/replay_workflow.py",
+      "relative_path": "tests/hybrid/replay_workflow.py",
+      "sha256": "df353d476f3ca0048267c7d72a0b3b80645b9abab2b6bc848263c4c31487868c",
+      "git_blob": "8dde006932fdb04b8bcf3406ff69a956eee725af",
+      "bytes": 2167,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/store.py",
+      "relative_path": "tests/hybrid/store.py",
+      "sha256": "7fa1e24eca696850f4dd11d66d3bdef55766292227b74077a2a6247bfcb5cbcc",
+      "git_blob": "6111be9d2f46df1e2faa77430074ddf31bf93276",
+      "bytes": 6974,
+      "role": "runtime"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/test_engine.py",
+      "relative_path": "tests/hybrid/test_engine.py",
+      "sha256": "6bc99121f53280d227a5d3534eef1a5203bdb5ff77cdbbd96d850d5376a39b42",
+      "git_blob": "7ea12fca543cfb7918c810c26d128486a8d5ac68",
+      "bytes": 7631,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/test_native_replay.py",
+      "relative_path": "tests/hybrid/test_native_replay.py",
+      "sha256": "74676e70ac65624fa4cfa0ae029381828ecbf5b3f2c57458673f7f141ae16f03",
+      "git_blob": "84c120432ff921052df929ed18073d1563e9fd74",
+      "bytes": 14439,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/test_native_workspace.py",
+      "relative_path": "tests/hybrid/test_native_workspace.py",
+      "sha256": "9693d0716060c154984e77c99afff71107158e8b986e6f1f0141a44dc735834d",
+      "git_blob": "607ef134c70aad67bdf830b33d5e5dce3264f00e",
+      "bytes": 19613,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/test_worker_loss.py",
+      "relative_path": "tests/hybrid/test_worker_loss.py",
+      "sha256": "da9b62c213ba8c7ae41779a5ba8febc2b1cfb85c2e96e4cc5a8448b513e592a5",
+      "git_blob": "816dd6486869d708ccfb0b0b5558de414d255b5e",
+      "bytes": 8344,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/test_workflow.py",
+      "relative_path": "tests/hybrid/test_workflow.py",
+      "sha256": "9ef790e86c78317bbfe26266a028f0ade9e7045cced86469c46fe06ffbd8363f",
+      "git_blob": "91a21c10772e4121b4390efaeebb60e1801be9cb",
+      "bytes": 10435,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/worker.py",
+      "relative_path": "tests/hybrid/worker.py",
+      "sha256": "5c5e0f391feefbb84d0ac8eea016a2399420009cfa50f56fa604f654dfaa1fae",
+      "git_blob": "15a1883c0f74711f38cc8ab7106095f297d254fa",
+      "bytes": 3124,
+      "role": "inspection only"
+    },
+    {
+      "path": "python/claude_agent_sdk/tests/hybrid/workflows.py",
+      "relative_path": "tests/hybrid/workflows.py",
+      "sha256": "52e4e17e46442b79f9eacb08c0828cd2beddf6cfaec8b8477ab2b526660bfbc4",
+      "git_blob": "4bc0434ef36ca9cddfc55d25ce353e920f47d0eb",
+      "bytes": 10998,
+      "role": "inspection only"
+    }
+  ],
+  "runtime_file_count": 14,
+  "inspection_file_count": 14
+}

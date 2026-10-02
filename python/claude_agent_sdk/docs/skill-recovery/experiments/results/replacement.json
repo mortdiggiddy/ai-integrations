@@ -1,0 +1,44 @@
+{
+  "pending_before": {
+    "id": "toolu_fake0003",
+    "input": {
+      "amount": 49.99,
+      "order_id": "A-1001",
+      "reason": "item arrived broken"
+    },
+    "name": "issue_refund"
+  },
+  "pending_after": {
+    "id": "toolu_fake0003",
+    "input": {
+      "amount": 49.99,
+      "order_id": "A-1001",
+      "reason": "item arrived broken"
+    },
+    "name": "issue_refund"
+  },
+  "model_requests_while_replacing": 0,
+  "model_requests_before_approval": 2,
+  "model_requests_total": 4,
+  "result": "Done. Refunded 49.99 EUR for order A-1001 (refund R-ke0003) and emailed maria@example.com.",
+  "activity_scheduled_counts": {
+    "run_claude_segment": 4,
+    "look_up_order": 1,
+    "issue_refund": 1,
+    "email_customer": 1
+  },
+  "refund_executions": 1,
+  "refund_records": 1,
+  "api_errors": [],
+  "worker_pids": [
+    1486429,
+    1486524
+  ],
+  "killed_while_model_request_inflight": false,
+  "old_worker_descendants": [],
+  "surviving_descendants_after_worker_kill": [],
+  "final_cleanup": {
+    "remaining_active": [],
+    "observed_states": []
+  }
+}

@@ -1,0 +1,360 @@
+{
+  "scenario": "native-error",
+  "accepted_edit_before": {
+    "id": "original-edit",
+    "name": "Edit",
+    "arguments": {
+      "file_path": "<scratch>/native-error/workspace/note.txt",
+      "new_string": "AFTER",
+      "old_string": "MISSING",
+      "replace_all": false
+    },
+    "session_id": "f183c791-6b26-4f0f-843f-0fa270267b01",
+    "round": 1,
+    "position": 0,
+    "batch_id": "01a0fa3e-22a6-7410-94fa-3929c8369f40:decision-1:1",
+    "digest": "ac7f4d5719a7ee42d89c6375b24daad3459ad30eabbb13f77975dd217780580f",
+    "transcript_uuid": "123e7a8d-3b30-490a-9501-e1f2d8659c88"
+  },
+  "accepted_edit_after": {
+    "id": "original-edit",
+    "name": "Edit",
+    "arguments": {
+      "file_path": "<scratch>/native-error/workspace/note.txt",
+      "new_string": "AFTER",
+      "old_string": "MISSING",
+      "replace_all": false
+    },
+    "session_id": "f183c791-6b26-4f0f-843f-0fa270267b01",
+    "round": 1,
+    "position": 0,
+    "batch_id": "01a0fa3e-22a6-7410-94fa-3929c8369f40:decision-1:1",
+    "digest": "ac7f4d5719a7ee42d89c6375b24daad3459ad30eabbb13f77975dd217780580f",
+    "transcript_uuid": "123e7a8d-3b30-490a-9501-e1f2d8659c88"
+  },
+  "before_file": "BEFORE\n",
+  "before_durable": "BEFORE\n",
+  "before_physical_file_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+  "before_durable_file_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+  "final_physical_file_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+  "final_durable_file_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+  "final_file_mode": "0o640",
+  "final_file": "BEFORE\n",
+  "physical_edit_attempts": 1,
+  "committed_edit_outcomes": 1,
+  "original_native_hash": "cea1218cfe936720fb19c4f41fbf1a6c9c5a28f78bc8cfb80a02c3d30f54a805",
+  "published_native_hash": "cea1218cfe936720fb19c4f41fbf1a6c9c5a28f78bc8cfb80a02c3d30f54a805",
+  "native_metadata_equal": true,
+  "original_tool_result_hash": "191d726ce990801d35fe5b91fae53a5e6c21e08db5df7ef71a8f68a135cf61be",
+  "published_tool_result_hash": "191d726ce990801d35fe5b91fae53a5e6c21e08db5df7ef71a8f68a135cf61be",
+  "original_carrier_hash": "fff776a7a95e683b3821450b38cf070a2b3e8903f5c5735be5d28dbf76a8db8d",
+  "published_carrier_hash": "982a09b662743c657ffb687f800423c0f76c6c577d2d65d2f1f81903eaf505b2",
+  "model_requests": 3,
+  "model_requests_before_fault": 2,
+  "model_requests_after_fault": 1,
+  "local_cached_execution_requests": 2,
+  "outcome_disposition": "original committed native result and metadata reused without another Edit execution",
+  "activity_schedules": [
+    "tool-original-read",
+    "tool-original-edit"
+  ],
+  "answer": "NATIVE ERROR",
+  "api_errors": [],
+  "history_replay": "PASS",
+  "events_before_fault": [
+    [
+      "original-read",
+      "permitted",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "cached-response",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "executed",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "committed",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-read:1"
+    ],
+    [
+      "original-edit",
+      "cached-response",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "executed",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "committed",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-edit:1"
+    ]
+  ],
+  "events_final": [
+    [
+      "original-read",
+      "permitted",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "cached-response",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "executed",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "committed",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-read:1"
+    ],
+    [
+      "original-edit",
+      "cached-response",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "executed",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "committed",
+      "01a0fa3e-22a6-7410-94fa-3929c8369f40:tool-original-edit:1"
+    ]
+  ],
+  "host_controls": "Sequential Worker ownership and verified descendant termination are experimental prerequisites, not candidate production supervision",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1590548,
+          "state": "R",
+          "parent": 1590536,
+          "start_ticks": "12718822"
+        },
+        {
+          "pid": 1590551,
+          "state": "Z",
+          "parent": 1590548,
+          "start_ticks": "12718824"
+        },
+        {
+          "pid": 1590552,
+          "state": "Z",
+          "parent": 1590548,
+          "start_ticks": "12718824"
+        },
+        {
+          "pid": 1590562,
+          "state": "Z",
+          "parent": 1590548,
+          "start_ticks": "12718842"
+        },
+        {
+          "pid": 1590563,
+          "state": "Z",
+          "parent": 1590548,
+          "start_ticks": "12718842"
+        },
+        {
+          "pid": 1590564,
+          "state": "Z",
+          "parent": 1590548,
+          "start_ticks": "12718842"
+        },
+        {
+          "pid": 1590575,
+          "state": "R",
+          "parent": 1590536,
+          "start_ticks": "12718857"
+        },
+        {
+          "pid": 1590576,
+          "state": "Z",
+          "parent": 1590536,
+          "start_ticks": "12718858"
+        },
+        {
+          "pid": 1590579,
+          "state": "Z",
+          "parent": 1590576,
+          "start_ticks": "12718861"
+        },
+        {
+          "pid": 1590580,
+          "state": "Z",
+          "parent": 1590576,
+          "start_ticks": "12718861"
+        },
+        {
+          "pid": 1590590,
+          "state": "Z",
+          "parent": 1590576,
+          "start_ticks": "12718879"
+        },
+        {
+          "pid": 1590591,
+          "state": "Z",
+          "parent": 1590576,
+          "start_ticks": "12718879"
+        },
+        {
+          "pid": 1590592,
+          "state": "S",
+          "parent": 1590576,
+          "start_ticks": "12718879"
+        },
+        {
+          "pid": 1590604,
+          "state": "Z",
+          "parent": 1590536,
+          "start_ticks": "12718940"
+        },
+        {
+          "pid": 1590607,
+          "state": "Z",
+          "parent": 1590604,
+          "start_ticks": "12718943"
+        },
+        {
+          "pid": 1590608,
+          "state": "Z",
+          "parent": 1590604,
+          "start_ticks": "12718943"
+        },
+        {
+          "pid": 1590632,
+          "state": "Z",
+          "parent": 1590536,
+          "start_ticks": "12718975"
+        },
+        {
+          "pid": 1590635,
+          "state": "Z",
+          "parent": 1590632,
+          "start_ticks": "12718977"
+        },
+        {
+          "pid": 1590636,
+          "state": "Z",
+          "parent": 1590632,
+          "start_ticks": "12718977"
+        },
+        {
+          "pid": 1590646,
+          "state": "Z",
+          "parent": 1590632,
+          "start_ticks": "12718993"
+        },
+        {
+          "pid": 1590647,
+          "state": "Z",
+          "parent": 1590632,
+          "start_ticks": "12718993"
+        },
+        {
+          "pid": 1590648,
+          "state": "R",
+          "parent": 1590632,
+          "start_ticks": "12718993"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "children": [
+        {
+          "pid": 1591082,
+          "state": "Z",
+          "parent": 1590658,
+          "start_ticks": "12720445"
+        },
+        {
+          "pid": 1591085,
+          "state": "Z",
+          "parent": 1591082,
+          "start_ticks": "12720448"
+        },
+        {
+          "pid": 1591086,
+          "state": "Z",
+          "parent": 1591082,
+          "start_ticks": "12720448"
+        },
+        {
+          "pid": 1591111,
+          "state": "Z",
+          "parent": 1591082,
+          "start_ticks": "12720462"
+        },
+        {
+          "pid": 1591113,
+          "state": "Z",
+          "parent": 1591082,
+          "start_ticks": "12720466"
+        },
+        {
+          "pid": 1591114,
+          "state": "Z",
+          "parent": 1591082,
+          "start_ticks": "12720466"
+        },
+        {
+          "pid": 1591115,
+          "state": "Z",
+          "parent": 1591082,
+          "start_ticks": "12720466"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

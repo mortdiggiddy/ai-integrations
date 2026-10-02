@@ -8,6 +8,8 @@ The historical plugin baseline is `69f5497d3d3dec7ad3269c72ff266c2931c9f379`. De
 
 The opt in policy and offline harness are constructed but incomplete. Offline tests do not prove real engine interception, native skill execution, paid budget enforcement, effect recovery or replacement Worker behavior. The package validator, effect executor and signed decision integration remain open. Leaving `tool_policy` unset preserves the existing plugin path.
 
+The bounded existing dependency comparison is [recorded in evidence](evidence.md#bounded-comparison-on-the-existing-dependency-lane-2026-10-01), followed by [native file recovery](evidence.md#bounded-native-file-replay-comparison-2026-10-01) on the unchanged SDK lane. It retains the current integration and leaves adoption and executor entry open. Exact result reuse and a legacy pending approval replacement case succeeded; malformed result identity, concurrent continuation and orphan observations prevent a full recovery claim. General filesystem/claims, signed decisions and ambiguous Bash proof remain outstanding. Experimental main recovery remains unexecuted; the exact disposable build dependency proposal is in the follow up evidence.
+
 ## Direction and adoption boundary
 
 Investigate the hybrid long running CLI and experimental main agent SDK recovery first. Compare them with the implemented defer path, and evaluate Mods as candidate interception plumbing. Research priority is not adoption. The hybrid prototype, experimental recovery fork and Mods have separate immutable source pins in [evidence](evidence.md).

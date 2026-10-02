@@ -1,0 +1,252 @@
+[
+  {
+    "type": "SystemMessage",
+    "message": {
+      "subtype": "init",
+      "data": {
+        "type": "system",
+        "subtype": "init",
+        "cwd": "<scratch>",
+        "session_id": "c951e53f-ec1d-4d51-8ccc-665458ebbd96",
+        "tools": [
+          "Read"
+        ],
+        "mcp_servers": [],
+        "model": "claude-sonnet-4-5",
+        "permissionMode": "default",
+        "slash_commands": [
+          "deep-research",
+          "dataviz",
+          "update-config",
+          "verify",
+          "debug",
+          "code-review",
+          "simplify",
+          "batch",
+          "fewer-permission-prompts",
+          "doctor",
+          "loop",
+          "claude-api",
+          "workflow-authoring",
+          "run",
+          "run-skill-generator",
+          "agents",
+          "auto-mode-setup",
+          "autocompact",
+          "clear",
+          "color",
+          "compact",
+          "config",
+          "output-style",
+          "context",
+          "effort",
+          "fast",
+          "heapdump",
+          "init",
+          "mcp",
+          "model",
+          "__remote-workflow",
+          "workflow-launch-exec",
+          "reload-plugins",
+          "reload-skills",
+          "rename",
+          "security-review",
+          "usage",
+          "insights",
+          "recap",
+          "goal",
+          "list-agents",
+          "team-onboarding"
+        ],
+        "terminal_slash_commands": [
+          "doctor",
+          "color",
+          "reload-plugins"
+        ],
+        "apiKeySource": "ANTHROPIC_API_KEY",
+        "claude_code_version": "2.1.274",
+        "output_style": "default",
+        "agents": [
+          "claude",
+          "Explore",
+          "general-purpose",
+          "Plan",
+          "statusline-setup"
+        ],
+        "skills": [
+          "deep-research",
+          "dataviz",
+          "update-config",
+          "verify",
+          "debug",
+          "code-review",
+          "simplify",
+          "batch",
+          "fewer-permission-prompts",
+          "doctor",
+          "loop",
+          "claude-api",
+          "workflow-authoring",
+          "run",
+          "run-skill-generator"
+        ],
+        "plugins": [
+          {
+            "name": "offline-mods-marker",
+            "path": "<scratch>/plugin",
+            "source": "offline-mods-marker@inline",
+            "version": "0.1.0"
+          }
+        ],
+        "capabilities": [
+          "interrupt_receipt_v1",
+          "interrupt_cancel_queued_v1",
+          "msg_lifecycle_v1"
+        ],
+        "analytics_disabled": true,
+        "product_feedback_disabled": true,
+        "uuid": "cbf3fbbc-d65a-469a-bd47-16b74de6e4cd",
+        "memory_paths": {
+          "auto": "<scratch>/isolated-config/projects/-tmp-recovery-comparison-mods-lead/memory/"
+        },
+        "messaging_socket_path": "<runtime>/1000/cc-socks/1481106.sock",
+        "fast_mode_state": "off",
+        "fast_mode_disabled_reason": "sdk_opt_in_required"
+      }
+    }
+  },
+  {
+    "type": "AssistantMessage",
+    "message": {
+      "content": [
+        {
+          "id": "toolu_mods_unique_read",
+          "name": "Read",
+          "input": {
+            "file_path": "<scratch>/input.txt"
+          }
+        }
+      ],
+      "model": "claude-sonnet-4-5",
+      "parent_tool_use_id": null,
+      "error": null,
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 1,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "message_id": "msg_fake0001",
+      "stop_reason": null,
+      "session_id": "c951e53f-ec1d-4d51-8ccc-665458ebbd96",
+      "uuid": "571b3459-32ab-469f-9066-79c6afe917b2"
+    }
+  },
+  {
+    "type": "UserMessage",
+    "message": {
+      "content": [
+        {
+          "tool_use_id": "toolu_mods_unique_read",
+          "content": "1\tHARMLESS_READ_EFFECT_20261001\n2\t",
+          "is_error": null
+        }
+      ],
+      "uuid": "f64b3c0d-9046-4be6-befa-3fdbefac56fa",
+      "parent_tool_use_id": null,
+      "tool_use_result": {
+        "type": "text",
+        "file": {
+          "filePath": "<scratch>/input.txt",
+          "content": "HARMLESS_READ_EFFECT_20261001\n",
+          "numLines": 2,
+          "startLine": 1,
+          "totalLines": 2
+        }
+      },
+      "origin": null
+    }
+  },
+  {
+    "type": "AssistantMessage",
+    "message": {
+      "content": [
+        {
+          "text": "OFFLINE_DONE"
+        }
+      ],
+      "model": "claude-sonnet-4-5",
+      "parent_tool_use_id": null,
+      "error": null,
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 1,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "message_id": "msg_fake0002",
+      "stop_reason": null,
+      "session_id": "c951e53f-ec1d-4d51-8ccc-665458ebbd96",
+      "uuid": "ca0a882a-f41b-4a03-9805-d4ceb43c828e"
+    }
+  },
+  {
+    "type": "ResultMessage",
+    "message": {
+      "subtype": "success",
+      "duration_ms": 95,
+      "duration_api_ms": 47,
+      "is_error": false,
+      "num_turns": 2,
+      "session_id": "c951e53f-ec1d-4d51-8ccc-665458ebbd96",
+      "stop_reason": "end_turn",
+      "total_cost_usd": 0.0006720000000000001,
+      "usage": {
+        "input_tokens": 24,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 40,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "result": "OFFLINE_DONE",
+      "structured_output": null,
+      "model_usage": {
+        "claude-sonnet-4-5": {
+          "inputTokens": 24,
+          "outputTokens": 40,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0006720000000000001,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000,
+          "thinkingTokens": 0,
+          "canonicalModel": "claude-sonnet-4-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "permission_denials": [],
+      "deferred_tool_use": null,
+      "errors": null,
+      "api_error_status": null,
+      "uuid": "9e786198-fe7e-4677-8bd5-70997db13427",
+      "terminal_reason": "completed",
+      "origin": null
+    }
+  }
+]

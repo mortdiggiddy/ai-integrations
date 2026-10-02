@@ -1,0 +1,198 @@
+{
+  "scenario": "committed-edit",
+  "disposition": "FAILED or unsupported experiment boundary; no completion claim",
+  "exception": "AssertionError: ",
+  "traceback": "Traceback (most recent call last):\n  File \"<experiment-script>\", line 289, in run_case\n    assert store.receipt(calls[0])[\"block\"] == {\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    }\n    ^\nAssertionError\n",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1585343,
+          "state": "R",
+          "parent": 1585328,
+          "start_ticks": "12685808"
+        },
+        {
+          "pid": 1585344,
+          "state": "Z",
+          "parent": 1585328,
+          "start_ticks": "12685813"
+        },
+        {
+          "pid": 1585347,
+          "state": "Z",
+          "parent": 1585344,
+          "start_ticks": "12685819"
+        },
+        {
+          "pid": 1585348,
+          "state": "Z",
+          "parent": 1585344,
+          "start_ticks": "12685819"
+        },
+        {
+          "pid": 1585381,
+          "state": "Z",
+          "parent": 1585344,
+          "start_ticks": "12685855"
+        },
+        {
+          "pid": 1585383,
+          "state": "Z",
+          "parent": 1585344,
+          "start_ticks": "12685863"
+        },
+        {
+          "pid": 1585384,
+          "state": "Z",
+          "parent": 1585344,
+          "start_ticks": "12685863"
+        },
+        {
+          "pid": 1585385,
+          "state": "Z",
+          "parent": 1585344,
+          "start_ticks": "12685864"
+        },
+        {
+          "pid": 1585397,
+          "state": "Z",
+          "parent": 1585328,
+          "start_ticks": "12685893"
+        },
+        {
+          "pid": 1585400,
+          "state": "Z",
+          "parent": 1585397,
+          "start_ticks": "12685895"
+        },
+        {
+          "pid": 1585401,
+          "state": "Z",
+          "parent": 1585397,
+          "start_ticks": "12685895"
+        },
+        {
+          "pid": 1585411,
+          "state": "Z",
+          "parent": 1585397,
+          "start_ticks": "12685913"
+        },
+        {
+          "pid": 1585412,
+          "state": "Z",
+          "parent": 1585397,
+          "start_ticks": "12685913"
+        },
+        {
+          "pid": 1585413,
+          "state": "S",
+          "parent": 1585397,
+          "start_ticks": "12685914"
+        },
+        {
+          "pid": 1585424,
+          "state": "Z",
+          "parent": 1585328,
+          "start_ticks": "12685978"
+        },
+        {
+          "pid": 1585427,
+          "state": "Z",
+          "parent": 1585424,
+          "start_ticks": "12685980"
+        },
+        {
+          "pid": 1585428,
+          "state": "Z",
+          "parent": 1585424,
+          "start_ticks": "12685980"
+        },
+        {
+          "pid": 1585439,
+          "state": "Z",
+          "parent": 1585424,
+          "start_ticks": "12685998"
+        },
+        {
+          "pid": 1585440,
+          "state": "Z",
+          "parent": 1585424,
+          "start_ticks": "12685998"
+        },
+        {
+          "pid": 1585441,
+          "state": "Z",
+          "parent": 1585424,
+          "start_ticks": "12685998"
+        },
+        {
+          "pid": 1585452,
+          "state": "Z",
+          "parent": 1585328,
+          "start_ticks": "12686015"
+        },
+        {
+          "pid": 1585455,
+          "state": "Z",
+          "parent": 1585452,
+          "start_ticks": "12686017"
+        },
+        {
+          "pid": 1585456,
+          "state": "Z",
+          "parent": 1585452,
+          "start_ticks": "12686017"
+        },
+        {
+          "pid": 1585466,
+          "state": "Z",
+          "parent": 1585452,
+          "start_ticks": "12686036"
+        },
+        {
+          "pid": 1585467,
+          "state": "Z",
+          "parent": 1585452,
+          "start_ticks": "12686036"
+        },
+        {
+          "pid": 1585468,
+          "state": "S",
+          "parent": 1585452,
+          "start_ticks": "12686036"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

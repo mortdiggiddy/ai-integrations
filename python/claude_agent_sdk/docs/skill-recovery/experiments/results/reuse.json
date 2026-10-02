@@ -1,0 +1,227 @@
+[
+  {
+    "mode": "success",
+    "lane": "legacy MCP defer runner; tool_policy unset",
+    "first": {
+      "id": "toolu_exact_1",
+      "name": "probe",
+      "input": {
+        "nested": {
+          "b": 2,
+          "a": 1
+        }
+      },
+      "checkpoint": "4a42eb75-cda6-4261-884b-826f336d5b6f",
+      "error": null,
+      "stub_calls": 0
+    },
+    "second": {
+      "result": "FINAL: observed stored outcome",
+      "error": null,
+      "deferred": null,
+      "stub_calls": 0
+    },
+    "disposition": "PASS: exact recorded payload, request ID and error bit retained",
+    "observed_outcomes": [
+      {
+        "id": "toolu_exact_1",
+        "content": {
+          "recorded": "exact payload",
+          "nested": [
+            1,
+            {
+              "value": "kept"
+            }
+          ]
+        },
+        "is_error": false
+      }
+    ],
+    "api_errors": [],
+    "model_requests": 2,
+    "continuation_model_requests": 1
+  },
+  {
+    "mode": "error",
+    "lane": "legacy MCP defer runner; tool_policy unset",
+    "first": {
+      "id": "toolu_exact_1",
+      "name": "probe",
+      "input": {
+        "nested": {
+          "b": 2,
+          "a": 1
+        }
+      },
+      "checkpoint": "459aaab1-892d-40e9-8d9c-e3b858c2918d",
+      "error": null,
+      "stub_calls": 0
+    },
+    "second": {
+      "result": "FINAL: observed stored outcome",
+      "error": null,
+      "deferred": null,
+      "stub_calls": 0
+    },
+    "disposition": "PASS: exact recorded payload, request ID and error bit retained",
+    "observed_outcomes": [
+      {
+        "id": "toolu_exact_1",
+        "content": {
+          "recorded": "exact payload",
+          "nested": [
+            1,
+            {
+              "value": "kept"
+            }
+          ]
+        },
+        "is_error": true
+      }
+    ],
+    "api_errors": [],
+    "model_requests": 2,
+    "continuation_model_requests": 1
+  },
+  {
+    "mode": "changed-id",
+    "lane": "legacy MCP defer runner; tool_policy unset",
+    "first": {
+      "id": "toolu_exact_1",
+      "name": "probe",
+      "input": {
+        "nested": {
+          "b": 2,
+          "a": 1
+        }
+      },
+      "checkpoint": "04c3fc55-298e-4d12-8a24-d549c31a826d",
+      "error": null,
+      "stub_calls": 0
+    },
+    "second": {
+      "result": null,
+      "error": "The pause hook deferred tool call toolu_exact_1, but Claude Code 2.1.274 did not pause (stop_reason=end_turn). Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.",
+      "deferred": null,
+      "stub_calls": 0
+    },
+    "disposition": "FAIL: malformed result identity reached another model request before final runner refusal",
+    "observed_outcomes": [
+      {
+        "id": "toolu_exact_1",
+        "content": "[Tool result missing due to internal error]",
+        "is_error": true
+      }
+    ],
+    "api_errors": [],
+    "model_requests": 2,
+    "continuation_model_requests": 1
+  },
+  {
+    "mode": "missing-checkpoint",
+    "lane": "legacy MCP defer runner; tool_policy unset",
+    "first": {
+      "id": "toolu_exact_1",
+      "name": "probe",
+      "input": {
+        "nested": {
+          "b": 2,
+          "a": 1
+        }
+      },
+      "checkpoint": "5ad1fb21-cefa-441e-a066-b222d510e085",
+      "error": null,
+      "stub_calls": 0
+    },
+    "exception": "ProcessError: Command failed with exit code 1 (exit code: 1)\nError output: Check stderr output for details",
+    "disposition": "unsupported malformed or unavailable checkpoint state; explicit failure observed",
+    "observed_outcomes": [],
+    "api_errors": [],
+    "model_requests": 1,
+    "continuation_model_requests": 0
+  },
+  {
+    "mode": "missing-store",
+    "lane": "legacy MCP defer runner; tool_policy unset",
+    "first": {
+      "id": "toolu_exact_1",
+      "name": "probe",
+      "input": {
+        "nested": {
+          "b": 2,
+          "a": 1
+        }
+      },
+      "checkpoint": "f266e79a-8bf1-449b-b48b-18cc511643a4",
+      "error": null,
+      "stub_calls": 0
+    },
+    "exception": "ResultError: Claude Code returned an error result: No conversation found with session ID: fcceaf2b-ea9a-463a-b98f-1f6d78edf4b7 (exit code: 1)",
+    "disposition": "unsupported malformed or unavailable checkpoint state; explicit failure observed",
+    "observed_outcomes": [],
+    "api_errors": [],
+    "model_requests": 1,
+    "continuation_model_requests": 0
+  },
+  {
+    "mode": "competing-resume",
+    "lane": "legacy MCP defer runner; tool_policy unset",
+    "first": {
+      "id": "toolu_exact_1",
+      "name": "probe",
+      "input": {
+        "nested": {
+          "b": 2,
+          "a": 1
+        }
+      },
+      "checkpoint": "9ae3f1fe-6f37-4440-ab09-f60aa5b08f3a",
+      "error": null,
+      "stub_calls": 0
+    },
+    "competing": [
+      {
+        "result": "FINAL: observed stored outcome",
+        "error": null,
+        "deferred": null
+      },
+      {
+        "result": "FINAL: observed stored outcome",
+        "error": null,
+        "deferred": null
+      }
+    ],
+    "disposition": "FAIL: two successful concurrent continuations, no exclusive owner",
+    "observed_outcomes": [
+      {
+        "id": "toolu_exact_1",
+        "content": {
+          "recorded": "exact payload",
+          "nested": [
+            1,
+            {
+              "value": "kept"
+            }
+          ]
+        },
+        "is_error": false
+      },
+      {
+        "id": "toolu_exact_1",
+        "content": {
+          "recorded": "exact payload",
+          "nested": [
+            1,
+            {
+              "value": "kept"
+            }
+          ]
+        },
+        "is_error": false
+      }
+    ],
+    "api_errors": [],
+    "model_requests": 3,
+    "continuation_model_requests": 2
+  }
+]

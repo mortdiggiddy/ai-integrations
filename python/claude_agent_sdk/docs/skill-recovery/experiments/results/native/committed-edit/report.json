@@ -1,0 +1,384 @@
+{
+  "scenario": "committed-edit",
+  "accepted_edit_before": {
+    "id": "original-edit",
+    "name": "Edit",
+    "arguments": {
+      "file_path": "<scratch>/committed-edit/workspace/note.txt",
+      "new_string": "AFTER",
+      "old_string": "BEFORE",
+      "replace_all": false
+    },
+    "session_id": "45feeb46-062a-427e-8f7d-667c284c4e6e",
+    "round": 1,
+    "position": 0,
+    "batch_id": "01a0fa3d-979c-7d82-bca6-41881f40d2c5:decision-1:1",
+    "digest": "6a6e1c3aad1f7f12e9cee948b0e944460afce2d8734caab2990532c3bd6561ce",
+    "transcript_uuid": "c74bd6fe-2fc4-466d-b09b-e967aee91ef3"
+  },
+  "accepted_edit_after": {
+    "id": "original-edit",
+    "name": "Edit",
+    "arguments": {
+      "file_path": "<scratch>/committed-edit/workspace/note.txt",
+      "new_string": "AFTER",
+      "old_string": "BEFORE",
+      "replace_all": false
+    },
+    "session_id": "45feeb46-062a-427e-8f7d-667c284c4e6e",
+    "round": 1,
+    "position": 0,
+    "batch_id": "01a0fa3d-979c-7d82-bca6-41881f40d2c5:decision-1:1",
+    "digest": "6a6e1c3aad1f7f12e9cee948b0e944460afce2d8734caab2990532c3bd6561ce",
+    "transcript_uuid": "c74bd6fe-2fc4-466d-b09b-e967aee91ef3"
+  },
+  "before_file": "AFTER\n",
+  "before_durable": "AFTER\n",
+  "before_physical_file_sha256": "f72c713b7b432dd18949ca10f1be6dbcf493479945653609d1c715b2d8d74356",
+  "before_durable_file_sha256": "f72c713b7b432dd18949ca10f1be6dbcf493479945653609d1c715b2d8d74356",
+  "final_physical_file_sha256": "f72c713b7b432dd18949ca10f1be6dbcf493479945653609d1c715b2d8d74356",
+  "final_durable_file_sha256": "f72c713b7b432dd18949ca10f1be6dbcf493479945653609d1c715b2d8d74356",
+  "final_file_mode": "0o640",
+  "final_file": "AFTER\n",
+  "physical_edit_attempts": 1,
+  "committed_edit_outcomes": 1,
+  "original_native_hash": "92723dcb7c381defaba6017ab9ec56e55ed0e568682a1217a13eb280532c8f3b",
+  "published_native_hash": "92723dcb7c381defaba6017ab9ec56e55ed0e568682a1217a13eb280532c8f3b",
+  "native_metadata_equal": true,
+  "original_tool_result_hash": "2987f271a65dbf106e9e28fee37a14aed455d161d4089680d3b2a1585dc9bbc5",
+  "published_tool_result_hash": "2987f271a65dbf106e9e28fee37a14aed455d161d4089680d3b2a1585dc9bbc5",
+  "original_carrier_hash": "7b03aa904e360b4c403549b3b87d7d5ab7427eeb94ea8ab567892ca3e472ee21",
+  "published_carrier_hash": "506b7a89d86f2cbf1d2511046f345f3c4c20cc0842b72962e96ce0a80cf16b93",
+  "model_requests": 3,
+  "model_requests_before_fault": 2,
+  "model_requests_after_fault": 1,
+  "local_cached_execution_requests": 2,
+  "outcome_disposition": "original committed native result and metadata reused without another Edit execution",
+  "activity_schedules": [
+    "tool-original-read",
+    "tool-original-edit"
+  ],
+  "answer": "EDIT DONE",
+  "api_errors": [],
+  "history_replay": "PASS",
+  "events_before_fault": [
+    [
+      "original-read",
+      "permitted",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "cached-response",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "executed",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "committed",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-read:1"
+    ],
+    [
+      "original-edit",
+      "permitted",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "cached-response",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "executed",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "committed",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-edit:1"
+    ]
+  ],
+  "events_final": [
+    [
+      "original-read",
+      "permitted",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "cached-response",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "executed",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-read:1"
+    ],
+    [
+      "original-read",
+      "committed",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-read:1"
+    ],
+    [
+      "original-edit",
+      "permitted",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "cached-response",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "executed",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-edit:1"
+    ],
+    [
+      "original-edit",
+      "committed",
+      "01a0fa3d-979c-7d82-bca6-41881f40d2c5:tool-original-edit:1"
+    ]
+  ],
+  "host_controls": "Sequential Worker ownership and verified descendant termination are experimental prerequisites, not candidate production supervision",
+  "cleanup": [
+    {
+      "children": [
+        {
+          "pid": 1589905,
+          "state": "Z",
+          "parent": 1589893,
+          "start_ticks": "12715262"
+        },
+        {
+          "pid": 1589908,
+          "state": "Z",
+          "parent": 1589905,
+          "start_ticks": "12715264"
+        },
+        {
+          "pid": 1589909,
+          "state": "Z",
+          "parent": 1589905,
+          "start_ticks": "12715264"
+        },
+        {
+          "pid": 1589937,
+          "state": "Z",
+          "parent": 1589905,
+          "start_ticks": "12715282"
+        },
+        {
+          "pid": 1589938,
+          "state": "Z",
+          "parent": 1589905,
+          "start_ticks": "12715282"
+        },
+        {
+          "pid": 1589939,
+          "state": "Z",
+          "parent": 1589905,
+          "start_ticks": "12715282"
+        },
+        {
+          "pid": 1589951,
+          "state": "Z",
+          "parent": 1589893,
+          "start_ticks": "12715298"
+        },
+        {
+          "pid": 1589954,
+          "state": "Z",
+          "parent": 1589951,
+          "start_ticks": "12715300"
+        },
+        {
+          "pid": 1589955,
+          "state": "Z",
+          "parent": 1589951,
+          "start_ticks": "12715300"
+        },
+        {
+          "pid": 1589967,
+          "state": "Z",
+          "parent": 1589951,
+          "start_ticks": "12715316"
+        },
+        {
+          "pid": 1589968,
+          "state": "Z",
+          "parent": 1589951,
+          "start_ticks": "12715316"
+        },
+        {
+          "pid": 1589969,
+          "state": "Z",
+          "parent": 1589951,
+          "start_ticks": "12715316"
+        },
+        {
+          "pid": 1589989,
+          "state": "Z",
+          "parent": 1589893,
+          "start_ticks": "12715377"
+        },
+        {
+          "pid": 1589992,
+          "state": "Z",
+          "parent": 1589989,
+          "start_ticks": "12715379"
+        },
+        {
+          "pid": 1589993,
+          "state": "Z",
+          "parent": 1589989,
+          "start_ticks": "12715380"
+        },
+        {
+          "pid": 1590004,
+          "state": "Z",
+          "parent": 1589989,
+          "start_ticks": "12715395"
+        },
+        {
+          "pid": 1590005,
+          "state": "Z",
+          "parent": 1589989,
+          "start_ticks": "12715395"
+        },
+        {
+          "pid": 1590006,
+          "state": "Z",
+          "parent": 1589989,
+          "start_ticks": "12715395"
+        },
+        {
+          "pid": 1590017,
+          "state": "R",
+          "parent": 1589893,
+          "start_ticks": "12715415"
+        },
+        {
+          "pid": 1590020,
+          "state": "Z",
+          "parent": 1590017,
+          "start_ticks": "12715417"
+        },
+        {
+          "pid": 1590021,
+          "state": "Z",
+          "parent": 1590017,
+          "start_ticks": "12715417"
+        },
+        {
+          "pid": 1590031,
+          "state": "Z",
+          "parent": 1590017,
+          "start_ticks": "12715434"
+        },
+        {
+          "pid": 1590032,
+          "state": "Z",
+          "parent": 1590017,
+          "start_ticks": "12715434"
+        },
+        {
+          "pid": 1590033,
+          "state": "Z",
+          "parent": 1590017,
+          "start_ticks": "12715434"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "children": [
+        {
+          "pid": 1590124,
+          "state": "R",
+          "parent": 1590042,
+          "start_ticks": "12716818"
+        },
+        {
+          "pid": 1590125,
+          "state": "Z",
+          "parent": 1590042,
+          "start_ticks": "12716819"
+        },
+        {
+          "pid": 1590128,
+          "state": "Z",
+          "parent": 1590125,
+          "start_ticks": "12716821"
+        },
+        {
+          "pid": 1590129,
+          "state": "Z",
+          "parent": 1590125,
+          "start_ticks": "12716821"
+        },
+        {
+          "pid": 1590156,
+          "state": "Z",
+          "parent": 1590125,
+          "start_ticks": "12716839"
+        },
+        {
+          "pid": 1590157,
+          "state": "Z",
+          "parent": 1590125,
+          "start_ticks": "12716839"
+        },
+        {
+          "pid": 1590158,
+          "state": "Z",
+          "parent": 1590125,
+          "start_ticks": "12716839"
+        }
+      ],
+      "survivors_after_kill": [],
+      "remaining_active": [],
+      "final_states": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

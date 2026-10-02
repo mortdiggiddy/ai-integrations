@@ -1,0 +1,35 @@
+{
+  "lane": "legacy MCP defer runner; tool_policy unset",
+  "old_worker_descendants": [
+    {
+      "pid": 1504247,
+      "state": "S",
+      "parent": 1504232,
+      "start_ticks": "12293578"
+    }
+  ],
+  "surviving_descendants_after_worker_kill": [
+    {
+      "pid": 1504247,
+      "state": "S",
+      "parent": 425765,
+      "start_ticks": "12293578"
+    }
+  ],
+  "model_requests": 1,
+  "tool_executions": [],
+  "replacement_started": false,
+  "disposition": "FAIL: Worker death leaves engine descendant alive; experiment terminated verified owned orphan",
+  "cleanup_before_replacement": {
+    "remaining_active": [],
+    "observed_states": [
+      null
+    ]
+  },
+  "final_cleanup": {
+    "remaining_active": [],
+    "observed_states": [
+      null
+    ]
+  }
+}

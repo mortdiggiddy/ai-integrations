@@ -1,0 +1,27 @@
+{
+  "parentUuid": "7fe836d7-5f9d-4590-be73-0d87679d755b",
+  "isSidechain": false,
+  "promptId": "b59dfde3-af21-4aeb-b1f2-9ac90004c0f3",
+  "type": "user",
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "type": "tool_result",
+        "content": "<tool_use_error>String to replace not found in file.\nString: MISSING</tool_use_error>",
+        "is_error": true,
+        "tool_use_id": "original-edit"
+      }
+    ]
+  },
+  "uuid": "a5827ec4-cf6d-4603-b623-a4b569b31900",
+  "timestamp": "2026-10-02T01:32:53.113Z",
+  "toolUseResult": "Error: String to replace not found in file.\nString: MISSING",
+  "sourceToolAssistantUUID": "7fe836d7-5f9d-4590-be73-0d87679d755b",
+  "userType": "external",
+  "entrypoint": "sdk-py",
+  "cwd": "<scratch>/native-error/workspace",
+  "sessionId": "f183c791-6b26-4f0f-843f-0fa270267b01",
+  "version": "2.1.274",
+  "gitBranch": "HEAD"
+}

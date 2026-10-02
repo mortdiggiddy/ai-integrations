@@ -1,0 +1,20 @@
+{
+  "cli_version": "2.1.274 (Claude Code)",
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "server_sha256": "eff36463f7c0fbfcfd50f117370fc582fe964912a62cf271b91af05447d1fdfe",
+  "settings": {
+    "tools": [
+      "Read",
+      "Edit"
+    ],
+    "allowed_tools": [
+      "Read",
+      "Edit"
+    ],
+    "permission_mode": "acceptEdits",
+    "setting_sources": [],
+    "mcp_servers": {},
+    "strict_mcp_config": true
+  },
+  "scope": "Pinned candidate probe settings; no governed production prevention claim"
+}

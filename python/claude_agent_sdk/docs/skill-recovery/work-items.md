@@ -41,7 +41,9 @@ Dependencies: [specification](spec.md). Construction precedes the preventive con
 
 ## Bounded recovery comparison
 
-Status: OPEN
+Status: IN PROGRESS
+
+The existing dependency batch is [recorded in evidence](evidence.md#bounded-comparison-on-the-existing-dependency-lane-2026-10-01), followed by the [bounded native file comparison](evidence.md#bounded-native-file-replay-comparison-2026-10-01). The latter verifies recorded native success/error reuse and an unpublished Edit replay after restoring a single file snapshot, with two physical Edit invocations and one committed outcome. General filesystem/claims, ownership, process supervision and ambiguous Bash proof remain open. Experimental main recovery is unexecuted; its exact disposable build dependency proposal is recorded in evidence. Research status does not authorize adoption or executor implementation.
 
 Dependencies: [real model harness](#real-model-harness) for paid cases and [deployment prerequisites](#deployment-prerequisites) for required test controls. Offline checks require no paid call.
 

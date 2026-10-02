@@ -1,0 +1,45 @@
+{
+  "parentUuid": "1d7299a5-b527-4a8b-84be-a298f5b7141b",
+  "isSidechain": false,
+  "promptId": "7533c803-41b7-48f1-99fa-04316cdfe04e",
+  "type": "user",
+  "message": {
+    "role": "user",
+    "content": [
+      {
+        "tool_use_id": "original-edit",
+        "type": "tool_result",
+        "content": "The file <scratch>/unpublished-edit/workspace/note.txt has been updated successfully. (file state is current in your context \u2014 no need to Read it back)"
+      }
+    ]
+  },
+  "uuid": "585d1fba-11e5-4342-bbbe-4d47513293af",
+  "timestamp": "2026-10-02T01:32:38.993Z",
+  "toolUseResult": {
+    "filePath": "<scratch>/unpublished-edit/workspace/note.txt",
+    "oldString": "BEFORE",
+    "newString": "AFTER",
+    "originalFile": "BEFORE\n",
+    "structuredPatch": [
+      {
+        "oldStart": 1,
+        "oldLines": 1,
+        "newStart": 1,
+        "newLines": 1,
+        "lines": [
+          "-BEFORE",
+          "+AFTER"
+        ]
+      }
+    ],
+    "userModified": false,
+    "replaceAll": false
+  },
+  "sourceToolAssistantUUID": "785b9da2-4b01-482b-9467-48bbcafe519e",
+  "userType": "external",
+  "entrypoint": "sdk-py",
+  "cwd": "<scratch>/unpublished-edit/workspace",
+  "sessionId": "8b4bda60-dcba-4678-9b52-17d74597a3ce",
+  "version": "2.1.274",
+  "gitBranch": "HEAD"
+}

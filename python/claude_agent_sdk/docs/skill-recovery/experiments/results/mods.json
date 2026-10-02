@@ -1,0 +1,33 @@
+{
+  "python": "3.13.15",
+  "sdk": "0.2.154",
+  "cli": "2.1.274 (Claude Code)",
+  "mods_option": false,
+  "plugin_forwarded": true,
+  "paid_calls": false,
+  "fake_endpoint": true,
+  "read_request_id": "toolu_mods_unique_read",
+  "plugin_listed": true,
+  "result_request_ids": [
+    "toolu_mods_unique_read"
+  ],
+  "message_types": [
+    "SystemMessage",
+    "AssistantMessage",
+    "UserMessage",
+    "AssistantMessage",
+    "ResultMessage"
+  ],
+  "negative_controls": "unexecuted: interception unsupported for this invocation",
+  "plugin_validation": {
+    "returncode": 0,
+    "output": "Validating plugin manifest: <scratch>/plugin/.claude-plugin/plugin.json\n\n\u26a0 Found 1 warning:\n\n  \u276f author: No author information provided. Consider adding author details for plugin attribution\n\nValidating hooks: <scratch>/plugin/hooks/hooks.json\n\n  \u276f ./register.ts hooks: tool.call{tool=Read}\n  \u276f ./register.ts calls: nothing on $\n\n\u2714 Validation passed with warnings\n"
+  },
+  "terminal_subtype": "success",
+  "cli_reported_list_price_cost": 0.0006720000000000001,
+  "requests": 2,
+  "hook_marker": false,
+  "read_result_marker": true,
+  "pairing_errors": [],
+  "disposition": "unsupported interception in tested invocation"
+}
