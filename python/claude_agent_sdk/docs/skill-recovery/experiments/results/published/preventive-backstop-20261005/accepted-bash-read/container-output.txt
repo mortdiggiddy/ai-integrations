@@ -1,0 +1,14 @@
+.....sssss.sssss........................................................ [ 37%]
+........................................................................ [ 75%]
+..............................................                           [100%]
+=============================== warnings summary ===============================
+test_tool_policy.py: 30 warnings
+  /checks/test_tool_policy.py:64: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    return ClaudeAgentSdkRunner(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Results (3.40s):
+       180 passed
+        10 skipped
+        30 warnings
+{"kind": "ready", "child_pid": 84, "child_sid": 84}

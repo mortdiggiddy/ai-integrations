@@ -1,0 +1,17 @@
+make: Entering directory '<repo>/python/claude_agent_sdk'
+uv run pytest -n auto --dist=worksteal tests/session_control/test_preventive_backstop.py tests/session_control/test_host_admission.py -q -n 0
+.....sssssssssssssssssssssss........................                     [100%]
+=============================== warnings summary ===============================
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[stop]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[interrupt]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[close]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[wedged]
+  <repo>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Results (3.38s):
+        29 passed
+        23 skipped
+         4 warnings
+make: Leaving directory '<repo>/python/claude_agent_sdk'

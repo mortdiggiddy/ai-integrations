@@ -37,7 +37,7 @@ Effects and questions are offered but not automatically approved. The hook defer
 
 The engine's [documented defer protocol](https://code.claude.com/docs/en/hooks#defer-a-tool-call-for-later) permits repeated deferral of a resumed call. Already answered IDs still defer without occupying the new paused slot. Their name and input are not yet bound to a durable cross segment answer ledger; that requires separate future validation. Offline tests do not settle batching, which the protocol documents as ignoring deferral.
 
-A permission callback only denies. The hook checks basic read paths against the runner working directory; this is not full filesystem or process isolation.
+A permission callback only denies. Policy-controlled settings require permission handling for offered effects/questions and unvalidated Skill, so auto-approved Bash and skill grants cannot skip that callback in the [qualified pinned configuration](docs/skill-recovery/evidence.md#scoped-permission-backstop-closure-2026-10-05). Normal Write/Bash calls still defer. The hook checks basic read paths against the runner working directory; this is not full filesystem or process isolation.
 
 The effect executor and signed question handler are not installed yet. A
 deferred policy call stops with `PolicyExecutorUnavailable`, retains the call

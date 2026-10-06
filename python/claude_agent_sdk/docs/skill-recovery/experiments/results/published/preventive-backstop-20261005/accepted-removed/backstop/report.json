@@ -1,0 +1,335 @@
+{
+  "callback_denials": [],
+  "case": "removed",
+  "emitted": [
+    "Write"
+  ],
+  "live_model_calls": 0,
+  "marker": "BACKSTOP_MARKER\n",
+  "marker_exists": true,
+  "messages": [
+    {
+      "message": {
+        "data": {
+          "agents": [
+            "claude",
+            "Explore",
+            "general-purpose",
+            "Plan",
+            "statusline-setup"
+          ],
+          "analytics_disabled": true,
+          "apiKeySource": "ANTHROPIC_API_KEY",
+          "capabilities": [
+            "interrupt_receipt_v1",
+            "interrupt_cancel_queued_v1",
+            "msg_lifecycle_v1"
+          ],
+          "claude_code_version": "2.1.274",
+          "cwd": "/state/backstop/work",
+          "fast_mode_disabled_reason": "sdk_opt_in_required",
+          "fast_mode_state": "off",
+          "mcp_servers": [
+            {
+              "name": "durable",
+              "source": "sdk",
+              "status": "connected"
+            }
+          ],
+          "memory_paths": {
+            "auto": "/state/backstop/config/projects/-state-backstop-work/memory/"
+          },
+          "messaging_socket_path": "/tmp/cc-socks/12.sock",
+          "model": "claude-haiku-4-5-20251001",
+          "output_style": "default",
+          "permissionMode": "default",
+          "plugins": [],
+          "product_feedback_disabled": true,
+          "session_id": "6982b2a5-495c-4763-a327-fd822cda5f6f",
+          "skills": [
+            "deep-research",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator"
+          ],
+          "slash_commands": [
+            "deep-research",
+            "dataviz",
+            "update-config",
+            "verify",
+            "debug",
+            "code-review",
+            "simplify",
+            "batch",
+            "fewer-permission-prompts",
+            "doctor",
+            "loop",
+            "claude-api",
+            "workflow-authoring",
+            "run",
+            "run-skill-generator",
+            "agents",
+            "auto-mode-setup",
+            "autocompact",
+            "clear",
+            "color",
+            "compact",
+            "config",
+            "output-style",
+            "context",
+            "effort",
+            "fast",
+            "heapdump",
+            "init",
+            "mcp",
+            "model",
+            "__remote-workflow",
+            "workflow-launch-exec",
+            "reload-plugins",
+            "reload-skills",
+            "rename",
+            "security-review",
+            "usage",
+            "insights",
+            "recap",
+            "goal",
+            "list-agents",
+            "team-onboarding"
+          ],
+          "subtype": "init",
+          "terminal_slash_commands": [
+            "doctor",
+            "color",
+            "reload-plugins"
+          ],
+          "tools": [
+            "Bash",
+            "Skill",
+            "Write"
+          ],
+          "type": "system",
+          "uuid": "fecee701-d527-4018-9715-338ec8f90923"
+        },
+        "subtype": "init"
+      },
+      "type": "SystemMessage"
+    },
+    {
+      "message": {
+        "content": [
+          {
+            "id": "toolu_probe_1",
+            "input": {
+              "content": "BACKSTOP_MARKER\n",
+              "file_path": "/state/backstop/work/marker.txt"
+            },
+            "name": "Write"
+          }
+        ],
+        "error": null,
+        "message_id": "msg_fake0001",
+        "model": "claude-haiku-4-5-20251001",
+        "parent_tool_use_id": null,
+        "session_id": "6982b2a5-495c-4763-a327-fd822cda5f6f",
+        "stop_reason": null,
+        "usage": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 12,
+          "output_tokens": 1
+        },
+        "uuid": "5b86bc00-76f1-4a8c-8682-f5b5673c1dfb"
+      },
+      "type": "AssistantMessage"
+    },
+    {
+      "message": {
+        "content": [
+          {
+            "content": "File created successfully at: /state/backstop/work/marker.txt (file state is current in your context \u2014 no need to Read it back)",
+            "is_error": null,
+            "tool_use_id": "toolu_probe_1"
+          }
+        ],
+        "origin": null,
+        "parent_tool_use_id": null,
+        "tool_use_result": {
+          "content": "BACKSTOP_MARKER\n",
+          "filePath": "/state/backstop/work/marker.txt",
+          "originalFile": null,
+          "structuredPatch": [],
+          "type": "create",
+          "userModified": false
+        },
+        "uuid": "c37439d4-ce0f-49b9-a07c-61014c8a045b"
+      },
+      "type": "UserMessage"
+    },
+    {
+      "message": {
+        "content": [
+          {
+            "text": "PROBE_FINISHED"
+          }
+        ],
+        "error": null,
+        "message_id": "msg_fake0002",
+        "model": "claude-haiku-4-5-20251001",
+        "parent_tool_use_id": null,
+        "session_id": "6982b2a5-495c-4763-a327-fd822cda5f6f",
+        "stop_reason": null,
+        "usage": {
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "input_tokens": 12,
+          "output_tokens": 1
+        },
+        "uuid": "3d9af444-5074-4727-a375-05c74741951b"
+      },
+      "type": "AssistantMessage"
+    },
+    {
+      "message": {
+        "api_error_status": null,
+        "deferred_tool_use": null,
+        "duration_api_ms": 88,
+        "duration_ms": 288,
+        "errors": null,
+        "is_error": false,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "cacheCreationInputTokens": 0,
+            "cacheReadInputTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "contextWindow": 200000,
+            "costBasis": "list",
+            "costUSD": 0.00022400000000000002,
+            "inputTokens": 24,
+            "maxOutputTokens": 32000,
+            "outputTokens": 40,
+            "provider": "firstParty",
+            "thinkingTokens": 0,
+            "webSearchRequests": 0
+          }
+        },
+        "num_turns": 2,
+        "origin": null,
+        "permission_denials": [],
+        "result": "PROBE_FINISHED",
+        "session_id": "6982b2a5-495c-4763-a327-fd822cda5f6f",
+        "stop_reason": "end_turn",
+        "structured_output": null,
+        "subtype": "success",
+        "terminal_reason": "completed",
+        "total_cost_usd": 0.00022400000000000002,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "",
+          "input_tokens": 24,
+          "iterations": [],
+          "output_tokens": 40,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "server_tool_use": {
+            "web_fetch_requests": 0,
+            "web_search_requests": 0
+          },
+          "service_tier": "standard",
+          "speed": "standard"
+        },
+        "uuid": "deeb4d2f-5fca-44e1-a180-2eeeac9cd339"
+      },
+      "type": "ResultMessage"
+    }
+  ],
+  "negative_control_failure": "Traceback (most recent call last):\n  File \"/checks/test_preventive_backstop.py\", line 323, in test_actual_engine_backstop\n    assert_prevented(marker, callback, history)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/checks/test_preventive_backstop.py\", line 106, in assert_prevented\n    assert not marker.exists(), \"Engine created the effect marker\"\nAssertionError: Engine created the effect marker\nassert not True\n +  where True = exists()\n +    where exists = PosixPath('/state/backstop/work/marker.txt').exists\n",
+  "output": {
+    "checkpoint": null,
+    "cost_usd": 0.00022400000000000002,
+    "deferred": null,
+    "error": "Claude Code 2.1.274 observed execution or an execution attempt for policy tool(s) Write inside the engine. The segment stops; detection cannot undo an effect.",
+    "is_error": true,
+    "result": null,
+    "session_id": "6982b2a5-495c-4763-a327-fd822cda5f6f"
+  },
+  "prevention_assertion": "FAIL: engine created marker with backstop removed",
+  "process_after": {
+    "complete": true,
+    "enumerated_pids": [
+      1
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "31410658",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "process_before": {
+    "complete": true,
+    "enumerated_pids": [
+      1
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "31410658",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "provider": "loopback scripted Messages API",
+  "provider_spend_usd": 0,
+  "python": "3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]",
+  "sdk": "0.2.162",
+  "sdk_state": {
+    "close_error": null,
+    "interrupt_acknowledged": false,
+    "interrupt_error": null,
+    "prompt_submission_started": true,
+    "sdk_closed": true,
+    "shutdown_unresolved": false,
+    "stop_requested": false,
+    "terminal_received": true
+  },
+  "status": "PASS",
+  "temporal_sdk": "1.33.0",
+  "tool_results": [
+    {
+      "content": "File created successfully at: /state/backstop/work/marker.txt (file state is current in your context \u2014 no need to Read it back)\n\n<system-reminder>\n<total_tokens>14999968 tokens left</total_tokens>\n</system-reminder>",
+      "id": "toolu_probe_1",
+      "input": {
+        "content": "BACKSTOP_MARKER\n",
+        "file_path": "/state/backstop/work/marker.txt"
+      },
+      "is_error": false,
+      "name": "Write"
+    }
+  ]
+}

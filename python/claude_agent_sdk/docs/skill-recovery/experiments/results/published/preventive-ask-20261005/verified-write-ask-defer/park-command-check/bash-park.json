@@ -1,0 +1,14 @@
+{
+  "accepted": {
+    "pending": {
+      "id": "original-park",
+      "input": {
+        "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30"
+      },
+      "name": "Bash"
+    }
+  },
+  "cause": "TimeoutExpired: Command '['/bin/sh', '-c', 'echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30']' timed out after 3 seconds",
+  "model_result": null,
+  "parked": true
+}

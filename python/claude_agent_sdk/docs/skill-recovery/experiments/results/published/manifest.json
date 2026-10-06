@@ -3929,6 +3929,1581 @@
       "path": "write-recovery-reservation-e461155f860312778738b6a8b74e6fb4df9f317d7297901f69d450c166cfb254.json",
       "published_sha256": "21f9d4a6011626c5672e84bae4f25e916b4701e9bbd9d8598408bfe4f7a4edf5",
       "raw_sha256": "f2cc7f5a57400bb661bb27b137e872f8281a9d2208a74cace19d39f1be5ce035"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/backstop/report.json",
+      "published_sha256": "960d38b3c62b2137ee799c226aa1ff6cfae8aefd32eaec57251e622f75ba116e",
+      "raw_sha256": "960d38b3c62b2137ee799c226aa1ff6cfae8aefd32eaec57251e622f75ba116e"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/backstop/requests.json",
+      "published_sha256": "55afeaf4e5d85d3fc42d1495dc6b0f24e26f7e1b7b075effd72195a815bda5d5",
+      "raw_sha256": "55afeaf4e5d85d3fc42d1495dc6b0f24e26f7e1b7b075effd72195a815bda5d5"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/backstop/store/-state-backstop-work__8002ff8a-accc-44a6-a262-4775ea3ef984.jsonl",
+      "published_sha256": "7a0c6dd4c4867d519b001edae3b8f41a3d860d3402adc271090fb05218d576ae",
+      "raw_sha256": "7a0c6dd4c4867d519b001edae3b8f41a3d860d3402adc271090fb05218d576ae"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/container-output.txt",
+      "published_sha256": "5858aefd20ad79bb01d01bf3d292992f0d0b7546d371fd3e5a20593effdef7a4",
+      "raw_sha256": "5858aefd20ad79bb01d01bf3d292992f0d0b7546d371fd3e5a20593effdef7a4"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/host-receipt.json",
+      "published_sha256": "138e580e5bf5e7ee8bee9a4a77b9c5e49d285c730f68f29f4ce55d132f2fa369",
+      "raw_sha256": "138e580e5bf5e7ee8bee9a4a77b9c5e49d285c730f68f29f4ce55d132f2fa369"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/host.db",
+      "published_sha256": "0d4f8ae455d38d0c58cc3ff6eec4469ae13dbd8bcd28f3bf14e7bf7b58a7e363",
+      "raw_sha256": "5155badfa2ba6ff4ce15861aa53907f0ad95a517d12874ab45ed7ebfd300f8b7"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/launcher-output.txt",
+      "published_sha256": "5fb1a886cc4acad3187ebeef337be0166abc8cc8eb9833243ff09a233cd0fb5c",
+      "raw_sha256": "5fb1a886cc4acad3187ebeef337be0166abc8cc8eb9833243ff09a233cd0fb5c"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/ready.json",
+      "published_sha256": "10f2c2e2487c1a16ace9d56a37b666b46da3ad7f8f204289c454cc1538d3eaf6",
+      "raw_sha256": "10f2c2e2487c1a16ace9d56a37b666b46da3ad7f8f204289c454cc1538d3eaf6"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/report.json",
+      "published_sha256": "f9c012bdde82f74b61d82df74ab85a6350ef243588b1e9d869194b1ccc92c8e2",
+      "raw_sha256": "f9c012bdde82f74b61d82df74ab85a6350ef243588b1e9d869194b1ccc92c8e2"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/backstop/report.json",
+      "published_sha256": "c49e7ab9c130959ec80e2ab8a991d62765023d1a1f60d1e29e34f2f9dad2bc09",
+      "raw_sha256": "c49e7ab9c130959ec80e2ab8a991d62765023d1a1f60d1e29e34f2f9dad2bc09"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/backstop/requests.json",
+      "published_sha256": "97de940a72d8468d952a411457aed59d3b3f9b7cf60ae3f63ca379359bd549dd",
+      "raw_sha256": "97de940a72d8468d952a411457aed59d3b3f9b7cf60ae3f63ca379359bd549dd"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/backstop/store/-state-backstop-work__7082f4ac-824c-4e66-a5bb-cd037e25fa54.jsonl",
+      "published_sha256": "3d13efe4307276f1a075f1af4a62868755bc6770c9d98f81bb0d1f2fefa534a5",
+      "raw_sha256": "3d13efe4307276f1a075f1af4a62868755bc6770c9d98f81bb0d1f2fefa534a5"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/container-output.txt",
+      "published_sha256": "64aa0ac50f3598e227d1107d5dfee47e80abf41e0dfbf966ba69ad5ad91aa4c0",
+      "raw_sha256": "64aa0ac50f3598e227d1107d5dfee47e80abf41e0dfbf966ba69ad5ad91aa4c0"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/host-receipt.json",
+      "published_sha256": "18057aa1faf27927624ffb19e5418017ec820f5eac98faad1d9cc7370332b42c",
+      "raw_sha256": "18057aa1faf27927624ffb19e5418017ec820f5eac98faad1d9cc7370332b42c"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/host.db",
+      "published_sha256": "3c4467477a315fa2d7de7592f7ad34492b4c5b7a711901ddd43affa102705044",
+      "raw_sha256": "10d3ef6cecf045acc98fc26f3db6500fd6b8d452711a1cd38445647c8da101c8"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/launcher-output.txt",
+      "published_sha256": "c0a4131d09670c22f41d36968c77d37a60058bf69cc00d3fae61ed54f11bdc7d",
+      "raw_sha256": "c0a4131d09670c22f41d36968c77d37a60058bf69cc00d3fae61ed54f11bdc7d"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/ready.json",
+      "published_sha256": "877e1620aba2252d092c3fdb2938eca97c52732450cb0462d958f69d99b7f72e",
+      "raw_sha256": "877e1620aba2252d092c3fdb2938eca97c52732450cb0462d958f69d99b7f72e"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/report.json",
+      "published_sha256": "4c7aa39c8a1428f83045cfebc4e012e32bbe762082823a3db2602a0a1f8c19f7",
+      "raw_sha256": "4c7aa39c8a1428f83045cfebc4e012e32bbe762082823a3db2602a0a1f8c19f7"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/backstop/hooks.jsonl",
+      "published_sha256": "5cf89ee2ef31f7dbb6158f60bde746174f7b93ac03b35abbe1faab6df3cc3f2d",
+      "raw_sha256": "5cf89ee2ef31f7dbb6158f60bde746174f7b93ac03b35abbe1faab6df3cc3f2d"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/backstop/production-hooks.jsonl",
+      "published_sha256": "0d83a8bb3912671345c608436322cd4128bb1fe921d415bfa64f146da687e5c3",
+      "raw_sha256": "0d83a8bb3912671345c608436322cd4128bb1fe921d415bfa64f146da687e5c3"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/backstop/report.json",
+      "published_sha256": "0669175c40accf180e7a24b9a51470884c6bb56d446913954bcf9ecdf1ca5584",
+      "raw_sha256": "0669175c40accf180e7a24b9a51470884c6bb56d446913954bcf9ecdf1ca5584"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/backstop/requests.json",
+      "published_sha256": "147d83f658e03d6d6a8db1d89e3211bb4873ec152d86d1b4919e1e8f559ad70c",
+      "raw_sha256": "147d83f658e03d6d6a8db1d89e3211bb4873ec152d86d1b4919e1e8f559ad70c"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/backstop/store/-state-backstop-work__e26e2f2a-fa24-4cf4-9cf1-f122c50e639b.jsonl",
+      "published_sha256": "8e43f9d2115e9b81063c859a52aa2bfcca65b1771b21b89ec4cd6d8222488413",
+      "raw_sha256": "8e43f9d2115e9b81063c859a52aa2bfcca65b1771b21b89ec4cd6d8222488413"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/container-output.txt",
+      "published_sha256": "d0a5ab88537c99c65def3be629b06f422fb8a6de8b269c777e2412a0b367e301",
+      "raw_sha256": "d0a5ab88537c99c65def3be629b06f422fb8a6de8b269c777e2412a0b367e301"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/host-receipt.json",
+      "published_sha256": "400903af3a28229beb9c7494eb6d5d08b5efe03ff4de9bf2ebd37e4cbe31763d",
+      "raw_sha256": "400903af3a28229beb9c7494eb6d5d08b5efe03ff4de9bf2ebd37e4cbe31763d"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/host.db",
+      "published_sha256": "b9a1f5b0441cade2a87e894ca5d3d765fd05e5f764d6c1cbde23749d304021ee",
+      "raw_sha256": "21efb8b6d30cd74b3d74979f08cbb77c0c0e2b57ef2d94a2ec9ed49f3d86f4f0"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/launcher-output.txt",
+      "published_sha256": "a3b7c78430dfa3fa19340366657ce7cf1ba32c2dfb4657575b9fc59acf654319",
+      "raw_sha256": "a3b7c78430dfa3fa19340366657ce7cf1ba32c2dfb4657575b9fc59acf654319"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/ready.json",
+      "published_sha256": "b472085bffffffd7adc6c0686262ada90b7ca4c446d42be2e4239ddc50c613cb",
+      "raw_sha256": "b472085bffffffd7adc6c0686262ada90b7ca4c446d42be2e4239ddc50c613cb"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/report.json",
+      "published_sha256": "ad7075b3fcf815cd95ca810d576c5ae858b683e0afaebec63cd0bb31d0c6d918",
+      "raw_sha256": "ad7075b3fcf815cd95ca810d576c5ae858b683e0afaebec63cd0bb31d0c6d918"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/backstop/hooks.jsonl",
+      "published_sha256": "0abe504e1132c6b8034aa4cfda76ea45f46994dc824a56ffde7a32d56ebf9fdc",
+      "raw_sha256": "0abe504e1132c6b8034aa4cfda76ea45f46994dc824a56ffde7a32d56ebf9fdc"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/backstop/report.json",
+      "published_sha256": "aaa879e96077534898c9769a53aea8c96db4ee0f5fe9a2cd7284fb1d2a70a57b",
+      "raw_sha256": "aaa879e96077534898c9769a53aea8c96db4ee0f5fe9a2cd7284fb1d2a70a57b"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/backstop/requests.json",
+      "published_sha256": "192cecc9970bc9af5f31ad50f36d4b68a00e437e956627f423217ebbc7b002bc",
+      "raw_sha256": "192cecc9970bc9af5f31ad50f36d4b68a00e437e956627f423217ebbc7b002bc"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/backstop/store/-state-backstop-work__fae65091-e47c-4dc8-862f-ef4a06f200e8.jsonl",
+      "published_sha256": "a7b3951e0e49beaed21fc625640cbc633f8f2a42606d9cd57220d32eb1f0d48a",
+      "raw_sha256": "a7b3951e0e49beaed21fc625640cbc633f8f2a42606d9cd57220d32eb1f0d48a"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/container-output.txt",
+      "published_sha256": "75a98c4f58bd80065b2b03d0f4b9afc2c020ae1b479a9070b84f9139f46c332c",
+      "raw_sha256": "75a98c4f58bd80065b2b03d0f4b9afc2c020ae1b479a9070b84f9139f46c332c"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/host-receipt.json",
+      "published_sha256": "5d40e133ff7516c4fb71232ccd9f833f8a31ea639600eb909124131697c07c43",
+      "raw_sha256": "5d40e133ff7516c4fb71232ccd9f833f8a31ea639600eb909124131697c07c43"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/host.db",
+      "published_sha256": "d2192cbc2537321305620faa12018d1d8a7a41ad5247efb3a3d438dcf54f211d",
+      "raw_sha256": "e69bad1c38867dc73f443ecba992dfce84b2af6389f863e7056671059129e459"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/launcher-output.txt",
+      "published_sha256": "fd0099d00a1059e44ff6b4331b5e03341415b9006f7d2a7a1d760b2de306bdd1",
+      "raw_sha256": "fd0099d00a1059e44ff6b4331b5e03341415b9006f7d2a7a1d760b2de306bdd1"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/ready.json",
+      "published_sha256": "b362ea997edd11dee8027d02ab4e151b88d81f948c796ed0a17a353cf4e824b3",
+      "raw_sha256": "b362ea997edd11dee8027d02ab4e151b88d81f948c796ed0a17a353cf4e824b3"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/report.json",
+      "published_sha256": "a7a874fa750acad6de676b1ed4c992f801363d8c1206ffcfe37500fd10afb91f",
+      "raw_sha256": "a7a874fa750acad6de676b1ed4c992f801363d8c1206ffcfe37500fd10afb91f"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/backstop/hooks.jsonl",
+      "published_sha256": "0664ac6e5e363e166e92d5edb8cd72eb373f52e5f37e7925ce7967f63a7d5ddf",
+      "raw_sha256": "0664ac6e5e363e166e92d5edb8cd72eb373f52e5f37e7925ce7967f63a7d5ddf"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/backstop/report.json",
+      "published_sha256": "d8f218e7b5e0f42c00561542ed9379d8d155cc8f2add9f4914169ea6be261dd3",
+      "raw_sha256": "d8f218e7b5e0f42c00561542ed9379d8d155cc8f2add9f4914169ea6be261dd3"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/backstop/requests.json",
+      "published_sha256": "6810ee21f746cab77a5a548366e51f199585e0f1b291bc9da2b917c0eb7821fa",
+      "raw_sha256": "6810ee21f746cab77a5a548366e51f199585e0f1b291bc9da2b917c0eb7821fa"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/backstop/store/-state-backstop-work__fb3e32d9-037b-4892-9a17-81407e80c422.jsonl",
+      "published_sha256": "b6ec0344b61b424b9ff253240cfc359f879ab7ec72d01cceab71511de6179dee",
+      "raw_sha256": "b6ec0344b61b424b9ff253240cfc359f879ab7ec72d01cceab71511de6179dee"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/container-output.txt",
+      "published_sha256": "9efe96867728b9020e9561c86c4b3eee931acd66c4e3a8d423a14ee17241be80",
+      "raw_sha256": "9efe96867728b9020e9561c86c4b3eee931acd66c4e3a8d423a14ee17241be80"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/host-receipt.json",
+      "published_sha256": "08e03b899106b22baeb9b3dd2f8cdb1108d5e4a6c1b25d262214382548ef0ca3",
+      "raw_sha256": "08e03b899106b22baeb9b3dd2f8cdb1108d5e4a6c1b25d262214382548ef0ca3"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/host.db",
+      "published_sha256": "041e88f631401616020486f002ed054d3bd9588f4c3d3d59fe471a1e06d8dce0",
+      "raw_sha256": "39d260a7920ffc577f901cf4cd0dce5bd19b05369040f484a542274433f3f8df"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/launcher-output.txt",
+      "published_sha256": "39bebebbc313d6ddc6e1e8c1e6f531405d7c03695ac27553f0520d98265d2875",
+      "raw_sha256": "39bebebbc313d6ddc6e1e8c1e6f531405d7c03695ac27553f0520d98265d2875"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/ready.json",
+      "published_sha256": "a42a5f5fd6f562c7dc60ddaf772aea7ec85d7b89b21202b894619d9594b20621",
+      "raw_sha256": "a42a5f5fd6f562c7dc60ddaf772aea7ec85d7b89b21202b894619d9594b20621"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/report.json",
+      "published_sha256": "9f9a383cbb2c136751366061cbaa60a35c9872568cd23e828ac47ac8b2260de8",
+      "raw_sha256": "9f9a383cbb2c136751366061cbaa60a35c9872568cd23e828ac47ac8b2260de8"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/hooks.jsonl",
+      "published_sha256": "07006e70edacd5e39c25d716f0bb4ce02085cf5e352c6076092da20fd52ad809",
+      "raw_sha256": "07006e70edacd5e39c25d716f0bb4ce02085cf5e352c6076092da20fd52ad809"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/production-hooks.jsonl",
+      "published_sha256": "d8d1598ac8fe04d2c23eeb12ce89e517e1d24937bc0f6e061aa2d137993013b0",
+      "raw_sha256": "d8d1598ac8fe04d2c23eeb12ce89e517e1d24937bc0f6e061aa2d137993013b0"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/report.json",
+      "published_sha256": "a41eb34e434447c630737ea00ff23e73e4955a803b1ed9510f4eff37716ad0ae",
+      "raw_sha256": "a41eb34e434447c630737ea00ff23e73e4955a803b1ed9510f4eff37716ad0ae"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/requests.json",
+      "published_sha256": "7d5eaca8d4436206a52de8fb56ff77699b9ce7933bb5e80dc91799a5d2012cbc",
+      "raw_sha256": "7d5eaca8d4436206a52de8fb56ff77699b9ce7933bb5e80dc91799a5d2012cbc"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/store/-state-backstop-work__6982b2a5-495c-4763-a327-fd822cda5f6f.jsonl",
+      "published_sha256": "181c34fa48af332bc9d2cfa1814f4b955cbd494b4f8086a9844ed10fe13e6c60",
+      "raw_sha256": "181c34fa48af332bc9d2cfa1814f4b955cbd494b4f8086a9844ed10fe13e6c60"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/work/marker.txt",
+      "published_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe",
+      "raw_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/container-output.txt",
+      "published_sha256": "ba3cbc31afd0babfa1699403180c34f4d793ef43613ce8885b45a6db917475af",
+      "raw_sha256": "ba3cbc31afd0babfa1699403180c34f4d793ef43613ce8885b45a6db917475af"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/host-receipt.json",
+      "published_sha256": "01de86953f184067bc389b4e77f8ea005f5d1f7c83d245cdd1fae375985cbb97",
+      "raw_sha256": "01de86953f184067bc389b4e77f8ea005f5d1f7c83d245cdd1fae375985cbb97"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/host.db",
+      "published_sha256": "2254e7d9abab0e2f9190505b9cc627c15dc69b636145ed476eec0bfe86151ea1",
+      "raw_sha256": "e647ae80c0c559781cee9ec1fbc1ea41bd7fd30bcb9a84caf4950803f79d1000"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/launcher-output.txt",
+      "published_sha256": "fdee5d3d697b94fa16e4dc7246bf88e7a43b1c49a868f5e2904383e685e11f8d",
+      "raw_sha256": "fdee5d3d697b94fa16e4dc7246bf88e7a43b1c49a868f5e2904383e685e11f8d"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/ready.json",
+      "published_sha256": "22950f2f708bd6f070cb89ad90582beb55e2497430d8ec54937ac4d69f6477a8",
+      "raw_sha256": "22950f2f708bd6f070cb89ad90582beb55e2497430d8ec54937ac4d69f6477a8"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/report.json",
+      "published_sha256": "65700757f8850fed3d3db51af007e2066bc675ef8535b19c00cb69540ed00cb6",
+      "raw_sha256": "65700757f8850fed3d3db51af007e2066bc675ef8535b19c00cb69540ed00cb6"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/hooks.jsonl",
+      "published_sha256": "4dc0ae8bd3a29aec1af67009c4eff34028de69ca77896db5bc876d3721a8ac3e",
+      "raw_sha256": "4dc0ae8bd3a29aec1af67009c4eff34028de69ca77896db5bc876d3721a8ac3e"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/production-hooks.jsonl",
+      "published_sha256": "db1abde5a2542cc73e437f58cdf0f0c6ee434c6faa86939f354234a9377bf565",
+      "raw_sha256": "db1abde5a2542cc73e437f58cdf0f0c6ee434c6faa86939f354234a9377bf565"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/report.json",
+      "published_sha256": "cb661c47bb451b4ea1f6f4e65bfe6754b695122995ab3da5b93dd412bada2c32",
+      "raw_sha256": "cb661c47bb451b4ea1f6f4e65bfe6754b695122995ab3da5b93dd412bada2c32"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/requests.json",
+      "published_sha256": "a0b993a3fc58688fb1e1af363195656a5891599aa88ab11dfe363a527b9abfb9",
+      "raw_sha256": "a0b993a3fc58688fb1e1af363195656a5891599aa88ab11dfe363a527b9abfb9"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/store/-state-backstop-work__ff0c0991-c752-42a0-bcff-e8c8d1321635.jsonl",
+      "published_sha256": "2536ea78e90a3e3256ebdd48473cf765200e0ea92dc0e3f74c0ee3e822d3af97",
+      "raw_sha256": "2536ea78e90a3e3256ebdd48473cf765200e0ea92dc0e3f74c0ee3e822d3af97"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/work/.claude/skills/backstop-probe/SKILL.md",
+      "published_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0",
+      "raw_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/work/marker.txt",
+      "published_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe",
+      "raw_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/work/second.txt",
+      "published_sha256": "cb0532c3945174afc065b9d249dd4b2ebc149295b5b97748f9721c0a1582b850",
+      "raw_sha256": "cb0532c3945174afc065b9d249dd4b2ebc149295b5b97748f9721c0a1582b850"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/container-output.txt",
+      "published_sha256": "5cd6acbe313023511af794a4015174fb8b6d4e63ad4b4d38edb3352eccbdf6ca",
+      "raw_sha256": "5cd6acbe313023511af794a4015174fb8b6d4e63ad4b4d38edb3352eccbdf6ca"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/host-receipt.json",
+      "published_sha256": "9759b797d0ba7e9e489e261062663f3dfb44d6ddaa57b0fe01c5a4a7d14c00ee",
+      "raw_sha256": "9759b797d0ba7e9e489e261062663f3dfb44d6ddaa57b0fe01c5a4a7d14c00ee"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/host.db",
+      "published_sha256": "73201674ea1c776b83fe58e7e7c2a39d444000c42d4347ed68735423a9436364",
+      "raw_sha256": "41abd85abc93a9e487a987a86f6f576bad15d6059173fdbdae887f756f3181fc"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/launcher-output.txt",
+      "published_sha256": "577ef8311af8d2aaebdfc1eb0f981966cff2ff59c69b5c0824007d964d25de12",
+      "raw_sha256": "577ef8311af8d2aaebdfc1eb0f981966cff2ff59c69b5c0824007d964d25de12"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/ready.json",
+      "published_sha256": "6875c8cf109827a6bbf145337f144d6d6a3c2d39294744b926cde460ce3fdbda",
+      "raw_sha256": "6875c8cf109827a6bbf145337f144d6d6a3c2d39294744b926cde460ce3fdbda"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/report.json",
+      "published_sha256": "9739d8dfc8a98b94972156194dace5b58b65514af3528388f1f292ef8f175c9a",
+      "raw_sha256": "9739d8dfc8a98b94972156194dace5b58b65514af3528388f1f292ef8f175c9a"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/hooks.jsonl",
+      "published_sha256": "ee74268f25af6c69a7e7124c7a7385615ba0ee116019a9d14dadfd0aae76e6c9",
+      "raw_sha256": "ee74268f25af6c69a7e7124c7a7385615ba0ee116019a9d14dadfd0aae76e6c9"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/production-hooks.jsonl",
+      "published_sha256": "85090da04dfb9977fd38985c97cac0127c1a2f72d4f49e7294badfa6c3aeb87c",
+      "raw_sha256": "85090da04dfb9977fd38985c97cac0127c1a2f72d4f49e7294badfa6c3aeb87c"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/report.json",
+      "published_sha256": "245f940d17950080b4662c3521f23f0cb830810e926c69db82cd0383841ff5fc",
+      "raw_sha256": "245f940d17950080b4662c3521f23f0cb830810e926c69db82cd0383841ff5fc"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/requests.json",
+      "published_sha256": "a0c429020b502fc9a8b7e491e5c0ad433206f3c1ce8b22c0808f8f530341e71f",
+      "raw_sha256": "a0c429020b502fc9a8b7e491e5c0ad433206f3c1ce8b22c0808f8f530341e71f"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/store/-state-backstop-work__618cefe7-f9fc-4bd6-8754-da5d8daa2bcf.jsonl",
+      "published_sha256": "27ef1573808406442c7ff281cca73136f77fa628c2e520dac24780f83ab06d55",
+      "raw_sha256": "27ef1573808406442c7ff281cca73136f77fa628c2e520dac24780f83ab06d55"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/work/.claude/skills/backstop-probe/SKILL.md",
+      "published_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0",
+      "raw_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/work/marker.txt",
+      "published_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe",
+      "raw_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/container-output.txt",
+      "published_sha256": "3c8c28b1c4a5e70dd66c16441d3f22239a502e819e3dd4cb602bf1147a195a00",
+      "raw_sha256": "3c8c28b1c4a5e70dd66c16441d3f22239a502e819e3dd4cb602bf1147a195a00"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/host-receipt.json",
+      "published_sha256": "96270eaab34673698bda13937db6febab01589c6fd2138bb3328e137644e8851",
+      "raw_sha256": "96270eaab34673698bda13937db6febab01589c6fd2138bb3328e137644e8851"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/host.db",
+      "published_sha256": "6074454c48ce1f522773d18e322b56f1328c0a9a1f93c83fe9a2ae16945cfaf9",
+      "raw_sha256": "f957416d2661dad0edc699467578e3a5298012e73abb433ef3167f48e0f2818b"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/launcher-output.txt",
+      "published_sha256": "4e5213d2d175b0deae7440b9279fd39d4cb4ac6d364b94fe127a52e26102fc5d",
+      "raw_sha256": "4e5213d2d175b0deae7440b9279fd39d4cb4ac6d364b94fe127a52e26102fc5d"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/ready.json",
+      "published_sha256": "5a8cb36369159f82236f850141c1e3017efffaeb5e74d161f32ff111359cd25f",
+      "raw_sha256": "5a8cb36369159f82236f850141c1e3017efffaeb5e74d161f32ff111359cd25f"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/report.json",
+      "published_sha256": "258b99e56b9966d194fdd7d64f96a4383d740b6ab68f636c2f0df8920b6a44cc",
+      "raw_sha256": "258b99e56b9966d194fdd7d64f96a4383d740b6ab68f636c2f0df8920b6a44cc"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/hooks.jsonl",
+      "published_sha256": "a6b33bf52a7c1300db5b19d77b0449b0ac3a658321b8de0809814ff860999748",
+      "raw_sha256": "a6b33bf52a7c1300db5b19d77b0449b0ac3a658321b8de0809814ff860999748"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/production-hooks.jsonl",
+      "published_sha256": "85090da04dfb9977fd38985c97cac0127c1a2f72d4f49e7294badfa6c3aeb87c",
+      "raw_sha256": "85090da04dfb9977fd38985c97cac0127c1a2f72d4f49e7294badfa6c3aeb87c"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/report.json",
+      "published_sha256": "ac28a8ac7f9e6bd973e28f267319be3ceac4c3efb328e0c7ee58f5c89e06ba50",
+      "raw_sha256": "ac28a8ac7f9e6bd973e28f267319be3ceac4c3efb328e0c7ee58f5c89e06ba50"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/requests.json",
+      "published_sha256": "08ed53dc4cf5f91d21b02a0e70c864635145da4d22c87668fd4b791fa0b25398",
+      "raw_sha256": "08ed53dc4cf5f91d21b02a0e70c864635145da4d22c87668fd4b791fa0b25398"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/store/-state-backstop-work__03e52e67-53c0-45fb-84e4-1523cff597b1.jsonl",
+      "published_sha256": "8d6fcf519cf64465827db86a009df5bb999af0ebc9046d9aae79765f14ad3846",
+      "raw_sha256": "8d6fcf519cf64465827db86a009df5bb999af0ebc9046d9aae79765f14ad3846"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/work/.claude/skills/backstop-probe/SKILL.md",
+      "published_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0",
+      "raw_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/work/marker.txt",
+      "published_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe",
+      "raw_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/container-output.txt",
+      "published_sha256": "b713b05aa583e7782af167e287727fff1122135e0637497ef2b90c6bdabd26c7",
+      "raw_sha256": "b713b05aa583e7782af167e287727fff1122135e0637497ef2b90c6bdabd26c7"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/host-receipt.json",
+      "published_sha256": "19d2c0db7f931c019d06ffcd8b03b8f9038e69ec39f598cd2e4ba3da0c09f45f",
+      "raw_sha256": "19d2c0db7f931c019d06ffcd8b03b8f9038e69ec39f598cd2e4ba3da0c09f45f"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/host.db",
+      "published_sha256": "f542a35d5928fcfdd25b91924b8088138b74d8dce35fb64fd3f18f00e9f789e7",
+      "raw_sha256": "bea3f71fff8fca85786a6bbf010d44284a3e760ea0686c0945deb670893f5c5e"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/launcher-output.txt",
+      "published_sha256": "b1028cd69c9a08385a8a6cb0eaa66de114319a46f820b4096a2cd327f10f53cb",
+      "raw_sha256": "b1028cd69c9a08385a8a6cb0eaa66de114319a46f820b4096a2cd327f10f53cb"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/ready.json",
+      "published_sha256": "3cc20d4cbb387527721f7f655e2b7464a61a5bce34fb494b2a45685b1204197f",
+      "raw_sha256": "3cc20d4cbb387527721f7f655e2b7464a61a5bce34fb494b2a45685b1204197f"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/report.json",
+      "published_sha256": "dd79d14a4057c79f1bd3d06fc9e7746e429cfc06ec433e8cd1a54930b1519e7d",
+      "raw_sha256": "dd79d14a4057c79f1bd3d06fc9e7746e429cfc06ec433e8cd1a54930b1519e7d"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/backstop/hooks.jsonl",
+      "published_sha256": "af65283ff6ace90bff9fe57ed208c6db52a9a9a370b6dc05e269e1d00d9cd2cf",
+      "raw_sha256": "af65283ff6ace90bff9fe57ed208c6db52a9a9a370b6dc05e269e1d00d9cd2cf"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/backstop/report.json",
+      "published_sha256": "2e6ddc5e7959ca9cdbc4c5d24cf0e5b74a13226dccf1a0edcf323b65f820cf90",
+      "raw_sha256": "2e6ddc5e7959ca9cdbc4c5d24cf0e5b74a13226dccf1a0edcf323b65f820cf90"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/backstop/requests.json",
+      "published_sha256": "54aa29cf6622c094eab1e5f87903ee8909fdbd9200c72011294e1e0cb60b0b9f",
+      "raw_sha256": "54aa29cf6622c094eab1e5f87903ee8909fdbd9200c72011294e1e0cb60b0b9f"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/backstop/store/-state-backstop-work__e491c7d4-682e-44aa-9cfa-db6707f87e95.jsonl",
+      "published_sha256": "58d62ecc28237ff8450d553d8eff4f389742766cc3ace773af21ed3d1aca09e0",
+      "raw_sha256": "58d62ecc28237ff8450d553d8eff4f389742766cc3ace773af21ed3d1aca09e0"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/container-output.txt",
+      "published_sha256": "e55e72a28a36d7c91721c9f05033c4e5c73b54e6a4916971255e5bc578f89ac1",
+      "raw_sha256": "e55e72a28a36d7c91721c9f05033c4e5c73b54e6a4916971255e5bc578f89ac1"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/host-receipt.json",
+      "published_sha256": "4c3c5341282561bfe42a23b0fb1be7bf3318ce8fa980bdcf8e74015e7f9e534b",
+      "raw_sha256": "4c3c5341282561bfe42a23b0fb1be7bf3318ce8fa980bdcf8e74015e7f9e534b"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/host.db",
+      "published_sha256": "b516d4f54ced1ffe10f40502bf0be0647a7e97583ad5313e1bdd41d2daba40f8",
+      "raw_sha256": "b7b2adc1a7ac526e6841a7bda4739425be5359623528abd23b37e3d1640208e8"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/launcher-output.txt",
+      "published_sha256": "a7bc4e1bcd14e023321095bb136f9aa21dbc558d7f72fc1b2256915c14ef4466",
+      "raw_sha256": "a7bc4e1bcd14e023321095bb136f9aa21dbc558d7f72fc1b2256915c14ef4466"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/ready.json",
+      "published_sha256": "0eff60859fe7474575a2726e7357166681d061a471d231431450e61927abc6dc",
+      "raw_sha256": "0eff60859fe7474575a2726e7357166681d061a471d231431450e61927abc6dc"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/report.json",
+      "published_sha256": "dacf10b4c0137f85f6a623d076c7087761ba6d8ec93137064854b92152b00833",
+      "raw_sha256": "dacf10b4c0137f85f6a623d076c7087761ba6d8ec93137064854b92152b00833"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/backstop/hooks.jsonl",
+      "published_sha256": "08194e6ff8b5348babe2ffc0355172221c63835d86f929a3ff1aefaea99ebfd1",
+      "raw_sha256": "08194e6ff8b5348babe2ffc0355172221c63835d86f929a3ff1aefaea99ebfd1"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/backstop/report.json",
+      "published_sha256": "5b5e73ebfe3fbee1ea69d0ddb8cdb52e4c667f2f563ad30cd98f556a1417af7b",
+      "raw_sha256": "5b5e73ebfe3fbee1ea69d0ddb8cdb52e4c667f2f563ad30cd98f556a1417af7b"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/backstop/requests.json",
+      "published_sha256": "1816bddafb3743e43bc0c308d979374b50ea365eb5f48dd30b9cc45f7c7d519f",
+      "raw_sha256": "1816bddafb3743e43bc0c308d979374b50ea365eb5f48dd30b9cc45f7c7d519f"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/backstop/store/-state-backstop-work__e48eb7fe-6593-4b9a-9e8f-385012433834.jsonl",
+      "published_sha256": "c3acbbd1e83e0554b1fd19a07e336baafbc1569cea04ca589f5f22ce4eec0b42",
+      "raw_sha256": "c3acbbd1e83e0554b1fd19a07e336baafbc1569cea04ca589f5f22ce4eec0b42"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/container-output.txt",
+      "published_sha256": "cd542ca344d857e4d4556b732bf9363e4e1e5780130d3ca8acdaccdb42b412d6",
+      "raw_sha256": "cd542ca344d857e4d4556b732bf9363e4e1e5780130d3ca8acdaccdb42b412d6"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/host-receipt.json",
+      "published_sha256": "a1313a8386986d3b97093bac78be643535c7de5c6a6ac1fc11258857613be4cf",
+      "raw_sha256": "a1313a8386986d3b97093bac78be643535c7de5c6a6ac1fc11258857613be4cf"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/host.db",
+      "published_sha256": "76eac27888db478c1e058c13f737e6c3ecc92dae6e637cf0499f9a1f8e9003b1",
+      "raw_sha256": "674c5432d35c85a0f2c1f818101f2b6c0ad6e754e8fffbffd0885eb609e353e4"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/launcher-output.txt",
+      "published_sha256": "21baba648eb8567be7b20ade947b4eff882f3da11399e808bc23e3ed2c97f252",
+      "raw_sha256": "21baba648eb8567be7b20ade947b4eff882f3da11399e808bc23e3ed2c97f252"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/ready.json",
+      "published_sha256": "3b169ec18b151130fe4a4e2360a48e04ab8f105ed737aec03ab4bc81c5abf852",
+      "raw_sha256": "3b169ec18b151130fe4a4e2360a48e04ab8f105ed737aec03ab4bc81c5abf852"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/report.json",
+      "published_sha256": "252b4ed6dd900c337e6394faf3b528d2afd1e954c59286ea37c20436fa643e0d",
+      "raw_sha256": "252b4ed6dd900c337e6394faf3b528d2afd1e954c59286ea37c20436fa643e0d"
+    },
+    {
+      "path": "preventive-backstop-20261005/verification/lint.txt",
+      "published_sha256": "1632224739cce50dc9ed0430e1af0f1bb35a39901c2af82242617ec94472801b",
+      "raw_sha256": "79b82caf066a4d8bc17e4b37210d01a9c4df61b29fa4c5ae2a521cdca2f65552"
+    },
+    {
+      "path": "preventive-backstop-20261005/verification/test.txt",
+      "published_sha256": "8492303ec42b78612fefb66ac17e2ec74e602eb43becd8571bc1fb11c46c97a7",
+      "raw_sha256": "d5603d2aae2bab8288dc0317b393290cd5a828a704e3533eb48b912b5157d831"
+    },
+    {
+      "path": "preventive-ask-20261005/verification/audit.json",
+      "published_sha256": "b25e60a460804679c61a8a9f90943724dde5dea9c035528bfc972e86c0ba61e0",
+      "raw_sha256": "b25e60a460804679c61a8a9f90943724dde5dea9c035528bfc972e86c0ba61e0"
+    },
+    {
+      "path": "preventive-ask-20261005/verification/default-test.txt",
+      "published_sha256": "0cb9f91fc437231c2cee992a527166368db7b7aabaaac8d874d91651523ebd72",
+      "raw_sha256": "34bd117ce218fb2c788449943c3381d421b22401ef7f645ed67245a8d788fd90"
+    },
+    {
+      "path": "preventive-ask-20261005/verification/lint.txt",
+      "published_sha256": "1632224739cce50dc9ed0430e1af0f1bb35a39901c2af82242617ec94472801b",
+      "raw_sha256": "79b82caf066a4d8bc17e4b37210d01a9c4df61b29fa4c5ae2a521cdca2f65552"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/backstop/hooks.jsonl",
+      "published_sha256": "4177023356711d0096a8cf6ea9bda672fce3f3cca83d95362c677137d011cde5",
+      "raw_sha256": "4177023356711d0096a8cf6ea9bda672fce3f3cca83d95362c677137d011cde5"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/backstop/report.json",
+      "published_sha256": "bcdb0c03649f9397161deb61746667186a7a0d95f5931ed266af75091bad32c6",
+      "raw_sha256": "bcdb0c03649f9397161deb61746667186a7a0d95f5931ed266af75091bad32c6"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/backstop/requests.json",
+      "published_sha256": "e4dc036d7aee1a996ed2cf63e53608a78e7a064a92ab601f52405aa113c3d1a4",
+      "raw_sha256": "e4dc036d7aee1a996ed2cf63e53608a78e7a064a92ab601f52405aa113c3d1a4"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/backstop/store/-state-backstop-work__6800aa48-2411-4bf2-a6de-3e7ec544e163.jsonl",
+      "published_sha256": "319b6d2667d735e24e776bd5429c5304f291f2dd5b9ca21694cd787705e30d1d",
+      "raw_sha256": "319b6d2667d735e24e776bd5429c5304f291f2dd5b9ca21694cd787705e30d1d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/container-output.txt",
+      "published_sha256": "59bdcb092448eb03b5545203d3dfbecf49a5194a9dfb95655d6e188a240c4e19",
+      "raw_sha256": "59bdcb092448eb03b5545203d3dfbecf49a5194a9dfb95655d6e188a240c4e19"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/host-receipt.json",
+      "published_sha256": "e2eb5950bcc25f269487a2560fbc13713325027b0f984df4dfbb76c63cdf49b4",
+      "raw_sha256": "e2eb5950bcc25f269487a2560fbc13713325027b0f984df4dfbb76c63cdf49b4"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/host.db",
+      "published_sha256": "7fd89c648fe854e87f2689f5d42f8ba5f2630cf82afed10d5ce3a1d89bf22101",
+      "raw_sha256": "eecaf527acda634446f7b4c262bb73bf17308d67a40d7893b9d18572057ed66d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/ready.json",
+      "published_sha256": "0db4718d916283e7bf95e59daa5ae3ede65220f070d82b71e50a6eb3fc7f97a5",
+      "raw_sha256": "0db4718d916283e7bf95e59daa5ae3ede65220f070d82b71e50a6eb3fc7f97a5"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/report.json",
+      "published_sha256": "0b68b39908bd6733cb6e53acbaebc705f59b0c8bd28572d4b9496656bbc74922",
+      "raw_sha256": "0b68b39908bd6733cb6e53acbaebc705f59b0c8bd28572d4b9496656bbc74922"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/backstop/hooks.jsonl",
+      "published_sha256": "2052f01bcc8997ef57873c4af27148885f179a1f688e446c5a6c9f8886589011",
+      "raw_sha256": "2052f01bcc8997ef57873c4af27148885f179a1f688e446c5a6c9f8886589011"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/backstop/report.json",
+      "published_sha256": "b4105be621f49444cfdd1fe6060c18937ba9e09166f5813d189936d4ea398c96",
+      "raw_sha256": "b4105be621f49444cfdd1fe6060c18937ba9e09166f5813d189936d4ea398c96"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/backstop/requests.json",
+      "published_sha256": "491bd7f51948bd2ca00d8140cb9552fadb302409b3d7728a52d8a392696a690d",
+      "raw_sha256": "491bd7f51948bd2ca00d8140cb9552fadb302409b3d7728a52d8a392696a690d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/backstop/store/-state-backstop-work__576af789-cd36-4c0e-a308-361eeec444da.jsonl",
+      "published_sha256": "ffd07a14e9e99355acfd4b9053f5e2ca708660a64c43f9536d7e3bacd20a0590",
+      "raw_sha256": "ffd07a14e9e99355acfd4b9053f5e2ca708660a64c43f9536d7e3bacd20a0590"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/container-output.txt",
+      "published_sha256": "4668a3d491077b77501e7d395e100bb3bc4ca3d98e918333fd1be924a8f6b76b",
+      "raw_sha256": "4668a3d491077b77501e7d395e100bb3bc4ca3d98e918333fd1be924a8f6b76b"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/host-receipt.json",
+      "published_sha256": "1503fa53a794ffc202672fb0bf5628515ed690860b33762b5dbe12836cac9b45",
+      "raw_sha256": "1503fa53a794ffc202672fb0bf5628515ed690860b33762b5dbe12836cac9b45"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/host.db",
+      "published_sha256": "b109c273ddba3cc91112fc3c6655a247ad342e220002f26cc52ccce5e0b69172",
+      "raw_sha256": "5a90c66edc2db5d2fc56b6576bf9cf0fe559697ce7f62f9fd63f8ed21a399ccc"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/ready.json",
+      "published_sha256": "d0f9b283618b92b9fb7877c8c2ee393cc134d827fb3805bfee1947b68a8673d5",
+      "raw_sha256": "d0f9b283618b92b9fb7877c8c2ee393cc134d827fb3805bfee1947b68a8673d5"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/report.json",
+      "published_sha256": "6b5a25dc35216aaff80a8a13c3730e6f2281d4d737bfa912a524319eccefc7cb",
+      "raw_sha256": "6b5a25dc35216aaff80a8a13c3730e6f2281d4d737bfa912a524319eccefc7cb"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/backstop/hooks.jsonl",
+      "published_sha256": "df7e37744643e9dd3da04dae87fbfc2b9a6ef6e8a422e50e5c9771c6b4857f50",
+      "raw_sha256": "df7e37744643e9dd3da04dae87fbfc2b9a6ef6e8a422e50e5c9771c6b4857f50"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/backstop/report.json",
+      "published_sha256": "a14a7b459fd0aa8f4f464b162a8b3216448fff9993ce3b20a298246ec551f550",
+      "raw_sha256": "a14a7b459fd0aa8f4f464b162a8b3216448fff9993ce3b20a298246ec551f550"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/backstop/requests.json",
+      "published_sha256": "359482250201158c24fd3eb3711bf9e5b9d6297150f7f08d19c540109b1bba4a",
+      "raw_sha256": "359482250201158c24fd3eb3711bf9e5b9d6297150f7f08d19c540109b1bba4a"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/backstop/store/-state-backstop-work__6f9350e1-d5d9-4364-8a54-7cb044a2e92e.jsonl",
+      "published_sha256": "a70b7d699a16c37dd746bf78770736eebf873c86eeb32a806f06c7daffb14297",
+      "raw_sha256": "a70b7d699a16c37dd746bf78770736eebf873c86eeb32a806f06c7daffb14297"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/container-output.txt",
+      "published_sha256": "ca0c358dd0f7c6c396550f049edab011aa4fb65b48f4cb1ffc1139b3d48b2d68",
+      "raw_sha256": "ca0c358dd0f7c6c396550f049edab011aa4fb65b48f4cb1ffc1139b3d48b2d68"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/host-receipt.json",
+      "published_sha256": "fdb5c956a03129e987b30677105db8c51da114ec346779c14108eaa45e2680ec",
+      "raw_sha256": "fdb5c956a03129e987b30677105db8c51da114ec346779c14108eaa45e2680ec"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/host.db",
+      "published_sha256": "44c5b4a92f66df1ef8dd85b497cdf18e81ebe4a9d20ce99d0970358252786d2f",
+      "raw_sha256": "45af4b5f07ddcc28f413ec4d8655900b3601429a556066b8c721dc6acd1a836f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/ready.json",
+      "published_sha256": "33beb8dc097f3b713170a657f73ed0b5478c9272778d0d381c8182468ec10680",
+      "raw_sha256": "33beb8dc097f3b713170a657f73ed0b5478c9272778d0d381c8182468ec10680"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/report.json",
+      "published_sha256": "5f26f5e7b645ad15f27dd009a94d459af3187425c6410a4ebf7aa1def93322ae",
+      "raw_sha256": "5f26f5e7b645ad15f27dd009a94d459af3187425c6410a4ebf7aa1def93322ae"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/backstop/hooks.jsonl",
+      "published_sha256": "865ef7f1db28a4336b6845345c9ea504632400f072f20dc676569aed56a59082",
+      "raw_sha256": "865ef7f1db28a4336b6845345c9ea504632400f072f20dc676569aed56a59082"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/backstop/report.json",
+      "published_sha256": "4dfbff65d0efa08f58f2227ea8840f17ca906f81a2b03a99d0cbccb63243e991",
+      "raw_sha256": "4dfbff65d0efa08f58f2227ea8840f17ca906f81a2b03a99d0cbccb63243e991"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/backstop/requests.json",
+      "published_sha256": "e3dcadd6a01eb4ae04600c9d15729276a56585c9d6d0922bf0b0741be411d75d",
+      "raw_sha256": "e3dcadd6a01eb4ae04600c9d15729276a56585c9d6d0922bf0b0741be411d75d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/backstop/store/-state-backstop-work__6d079ed5-eca1-48e1-988a-144b0fb14dd5.jsonl",
+      "published_sha256": "30f5e2cfec869b28b4d6a8d1cb417cc690abc0ae087560494921bab069da0337",
+      "raw_sha256": "30f5e2cfec869b28b4d6a8d1cb417cc690abc0ae087560494921bab069da0337"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/container-output.txt",
+      "published_sha256": "c5660842af4a7d40c28d6baaae560857e6623acf39ff901b551027834165a5b8",
+      "raw_sha256": "c5660842af4a7d40c28d6baaae560857e6623acf39ff901b551027834165a5b8"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/host-receipt.json",
+      "published_sha256": "8cfd5742b980431b0732e9d5df4f271a6819726d63a4ae83f8385e8e549aca32",
+      "raw_sha256": "8cfd5742b980431b0732e9d5df4f271a6819726d63a4ae83f8385e8e549aca32"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/host.db",
+      "published_sha256": "842e8caa9e91b8c3ff34c68bd1d0d36a3f22fd9a4a878a60473ce707450ef39d",
+      "raw_sha256": "4d1eefcf49922cf495db588ae706762af97c4657cc434db5c04daa38d3ac9b29"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/ready.json",
+      "published_sha256": "7a21598536a8b80af6a4aabbab22f62b224b432bec5ec7e16125e03220a593aa",
+      "raw_sha256": "7a21598536a8b80af6a4aabbab22f62b224b432bec5ec7e16125e03220a593aa"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/report.json",
+      "published_sha256": "90790d0e9221dd3373c618bd9e546e064d8b13b7bcb9389f35ebb2cfb851eda1",
+      "raw_sha256": "90790d0e9221dd3373c618bd9e546e064d8b13b7bcb9389f35ebb2cfb851eda1"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/backstop/production-hooks.jsonl",
+      "published_sha256": "cb94171fe2d7383978772164e02cc536bf657a8b1337a68c2b35e393ae487099",
+      "raw_sha256": "cb94171fe2d7383978772164e02cc536bf657a8b1337a68c2b35e393ae487099"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/backstop/report.json",
+      "published_sha256": "264f89e63e95c11d3bdd6567246bcd04d5bb465d367fd76f07f5f45d7edd7197",
+      "raw_sha256": "264f89e63e95c11d3bdd6567246bcd04d5bb465d367fd76f07f5f45d7edd7197"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/backstop/requests.json",
+      "published_sha256": "091d27b4c22da4b65d5924e4f53904dec236dca17ddf2a6151c913a2f268109f",
+      "raw_sha256": "091d27b4c22da4b65d5924e4f53904dec236dca17ddf2a6151c913a2f268109f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/backstop/store/-state-backstop-work__76e9bbdc-045c-4dc9-83bb-c14d8f405891.jsonl",
+      "published_sha256": "8cfc6133ddc014592abcf5dd51369951933192e53d1692396df1e32f77968fc9",
+      "raw_sha256": "8cfc6133ddc014592abcf5dd51369951933192e53d1692396df1e32f77968fc9"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/container-output.txt",
+      "published_sha256": "81b7f0108aca1fd208df0a6526110e1456eec5a264975ddd43114e1ab8150c6d",
+      "raw_sha256": "81b7f0108aca1fd208df0a6526110e1456eec5a264975ddd43114e1ab8150c6d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/host-receipt.json",
+      "published_sha256": "4cfbb08d0c9930523a17af256cdfe3881815454915a12d8f2f1adb3858c3129d",
+      "raw_sha256": "4cfbb08d0c9930523a17af256cdfe3881815454915a12d8f2f1adb3858c3129d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/host.db",
+      "published_sha256": "920a696f98b1d0b533b8445e3ac9bc3f11c5c2fb04cf5520380a0633f5e97327",
+      "raw_sha256": "2cb0e431b88abf453f441a5d9c255d92d4994d4ef2976afe0147b0d6a4b9ca4d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/ready.json",
+      "published_sha256": "436622adcf13c0f7529d2d414bd5d6fd1e55db1556c070f94c7f841fed875d64",
+      "raw_sha256": "436622adcf13c0f7529d2d414bd5d6fd1e55db1556c070f94c7f841fed875d64"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/report.json",
+      "published_sha256": "ce33e0c8fe8946422c3f4faf4adfc6b959293ab19f7223c110935acaee9a5f2a",
+      "raw_sha256": "ce33e0c8fe8946422c3f4faf4adfc6b959293ab19f7223c110935acaee9a5f2a"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/hooks.jsonl",
+      "published_sha256": "48c99506d87819ec1e6f7dc7c23ebdde1c51de6740a218a4df943316e1432087",
+      "raw_sha256": "48c99506d87819ec1e6f7dc7c23ebdde1c51de6740a218a4df943316e1432087"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/production-hooks.jsonl",
+      "published_sha256": "0d83a8bb3912671345c608436322cd4128bb1fe921d415bfa64f146da687e5c3",
+      "raw_sha256": "0d83a8bb3912671345c608436322cd4128bb1fe921d415bfa64f146da687e5c3"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/report.json",
+      "published_sha256": "f6373cb9718bb896fc77a6c0ff7375a0063551414cadea3e9d5d7fa85ae43ca9",
+      "raw_sha256": "f6373cb9718bb896fc77a6c0ff7375a0063551414cadea3e9d5d7fa85ae43ca9"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/requests.json",
+      "published_sha256": "cde7eaa8b3109f245310e7f4729ae6700f0c09ddbff2229681b8ddcd985b9412",
+      "raw_sha256": "cde7eaa8b3109f245310e7f4729ae6700f0c09ddbff2229681b8ddcd985b9412"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/store/-state-backstop-work__7b37ccd0-3cf7-42a7-9401-f65fe1817bc7.jsonl",
+      "published_sha256": "745157bead27a4b03f1e43b8cc9c7af9cf46b4f215fed3620b10b9bab6d7d626",
+      "raw_sha256": "745157bead27a4b03f1e43b8cc9c7af9cf46b4f215fed3620b10b9bab6d7d626"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/container-output.txt",
+      "published_sha256": "730ba45d1004b13df1c1b93ff7b092683a1c5347fda783bfd6d9d11c28bcf19d",
+      "raw_sha256": "730ba45d1004b13df1c1b93ff7b092683a1c5347fda783bfd6d9d11c28bcf19d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/host-receipt.json",
+      "published_sha256": "4992a9b98c62100b480700ceea40f7c111688a122ce5d4908271ff9feb583405",
+      "raw_sha256": "4992a9b98c62100b480700ceea40f7c111688a122ce5d4908271ff9feb583405"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/host.db",
+      "published_sha256": "556e9a460961aebbd8937a955ac4059d04be831d6602ca29dd9ee5c93e38bff4",
+      "raw_sha256": "9a7ae36a8497e1a60d892d47e78aae49121af9149aeb681be252ad5ae7b74764"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/ready.json",
+      "published_sha256": "4a48c5dd6f984ab0244d0db3939a217cc8e48c1667a752e186c5908de2f4834c",
+      "raw_sha256": "4a48c5dd6f984ab0244d0db3939a217cc8e48c1667a752e186c5908de2f4834c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/report.json",
+      "published_sha256": "d2e89c552399f7c143f5b783d3f3b33fcabe2fbf726390630da43851b96ef456",
+      "raw_sha256": "d2e89c552399f7c143f5b783d3f3b33fcabe2fbf726390630da43851b96ef456"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/hooks.jsonl",
+      "published_sha256": "db3f7bb4d65ab0d7e56d0baafdcaf4622ab8641d8173b37794e2648a66287716",
+      "raw_sha256": "db3f7bb4d65ab0d7e56d0baafdcaf4622ab8641d8173b37794e2648a66287716"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/production-hooks.jsonl",
+      "published_sha256": "7304651f94b3207b1d6742c5672d3c66806796e039fa47e1770e49c51a18c7c2",
+      "raw_sha256": "7304651f94b3207b1d6742c5672d3c66806796e039fa47e1770e49c51a18c7c2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/report.json",
+      "published_sha256": "1efc0012aecfa679228120024693f2886a5c9605c84b8c2a89dfd232ea7580dc",
+      "raw_sha256": "1efc0012aecfa679228120024693f2886a5c9605c84b8c2a89dfd232ea7580dc"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/requests.json",
+      "published_sha256": "7185bf6d90e78eb39a62ef713b2eb204c7f8fcc781c1d5bf8bba966781597ea0",
+      "raw_sha256": "7185bf6d90e78eb39a62ef713b2eb204c7f8fcc781c1d5bf8bba966781597ea0"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/store/-state-backstop-work__ee267064-711d-45f3-8c21-542f9113eace.jsonl",
+      "published_sha256": "c9190e09f1aa2ae36cb78da53c097489e0644820d6d6d116f1d064b9fc671495",
+      "raw_sha256": "c9190e09f1aa2ae36cb78da53c097489e0644820d6d6d116f1d064b9fc671495"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/container-output.txt",
+      "published_sha256": "e6a09e92f11d84b1b8854d1f3a3acb56e6624c29fcd75f4f5f6257b535328a59",
+      "raw_sha256": "e6a09e92f11d84b1b8854d1f3a3acb56e6624c29fcd75f4f5f6257b535328a59"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/host-receipt.json",
+      "published_sha256": "b10a4cfb4ee9df1e99a0b78f8279f476a69e3edeb4f32fb6b7731f1c1fa183bc",
+      "raw_sha256": "b10a4cfb4ee9df1e99a0b78f8279f476a69e3edeb4f32fb6b7731f1c1fa183bc"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/host.db",
+      "published_sha256": "467672b3d50c5f94692140b701a0226b4372ada8ab197de97273088f57f09979",
+      "raw_sha256": "b5d95b1bd51a222ede833f8b011bfded7d3f1a43f458079f11413e5d3bf2630b"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/ready.json",
+      "published_sha256": "52b24c1dda459533eb5bdcbe1ab3a298d2cfca3191cce08046c8b0716cecb1a8",
+      "raw_sha256": "52b24c1dda459533eb5bdcbe1ab3a298d2cfca3191cce08046c8b0716cecb1a8"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/report.json",
+      "published_sha256": "17d61708cd4252097442a0e2c175185a6d7f9d1769033920099c987f0b3beee2",
+      "raw_sha256": "17d61708cd4252097442a0e2c175185a6d7f9d1769033920099c987f0b3beee2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/hooks.jsonl",
+      "published_sha256": "bd3f79560617a35d169efe0b58b4d48cdcb32ed19b1842cbe6fbe8676f3977be",
+      "raw_sha256": "bd3f79560617a35d169efe0b58b4d48cdcb32ed19b1842cbe6fbe8676f3977be"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/production-hooks.jsonl",
+      "published_sha256": "93d946e23bc03d021f46263cc8cb56bf79750843691d3c031276107321b0b683",
+      "raw_sha256": "93d946e23bc03d021f46263cc8cb56bf79750843691d3c031276107321b0b683"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/report.json",
+      "published_sha256": "cfa13259f91f83c79afdfe884299ebf27bac15414e3a7da1539bd54e4380c6dc",
+      "raw_sha256": "cfa13259f91f83c79afdfe884299ebf27bac15414e3a7da1539bd54e4380c6dc"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/requests.json",
+      "published_sha256": "644b4a3b9ec6c63764fe63ee8a285f552b3d3970657dad997e5d8ad90b0bd5b3",
+      "raw_sha256": "644b4a3b9ec6c63764fe63ee8a285f552b3d3970657dad997e5d8ad90b0bd5b3"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/store/-state-backstop-work__217f11bc-cd12-4d64-a13f-bf4cf1b20a98.jsonl",
+      "published_sha256": "cbf0319dff49dd9e07a6ab2354a5aed6a6a5b2a1327d43c7d2e3b08fc05369e7",
+      "raw_sha256": "cbf0319dff49dd9e07a6ab2354a5aed6a6a5b2a1327d43c7d2e3b08fc05369e7"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/work/edit.txt",
+      "published_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe",
+      "raw_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/container-output.txt",
+      "published_sha256": "3e886175008ea1ce3b5daf4f46f7f53fe0ce26b71dab3570e747c42c4afbae6d",
+      "raw_sha256": "3e886175008ea1ce3b5daf4f46f7f53fe0ce26b71dab3570e747c42c4afbae6d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/host-receipt.json",
+      "published_sha256": "7ff30c7f8e2de971a2098ca366f860a997476bf9365094c45ef1cc8997697c1b",
+      "raw_sha256": "7ff30c7f8e2de971a2098ca366f860a997476bf9365094c45ef1cc8997697c1b"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/host.db",
+      "published_sha256": "7520a7e5431ba0f0e93dbe510a56431a647501a7fdac96793ef232cfb8fbacd7",
+      "raw_sha256": "0bbf54dd74415ef0c3808684ad3bcecf8b1304d15196b0995a7f6b326dd91771"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/ready.json",
+      "published_sha256": "049cca208c838615d957566ccbe660746b616e7f384a62b54785bf3d737af8c6",
+      "raw_sha256": "049cca208c838615d957566ccbe660746b616e7f384a62b54785bf3d737af8c6"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/report.json",
+      "published_sha256": "86f21b76234284bc9479e3fa52e38d682526a0851616f97814311db08d34faca",
+      "raw_sha256": "86f21b76234284bc9479e3fa52e38d682526a0851616f97814311db08d34faca"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/hooks.jsonl",
+      "published_sha256": "5c542d5a4d0dbdeddade1d43b846a80d408811a1ef98ad7385cbeaefdeba4242",
+      "raw_sha256": "5c542d5a4d0dbdeddade1d43b846a80d408811a1ef98ad7385cbeaefdeba4242"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/production-hooks.jsonl",
+      "published_sha256": "8ceabcf55567332c3c7c2650782c525779a6d67333aadc3e7078e968f3c1b65e",
+      "raw_sha256": "8ceabcf55567332c3c7c2650782c525779a6d67333aadc3e7078e968f3c1b65e"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/report.json",
+      "published_sha256": "09fb6cbb3679a92af0ae0f14a550617d4ad68d4ff36e108d4589ded71a8210f1",
+      "raw_sha256": "09fb6cbb3679a92af0ae0f14a550617d4ad68d4ff36e108d4589ded71a8210f1"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/requests.json",
+      "published_sha256": "7cc6730c42a2e4c314982cbe4285b0a4e5df61b0753f986ff21044bb8dbe232c",
+      "raw_sha256": "7cc6730c42a2e4c314982cbe4285b0a4e5df61b0753f986ff21044bb8dbe232c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/store/-state-backstop-work__cbae0cc9-610f-4770-b021-965b8497c36f.jsonl",
+      "published_sha256": "7f47001965160c422d9d2c8f89bf76d6728e224edeedc25856509875e8d3d324",
+      "raw_sha256": "7f47001965160c422d9d2c8f89bf76d6728e224edeedc25856509875e8d3d324"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/work/.claude/skills/backstop-probe/SKILL.md",
+      "published_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0",
+      "raw_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/container-output.txt",
+      "published_sha256": "49eb9b63e41d5c1be6cb042808671d8fc4d5ff8714f4865f90e967dd11ec863f",
+      "raw_sha256": "49eb9b63e41d5c1be6cb042808671d8fc4d5ff8714f4865f90e967dd11ec863f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/host-receipt.json",
+      "published_sha256": "f211cb904cb473cea36b2df215d587fc464ec2344947a6ff94219fa765b3f306",
+      "raw_sha256": "f211cb904cb473cea36b2df215d587fc464ec2344947a6ff94219fa765b3f306"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/host.db",
+      "published_sha256": "2e3c7ba7dabd079a611dbeece2c8d4d9319788e2ff5a4acb70de64447e14ce05",
+      "raw_sha256": "16009fda3510261389a21a8fcbe146e55fc9a400a8e3f1635f6806a967e33c64"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/ready.json",
+      "published_sha256": "10249d0d73e51c8e798d20fd13a0b7088eaa1fdfb5aa39d2f032900078fa0a0c",
+      "raw_sha256": "10249d0d73e51c8e798d20fd13a0b7088eaa1fdfb5aa39d2f032900078fa0a0c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/report.json",
+      "published_sha256": "a20d4a0560143236d9e9cd390975b21efc36c2091e64a857c39144ae47f020a1",
+      "raw_sha256": "a20d4a0560143236d9e9cd390975b21efc36c2091e64a857c39144ae47f020a1"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/hooks.jsonl",
+      "published_sha256": "3da04cb90b5c64bab6c3f8ebf7f42f428995efcbabeb679679c0b7c82769ad1f",
+      "raw_sha256": "3da04cb90b5c64bab6c3f8ebf7f42f428995efcbabeb679679c0b7c82769ad1f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/production-hooks.jsonl",
+      "published_sha256": "db1abde5a2542cc73e437f58cdf0f0c6ee434c6faa86939f354234a9377bf565",
+      "raw_sha256": "db1abde5a2542cc73e437f58cdf0f0c6ee434c6faa86939f354234a9377bf565"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/report.json",
+      "published_sha256": "be8403c5bd70fbb8ab1b0bd86ce51ad63743149bca8a00578ffb099863b35b5f",
+      "raw_sha256": "be8403c5bd70fbb8ab1b0bd86ce51ad63743149bca8a00578ffb099863b35b5f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/requests.json",
+      "published_sha256": "a4d467ad5e3da87d71ceb1d325be38d8be941b44616a09805037f38d7f8365d8",
+      "raw_sha256": "a4d467ad5e3da87d71ceb1d325be38d8be941b44616a09805037f38d7f8365d8"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/store/-state-backstop-work__2e25362c-45e8-4395-bd89-ef7417ecea5c.jsonl",
+      "published_sha256": "99341083a993b6e6fb4a50b3f7fdb32a14d6b59db52dc1eea209129e60237d3d",
+      "raw_sha256": "99341083a993b6e6fb4a50b3f7fdb32a14d6b59db52dc1eea209129e60237d3d"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/work/.claude/skills/backstop-probe/SKILL.md",
+      "published_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0",
+      "raw_sha256": "8c9eae60fc20d1c88aefa721bac81fea353363d20840002731e889ebf1e397c0"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/work/marker.txt",
+      "published_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe",
+      "raw_sha256": "8281ebf9e8d234e0389b0f52e7dd334954c89ecf4d5de1b16cfbc67e2ebd1cfe"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/work/second.txt",
+      "published_sha256": "cb0532c3945174afc065b9d249dd4b2ebc149295b5b97748f9721c0a1582b850",
+      "raw_sha256": "cb0532c3945174afc065b9d249dd4b2ebc149295b5b97748f9721c0a1582b850"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/container-output.txt",
+      "published_sha256": "e8de479ca8ed7f1998a135b22a585594246eaf9955cb8571820ff504eaded941",
+      "raw_sha256": "e8de479ca8ed7f1998a135b22a585594246eaf9955cb8571820ff504eaded941"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/host-receipt.json",
+      "published_sha256": "dab09c22961fa9f9bd93fea4c45adee1d145ac63835a5f47490945bcd014308e",
+      "raw_sha256": "dab09c22961fa9f9bd93fea4c45adee1d145ac63835a5f47490945bcd014308e"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/host.db",
+      "published_sha256": "c4b6d80edf2e298eba4fb070623691c56a565f93c31338d469247547474dc303",
+      "raw_sha256": "6f64735c2dbf36dc95d89596efefd4648411fdcf6c13c4e94adc6ee57f30aea2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/ready.json",
+      "published_sha256": "daab6bd5828c5faca85d2462b03eb03c2288d7e5cd7a01397802f508f4802ed2",
+      "raw_sha256": "daab6bd5828c5faca85d2462b03eb03c2288d7e5cd7a01397802f508f4802ed2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/report.json",
+      "published_sha256": "f9a8a4d7c605ebadd8e1ee0397596fea3232035aff93b162548a9b55004a8dfd",
+      "raw_sha256": "f9a8a4d7c605ebadd8e1ee0397596fea3232035aff93b162548a9b55004a8dfd"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/backstop/hooks.jsonl",
+      "published_sha256": "2de31de3c58e2a4cfcfde0c46616e76aeb4f23bfa8fa48c5500d2eb187d1188e",
+      "raw_sha256": "2de31de3c58e2a4cfcfde0c46616e76aeb4f23bfa8fa48c5500d2eb187d1188e"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/backstop/report.json",
+      "published_sha256": "3a5f0efdec364d07616e135315a64f124f80d9d4f292164f806aee746985760e",
+      "raw_sha256": "3a5f0efdec364d07616e135315a64f124f80d9d4f292164f806aee746985760e"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/backstop/requests.json",
+      "published_sha256": "6628a811c91e65654713e5c0036797198c7d438333cecf623dec521b5229c6e3",
+      "raw_sha256": "6628a811c91e65654713e5c0036797198c7d438333cecf623dec521b5229c6e3"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/backstop/store/-state-backstop-work__5c150cd4-6175-4f6c-bd81-c87deaa21681.jsonl",
+      "published_sha256": "cf5606798b125fed10500e8f79202de09bdf5ecede04718e74c00d986b2ffac0",
+      "raw_sha256": "cf5606798b125fed10500e8f79202de09bdf5ecede04718e74c00d986b2ffac0"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/container-output.txt",
+      "published_sha256": "7e3390fdff4f0102f391a7e328b80076e444e036616ce6aaaa8659ae79fd002e",
+      "raw_sha256": "7e3390fdff4f0102f391a7e328b80076e444e036616ce6aaaa8659ae79fd002e"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/host-receipt.json",
+      "published_sha256": "59e117054de438879a0e1accee645f6355186f7ba9401c013a1eee6fc0668413",
+      "raw_sha256": "59e117054de438879a0e1accee645f6355186f7ba9401c013a1eee6fc0668413"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/host.db",
+      "published_sha256": "08a5136bd1962fa2f0d509a21b9b569959bf5ae683232091eda3f136e01220e1",
+      "raw_sha256": "53b8addf2b43a851f46e5d46b51f1d974058bb17e4e359bc41de0b543abc4285"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/ready.json",
+      "published_sha256": "45176ebf8355feb0025ca757d4f6a6548da068532115b682744b202f74057b5e",
+      "raw_sha256": "45176ebf8355feb0025ca757d4f6a6548da068532115b682744b202f74057b5e"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/report.json",
+      "published_sha256": "97ecf92f41bfa62ff7585ab756daeb66f61d5aba38fd4e28425e14859fe0eb84",
+      "raw_sha256": "97ecf92f41bfa62ff7585ab756daeb66f61d5aba38fd4e28425e14859fe0eb84"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/backstop/production-hooks.jsonl",
+      "published_sha256": "bd99612f5c7807f4b6d2d7274f4a290b044b728aea7f731866b3cdb512d0d78b",
+      "raw_sha256": "bd99612f5c7807f4b6d2d7274f4a290b044b728aea7f731866b3cdb512d0d78b"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/backstop/report.json",
+      "published_sha256": "19686ca68e6d138b4e83d6f3d0893e890214fa46d509e9f8e3fd3fd7d3062038",
+      "raw_sha256": "19686ca68e6d138b4e83d6f3d0893e890214fa46d509e9f8e3fd3fd7d3062038"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/backstop/requests.json",
+      "published_sha256": "3111016ad09138ddda32c39f7d75404ca73d5469f70f2e533860b9b2135597a1",
+      "raw_sha256": "3111016ad09138ddda32c39f7d75404ca73d5469f70f2e533860b9b2135597a1"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/backstop/store/-state-backstop-work__b68b2598-3c87-414a-a2a0-fc08fd3a0159.jsonl",
+      "published_sha256": "06c836b499648c1b07633d41f7f94c0b70a0d62c5be7dd09304a2b84407357b5",
+      "raw_sha256": "06c836b499648c1b07633d41f7f94c0b70a0d62c5be7dd09304a2b84407357b5"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/backstop/work/edit.txt",
+      "published_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450",
+      "raw_sha256": "be9351741a8155d01fd028d158546f1005e73ceeb0bb2d093335feac4144e450"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/bash-process.json",
+      "published_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f",
+      "raw_sha256": "153e93a2cae58440e4ac8d9824af25a3a04ca846f93f65d5089ccf89040b769f"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/container-output.txt",
+      "published_sha256": "d26c95d29733ae5190fa869f3d806cfc9a1daa9a13ca207486bb23202604eb58",
+      "raw_sha256": "d26c95d29733ae5190fa869f3d806cfc9a1daa9a13ca207486bb23202604eb58"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/effect-invocation.json",
+      "published_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce",
+      "raw_sha256": "f89b1f013a4dd70e1ae5849a91727e2420d9be7ffa89bd77eeacb393a0a98bce"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/host-receipt.json",
+      "published_sha256": "8ed63b0e9ba8cb447a47b9148d88506b094971f64defc38542a762b530868270",
+      "raw_sha256": "8ed63b0e9ba8cb447a47b9148d88506b094971f64defc38542a762b530868270"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/host.db",
+      "published_sha256": "19fd7e5bf387ee0af35e2eaea1ff62f61bf1702a346793a022badc2d744381d5",
+      "raw_sha256": "78a139d827fe6d29d32aa0ac6e8420a86e992f5f0cc3444715742d7b2fd447b1"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/park-command-check/bash-park.json",
+      "published_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2",
+      "raw_sha256": "18f451dbfd49cf6d426d4e543ef50f58cd37c4bb95486dda4ccc761e3fe6e3f2"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/park-command-check/effect-invocation.json",
+      "published_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c",
+      "raw_sha256": "5dea6d102b2bfb55605dd811fb87bf1da6c35ee3fd023231f34c9aa740b6f72c"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/ready.json",
+      "published_sha256": "13f71f3874371b7cf106529822585bda817ebc19a15721792160313bcb254b62",
+      "raw_sha256": "13f71f3874371b7cf106529822585bda817ebc19a15721792160313bcb254b62"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/report.json",
+      "published_sha256": "f67e6c9d61b5afb331061b49719b64d8f7e65b9e57328afd96ae5caeede658fd",
+      "raw_sha256": "f67e6c9d61b5afb331061b49719b64d8f7e65b9e57328afd96ae5caeede658fd"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/work/marker.txt",
+      "published_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599",
+      "raw_sha256": "2c19b8a5202e5de72dbc1e174633c1fdcec1a07b7faf3e14b5f2c50a40164599"
     }
   ],
   "format": 1,
@@ -4021,7 +5596,283 @@
     {
       "path": "budget-offline/request-final/proof/request/ordinary/engine/config/backups/.claude.json.backup.1790984322385",
       "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/backstop/config/backups/.claude.json.backup.1791252320761",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-defer/backstop/config/projects/-state-backstop-work/8002ff8a-accc-44a6-a262-4775ea3ef984.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/backstop/config/backups/.claude.json.backup.1791252314475",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-deny/backstop/config/projects/-state-backstop-work/7082f4ac-824c-4e66-a5bb-cd037e25fa54.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/backstop/config/backups/.claude.json.backup.1791252308320",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-bash-read/backstop/config/projects/-state-backstop-work/e26e2f2a-fa24-4cf4-9cf1-f122c50e639b.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/backstop/config/backups/.claude.json.backup.1791252301786",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-combined-options/backstop/config/projects/-state-backstop-work/fae65091-e47c-4dc8-862f-ef4a06f200e8.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/backstop/config/backups/.claude.json.backup.1791252295708",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-extra-args/backstop/config/projects/-state-backstop-work/fb3e32d9-037b-4892-9a17-81407e80c422.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/config/backups/.claude.json.backup.1791252282629",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-removed/backstop/config/projects/-state-backstop-work/6982b2a5-495c-4763-a327-fd822cda5f6f.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/config/backups/.claude.json.backup.1791252340301",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-batch/backstop/config/projects/-state-backstop-work/ff0c0991-c752-42a0-bcff-e8c8d1321635.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/config/backups/.claude.json.backup.1791252327398",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-grant/backstop/config/projects/-state-backstop-work/618cefe7-f9fc-4bd6-8754-da5d8daa2bcf.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/config/backups/.claude.json.backup.1791252333764",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-skill-removed/backstop/config/projects/-state-backstop-work/03e52e67-53c0-45fb-84e4-1523cff597b1.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/backstop/config/backups/.claude.json.backup.1791252289074",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-system-prompt/backstop/config/projects/-state-backstop-work/e491c7d4-682e-44aa-9cfa-db6707f87e95.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/backstop/config/backups/.claude.json.backup.1791252276406",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-backstop-20261005/accepted-write/backstop/config/projects/-state-backstop-work/e48eb7fe-6593-4b9a-9e8f-385012433834.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/backstop/config/backups/.claude.json.backup.1791254456708",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-combined-options/backstop/config/projects/-state-backstop-work/6800aa48-2411-4bf2-a6de-3e7ec544e163.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/backstop/config/backups/.claude.json.backup.1791254444033",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-extra-args/backstop/config/projects/-state-backstop-work/576af789-cd36-4c0e-a308-361eeec444da.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/backstop/config/backups/.claude.json.backup.1791254431079",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-ask-system-prompt/backstop/config/projects/-state-backstop-work/6f9350e1-d5d9-4364-8a54-7cb044a2e92e.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/backstop/config/backups/.claude.json.backup.1791254341075",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask/backstop/config/projects/-state-backstop-work/6d079ed5-eca1-48e1-988a-144b0fb14dd5.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/backstop/config/backups/.claude.json.backup.1791254353950",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-defer/backstop/config/projects/-state-backstop-work/76e9bbdc-045c-4dc9-83bb-c14d8f405891.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/config/backups/.claude.json.backup.1791254379372",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-bash-ask-removed/backstop/config/projects/-state-backstop-work/7b37ccd0-3cf7-42a7-9401-f65fe1817bc7.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/config/backups/.claude.json.backup.1791254404760",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-ask/backstop/config/projects/-state-backstop-work/ee267064-711d-45f3-8c21-542f9113eace.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/config/backups/.claude.json.backup.1791254417836",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-edit-removed/backstop/config/projects/-state-backstop-work/217f11bc-cd12-4d64-a13f-bf4cf1b20a98.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/config/backups/.claude.json.backup.1791254300442",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-batch/backstop/config/projects/-state-backstop-work/cbae0cc9-610f-4770-b021-965b8497c36f.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/config/backups/.claude.json.backup.1791254366622",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-skill-ask-removed-batch/backstop/config/projects/-state-backstop-work/2e25362c-45e8-4395-bd89-ef7417ecea5c.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/backstop/config/backups/.claude.json.backup.1791254327956",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask/backstop/config/projects/-state-backstop-work/5c150cd4-6175-4f6c-bd81-c87deaa21681.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/backstop/config/.claude.json",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/backstop/config/backups/.claude.json.backup.1791254392017",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
+    },
+    {
+      "path": "preventive-ask-20261005/verified-write-ask-defer/backstop/config/projects/-state-backstop-work/b68b2598-3c87-414a-a2a0-fc08fd3a0159.jsonl",
+      "reason": "Harness configuration is retained locally and not inspected or exported"
     }
   ],
-  "scope": "Full structured evidence exports; session context and machine identifiers sanitized. Historical dispositions and original call/result identities are retained."
+  "scope": "Selected complete structured evidence exports: the original published set, final preventive proofs, historically cited accepted cases and verification. Intermediate exports and original raw archives remain preserved locally. Session context and machine identifiers are sanitized; historical dispositions and original call/result identities are retained."
 }

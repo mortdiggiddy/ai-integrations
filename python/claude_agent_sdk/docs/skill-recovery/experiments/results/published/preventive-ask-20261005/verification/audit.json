@@ -1,0 +1,142 @@
+{
+  "verified_cases": [
+    {
+      "case": "ask-combined-options",
+      "status": "PASS",
+      "callback_denials": [
+        "Write"
+      ],
+      "unrecorded_effects": null,
+      "negative_control": false,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "ask-extra-args",
+      "status": "PASS",
+      "callback_denials": [
+        "Write"
+      ],
+      "unrecorded_effects": null,
+      "negative_control": false,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "ask-system-prompt",
+      "status": "PASS",
+      "callback_denials": [
+        "Write"
+      ],
+      "unrecorded_effects": null,
+      "negative_control": false,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "bash-ask",
+      "status": "PASS",
+      "callback_denials": [
+        "Bash"
+      ],
+      "unrecorded_effects": null,
+      "negative_control": false,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "bash-ask-defer",
+      "status": "PASS",
+      "callback_denials": [],
+      "unrecorded_effects": null,
+      "negative_control": false,
+      "deferral_preserved": true,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "bash-ask-removed",
+      "status": "PASS",
+      "callback_denials": [],
+      "unrecorded_effects": null,
+      "negative_control": true,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "edit-ask",
+      "status": "PASS",
+      "callback_denials": [
+        "Edit"
+      ],
+      "unrecorded_effects": null,
+      "negative_control": false,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "edit-removed",
+      "status": "PASS",
+      "callback_denials": [],
+      "unrecorded_effects": null,
+      "negative_control": true,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "skill-ask-batch",
+      "status": "PASS",
+      "callback_denials": [
+        "Write",
+        "Write"
+      ],
+      "unrecorded_effects": 0,
+      "negative_control": false,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "skill-ask-removed-batch",
+      "status": "PASS",
+      "callback_denials": [],
+      "unrecorded_effects": 2,
+      "negative_control": true,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "write-ask",
+      "status": "PASS",
+      "callback_denials": [
+        "Write"
+      ],
+      "unrecorded_effects": null,
+      "negative_control": false,
+      "deferral_preserved": null,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    },
+    {
+      "case": "write-ask-defer",
+      "status": "PASS",
+      "callback_denials": [],
+      "unrecorded_effects": null,
+      "negative_control": false,
+      "deferral_preserved": true,
+      "source_hashes_verified": true,
+      "host_cleanup_verified": true
+    }
+  ],
+  "source_and_cleanup_audit": "PASS",
+  "model_calls": 0,
+  "provider_spend_usd": 0
+}

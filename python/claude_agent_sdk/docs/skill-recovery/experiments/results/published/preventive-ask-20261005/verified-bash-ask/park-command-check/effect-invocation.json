@@ -1,0 +1,1 @@
+{"accepted": {"pending": {"name": "Bash", "id": "original-park", "input": {"command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30"}}}, "activity_attempt": 1}

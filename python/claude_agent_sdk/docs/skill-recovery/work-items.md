@@ -105,14 +105,16 @@ Inspection checkpoint (2026-10-02): `tests/helpers/offline_harness.py` always re
 
 ## Policy and pause identity
 
-Status: IN PROGRESS
+Status: DONE (2026-10-05 local)
+
+All six local construction criteria and the applicable coordination prerequisite are demonstrated; this work item is DONE. [The preventive criterion disposition](evidence.md#preventive-backstop-criterion-disposition-2026-10-05) owns the construction closure. [Scoped permission backstop closure](evidence.md#scoped-permission-backstop-closure-2026-10-05) proves independent prevention on the qualified configuration, and result delivery remains complete. The mandatory engine exit review still precedes Phase 2.
 
 Dependencies: [specification](spec.md). Construction precedes the preventive control tests; real engine completion also requires [preventive control](#preventive-control), which is an exit check rather than a construction blocker.
 
 - [x] Offline policy tests cover exact retained names, immutable input/digest binding, option snapshots and legacy behavior when the option is unset. See [evidence](evidence.md).
 - [x] The implemented hook denies unvalidated Skill, binds the first paused request to ID, exact name and canonical inputs, re defers an identical reannouncement without replacement, denies every different call after pause and every call after stop, and rejects mismatched checkpoint requests in offline tests.
 - [x] Offline option tests put effects in offered tools but outside `allowed_tools`, pin `default` permissions, reject unreviewed or nested option escapes, and cover the effect observation detector. These are not real engine prevention results.
-- [ ] Complete the real engine permission, missing interception and result delivery proofs linked below before marking the policy complete. Effects cannot complete through the policy until its executor or an explicitly adopted alternative exists.
+- [x] Complete the real engine permission, missing interception and result delivery proofs linked below before marking the policy complete. Proof: [scoped prevention](evidence.md#scoped-permission-backstop-closure-2026-10-05) and [production result delivery](evidence.md#production-result-delivery-closure-2026-10-05), using the approved original pending call recovery route. General effect execution remains a later work item.
 
 ## Bounded recovery comparison
 
@@ -177,15 +179,17 @@ Dependencies: [integration adoption](#integration-adoption), [real model harness
 
 ## Preventive control
 
-Status: OPEN
+Status: DONE (2026-10-05 local)
+
+[The scoped permission closure](evidence.md#scoped-permission-backstop-closure-2026-10-05) demonstrates all nine applicable dispositions after the authorized production fix. No decision interception now leaves Write, Edit, read only Bash and the diagnostic two-Write skill grant denied. Removing the controls exposes the expected failures; ordinary Write/Bash deferral and retained recovery guards remain valid. The conditional fallback is unused because the current positive prevention cases pass. The historical one-effect detection bound remains false and is not accepted as a fallback.
 
 Dependencies: [policy and pause identity](#policy-and-pause-identity), [real model harness](#real-model-harness), selected route from [integration adoption](#integration-adoption).
 
-- [ ] With a no decision hook and independent control present, no file/effect marker is created and permission refusal is observed. Removing the control makes the intended negative test fail.
-- [ ] For adopted Mods, rerun missing/disabled/throwing/over budget/malformed controls across offered child and plugin routes. Explicitly exclude unsupported routes rather than infer global coverage.
-- [ ] Observe read only Bash under `default`; if it bypasses control, test a scoped denial or exclude Bash until a supported prevention mechanism exists.
-- [ ] Test skill permission grants and each pinned option escape, including raw flags and nested caller mutations. Every permitted option leaves the prevention tests passing.
-- [ ] If prevention fails, record the weaker detected violation boundary and redesign the affected guarantee before continuing. A post execution detector never counts as prevention.
+- [x] With a no decision hook and independent control present, no Write marker is created and exact production permission refusal is observed. Removing the control raises the same preventive assertion; actual engine bytes and the failing traceback are retained.
+- [x] For adopted Mods, rerun missing/disabled/throwing/over budget/malformed controls across offered child and plugin routes. No Mods route is adopted; the approved rejection and child/plugin scope exclusions satisfy this conditional criterion without claiming safety.
+- [x] Observe read only Bash under `default`; if it bypasses control, test a scoped denial or exclude Bash until a supported prevention mechanism exists. The observed scoped denial blocks execution but also prevents accepted deferral, so it is not production policy.
+- [x] Test skill permission grants and each pinned option escape, including raw flags and nested caller mutations. Both permitted keys and their combination leave the no decision Write test passing; five pinned fields and all 49 excluded SDK keys reject construction. Skill grant bypass is a recorded defect, with package grant rejection retained as the design requirement.
+- [x] If prevention fails, record the weaker detected violation boundary and redesign the affected guarantee before continuing. A post execution detector never counts as prevention. The scoped ask rules remedy the observed failures with new positive and negative engine proof; the old detection-only fallback remains refuted and unused.
 
 ## Validated skill invocation
 

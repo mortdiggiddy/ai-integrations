@@ -1,0 +1,1 @@
+{"id": "toolu_probe_1", "name": "Write", "event": "PreToolUse", "decision": "defer", "reason": null}

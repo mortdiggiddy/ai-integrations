@@ -1,0 +1,2 @@
+{"id": "toolu_probe_1", "name": "Skill", "event": "PostToolUse", "decision": "none", "reason": null}
+{"id": "toolu_probe_2", "name": "Write", "event": "PostToolUse", "decision": "none", "reason": null}
