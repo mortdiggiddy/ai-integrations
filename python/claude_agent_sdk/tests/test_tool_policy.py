@@ -78,6 +78,50 @@ def test_policy_names_are_exact() -> None:
             ToolPolicyEntry(name, "effect", "claimed")
 
 
+def test_policy_log_records_read_order_and_denials_without_inputs(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("TCA_POLICY_MODE", "1")
+    monkeypatch.setenv("TCA_HOOK_DIR", str(tmp_path))
+    log = tmp_path / "decisions.jsonl"
+    monkeypatch.setenv("TCA_HOOK_LOG", str(log))
+    (tmp_path / "policy.json").write_text(
+        json.dumps(
+            {
+                "entries": json.loads(_policy().canonical_json()),
+                "workspace_root": str(tmp_path),
+            }
+        )
+    )
+    for name, identity, event, decision in (
+        ("Read", "before", "PreToolUse", None),
+        ("Read", "before", "PostToolUse", None),
+        ("Write", "effect", "PreToolUse", "defer"),
+        ("Write", "extra", "PreToolUse", "deny"),
+        ("Read", "after", "PreToolUse", "deny"),
+    ):
+        answer = _defer_hook.decide(
+            {
+                "tool_name": name,
+                "tool_use_id": identity,
+                "hook_event_name": event,
+                "tool_input": {"file_path": "inside", "content": "private-input"},
+            }
+        )
+        assert answer.get("permissionDecision") == decision
+    rows = [json.loads(line) for line in log.read_text().splitlines()]
+    assert [row["id"] for row in rows] == [
+        "before",
+        "before",
+        "effect",
+        "extra",
+        "after",
+    ]
+    assert rows[1]["event"] == "PostToolUse"
+    assert rows[-1]["reason"] == _defer_hook.ONE_AT_A_TIME
+    assert "private-input" not in log.read_text()
+
+
 @pytest.mark.parametrize(
     "name,classification,mode",
     [

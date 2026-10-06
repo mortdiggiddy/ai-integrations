@@ -9,6 +9,7 @@ the way the Workflow does, and throw an attempt's result away at the worst momen
 from __future__ import annotations
 
 import asyncio
+import os
 import threading
 import uuid
 from pathlib import Path
@@ -137,13 +138,29 @@ async def test_retry_after_the_attempt_reached_the_next_pause(tmp_path: Path) ->
     check_clean(api, runner)
 
 
-async def test_retry_after_a_crash_during_the_model_call(tmp_path: Path) -> None:
+async def test_retry_after_a_crash_during_the_model_call(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """The attempt delivered the tool result, then died waiting for Claude."""
     holder: list[FakeMessagesAPI] = []
     api = start_api(holder)
     policy = api.decide
     arrived, release = threading.Event(), threading.Event()
     requests = 0
+    from claude_agent_sdk._internal.transport.subprocess_cli import (
+        SubprocessCLITransport,
+    )
+
+    from temporalio.claude_agent_sdk._session_control import SessionShutdownUnresolved
+
+    children: list[Any] = []
+    connect = SubprocessCLITransport.connect
+
+    async def tracked_connect(transport: Any) -> None:
+        await connect(transport)
+        children.append(transport._process)
+
+    monkeypatch.setattr(SubprocessCLITransport, "connect", tracked_connect)
 
     def hang_once(body: dict[str, Any]) -> list[dict[str, Any]]:
         nonlocal requests
@@ -164,8 +181,16 @@ async def test_retry_after_a_crash_during_the_model_call(tmp_path: Path) -> None
         crashed = asyncio.ensure_future(runner.run(retry, 1))
         assert await asyncio.to_thread(arrived.wait, 60)
         crashed.cancel()  # the Worker dies in the middle of the model call
-        with pytest.raises(asyncio.CancelledError):
+        with pytest.raises((asyncio.CancelledError, SessionShutdownUnresolved)):
             await crashed
+        with pytest.raises(SessionShutdownUnresolved):
+            await runner.run(retry, 2)
+        for child in children:
+            assert child.returncode is not None
+            with pytest.raises(ProcessLookupError):
+                os.kill(child.pid, 0)
+        runner = make_runner(api, tmp_path)
+        s.runner = runner
         release.set()
         second = await s.run(retry, 2)
         assert second.deferred is not None and second.deferred.input == {"n": 2}

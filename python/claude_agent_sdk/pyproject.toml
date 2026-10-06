@@ -91,8 +91,14 @@ include = ["src", "tests"]
 
 # Resolve the plugin's own modules from source rather than from site-packages.
 [[tool.pyright.executionEnvironments]]
+root = "tests/session_control"
+extraPaths = ["src", "docs/skill-recovery/experiments"]
+# Scripted SDK and Docker interfaces retain the real parameter names.
+reportUnusedParameter = "none"
+
+[[tool.pyright.executionEnvironments]]
 root = "."
-extraPaths = ["src"]
+extraPaths = ["src", "docs/skill-recovery/experiments"]
 
 [tool.pydocstyle]
 convention = "google"

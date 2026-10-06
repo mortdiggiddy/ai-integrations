@@ -45,7 +45,7 @@ import tempfile
 import unicodedata
 import uuid
 import warnings
-from collections.abc import AsyncIterator
+from collections.abc import AsyncGenerator, AsyncIterator, Awaitable, Callable
 from pathlib import Path
 from typing import Any, cast
 
@@ -65,7 +65,6 @@ from claude_agent_sdk import (
     create_sdk_mcp_server,
     fork_session_via_store,
     project_key_for_directory,
-    query,
     tool,
 )
 from temporalio import activity
@@ -74,6 +73,19 @@ from ._defer_hook import STOPPED, _read_paused_request, _request_identity
 from ._events import emit
 from ._models import DeferredCall, SegmentInput, SegmentOutput, ToolOutcome, ToolSpec
 from ._policy import ToolPolicy, policy_extra_options
+from ._session_control import SdkSessionControl, SessionShutdownUnresolved
+
+
+async def query(
+    *, prompt: Any, options: ClaudeAgentOptions, control: SdkSessionControl
+) -> AsyncGenerator[Any, None]:
+    """Stream one owned client exchange through the runner's testable SDK boundary."""
+    stream = control.stream(prompt, options)
+    try:
+        async for message in stream:
+            yield message
+    finally:
+        await stream.aclose()
 
 
 async def _deny_policy_permission(
@@ -131,6 +143,8 @@ _RESERVED_OPTIONS = {
     "cwd": "ClaudeAgentSdkRunner(cwd=...)",
     "cli_path": "ClaudeAgentSdkRunner(cli_path=...)",
     "session_store": "ClaudeAgentSdkRunner(session_store=...)",
+    "recover_pending_tool": "ClaudeAgentSdkRunner(recover_pending_tool=...)",
+    "parallel_tool_recovery": "serial recovery is managed by the runner",
 }
 """``extra_options`` keys the agent or the runner already sets, with where to set them."""
 
@@ -404,6 +418,8 @@ class _GuardedStore:
 def _guarded(inner: Any, session_id: str, checkpoint: str) -> Any:
     """``inner`` with the resume check, keeping only the optional methods it has."""
     namespace: dict[str, Any] = {}
+    if callable(getattr(inner, "append_if_unchanged", None)):
+        namespace["append_if_unchanged"] = _append_recovery_if_unchanged
     for name in _OPTIONAL_STORE_METHODS:
         # The rule the SDK applies: present, and not the protocol's default.
         present = getattr(inner, name, None) is not None
@@ -413,6 +429,24 @@ def _guarded(inner: Any, session_id: str, checkpoint: str) -> Any:
             namespace[name] = _forward(name)
     cls = type("GuardedSessionStore", (_GuardedStore,), namespace)
     return cls(inner, session_id, checkpoint)
+
+
+async def _append_recovery_if_unchanged(
+    self: _GuardedStore, key: Any, expected_last_uuid: str | None, entries: Any
+) -> bool:
+    """Advance the local resume guard only after a conditional recovery commit."""
+    if key.get("session_id") != self._session_id or key.get("subpath"):
+        raise ValueError("Recovery append requires the guarded main session")
+    await self.load(key)
+    if expected_last_uuid != self._checkpoint:
+        return False
+    new_checkpoint = _last_entry(entries)
+    if not new_checkpoint:
+        raise ValueError("Recovery append requires a transcript checkpoint")
+    committed = await self._inner.append_if_unchanged(key, expected_last_uuid, entries)
+    if committed:
+        self._checkpoint = new_checkpoint
+    return bool(committed)
 
 
 def _forward(name: str) -> Any:
@@ -436,18 +470,10 @@ def _hook_entry() -> dict[str, Any]:
     return {"type": "command", "command": sys.executable, "args": [str(hook)]}
 
 
-async def _stop_hooks_when_cancelled(hook_dir: str) -> None:
-    """Once the segment Activity is cancelled (or timed out), the hook denies every call.
-
-    The SDK gives the engine a few seconds to exit, and a cancel reaches the Worker
-    only with a heartbeat, so the engine could otherwise still run a tool after the
-    Workflow moved on.
-    """
+async def _stop_hooks_when_cancelled(control: SdkSessionControl) -> None:
+    """Deny hooks and request SDK interruption when Activity cancellation arrives."""
     await activity.wait_for_cancelled()
-    try:
-        Path(hook_dir, "stop").touch()
-    except OSError:
-        pass  # the folder is already gone, and the hook denies without it
+    control.request_stop()
 
 
 def _hook_said_stopped(message: UserMessage) -> bool:
@@ -495,6 +521,7 @@ class ClaudeAgentSdkRunner:
         model: str | None = None,
         max_budget_usd: float | None = None,
         tool_policy: ToolPolicy | None = None,
+        recover_pending_tool: Callable[[Any], Awaitable[ToolResultBlock]] | None = None,
     ) -> None:
         """Create the runner.
 
@@ -521,6 +548,10 @@ class ClaudeAgentSdkRunner:
             tool_policy: Optional runner bound inventory. When set, every segment
                 must carry the same policy. Policy extras are validated here.
                 When unset, a segment can opt in and is validated before startup.
+            recover_pending_tool: Optional SDK callback for serial recovery of an
+                accepted pending call on resume. Requires a bound tool policy, SDK
+                recovery support and a store with conditional append. The caller
+                validates workspace, outcome and host ownership before running.
 
         Raises:
             ValueError: If ``extra_options`` sets an option the plugin manages, or
@@ -529,6 +560,19 @@ class ClaudeAgentSdkRunner:
                 path, or a path given in another form than its real one).
         """
         _check_extra_options(extra_options or {})
+        if recover_pending_tool is not None:
+            if tool_policy is None or not callable(recover_pending_tool):
+                raise ValueError(
+                    "Pending recovery requires a callback and bound tool policy"
+                )
+            if not callable(getattr(session_store, "append_if_unchanged", None)):
+                raise ValueError("Pending recovery requires conditional session append")
+            fields = getattr(ClaudeAgentOptions, "__dataclass_fields__", {})
+            if not {"recover_pending_tool", "parallel_tool_recovery"} <= fields.keys():
+                raise ValueError(
+                    "Installed SDK does not support serial pending tool recovery"
+                )
+        self._recover_pending_tool = recover_pending_tool
         self._policy = tool_policy
         self._policy_extra = (
             policy_extra_options(extra_options or {})
@@ -560,6 +604,7 @@ class ClaudeAgentSdkRunner:
         self.stub_calls = 0
         """Durable tools the engine ran itself. Stays 0 while the engine honors defer."""
         self._versions: dict[str, str | None] = {}
+        self._session_controls: dict[str, SdkSessionControl] = {}
 
         def is_set(name: str) -> bool:
             value = self._env.get(name) or os.environ.get(name, "")
@@ -617,6 +662,10 @@ class ClaudeAgentSdkRunner:
         A segment that runs again continues in a copy of the session that ends at
         the checkpoint, because an unfinished attempt may have written after it.
         """
+        if self._recover_pending_tool is not None and (attempt != 1 or inp.fork):
+            raise ValueError(
+                "Pending recovery requires the original session and first attempt"
+            )
         if inp.checkpoint is None:  # nothing committed yet: a new session
             if attempt == 1:
                 return inp.session_id, False
@@ -660,7 +709,11 @@ class ClaudeAgentSdkRunner:
         stored = assistant_uuid is None or any(
             e.get("uuid") == assistant_uuid for e in entries
         )
-        leaf = _resume_point(entries, paused_call)
+        leaf = (
+            _last_entry(entries)
+            if self._recover_pending_tool is not None
+            else _resume_point(entries, paused_call)
+        )
         if not stored or leaf is None or leaf == resumed_at:  # nothing new stored
             raise RuntimeError(
                 f"The session store does not have this segment's turn (session "
@@ -685,6 +738,7 @@ class ClaudeAgentSdkRunner:
                 retries the segment).
         """
         policy = self._effective_policy(inp)
+        self._check_session_admission(inp.session_id)
         if policy is not None:
             policy_extra_options(
                 self._policy_extra
@@ -708,9 +762,38 @@ class ClaudeAgentSdkRunner:
                 inp, injected, session_id, resume, inp.checkpoint if in_place else None
             )
         except _SessionMoved:
+            if self._recover_pending_tool is not None:
+                raise
             # The session went on after the checkpoint (for example, the Workflow
             # was reset to an earlier point): continue in a copy that ends there.
             return await self._run_engine(inp, injected, await self._copy(inp), True)
+
+    def stop_session(self, session_id: str) -> None:
+        """Request interruption for an owned logical session without sending a prompt.
+
+        The host still owns fencing and process containment. A stopped session
+        cannot be reused through this runner, even after SDK closure.
+        """
+        control = self._session_controls.get(session_id)
+        if control is None:
+            raise ValueError("No SDK exchange is owned for this logical session")
+        control.request_stop()
+
+    def session_control(self, session_id: str) -> SdkSessionControl | None:
+        """Return retained SDK observations for the logical session's last exchange."""
+        return self._session_controls.get(session_id)
+
+    def _check_session_admission(self, session_id: str) -> None:
+        control = self._session_controls.get(session_id)
+        if control is not None and (
+            control.active
+            or control.state.stop_requested
+            or control.state.shutdown_unresolved
+        ):
+            raise SessionShutdownUnresolved(
+                "Previous SDK ownership or stop requires host teardown verification; "
+                "this runner cannot start a replacement"
+            )
 
     async def _run_engine(
         self,
@@ -725,6 +808,7 @@ class ClaudeAgentSdkRunner:
         Raises:
             _SessionMoved: If the session does not end at ``guard``.
         """
+        self._check_session_admission(inp.session_id)
         # Durable tools the engine ran itself (must stay empty).
         ran_inside: list[str] = []
         policy = self._effective_policy(inp)
@@ -746,6 +830,8 @@ class ClaudeAgentSdkRunner:
             return stub
 
         hook_dir = tempfile.mkdtemp(prefix="tca-hook-")
+        control = SdkSessionControl(hook_dir)
+        self._session_controls[inp.session_id] = control
         settings_file = Path(hook_dir) / "settings.json"
         if policy is not None:
             Path(hook_dir, "policy.json").write_text(
@@ -811,14 +897,15 @@ class ClaudeAgentSdkRunner:
         # When the Activity is cancelled or times out, deny every later tool call
         # while the SDK shuts the engine down.
         stopper = (
-            asyncio.ensure_future(_stop_hooks_when_cancelled(hook_dir))
+            asyncio.ensure_future(_stop_hooks_when_cancelled(control))
             if activity.in_activity()
             else None
         )
+        stream = query(
+            prompt=prompt, options=ClaudeAgentOptions(**options), control=control
+        )
         try:
-            async for message in query(
-                prompt=prompt, options=ClaudeAgentOptions(**options)
-            ):
+            async for message in stream:
                 if isinstance(message, MirrorErrorMessage):
                     store_error = message.error or "unknown error"
                 elif isinstance(message, SystemMessage) and message.subtype == "init":
@@ -881,6 +968,17 @@ class ClaudeAgentSdkRunner:
         finally:
             if stopper is not None:
                 stopper.cancel()
+                try:
+                    await stopper
+                except asyncio.CancelledError:
+                    pass
+            # A consumer failure must also close the owner before checkpointing.
+            if control.active:
+                control.request_stop()
+            try:
+                await stream.aclose()
+            finally:
+                await control.finish()
             if policy is not None:
                 marker = Path(hook_dir, "paused_call")
                 try:
@@ -900,6 +998,9 @@ class ClaudeAgentSdkRunner:
                 except (OSError, ValueError, KeyError, TypeError, RecursionError):
                     ran_inside.append("(unreadable execution observation)")
             shutil.rmtree(hook_dir, ignore_errors=True)  # the hook denies from now on
+
+        if control.state.stop_requested:
+            raise asyncio.CancelledError
 
         if policy is not None and ran_inside:
             return SegmentOutput(
@@ -1113,6 +1214,9 @@ class ClaudeAgentSdkRunner:
             options["max_budget_usd"] = self._max_budget  # safety cap per segment
         if resume:
             options["resume"] = session_id
+            if self._recover_pending_tool is not None:
+                options["recover_pending_tool"] = self._recover_pending_tool
+                options["parallel_tool_recovery"] = False
         else:
             options["session_id"] = session_id
         options.update(

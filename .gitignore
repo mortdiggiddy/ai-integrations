@@ -20,3 +20,7 @@ junit/
 # Local-only agent notes (see AGENTS.md)
 CLAUDE.local.md
 
+# Keep new raw experiment captures local; publish sanitized evidence projections.
+python/claude_agent_sdk/docs/skill-recovery/experiments/results/*
+!python/claude_agent_sdk/docs/skill-recovery/experiments/results/published/
+!python/claude_agent_sdk/docs/skill-recovery/experiments/results/published/**/*.log

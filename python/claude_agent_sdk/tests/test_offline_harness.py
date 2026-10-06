@@ -88,7 +88,9 @@ async def test_production_runner_receives_explicit_options_and_redacts(
     tmp_path: Path,
 ) -> None:
     config = HarnessConfig.from_environment(_environment())
-    harness = OfflineHarness(config, tmp_path, secrets=("synthetic-secret",))
+    harness = OfflineHarness(
+        config, tmp_path, secrets=("synthetic-secret",), initialize_ledger=True
+    )
     record = await harness.run(
         prompt="Question synthetic-secret", response="Answer synthetic-secret"
     )
@@ -118,19 +120,28 @@ async def test_production_runner_receives_explicit_options_and_redacts(
 async def test_cap_observation_never_reports_pass(
     tmp_path: Path, reported: dict[str, Any]
 ) -> None:
-    harness = OfflineHarness(HarnessConfig.from_environment(_environment()), tmp_path)
+    harness = OfflineHarness(
+        HarnessConfig.from_environment(_environment()), tmp_path, initialize_ledger=True
+    )
     record = await harness.run(prompt="Question", **reported)
     assert record.status == "cap_reached"
     assert record.token_cap_enforcement == "observed_after_result_only"
 
 
 async def test_cancellation_propagates_and_records_no_pass(tmp_path: Path) -> None:
-    harness = OfflineHarness(HarnessConfig.from_environment(_environment()), tmp_path)
+    harness = OfflineHarness(
+        HarnessConfig.from_environment(_environment()), tmp_path, initialize_ledger=True
+    )
     with pytest.raises(asyncio.CancelledError):
         await harness.run(prompt="Question", cancel=True)
     assert harness.last_record is not None
     assert harness.last_record.status == "cancelled"
-    assert harness.last_record.cost_usd == 0
+    assert harness.last_record.cost_usd is None
+    assert harness.last_record.input_tokens is None
+    assert harness.last_record.accounting_status == "unresolved"
+    reopened = OfflineHarness(harness.config, tmp_path)
+    with pytest.raises(RuntimeError, match="Unresolved"):
+        await reopened.run(prompt="Replacement")
 
 
 async def test_overlapping_runs_refuse_without_live_transport(
@@ -145,8 +156,8 @@ async def test_overlapping_runs_refuse_without_live_transport(
 
     monkeypatch.setattr(_runner, "query", forbidden_query)
     config = HarnessConfig.from_environment(_environment())
-    first = OfflineHarness(config, tmp_path / "first")
-    second = OfflineHarness(config, tmp_path / "second")
+    first = OfflineHarness(config, tmp_path / "first", initialize_ledger=True)
+    second = OfflineHarness(config, tmp_path / "second", initialize_ledger=True)
     results = await asyncio.gather(
         first.run(prompt="First"),
         second.run(prompt="Second"),

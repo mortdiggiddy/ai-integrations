@@ -10,6 +10,7 @@ again from its checkpoint, and every tool runs once.
 from __future__ import annotations
 
 import asyncio
+import os
 import uuid
 from collections import Counter
 from pathlib import Path
@@ -38,7 +39,7 @@ from tests.helpers.fake_messages_api import (
 from tests.refund import shop
 from tests.refund.policy import refund_policy
 from tests.refund.workflows import MANAGER, RefundAgentWorkflow
-from tests.test_crash import activity_completed, kill, start_worker
+from tests.test_crash import activity_completed, kill, start_worker, wait_until
 
 PROMPT = "Order A-1001 arrived broken, I want my money back."
 pytestmark = pytest.mark.timeout(240)
@@ -184,9 +185,9 @@ async def test_real_engine_crash_in_the_middle_of_a_segment(
 
 
 async def test_real_engine_segment_that_times_out_is_retried_cleanly(
-    client: Client, shop_dir: Path, tmp_path: Path
+    client: Client, shop_dir: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Attempt 1 hangs past its timeout and keeps running; attempt 2 must not build on it."""
+    """A timed out owner closes before a fresh Worker retries its checkpoint."""
     del shop_dir
     api = start_with_policy(count_policy)
     arrived, release = hang_on_request(api, 3)
@@ -198,6 +199,18 @@ async def test_real_engine_segment_that_times_out_is_retried_cleanly(
     )
     queue = f"zombie-{uuid.uuid4().hex[:8]}"
     options = TaskOptions(continue_as_new=False, live=True, segment_timeout=12)
+    from claude_agent_sdk._internal.transport.subprocess_cli import (
+        SubprocessCLITransport,
+    )
+
+    children: list[Any] = []
+    connect = SubprocessCLITransport.connect
+
+    async def tracked_connect(transport: Any) -> None:
+        await connect(transport)
+        children.append(transport._process)
+
+    monkeypatch.setattr(SubprocessCLITransport, "connect", tracked_connect)
     try:
         async with Worker(
             client,
@@ -205,6 +218,7 @@ async def test_real_engine_segment_that_times_out_is_retried_cleanly(
             workflows=[LongTaskWorkflow],
             activities=COUNTING,
             plugins=[ClaudeAgentPlugin(runner, heartbeat_every=1.0)],
+            max_concurrent_activities=1,
         ):
             handle = await client.start_workflow(
                 LongTaskWorkflow.run,
@@ -212,6 +226,29 @@ async def test_real_engine_segment_that_times_out_is_retried_cleanly(
                 id=queue,
                 task_queue=queue,
             )
+            assert await asyncio.to_thread(arrived.wait, 30)
+            await wait_until(
+                lambda: any(
+                    c.state.stop_requested for c in runner._session_controls.values()
+                ),
+                timeout=30,
+            )
+        for child in children:
+            assert child.returncode is not None
+            with pytest.raises(ProcessLookupError):
+                os.kill(child.pid, 0)
+        replacement = ClaudeAgentSdkRunner(
+            session_store=FileSessionStore(tmp_path / "sessions"),
+            cwd=str(tmp_path / "work"),
+            env=engine_env(api, str(tmp_path / "cfg")),
+        )
+        async with Worker(
+            client,
+            task_queue=queue,
+            workflows=[LongTaskWorkflow],
+            activities=COUNTING,
+            plugins=[ClaudeAgentPlugin(replacement, heartbeat_every=1.0)],
+        ):
             events = []
             async for event in follow_agent(client, queue):
                 events.append(event)
@@ -226,4 +263,4 @@ async def test_real_engine_segment_that_times_out_is_retried_cleanly(
     assert [e["detail"] for e in shop.executions("count")] == ["1", "2", "3"]
     retries = [e for e in events if e["type"] == "retry"]
     assert [(r["segment"], r["attempt"]) for r in retries] == [(2, 2)]
-    assert api.errors == [] and runner.stub_calls == 0
+    assert api.errors == [] and runner.stub_calls == 0 and replacement.stub_calls == 0

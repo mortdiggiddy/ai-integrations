@@ -61,7 +61,23 @@ def decide(event: dict[str, Any]) -> dict[str, Any]:
         The hook decision.
     """
     if os.environ.get("TCA_POLICY_MODE") == "1":
-        return _policy_decide(event)
+        policy_output = _policy_decide(event)
+        log = os.environ.get("TCA_HOOK_LOG")
+        if log:
+            with open(log, "a", encoding="utf-8") as handle:
+                handle.write(
+                    json.dumps(
+                        {
+                            "id": event.get("tool_use_id"),
+                            "name": event.get("tool_name"),
+                            "event": event.get("hook_event_name", "PreToolUse"),
+                            "decision": policy_output.get("permissionDecision", "none"),
+                            "reason": policy_output.get("permissionDecisionReason"),
+                        }
+                    )
+                    + "\n"
+                )
+        return policy_output
     tool_use_id = str(event.get("tool_use_id") or "")
     answered = set(os.environ.get("TCA_ANSWERED_IDS", "").split())
     run_dir = os.environ.get("TCA_HOOK_DIR")
