@@ -1,0 +1,37 @@
+{
+  "evidence_kind": "offline_source_lifecycle_and_policy_checks",
+  "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "python": "3.13.15",
+  "sdk": "0.2.162",
+  "temporalio": "1.33.0",
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "source_sha256": {
+    "src/temporalio/claude_agent_sdk/_runner.py": "9f06d775060dfd6a6b73fc7278b13531a8608a558fad2b9822aae9aff06bbc89",
+    "src/temporalio/claude_agent_sdk/_session_control.py": "4e671058be6d1638eecfccaf65fdab92feef2753f4f1ca3abd8cfd29f5bac8ea",
+    "tests/session_control/test_lifecycle.py": "f23eef4733c5bdbca2e34c68d9eecebd4e20bc86b92e5d81fd3bb19d69248f9c",
+    "tests/test_tool_policy.py": "4d0174e90cfc5d8924091744084699af6e24893d625fabe6ab354f9a6aa4281a"
+  },
+  "pytest": {
+    "exit_code": 0,
+    "lifecycle_passed": 23,
+    "policy_passed": 173,
+    "total_passed": 196,
+    "duration_seconds_reported": 1.68,
+    "warnings": 30,
+    "warning_kind": "Existing policy fixtures have no provider authentication; no credential was requested."
+  },
+  "focused_checks": {
+    "mypy": "Success: no issues found in 3 source files",
+    "ruff_check": "All checks passed!",
+    "ruff_format": "4 files already formatted",
+    "pydocstyle": "exit 0"
+  },
+  "model_calls": 0,
+  "engine_launches_in_tests": 0,
+  "provider_spend_usd": 0,
+  "installation_build_or_sync": false,
+  "installed_plugin_wheel_verified": false,
+  "live_engine_shutdown_or_recovery_proved": false,
+  "host_process_teardown_proved": false,
+  "phase_2_authorized": false
+}

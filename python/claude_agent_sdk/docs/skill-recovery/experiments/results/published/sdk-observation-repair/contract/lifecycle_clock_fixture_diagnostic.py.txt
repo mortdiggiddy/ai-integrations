@@ -1,0 +1,59 @@
+import sys,asyncio,copy,json,types,contextlib
+from pathlib import Path
+from unittest.mock import patch
+sys.path.insert(0,str(Path("python/claude_agent_sdk/docs/skill-recovery/experiments").resolve()))
+import sdk_shutdown_probe as p
+counter=0
+def inventory():
+ return dict(version=1,enumeration_completed=True,complete=True,errors=[],enumerated_pids=[1],processes=[dict(pid=1,start="100",comm="python",state="S")])
+class Host:
+ def __init__(self,path=None): self.stopped=False;self.observed=None;self.done=asyncio.Event()
+ def claim_runner(self,*args): return "runner"
+ def check_runner(self,*args): pass
+ def stop(self,*args): self.stopped=True
+ def observe(self,attempt,runner,state): self.observed=copy.deepcopy(state);self.done.set()
+async def case(fault):
+ global counter
+ host=Host(); gate=asyncio.Event(); calls=[]; owners=[]
+ class Options:
+  def __init__(self,**kwargs): pass
+ class Client:
+  def __init__(self,**kwargs): owners.append(asyncio.current_task())
+  async def action(self,name):
+   calls.append(name)
+   if fault==name: raise RuntimeError(name+" failed")
+   if fault==name+"_timeout": await gate.wait()
+  async def connect(self): await self.action("connect")
+  async def interrupt(self): await self.action("interrupt")
+  async def disconnect(self): await self.action("disconnect")
+ module=types.SimpleNamespace(ClaudeAgentOptions=Options,ClaudeSDKClient=Client)
+ with patch.dict(sys.modules,{"claude_agent_sdk":module}),patch.object(p,"inventory",inventory):
+  if not fault.endswith("_timeout"):
+   state=dict(stage="created",connected=False,sdk_closed=False,stop_requested=False,interrupt_acknowledged=False,shutdown_unresolved=False,prompt_submission_started=False,before_connect=inventory())
+   await p.lifecycle(host,"attempt","session","runner",state)
+   assert state["stage"]=="finished" and calls[-1]=="disconnect"
+   if fault=="valid":
+    assert state["connected"] and state["sdk_closed"] and state["interrupt_acknowledged"] and host.stopped
+   else:
+    field={"connect":"connect_error","interrupt":"interrupt_error","disconnect":"close_error"}[fault]
+    assert field in state and state["shutdown_unresolved"] and not p.classify_observations(state)["sdk_control_completed"],state
+   assert not state["prompt_submission_started"]
+  else:
+   tick=[0]
+   def mono(): tick[0]+=25;return tick[0]
+   with patch.object(p,"HostSession",lambda path:host),patch.object(p,"time",types.SimpleNamespace(monotonic=mono)),patch.object(p,"save",lambda *args:None),patch("builtins.print",lambda *args,**kwargs:None):
+    task=asyncio.create_task(p.child_control(types.SimpleNamespace(attempt="attempt",session="session")))
+    await asyncio.wait_for(host.done.wait(),2)
+    state=host.observed
+    expected={"connect_timeout":"connect","interrupt_timeout":"interrupt","disconnect_timeout":"disconnect"}[fault]
+    assert state["timeout_stage"]==expected and state["shutdown_unresolved"] and host.stopped,state
+    assert not state["sdk_closed"] and not state["prompt_submission_started"],state
+    owner=owners[0];assert not owner.done() and not owner.cancelled()
+    task.cancel()
+    with contextlib.suppress(asyncio.CancelledError):await task
+    gate.set();await asyncio.wait_for(owner,2)
+ counter+=1
+async def main():
+ for fault in ("valid","connect","interrupt","disconnect","connect_timeout","interrupt_timeout","disconnect_timeout"):await case(fault)
+asyncio.run(main())
+print(json.dumps(dict(supplemental_lifecycle_checks=counter,result="PASS")))

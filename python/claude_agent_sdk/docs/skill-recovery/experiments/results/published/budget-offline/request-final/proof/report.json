@@ -1,0 +1,140 @@
+{
+  "provider_spend_usd": 0,
+  "synthetic_only": true,
+  "batch_seconds_limit": 900,
+  "request_case_seconds_limit": 60,
+  "fake_provider_receipt_limit": 40,
+  "entry_gate": {
+    "status": "candidate-only",
+    "configuration": "ANTHROPIC_BASE_URL with literal synthetic API key, SDK env passthrough",
+    "source_observation": "SDK merges explicit env into CLI; provider HTTP gateway supplies admission before forwarding, not a private CLI hook",
+    "confinement": "network none; only loopback fake provider accepts single-use bound gateway receipt; no account login or credential mounts",
+    "subscription_route": "unproved; fake endpoint configuration is not an Enterprise admission API",
+    "official_source": "https://code.claude.com/docs/en/llm-gateway-connect",
+    "source_checked": "2026-10-02",
+    "options_signature": "(tools: list[str] | claude_agent_sdk.types.ToolsPreset | None = None, allowed_tools: list[str] = <factory>, system_prompt: str | claude_agent_sdk.types.SystemPromptPreset | claude_agent_sdk.types.SystemPromptCustom | claude_agent_sdk.types.SystemPromptFile | None = None, mcp_servers: dict[str, claude_agent_sdk.types.McpStdioServerConfig | claude_agent_sdk.types.McpSSEServerConfig | claude_agent_sdk.types.McpHttpServerConfig | claude_agent_sdk.types.McpSdkServerConfig] | str | pathlib._local.Path = <factory>, strict_mcp_config: bool = False, permission_mode: Optional[Literal['default', 'acceptEdits', 'plan', 'bypassPermissions', 'dontAsk', 'auto']] = None, continue_conversation: bool = False, resume: str | None = None, session_id: str | None = None, max_turns: int | None = None, max_budget_usd: float | None = None, disallowed_tools: list[str] = <factory>, model: str | None = None, fallback_model: str | None = None, betas: list[typing.Literal['context-1m-2025-08-07']] = <factory>, permission_prompt_tool_name: str | None = None, cwd: str | pathlib._local.Path | None = None, cli_path: str | pathlib._local.Path | None = None, settings: str | None = None, add_dirs: list[str | pathlib._local.Path] = <factory>, env: dict[str, str] = <factory>, extra_args: dict[str, str | None] = <factory>, max_buffer_size: int | None = None, debug_stderr: Any = <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>, stderr: collections.abc.Callable[[str], None] | None = None, can_use_tool: collections.abc.Callable[[str, dict[str, typing.Any], claude_agent_sdk.types.ToolPermissionContext], collections.abc.Awaitable[claude_agent_sdk.types.PermissionResultAllow | claude_agent_sdk.types.PermissionResultDeny]] | None = None, hooks: dict[typing.Union[typing.Literal['PreToolUse'], typing.Literal['PostToolUse'], typing.Literal['PostToolUseFailure'], typing.Literal['UserPromptSubmit'], typing.Literal['Stop'], typing.Literal['SubagentStop'], typing.Literal['PreCompact'], typing.Literal['Notification'], typing.Literal['SubagentStart'], typing.Literal['PermissionRequest']], list[claude_agent_sdk.types.HookMatcher]] | None = None, user: str | None = None, include_partial_messages: bool = False, include_hook_events: bool = False, forward_subagent_text: bool = False, verbatim_prompts: bool = False, fork_session: bool = False, resume_session_at: str | None = None, resume_drops_turn: str | None = None, agents: dict[str, claude_agent_sdk.types.AgentDefinition] | None = None, setting_sources: list[typing.Literal['user', 'project', 'local']] | None = None, skills: Union[list[str], Literal['all'], NoneType] = None, sandbox: claude_agent_sdk.types.SandboxSettings | None = None, plugins: list[claude_agent_sdk.types.SdkPluginConfig] = <factory>, max_thinking_tokens: int | None = None, thinking: claude_agent_sdk.types.ThinkingConfigAdaptive | claude_agent_sdk.types.ThinkingConfigEnabled | claude_agent_sdk.types.ThinkingConfigDisabled | None = None, effort: Optional[Literal['low', 'medium', 'high', 'xhigh', 'max']] = None, output_format: dict[str, typing.Any] | None = None, enable_file_checkpointing: bool = False, session_store: claude_agent_sdk.types.SessionStore | None = None, recover_pending_tool: collections.abc.Callable[[claude_agent_sdk.types.PendingToolUse], collections.abc.Awaitable[claude_agent_sdk.types.ToolResultBlock]] | None = None, parallel_tool_recovery: bool = False, session_store_flush: Literal['batched', 'eager'] = 'batched', load_timeout_ms: int = 60000, task_budget: claude_agent_sdk.types.TaskBudget | None = None) -> None",
+    "runtime_proof": "unexecuted at entry gate"
+  },
+  "request": {
+    "status": "passed",
+    "cases": [
+      {
+        "name": "ordinary",
+        "status": "passed",
+        "synthetic_only": true,
+        "sdk_error": null,
+        "stream_events": 10,
+        "admissions": 1,
+        "provider_receipts": 1,
+        "accepted_provider_requests": 1,
+        "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+        "elapsed_seconds": 1.2140576039964799
+      },
+      {
+        "name": "internal-continuation",
+        "status": "passed",
+        "synthetic_only": true,
+        "sdk_error": null,
+        "stream_events": 19,
+        "admissions": 2,
+        "provider_receipts": 2,
+        "accepted_provider_requests": 2,
+        "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+        "elapsed_seconds": 0.9742274550080765
+      },
+      {
+        "name": "internal-retry",
+        "status": "passed",
+        "synthetic_only": true,
+        "sdk_error": null,
+        "stream_events": 11,
+        "admissions": 2,
+        "provider_receipts": 2,
+        "accepted_provider_requests": 2,
+        "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+        "elapsed_seconds": 1.432117254997138
+      },
+      {
+        "name": "insufficient",
+        "status": "passed",
+        "synthetic_only": true,
+        "sdk_error": "ResultError: Claude Code returned an error result: API Error: 400 Insufficient cumulative request envelope (exit code: 1)",
+        "stream_events": 4,
+        "admissions": 0,
+        "provider_receipts": 0,
+        "accepted_provider_requests": 0,
+        "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+        "elapsed_seconds": 1.0124214449897408
+      },
+      {
+        "name": "last-allowance-contention",
+        "status": "passed",
+        "synthetic_only": true,
+        "process_statuses": [
+          400,
+          200
+        ],
+        "admissions": 1,
+        "provider_receipts": 1,
+        "accepted_provider_requests": 1,
+        "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+        "elapsed_seconds": 1.9565435190161224
+      },
+      {
+        "name": "gateway-faults",
+        "status": "passed",
+        "synthetic_only": true,
+        "refusals": [
+          "reject",
+          "timeout",
+          "crash",
+          "absent"
+        ],
+        "admissions": 0,
+        "provider_receipts": 0,
+        "accepted_provider_requests": 0,
+        "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+        "elapsed_seconds": 1.0138975669979118
+      },
+      {
+        "name": "loss-after-admission",
+        "status": "passed",
+        "synthetic_only": true,
+        "admissions": 1,
+        "provider_receipts": 0,
+        "accepted_provider_requests": 0,
+        "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+        "elapsed_seconds": 1.0114607390132733
+      },
+      {
+        "name": "bypass",
+        "status": "passed",
+        "synthetic_only": true,
+        "endpoint_bypass": {
+          "sdk_error": "ResultError: Claude Code returned an error result: Failed to authenticate. API Error: 403 {\"error\":\"missing, forged, replayed or mismatched admission receipt\"} (exit code: 1)",
+          "stream_events": 4
+        },
+        "changed_model": {
+          "sdk_error": "ResultError: Claude Code returned an error result: API Error: 400 Model or output envelope mismatch (exit code: 1)",
+          "stream_events": 4
+        },
+        "inherited_selection": {
+          "sdk_error": null,
+          "stream_events": 10
+        },
+        "negative_control": "receipt requirement removed: provider accepted unadmitted work, prevention assertion broke",
+        "negative_control_receipts": 1,
+        "admissions": 2,
+        "provider_receipts": 7,
+        "accepted_provider_requests": 2,
+        "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+        "elapsed_seconds": 2.2983337470213883
+      }
+    ],
+    "provider_receipts": 14,
+    "limits": "Confined synthetic API route only; subscription routing, real tokens, currency and billing unproved."
+  },
+  "elapsed_seconds": 13.472700474027079,
+  "scope": "affected request arm only",
+  "status": "passed"
+}

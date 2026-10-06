@@ -1,0 +1,1890 @@
+uv run pytest -n auto --dist=worksteal -n 4
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>/python/claude_agent_sdk
+configfile: pyproject.toml
+testpaths: tests
+plugins: pretty-1.3.0, anyio-4.15.1, timeout-2.4.0, rerunfailures-16.6.1, xdist-3.8.0, asyncio-0.21.2
+timeout: 60.0s
+timeout method: signal
+timeout func_only: True
+asyncio: mode=Mode.AUTO
+created: 4/4 workers
+4 workers [489 items]
+
+........................................................................ [ 14%]
+........................................s............................... [ 29%]
+........................................................................ [ 44%]
+........................................................................ [ 58%]
+.........................................F                               [ 67%]tests/test_workflow_engine.py:46 test_real_engine_refund_with_approval[clean]. [ 67%]
+.F                                                                       [ 68%]tests/test_hardening.py:432 test_a_background_subagent_does_not_keep_the_engine_runningF [ 68%]
+                                                                         [ 68%]tests/test_workflow_engine.py:46 test_real_engine_refund_with_approval[crash-after-refund]. [ 68%]
+......F                                                                  [ 69%]tests/test_workflow_engine.py:129 test_real_engine_crash_in_the_middle_of_a_segment. [ 70%]
+.......F                                                                 [ 71%]tests/test_workflow_engine.py:185 test_real_engine_segment_that_times_out_is_retried_cleanly. [ 71%]
+..............................................................F          [ 84%]tests/test_endless.py:183 test_real_engine_session_continues_across_runs. [ 85%]
+..F                                                                      [ 85%]tests/test_engine.py:87 test_engine_pauses_at_every_durable_call_and_resumes. [ 85%]
+F                                                                        [ 86%]tests/test_engine.py:109 test_parallel_calls_are_serialized_not_lost. [ 86%]
+...F                                                                     [ 87%]tests/test_retries.py:111 test_retry_after_the_attempt_reached_the_next_pause. [ 87%]
+...F                                                                     [ 88%]tests/test_engine.py:230 test_builtin_tools_run_inside_the_segment[max-turns]. [ 88%]
+F                                                                        [ 88%]tests/test_engine.py:230 test_builtin_tools_run_inside_the_segment[max-budget]. [ 88%]
+F                                                                        [ 88%]tests/test_live_output.py:119 test_real_engine_text_streams_live. [ 89%]
+....................................F                                    [ 96%]tests/test_retries.py:139 test_retry_after_a_crash_during_the_model_call. [ 96%]
+F                                                                        [ 97%]tests/test_external_storage.py:83 test_real_engine_reads_a_large_result_from_external_storageF [ 97%]
+                                                                         [ 97%]tests/test_retries.py:182 test_retry_of_a_new_task_on_the_same_session. [ 97%]
+....F                                                                    [ 98%]tests/test_retries.py:206 test_next_task_after_a_failed_one_answers_the_waiting_callF [ 98%]
+                                                                         [ 98%]tests/test_retries.py:351 test_parallel_calls_in_a_resumed_session_keep_every_result[retried]. [ 98%]
+.F                                                                       [ 99%]tests/test_retries.py:263 test_a_stale_checkpoint_continues_in_a_copyF [ 99%]
+                                                                         [ 99%]<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/_pytest/unraisableexception.py:33: RuntimeWarning: coroutine '_WorkflowInstanceImpl._apply_initialize_workflow.<locals>.run_workflow' was never awaited
+  gc.collect()
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+tests/test_retries.py:396 test_a_builtin_call_after_a_pause_waits_for_its_result. [ 99%]
+F                                                                        [100%]tests/test_retries.py:351 test_parallel_calls_in_a_resumed_session_keep_every_result[in-place] [100%]
+=================================== FAILURES ===================================
+_________________ test_real_engine_refund_with_approval[clean] _________________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+client = <temporalio.client._client.Client object at 0x7760d14a1090>
+address = '127.0.0.1:42335'
+shop_dir = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_real_engine_refund_with_a0/shop')
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_real_engine_refund_with_a0')
+crash = False
+
+    @pytest.mark.parametrize("crash", [False, True], ids=["clean", "crash-after-refund"])
+    async def test_real_engine_refund_with_approval(
+        client: Client, address: str, shop_dir: Path, tmp_path: Path, crash: bool
+    ) -> None:
+        api = start_with_policy(refund_policy)
+        queue = f"e2e-{uuid.uuid4().hex[:8]}"
+        shared = {
+            "SHOP_DIR": str(shop_dir),
+            "SESSION_DIR": str(tmp_path / "sessions"),  # the store every Worker can reach
+            "ENGINE_CWD": str(tmp_path / "work"),
+        }
+        (tmp_path / "work").mkdir()
+
+        def machine(n: int) -> dict[str, str]:
+            return {**shared, **engine_env(api, str(tmp_path / f"claude-config-{n}"))}
+
+        workers = [
+            await start_worker(address, queue, machine(1), tmp_path / "w1.log", real=True)
+        ]
+        try:
+            handle = await client.start_workflow(
+                RefundAgentWorkflow.run, PROMPT, id=queue, task_queue=queue
+            )
+            pending = await wait_for_approval(handle, timeout=120)
+>           assert pending is not None, (tmp_path / "w1.log").read_text(errors="replace")[
+                -3000:
+            ]
+E           AssertionError: worker ready
+E
+E           assert None is not None
+
+tests/test_workflow_engine.py:71: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+---------------------------- Captured stderr setup -----------------------------
+time=2026-10-05T12:08:40.141 level=WARN msg="Cluster Id in Cluster Metadata config is not a valid uuid. Generating a new Cluster Id" component=metadata-initializer
+----------------------------- Captured stdout call -----------------------------
+Temporal CLI 1.8.3-server-1.32.0-162.0 (Server 1.32.0-162.0, UI 2.53.1)
+
+Temporal Server:      localhost:42335
+Temporal Persistence: in-memory
+Temporal Metrics:     http://localhost:40761/metrics
+_________ test_a_background_subagent_does_not_keep_the_engine_running __________
+[gw2] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw2/test_a_background_subagent_doe0')
+
+    async def test_a_background_subagent_does_not_keep_the_engine_running(
+        tmp_path: Path,
+    ) -> None:
+        """Claude delegates a note to a subagent, then calls a durable tool itself."""
+        work = tmp_path / "work"
+        work.mkdir()
+        model_calls: list[str] = []
+        holder: list[FakeMessagesAPI] = []
+
+        def decide(body: dict[str, Any]) -> list[dict[str, Any]]:
+            api = holder[0]
+            results = _results(body)
+            if SUBTASK in _first_user_text(body):
+                model_calls.append("subagent")
+                if results:
+                    return [{"type": "text", "text": "note written"}]
+                note = {"file_path": str(work / "note.txt"), "content": "x"}
+                return [
+                    {
+                        "type": "tool_use",
+                        "id": api.next_id("toolu_write"),
+                        "name": "Write",
+                        "input": note,
+                    }
+                ]
+            model_calls.append("main")
+            if not any(tid.startswith("toolu_task") for tid, _ in results):
+                task = {
+                    "description": "write a note",
+                    "prompt": SUBTASK,
+                    "subagent_type": "general-purpose",
+                }
+                return [
+                    {
+                        "type": "tool_use",
+                        "id": api.next_id("toolu_task"),
+                        "name": "Agent",
+                        "input": task,
+                    }
+                ]
+            if not any(tid.startswith("toolu_fake") and not err for tid, err in results):
+                return [api.tool_use("count", {"n": 1})]
+            return [{"type": "text", "text": "FINAL"}]
+
+        api = FakeMessagesAPI(decide)
+        holder.append(api)
+        api.start()
+        runner = ClaudeAgentSdkRunner(
+            session_store=FileSessionStore(tmp_path / "store"),
+            cwd=str(work),
+            env=engine_env(api, str(tmp_path / "cfg")),
+        )
+        spec = ToolSpec("count", "Count one step.", {"type": "object"})
+        builtin = ["Agent", "Write"]
+        session = str(uuid.uuid4())
+        try:
+            first = await asyncio.wait_for(
+                runner.run(
+                    SegmentInput(
+                        session_id=session,
+                        prompt="Delegate a note, then count.",
+                        tools=[spec],
+                        builtin_tools=builtin,
+                    ),
+                    1,
+                ),
+                90,
+            )
+            assert not first.is_error, first.error
+            assert first.deferred is not None and first.deferred.name == "count"
+            second = await runner.run(
+                SegmentInput(
+                    session_id=first.session_id,
+                    prompt=None,
+                    tools=[spec],
+                    builtin_tools=builtin,
+                    checkpoint=first.checkpoint,
+                    injected={first.deferred.id: ToolOutcome({"n": 1})},
+                    segment_index=1,
+                ),
+                1,
+            )
+        finally:
+            api.stop()
+>       assert second.result == "FINAL", second
+E       AssertionError: SegmentOutput(session_id='5ffe322e-e53c-4b1f-b16d-d65d9a192dad', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.")
+E       assert None == 'FINAL'
+E        +  where None = SegmentOutput(session_id='5ffe322e-e53c-4b1f-b16d-d65d9a192dad', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.").result
+
+tests/test_hardening.py:517: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:08:42 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:08:42 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:08:48 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:08:48 [   DEBUG] Read task cancelled (query.py:409)
+12:08:49 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:08:49 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:08:54 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:08:54 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:08:54 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:08:54 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:08:54 [   DEBUG] Read task cancelled (query.py:409)
+__________ test_real_engine_refund_with_approval[crash-after-refund] ___________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+client = <temporalio.client._client.Client object at 0x7760d14a1090>
+address = '127.0.0.1:42335'
+shop_dir = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_real_engine_refund_with_a1/shop')
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_real_engine_refund_with_a1')
+crash = True
+
+    @pytest.mark.parametrize("crash", [False, True], ids=["clean", "crash-after-refund"])
+    async def test_real_engine_refund_with_approval(
+        client: Client, address: str, shop_dir: Path, tmp_path: Path, crash: bool
+    ) -> None:
+        api = start_with_policy(refund_policy)
+        queue = f"e2e-{uuid.uuid4().hex[:8]}"
+        shared = {
+            "SHOP_DIR": str(shop_dir),
+            "SESSION_DIR": str(tmp_path / "sessions"),  # the store every Worker can reach
+            "ENGINE_CWD": str(tmp_path / "work"),
+        }
+        (tmp_path / "work").mkdir()
+
+        def machine(n: int) -> dict[str, str]:
+            return {**shared, **engine_env(api, str(tmp_path / f"claude-config-{n}"))}
+
+        workers = [
+            await start_worker(address, queue, machine(1), tmp_path / "w1.log", real=True)
+        ]
+        try:
+            handle = await client.start_workflow(
+                RefundAgentWorkflow.run, PROMPT, id=queue, task_queue=queue
+            )
+            pending = await wait_for_approval(handle, timeout=120)
+>           assert pending is not None, (tmp_path / "w1.log").read_text(errors="replace")[
+                -3000:
+            ]
+E           AssertionError: worker ready
+E
+E           assert None is not None
+
+tests/test_workflow_engine.py:71: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+______________ test_real_engine_crash_in_the_middle_of_a_segment _______________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+client = <temporalio.client._client.Client object at 0x7760d14a1090>
+address = '127.0.0.1:42335'
+shop_dir = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_real_engine_crash_in_the_0/shop')
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_real_engine_crash_in_the_0')
+
+    async def test_real_engine_crash_in_the_middle_of_a_segment(
+        client: Client, address: str, shop_dir: Path, tmp_path: Path
+    ) -> None:
+        """The Worker dies while Claude is answering; a new Worker redoes that segment cleanly."""
+        api = start_with_policy(refund_policy)
+        arrived, release = hang_on_request(api, 2)  # the turn after look_up_order's result
+        queue = f"midseg-{uuid.uuid4().hex[:8]}"
+        shared = {
+            "SHOP_DIR": str(shop_dir),
+            "SESSION_DIR": str(tmp_path / "sessions"),
+            "ENGINE_CWD": str(tmp_path / "work"),
+        }
+        (tmp_path / "work").mkdir()
+
+        def machine(n: int) -> dict[str, str]:
+            return {**shared, **engine_env(api, str(tmp_path / f"claude-config-{n}"))}
+
+        workers = [
+            await start_worker(address, queue, machine(1), tmp_path / "w1.log", real=True)
+        ]
+        try:
+            handle = await client.start_workflow(
+                RefundAgentWorkflow.run, PROMPT, id=queue, task_queue=queue
+            )
+            assert await asyncio.to_thread(arrived.wait, 120)
+            kill(workers[0])  # a power cut while the model call is in flight
+            workers.append(
+                await start_worker(
+                    address, queue, machine(2), tmp_path / "w2.log", real=True
+                )
+            )
+            pending = await wait_for_approval(handle, timeout=120)
+>           assert pending is not None and pending["name"] == "issue_refund"
+E           assert (None is not None)
+
+tests/test_workflow_engine.py:162: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+----------------------------- Captured stderr call -----------------------------
+time=2026-10-05T12:09:14.910 level=WARN msg="Slow gRPC call" wf-id=midseg-ec22542f wf-run-id="" duration=10.020659213s method=/temporal.api.workflowservice.v1.WorkflowService/QueryWorkflow
+time=2026-10-05T12:09:20.643 level=WARN msg="Slow gRPC call" wf-id=midseg-ec22542f wf-run-id="" duration=5.528633538s method=/temporal.api.workflowservice.v1.WorkflowService/QueryWorkflow
+__________ test_real_engine_segment_that_times_out_is_retried_cleanly __________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+temporalio.exceptions.ApplicationError: Claude run failed: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+
+The above exception was the direct cause of the following exception:
+
+client = <temporalio.client._client.Client object at 0x7760d14a1090>
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_real_engine_segment_that_0')
+
+    async def test_real_engine_segment_that_times_out_is_retried_cleanly(
+        client: Client, shop_dir: Path, tmp_path: Path
+    ) -> None:
+        """Attempt 1 hangs past its timeout and keeps running; attempt 2 must not build on it."""
+        del shop_dir
+        api = start_with_policy(count_policy)
+        arrived, release = hang_on_request(api, 3)
+        (tmp_path / "work").mkdir()
+        runner = ClaudeAgentSdkRunner(
+            session_store=FileSessionStore(tmp_path / "sessions"),
+            cwd=str(tmp_path / "work"),
+            env=engine_env(api, str(tmp_path / "cfg")),
+        )
+        queue = f"zombie-{uuid.uuid4().hex[:8]}"
+        options = TaskOptions(continue_as_new=False, live=True, segment_timeout=12)
+        try:
+            async with Worker(
+                client,
+                task_queue=queue,
+                workflows=[LongTaskWorkflow],
+                activities=COUNTING,
+                plugins=[ClaudeAgentPlugin(runner, heartbeat_every=1.0)],
+            ):
+                handle = await client.start_workflow(
+                    LongTaskWorkflow.run,
+                    args=["count to 3", options, None],
+                    id=queue,
+                    task_queue=queue,
+                )
+                events = []
+                async for event in follow_agent(client, queue):
+                    events.append(event)
+                    if event["type"] in ("done", "error"):
+                        break
+>               result = await asyncio.wait_for(handle.result(), 60)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_workflow_engine.py:220:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+../../../../.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py:507: in wait_for
+    return await fut
+           ^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.client._workflow.WorkflowHandle object at 0x7760d152b230>
+follow_runs = True, rpc_metadata = {}, rpc_timeout = None
+
+    async def result(
+        self,
+        *,
+        follow_runs: bool = True,
+        rpc_metadata: Mapping[str, str | bytes] = {},
+        rpc_timeout: timedelta | None = None,
+    ) -> ReturnType:
+        """Wait for result of the workflow.
+
+        This will use :py:attr:`result_run_id` if present to base the result on.
+        To use another run ID, a new handle must be created via
+        :py:meth:`Client.get_workflow_handle`.
+
+        Args:
+            follow_runs: If true (default), workflow runs will be continually
+                fetched, until the most recent one is found. If false, return
+                the result from the first run targeted by the request if that run
+                ends in a result, otherwise raise an exception.
+            rpc_metadata: Headers used on the RPC call. Keys here override
+                client-level RPC metadata keys.
+            rpc_timeout: Optional RPC deadline to set for each RPC call. Note,
+                this is the timeout for each history RPC call not this overall
+                function.
+
+        Returns:
+            Result of the workflow after being converted by the data converter.
+
+        Raises:
+            WorkflowFailureError: Workflow failed, was cancelled, was
+                terminated, or timed out. Use the
+                :py:attr:`WorkflowFailureError.cause` to see the underlying
+                reason.
+            Exception: Other possible failures during result fetching.
+        """
+        # We have to maintain our own run ID because it can change if we follow
+        # executions
+        hist_run_id = self._result_run_id
+        while True:
+            async for event in self._fetch_history_events_for_run(
+                hist_run_id,
+                wait_new_event=True,
+                event_filter_type=WorkflowHistoryEventFilterType.CLOSE_EVENT,
+                skip_archival=True,
+                rpc_metadata=rpc_metadata,
+                rpc_timeout=rpc_timeout,
+            ):
+                if event.HasField("workflow_execution_completed_event_attributes"):
+                    complete_attr = event.workflow_execution_completed_event_attributes
+                    # Follow execution
+                    if follow_runs and complete_attr.new_execution_run_id:
+                        hist_run_id = complete_attr.new_execution_run_id
+                        break
+                    # Ignoring anything after the first response like TypeScript
+                    type_hints = [self._result_type] if self._result_type else None
+                    results = await self._data_converter.decode_wrapper(
+                        complete_attr.result,
+                        type_hints,
+                    )
+                    if not results:
+                        return cast(ReturnType, None)
+                    elif len(results) > 1:
+                        warnings.warn(f"Expected single result, got {len(results)}")
+                    return cast(ReturnType, results[0])
+                elif event.HasField("workflow_execution_failed_event_attributes"):
+                    fail_attr = event.workflow_execution_failed_event_attributes
+                    # Follow execution
+                    if follow_runs and fail_attr.new_execution_run_id:
+                        hist_run_id = fail_attr.new_execution_run_id
+                        break
+>                   raise WorkflowFailureError(
+                        cause=await self._data_converter.decode_failure(
+                            fail_attr.failure
+                        ),
+E                       temporalio.client._exceptions.WorkflowFailureError: Workflow execution failed
+
+.venv/lib/python3.13/site-packages/temporalio/client/_workflow.py:255: WorkflowFailureError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:21 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d40-e8c0-719e-b890-4977187e6c82\x12\x0fzombie-7c7b1b63\x1a$01a10d41-8937-7f05-bb9d-87c55139aabe \x06(\x012\x011B\x12run_claude_segmentJ\x08\x08\x01\x10\xe6\x81@\x18\x01') (_activity.py:307)
+12:09:21 [   DEBUG] Starting activity ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:21 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:21 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:21 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:22 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:23 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:24 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:25 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:26 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:26 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:26 [   DEBUG] Read task cancelled (query.py:409)
+12:09:26 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d40-e8c0-719e-b890-4977187e6c82\022\017zombie-7c7b1b63\032$01a10d41-8937-7f05-bb9d-87c55139aabe \006(\0012\0011B\022run_claude_segmentJ\010\010\001\020\346\201@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":\"c93a44ff-1003-47d5-b71a-6b810a6562e5\",\"cost_usd\":0.0005600000000000001,\"deferred\":{\"id\":\"toolu_fake0001\",\"input\":{\"n\":1},\"name\":\"count\"},\"error\":null,\"is_error\":false,\"result\":null,\"session_id\":\"b8bc575f-bd4f-4d18-8ea3-cf5e3f18a0e9\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:26 [   DEBUG] Running activity count (token b'\n$01a10d40-e8c0-719e-b890-4977187e6c82\x12\x0fzombie-7c7b1b63\x1a$01a10d41-8937-7f05-bb9d-87c55139aabe \x11(\x012\x13tool-toolu_fake0001B\x05countJ\x08\x08\x01\x10\x83\x82@\x18\x01') (_activity.py:307)
+12:09:26 [   DEBUG] Starting activity ({'activity_id': 'tool-toolu_fake0001', 'activity_type': 'count', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:26 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d40-e8c0-719e-b890-4977187e6c82\022\017zombie-7c7b1b63\032$01a10d41-8937-7f05-bb9d-87c55139aabe \021(\0012\023tool-toolu_fake0001B\005countJ\010\010\001\020\203\202@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"n\":1}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:26 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d40-e8c0-719e-b890-4977187e6c82\x12\x0fzombie-7c7b1b63\x1a$01a10d41-8937-7f05-bb9d-87c55139aabe \x18(\x012\x013B\x12run_claude_segmentJ\x08\x08\x01\x10\x93\x82@\x18\x01') (_activity.py:307)
+12:09:26 [   DEBUG] Starting activity ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:26 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:26 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:26 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:27 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:28 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:29 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:30 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:31 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-7c7b1b63', 'workflow_id': 'zombie-7c7b1b63', 'workflow_run_id': '01a10d41-8937-7f05-bb9d-87c55139aabe', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:32 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:32 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:09:32 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:32 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:32 [   DEBUG] Read task cancelled (query.py:409)
+12:09:32 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d40-e8c0-719e-b890-4977187e6c82\022\017zombie-7c7b1b63\032$01a10d41-8937-7f05-bb9d-87c55139aabe \030(\0012\0013B\022run_claude_segmentJ\010\010\001\020\223\202@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":null,\"cost_usd\":0.0,\"deferred\":null,\"error\":\"Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin\'s test suite.\",\"is_error\":true,\"result\":null,\"session_id\":\"b8bc575f-bd4f-4d18-8ea3-cf5e3f18a0e9\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:33 [   DEBUG] Workflow raised failure with run ID 01a10d41-8937-7f05-bb9d-87c55139aabe (_workflow_instance.py:2771)
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 2750, in _run_top_level_workflow_function
+    await coro
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 1153, in run_workflow
+    result = await self._inbound.execute_workflow(input)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/testing/_workflow.py", line 584, in execute_workflow
+    return await super().execute_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_interceptor.py", line 401, in execute_workflow
+    return await self.next.execute_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 3144, in execute_workflow
+    return await input.run_fn(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/tests/endless/workflows.py", line 84, in run
+    return await self.agent.run(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 558, in run
+    return await self._loop()
+           ^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 615, in _loop
+    await self._fail(f"Claude run failed: {seg.error}")
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 689, in _fail
+    raise ApplicationError(message, non_retryable=True)
+temporalio.exceptions.ApplicationError: Claude run failed: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+12:09:33 [   DEBUG] Evicting workflow with run ID 01a10d41-8937-7f05-bb9d-87c55139aabe, message: Workflow completed (_workflow.py:540)
+12:09:33 [    INFO] Beginning worker shutdown, will wait 0:00:00 before cancelling activities (_worker.py:867)
+________________ test_real_engine_session_continues_across_runs ________________
+[gw1] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+temporalio.exceptions.ApplicationError: Claude run failed: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+
+The above exception was the direct cause of the following exception:
+
+limited = <temporalio.testing._workflow._EphemeralServerWorkflowEnvironment object at 0x7fe021c8ccd0>
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw1/test_real_engine_session_conti0')
+
+    @pytest.mark.timeout(300)
+    @pytest.mark.usefixtures("shop_dir")
+    async def test_real_engine_session_continues_across_runs(
+        limited: WorkflowEnvironment, tmp_path: Path
+    ) -> None:
+        """The real engine resumes the same Claude session in each new run."""
+        api = start_with_policy(count_policy)
+        (tmp_path / "work").mkdir()
+        runner = ClaudeAgentSdkRunner(
+            session_store=FileSessionStore(tmp_path / "sessions"),
+            cwd=str(tmp_path / "work"),
+            env=engine_env(api, str(tmp_path / "cfg")),
+        )
+        client, queue = limited.client, f"real-{uuid.uuid4().hex[:8]}"
+        try:
+            async with scripted_worker(client, queue, tmp_path, runner):
+                handle = await client.start_workflow(
+                    LongTaskWorkflow.run,
+                    args=["count to 12", TaskOptions(after_events=40), None],
+                    id=queue,
+                    task_queue=queue,
+                )
+>               result = await asyncio.wait_for(handle.result(), 280)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_endless.py:206:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+../../../../.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py:507: in wait_for
+    return await fut
+           ^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.client._workflow.WorkflowHandle object at 0x7fe0201b8190>
+follow_runs = True, rpc_metadata = {}, rpc_timeout = None
+
+    async def result(
+        self,
+        *,
+        follow_runs: bool = True,
+        rpc_metadata: Mapping[str, str | bytes] = {},
+        rpc_timeout: timedelta | None = None,
+    ) -> ReturnType:
+        """Wait for result of the workflow.
+
+        This will use :py:attr:`result_run_id` if present to base the result on.
+        To use another run ID, a new handle must be created via
+        :py:meth:`Client.get_workflow_handle`.
+
+        Args:
+            follow_runs: If true (default), workflow runs will be continually
+                fetched, until the most recent one is found. If false, return
+                the result from the first run targeted by the request if that run
+                ends in a result, otherwise raise an exception.
+            rpc_metadata: Headers used on the RPC call. Keys here override
+                client-level RPC metadata keys.
+            rpc_timeout: Optional RPC deadline to set for each RPC call. Note,
+                this is the timeout for each history RPC call not this overall
+                function.
+
+        Returns:
+            Result of the workflow after being converted by the data converter.
+
+        Raises:
+            WorkflowFailureError: Workflow failed, was cancelled, was
+                terminated, or timed out. Use the
+                :py:attr:`WorkflowFailureError.cause` to see the underlying
+                reason.
+            Exception: Other possible failures during result fetching.
+        """
+        # We have to maintain our own run ID because it can change if we follow
+        # executions
+        hist_run_id = self._result_run_id
+        while True:
+            async for event in self._fetch_history_events_for_run(
+                hist_run_id,
+                wait_new_event=True,
+                event_filter_type=WorkflowHistoryEventFilterType.CLOSE_EVENT,
+                skip_archival=True,
+                rpc_metadata=rpc_metadata,
+                rpc_timeout=rpc_timeout,
+            ):
+                if event.HasField("workflow_execution_completed_event_attributes"):
+                    complete_attr = event.workflow_execution_completed_event_attributes
+                    # Follow execution
+                    if follow_runs and complete_attr.new_execution_run_id:
+                        hist_run_id = complete_attr.new_execution_run_id
+                        break
+                    # Ignoring anything after the first response like TypeScript
+                    type_hints = [self._result_type] if self._result_type else None
+                    results = await self._data_converter.decode_wrapper(
+                        complete_attr.result,
+                        type_hints,
+                    )
+                    if not results:
+                        return cast(ReturnType, None)
+                    elif len(results) > 1:
+                        warnings.warn(f"Expected single result, got {len(results)}")
+                    return cast(ReturnType, results[0])
+                elif event.HasField("workflow_execution_failed_event_attributes"):
+                    fail_attr = event.workflow_execution_failed_event_attributes
+                    # Follow execution
+                    if follow_runs and fail_attr.new_execution_run_id:
+                        hist_run_id = fail_attr.new_execution_run_id
+                        break
+>                   raise WorkflowFailureError(
+                        cause=await self._data_converter.decode_failure(
+                            fail_attr.failure
+                        ),
+E                       temporalio.client._exceptions.WorkflowFailureError: Workflow execution failed
+
+.venv/lib/python3.13/site-packages/temporalio/client/_workflow.py:255: WorkflowFailureError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:47 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d41-85de-7cf0-a76e-d0840e2790e9\x12\rreal-20868eda\x1a$01a10d41-f040-7c79-a8da-a6fe71275c95 \x05(\x012\x011B\x12run_claude_segmentJ\x08\x08\x01\x10\xe7\xb3@\x18\x01') (_activity.py:307)
+12:09:47 [   DEBUG] Starting activity ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'real-20868eda', 'workflow_id': 'real-20868eda', 'workflow_run_id': '01a10d41-f040-7c79-a8da-a6fe71275c95', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:47 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'real-20868eda', 'workflow_id': 'real-20868eda', 'workflow_run_id': '01a10d41-f040-7c79-a8da-a6fe71275c95', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:47 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:47 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:47 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:48 [   DEBUG] Read task cancelled (query.py:409)
+12:09:48 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d41-85de-7cf0-a76e-d0840e2790e9\022\rreal-20868eda\032$01a10d41-f040-7c79-a8da-a6fe71275c95 \005(\0012\0011B\022run_claude_segmentJ\010\010\001\020\347\263@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":\"fd19d075-3d91-4fa1-b4ac-1167426414db\",\"cost_usd\":0.0005600000000000001,\"deferred\":{\"id\":\"toolu_fake0001\",\"input\":{\"n\":1},\"name\":\"count\"},\"error\":null,\"is_error\":false,\"result\":null,\"session_id\":\"8b8fbfe3-1292-4662-8f29-79412f33d432\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:48 [   DEBUG] Running activity count (token b'\n$01a10d41-85de-7cf0-a76e-d0840e2790e9\x12\rreal-20868eda\x1a$01a10d41-f040-7c79-a8da-a6fe71275c95 \x0b(\x012\x13tool-toolu_fake0001B\x05countJ\x08\x08\x01\x10\xf8\xb3@\x18\x01') (_activity.py:307)
+12:09:48 [   DEBUG] Starting activity ({'activity_id': 'tool-toolu_fake0001', 'activity_type': 'count', 'attempt': 1, 'namespace': 'default', 'task_queue': 'real-20868eda', 'workflow_id': 'real-20868eda', 'workflow_run_id': '01a10d41-f040-7c79-a8da-a6fe71275c95', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:48 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d41-85de-7cf0-a76e-d0840e2790e9\022\rreal-20868eda\032$01a10d41-f040-7c79-a8da-a6fe71275c95 \013(\0012\023tool-toolu_fake0001B\005countJ\010\010\001\020\370\263@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"n\":1}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:48 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d41-85de-7cf0-a76e-d0840e2790e9\x12\rreal-20868eda\x1a$01a10d41-f040-7c79-a8da-a6fe71275c95 \x11(\x012\x013B\x12run_claude_segmentJ\x08\x08\x01\x10\x87\xb4@\x18\x01') (_activity.py:307)
+12:09:48 [   DEBUG] Starting activity ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'real-20868eda', 'workflow_id': 'real-20868eda', 'workflow_run_id': '01a10d41-f040-7c79-a8da-a6fe71275c95', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:48 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:48 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'real-20868eda', 'workflow_id': 'real-20868eda', 'workflow_run_id': '01a10d41-f040-7c79-a8da-a6fe71275c95', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:48 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:48 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:48 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:09:48 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:48 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:48 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d41-85de-7cf0-a76e-d0840e2790e9\022\rreal-20868eda\032$01a10d41-f040-7c79-a8da-a6fe71275c95 \021(\0012\0013B\022run_claude_segmentJ\010\010\001\020\207\264@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":null,\"cost_usd\":0.0,\"deferred\":null,\"error\":\"Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin\'s test suite.\",\"is_error\":true,\"result\":null,\"session_id\":\"8b8fbfe3-1292-4662-8f29-79412f33d432\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:48 [   DEBUG] Workflow raised failure with run ID 01a10d41-f040-7c79-a8da-a6fe71275c95 (_workflow_instance.py:2771)
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 2750, in _run_top_level_workflow_function
+    await coro
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 1153, in run_workflow
+    result = await self._inbound.execute_workflow(input)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/testing/_workflow.py", line 584, in execute_workflow
+    return await super().execute_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_interceptor.py", line 401, in execute_workflow
+    return await self.next.execute_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 3144, in execute_workflow
+    return await input.run_fn(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/tests/endless/workflows.py", line 84, in run
+    return await self.agent.run(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 558, in run
+    return await self._loop()
+           ^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 615, in _loop
+    await self._fail(f"Claude run failed: {seg.error}")
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 689, in _fail
+    raise ApplicationError(message, non_retryable=True)
+temporalio.exceptions.ApplicationError: Claude run failed: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+12:09:48 [    INFO] Beginning worker shutdown, will wait 0:00:00 before cancelling activities (_worker.py:867)
+12:09:48 [   DEBUG] Evicting workflow with run ID 01a10d41-f040-7c79-a8da-a6fe71275c95, message: Workflow completed (_workflow.py:540)
+_____________ test_engine_pauses_at_every_durable_call_and_resumes _____________
+[gw1] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw1/test_engine_pauses_at_every_du0')
+
+    async def test_engine_pauses_at_every_durable_call_and_resumes(tmp_path: Path) -> None:
+        api = start_with_policy(refund_policy)
+        try:
+            runner = _make_runner(api, tmp_path)
+            paused, final = await _drive(
+                runner, "Order A-1001 arrived broken, I want my money back.", TOOLS
+            )
+        finally:
+            api.stop()
+>       assert [name for name, _ in paused] == [
+            "look_up_order",
+            "issue_refund",
+            "email_customer",
+        ]
+E       AssertionError: assert ['look_up_order'] == ['look_up_ord...ail_customer']
+E
+E         Right contains 2 more items, first extra item: 'issue_refund'
+E         Use -v to get more diff
+
+tests/test_engine.py:97: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:49 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:49 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:49 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:49 [   DEBUG] Read task cancelled (query.py:409)
+12:09:49 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:49 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:49 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:49 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:09:49 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:49 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+_________________ test_parallel_calls_are_serialized_not_lost __________________
+[gw1] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw1/test_parallel_calls_are_serial0')
+
+    async def test_parallel_calls_are_serialized_not_lost(tmp_path: Path) -> None:
+        """Claude asks for two tools in one message: one pauses, the other is told to retry."""
+        wanted = ("A-1001", "A-1002")
+        ref: list[FakeMessagesAPI] = []
+
+        def both_at_once(body: dict[str, Any]) -> list[dict[str, Any]]:
+            uses, _, history = history_of(body)
+            if not uses:
+                return [ref[0].tool_use("look_up_order", {"order_id": o}) for o in wanted]
+            done = {
+                h.content["order_id"]
+                for h in history
+                if not h.is_error
+                and isinstance(h.content, dict)
+                and "order_id" in h.content
+            }
+            missing = [o for o in wanted if o not in done]
+            if missing:
+                return [ref[0].tool_use("look_up_order", {"order_id": missing[0]})]
+            return [{"type": "text", "text": "FINAL: looked up " + ", ".join(wanted)}]
+
+        api = FakeMessagesAPI(both_at_once)
+        ref.append(api)
+        api.start()
+        try:
+            runner = _make_runner(api, tmp_path)
+            paused, final = await _drive(
+                runner, "Check orders A-1001 and A-1002.", TOOLS[:1]
+            )
+        finally:
+            api.stop()
+>       assert sorted(args["order_id"] for _, args in paused) == ["A-1001", "A-1002"]
+E       AssertionError: assert ['A-1001'] == ['A-1001', 'A-1002']
+E
+E         Right contains one more item: 'A-1002'
+E         Use -v to get more diff
+
+tests/test_engine.py:141: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:50 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:50 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:50 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:51 [   DEBUG] Read task cancelled (query.py:409)
+12:09:51 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:51 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:51 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:51 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:51 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:09:51 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:51 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:51 [   DEBUG] Read task cancelled (query.py:409)
+_____________ test_retry_after_the_attempt_reached_the_next_pause ______________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_retry_after_the_attempt_r0')
+
+    async def test_retry_after_the_attempt_reached_the_next_pause(tmp_path: Path) -> None:
+        """The lost attempt paused at the next call; the retry decides again from the checkpoint."""
+        holder: list[FakeMessagesAPI] = []
+        api = start_api(holder)
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            first = await s.run(s.input("count to 3"))
+            assert first.deferred is not None
+            c1 = first.deferred
+            retry = s.input(injected={c1.id: ToolOutcome({"n": 1})})
+            lost = await runner.run(retry, 1)  # finished, but its result never arrived
+>           assert lost.deferred is not None
+E           assert None is not None
+E            +  where None = SegmentOutput(session_id='c080d19b-6af5-4b36-aafc-9a610a5ce114', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.").deferred
+
+tests/test_retries.py:124: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:40 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:40 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:46 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:46 [   DEBUG] Read task cancelled (query.py:409)
+12:09:46 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:46 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:51 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:51 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:09:51 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:51 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:51 [   DEBUG] Read task cancelled (query.py:409)
+_____________ test_builtin_tools_run_inside_the_segment[max-turns] _____________
+[gw1] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw1/test_builtin_tools_run_inside_1')
+max_turns = 1, budget = None, stop = 'turns'
+
+    @pytest.mark.parametrize(
+        ("max_turns", "budget", "stop"),
+        [(None, None, None), (1, None, "turns"), (None, 0.0001, "budget")],
+        ids=["runs-inside", "max-turns", "max-budget"],
+    )
+    async def test_builtin_tools_run_inside_the_segment(
+        tmp_path: Path, max_turns: int | None, budget: float | None, stop: str | None
+    ) -> None:
+        """A built-in tool runs in the engine; a turn or budget cap ends the segment for good."""
+        ref: list[FakeMessagesAPI] = []
+
+        def glob_then_answer(body: dict[str, Any]) -> list[dict[str, Any]]:
+            answered = any(
+                block.get("type") == "tool_result"
+                for message in body.get("messages", [])
+                if isinstance(message.get("content"), list)
+                for block in message["content"]
+            )
+            if answered:
+                return [{"type": "text", "text": "FINAL: looked around"}]
+            return [
+                {
+                    "type": "tool_use",
+                    "id": ref[0].next_id("toolu_glob"),
+                    "name": "Glob",
+                    "input": {"pattern": "*.txt"},
+                }
+            ]
+
+        api = FakeMessagesAPI(glob_then_answer)
+        ref.append(api)
+        api.start()
+        try:
+            runner = _make_runner(api, tmp_path)
+            runner._max_budget = budget  # type: ignore[reportPrivateUsage]
+            out = await runner.run(
+                SegmentInput(
+                    session_id=str(uuid.uuid4()),
+                    prompt="Look around.",
+                    tools=TOOLS,
+                    builtin_tools=["Glob"],
+                    max_turns=max_turns,
+                ),
+                1,
+            )
+        finally:
+            api.stop()
+        assert out.deferred is None
+        if stop is None:
+            assert out.result == "FINAL: looked around" and out.checkpoint is not None
+        else:
+>           assert out.is_error and out.error is not None and stop in out.error
+E           AssertionError: assert (True and 'Claude Code returned an error result' is not None and 'turns' in 'Claude Code returned an error result')
+E            +  where True = SegmentOutput(session_id='189dab17-5c2b-4f98-a844-5c216c977c40', result=None, deferred=None, checkpoint=None, cost_usd=0.0, is_error=True, error='Claude Code returned an error result').is_error
+E            +  and   'Claude Code returned an error result' = SegmentOutput(session_id='189dab17-5c2b-4f98-a844-5c216c977c40', result=None, deferred=None, checkpoint=None, cost_usd=0.0, is_error=True, error='Claude Code returned an error result').error
+E            +  and   'Claude Code returned an error result' = SegmentOutput(session_id='189dab17-5c2b-4f98-a844-5c216c977c40', result=None, deferred=None, checkpoint=None, cost_usd=0.0, is_error=True, error='Claude Code returned an error result').error
+
+tests/test_engine.py:282: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:53 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:53 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:53 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:54 [   DEBUG] Read task cancelled (query.py:409)
+____________ test_builtin_tools_run_inside_the_segment[max-budget] _____________
+[gw1] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw1/test_builtin_tools_run_inside_2')
+max_turns = None, budget = 0.0001, stop = 'budget'
+
+    @pytest.mark.parametrize(
+        ("max_turns", "budget", "stop"),
+        [(None, None, None), (1, None, "turns"), (None, 0.0001, "budget")],
+        ids=["runs-inside", "max-turns", "max-budget"],
+    )
+    async def test_builtin_tools_run_inside_the_segment(
+        tmp_path: Path, max_turns: int | None, budget: float | None, stop: str | None
+    ) -> None:
+        """A built-in tool runs in the engine; a turn or budget cap ends the segment for good."""
+        ref: list[FakeMessagesAPI] = []
+
+        def glob_then_answer(body: dict[str, Any]) -> list[dict[str, Any]]:
+            answered = any(
+                block.get("type") == "tool_result"
+                for message in body.get("messages", [])
+                if isinstance(message.get("content"), list)
+                for block in message["content"]
+            )
+            if answered:
+                return [{"type": "text", "text": "FINAL: looked around"}]
+            return [
+                {
+                    "type": "tool_use",
+                    "id": ref[0].next_id("toolu_glob"),
+                    "name": "Glob",
+                    "input": {"pattern": "*.txt"},
+                }
+            ]
+
+        api = FakeMessagesAPI(glob_then_answer)
+        ref.append(api)
+        api.start()
+        try:
+            runner = _make_runner(api, tmp_path)
+            runner._max_budget = budget  # type: ignore[reportPrivateUsage]
+            out = await runner.run(
+                SegmentInput(
+                    session_id=str(uuid.uuid4()),
+                    prompt="Look around.",
+                    tools=TOOLS,
+                    builtin_tools=["Glob"],
+                    max_turns=max_turns,
+                ),
+                1,
+            )
+        finally:
+            api.stop()
+        assert out.deferred is None
+        if stop is None:
+            assert out.result == "FINAL: looked around" and out.checkpoint is not None
+        else:
+>           assert out.is_error and out.error is not None and stop in out.error
+E           AssertionError: assert (True and 'Claude Code returned an error result' is not None and 'budget' in 'Claude Code returned an error result')
+E            +  where True = SegmentOutput(session_id='2030629d-7fbb-417b-8eac-257892f6a964', result=None, deferred=None, checkpoint=None, cost_usd=0.0, is_error=True, error='Claude Code returned an error result').is_error
+E            +  and   'Claude Code returned an error result' = SegmentOutput(session_id='2030629d-7fbb-417b-8eac-257892f6a964', result=None, deferred=None, checkpoint=None, cost_usd=0.0, is_error=True, error='Claude Code returned an error result').error
+E            +  and   'Claude Code returned an error result' = SegmentOutput(session_id='2030629d-7fbb-417b-8eac-257892f6a964', result=None, deferred=None, checkpoint=None, cost_usd=0.0, is_error=True, error='Claude Code returned an error result').error
+
+tests/test_engine.py:282: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:54 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:54 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:54 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:55 [   DEBUG] Read task cancelled (query.py:409)
+______________________ test_real_engine_text_streams_live ______________________
+[gw2] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+client = <temporalio.client._client.Client object at 0x775c88b26850>
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw2/test_real_engine_text_streams_0')
+
+    @pytest.mark.timeout(240)
+    @pytest.mark.usefixtures("shop_dir")
+    async def test_real_engine_text_streams_live(client: Client, tmp_path: Path) -> None:
+        api = start_with_policy(count_policy)
+        (tmp_path / "work").mkdir()
+        runner = ClaudeAgentSdkRunner(
+            session_store=FileSessionStore(tmp_path / "sessions"),
+            cwd=str(tmp_path / "work"),
+            env=engine_env(api, str(tmp_path / "cfg")),
+        )
+        queue = f"live-real-{uuid.uuid4().hex[:8]}"
+        try:
+            async with worker(client, queue, runner):
+                await client.start_workflow(
+                    LongTaskWorkflow.run,
+                    args=["count to 3", TaskOptions(after_events=40, live=True), None],
+                    id=queue,
+                    task_queue=queue,
+                )
+                events = await asyncio.wait_for(read_until_done(client, queue), 200)
+        finally:
+            api.stop()
+>       check_sequence(
+            events, 3
+        )  # the text event came from the engine, through the Activity
+
+tests/test_live_output.py:142:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+events = [{'at': '2026-10-05T18:09:54.985118+00:00', 'text': 'count to 3', 'type': 'prompt', 'offset': 0}, {'at': '2026-10-05T1... subagents; otherwise, use a Claude Code version that passes this plugin's test suite.", 'type': 'error', 'offset': 3}]
+steps = 3
+
+    def check_sequence(events: list[dict[str, Any]], steps: int) -> None:
+        """The events tell the whole story, once each, in order."""
+        offsets = [e["offset"] for e in events]
+        assert offsets == list(
+            range(offsets[0], offsets[0] + len(events))
+        )  # no gap, no duplicate
+        kinds = [e["type"] for e in events]
+>       assert kinds[0] == "prompt" and kinds[-1] == "done"
+E       AssertionError: assert ('prompt' == 'prompt'
+E
+E           prompt and 'error' == 'done'
+E
+E         - done
+E         + error)
+
+tests/test_live_output.py:60: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:55 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d41-22ea-708e-a3f9-c46ffdade6f4\x12\x12live-real-69ac3f12\x1a$01a10d42-0d1d-700c-b7db-6b5cb54b9eb8 \x05(\x012\x011B\x12run_claude_segmentJ\x08\x08\x01\x10\xcf\x98@\x18\x01') (_activity.py:307)
+12:09:55 [   DEBUG] Starting activity ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'live-real-69ac3f12', 'workflow_id': 'live-real-69ac3f12', 'workflow_run_id': '01a10d42-0d1d-700c-b7db-6b5cb54b9eb8', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:55 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'live-real-69ac3f12', 'workflow_id': 'live-real-69ac3f12', 'workflow_run_id': '01a10d42-0d1d-700c-b7db-6b5cb54b9eb8', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:55 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:55 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:55 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:55 [   DEBUG] Read task cancelled (query.py:409)
+12:09:55 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d41-22ea-708e-a3f9-c46ffdade6f4\022\022live-real-69ac3f12\032$01a10d42-0d1d-700c-b7db-6b5cb54b9eb8 \005(\0012\0011B\022run_claude_segmentJ\010\010\001\020\317\230@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":\"f637b6ea-aa1f-4d18-bf88-45dc51bc1921\",\"cost_usd\":0.0005600000000000001,\"deferred\":{\"id\":\"toolu_fake0001\",\"input\":{\"n\":1},\"name\":\"count\"},\"error\":null,\"is_error\":false,\"result\":null,\"session_id\":\"7af4ca81-0cba-4921-a4ea-30dc70182285\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:55 [   DEBUG] Running activity count (token b'\n$01a10d41-22ea-708e-a3f9-c46ffdade6f4\x12\x12live-real-69ac3f12\x1a$01a10d42-0d1d-700c-b7db-6b5cb54b9eb8 \x14(\x012\x13tool-toolu_fake0001B\x05countJ\x08\x08\x01\x10\xf2\x98@\x18\x01') (_activity.py:307)
+12:09:55 [   DEBUG] Starting activity ({'activity_id': 'tool-toolu_fake0001', 'activity_type': 'count', 'attempt': 1, 'namespace': 'default', 'task_queue': 'live-real-69ac3f12', 'workflow_id': 'live-real-69ac3f12', 'workflow_run_id': '01a10d42-0d1d-700c-b7db-6b5cb54b9eb8', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:55 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d41-22ea-708e-a3f9-c46ffdade6f4\022\022live-real-69ac3f12\032$01a10d42-0d1d-700c-b7db-6b5cb54b9eb8 \024(\0012\023tool-toolu_fake0001B\005countJ\010\010\001\020\362\230@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"n\":1}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:55 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d41-22ea-708e-a3f9-c46ffdade6f4\x12\x12live-real-69ac3f12\x1a$01a10d42-0d1d-700c-b7db-6b5cb54b9eb8 \x1b(\x012\x013B\x12run_claude_segmentJ\x08\x08\x01\x10\x82\x99@\x18\x01') (_activity.py:307)
+12:09:55 [   DEBUG] Starting activity ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'live-real-69ac3f12', 'workflow_id': 'live-real-69ac3f12', 'workflow_run_id': '01a10d42-0d1d-700c-b7db-6b5cb54b9eb8', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:09:55 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:55 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'live-real-69ac3f12', 'workflow_id': 'live-real-69ac3f12', 'workflow_run_id': '01a10d42-0d1d-700c-b7db-6b5cb54b9eb8', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:09:55 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:56 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:56 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:09:56 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:56 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:56 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d41-22ea-708e-a3f9-c46ffdade6f4\022\022live-real-69ac3f12\032$01a10d42-0d1d-700c-b7db-6b5cb54b9eb8 \033(\0012\0013B\022run_claude_segmentJ\010\010\001\020\202\231@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":null,\"cost_usd\":0.0,\"deferred\":null,\"error\":\"Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin\'s test suite.\",\"is_error\":true,\"result\":null,\"session_id\":\"7af4ca81-0cba-4921-a4ea-30dc70182285\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:56 [    INFO] Beginning worker shutdown, will wait 0:00:00 before cancelling activities (_worker.py:867)
+________________ test_retry_after_a_crash_during_the_model_call ________________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_retry_after_a_crash_durin0')
+
+    async def test_retry_after_a_crash_during_the_model_call(tmp_path: Path) -> None:
+        """The attempt delivered the tool result, then died waiting for Claude."""
+        holder: list[FakeMessagesAPI] = []
+        api = start_api(holder)
+        policy = api.decide
+        arrived, release = threading.Event(), threading.Event()
+        requests = 0
+
+        def hang_once(body: dict[str, Any]) -> list[dict[str, Any]]:
+            nonlocal requests
+            requests += 1
+            if requests == 2:  # the first model call after the tool result
+                arrived.set()
+                release.wait(30)
+            return policy(body)
+
+        api.decide = hang_once
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            first = await s.run(s.input("count to 3"))
+            assert first.deferred is not None
+            c1 = first.deferred
+            retry = s.input(injected={c1.id: ToolOutcome({"n": 1})})
+            crashed = asyncio.ensure_future(runner.run(retry, 1))
+            assert await asyncio.to_thread(arrived.wait, 60)
+            crashed.cancel()  # the Worker dies in the middle of the model call
+            with pytest.raises(asyncio.CancelledError):
+                await crashed
+            release.set()
+>           second = await s.run(retry, 2)
+                     ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_retries.py:170:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_retries.py:73: in run
+    return self.commit(await self.runner.run(inp, attempt))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:693: in run
+    self._check_session_admission(inp.session_id)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.claude_agent_sdk._runner.ClaudeAgentSdkRunner object at 0x7760d13ae750>
+session_id = 'a6e10fd7-414b-4603-82fe-d62425887531'
+
+    def _check_session_admission(self, session_id: str) -> None:
+        control = self._session_controls.get(session_id)
+        if control is not None and (
+            control.active
+            or control.state.stop_requested
+            or control.state.shutdown_unresolved
+        ):
+>           raise SessionShutdownUnresolved(
+                "Previous SDK ownership or stop requires host teardown verification; "
+                "this runner cannot start a replacement"
+            )
+E           temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:743: SessionShutdownUnresolved
+---------------------------- Captured stdout setup -----------------------------
+
+----------------------------- Captured stderr call -----------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 46886)
+Traceback (most recent call last):
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "<repo>/python/claude_agent_sdk/tests/helpers/fake_messages_api.py", line 200, in do_POST
+    api.write(self, body, blocks)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/tests/helpers/fake_messages_api.py", line 291, in write
+    handler.wfile.write(
+    ~~~~~~~~~~~~~~~~~~~^
+        f"event: {event['type']}\ndata: {json.dumps(event)}\n\n".encode()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+------------------------------ Captured log call -------------------------------
+12:09:52 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:52 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:52 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:53 [   DEBUG] Read task cancelled (query.py:409)
+12:09:53 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:53 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:58 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:58 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:09:58 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:58 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:58 [   DEBUG] Read task cancelled (query.py:409)
+_________ test_real_engine_reads_a_large_result_from_external_storage __________
+[gw1] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+temporalio.exceptions.ApplicationError: Claude run failed: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+
+The above exception was the direct cause of the following exception:
+
+address = '127.0.0.1:38661'
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw1/test_real_engine_reads_a_large0')
+
+    @pytest.mark.timeout(240)
+    @pytest.mark.usefixtures("shop_dir")
+    async def test_real_engine_reads_a_large_result_from_external_storage(
+        address: str, tmp_path: Path
+    ) -> None:
+        api = start_with_policy(fetch_policy)
+        (tmp_path / "work").mkdir()
+        runner = ClaudeAgentSdkRunner(
+            session_store=FileSessionStore(tmp_path / "sessions"),
+            cwd=str(tmp_path / "work"),
+            env=engine_env(api, str(tmp_path / "cfg")),
+        )
+        driver = FolderStorageDriver(tmp_path / "blobs")
+        converter = DataConverter(external_storage=ExternalStorage(drivers=[driver]))
+        try:
+            # Over 1 MiB: the engine echoes the result as one line, over the SDK's
+            # default message limit, which the runner raises.
+>           answer, history_bytes, largest = await fetch(
+                address, tmp_path, 2000, converter, runner
+            )
+
+tests/test_external_storage.py:101:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_external_storage.py:56: in fetch
+    answer = await asyncio.wait_for(handle.result(), 150)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py:507: in wait_for
+    return await fut
+           ^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.client._workflow.WorkflowHandle object at 0x7fe0201bb390>
+follow_runs = True, rpc_metadata = {}, rpc_timeout = None
+
+    async def result(
+        self,
+        *,
+        follow_runs: bool = True,
+        rpc_metadata: Mapping[str, str | bytes] = {},
+        rpc_timeout: timedelta | None = None,
+    ) -> ReturnType:
+        """Wait for result of the workflow.
+
+        This will use :py:attr:`result_run_id` if present to base the result on.
+        To use another run ID, a new handle must be created via
+        :py:meth:`Client.get_workflow_handle`.
+
+        Args:
+            follow_runs: If true (default), workflow runs will be continually
+                fetched, until the most recent one is found. If false, return
+                the result from the first run targeted by the request if that run
+                ends in a result, otherwise raise an exception.
+            rpc_metadata: Headers used on the RPC call. Keys here override
+                client-level RPC metadata keys.
+            rpc_timeout: Optional RPC deadline to set for each RPC call. Note,
+                this is the timeout for each history RPC call not this overall
+                function.
+
+        Returns:
+            Result of the workflow after being converted by the data converter.
+
+        Raises:
+            WorkflowFailureError: Workflow failed, was cancelled, was
+                terminated, or timed out. Use the
+                :py:attr:`WorkflowFailureError.cause` to see the underlying
+                reason.
+            Exception: Other possible failures during result fetching.
+        """
+        # We have to maintain our own run ID because it can change if we follow
+        # executions
+        hist_run_id = self._result_run_id
+        while True:
+            async for event in self._fetch_history_events_for_run(
+                hist_run_id,
+                wait_new_event=True,
+                event_filter_type=WorkflowHistoryEventFilterType.CLOSE_EVENT,
+                skip_archival=True,
+                rpc_metadata=rpc_metadata,
+                rpc_timeout=rpc_timeout,
+            ):
+                if event.HasField("workflow_execution_completed_event_attributes"):
+                    complete_attr = event.workflow_execution_completed_event_attributes
+                    # Follow execution
+                    if follow_runs and complete_attr.new_execution_run_id:
+                        hist_run_id = complete_attr.new_execution_run_id
+                        break
+                    # Ignoring anything after the first response like TypeScript
+                    type_hints = [self._result_type] if self._result_type else None
+                    results = await self._data_converter.decode_wrapper(
+                        complete_attr.result,
+                        type_hints,
+                    )
+                    if not results:
+                        return cast(ReturnType, None)
+                    elif len(results) > 1:
+                        warnings.warn(f"Expected single result, got {len(results)}")
+                    return cast(ReturnType, results[0])
+                elif event.HasField("workflow_execution_failed_event_attributes"):
+                    fail_attr = event.workflow_execution_failed_event_attributes
+                    # Follow execution
+                    if follow_runs and fail_attr.new_execution_run_id:
+                        hist_run_id = fail_attr.new_execution_run_id
+                        break
+>                   raise WorkflowFailureError(
+                        cause=await self._data_converter.decode_failure(
+                            fail_attr.failure
+                        ),
+E                       temporalio.client._exceptions.WorkflowFailureError: Workflow execution failed
+
+.venv/lib/python3.13/site-packages/temporalio/client/_workflow.py:255: WorkflowFailureError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:09:56 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d40-e557-77d1-b7ac-881ea13ee8f4\x12\x0efetch-7a5baef9\x1a$01a10d42-14e0-7a89-b13c-99ac2dc9053e \x05(\x012\x011B\x12run_claude_segmentJ\x08\x08\x01\x10\xed\x89@\x18\x01') (_activity.py:307)
+12:09:56 [   DEBUG] Starting activity ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'fetch-7a5baef9', 'workflow_id': 'fetch-7a5baef9', 'workflow_run_id': '01a10d42-14e0-7a89-b13c-99ac2dc9053e', 'workflow_type': 'FetchWorkflow'}) (_activity.py:671)
+12:09:56 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'fetch-7a5baef9', 'workflow_id': 'fetch-7a5baef9', 'workflow_run_id': '01a10d42-14e0-7a89-b13c-99ac2dc9053e', 'workflow_type': 'FetchWorkflow'}) (_activity.py:281)
+12:09:56 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:56 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:57 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:57 [   DEBUG] Read task cancelled (query.py:409)
+12:09:57 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d40-e557-77d1-b7ac-881ea13ee8f4\022\016fetch-7a5baef9\032$01a10d42-14e0-7a89-b13c-99ac2dc9053e \005(\0012\0011B\022run_claude_segmentJ\010\010\001\020\355\211@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":\"b93194b7-f273-4903-a465-f94eaa02b269\",\"cost_usd\":0.0005600000000000001,\"deferred\":{\"id\":\"toolu_fake0001\",\"input\":{\"kb\":2000},\"name\":\"fetch_document\"},\"error\":null,\"is_error\":false,\"result\":null,\"session_id\":\"17d41e16-df03-484d-8645-4ac650d8283c\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:09:57 [   DEBUG] Running activity fetch_document (token b'\n$01a10d40-e557-77d1-b7ac-881ea13ee8f4\x12\x0efetch-7a5baef9\x1a$01a10d42-14e0-7a89-b13c-99ac2dc9053e \x0b(\x012\x13tool-toolu_fake0001B\x0efetch_documentJ\x08\x08\x01\x10\xfe\x89@\x18\x01') (_activity.py:307)
+12:09:57 [   DEBUG] Starting activity ({'activity_id': 'tool-toolu_fake0001', 'activity_type': 'fetch_document', 'attempt': 1, 'namespace': 'default', 'task_queue': 'fetch-7a5baef9', 'workflow_id': 'fetch-7a5baef9', 'workflow_run_id': '01a10d42-14e0-7a89-b13c-99ac2dc9053e', 'workflow_type': 'FetchWorkflow'}) (_activity.py:671)
+12:09:57 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d40-e557-77d1-b7ac-881ea13ee8f4\022\016fetch-7a5baef9\032$01a10d42-14e0-7a89-b13c-99ac2dc9053e \013(\0012\023tool-toolu_fake0001B\016fetch_documentJ\010\010\001\020\376\211@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "messageType"
+        value: "temporal.api.sdk.v1.ExternalStorageReference"
+      }
+      metadata {
+        key: "encoding"
+        value: "json/protobuf"
+      }
+      data: "{\"claimData\":{\"key\":\"8408a6c9fd3dd957f1108a1f74878750363d51617c50db4d856a60eba237f650\"},\"driverName\":\"folder\"}"
+      external_payloads {
+        size_bytes: 2048041
+      }
+    }
+  }
+}
+ (_activity.py:488)
+12:09:57 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d40-e557-77d1-b7ac-881ea13ee8f4\x12\x0efetch-7a5baef9\x1a$01a10d42-14e0-7a89-b13c-99ac2dc9053e \x11(\x012\x013B\x12run_claude_segmentJ\x08\x08\x01\x10\x8d\x8a@\x18\x01') (_activity.py:307)
+12:09:57 [   DEBUG] Starting activity ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'fetch-7a5baef9', 'workflow_id': 'fetch-7a5baef9', 'workflow_run_id': '01a10d42-14e0-7a89-b13c-99ac2dc9053e', 'workflow_type': 'FetchWorkflow'}) (_activity.py:671)
+12:09:57 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:09:57 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'fetch-7a5baef9', 'workflow_id': 'fetch-7a5baef9', 'workflow_run_id': '01a10d42-14e0-7a89-b13c-99ac2dc9053e', 'workflow_type': 'FetchWorkflow'}) (_activity.py:281)
+12:09:57 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:09:57 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:09:57 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:09:57 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:57 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:09:57 [   DEBUG] Read task cancelled (query.py:409)
+12:10:02 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'fetch-7a5baef9', 'workflow_id': 'fetch-7a5baef9', 'workflow_run_id': '01a10d42-14e0-7a89-b13c-99ac2dc9053e', 'workflow_type': 'FetchWorkflow'}) (_activity.py:281)
+12:10:04 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d40-e557-77d1-b7ac-881ea13ee8f4\022\016fetch-7a5baef9\032$01a10d42-14e0-7a89-b13c-99ac2dc9053e \021(\0012\0013B\022run_claude_segmentJ\010\010\001\020\215\212@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":null,\"cost_usd\":0.0,\"deferred\":null,\"error\":\"Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin\'s test suite.\",\"is_error\":true,\"result\":null,\"session_id\":\"17d41e16-df03-484d-8645-4ac650d8283c\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:10:05 [   DEBUG] Workflow raised failure with run ID 01a10d42-14e0-7a89-b13c-99ac2dc9053e (_workflow_instance.py:2771)
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 2750, in _run_top_level_workflow_function
+    await coro
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 1153, in run_workflow
+    result = await self._inbound.execute_workflow(input)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 3144, in execute_workflow
+    return await input.run_fn(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/tests/storage/workflows.py", line 59, in run
+    return await self.agent.run(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 558, in run
+    return await self._loop()
+           ^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 615, in _loop
+    await self._fail(f"Claude run failed: {seg.error}")
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 689, in _fail
+    raise ApplicationError(message, non_retryable=True)
+temporalio.exceptions.ApplicationError: Claude run failed: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+12:10:05 [    INFO] Beginning worker shutdown, will wait 0:00:00 before cancelling activities (_worker.py:867)
+12:10:05 [   DEBUG] Evicting workflow with run ID 01a10d42-14e0-7a89-b13c-99ac2dc9053e, message: Workflow completed (_workflow.py:540)
+_________________ test_retry_of_a_new_task_on_the_same_session _________________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_retry_of_a_new_task_on_th0')
+
+    async def test_retry_of_a_new_task_on_the_same_session(tmp_path: Path) -> None:
+        """The second task's first segment is lost after it paused; the retry sends the prompt once."""
+        holder: list[FakeMessagesAPI] = []
+        api = start_api(holder)
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+>           done = await s.finish(await s.run(s.input("count to 2")))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_retries.py:190:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_retries.py:79: in finish
+    out = await self.run(
+tests/test_retries.py:73: in run
+    return self.commit(await self.runner.run(inp, attempt))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <tests.test_retries.Session object at 0x7760d14a3250>
+out = SegmentOutput(session_id='5cf8aec8-803a-4ef6-9b3b-7b71c7df2776', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.")
+
+    def commit(self, out: SegmentOutput) -> SegmentOutput:
+>       assert not out.is_error, out.error
+E       AssertionError: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+E       assert not True
+E        +  where True = SegmentOutput(session_id='5cf8aec8-803a-4ef6-9b3b-7b71c7df2776', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.").is_error
+
+tests/test_retries.py:66: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:10:03 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:03 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:03 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:04 [   DEBUG] Read task cancelled (query.py:409)
+12:10:04 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:04 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:04 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:04 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:10:04 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:04 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:04 [   DEBUG] Read task cancelled (query.py:409)
+__________ test_next_task_after_a_failed_one_answers_the_waiting_call __________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_next_task_after_a_failed_0')
+
+    async def test_next_task_after_a_failed_one_answers_the_waiting_call(
+        tmp_path: Path,
+    ) -> None:
+        """A task stopped while Claude waited for a tool result: the next task answers it."""
+        holder: list[FakeMessagesAPI] = []
+        api = start_api(holder)
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            first = await s.run(s.input("count to 5"))
+            assert first.deferred is not None
+            stopped = first.deferred.id
+            # The Workflow stopped the task here (for example at max_segments). The next
+            # task delivers an error result for the waiting call, with its own prompt.
+>           out = await s.run(
+                s.input(
+                    "count to 1",
+                    injected={stopped: ToolOutcome("This tool call did not run.", True)},
+                    fork=True,
+                )
+            )
+
+tests/test_retries.py:221:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_retries.py:73: in run
+    return self.commit(await self.runner.run(inp, attempt))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <tests.test_retries.Session object at 0x7760d152bbb0>
+out = SegmentOutput(session_id='6e4c4319-17d3-4f8a-8e85-13d6d0ed6596', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.")
+
+    def commit(self, out: SegmentOutput) -> SegmentOutput:
+>       assert not out.is_error, out.error
+E       AssertionError: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+E       assert not True
+E        +  where True = SegmentOutput(session_id='6e4c4319-17d3-4f8a-8e85-13d6d0ed6596', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.").is_error
+
+tests/test_retries.py:66: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:10:05 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:05 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:05 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:05 [   DEBUG] Read task cancelled (query.py:409)
+12:10:05 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:05 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:06 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:06 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:10:06 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:06 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:06 [   DEBUG] Read task cancelled (query.py:409)
+_____ test_parallel_calls_in_a_resumed_session_keep_every_result[retried] ______
+[gw2] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw2/test_parallel_calls_in_a_resum0')
+retry_at = 2
+
+    @pytest.mark.parametrize("retry_at", [None, 2], ids=["in-place", "retried"])
+    async def test_parallel_calls_in_a_resumed_session_keep_every_result(
+        tmp_path: Path, retry_at: int | None
+    ) -> None:
+        """Claude keeps sending two calls per message; each paused call's result must arrive."""
+        ref: list[FakeMessagesAPI] = []
+
+        def two_at_a_time(body: dict[str, Any]) -> list[dict[str, Any]]:
+            _, _, history = history_of(body)
+            done = [h for h in history if h.name == "count" and not h.is_error]
+            if len(done) >= 3:
+                return [{"type": "text", "text": "FINAL"}]
+            step = len(done) + 1
+            return [
+                ref[0].tool_use("count", {"n": step}),
+                ref[0].tool_use("count", {"n": step, "again": True}),
+            ]
+
+        api = FakeMessagesAPI(two_at_a_time)
+        ref.append(api)
+        api.start()
+        handed: list[int] = []
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            out = await s.run(s.input("count to 3"))
+            while out.deferred is not None and len(handed) < 6:
+                call = out.deferred
+                handed.append(call.input["n"])
+                attempt = 2 if len(handed) == retry_at else 1
+>               out = await s.run(
+                    s.input(injected={call.id: ToolOutcome({"n": call.input["n"]})}),
+                    attempt,
+                )
+
+tests/test_retries.py:382:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_retries.py:73: in run
+    return self.commit(await self.runner.run(inp, attempt))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <tests.test_retries.Session object at 0x775c88bd4050>
+out = SegmentOutput(session_id='3808eb79-ddff-4273-93ff-2a17eb67e5a0', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.")
+
+    def commit(self, out: SegmentOutput) -> SegmentOutput:
+>       assert not out.is_error, out.error
+E       AssertionError: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+E       assert not True
+E        +  where True = SegmentOutput(session_id='3808eb79-ddff-4273-93ff-2a17eb67e5a0', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.").is_error
+
+tests/test_retries.py:66: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:10:05 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:05 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:06 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:06 [   DEBUG] Read task cancelled (query.py:409)
+12:10:06 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:06 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:06 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:06 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:06 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:10:06 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:06 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:06 [   DEBUG] Read task cancelled (query.py:409)
+_________________ test_a_stale_checkpoint_continues_in_a_copy __________________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw3/test_a_stale_checkpoint_contin0')
+
+    async def test_a_stale_checkpoint_continues_in_a_copy(tmp_path: Path) -> None:
+        """After a Workflow reset, the session holds later turns than the checkpoint."""
+        holder: list[FakeMessagesAPI] = []
+        api = start_api(holder)
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            first = await s.run(s.input("count to 4"))
+            assert first.deferred is not None
+            c1 = first.deferred
+>           second = await s.run(s.input(injected={c1.id: ToolOutcome({"n": 1})}))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_retries.py:274:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_retries.py:73: in run
+    return self.commit(await self.runner.run(inp, attempt))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <tests.test_retries.Session object at 0x7760d152a2c0>
+out = SegmentOutput(session_id='53c95014-d577-49fc-8a36-5788f6d8a829', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.")
+
+    def commit(self, out: SegmentOutput) -> SegmentOutput:
+>       assert not out.is_error, out.error
+E       AssertionError: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+E       assert not True
+E        +  where True = SegmentOutput(session_id='53c95014-d577-49fc-8a36-5788f6d8a829', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.").is_error
+
+tests/test_retries.py:66: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:10:08 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:08 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:09 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:09 [   DEBUG] Read task cancelled (query.py:409)
+12:10:09 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:09 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:09 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:09 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:10:09 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:09 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:09 [   DEBUG] Read task cancelled (query.py:409)
+---------------------------- Captured log teardown -----------------------------
+12:10:10 [   DEBUG] Using selector: EpollSelector (selector_events.py:64)
+____________ test_a_builtin_call_after_a_pause_waits_for_its_result ____________
+[gw2] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw2/test_a_builtin_call_after_a_pa0')
+
+    async def test_a_builtin_call_after_a_pause_waits_for_its_result(
+        tmp_path: Path,
+    ) -> None:
+        """[durable, built-in] in one message: the built-in must not run before the paused call's result."""
+        ref: list[FakeMessagesAPI] = []
+
+        def count_and_write(body: dict[str, Any]) -> list[dict[str, Any]]:
+            uses, _, history = history_of(body)
+            counted = any(h.name == "count" and not h.is_error for h in history)
+            wrote = any(h.name == "Write" and not h.is_error for h in history)
+            write = {
+                "type": "tool_use",
+                "id": ref[0].next_id("toolu_write"),
+                "name": "Write",
+                "input": {
+                    "file_path": str(tmp_path / "work" / f"note-{len(uses)}.txt"),
+                    "content": "written",
+                },
+            }
+            if not counted:
+                return [ref[0].tool_use("count", {"n": 1}), write]
+            if not wrote:
+                return [write]
+            return [{"type": "text", "text": "FINAL"}]
+
+        api = FakeMessagesAPI(count_and_write)
+        ref.append(api)
+        api.start()
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            first = await s.run(
+                SegmentInput(
+                    session_id=s.session_id,
+                    prompt="count, then write a note",
+                    tools=TOOLS,
+                    builtin_tools=["Write"],
+                )
+            )
+            assert first.deferred is not None
+            assert list((tmp_path / "work").glob("note-*.txt")) == []  # denied, not run
+            call = first.deferred
+>           final = await s.run(
+                SegmentInput(
+                    session_id=s.session_id,
+                    prompt=None,
+                    tools=TOOLS,
+                    builtin_tools=["Write"],
+                    checkpoint=s.checkpoint,
+                    injected={call.id: ToolOutcome({"n": 1})},
+                    segment_index=s.index,
+                )
+            )
+
+tests/test_retries.py:439:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_retries.py:73: in run
+    return self.commit(await self.runner.run(inp, attempt))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <tests.test_retries.Session object at 0x775c8828f610>
+out = SegmentOutput(session_id='389611d9-274b-4058-bff9-12c97798611a', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.")
+
+    def commit(self, out: SegmentOutput) -> SegmentOutput:
+>       assert not out.is_error, out.error
+E       AssertionError: Claude Code (unknown version) paused again at tool call toolu_fake0002, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+E       assert not True
+E        +  where True = SegmentOutput(session_id='389611d9-274b-4058-bff9-12c97798611a', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.").is_error
+
+tests/test_retries.py:66: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:10:07 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:07 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:07 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:07 [   DEBUG] Read task cancelled (query.py:409)
+12:10:07 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:07 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:10:07 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:10:13 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:10:13 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:10:13 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:13 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:10:13 [   DEBUG] Read task cancelled (query.py:409)
+---------------------------- Captured log teardown -----------------------------
+12:10:14 [   DEBUG] Using selector: EpollSelector (selector_events.py:64)
+_____ test_parallel_calls_in_a_resumed_session_keep_every_result[in-place] _____
+[gw0] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-25/popen-gw0/test_parallel_calls_in_a_resum0')
+retry_at = None
+
+    @pytest.mark.parametrize("retry_at", [None, 2], ids=["in-place", "retried"])
+    async def test_parallel_calls_in_a_resumed_session_keep_every_result(
+        tmp_path: Path, retry_at: int | None
+    ) -> None:
+        """Claude keeps sending two calls per message; each paused call's result must arrive."""
+        ref: list[FakeMessagesAPI] = []
+
+        def two_at_a_time(body: dict[str, Any]) -> list[dict[str, Any]]:
+            _, _, history = history_of(body)
+            done = [h for h in history if h.name == "count" and not h.is_error]
+            if len(done) >= 3:
+                return [{"type": "text", "text": "FINAL"}]
+            step = len(done) + 1
+            return [
+                ref[0].tool_use("count", {"n": step}),
+                ref[0].tool_use("count", {"n": step, "again": True}),
+            ]
+
+        api = FakeMessagesAPI(two_at_a_time)
+        ref.append(api)
+        api.start()
+        handed: list[int] = []
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            out = await s.run(s.input("count to 3"))
+            while out.deferred is not None and len(handed) < 6:
+                call = out.deferred
+                handed.append(call.input["n"])
+                attempt = 2 if len(handed) == retry_at else 1
+>               out = await s.run(
+                    s.input(injected={call.id: ToolOutcome({"n": call.input["n"]})}),
+                    attempt,
+                )
+
+tests/test_retries.py:382:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_retries.py:73: in run
+    return self.commit(await self.runner.run(inp, attempt))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <tests.test_retries.Session object at 0x7a941276f0e0>
+out = SegmentOutput(session_id='9cdd36d4-a6f7-4bde-821a-8d1c34ab2fc6', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.")
+
+    def commit(self, out: SegmentOutput) -> SegmentOutput:
+>       assert not out.is_error, out.error
+E       AssertionError: Claude Code (unknown version) paused again at tool call toolu_fake0001, whose result was just delivered. Durable tools never run inside the engine (the in-engine tool only returns an error), so nothing ran outside Temporal. This segment stops instead of continuing. Durable tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.
+E       assert not True
+E        +  where True = SegmentOutput(session_id='9cdd36d4-a6f7-4bde-821a-8d1c34ab2fc6', result=None, deferred=None, checkpoint=None, cost_usd...ble tools cannot be called from subagents; otherwise, use a Claude Code version that passes this plugin's test suite.").is_error
+
+tests/test_retries.py:66: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log call -------------------------------
+12:12:02 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:12:02 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:12:02 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:12:03 [   DEBUG] Read task cancelled (query.py:409)
+12:12:03 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:12:03 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:12:03 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:12:03 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:12:03 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:12:03 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:12:03 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:12:03 [   DEBUG] Read task cancelled (query.py:409)
+---------------------------- Captured log teardown -----------------------------
+12:12:04 [   DEBUG] Using selector: EpollSelector (selector_events.py:64)
+=============================== warnings summary ===============================
+tests/test_tool_policy.py: 30 warnings
+  <repo>/python/claude_agent_sdk/tests/test_tool_policy.py:64: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    return ClaudeAgentSdkRunner(
+
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[stop]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[interrupt]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[close]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[wedged]
+  <repo>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+                              Summary of Failures
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃               ┃               ┃  Function     ┃              ┃               ┃
+┃  File         ┃  Function     ┃  Line         ┃  Error Line  ┃  Error        ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│  tests/test…  │  test_real_…  │  47           │  71          │  AssertionE…  │
+│  tests/test…  │  test_a_bac…  │  433          │  517         │  AssertionE…  │
+│  tests/test…  │  test_real_…  │  47           │  71          │  AssertionE…  │
+│  tests/test…  │  test_real_…  │  130          │  162         │  AssertionE…  │
+│  tests/test…  │  test_real_…  │  186          │  220         │  WorkflowFa…  │
+│  tests/test…  │  test_real_…  │  184          │  206         │  WorkflowFa…  │
+│  tests/test…  │  test_engin…  │  88           │  97          │  AssertionE…  │
+│  tests/test…  │  test_paral…  │  110          │  141         │  AssertionE…  │
+│  tests/test…  │  test_retry…  │  112          │  124         │  AssertionE…  │
+│  tests/test…  │  test_built…  │  231          │  282         │  AssertionE…  │
+│  tests/test…  │  test_built…  │  231          │  282         │  AssertionE…  │
+│  tests/test…  │  test_real_…  │  120          │  142         │  AssertionE…  │
+│  tests/test…  │  test_retry…  │  140          │  170         │  SessionShu…  │
+│  tests/test…  │  test_real_…  │  84           │  101         │  WorkflowFa…  │
+│  tests/test…  │  test_retry…  │  183          │  190         │  AssertionE…  │
+│  tests/test…  │  test_next_…  │  207          │  221         │  AssertionE…  │
+│  tests/test…  │  test_paral…  │  352          │  382         │  AssertionE…  │
+│  tests/test…  │  test_a_sta…  │  264          │  274         │  AssertionE…  │
+│  tests/test…  │  test_a_bui…  │  397          │  439         │  AssertionE…  │
+│  tests/test…  │  test_paral…  │  352          │  382         │  AssertionE…  │
+└───────────────┴───────────────┴───────────────┴──────────────┴───────────────┘
+Results (207.40s):
+        20 failed
+       468 passed
+         1 skipped
+        34 warnings
+make: *** [../_shared/python.mk:60: test] Error 1

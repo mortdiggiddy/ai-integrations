@@ -1,0 +1,27 @@
+
+/fixture/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+  self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)
+Completing activity as failed ({'activity_id': '1', 'activity_type': 'proof_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'write-proof', 'workflow_id': 'a9418f34-de31-4f3c-a60c-71d9682b71ee', 'workflow_run_id': '01a10d0c-1549-7068-8e0b-c35e14a58bba', 'workflow_type': 'WriteRecoveryProof'})
+Traceback (most recent call last):
+  File "/opt/packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        start, running_activity, task_token, data_converter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/fixture/write_recovery.py", line 374, in initial
+    result = await segment(
+             ^^^^^^^^^^^^^^
+    ...<8 lines>...
+    )
+    ^
+  File "/fixture/write_recovery.py", line 289, in segment
+    raise AdmissionRefused(reason)
+host_session.AdmissionRefused: ambiguous_active_or_unverifiable_overage

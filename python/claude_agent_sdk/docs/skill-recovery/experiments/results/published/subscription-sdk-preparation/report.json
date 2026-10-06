@@ -1,0 +1,73 @@
+{
+  "status": "offline_prepared_live_disabled",
+  "sdk_version": "0.2.162",
+  "cli_version": "2.1.274 (Claude Code)",
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "prompt": "Reply with exactly SDK_CONNECTIVITY_OK.",
+  "options": {
+    "model": "claude-haiku-4-5-20251001",
+    "tools": [],
+    "allowed_tools": [],
+    "skills": [],
+    "setting_sources": [],
+    "mcp_servers": "{\"mcpServers\":{}}",
+    "strict_mcp_config": true,
+    "permission_mode": "default",
+    "max_turns": 1,
+    "max_budget_usd": 0.05,
+    "parallel_tool_recovery": false,
+    "env": {
+      "CLAUDE_CODE_MAX_RETRIES": "0",
+      "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "64",
+      "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+    },
+    "extra_args": {
+      "disable-slash-commands": null,
+      "no-chrome": null,
+      "no-session-persistence": null,
+      "prompt-suggestions": "false"
+    }
+  },
+  "sdk_command": [
+    "/opt/claude",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--system-prompt",
+    "Return the requested text without explanation.",
+    "--tools",
+    "",
+    "--max-turns",
+    "1",
+    "--max-budget-usd",
+    "0.05",
+    "--model",
+    "claude-haiku-4-5-20251001",
+    "--permission-mode",
+    "default",
+    "--mcp-config",
+    "{\"mcpServers\":{}}",
+    "--strict-mcp-config",
+    "--setting-sources=",
+    "--disable-slash-commands",
+    "--no-chrome",
+    "--no-session-persistence",
+    "--prompt-suggestions",
+    "false",
+    "--input-format",
+    "stream-json"
+  ],
+  "guarded_transport_attempts": 1,
+  "model_cli_spawns": 0,
+  "model_requests": 0,
+  "required_login_mount": false,
+  "probe_sha256": "761413eead1afa318d2dc6dcfcc562431511aa5bed2fb6dec8454541185866dc",
+  "limits": [
+    "Configured controls are not runtime budget enforcement.",
+    "No input token, currency or phase aggregate cap is proved.",
+    "No SDK query, result recording or recovery is executed.",
+    "This file exposes no live execution mode.",
+    "Mount isolation is supplied by the recorded container invocation.",
+    "SDK version check is not fresh installed wheel provenance proof."
+  ]
+}

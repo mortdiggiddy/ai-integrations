@@ -1,0 +1,27 @@
+{
+  "callbacks": [
+    {
+      "id": "toolu_01DJu2fHo3hop4VaWotJLd1k",
+      "input": {
+        "content": "WRITE_ONCE_MARKER\n",
+        "file_path": "/state/work/marker.txt"
+      },
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "e83c3b9d-a2a4-445a-96ba-4d61363e460e"
+      },
+      "name": "Write",
+      "transcript_uuid": "cafe68b8-2a76-4770-a7d0-8667c4bf0e7b"
+    }
+  ],
+  "effect_count": 1,
+  "segment": {
+    "checkpoint": "739b41f6-da2b-44d1-a893-38a372911074",
+    "cost_usd": 0.002071,
+    "deferred": null,
+    "error": null,
+    "is_error": false,
+    "result": "WRITE_ONCE_RECORDED_OK",
+    "session_id": "e83c3b9d-a2a4-445a-96ba-4d61363e460e"
+  }
+}

@@ -1,0 +1,67 @@
+........................................................................ [ 41%]
+........................................................................ [ 82%]
+..............................                                           [100%]
+=============================== warnings summary ===============================
+test_host_admission.py::test_controller_stop_fences_fresh_runner[stop]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[interrupt]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[close]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[wedged]
+  /fixture/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Results (3.96s):
+       174 passed
+         4 warnings
+{"kind": "sdk_observations", "row": {"singleton": 1, "session": "aab6add7-bd3f-450b-8740-82a66ed966ca", "attempt": "fb9855f2ccae4d0594d0aeeb0d3086c8", "name": "sdk-host-fb9855f2ccae4d0594d0aeeb0d3086c8", "resource": "29b1a3c62b1f2d744d3f89833387c664d61a90c690613bc0ed1e39c9d6d26a5a", "runner": "40380c414fdf4f5e83228d1b187089b3", "stopped": 1, "observations": "{\"close_error\": null, \"interrupt_acknowledged\": true, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"claude_code_version\": \"2.1.274\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": null, \"duration_api_ms\": 0, \"duration_ms\": 1, \"errors\": null, \"is_error\": false, \"model_usage\": null, \"num_turns\": 1, \"origin\": null, \"permission_denials\": null, \"result\": \"done\", \"session_id\": \"session\", \"stop_reason\": null, \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": null, \"total_cost_usd\": null, \"usage\": null, \"uuid\": null}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": true, \"terminal_received\": true}", "terminated": 0, "removed": 0, "host_receipt": null}}
+{"kind": "ready", "child_pid": 42, "child_sid": 42}
+/fixture/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+  self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)
+{
+  "evidence_kind": "scripted_sdk_and_harmless_container_child",
+  "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "before_teardown": {
+    "singleton": 1,
+    "session": "aab6add7-bd3f-450b-8740-82a66ed966ca",
+    "attempt": "fb9855f2ccae4d0594d0aeeb0d3086c8",
+    "name": "sdk-host-fb9855f2ccae4d0594d0aeeb0d3086c8",
+    "resource": "29b1a3c62b1f2d744d3f89833387c664d61a90c690613bc0ed1e39c9d6d26a5a",
+    "runner": "40380c414fdf4f5e83228d1b187089b3",
+    "stopped": 1,
+    "observations": "{\"close_error\": null, \"interrupt_acknowledged\": true, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"claude_code_version\": \"2.1.274\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": null, \"duration_api_ms\": 0, \"duration_ms\": 1, \"errors\": null, \"is_error\": false, \"model_usage\": null, \"num_turns\": 1, \"origin\": null, \"permission_denials\": null, \"result\": \"done\", \"session_id\": \"session\", \"stop_reason\": null, \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": null, \"total_cost_usd\": null, \"usage\": null, \"uuid\": null}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": true, \"terminal_received\": true}",
+    "terminated": 0,
+    "removed": 0,
+    "host_receipt": null
+  },
+  "after_teardown": {
+    "singleton": 1,
+    "session": "aab6add7-bd3f-450b-8740-82a66ed966ca",
+    "attempt": "fb9855f2ccae4d0594d0aeeb0d3086c8",
+    "name": "sdk-host-fb9855f2ccae4d0594d0aeeb0d3086c8",
+    "resource": "29b1a3c62b1f2d744d3f89833387c664d61a90c690613bc0ed1e39c9d6d26a5a",
+    "runner": "40380c414fdf4f5e83228d1b187089b3",
+    "stopped": 1,
+    "observations": "{\"close_error\": null, \"interrupt_acknowledged\": true, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"claude_code_version\": \"2.1.274\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": null, \"duration_api_ms\": 0, \"duration_ms\": 1, \"errors\": null, \"is_error\": false, \"model_usage\": null, \"num_turns\": 1, \"origin\": null, \"permission_denials\": null, \"result\": \"done\", \"session_id\": \"session\", \"stop_reason\": null, \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": null, \"total_cost_usd\": null, \"usage\": null, \"uuid\": null}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": true, \"terminal_received\": true}",
+    "terminated": 1,
+    "removed": 1,
+    "host_receipt": "{\"removal_verified\": true, \"resource\": \"29b1a3c62b1f2d744d3f89833387c664d61a90c690613bc0ed1e39c9d6d26a5a\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}"
+  },
+  "replacement_before_teardown_refused": true,
+  "replacement_after_teardown_admitted": true,
+  "stale_teardown_refused": true,
+  "network": "none",
+  "credentials_or_login_mounts": false,
+  "model_calls": 0,
+  "engine_launches": 0,
+  "provider_spend_usd": 0,
+  "installed_plugin_provenance_proved": false,
+  "live_engine_shutdown_or_recovery_proved": false,
+  "source_sha256": {
+    "docs/skill-recovery/experiments/host_session_offline.py": "387f6ec6b22382a075cfc105803efe80af85b45e81826346fba648a48f69b0ac",
+    "docs/skill-recovery/experiments/host_session.py": "666ebb0c380c797905d73a065678783b87d6e5507f0b596122ace867f5f956dc",
+    "tests/session_control/test_host_admission.py": "e59bf4a05f4bfc4162a3db4601e2dee8ed14cab4dbdcb76ee8009b730ca91ebf",
+    "src/temporalio/claude_agent_sdk/_runner.py": "9f06d775060dfd6a6b73fc7278b13531a8608a558fad2b9822aae9aff06bbc89",
+    "src/temporalio/claude_agent_sdk/_session_control.py": "5422ef1135e1de662bfc9f7115794ff82f39ef6d3f42c4d76947d52f0b5142e7"
+  }
+}

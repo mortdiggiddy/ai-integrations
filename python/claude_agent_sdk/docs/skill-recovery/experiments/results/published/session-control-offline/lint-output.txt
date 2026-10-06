@@ -1,0 +1,4 @@
+All checks passed!
+4 files already formatted
+Success: no issues found in 3 source files
+Focused check exit codes: [0, 0, 0, 0]

@@ -19,6 +19,10 @@ The diagram is a target responsibility map, not a claim that these capabilities 
 
 ## Current status
 
+[Production result delivery is complete](python/claude_agent_sdk/docs/skill-recovery/evidence.md#production-result-delivery-closure-2026-10-05): all eight accepted criteria are demonstrated. Exact original Write success and Bash error return on fresh production Workers without repeated effects, after accepted segment commit and authoritative cleanup. Mixed denial visibility and Read ordering/model next action are proved. Historical failures and reservations remain preserved. Phase 1 continues with preventive control implementation and its negative proof; the engine exit review remains mandatory before Phase 2.
+
+The [bounded real model harness is complete](python/claude_agent_sdk/docs/skill-recovery/evidence.md#bounded-real-model-harness-closure-2026-10-05). The existing live fixture demonstrates one external Write after accepted segment commit and a fresh Worker returning the exact recorded result to the original pending call without repeating the effect, after authoritative host cleanup. Paired installed CLI versions and credential free default tests are recorded. Other recovery scenarios and production integration remain incomplete; the Phase 1 exit review is still required before Phase 2.
+
 Experimental and incomplete. The original plugin supplies durable custom tools and session checkpoints. This fork adds an opt in built in tool policy and an offline harness. Leaving the policy unset retains the original behavior.
 
 The policy branch validates its table and options, defers supported effects and questions, and stops when it has no executor. The effect executor, validated skill loading and signed question handler are not implemented. It cannot yet complete an effectful coding skill. Offline tests are not proof of real model interception, replacement Worker recovery or complete filesystem preservation. The [plugin README](python/claude_agent_sdk/README.md) describes the implemented API and its limits.

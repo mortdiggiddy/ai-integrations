@@ -1,0 +1,56 @@
+import asyncio, contextlib, io, json, sys, types
+from pathlib import Path
+ROOT=Path('<temporary>/corrected-fixture')
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(ROOT/'copy/python/claude_agent_sdk/docs/skill-recovery/experiments'))
+import sdk_shutdown_probe as probe
+from host_session import HostSession, AdmissionRefused
+rows=[]
+async def exercise(fault):
+    directory=ROOT/('deadline-'+fault);directory.mkdir()
+    host=HostSession.initialize(directory/'host.db');attempt=host.admit('session');host.bind(attempt,'a'*64)
+    gate=asyncio.Event(); observed=asyncio.Event(); finished=asyncio.Event(); owners=[]; cancellations=[]
+    sdk=types.ModuleType('claude_agent_sdk');sdk.ClaudeAgentOptions=lambda **kw:kw
+    class Client:
+        def __init__(self,options):pass
+        async def stage(self,name):
+            if name==fault:
+                try:await gate.wait()
+                except asyncio.CancelledError:cancellations.append(name);raise
+        async def connect(self):await self.stage('connect')
+        async def interrupt(self):await self.stage('interrupt')
+        async def disconnect(self):await self.stage('disconnect')
+    sdk.ClaudeSDKClient=Client;sys.modules['claude_agent_sdk']=sdk
+    class RetainedBarrier:
+        async def wait(self):await finished.wait()
+    def task(coro):
+        owner=asyncio.create_task(coro);owners.append(owner);return owner
+    async def sleep(delay):await asyncio.sleep(0)
+    clock=[0]
+    def monotonic():clock[0]+=5;return clock[0]
+    probe.asyncio=types.SimpleNamespace(create_task=task,sleep=sleep,Event=RetainedBarrier)
+    probe.time=types.SimpleNamespace(monotonic=monotonic)
+    probe.HostSession=lambda path:host
+    probe.inventory=lambda:[{'pid':1,'start':'one'}]
+    def save(path,value):
+        (directory/path.name).write_text(json.dumps(value,indent=2));observed.set()
+    probe.save=save
+    with contextlib.redirect_stdout(io.StringIO()):
+        monitor=asyncio.create_task(probe.child_control(types.SimpleNamespace(attempt=attempt,session='session')))
+        await asyncio.wait_for(observed.wait(),1)
+        owner=owners[0]
+        assert not owner.done() and not owner.cancelled() and not cancellations
+        state=json.loads((directory/'sdk-observations.json').read_text())
+        assert state['timeout_stage']==fault and state['shutdown_unresolved'] and not state['sdk_closed']
+        assert host.snapshot(attempt)['stopped']==1
+        try:host.admit('session')
+        except AdmissionRefused as exc:diagnostic=str(exc)
+        else:raise AssertionError('replacement admitted')
+        gate.set();await owner
+        finished.set();await monitor
+    rows.append({'stage':fault,'saved_timeout_state':state,'owner_cancelled':cancellations,'replacement_diagnostic':diagnostic})
+async def main():
+    for fault in ['connect','interrupt','disconnect']:await exercise(fault)
+asyncio.run(main())
+(ROOT/'deadline-results.json').write_text(json.dumps(rows,indent=2))
+print('3 actual child_control scripted accelerated-clock stage deadline cases passed; owner retained and never cancelled')

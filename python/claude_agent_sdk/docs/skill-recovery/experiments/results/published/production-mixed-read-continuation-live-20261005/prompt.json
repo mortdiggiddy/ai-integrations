@@ -1,0 +1,5 @@
+{
+  "one_tool_at_a_time": false,
+  "prompt": "First call Read on /state/work/input.txt and inspect its contents. Then in your next single assistant message call Write twice, with two distinct tool calls both using file_path /state/work/marker.txt and content WRITE_ONCE_MARKER followed by a newline. In that same message, after both Write calls, call Read on /state/work/input.txt again. Do not combine these into Bash, do not omit a call, and do not use other tools. After the tool results, describe which calls were denied and include the recorded Write result.",
+  "scenario": "mixed-read"
+}

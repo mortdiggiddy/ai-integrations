@@ -1,0 +1,36 @@
+import sys,json,tempfile
+from pathlib import Path
+sys.path.insert(0,str(Path("python/claude_agent_sdk/docs/skill-recovery/experiments").resolve()))
+from host_session import HostSession,AdmissionRefused
+count=0
+class Daemon:
+ def __init__(self,host,attempt,fault):self.row=host.snapshot(attempt);self.fault=fault;self.n=0;self.running=True;self.removed=False
+ def inspect(self,resource):
+  self.n+=1
+  value=dict(Id=resource,Name="/"+self.row["name"],Config=dict(Labels={"durability.attempt":self.row["attempt"]}),State=dict(Running=self.running,Pid=42 if self.running else 0))
+  if self.n==1:
+   if self.fault=="id":value["Id"]="b"*64
+   if self.fault=="name":value["Name"]="/other"
+   if self.fault=="label":value["Config"]["Labels"]["durability.attempt"]="stale"
+  else:
+   if self.fault=="post_id":value["Id"]="b"*64
+   if self.fault=="post_running":value["State"]["Running"]=True
+   if self.fault=="post_pid":value["State"]["Pid"]=9
+  return value
+ def kill(self,resource):self.running=False
+ def wait(self,resource):return True if self.fault=="bool_exit" else "0" if self.fault=="str_exit" else 0
+ def remove(self,resource):self.removed=True
+ def absent(self,resource):return self.fault!="present"
+expected={"id":"Container ownership identity differs","name":"Container ownership identity differs","label":"Container ownership identity differs","post_id":"Host process termination is unverified","post_running":"Host process termination is unverified","post_pid":"Host process termination is unverified","bool_exit":"Container exit receipt is unverified","str_exit":"Container exit receipt is unverified","present":"Containment teardown is unverified"}
+for fault,diagnostic in expected.items():
+ with tempfile.TemporaryDirectory() as tmp:
+  host=HostSession.initialize(Path(tmp)/"host.db");attempt=host.admit("session");host.bind(attempt,"a"*64)
+  try:host.teardown(attempt,Daemon(host,attempt,fault))
+  except AdmissionRefused as error:assert str(error)==diagnostic
+  else:raise AssertionError(fault)
+  try:HostSession(host.path).admit("session")
+  except AdmissionRefused as error:assert str(error)=="Prior host termination and teardown are unresolved"
+  else:raise AssertionError("admitted")
+  row=host.snapshot(attempt);assert row["removed"]==0 and bool(row["terminated"])==(fault=="present")
+  count+=1
+print(json.dumps(dict(supplemental_host_predicate_checks=count,result="PASS")))

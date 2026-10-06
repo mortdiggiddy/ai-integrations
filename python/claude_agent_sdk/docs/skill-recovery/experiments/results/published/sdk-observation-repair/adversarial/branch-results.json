@@ -1,0 +1,679 @@
+{
+  "branches": [
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "missing_after_disconnect",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": null,
+      "error": "JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+      "fault": "truncated_json",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": null,
+      "teardown_error": null,
+      "unresolved": null
+    },
+    {
+      "absence": null,
+      "error": "PermissionError: injected observation read race",
+      "fault": "read_error",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": null,
+      "teardown_error": null,
+      "unresolved": null
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "top_level_list",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": [
+        "SDK observations are not an object"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "enumeration_false",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "enumeration_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "complete_false",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "complete_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "errors_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "errors_nonempty",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "pids_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "pids_string",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "pid_zero",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "pid_negative",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "pid_float",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "pid_bool",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "pid_duplicate",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "row_duplicate",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "row_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "row_extra",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "rows_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "rows_string",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "version_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "version_wrong",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "version_float",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "start_empty",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "start_zero",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "start_negative",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "start_space",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "start_unicode",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "start_float",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "start_int",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "start_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "state_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "state_unknown",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "comm_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "comm_whitespace",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "before_connect inventory missing, invalid or incomplete",
+        "after_connect inventory missing, invalid or incomplete",
+        "after_disconnect inventory missing, invalid or incomplete"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "parent_survives",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "Relevant process identities survive disconnect"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "descendant_survives",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "Relevant process identities survive disconnect"
+      ]
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "zombie_survives",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "Relevant process identities survive disconnect"
+      ]
+    },
+    {
+      "absence": true,
+      "error": null,
+      "fault": "reused_pid_valid",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": null,
+      "fault": "order_valid",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": null,
+      "fault": "unrelated_valid",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "interrupt_failed",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "close_timeout",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "connected_truthy",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "stop_truthy",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "sdk_closed_truthy",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "shutdown_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "prompt_missing",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "connect_error",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": "RuntimeError: Public SDK lifecycle unresolved; retain limitation and stop this approach",
+      "fault": "close_error",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": false,
+      "teardown_error": null,
+      "unresolved": []
+    },
+    {
+      "absence": false,
+      "error": "RuntimeError: SDK subprocess disappearance is unverified before host teardown",
+      "fault": "empty_relevant",
+      "replacement_after_cleanup": true,
+      "sdk_control_completed": true,
+      "teardown_error": null,
+      "unresolved": [
+        "No relevant process identity observed after connection"
+      ]
+    },
+    {
+      "absence": true,
+      "error": null,
+      "fault": "teardown_wait",
+      "replacement_after_cleanup": null,
+      "sdk_control_completed": true,
+      "teardown_error": "AdmissionRefused: wait unresolved",
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": null,
+      "fault": "teardown_remove",
+      "replacement_after_cleanup": null,
+      "sdk_control_completed": true,
+      "teardown_error": "AdmissionRefused: remove unresolved",
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": null,
+      "fault": "teardown_enumerate",
+      "replacement_after_cleanup": null,
+      "sdk_control_completed": true,
+      "teardown_error": "AdmissionRefused: daemon unavailable",
+      "unresolved": []
+    },
+    {
+      "absence": true,
+      "error": null,
+      "fault": "teardown_present",
+      "replacement_after_cleanup": null,
+      "sdk_control_completed": true,
+      "teardown_error": "AdmissionRefused: Containment teardown is unverified",
+      "unresolved": []
+    }
+  ],
+  "collections": [
+    {
+      "location": "comm",
+      "observation": {
+        "complete": false,
+        "enumerated_pids": [
+          7
+        ],
+        "enumeration_completed": true,
+        "errors": [
+          {
+            "error": "FileNotFoundError",
+            "operation": "comm",
+            "pid": 7,
+            "vanished_during_collection": true
+          }
+        ],
+        "processes": [],
+        "version": 1
+      }
+    },
+    {
+      "location": "second_stat",
+      "observation": {
+        "complete": false,
+        "enumerated_pids": [
+          7
+        ],
+        "enumeration_completed": true,
+        "errors": [
+          {
+            "error": "FileNotFoundError",
+            "operation": "stat_identity",
+            "pid": 7,
+            "vanished_during_collection": true
+          }
+        ],
+        "processes": [],
+        "version": 1
+      }
+    },
+    {
+      "location": "enumeration_partial_timeout",
+      "observation": {
+        "complete": false,
+        "enumerated_pids": [
+          7
+        ],
+        "enumeration_completed": false,
+        "errors": [
+          {
+            "error": "TimeoutError",
+            "operation": "enumerate"
+          }
+        ],
+        "processes": [],
+        "version": 1
+      }
+    }
+  ]
+}

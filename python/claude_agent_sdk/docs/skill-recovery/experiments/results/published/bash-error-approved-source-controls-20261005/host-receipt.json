@@ -1,0 +1,13 @@
+{
+  "singleton": 1,
+  "session": "aab6add7-bd3f-450b-8740-82a66ed966ca",
+  "attempt": "fb9855f2ccae4d0594d0aeeb0d3086c8",
+  "name": "sdk-host-fb9855f2ccae4d0594d0aeeb0d3086c8",
+  "resource": "29b1a3c62b1f2d744d3f89833387c664d61a90c690613bc0ed1e39c9d6d26a5a",
+  "runner": "40380c414fdf4f5e83228d1b187089b3",
+  "stopped": 1,
+  "observations": "{\"close_error\": null, \"interrupt_acknowledged\": true, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"claude_code_version\": \"2.1.274\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": null, \"duration_api_ms\": 0, \"duration_ms\": 1, \"errors\": null, \"is_error\": false, \"model_usage\": null, \"num_turns\": 1, \"origin\": null, \"permission_denials\": null, \"result\": \"done\", \"session_id\": \"session\", \"stop_reason\": null, \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": null, \"total_cost_usd\": null, \"usage\": null, \"uuid\": null}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": true, \"terminal_received\": true}",
+  "terminated": 1,
+  "removed": 1,
+  "host_receipt": "{\"removal_verified\": true, \"resource\": \"29b1a3c62b1f2d744d3f89833387c664d61a90c690613bc0ed1e39c9d6d26a5a\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}"
+}

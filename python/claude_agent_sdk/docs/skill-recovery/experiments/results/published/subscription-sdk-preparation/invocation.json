@@ -1,0 +1,34 @@
+{
+  "container_controls": [
+    "--rm",
+    "--init",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=128",
+    "--memory=2g",
+    "--cpus=2",
+    "--network=none"
+  ],
+  "tmpfs": [
+    "/tmp:rw,nosuid,nodev,size=256m",
+    "/work:rw,nosuid,nodev,uid=1000,gid=1000,size=128m",
+    "/home/proof:rw,nosuid,nodev,uid=1000,gid=1000,size=128m"
+  ],
+  "bind_mounts": [
+    {
+      "source": "docs/skill-recovery/experiments/subscription_sdk_prepare.py",
+      "target": "/probe.py",
+      "readonly": true
+    }
+  ],
+  "entrypoint": "/opt/python/bin/python3.13",
+  "arguments": [
+    "/probe.py"
+  ],
+  "exit_code": 0,
+  "login_volume_mounted": false,
+  "probe_sha256": "761413eead1afa318d2dc6dcfcc562431511aa5bed2fb6dec8454541185866dc",
+  "image_id": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "scope": "Offline guarded SDK preparation only; existing wheel provenance not rerun"
+}

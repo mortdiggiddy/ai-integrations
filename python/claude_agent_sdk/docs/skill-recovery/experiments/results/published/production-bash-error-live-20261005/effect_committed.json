@@ -1,0 +1,42 @@
+{
+  "accepted": {
+    "key": {
+      "project_key": "-state-work",
+      "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6"
+    },
+    "pending": {
+      "id": "toolu_013vZh1pgTbu1az5mdaQhqgM",
+      "input": {
+        "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"
+      },
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6"
+      },
+      "name": "Bash",
+      "transcript_uuid": "d893646e-deae-4e8a-b2e5-1273ba031623"
+    },
+    "segment": {
+      "checkpoint": "6fcfa12c-2787-471a-a0e4-6ae25d94e5d3",
+      "cost_usd": 0.004934999999999999,
+      "deferred": {
+        "id": "toolu_013vZh1pgTbu1az5mdaQhqgM",
+        "input": {
+          "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"
+        },
+        "name": "Bash"
+      },
+      "error": null,
+      "is_error": false,
+      "result": null,
+      "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6"
+    },
+    "transcript_sha256": "5ca6a700d53996caa64d5e2b4380dbc56ffa79789be985d3a824f7bae1c99dd9"
+  },
+  "outcome": {
+    "content": "BASH_KNOWN_ERROR_EXIT_7",
+    "is_error": true,
+    "tool_use_id": "toolu_013vZh1pgTbu1az5mdaQhqgM"
+  },
+  "stage": "effect_committed"
+}

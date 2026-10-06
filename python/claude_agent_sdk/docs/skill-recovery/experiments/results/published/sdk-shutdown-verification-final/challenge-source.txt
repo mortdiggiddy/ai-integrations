@@ -1,0 +1,185 @@
+import asyncio, contextlib, copy, importlib.util, io, json, shutil, sys, types
+from pathlib import Path
+ROOT=Path('<temporary>/corrected-fixture')
+ROOT.mkdir()
+REAL=Path('<plugin>')
+EXP=REAL/'docs/skill-recovery/experiments'
+COPY=ROOT/'copy/python/claude_agent_sdk'
+for rel in ['src','tests/session_control','docs/skill-recovery/experiments']:
+    dest=COPY/rel
+    if rel.endswith('experiments'):
+        dest.mkdir(parents=True)
+        for name in ['host_session.py','host_session_offline.py','sdk_shutdown_probe.py']:
+            shutil.copy2(EXP/name,dest/name)
+    else:
+        shutil.copytree(REAL/rel,dest)
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(COPY/'docs/skill-recovery/experiments'))
+import host_session as hs
+import sdk_shutdown_probe as probe
+rows=[]
+def record(name, ok, detail):
+    rows.append(dict(case=name,passed=ok,detail=detail))
+def rejected(fn, text):
+    try: fn()
+    except hs.AdmissionRefused as exc:
+        assert text in str(exc), str(exc)
+        return str(exc)
+    raise AssertionError('unexpected admission')
+def make(name):
+    directory=ROOT/name; directory.mkdir()
+    host=hs.HostSession.initialize(directory/'host.db')
+    attempt=host.admit('session'); host.bind(attempt,'a'*64)
+    return host, attempt
+class Daemon:
+    def __init__(self,host,attempt,fault=None):
+        self.row=host.snapshot(attempt); self.fault=fault; self.running=True; self.calls=[]; self.inspect_count=0
+    def inspect(self,resource):
+        self.inspect_count+=1
+        if self.fault=='inspect': raise hs.AdmissionRefused('scripted inspection failure')
+        return {'Id': 'b'*64 if self.fault in ['id','postid'] and (self.fault=='id' or self.inspect_count>1) else resource,
+                'Name': '/wrong' if self.fault=='name' else '/'+self.row['name'],
+                'Config':{'Labels':{'durability.attempt':'stale' if self.fault=='label' else self.row['attempt']}},
+                'State':{'Running':self.running or (self.inspect_count>1 and self.fault=='postrunning'),
+                         'Pid':42 if self.running or (self.inspect_count>1 and self.fault=='postpid') else 0}}
+    def kill(self,resource):
+        if self.fault=='kill': raise hs.AdmissionRefused('scripted kill failure')
+        self.running=False
+    def wait(self,resource):
+        if self.fault=='wait': raise hs.AdmissionRefused('scripted wait failure')
+        return False if self.fault=='bool_exit' else '0' if self.fault=='str_exit' else 137
+    def remove(self,resource):
+        self.calls.append('remove')
+        if self.fault=='remove': raise hs.AdmissionRefused('scripted remove failure')
+    def absent(self,resource):
+        if self.fault=='enumerate': raise hs.AdmissionRefused('scripted enumeration failure')
+        return self.fault!='present'
+faults={'id':'identity differs','label':'identity differs','name':'identity differs','postid':'termination is unverified',
+        'postrunning':'termination is unverified','postpid':'termination is unverified',
+        'bool_exit':'exit receipt is unverified','str_exit':'exit receipt is unverified','inspect':'inspection failure',
+        'kill':'kill failure','wait':'wait failure','remove':'remove failure','enumerate':'enumeration failure','present':'teardown is unverified'}
+for fault,text in faults.items():
+    host,attempt=make('host-'+fault); daemon=Daemon(host,attempt,fault)
+    diagnostic=rejected(lambda:host.teardown(attempt,daemon),text)
+    rejected(lambda:hs.HostSession(host.path).admit('session'),'termination and teardown are unresolved')
+    row=host.snapshot(attempt)
+    assert row['removed']==0
+    assert bool(row['terminated'])==(fault in ['remove','enumerate','present'])
+    record('host-'+fault,True,diagnostic+'; replacement refused; flags '+str((row['terminated'],row['removed'])))
+host,attempt=make('host-valid'); runner=host.claim_runner(attempt,'session')
+host.observe(attempt,runner,{'sdk_closed':True,'stop_requested':True})
+rejected(lambda:host.admit('session'),'termination and teardown are unresolved')
+daemon=Daemon(host,attempt); row=host.teardown(attempt,daemon)
+receipt=json.loads(row['host_receipt']); assert receipt['wait_exit_code']==137 and receipt['removal_verified']
+replacement=host.admit('session'); host.bind(replacement,'b'*64)
+for name,fn in [('stale-observation',lambda:host.observe(attempt,runner,{'sdk_closed':True})),
+                ('stale-receipt',lambda:host.teardown(attempt,daemon)),
+                ('stale-runner',lambda:host.check_runner(attempt,'session',runner))]:
+    record(name,True,rejected(fn,'Stale or absent host ownership'))
+assert host.snapshot(replacement)['terminated']==host.snapshot(replacement)['removed']==0
+record('valid-host-cleanup',True,receipt)
+host,attempt=make('store-loss'); host.path.unlink()
+record('store-loss',True,rejected(lambda:host.admit('session'),'store is unavailable'))
+
+# Scripted daemon exercises the unchanged public host_probe classification.
+base={'connected':True,'interrupt_acknowledged':True,'sdk_closed':True,'shutdown_unresolved':False,
+      'stop_requested':True,'before_connect':[{'pid':1,'start':'one'}],
+      'after_connect':[{'pid':1,'start':'one'},{'pid':8,'start':'eight'}],
+      'after_disconnect':[{'pid':1,'start':'one'}]}
+old_docker=probe.Docker
+old_monotonic=probe.time.monotonic
+old_sleep=probe.time.sleep
+for fault in ['valid','connected','interrupt_acknowledged','sdk_closed','shutdown_unresolved','no-launch',
+              'still-present','missing-before','missing-after-connect','missing-after-disconnect',
+              'missing-observation-file','host-timeout','host-logs-error','teardown-error']:
+    state=copy.deepcopy(base)
+    if fault in ['connected','interrupt_acknowledged','sdk_closed']:state[fault]=False
+    if fault=='shutdown_unresolved':state[fault]=True
+    if fault=='no-launch':state['after_connect']=state['before_connect']
+    if fault=='still-present':state['after_disconnect']=state['after_connect']
+    for label,key in [('missing-before','before_connect'),('missing-after-connect','after_connect'),('missing-after-disconnect','after_disconnect')]:
+        if fault==label:state.pop(key)
+    class ScriptDocker:
+        def command(self,*args):
+            if args[:2]==('image','inspect'):return probe.IMAGE
+            if args[0]=='create':
+                volume=args[args.index('-v')+1]
+                self.path=Path(volume.rsplit(':',2)[0]); self.host=hs.HostSession(self.path/'host.db')
+                self.attempt=args[args.index('--label')+1].split('=')[1]
+                self.session=args[args.index('--session')+1]; self.row=self.host.snapshot(self.attempt); return 'a'*64
+            if args[:2]==('container','start'):
+                self.runner=self.host.claim_runner(self.attempt,self.session)
+                if fault not in ['missing-observation-file','host-timeout','host-logs-error']:
+                    self.host.observe(self.attempt,self.runner,state)
+                    (self.path/'sdk-observations.json').write_text(json.dumps(state))
+            if args[:2]==('container','logs'):
+                if fault=='host-logs-error':raise hs.AdmissionRefused('scripted logs error')
+                return '{"kind":"ready"}'
+            return ''
+        def inspect(self,resource):
+            return {'Id':resource,'Name':'/'+self.row['name'],
+                    'Config':{'Labels':{'durability.attempt':self.attempt}},
+                    'State':{'Running':not getattr(self,'killed',False) and fault!='missing-observation-file','Pid':0 if getattr(self,'killed',False) or fault=='missing-observation-file' else 42},
+                    'HostConfig':{}}
+        def kill(self,r):self.killed=True
+        def wait(self,r):return 137
+        def remove(self,r):
+            if fault=='teardown-error':raise hs.AdmissionRefused('scripted remove error')
+        def absent(self,r):return True
+    probe.Docker=ScriptDocker
+    if fault=='host-timeout':
+        clock=iter(range(0,10000,100)); probe.time.monotonic=lambda:next(clock); probe.time.sleep=lambda _:None
+    args=types.SimpleNamespace(output=str(ROOT/('probe-'+fault)),inspect_only=False)
+    with contextlib.redirect_stdout(io.StringIO()):
+        try:probe.host_probe(args); exit_code=0
+        except SystemExit as exc:exit_code=exc.code
+    report=json.loads((Path(args.output)/'report.json').read_text())
+    expected=0 if fault=='valid' else 1
+    record('probe-'+fault,exit_code==expected,{'exit':exit_code,'expected':expected,'report':report})
+    probe.time.monotonic=old_monotonic;probe.time.sleep=old_sleep
+probe.Docker=old_docker
+
+# Scripted SDK never offers a query method, so prompt/model calls are impossible.
+async def lifecycle_cases():
+    original_inventory=probe.inventory
+    probe.inventory=lambda:[{'pid':1,'start':'one'}]
+    fake=types.ModuleType('claude_agent_sdk')
+    fake.ClaudeAgentOptions=lambda **kw:kw
+    sys.modules['claude_agent_sdk']=fake
+    for fault in ['valid','connect-error','interrupt-error','disconnect-error','connect-timeout','interrupt-timeout','disconnect-timeout']:
+        gate=asyncio.Event(); started=asyncio.Event(); cancelled=[]; calls=[]
+        class Client:
+            def __init__(self,options):pass
+            async def stage(self,name):
+                calls.append(name)
+                if fault==name+'-error':raise RuntimeError('scripted '+name+' failure')
+                if fault==name+'-timeout':
+                    started.set()
+                    try:await gate.wait()
+                    except asyncio.CancelledError:cancelled.append(name);raise
+            async def connect(self):await self.stage('connect')
+            async def interrupt(self):await self.stage('interrupt')
+            async def disconnect(self):await self.stage('disconnect')
+        fake.ClaudeSDKClient=Client
+        host,attempt=make('lifecycle-'+fault); runner=host.claim_runner(attempt,'session')
+        state={'stage':'created','connected':False,'interrupt_acknowledged':False,'sdk_closed':False,'shutdown_unresolved':False}
+        task=asyncio.create_task(probe.lifecycle(host,attempt,'session',runner,state))
+        if fault.endswith('timeout'):
+            await started.wait()
+            # Observe a finite deadline without cancellation; same policy as child_control.
+            done,_=await asyncio.wait({task},timeout=.005)
+            assert not done and not task.cancelled() and not cancelled
+            state['timeout_stage']=state['stage'];state['shutdown_unresolved']=True;host.stop(attempt)
+            assert state['timeout_stage']==fault.split('-')[0]
+            rejected(lambda:host.admit('session'),'termination and teardown are unresolved')
+            gate.set()
+        await task
+        if fault!='valid':assert state['shutdown_unresolved']
+        if fault=='interrupt-error':assert not state['interrupt_acknowledged'] and state['sdk_closed']
+        if fault=='connect-error':assert not state['connected'] and 'disconnect' in calls
+        if fault=='disconnect-error':assert not state['sdk_closed']
+        record('lifecycle-'+fault,True,{'state':state,'calls':calls,'owner_cancelled':cancelled})
+    probe.inventory=original_inventory
+asyncio.run(lifecycle_cases())
+(ROOT/'challenge-results.json').write_text(json.dumps(rows,indent=2))
+print(json.dumps({'count':len(rows),'pass':sum(row['passed'] for row in rows),'fail':[r['case'] for r in rows if not r['passed']],'evidence':str(ROOT/'challenge-results.json')},indent=2))

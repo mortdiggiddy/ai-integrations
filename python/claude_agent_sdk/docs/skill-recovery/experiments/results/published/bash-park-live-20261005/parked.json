@@ -1,0 +1,76 @@
+{
+  "accepted": {
+    "key": {
+      "project_key": "-state-work",
+      "session_id": "fc5cc845-889d-48ce-8e29-955a4f04f982"
+    },
+    "pending": {
+      "id": "toolu_011xtx7y28TNYy7cnN7GLrJA",
+      "input": {
+        "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30"
+      },
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "fc5cc845-889d-48ce-8e29-955a4f04f982"
+      },
+      "name": "Bash",
+      "transcript_uuid": "588795bf-4e16-4397-9908-ee1431e254f2"
+    },
+    "segment": {
+      "checkpoint": "cad0c9ca-539f-4876-aa17-58d8a0d6e53a",
+      "cost_usd": 0.004963,
+      "deferred": {
+        "id": "toolu_011xtx7y28TNYy7cnN7GLrJA",
+        "input": {
+          "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30"
+        },
+        "name": "Bash"
+      },
+      "error": null,
+      "is_error": false,
+      "result": null,
+      "session_id": "fc5cc845-889d-48ce-8e29-955a4f04f982"
+    },
+    "transcript_sha256": "e6cb4c841b1c10410f98056ea539d6942ec73a322650a8211095b131c5e4297c"
+  },
+  "outcome": {
+    "accepted": {
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "fc5cc845-889d-48ce-8e29-955a4f04f982"
+      },
+      "pending": {
+        "id": "toolu_011xtx7y28TNYy7cnN7GLrJA",
+        "input": {
+          "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30"
+        },
+        "key": {
+          "project_key": "-state-work",
+          "session_id": "fc5cc845-889d-48ce-8e29-955a4f04f982"
+        },
+        "name": "Bash",
+        "transcript_uuid": "588795bf-4e16-4397-9908-ee1431e254f2"
+      },
+      "segment": {
+        "checkpoint": "cad0c9ca-539f-4876-aa17-58d8a0d6e53a",
+        "cost_usd": 0.004963,
+        "deferred": {
+          "id": "toolu_011xtx7y28TNYy7cnN7GLrJA",
+          "input": {
+            "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30"
+          },
+          "name": "Bash"
+        },
+        "error": null,
+        "is_error": false,
+        "result": null,
+        "session_id": "fc5cc845-889d-48ce-8e29-955a4f04f982"
+      },
+      "transcript_sha256": "e6cb4c841b1c10410f98056ea539d6942ec73a322650a8211095b131c5e4297c"
+    },
+    "cause": "TimeoutExpired: Command '['/bin/sh', '-c', 'echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30']' timed out after 3 seconds",
+    "model_result": null,
+    "parked": true
+  },
+  "stage": "parked"
+}

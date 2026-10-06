@@ -1,0 +1,407 @@
+"""Process observation contracts with scripted clients and daemons, no engine calls."""
+
+from __future__ import annotations
+
+import copy
+import json
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+import sdk_shutdown_probe as probe
+from host_session import HostSession
+from test_host_admission import Container
+
+
+def process(pid, start, comm="claude", state="S"):
+    return {"pid": pid, "start": start, "comm": comm, "state": state}
+
+
+def snapshot(*rows):
+    return {
+        "version": 1,
+        "enumeration_completed": True,
+        "enumerated_pids": [row["pid"] for row in rows],
+        "processes": list(rows),
+        "errors": [],
+        "complete": True,
+    }
+
+
+def completed():
+    parent = process(1, "100", "python")
+    return {
+        "stage": "finished",
+        "connected": True,
+        "interrupt_acknowledged": True,
+        "sdk_closed": True,
+        "stop_requested": True,
+        "shutdown_unresolved": False,
+        "prompt_submission_started": False,
+        "before_connect": snapshot(parent),
+        "after_connect": snapshot(parent, process(7, "200"), process(8, "201", "child")),
+        "after_disconnect": snapshot(parent),
+    }
+
+
+@pytest.mark.parametrize("name", ["before_connect", "after_connect", "after_disconnect"])
+@pytest.mark.parametrize("value", [None, [], {}, "bad", {"complete": True}])
+def test_missing_or_malformed_inventory_never_proves_absence(name, value):
+    state = completed()
+    if value is None:
+        del state[name]
+    else:
+        state[name] = value
+    result = probe.classify_observations(state)
+    assert result["sdk_control_completed"] is True
+    assert result["sdk_process_absence_before_host_teardown"] is False
+    assert result["process_observation_unresolved"] == [name + " inventory missing, invalid or incomplete"]
+
+
+@pytest.mark.parametrize("fault", [
+    "enumeration", "errors", "incomplete", "missing_pid", "duplicate_pid", "bool_pid",
+    "row_pid", "start", "bool_start", "noncanonical_start", "state", "comm", "row", "version",
+])
+def test_invalid_observation_contract(fault):
+    state = completed()
+    value = state["after_disconnect"]
+    if fault == "enumeration":
+        value["enumeration_completed"] = False
+    elif fault == "errors":
+        value["errors"] = [{"pid": 7, "error": "PermissionError"}]
+    elif fault == "incomplete":
+        value["complete"] = False
+    elif fault == "missing_pid":
+        value["enumerated_pids"].append(7)
+    elif fault == "duplicate_pid":
+        value["enumerated_pids"].append(1)
+        value["processes"].append(copy.deepcopy(value["processes"][0]))
+    elif fault == "bool_pid":
+        value["enumerated_pids"] = [True]
+    elif fault == "row_pid":
+        value["processes"][0]["pid"] = True
+    elif fault == "row":
+        value["processes"] = [None]
+    elif fault == "version":
+        value["version"] = True
+    else:
+        field, changed = {
+            "start": ("start", "bad"), "bool_start": ("start", True),
+            "noncanonical_start": ("start", "0100"), "state": ("state", []), "comm": ("comm", ""),
+        }[fault]
+        value["processes"][0][field] = changed
+    result = probe.classify_observations(state)
+    assert not result["process_observations_valid"]
+    assert not result["sdk_process_absence_before_host_teardown"]
+    assert result["process_observation_unresolved"]
+
+
+@pytest.mark.parametrize("pid,start,state,absent", [(7, "200", "S", False), (8, "201", "Z", False), (7, "999", "S", True)])
+def test_every_identity_including_zombie_and_pid_reuse(pid, start, state, absent):
+    value = completed()
+    value["after_disconnect"] = snapshot(process(1, "100", "python"), process(pid, start, state=state))
+    result = probe.classify_observations(value)
+    assert result["sdk_process_absence_before_host_teardown"] is absent
+    assert {row["pid"] for row in result["sdk_processes_observed"]} == {7, 8}
+
+
+def test_explicit_valid_disappearance_and_no_launch():
+    value = completed()
+    result = probe.classify_observations(value)
+    assert result["sdk_control_completed"] and result["process_observations_valid"]
+    assert result["sdk_process_absence_before_host_teardown"]
+    assert result["process_observation_unresolved"] == []
+    value["after_connect"] = copy.deepcopy(value["before_connect"])
+    result = probe.classify_observations(value)
+    assert not result["sdk_process_absence_before_host_teardown"]
+    assert result["process_observation_unresolved"] == ["No relevant process identity observed after connection"]
+
+
+def test_existing_claude_identity_is_also_relevant():
+    value = completed()
+    value["before_connect"] = copy.deepcopy(value["after_connect"])
+    value["after_disconnect"] = copy.deepcopy(value["after_connect"])
+    result = probe.classify_observations(value)
+    assert result["sdk_processes_observed"] == [process(7, "200")]
+    assert not result["sdk_process_absence_before_host_teardown"]
+
+
+@pytest.mark.parametrize("field,value", [
+    ("connected", False), ("interrupt_acknowledged", False), ("sdk_closed", False),
+    ("stop_requested", False), ("shutdown_unresolved", True), ("prompt_submission_started", True),
+    ("stage", "disconnect"), ("timeout_stage", "disconnect"), ("interrupt_error", "failed"),
+])
+def test_control_completion_does_not_follow_process_absence(field, value):
+    state = completed()
+    state[field] = value
+    result = probe.classify_observations(state)
+    assert not result["sdk_control_completed"]
+    assert result["process_observations_valid"]
+    assert result["sdk_process_absence_before_host_teardown"] is (field != "sdk_closed")
+
+
+def stat(pid=7, start="200"):
+    return f"{pid} (claude) " + " ".join(["S"] + ["0"] * 18 + [start])
+
+
+@pytest.mark.parametrize("fault", ["enumerate", "partial_enumerate", "stat", "comm", "vanished", "malformed", "identity", "deadline"])
+def test_collection_failure_is_recorded(tmp_path, monkeypatch, fault):
+    directory = tmp_path / "7"
+    directory.mkdir()
+    real_read = Path.read_text
+    reads = 0
+
+    def read(path, *args, **kwargs):
+        nonlocal reads
+        if path.parent == directory:
+            if path.name == "stat":
+                reads += 1
+                if fault == "stat":
+                    raise PermissionError("unreadable")
+                if fault == "vanished":
+                    raise FileNotFoundError("raced")
+                if fault == "malformed":
+                    return "bad stat"
+                return stat(start="201" if fault == "identity" and reads > 1 else "200")
+            if fault == "comm":
+                raise PermissionError("unreadable comm")
+            return "claude\n"
+        return real_read(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", read)
+    if fault in {"enumerate", "partial_enumerate"}:
+        def enumerate_paths(path):
+            if fault == "partial_enumerate":
+                yield directory
+            raise PermissionError("enumeration denied")
+        monkeypatch.setattr(Path, "iterdir", enumerate_paths)
+    result = probe.inventory(tmp_path, timeout=0 if fault == "deadline" else 2)
+    assert result["complete"] is False
+    assert result["errors"]
+    assert not probe.valid_inventory(result)
+    assert result["errors"][0]["operation"] == ("enumerate" if fault in {"enumerate", "partial_enumerate", "deadline"} else "comm" if fault == "comm" else "stat_identity" if fault == "identity" else "stat")
+    if fault == "vanished":
+        assert result["errors"][0]["vanished_during_collection"] is True
+    elif fault not in {"enumerate", "partial_enumerate", "deadline"}:
+        assert result["errors"][0]["vanished_during_collection"] is False
+
+
+def test_successful_collection(tmp_path, monkeypatch):
+    (tmp_path / "7").mkdir()
+    monkeypatch.setattr(Path, "read_text", lambda path: stat() if path.name == "stat" else "claude\n")
+    result = probe.inventory(tmp_path)
+    assert probe.valid_inventory(result)
+    assert result["processes"] == [process(7, "200")]
+    assert result["errors"] == []
+
+
+@pytest.mark.parametrize("fault", ["missing", "malformed", "unreadable", "surviving", "valid", "partial_teardown"])
+def test_host_probe_inventory_contract_end_to_end(tmp_path, monkeypatch, fault):
+    output = tmp_path / "results"
+    daemons = []
+
+    class Daemon(Container):
+        def __init__(self):
+            pass
+
+        def inspect(self, resource):
+            return {**super().inspect(resource), "HostConfig": {}}
+
+        def command(self, *args):
+            if args[:2] == ("image", "inspect"):
+                return probe.IMAGE
+            if args[0] == "create":
+                root = Path(args[args.index("-v") + 1].split(":")[0])
+                self.host = HostSession(root / "host.db")
+                attempt = args[args.index("--attempt") + 1]
+                super().__init__(self.host, attempt)
+                self.root = root
+                self.session = args[args.index("--session") + 1]
+                if fault == "partial_teardown":
+                    self.fail = "remove"
+                daemons.append(self)
+                return "a" * 64
+            if args[:2] == ("container", "start"):
+                runner = self.host.claim_runner(self.row["attempt"], self.session)
+                value = completed()
+                if fault == "missing":
+                    del value["after_disconnect"]
+                elif fault == "malformed":
+                    value["after_disconnect"] = []
+                elif fault == "unreadable":
+                    value["after_disconnect"]["errors"] = [{"pid": 7, "error": "PermissionError"}]
+                elif fault == "surviving":
+                    value["after_disconnect"] = copy.deepcopy(value["after_connect"])
+                self.host.observe(self.row["attempt"], runner, value)
+                (self.root / "sdk-observations.json").write_text(json.dumps(value))
+            return ""
+
+    monkeypatch.setattr(probe, "Docker", Daemon)
+    args = SimpleNamespace(output=str(output), inspect_only=False)
+    if fault == "valid":
+        probe.host_probe(args)
+    else:
+        with pytest.raises(SystemExit) as exc:
+            probe.host_probe(args)
+        assert exc.value.code == 1
+    report = json.loads((output / "report.json").read_text())
+    assert report["sdk_control_completed"] is True
+    assert report["sdk_process_absence_before_host_teardown"] is (fault in {"valid", "partial_teardown"})
+    assert report["replacement_before_cleanup"] == "Prior host termination and teardown are unresolved"
+    assert report["fresh_runner_before_cleanup"] == "Fresh runner has no current host grant"
+    if fault == "partial_teardown":
+        assert "teardown_error" in report
+        assert "replacement_after_cleanup" not in report
+        assert daemons[0].host.snapshot(daemons[0].row["attempt"])["removed"] == 0
+    else:
+        assert report["replacement_after_cleanup"] is True
+        receipt = json.loads(report["after_teardown"]["host_receipt"])
+        assert receipt["removal_verified"] is True
+        assert receipt["stopped_state"] == {"Running": False, "Pid": 0}
+
+# Fresh verifier challenges; this file exists only in an isolated temporary copy.
+@pytest.mark.parametrize('fault', [
+    'missing_after_disconnect', 'truncated_json', 'read_error', 'top_level_list',
+    'enumeration_false', 'enumeration_missing', 'complete_false', 'complete_missing',
+    'errors_missing', 'errors_nonempty', 'pids_missing', 'pids_string', 'pid_zero',
+    'pid_negative', 'pid_float', 'pid_bool', 'pid_duplicate', 'row_duplicate',
+    'row_missing', 'row_extra', 'rows_missing', 'rows_string', 'version_missing',
+    'version_wrong', 'version_float', 'start_empty', 'start_zero', 'start_negative',
+    'start_space', 'start_unicode', 'start_float', 'start_int', 'start_missing',
+    'state_missing', 'state_unknown', 'comm_missing', 'comm_whitespace',
+    'parent_survives', 'descendant_survives', 'zombie_survives', 'reused_pid_valid',
+    'order_valid', 'unrelated_valid', 'interrupt_failed', 'close_timeout',
+    'connected_truthy', 'stop_truthy', 'sdk_closed_truthy', 'shutdown_missing',
+    'prompt_missing', 'connect_error', 'close_error', 'empty_relevant',
+    'teardown_wait', 'teardown_remove', 'teardown_enumerate', 'teardown_present',
+])
+def test_fresh_adversarial_host_probe(tmp_path, monkeypatch, fault):
+    output=tmp_path/'result'
+    value=completed(); inv=value['after_disconnect']; row=inv['processes'][0]
+    if fault=='missing_after_disconnect': del value['after_disconnect']
+    elif fault=='top_level_list': value=[]
+    elif fault in {'enumeration_false','enumeration_missing','complete_false','complete_missing'}:
+        field='enumeration_completed' if fault.startswith('enumeration') else 'complete'
+        if fault.endswith('missing'): del inv[field]
+        else: inv[field]=False
+    elif fault=='errors_missing': del inv['errors']
+    elif fault=='errors_nonempty': inv['errors']=[{'operation':'stat','error':'FileNotFoundError','vanished_during_collection':True}]
+    elif fault=='pids_missing': del inv['enumerated_pids']
+    elif fault=='pids_string': inv['enumerated_pids']='1'
+    elif fault.startswith('pid_'):
+        inv['enumerated_pids']={'pid_zero':[0],'pid_negative':[-1],'pid_float':[1.0],'pid_bool':[True],'pid_duplicate':[1,1]}[fault]
+    elif fault=='row_duplicate': inv['processes'].append(copy.deepcopy(row))
+    elif fault=='row_missing': inv['processes']=[]
+    elif fault=='row_extra': inv['processes'].append(process(88,'999'))
+    elif fault=='rows_missing': del inv['processes']
+    elif fault=='rows_string': inv['processes']='bad'
+    elif fault=='version_missing': del inv['version']
+    elif fault=='version_wrong': inv['version']=2
+    elif fault=='version_float': inv['version']=1.0
+    elif fault.startswith('start_'):
+        if fault=='start_missing': del row['start']
+        else: row['start']={'start_empty':'','start_zero':'0','start_negative':'-1','start_space':' 100','start_unicode':'١٠٠','start_float':'1.0','start_int':100}[fault]
+    elif fault=='state_missing': del row['state']
+    elif fault=='state_unknown': row['state']='unknown'
+    elif fault=='comm_missing': del row['comm']
+    elif fault=='comm_whitespace': row['comm']=' \t\n'
+    elif fault in {'parent_survives','descendant_survives','zombie_survives'}:
+        inv['processes'].append(process(7 if fault=='parent_survives' else 8,'200' if fault=='parent_survives' else '201','child', 'Z' if fault=='zombie_survives' else 'S'))
+        inv['enumerated_pids']=[r['pid'] for r in inv['processes']]
+    elif fault=='reused_pid_valid': value['after_disconnect']=snapshot(process(1,'100','python'),process(7,'999'))
+    elif fault=='order_valid': value['after_connect']['processes'].reverse(); value['after_connect']['enumerated_pids'].reverse()
+    elif fault=='unrelated_valid': value['after_disconnect']=snapshot(process(1,'100','python'),process(88,'999','unrelated'))
+    elif fault=='interrupt_failed': value['interrupt_acknowledged']=False;value['interrupt_error']='injected refusal'
+    elif fault=='close_timeout': value['sdk_closed']=False;value['timeout_stage']='disconnect';value['shutdown_unresolved']=True
+    elif fault in {'connected_truthy','stop_truthy','sdk_closed_truthy'}: value[{'connected_truthy':'connected','stop_truthy':'stop_requested','sdk_closed_truthy':'sdk_closed'}[fault]]=1
+    elif fault in {'shutdown_missing','prompt_missing'}: del value['shutdown_unresolved' if fault=='shutdown_missing' else 'prompt_submission_started']
+    elif fault in {'connect_error','close_error'}: value[fault]='injected'
+    elif fault=='empty_relevant': value['after_connect']=copy.deepcopy(value['before_connect'])
+    daemons=[]
+    class Daemon(Container):
+        def __init__(self): pass
+        def inspect(self, resource): return {**super().inspect(resource),'HostConfig':{}}
+        def command(self,*args):
+            if args[:2]==('image','inspect'):return probe.IMAGE
+            if args[0]=='create':
+                self.root=Path(args[args.index('-v')+1].split(':')[0]); self.host=HostSession(self.root/'host.db')
+                self.session=args[args.index('--session')+1]
+                super().__init__(self.host,args[args.index('--attempt')+1]);daemons.append(self)
+                if fault.startswith('teardown_'):self.fail=fault.removeprefix('teardown_')
+                return 'a'*64
+            if args[:2]==('container','start'):
+                runner=self.host.claim_runner(self.row['attempt'],self.session)
+                if isinstance(value,dict):self.host.observe(self.row['attempt'],runner,value)
+                (self.root/'sdk-observations.json').write_text('{' if fault=='truncated_json' else json.dumps(value))
+            return ''
+        def kill(self,resource):
+            import sqlite3
+            with sqlite3.connect(self.host.path) as db:
+                db.row_factory=sqlite3.Row
+                current=dict(db.execute('SELECT * FROM execution').fetchone())
+            assert current['host_receipt'] is None and current['terminated']==0 and current['removed']==0
+            if fault in {'missing_after_disconnect','teardown_remove'}:
+                with pytest.raises(probe.AdmissionRefused,match='unresolved|unavailable'):HostSession(self.host.path).admit(self.session)
+            super().kill(resource)
+        def remove(self,resource):
+            import sqlite3
+            with sqlite3.connect(self.host.path) as db:
+                db.row_factory=sqlite3.Row
+                current=dict(db.execute('SELECT * FROM execution').fetchone())
+            assert current['terminated']==1 and current['removed']==0
+            if fault in {'missing_after_disconnect','teardown_remove'}:
+                with pytest.raises(probe.AdmissionRefused,match='unresolved|unavailable'):HostSession(self.host.path).admit(self.session)
+            super().remove(resource)
+    monkeypatch.setattr(probe,'Docker',Daemon)
+    real_read=Path.read_text
+    def read(path,*a,**kw):
+        if fault=='read_error' and path.name=='sdk-observations.json':raise PermissionError('injected observation read race')
+        return real_read(path,*a,**kw)
+    monkeypatch.setattr(Path,'read_text',read)
+    valid=fault in {'reused_pid_valid','order_valid','unrelated_valid'}
+    if valid:probe.host_probe(SimpleNamespace(output=str(output),inspect_only=False))
+    else:
+        with pytest.raises(SystemExit) as exc:probe.host_probe(SimpleNamespace(output=str(output),inspect_only=False))
+        assert exc.value.code==1
+    result=json.loads((output/'report.json').read_text())
+    print('FRESH_BRANCH '+json.dumps({'fault':fault,'sdk_control_completed':result.get('sdk_control_completed'),'absence':result.get('sdk_process_absence_before_host_teardown'),'unresolved':result.get('process_observation_unresolved'),'error':result.get('error'),'teardown_error':result.get('teardown_error'),'replacement_after_cleanup':result.get('replacement_after_cleanup')},sort_keys=True))
+    if fault=='missing_after_disconnect':print('MISSING_AFTER_DISCONNECT_REPORT '+json.dumps(result,sort_keys=True))
+    assert result['fresh_runner_before_cleanup']=='Fresh runner has no current host grant'
+    assert result['replacement_before_cleanup']=='Prior host termination and teardown are unresolved'
+    if fault.startswith('teardown_'):
+        assert 'teardown_error' in result and 'replacement_after_cleanup' not in result
+        with pytest.raises(probe.AdmissionRefused,match='unresolved'):HostSession(daemons[0].host.path).admit(daemons[0].session)
+    else:
+        assert result['replacement_after_cleanup'] is True
+        assert result['stale_observation']=='Stale or absent host ownership'
+        receipt=json.loads(result['after_teardown']['host_receipt'])
+        assert receipt['removal_verified'] is True and receipt['stopped_state']=={'Running':False,'Pid':0}
+    if not valid and not fault.startswith('teardown_'):assert 'error' in result
+    if fault=='missing_after_disconnect':
+        assert result['sdk_control_completed'] is True
+        assert result['sdk_process_absence_before_host_teardown'] is False
+        assert result['process_observation_unresolved']==['after_disconnect inventory missing, invalid or incomplete']
+    if fault in {'parent_survives','descendant_survives','zombie_survives'}:
+        assert result['process_observation_unresolved']==['Relevant process identities survive disconnect']
+
+@pytest.mark.parametrize('location',['comm','second_stat','enumeration_partial_timeout'])
+def test_fresh_collection_disappearance_races(tmp_path,monkeypatch,location):
+    directory=tmp_path/'7';directory.mkdir();reads=0
+    def read(path):
+        nonlocal reads
+        if path.name=='stat':
+            reads+=1
+            if location=='second_stat' and reads>1:raise FileNotFoundError('disappeared between identity reads')
+            return stat()
+        if location=='comm':raise FileNotFoundError('disappeared between stat and comm')
+        return 'claude\n'
+    monkeypatch.setattr(Path,'read_text',read)
+    if location=='enumeration_partial_timeout':
+        counter=iter([0,0,3]);monkeypatch.setattr(probe.time,'monotonic',lambda:next(counter))
+        def enumeration(path):yield directory;yield directory
+        monkeypatch.setattr(Path,'iterdir',enumeration)
+    result=probe.inventory(tmp_path)
+    assert not probe.valid_inventory(result) and result['complete'] is False
+    assert result['errors'][0]['operation']=={'comm':'comm','second_stat':'stat_identity','enumeration_partial_timeout':'enumerate'}[location]
+    if location!='enumeration_partial_timeout':assert result['errors'][0]['vanished_during_collection'] is True
+    print('FRESH_COLLECTION '+json.dumps({'location':location,'observation':result},sort_keys=True))

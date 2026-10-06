@@ -1,0 +1,426 @@
+[
+  {
+    "content": "Use Write exactly once to create /state/work/marker.txt with exactly WRITE_ONCE_MARKER followed by a newline. Then reply with the tool result only. Do not use any other tool.",
+    "operation": "enqueue",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.160Z",
+    "type": "queue-operation"
+  },
+  {
+    "operation": "dequeue",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.167Z",
+    "type": "queue-operation"
+  },
+  {
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "message": {
+      "content": "Use Write exactly once to create /state/work/marker.txt with exactly WRITE_ONCE_MARKER followed by a newline. Then reply with the tool result only. Do not use any other tool.",
+      "role": "user"
+    },
+    "parentUuid": null,
+    "permissionMode": "default",
+    "promptId": "e60ecc56-dcb2-4f3e-8dc4-3b4338876ac8",
+    "promptSource": "sdk",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.205Z",
+    "type": "user",
+    "userType": "external",
+    "uuid": "4854fb7a-574c-4cc4-905e-a1f7c89646c6",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "snapshot": {
+        "additionalWorkingDirectories": [],
+        "isGitRepo": false,
+        "isWorktree": false,
+        "osVersion": "Linux 6.6.114.1-microsoft-standard-WSL2",
+        "platform": "linux",
+        "shell": "unknown",
+        "workingDirectory": "/state/work"
+      },
+      "type": "environment"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "4854fb7a-574c-4cc4-905e-a1f7c89646c6",
+    "rendered": [
+      {
+        "content": "<system-reminder>\n# Environment\nYou have been invoked in the following environment: \n - Primary working directory: /state/work\n - Is a git repository: false\n - Platform: linux\n - Shell: unknown\n - OS Version: Linux 6.6.114.1-microsoft-standard-WSL2\n</system-reminder>"
+      }
+    ],
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.204Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "9b94b110-4ff3-4568-b662-e31b2f45d1b3",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "identity": {
+        "knowledgeCutoff": "February 2025",
+        "marketingName": "Haiku 4.5",
+        "modelId": "claude-haiku-4-5-20251001"
+      },
+      "text": "You are powered by the model named Haiku 4.5. The exact model ID is claude-haiku-4-5-20251001. Assistant knowledge cutoff is February 2025.",
+      "type": "model"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "9b94b110-4ff3-4568-b662-e31b2f45d1b3",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nYou are powered by the model named Haiku 4.5. The exact model ID is claude-haiku-4-5-20251001. Assistant knowledge cutoff is February 2025.\n</system-reminder>"
+      }
+    ],
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.204Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "ad14c330-2eab-4665-8302-919ed10ff6e0",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "text": "<total_tokens>15000000 tokens left</total_tokens>",
+      "type": "total_tokens_reminder"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "ad14c330-2eab-4665-8302-919ed10ff6e0",
+    "rendered": [
+      {
+        "content": "<system-reminder>\n<total_tokens>15000000 tokens left</total_tokens>\n</system-reminder>"
+      }
+    ],
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.204Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "5a2d926f-fcdc-4abf-9f32-fc0f93760570",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "remaining": 0.05,
+      "total": 0.05,
+      "type": "budget_usd",
+      "used": 0
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "5a2d926f-fcdc-4abf-9f32-fc0f93760570",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nUSD budget: $0/$0.05; $0.05 remaining\n</system-reminder>"
+      }
+    ],
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.204Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "523ca070-e1e5-4f21-a673-7328d730c53d",
+    "version": "2.1.274"
+  },
+  {
+    "atis": "",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "type": "atis-latch"
+  },
+  {
+    "attachment": {
+      "context": {
+        "userEmail": "The user's email address is operator@example.invalid. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrelated service, such as in a request header, URL, or payload, unless the user explicitly asks."
+      },
+      "type": "session_context"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "523ca070-e1e5-4f21-a673-7328d730c53d",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nAs you answer the user's questions, you can use the following context:\n# userEmail\nThe user's email address is operator@example.invalid. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrelated service, such as in a request header, URL, or payload, unless the user explicitly asks.\n\nIMPORTANT: this context may or may not be relevant to your tasks. You should not respond to this context unless it is highly relevant to your task.\n</system-reminder>"
+      }
+    ],
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.221Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "f71e7e69-4979-4b80-b2a0-ec0fc4cd5469",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "date": "2026-10-05",
+      "type": "date"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "f71e7e69-4979-4b80-b2a0-ec0fc4cd5469",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nToday's date is 2026-10-05.\n</system-reminder>"
+      }
+    ],
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.221Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "9d6e59fe-6b94-4f53-a24f-977376fe8d19",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "systemPrompt": [
+        "Call at most one tool per message, then wait for its result before calling another."
+      ],
+      "type": "prompt_snapshot"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "9d6e59fe-6b94-4f53-a24f-977376fe8d19",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:37.222Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "1fbaac70-1a20-4772-bc6d-0b283cb2bdca",
+    "version": "2.1.274"
+  },
+  {
+    "apiBlockIndex": 0,
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "message": {
+      "container": null,
+      "content": [
+        {
+          "signature": "Eo4GCtABCBIYAipA0f8z0/11BTbJZGtuxPYY4mVfyMWXCBnwppxFPlUecbzphpEzTyAc/mZ3czHIJL4X1lvcSi/cFll4ysNeDeKaRTIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYmMxMjQ4YzMtMzBhOS00MDQ4LTg1NGQtNDZkNWE3YTY2ZjA3chB9oY7uhvxijGquhYYIC/gSiAEBmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAGTyo/WBrABAhIMOuIpuKGB3FEYdPBSGgyp3JpF8Ea5bNYu4VQiMD3lpiktBPVfInfXSQ1Sl1NtxtOXJ1RrPWiQqgVP0bJ8axUH/wTaA7uDFlZJIDv/JirqA7+ceR1te38MF6knOSihw/WnWi2k8M63e8ywvV72viajIfX15FuX8jnKNWKQki+glSSLXih5h9Ne52+vcvrKwbNKg1hAfjnA/rLeJpsBiPfLfCBLXntNH8zmcEPqx3su55llX4IYpUUutSXaBbY7tTnidbqHP9HfoOfq16N4yoiQJcW21IIOFq47C6qApVFtB6OxtwyK6mAu9b7rJR6q4nSqk29k966m2vs7o5ErEyPIaJugVbyjpI5ff4NxcHU1PwZ3WBdnq+k4RVYlQtwc4GfTLVuOBD+VI76XWegcJmO8eUBk3JEmKKeiRaOeqpp8ZvMltpRai64NkDiOFoW1ff/wPhbWSVxdoFQSvki3TrhRsxtlinDwTEPxXQop4DJiIMpJdoMzjw4fOQTeaYNZr2B3oaiTGqiC4qWa+EDvCFKZflsXVTBbpVm4iuLjV8Jc/o+jZKMYZjEZ0tMV78NgkcOLCQD+VGpzuZhZ7x85HUoipn5GE+7dNXCsO3RX2bbUzhoB7gkbGnImjOKRcMusAl6+Pk8PssJqiSi+d58V+LIoNJdOnKKE6RCv3h+g+wASYvmzm4D4iZ30JH62A5Srcxu5Y1mEnv81GwUMAs2XS+z7lUHWfK/25DsXo3BKQslQi1ltcFlqTICccHMYAQ==",
+          "thinking": "",
+          "type": "thinking"
+        }
+      ],
+      "context_management": null,
+      "diagnostics": null,
+      "id": "msg_011CfjXHz9AArrPBeRZTWbmb",
+      "model": "claude-haiku-4-5-20251001",
+      "role": "assistant",
+      "stop_details": null,
+      "stop_reason": "tool_use",
+      "stop_sequence": null,
+      "type": "message",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "not_available",
+        "input_tokens": 1377,
+        "iterations": [],
+        "output_tokens": 224,
+        "output_tokens_details": {
+          "thinking_tokens": 136
+        },
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 0
+        },
+        "service_tier": "standard",
+        "speed": "standard"
+      }
+    },
+    "parentUuid": "1fbaac70-1a20-4772-bc6d-0b283cb2bdca",
+    "perTurnEffort": null,
+    "requestId": "req_011CfjXHyMmjtHEMgi1kPgJ7",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:39.072Z",
+    "type": "assistant",
+    "userType": "external",
+    "uuid": "371e1768-becb-42d2-bf1f-2131805a92be",
+    "version": "2.1.274"
+  },
+  {
+    "apiBlockIndex": 1,
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "message": {
+      "container": null,
+      "content": [
+        {
+          "caller": {
+            "type": "direct"
+          },
+          "id": "toolu_01DJu2fHo3hop4VaWotJLd1k",
+          "input": {
+            "content": "WRITE_ONCE_MARKER\n",
+            "file_path": "/state/work/marker.txt"
+          },
+          "name": "Write",
+          "type": "tool_use"
+        }
+      ],
+      "context_management": null,
+      "diagnostics": null,
+      "id": "msg_011CfjXHz9AArrPBeRZTWbmb",
+      "model": "claude-haiku-4-5-20251001",
+      "role": "assistant",
+      "stop_details": null,
+      "stop_reason": "tool_use",
+      "stop_sequence": null,
+      "type": "message",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "not_available",
+        "input_tokens": 1377,
+        "iterations": [],
+        "output_tokens": 224,
+        "output_tokens_details": {
+          "thinking_tokens": 136
+        },
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 0
+        },
+        "service_tier": "standard",
+        "speed": "standard"
+      }
+    },
+    "parentUuid": "371e1768-becb-42d2-bf1f-2131805a92be",
+    "perTurnEffort": null,
+    "requestId": "req_011CfjXHyMmjtHEMgi1kPgJ7",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:39.343Z",
+    "type": "assistant",
+    "userType": "external",
+    "uuid": "cafe68b8-2a76-4770-a7d0-8667c4bf0e7b",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "command": "/opt/python/bin/python3.13 /source/temporalio/claude_agent_sdk/_defer_hook.py",
+      "content": "",
+      "durationMs": 20,
+      "exitCode": 0,
+      "hookEvent": "PreToolUse",
+      "hookName": "PreToolUse:Write",
+      "stderr": "",
+      "stdout": "{\"hookSpecificOutput\": {\"hookEventName\": \"PreToolUse\", \"permissionDecision\": \"defer\"}}\n",
+      "toolUseID": "toolu_01DJu2fHo3hop4VaWotJLd1k",
+      "type": "hook_success"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "cafe68b8-2a76-4770-a7d0-8667c4bf0e7b",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:39.372Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "351119fe-41c2-4e3c-9df5-8379106edd06",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "hookEvent": "PreToolUse",
+      "hookName": "settings",
+      "permissionMode": "default",
+      "toolInput": {
+        "content": "WRITE_ONCE_MARKER\n",
+        "file_path": "/state/work/marker.txt"
+      },
+      "toolName": "Write",
+      "toolUseID": "toolu_01DJu2fHo3hop4VaWotJLd1k",
+      "type": "hook_deferred_tool"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "351119fe-41c2-4e3c-9df5-8379106edd06",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:39.373Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "8ac061e2-d47e-4048-bd55-044f9c477ea9",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "cliPrefix": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+      "systemPrompt": [
+        "Call at most one tool per message, then wait for its result before calling another."
+      ],
+      "tools": [
+        {
+          "description": "Writes a file to the local filesystem.\n\nUsage:\n- This tool will overwrite the existing file if there is one at the provided path.\n- If this is an existing file, you MUST use the Read tool first to read the file's contents. This tool will fail if you did not read the file first.\n- Prefer the Edit tool for modifying existing files \u2014 it only sends the diff. Only use this tool to create new files or for complete rewrites.\n- NEVER create documentation files (*.md) or README files unless explicitly requested by the User.\n- Only use emojis if the user explicitly requests it. Avoid writing emojis to files unless asked.",
+          "name": "Write",
+          "schema": {
+            "description": "Writes a file to the local filesystem.\n\nUsage:\n- This tool will overwrite the existing file if there is one at the provided path.\n- If this is an existing file, you MUST use the Read tool first to read the file's contents. This tool will fail if you did not read the file first.\n- Prefer the Edit tool for modifying existing files \u2014 it only sends the diff. Only use this tool to create new files or for complete rewrites.\n- NEVER create documentation files (*.md) or README files unless explicitly requested by the User.\n- Only use emojis if the user explicitly requests it. Avoid writing emojis to files unless asked.",
+            "input_schema": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "additionalProperties": false,
+              "properties": {
+                "content": {
+                  "description": "The content to write to the file",
+                  "type": "string"
+                },
+                "file_path": {
+                  "description": "The absolute path to the file to write (must be absolute, not relative)",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "file_path",
+                "content"
+              ],
+              "type": "object"
+            },
+            "name": "Write"
+          }
+        }
+      ],
+      "type": "prompt_snapshot"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "8ac061e2-d47e-4048-bd55-044f9c477ea9",
+    "sessionId": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+    "timestamp": "2026-10-05T17:57:39.379Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "2dcee6db-95e1-407b-8034-1cd8e7b12ab3",
+    "version": "2.1.274"
+  }
+]

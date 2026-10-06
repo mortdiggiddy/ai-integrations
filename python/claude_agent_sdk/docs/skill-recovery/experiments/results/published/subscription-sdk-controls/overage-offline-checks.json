@@ -1,0 +1,176 @@
+{
+  "date": "2026-10-02",
+  "purpose": "Offline pinned overage semantics; no blocker closure",
+  "checker_sha256": "ed8c00885570e57030c91573e211519a24e8dd61ed1e48138d9dfe133ef759af",
+  "monitor_sha256": "44754903f656b8c9dd3169a931314f84e8143988fd0473a93c2ab2d01811999e",
+  "helper_sha256": "60f18ce20cd2281cfb86f7793653ec5dcf0e9db3fdecc5665f69966493848869",
+  "container": {
+    "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+    "network": "none",
+    "readonly_root": true,
+    "login_volume_mounted": false,
+    "credential_access": false,
+    "entrypoint": "/opt/python/bin/python3.13",
+    "readonly_source_mounts": [
+      "overage_metadata_offline.py",
+      "subscription_sdk_control.py",
+      "subscription_sdk_run.py"
+    ]
+  },
+  "lead_result": {
+    "status": "passed",
+    "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+    "sdk_record_files": 36,
+    "extracted_functions": {
+      "Tot": {
+        "byte_offset": 197484468,
+        "sha256": "4295314fe5ea0d0e7a395e99718e7426e5737b874e43e16729e25c164e43e623"
+      },
+      "uzo": {
+        "byte_offset": 197485879,
+        "sha256": "2adf0cbf5cc73971f29cf2e93a9dc6297a16a2bba0a7455523c234b302be3ef0"
+      },
+      "xot": {
+        "byte_offset": 197486052,
+        "sha256": "7fd72a25e370a83e23fceb3019571e08d0f305a15424c7d2ff804a126cc1e3ea"
+      },
+      "ia": {
+        "byte_offset": 202572359,
+        "sha256": "b9d29710908f54d3228ac813c2c3756e4f8025dd0b641377a4ef976f177aa091"
+      }
+    },
+    "source_vectors": [
+      {
+        "name": "observed-shape",
+        "value": {
+          "status": "allowed",
+          "rateLimitType": "overage",
+          "overageStatus": "allowed",
+          "isUsingOverage": false,
+          "overageInUse": true
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      },
+      {
+        "name": "fallback",
+        "value": {
+          "status": "rejected",
+          "rateLimitType": "five_hour",
+          "overageStatus": "allowed",
+          "isUsingOverage": true,
+          "overageInUse": true
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      },
+      {
+        "name": "fallback-warning",
+        "value": {
+          "status": "rejected",
+          "rateLimitType": "five_hour",
+          "overageStatus": "allowed_warning",
+          "isUsingOverage": true,
+          "overageInUse": true
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      },
+      {
+        "name": "eligibility-only",
+        "value": {
+          "status": "allowed",
+          "rateLimitType": "five_hour",
+          "overageStatus": "allowed",
+          "isUsingOverage": false
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      },
+      {
+        "name": "false-header-omitted",
+        "value": {
+          "status": "allowed",
+          "rateLimitType": "five_hour",
+          "overageStatus": "allowed",
+          "isUsingOverage": false
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      },
+      {
+        "name": "nonliteral-header-omitted",
+        "value": {
+          "status": "allowed",
+          "rateLimitType": "five_hour",
+          "overageStatus": "allowed",
+          "isUsingOverage": false
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      },
+      {
+        "name": "default-status",
+        "value": {
+          "status": "allowed",
+          "rateLimitType": "overage",
+          "overageStatus": "allowed",
+          "isUsingOverage": false,
+          "overageInUse": true
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      },
+      {
+        "name": "derived-warning-preserves-use",
+        "value": {
+          "status": "allowed_warning",
+          "rateLimitType": "five_hour",
+          "isUsingOverage": false,
+          "overageInUse": true
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      },
+      {
+        "name": "emitter-suppresses-use",
+        "value": {
+          "status": "allowed",
+          "rateLimitType": "overage",
+          "overageStatus": "allowed",
+          "isUsingOverage": false
+        },
+        "unchanged_monitor_stop": "ambiguous_active_or_unverifiable_overage"
+      }
+    ],
+    "explicit_false_monitor_control": "accepted",
+    "model_cli_spawns": 0,
+    "transport_starts": 0,
+    "limits": [
+      "Pure extracted functions, not a full CLI execution",
+      "Utilization warning injected; window tracking not replayed",
+      "No observed response headers or provider billing verified",
+      "Monitor unchanged; missing overageInUse still stops"
+    ]
+  },
+  "independent_review": {
+    "verdict": "Approved to document blocker remains open; no monitor or execution approval",
+    "independent_offline_run": "Passed same nine source cases, SDK/parser/monitor checks on checker hash",
+    "corrections_applied": [
+      "Window helper injection explicitly limits normalization proof",
+      "Manual procedure distinguishes MTD totals from optional historical analytics/invoice detail"
+    ],
+    "billing_verified": false
+  },
+  "validation": {
+    "plugin_make_lint": "PASS with UV_NO_SYNC=1",
+    "repository_conventions": "PASS with UV_NO_SYNC=1 and UV_NO_EDITABLE=1",
+    "canonical_assumption_coverage": "PASS; 59 IDs",
+    "maintained_private_ticket_validator": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "diagnostics": [
+    "System Python lacked rpds compiled module; corrected to existing Python 3.13.15",
+    "Initial ia name collision yielded embedded null before Node execution; bounded extraction corrected"
+  ],
+  "authorization": {
+    "new_model_calls": 0,
+    "completed_model_experiments_repeated": 0,
+    "reservations_modified": false,
+    "monitor_changed": false,
+    "commit_or_push": false
+  },
+  "decision": "Both booleans have distinct local origins; keep control nonpassing and actual billing unknown"
+}

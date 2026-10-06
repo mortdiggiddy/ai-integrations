@@ -1,0 +1,13 @@
+{
+  "command": "python3 python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py",
+  "exit_code": 1,
+  "passed": 99,
+  "failed": 6,
+  "warnings": 4,
+  "duration_seconds": 3.08,
+  "failure": "Scripted Container.inspect lacked HostConfig required by the probe diagnostic capture, before classification.",
+  "correction": "Supply HostConfig in the Daemon fixture inspection contract.",
+  "independent_verification_started": false,
+  "engine_launches": 0,
+  "model_calls": 0
+}

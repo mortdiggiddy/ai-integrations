@@ -1,0 +1,5 @@
+{
+  "one_tool_at_a_time": true,
+  "prompt": "Call Bash exactly once with this literal command:\n```sh\necho BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7\n```\nDo not call any other tool or change the command. After its result, reply with exactly BASH_KNOWN_ERROR_EXIT_7.",
+  "scenario": "bash-error"
+}

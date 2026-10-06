@@ -1,0 +1,953 @@
+uv run pytest -n auto --dist=worksteal -n 4
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>/python/claude_agent_sdk
+configfile: pyproject.toml
+testpaths: tests
+plugins: pretty-1.3.0, anyio-4.15.1, timeout-2.4.0, rerunfailures-16.6.1, xdist-3.8.0, asyncio-0.21.2
+timeout: 60.0s
+timeout method: signal
+timeout func_only: True
+asyncio: mode=Mode.AUTO
+created: 4/4 workers
+4 workers [489 items]
+
+........................................................................ [ 14%]
+.......................................................s................ [ 29%]
+........................................................................ [ 44%]
+........................................................................ [ 58%]
+........................................................................ [ 73%]
+........................F                                                [ 78%]tests/test_retries.py:139 test_retry_after_a_crash_during_the_model_callF [ 78%]
+                                                                         [ 78%]tests/test_workflow_engine.py:185 test_real_engine_segment_that_times_out_is_retried_cleanly. [ 79%]
+........................................................................ [ 93%]
+............................<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/_pytest/unraisableexception.py:33: RuntimeWarning: coroutine '_WorkflowInstanceImpl._apply_initialize_workflow.<locals>.run_workflow' was never awaited
+  gc.collect()
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+..                                           [100%]
+=================================== FAILURES ===================================
+________________ test_retry_after_a_crash_during_the_model_call ________________
+[gw2] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+self = <temporalio.claude_agent_sdk._session_control.SdkSessionControl object at 0x7353952d0f50>
+prompt = <async_generator object ClaudeAgentSdkRunner._user_message at 0x7353b6e70820>
+options = ClaudeAgentOptions(tools=[], allowed_tools=['mcp__durable__count'], system_prompt='Call at most one tool per message, ....GuardedSessionStore object at 0x7353b6eb9d30>, session_store_flush='batched', load_timeout_ms=60000, task_budget=None)
+
+    async def stream(
+        self, prompt: Any, options: ClaudeAgentOptions
+    ) -> AsyncGenerator[Message, None]:
+        """Submit once and drain messages before accepting closure or cancellation."""
+        if self._owner is not None:
+            raise RuntimeError("SDK session control is single use")
+        permission = options.can_use_tool
+        if permission is not None:
+
+            async def guarded_permission(
+                name: str, inputs: dict[str, Any], context: Any
+            ) -> Any:
+                if self.state.stop_requested:
+                    return PermissionResultDeny(
+                        message="Session stop requested", interrupt=True
+                    )
+                return await permission(name, inputs, context)
+
+            options = replace(options, can_use_tool=guarded_permission)
+        self._owner = asyncio.create_task(self._drive(prompt, options))
+        try:
+            while True:
+>               message = await self._queue.get()
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py:262:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Queue at 0x7353952b0d40 maxsize=0 _queue=[None] tasks=3>
+
+    async def get(self):
+        """Remove and return an item from the queue.
+
+        If queue is empty, wait until an item is available.
+
+        Raises QueueShutDown if the queue has been shut down and is empty,
+        or if the queue has been shut down immediately.
+        """
+        while self.empty():
+            if self._is_shutdown and self.empty():
+                raise QueueShutDown
+            getter = self._get_loop().create_future()
+            self._getters.append(getter)
+            try:
+>               await getter
+E               asyncio.exceptions.CancelledError
+
+../../../../.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/asyncio/queues.py:186: CancelledError
+
+During handling of the above exception, another exception occurred:
+
+self = <temporalio.claude_agent_sdk._runner.ClaudeAgentSdkRunner object at 0x7353b6e8f930>
+inp = SegmentInput(session_id='6a995d56-9cf3-4698-8472-1c78a4ef94df', prompt=None, tools=[ToolSpec(name='count', description...cted={'toolu_fake0001': ToolOutcome(content={'n': 1}, is_error=False)}, segment_index=1, live_output=False, fork=False)
+injected = {'toolu_fake0001': ToolOutcome(content={'n': 1}, is_error=False)}
+session_id = '6a995d56-9cf3-4698-8472-1c78a4ef94df', resume = True
+guard = '85dd3967-767b-4b5e-bc0a-c957d9cfe56e'
+
+    async def _run_engine(
+        self,
+        inp: SegmentInput,
+        injected: dict[str, ToolOutcome],
+        session_id: str,
+        resume: bool,
+        guard: str | None = None,
+    ) -> SegmentOutput:
+        """Run the engine once. With ``guard``, resuming requires the session to end there.
+
+        Raises:
+            _SessionMoved: If the session does not end at ``guard``.
+        """
+        self._check_session_admission(inp.session_id)
+        # Durable tools the engine ran itself (must stay empty).
+        ran_inside: list[str] = []
+        policy = self._effective_policy(inp)
+        seen_tools: dict[str, str] = {}
+
+        def make_stub(spec: ToolSpec) -> Any:
+            @tool(spec.name, spec.description, spec.input_schema)
+            async def stub(args: dict[str, Any]) -> dict[str, Any]:
+                del args
+                self.stub_calls += 1  # never happens while the hook defers
+                ran_inside.append(spec.name)
+                return {
+                    "content": [
+                        {"type": "text", "text": "This tool must run through Temporal."}
+                    ],
+                    "is_error": True,
+                }
+
+            return stub
+
+        hook_dir = tempfile.mkdtemp(prefix="tca-hook-")
+        control = SdkSessionControl(hook_dir)
+        self._session_controls[inp.session_id] = control
+        settings_file = Path(hook_dir) / "settings.json"
+        if policy is not None:
+            Path(hook_dir, "policy.json").write_text(
+                json.dumps(
+                    {
+                        "entries": json.loads(policy.canonical_json()),
+                        "workspace_root": os.path.realpath(self._cwd or os.getcwd()),
+                    }
+                ),
+                encoding="utf-8",
+            )
+        settings_file.write_text(
+            json.dumps(
+                {
+                    "hooks": {
+                        "PreToolUse": [
+                            {
+                                # Every tool: built-in calls after a pause are denied too.
+                                "matcher": ".*",
+                                "hooks": [_hook_entry()],
+                            }
+                        ],
+                        **(
+                            {
+                                event: [{"matcher": ".*", "hooks": [_hook_entry()]}]
+                                for event in ("PostToolUse", "PostToolUseFailure")
+                            }
+                            if policy is not None
+                            else {}
+                        ),
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        options = self._engine_options(
+            inp,
+            injected,
+            session_id,
+            resume,
+            guard,
+            hook_dir,
+            create_sdk_mcp_server(SERVER, tools=[make_stub(t) for t in inp.tools]),
+        )
+        prompt: Any
+        if not resume:
+            prompt = inp.prompt or ""
+        elif injected:
+            prompt = self._user_message(session_id, injected, inp.prompt)
+        else:
+            prompt = inp.prompt  # a new task on the session
+
+        result: ResultMessage | None = None
+        engine_version = "(unknown version)"
+        paused_by_hook: str | None = None
+        paused_request: dict[str, Any] | None = None
+        marker_error: str | None = None
+        last_assistant: str | None = None
+        store_error: str | None = None
+        query_error: Exception | None = None
+        stopped_by_hook = False
+        # When the Activity is cancelled or times out, deny every later tool call
+        # while the SDK shuts the engine down.
+        stopper = (
+            asyncio.ensure_future(_stop_hooks_when_cancelled(control))
+            if activity.in_activity()
+            else None
+        )
+        stream = query(
+            prompt=prompt, options=ClaudeAgentOptions(**options), control=control
+        )
+        try:
+>           async for message in stream:
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:858:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:85: in query
+    async for message in stream:
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py:275: in stream
+    await self.finish()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.claude_agent_sdk._session_control.SdkSessionControl object at 0x7353952d0f50>
+
+    async def finish(self) -> None:
+        """Wait without cancelling SDK cleanup; retain a wedged owner for containment."""
+        if self._owner is None:
+            return
+        if self._deadline_expired:
+            raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+        done, _ = await asyncio.wait({self._owner}, timeout=self._timeout)
+        if not done:
+            self.state.shutdown_unresolved = True
+            self._deadline_expired = True
+            raise SessionShutdownUnresolved("SDK owner did not finish shutdown")
+        if self._owner.cancelled() or self._owner.exception() is not None:
+            self.state.shutdown_unresolved = True
+            raise SessionShutdownUnresolved("SDK owner failed during cleanup")
+        if self.state.shutdown_unresolved:
+>           raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+E           temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: SDK interruption or closure is unresolved
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py:238: SessionShutdownUnresolved
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-29/popen-gw2/test_retry_after_a_crash_durin0')
+
+    async def test_retry_after_a_crash_during_the_model_call(tmp_path: Path) -> None:
+        """The attempt delivered the tool result, then died waiting for Claude."""
+        holder: list[FakeMessagesAPI] = []
+        api = start_api(holder)
+        policy = api.decide
+        arrived, release = threading.Event(), threading.Event()
+        requests = 0
+
+        def hang_once(body: dict[str, Any]) -> list[dict[str, Any]]:
+            nonlocal requests
+            requests += 1
+            if requests == 2:  # the first model call after the tool result
+                arrived.set()
+                release.wait(30)
+            return policy(body)
+
+        api.decide = hang_once
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            first = await s.run(s.input("count to 3"))
+            assert first.deferred is not None
+            c1 = first.deferred
+            retry = s.input(injected={c1.id: ToolOutcome({"n": 1})})
+            crashed = asyncio.ensure_future(runner.run(retry, 1))
+            assert await asyncio.to_thread(arrived.wait, 60)
+            crashed.cancel()  # the Worker dies in the middle of the model call
+            with pytest.raises(asyncio.CancelledError):
+>               await crashed
+
+tests/test_retries.py:168:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:713: in run
+    return await self._run_engine(
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:931: in _run_engine
+    await control.finish()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.claude_agent_sdk._session_control.SdkSessionControl object at 0x7353952d0f50>
+
+    async def finish(self) -> None:
+        """Wait without cancelling SDK cleanup; retain a wedged owner for containment."""
+        if self._owner is None:
+            return
+        if self._deadline_expired:
+            raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+        done, _ = await asyncio.wait({self._owner}, timeout=self._timeout)
+        if not done:
+            self.state.shutdown_unresolved = True
+            self._deadline_expired = True
+            raise SessionShutdownUnresolved("SDK owner did not finish shutdown")
+        if self._owner.cancelled() or self._owner.exception() is not None:
+            self.state.shutdown_unresolved = True
+            raise SessionShutdownUnresolved("SDK owner failed during cleanup")
+        if self.state.shutdown_unresolved:
+>           raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+E           temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: SDK interruption or closure is unresolved
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py:238: SessionShutdownUnresolved
+---------------------------- Captured stdout setup -----------------------------
+
+----------------------------- Captured stderr call -----------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 52826)
+Traceback (most recent call last):
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "<repo>/python/claude_agent_sdk/tests/helpers/fake_messages_api.py", line 200, in do_POST
+    api.write(self, body, blocks)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/tests/helpers/fake_messages_api.py", line 291, in write
+    handler.wfile.write(
+    ~~~~~~~~~~~~~~~~~~~^
+        f"event: {event['type']}\ndata: {json.dumps(event)}\n\n".encode()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+------------------------------ Captured log call -------------------------------
+12:17:26 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:17:26 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:17:27 [   DEBUG] Waiting for a run-ending result before closing stdin (sdk_mcp_servers=1, has_hooks=False, has_can_use_tool=False) (query.py:859)
+12:17:27 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:17:27 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:17:27 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:17:27 [   DEBUG] Waiting for a run-ending result before closing stdin (sdk_mcp_servers=1, has_hooks=False, has_can_use_tool=False) (query.py:859)
+12:17:27 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:17:27 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:17:27 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:17:27 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:17:27 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:17:27 [   DEBUG] Read task cancelled (query.py:409)
+__________ test_real_engine_segment_that_times_out_is_retried_cleanly __________
+[gw3] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+temporalio.exceptions.ApplicationError: SessionShutdownUnresolved: Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement
+
+The above exception was the direct cause of the following exception:
+temporalio.exceptions.ApplicationError: SessionShutdownUnresolved: Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement
+
+The above exception was the direct cause of the following exception:
+
+temporalio.exceptions.ActivityError: Activity task failed
+
+The above exception was the direct cause of the following exception:
+
+client = <temporalio.client._client.Client object at 0x72abbf2e1450>
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-29/popen-gw3/test_real_engine_segment_that_0')
+
+    async def test_real_engine_segment_that_times_out_is_retried_cleanly(
+        client: Client, shop_dir: Path, tmp_path: Path
+    ) -> None:
+        """Attempt 1 hangs past its timeout and keeps running; attempt 2 must not build on it."""
+        del shop_dir
+        api = start_with_policy(count_policy)
+        arrived, release = hang_on_request(api, 3)
+        (tmp_path / "work").mkdir()
+        runner = ClaudeAgentSdkRunner(
+            session_store=FileSessionStore(tmp_path / "sessions"),
+            cwd=str(tmp_path / "work"),
+            env=engine_env(api, str(tmp_path / "cfg")),
+        )
+        queue = f"zombie-{uuid.uuid4().hex[:8]}"
+        options = TaskOptions(continue_as_new=False, live=True, segment_timeout=12)
+        try:
+            async with Worker(
+                client,
+                task_queue=queue,
+                workflows=[LongTaskWorkflow],
+                activities=COUNTING,
+                plugins=[ClaudeAgentPlugin(runner, heartbeat_every=1.0)],
+            ):
+                handle = await client.start_workflow(
+                    LongTaskWorkflow.run,
+                    args=["count to 3", options, None],
+                    id=queue,
+                    task_queue=queue,
+                )
+                events = []
+                async for event in follow_agent(client, queue):
+                    events.append(event)
+                    if event["type"] in ("done", "error"):
+                        break
+>               result = await asyncio.wait_for(handle.result(), 60)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_workflow_engine.py:220:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+../../../../.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py:507: in wait_for
+    return await fut
+           ^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.client._workflow.WorkflowHandle object at 0x72abbf2bfbb0>
+follow_runs = True, rpc_metadata = {}, rpc_timeout = None
+
+    async def result(
+        self,
+        *,
+        follow_runs: bool = True,
+        rpc_metadata: Mapping[str, str | bytes] = {},
+        rpc_timeout: timedelta | None = None,
+    ) -> ReturnType:
+        """Wait for result of the workflow.
+
+        This will use :py:attr:`result_run_id` if present to base the result on.
+        To use another run ID, a new handle must be created via
+        :py:meth:`Client.get_workflow_handle`.
+
+        Args:
+            follow_runs: If true (default), workflow runs will be continually
+                fetched, until the most recent one is found. If false, return
+                the result from the first run targeted by the request if that run
+                ends in a result, otherwise raise an exception.
+            rpc_metadata: Headers used on the RPC call. Keys here override
+                client-level RPC metadata keys.
+            rpc_timeout: Optional RPC deadline to set for each RPC call. Note,
+                this is the timeout for each history RPC call not this overall
+                function.
+
+        Returns:
+            Result of the workflow after being converted by the data converter.
+
+        Raises:
+            WorkflowFailureError: Workflow failed, was cancelled, was
+                terminated, or timed out. Use the
+                :py:attr:`WorkflowFailureError.cause` to see the underlying
+                reason.
+            Exception: Other possible failures during result fetching.
+        """
+        # We have to maintain our own run ID because it can change if we follow
+        # executions
+        hist_run_id = self._result_run_id
+        while True:
+            async for event in self._fetch_history_events_for_run(
+                hist_run_id,
+                wait_new_event=True,
+                event_filter_type=WorkflowHistoryEventFilterType.CLOSE_EVENT,
+                skip_archival=True,
+                rpc_metadata=rpc_metadata,
+                rpc_timeout=rpc_timeout,
+            ):
+                if event.HasField("workflow_execution_completed_event_attributes"):
+                    complete_attr = event.workflow_execution_completed_event_attributes
+                    # Follow execution
+                    if follow_runs and complete_attr.new_execution_run_id:
+                        hist_run_id = complete_attr.new_execution_run_id
+                        break
+                    # Ignoring anything after the first response like TypeScript
+                    type_hints = [self._result_type] if self._result_type else None
+                    results = await self._data_converter.decode_wrapper(
+                        complete_attr.result,
+                        type_hints,
+                    )
+                    if not results:
+                        return cast(ReturnType, None)
+                    elif len(results) > 1:
+                        warnings.warn(f"Expected single result, got {len(results)}")
+                    return cast(ReturnType, results[0])
+                elif event.HasField("workflow_execution_failed_event_attributes"):
+                    fail_attr = event.workflow_execution_failed_event_attributes
+                    # Follow execution
+                    if follow_runs and fail_attr.new_execution_run_id:
+                        hist_run_id = fail_attr.new_execution_run_id
+                        break
+>                   raise WorkflowFailureError(
+                        cause=await self._data_converter.decode_failure(
+                            fail_attr.failure
+                        ),
+E                       temporalio.client._exceptions.WorkflowFailureError: Workflow execution failed
+
+.venv/lib/python3.13/site-packages/temporalio/client/_workflow.py:255: WorkflowFailureError
+---------------------------- Captured stdout setup -----------------------------
+
+----------------------------- Captured stderr call -----------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 59884)
+Traceback (most recent call last):
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "<repo>/python/claude_agent_sdk/tests/helpers/fake_messages_api.py", line 200, in do_POST
+    api.write(self, body, blocks)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/tests/helpers/fake_messages_api.py", line 291, in write
+    handler.wfile.write(
+    ~~~~~~~~~~~~~~~~~~~^
+        f"event: {event['type']}\ndata: {json.dumps(event)}\n\n".encode()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+------------------------------ Captured log call -------------------------------
+12:17:15 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 \x05(\x012\x011B\x12run_claude_segmentJ\x08\x08\x01\x10\xcb\x83@\x18\x01') (_activity.py:307)
+12:17:15 [   DEBUG] Starting activity ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:15 [   DEBUG] Recording heartbeat with details (0,) ({'activity_id': '1', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:15 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:17:15 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:17:15 [   DEBUG] Waiting for a run-ending result before closing stdin (sdk_mcp_servers=1, has_hooks=False, has_can_use_tool=False) (query.py:859)
+12:17:15 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:17:16 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 \005(\0012\0011B\022run_claude_segmentJ\010\010\001\020\313\203@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":\"27c5d0ac-21cb-4d8a-ab02-f6cf733ccb97\",\"cost_usd\":0.0005600000000000001,\"deferred\":{\"id\":\"toolu_fake0001\",\"input\":{\"n\":1},\"name\":\"count\"},\"error\":null,\"is_error\":false,\"result\":null,\"session_id\":\"a6a8ce2a-40bf-4119-8dcb-5733a46c4d42\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:17:16 [   DEBUG] Running activity count (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 \x14(\x012\x13tool-toolu_fake0001B\x05countJ\x08\x08\x01\x10\xee\x83@\x18\x01') (_activity.py:307)
+12:17:16 [   DEBUG] Starting activity ({'activity_id': 'tool-toolu_fake0001', 'activity_type': 'count', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:16 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 \024(\0012\023tool-toolu_fake0001B\005countJ\010\010\001\020\356\203@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"n\":1}"
+    }
+  }
+}
+ (_activity.py:488)
+12:17:16 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 \x1b(\x012\x013B\x12run_claude_segmentJ\x08\x08\x01\x10\xfe\x83@\x18\x01') (_activity.py:307)
+12:17:16 [   DEBUG] Starting activity ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:16 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:17:16 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:16 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:17:17 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:18 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:19 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:20 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:21 [   DEBUG] Recording heartbeat with details (1,) ({'activity_id': '3', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:21 [   DEBUG] Waiting for a run-ending result before closing stdin (sdk_mcp_servers=1, has_hooks=False, has_can_use_tool=False) (query.py:859)
+12:17:21 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:17:21 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:17:21 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:17:21 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:17:21 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:17:21 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 \033(\0012\0013B\022run_claude_segmentJ\010\010\001\020\376\203@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"checkpoint\":\"215fd2cc-7d20-4205-a133-3b109fad7707\",\"cost_usd\":0.0005600000000000001,\"deferred\":{\"id\":\"toolu_fake0003\",\"input\":{\"n\":2},\"name\":\"count\"},\"error\":null,\"is_error\":false,\"result\":null,\"session_id\":\"a6a8ce2a-40bf-4119-8dcb-5733a46c4d42\"}"
+    }
+  }
+}
+ (_activity.py:488)
+12:17:21 [   DEBUG] Running activity count (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 *(\x012\x13tool-toolu_fake0003B\x05countJ\x08\x08\x01\x10\xa3\x84@\x18\x01') (_activity.py:307)
+12:17:21 [   DEBUG] Starting activity ({'activity_id': 'tool-toolu_fake0003', 'activity_type': 'count', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:21 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 *(\0012\023tool-toolu_fake0003B\005countJ\010\010\001\020\243\204@\030\001"
+result {
+  completed {
+    result {
+      metadata {
+        key: "encoding"
+        value: "json/plain"
+      }
+      data: "{\"n\":2}"
+    }
+  }
+}
+ (_activity.py:488)
+12:17:21 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 1(\x012\x015B\x12run_claude_segmentJ\x08\x08\x01\x10\xb3\x84@\x18\x01') (_activity.py:307)
+12:17:21 [   DEBUG] Starting activity ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:21 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:17:21 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:21 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:17:21 [   DEBUG] Waiting for a run-ending result before closing stdin (sdk_mcp_servers=1, has_hooks=False, has_can_use_tool=False) (query.py:859)
+12:17:21 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:17:21 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:17:21 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:17:21 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:17:21 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:17:22 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:23 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:24 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:25 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:26 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:27 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:28 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:29 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:30 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:31 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:32 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:33 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:34 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 1(\x022\x015B\x12run_claude_segmentJ\x08\x08\x01\x10\xd1\x84@\x18\x01') (_activity.py:307)
+12:17:34 [   DEBUG] Starting activity ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 2, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:34 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 2, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:34 [ WARNING] Completing activity as failed ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 2, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:452)
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        start, running_activity, task_token, data_converter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py", line 72, in run_claude_segment
+    return await runner.run(inp, attempt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 693, in run
+    self._check_session_admission(inp.session_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 743, in _check_session_admission
+    raise SessionShutdownUnresolved(
+    ...<2 lines>...
+    )
+temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement
+12:17:34 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 1(\0022\0015B\022run_claude_segmentJ\010\010\001\020\321\204@\030\001"
+result {
+  failed {
+    failure {
+      message: "Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement"
+      stack_trace: "  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 351, in _handle_start_activity_task\n    result = await self._execute_activity(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        start, running_activity, task_token, data_converter\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 681, in _execute_activity\n    return await impl.execute_activity(input)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 889, in execute_activity\n    return await input.fn(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py\", line 72, in run_claude_segment\n    return await runner.run(inp, attempt)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 693, in run\n    self._check_session_admission(inp.session_id)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 743, in _check_session_admission\n    raise SessionShutdownUnresolved(\n    ...<2 lines>...\n    )\n"
+      application_failure_info {
+        type: "SessionShutdownUnresolved"
+      }
+    }
+  }
+}
+ (_activity.py:488)
+12:17:34 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:35 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 1(\x032\x015B\x12run_claude_segmentJ\x08\x08\x01\x10\xed\x84@\x18\x01') (_activity.py:307)
+12:17:35 [   DEBUG] Starting activity ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 3, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:35 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 3, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:35 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:35 [ WARNING] Completing activity as failed ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 3, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:452)
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        start, running_activity, task_token, data_converter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py", line 72, in run_claude_segment
+    return await runner.run(inp, attempt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 693, in run
+    self._check_session_admission(inp.session_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 743, in _check_session_admission
+    raise SessionShutdownUnresolved(
+    ...<2 lines>...
+    )
+temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement
+12:17:35 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 1(\0032\0015B\022run_claude_segmentJ\010\010\001\020\355\204@\030\001"
+result {
+  failed {
+    failure {
+      message: "Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement"
+      stack_trace: "  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 351, in _handle_start_activity_task\n    result = await self._execute_activity(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        start, running_activity, task_token, data_converter\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 681, in _execute_activity\n    return await impl.execute_activity(input)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 889, in execute_activity\n    return await input.fn(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py\", line 72, in run_claude_segment\n    return await runner.run(inp, attempt)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 693, in run\n    self._check_session_admission(inp.session_id)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 743, in _check_session_admission\n    raise SessionShutdownUnresolved(\n    ...<2 lines>...\n    )\n"
+      application_failure_info {
+        type: "SessionShutdownUnresolved"
+      }
+    }
+  }
+}
+ (_activity.py:488)
+12:17:36 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:36 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 1(\x042\x015B\x12run_claude_segmentJ\x08\x08\x01\x10\x89\x85@\x18\x01') (_activity.py:307)
+12:17:36 [   DEBUG] Starting activity ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 4, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:36 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 4, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:36 [ WARNING] Completing activity as failed ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 4, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:452)
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        start, running_activity, task_token, data_converter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py", line 72, in run_claude_segment
+    return await runner.run(inp, attempt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 693, in run
+    self._check_session_admission(inp.session_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 743, in _check_session_admission
+    raise SessionShutdownUnresolved(
+    ...<2 lines>...
+    )
+temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement
+12:17:36 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 1(\0042\0015B\022run_claude_segmentJ\010\010\001\020\211\205@\030\001"
+result {
+  failed {
+    failure {
+      message: "Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement"
+      stack_trace: "  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 351, in _handle_start_activity_task\n    result = await self._execute_activity(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        start, running_activity, task_token, data_converter\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 681, in _execute_activity\n    return await impl.execute_activity(input)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 889, in execute_activity\n    return await input.fn(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py\", line 72, in run_claude_segment\n    return await runner.run(inp, attempt)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 693, in run\n    self._check_session_admission(inp.session_id)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 743, in _check_session_admission\n    raise SessionShutdownUnresolved(\n    ...<2 lines>...\n    )\n"
+      application_failure_info {
+        type: "SessionShutdownUnresolved"
+      }
+    }
+  }
+}
+ (_activity.py:488)
+12:17:37 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:38 [   DEBUG] Running activity run_claude_segment (token b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 1(\x052\x015B\x12run_claude_segmentJ\x08\x08\x01\x10\xa5\x85@\x18\x01') (_activity.py:307)
+12:17:38 [   DEBUG] Starting activity ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 5, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:671)
+12:17:38 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 5, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:38 [ WARNING] Completing activity as failed ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 5, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:452)
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        start, running_activity, task_token, data_converter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py", line 72, in run_claude_segment
+    return await runner.run(inp, attempt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 693, in run
+    self._check_session_admission(inp.session_id)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 743, in _check_session_admission
+    raise SessionShutdownUnresolved(
+    ...<2 lines>...
+    )
+temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement
+12:17:38 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 1(\0052\0015B\022run_claude_segmentJ\010\010\001\020\245\205@\030\001"
+result {
+  failed {
+    failure {
+      message: "Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement"
+      stack_trace: "  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 351, in _handle_start_activity_task\n    result = await self._execute_activity(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        start, running_activity, task_token, data_converter\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 681, in _execute_activity\n    return await impl.execute_activity(input)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 889, in execute_activity\n    return await input.fn(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py\", line 72, in run_claude_segment\n    return await runner.run(inp, attempt)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 693, in run\n    self._check_session_admission(inp.session_id)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 743, in _check_session_admission\n    raise SessionShutdownUnresolved(\n    ...<2 lines>...\n    )\n"
+      application_failure_info {
+        type: "SessionShutdownUnresolved"
+      }
+    }
+  }
+}
+ (_activity.py:488)
+12:17:38 [   DEBUG] Cancelling activity b'\n$01a10d47-deee-74bf-aa73-c50ac75a3255\x12\x0fzombie-fb5d6d14\x1a$01a10d48-c63c-7049-82da-ce717cbb8422 1(\x012\x015B\x12run_claude_segmentJ\x08\x08\x01\x10\xb3\x84@\x18\x01', reason: 2 (_activity.py:212)
+12:17:38 [   DEBUG] Read task cancelled (query.py:409)
+12:17:38 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:39 [   DEBUG] Workflow raised failure with run ID 01a10d48-c63c-7049-82da-ce717cbb8422 (_workflow_instance.py:2771)
+temporalio.exceptions.ApplicationError: SessionShutdownUnresolved: Previous SDK ownership or stop requires host teardown verification; this runner cannot start a replacement
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 2750, in _run_top_level_workflow_function
+    await coro
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 1153, in run_workflow
+    result = await self._inbound.execute_workflow(input)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/testing/_workflow.py", line 584, in execute_workflow
+    return await super().execute_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_interceptor.py", line 401, in execute_workflow
+    return await self.next.execute_workflow(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 3144, in execute_workflow
+    return await input.run_fn(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/tests/endless/workflows.py", line 84, in run
+    return await self.agent.run(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 558, in run
+    return await self._loop()
+           ^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_workflow.py", line 577, in _loop
+    seg: SegmentOutput = await workflow.execute_activity(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<26 lines>...
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/workflow/_activities.py", line 483, in execute_activity
+    return await _Runtime.current().workflow_start_activity(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<14 lines>...
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 2036, in run_activity
+    return await self._await_temporal_operation(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 2293, in _await_temporal_operation
+    return await _shield_await(fut)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_workflow_instance.py", line 101, in _shield_await
+    return fut.result()
+           ~~~~~~~~~~^^
+temporalio.exceptions.ActivityError: Activity task failed
+12:17:39 [   DEBUG] Evicting workflow with run ID 01a10d48-c63c-7049-82da-ce717cbb8422, message: Workflow completed (_workflow.py:540)
+12:17:39 [    INFO] Beginning worker shutdown, will wait 0:00:00 before cancelling activities (_worker.py:867)
+12:17:39 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:40 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:41 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:42 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:43 [   DEBUG] Recording heartbeat with details (2,) ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:281)
+12:17:43 [ WARNING] Completing activity as failed ({'activity_id': '5', 'activity_type': 'run_claude_segment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'zombie-fb5d6d14', 'workflow_id': 'zombie-fb5d6d14', 'workflow_run_id': '01a10d48-c63c-7049-82da-ce717cbb8422', 'workflow_type': 'LongTaskWorkflow'}) (_activity.py:452)
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py", line 262, in stream
+    message = await self._queue.get()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/asyncio/queues.py", line 186, in get
+    await getter
+asyncio.exceptions.CancelledError: Activity cancelled
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 858, in _run_engine
+    async for message in stream:
+    ...<33 lines>...
+            result = message
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 85, in query
+    async for message in stream:
+        yield message
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py", line 275, in stream
+    await self.finish()
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py", line 238, in finish
+    raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: SDK interruption or closure is unresolved
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+    result = await self._execute_activity(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        start, running_activity, task_token, data_converter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+    return await impl.execute_activity(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+    return await input.fn(*input.args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py", line 72, in run_claude_segment
+    return await runner.run(inp, attempt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 713, in run
+    return await self._run_engine(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+        inp, injected, session_id, resume, inp.checkpoint if in_place else None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py", line 931, in _run_engine
+    await control.finish()
+  File "<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py", line 238, in finish
+    raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: SDK interruption or closure is unresolved
+12:17:43 [   DEBUG] Completing activity with completion: task_token: "\n$01a10d47-deee-74bf-aa73-c50ac75a3255\022\017zombie-fb5d6d14\032$01a10d48-c63c-7049-82da-ce717cbb8422 1(\0012\0015B\022run_claude_segmentJ\010\010\001\020\263\204@\030\001"
+result {
+  failed {
+    failure {
+      message: "SDK interruption or closure is unresolved"
+      stack_trace: "  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 351, in _handle_start_activity_task\n    result = await self._execute_activity(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        start, running_activity, task_token, data_converter\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 681, in _execute_activity\n    return await impl.execute_activity(input)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/worker/_activity.py\", line 889, in execute_activity\n    return await input.fn(*input.args)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_activity.py\", line 72, in run_claude_segment\n    return await runner.run(inp, attempt)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 713, in run\n    return await self._run_engine(\n           ^^^^^^^^^^^^^^^^^^^^^^^\n        inp, injected, session_id, resume, inp.checkpoint if in_place else None\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py\", line 931, in _run_engine\n    await control.finish()\n\n  File \"<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py\", line 238, in finish\n    raise SessionShutdownUnresolved(\"SDK interruption or closure is unresolved\")\n"
+      application_failure_info {
+        type: "SessionShutdownUnresolved"
+      }
+    }
+  }
+}
+ (_activity.py:488)
+=============================== warnings summary ===============================
+tests/test_tool_policy.py: 30 warnings
+  <repo>/python/claude_agent_sdk/tests/test_tool_policy.py:64: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    return ClaudeAgentSdkRunner(
+
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[stop]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[interrupt]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[close]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[wedged]
+  <repo>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+                              Summary of Failures
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃               ┃               ┃  Function     ┃              ┃               ┃
+┃  File         ┃  Function     ┃  Line         ┃  Error Line  ┃  Error        ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│  tests/test…  │  test_retry…  │  140          │  168         │  SessionShu…  │
+│  tests/test…  │  test_real_…  │  186          │  220         │  WorkflowFa…  │
+└───────────────┴───────────────┴───────────────┴──────────────┴───────────────┘
+Results (191.17s):
+         2 failed
+       486 passed
+         1 skipped
+        34 warnings
+make: *** [../_shared/python.mk:60: test] Error 1

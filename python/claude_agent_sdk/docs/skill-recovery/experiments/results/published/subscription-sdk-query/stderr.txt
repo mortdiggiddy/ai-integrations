@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/opt/packages/claude_agent_sdk/_internal/query.py", line 391, in _read_messages
+    async for message in self.transport.read_messages():
+    ...<114 lines>...
+        await self._message_send.send(message)
+  File "/opt/packages/claude_agent_sdk/_internal/transport/subprocess_cli.py", line 1162, in _read_messages_impl
+    raise self._exit_error
+claude_agent_sdk._errors.ProcessError: Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/probe.py", line 279, in <module>
+    asyncio.run(container_query())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/probe.py", line 88, in container_query
+    async for message in query(prompt=PROMPT, options=options):
+        print(json.dumps({"kind": type(message).__name__, "message": encode(message)}), flush=True)
+  File "/opt/packages/claude_agent_sdk/query.py", line 129, in query
+    async for message in client.process_query(
+    ...<2 lines>...
+        yield message
+  File "/opt/packages/claude_agent_sdk/_internal/client.py", line 60, in process_query
+    async for msg in inner:
+        yield msg
+  File "/opt/packages/claude_agent_sdk/_internal/client.py", line 208, in _process_query_inner
+    async for data in query.receive_messages():
+    ...<2 lines>...
+            yield message
+  File "/opt/packages/claude_agent_sdk/_internal/query.py", line 1144, in receive_messages
+    raise exc
+claude_agent_sdk._errors.ResultError: Claude Code returned an error result: API Error: Claude's response exceeded the 64 output token maximum. To configure this behavior, set the CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable. (exit code: 1)

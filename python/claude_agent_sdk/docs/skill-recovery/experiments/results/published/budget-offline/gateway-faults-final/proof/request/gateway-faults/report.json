@@ -1,0 +1,22 @@
+{
+  "name": "gateway-faults",
+  "status": "passed",
+  "synthetic_only": true,
+  "refusals": [
+    "reject",
+    "timeout",
+    "crash",
+    "absent"
+  ],
+  "whole_gateway_process_crash": {
+    "exit_code": -9,
+    "independent_provider_alive": true,
+    "provider_receipts": 0,
+    "waited_before_next_case": true
+  },
+  "admissions": 0,
+  "provider_receipts": 0,
+  "accepted_provider_requests": 0,
+  "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+  "elapsed_seconds": 2.0519545629795175
+}

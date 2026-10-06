@@ -1,0 +1,26 @@
+{
+  "callbacks": [
+    {
+      "id": "toolu_013vZh1pgTbu1az5mdaQhqgM",
+      "input": {
+        "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"
+      },
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6"
+      },
+      "name": "Bash",
+      "transcript_uuid": "d893646e-deae-4e8a-b2e5-1273ba031623"
+    }
+  ],
+  "effect_count": 1,
+  "segment": {
+    "checkpoint": "f07efb4e-01c2-4301-be68-e434e76c46aa",
+    "cost_usd": 0.008999,
+    "deferred": null,
+    "error": null,
+    "is_error": false,
+    "result": "BASH_KNOWN_ERROR_EXIT_7",
+    "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6"
+  }
+}

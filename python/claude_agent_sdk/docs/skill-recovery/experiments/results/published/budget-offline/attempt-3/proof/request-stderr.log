@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/fixtures/budget_request_offline.py", line 28, in <module>
+    from claude_agent_sdk import ClaudeAgentOptions, query
+ModuleNotFoundError: No module named 'claude_agent_sdk'

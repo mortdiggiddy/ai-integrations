@@ -2,6 +2,8 @@
 
 ## Development fork goal
 
+The [bounded real model harness acceptance is complete](docs/skill-recovery/evidence.md#bounded-real-model-harness-closure-2026-10-05), including the existing actual Write/fresh Worker proof, paired installed CLI versions and credential free default suite. Other recovery scenarios and decisive production integration remain open, with the Phase 1 exit review mandatory before Phase 2.
+
 This fork targets validated native Claude skills that run unmodified as recoverable Temporal operations. The integration is intended for application authored Temporal Workflows and a later adapter into [temporal-agent-harness](https://github.com/temporal-community/temporal-agent-harness), not one fixed demo Workflow. Claude owns skill execution; the integration must preserve conversation checkpoints, workspace files, approvals and recorded outcomes. These are target requirements, not implemented guarantees.
 
 ![Target recovery responsibilities, not shipped behavior: Claude executes the skill, Temporal governs the run, and a replacement Worker restores conversation, workspace and control records before continuing.](docs/skill-recovery-goals.svg)
@@ -9,6 +11,12 @@ This fork targets validated native Claude skills that run unmodified as recovera
 See the [fork README](https://github.com/mortdiggiddy/ai-integrations/tree/design-base#readme) for project goals, current status, the recommended hybrid recovery investigation and the role of Mods. The APIs below describe the current implementation. Policy mode cannot yet complete an effectful coding skill.
 
 The canonical recovery documentation is the [specification](docs/skill-recovery/spec.md), [implementation plan](docs/skill-recovery/plan.md), [evidence ledger](docs/skill-recovery/evidence.md) and [work items](docs/skill-recovery/work-items.md). These describe the target and its remaining proof requirements, not additional implemented guarantees.
+
+[Production result delivery closure](docs/skill-recovery/evidence.md#production-result-delivery-closure-2026-10-05) demonstrates all eight accepted criteria: exact original success/error on fresh production Workers, one external effect after accepted segment commit, authoritative cleanup, mixed effects/visible denial and Read ordering/model next action. Historical failures remain preserved. Phase 1 preventive control work and the mandatory engine exit review remain before Phase 2.
+
+[Production recovery preparation](docs/skill-recovery/evidence.md#production-recovery-and-mixed-read-preparation-2026-10-05) adds an optional `recover_pending_tool` callback to this runner. It requires a bound policy, conditional session append and a supporting installed SDK; recovery runs serially on the original session and preserves denial records. Retry, fork and moved session recovery are refused. Actual production success/error proofs are complete within their approved monitored allowances; this does not promote the experimental SDK dependency.
+
+[Recorded checkpoint refusal](docs/skill-recovery/evidence.md#recorded-checkpoint-identity-refusal) passes nine actual SDK negative cases on the unchanged real Write checkpoint. Eight additional state guards demonstrate workspace/claim refusal and explicit batch refusal, completing candidate serial/state acceptance without model calls or effects.
 
 ## Opt in built in tool policy
 

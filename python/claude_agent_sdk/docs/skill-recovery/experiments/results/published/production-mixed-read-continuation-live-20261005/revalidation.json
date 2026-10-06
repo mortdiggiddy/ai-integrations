@@ -1,0 +1,114 @@
+{
+  "status": "passed offline revalidation of retained live evidence",
+  "original_report_status": "nonpassing",
+  "original_report_error": "ModuleNotFoundError: No module named 'temporalio'",
+  "report_preserved": true,
+  "model_calls": 0,
+  "effects": 0,
+  "scheduled": [
+    "proof_segment",
+    "proof_write",
+    "proof_recovery"
+  ],
+  "completed_event_ids": [
+    "7",
+    "17",
+    "27"
+  ],
+  "original_pending": {
+    "id": "toolu_01GTQfAPk2Lvx9cs5Qx1oYRu",
+    "input": {
+      "content": "WRITE_ONCE_MARKER\n",
+      "file_path": "/state/work/marker.txt"
+    },
+    "key": {
+      "project_key": "-state-work",
+      "session_id": "160129a5-695f-45d1-9fc7-0b139a0fcfab"
+    },
+    "name": "Write",
+    "transcript_uuid": "a34c8fb5-92ad-45c8-863e-0bbb9cc49ba1"
+  },
+  "exact_original_result": [
+    {
+      "content": "WRITE_ONCE_RECORDED_OK",
+      "is_error": false,
+      "tool_use_id": "toolu_01GTQfAPk2Lvx9cs5Qx1oYRu",
+      "type": "tool_result"
+    }
+  ],
+  "callback_before_transport": [
+    {
+      "recovery_callbacks_before_transport": 1
+    }
+  ],
+  "mixed_read": {
+    "effect_calls": [
+      "toolu_01GTQfAPk2Lvx9cs5Qx1oYRu",
+      "toolu_01DTuoykcTMjomMDHKZfr1Tx"
+    ],
+    "accepted": "toolu_01GTQfAPk2Lvx9cs5Qx1oYRu",
+    "denied": [
+      "toolu_01DTuoykcTMjomMDHKZfr1Tx",
+      "toolu_01MJhP6GQa23FJghQCU3aGpi"
+    ],
+    "multiple_effect_shape": true,
+    "shape_trial": "prompt.json",
+    "successful_reads": [
+      "toolu_01P2zQyx437QfEs3WFQVA7Ps"
+    ],
+    "denied_reads": [
+      "toolu_01MJhP6GQa23FJghQCU3aGpi"
+    ],
+    "model_next_action": "Based on the previous tool results:\n\n**Recorded Write Result:** The first Write call returned `WRITE_ONCE_RECORDED_OK`, indicating the write to /state/work/marker.txt was successfully recorded.\n\n**Denied Calls:** \n- The second Write call was denied with the error: \"Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result.\"\n- The second Read call was denied with the same error: \"Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result.\"\n\nThis occurred because I attempted to make three tool calls simultaneously (two Writes and one Read), but the system only permits one tool call to execute at a time, so the second and third calls were rejected."
+  },
+  "totals": {
+    "cost_usd": 0.005141,
+    "input": 3036,
+    "output": 421,
+    "turns": 1
+  },
+  "cumulative_checkpoint_usage": {
+    "cost_usd": 0.012281,
+    "input": 7581,
+    "output": 940,
+    "turns": 5
+  },
+  "cleanup": [
+    {
+      "removal_verified": true,
+      "resource": "40d086311393d09cd4a73dcb974642d87c1c5b206f454739ac1a4e9a4c95a4f7",
+      "stopped_state": {
+        "Pid": 0,
+        "Running": false
+      },
+      "wait_exit_code": 137
+    },
+    {
+      "removal_verified": true,
+      "resource": "4ff3780b4090c1f835fd336a79a24f537648150ca6f0af85b602b8ed76cb5953",
+      "stopped_state": {
+        "Pid": 0,
+        "Running": false
+      },
+      "wait_exit_code": 137
+    },
+    {
+      "removal_verified": true,
+      "resource": "7ce1bf353860e69cbc92def03dafc0c53c5ecd80471a73ee973f55f347ef823b",
+      "stopped_state": {
+        "Pid": 0,
+        "Running": false
+      },
+      "wait_exit_code": 137
+    }
+  ],
+  "sha256": {
+    "report.json": "fc5c53d7ca66056f9c291cfcdb567c0edb7f7474f5f0d5fbfc035e7a2902f98c",
+    "original-transcript.json": "e22e48597bf861c38295b193cd1d29a2572350041b44a4d69a8c5248870b1b59",
+    "recovered-transcript.json": "7bd438f37167d4dd201b3cf2b8c1d12f741c4f3cfd474e2fba6d3216394ac11b",
+    "history.json": "ee29310473e5818d8f710dd8b58a8fa9184edc493601137c957239bed42064e5",
+    "result.json": "e55e7837b651cbef53f10740d52f9807d0b1a1dc56ac55debaf8e889b7236eef",
+    "replacement-observations.json": "7b35202e85412a3bae0bfe1300ef60bbf41a95f75f32762e9dd1bf568afc4a5e",
+    "effect-invocation.json": "1a70d1a40257bdb2b31f8916c290f90bdf2edabe0e535c5f299c5047f290174a"
+  }
+}

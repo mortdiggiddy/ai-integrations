@@ -1,0 +1,238 @@
+[
+  {
+    "received_ns": 181163309293010,
+    "receipt": null,
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": false,
+    "admitted_ns": null,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181163311065239,
+    "receipt": "forged",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": false,
+    "admitted_ns": null,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181163313342367,
+    "receipt": "933cf975-2870-49c0-97fd-8e496b0549c6",
+    "body": {
+      "model": "haiku",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": false,
+    "admitted_ns": 181163312212672,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181163314732773,
+    "receipt": "933cf975-2870-49c0-97fd-8e496b0549c6",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": true,
+    "admitted_ns": 181163312212672,
+    "synthetic_input": 12,
+    "synthetic_output": 20,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181163316574415,
+    "receipt": "933cf975-2870-49c0-97fd-8e496b0549c6",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": false,
+    "admitted_ns": 181163312212672,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181163747376141,
+    "receipt": null,
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "<system-reminder>\nToday's date is 2026-10-02.\n</system-reminder>\n"
+            },
+            {
+              "type": "text",
+              "text": "Return OFFLINE_OK.",
+              "cache_control": {
+                "type": "ephemeral"
+              }
+            }
+          ]
+        }
+      ],
+      "system": [
+        {
+          "type": "text",
+          "text": "x-anthropic-billing-header: cc_version=2.1.274.03a; cc_entrypoint=sdk-py;"
+        },
+        {
+          "type": "text",
+          "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        },
+        {
+          "type": "text",
+          "text": "Return OFFLINE_OK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        }
+      ],
+      "tools": [],
+      "metadata": {
+        "user_id": "{\"device_id\":\"6256838b96790d6b79a521a815bd51b977fb04f314ee3b24dec4ea5678dc4467\",\"account_uuid\":\"\",\"session_id\":\"505ebc97-c4a7-49e1-a8e6-a20bae16cdd1\"}"
+      },
+      "max_tokens": 64,
+      "thinking": {
+        "budget_tokens": 1024,
+        "type": "enabled"
+      },
+      "context_management": {
+        "edits": [
+          {
+            "type": "clear_thinking_20251015",
+            "keep": "all"
+          }
+        ]
+      },
+      "stream": true
+    },
+    "accepted": false,
+    "admitted_ns": null,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181164595589765,
+    "receipt": "c163e7c7-1c70-4997-a06f-56519ffe08e3",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "<system-reminder>\nToday's date is 2026-10-02.\n</system-reminder>\n"
+            },
+            {
+              "type": "text",
+              "text": "Return OFFLINE_OK.",
+              "cache_control": {
+                "type": "ephemeral"
+              }
+            }
+          ]
+        }
+      ],
+      "system": [
+        {
+          "type": "text",
+          "text": "x-anthropic-billing-header: cc_version=2.1.274.03a; cc_entrypoint=sdk-py;"
+        },
+        {
+          "type": "text",
+          "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        },
+        {
+          "type": "text",
+          "text": "Return OFFLINE_OK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        }
+      ],
+      "tools": [],
+      "metadata": {
+        "user_id": "{\"device_id\":\"e21ee63a9199502d694951fc064069442297a90f1b09c0cceb10c295ea9b0de3\",\"account_uuid\":\"\",\"session_id\":\"2992d5d8-8209-4bfa-9c0b-15215e4e45cb\"}"
+      },
+      "max_tokens": 64,
+      "thinking": {
+        "budget_tokens": 1024,
+        "type": "enabled"
+      },
+      "context_management": {
+        "edits": [
+          {
+            "type": "clear_thinking_20251015",
+            "keep": "all"
+          }
+        ]
+      },
+      "stream": true
+    },
+    "accepted": true,
+    "admitted_ns": 181164594643547,
+    "synthetic_input": 12,
+    "synthetic_output": 20,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  }
+]

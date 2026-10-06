@@ -1,0 +1,88 @@
+{
+  "status": "failed",
+  "exit_code": 1,
+  "timed_out": false,
+  "cleanup": {
+    "confirmed_removed": true,
+    "remove_code": 0,
+    "inspect_code": 1
+  },
+  "host_admissions": 1,
+  "approval": "sdk-subscription-single-20261002",
+  "image_id": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "requested_model": "claude-haiku-4-5-20251001",
+  "cost_kind": "CLI list estimate, not verified subscription billing",
+  "event_count": 21,
+  "result": {
+    "subtype": "success",
+    "duration_ms": 4883,
+    "duration_api_ms": 4814,
+    "is_error": true,
+    "num_turns": 4,
+    "session_id": "e7f5a449-39c8-4cb6-826e-26eee6b7501b",
+    "stop_reason": "stop_sequence",
+    "total_cost_usd": 0.0033799999999999998,
+    "usage": {
+      "input_tokens": 2100,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 256,
+      "output_tokens_details": {
+        "thinking_tokens": 244
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "not_available",
+      "iterations": [],
+      "speed": "standard"
+    },
+    "result": "API Error: Claude's response exceeded the 64 output token maximum. To configure this behavior, set the CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable.",
+    "structured_output": null,
+    "model_usage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 2100,
+        "outputTokens": 256,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.0033799999999999998,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 244,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "permission_denials": [],
+    "deferred_tool_use": null,
+    "errors": null,
+    "api_error_status": null,
+    "uuid": "db1729d8-0f28-408f-9a77-3c57e30c541e",
+    "terminal_reason": "api_error",
+    "origin": null
+  },
+  "provenance": {
+    "kind": "provenance",
+    "sdk": "0.2.162",
+    "cli": "2.1.274 (Claude Code)",
+    "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+    "sdk_record_files": 36,
+    "probe_sha256": "d5d2f0ce7fd8a27314f377d5b253272187f63a3ef8453fe0ac873ac86c33fccb"
+  },
+  "limits": [
+    "Failed SDK text connectivity; no recovery or effect proof.",
+    "One host admission is not a provider request bound.",
+    "CLI reported four turns despite configured max_turns=1 and retry setting 0.",
+    "64 output token setting produced a nonpassing output limit error; aggregate output was 256.",
+    "CLI costBasis list is not subscription billing; USD/input-token/phase enforcement remains open.",
+    "Reservation retained; no further model invocation authorized."
+  ]
+}

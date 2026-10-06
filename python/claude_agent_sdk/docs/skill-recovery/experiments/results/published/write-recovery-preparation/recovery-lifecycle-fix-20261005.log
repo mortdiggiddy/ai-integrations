@@ -1,0 +1,61 @@
+uv run pytest -n auto --dist=worksteal -n 4 tests/session_control/test_lifecycle.py tests/test_engine.py tests/test_hardening.py::test_a_background_subagent_does_not_keep_the_engine_running
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>/python/claude_agent_sdk
+configfile: pyproject.toml
+plugins: pretty-1.3.0, anyio-4.15.1, timeout-2.4.0, rerunfailures-16.6.1, xdist-3.8.0, asyncio-0.21.2
+timeout: 60.0s
+timeout method: signal
+timeout func_only: True
+asyncio: mode=Mode.AUTO
+created: 4/4 workers
+4 workers [35 items]
+
+......................F                                                  [ 65%]tests/session_control/test_lifecycle.py:389 test_cancel_after_terminal_during_close_does_not_claim_interrupt. [ 68%]
+...........                                                              [100%]
+=================================== FAILURES ===================================
+_______ test_cancel_after_terminal_during_close_does_not_claim_interrupt _______
+[gw1] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-27/popen-gw1/test_cancel_after_terminal_dur0')
+client_factory = {'close_gate': <asyncio.locks.Event object at 0x7c949ec5e090 [set]>}
+
+    async def test_cancel_after_terminal_during_close_does_not_claim_interrupt(
+        tmp_path: Path, client_factory: Any
+    ) -> None:
+        gate = asyncio.Event()
+        client_factory["close_gate"] = gate
+        control = SdkSessionControl(str(tmp_path))
+        task = asyncio.create_task(collect(control))
+        client = await started()
+        await client.submitted.wait()
+        client.release.set()
+        while not control.state.terminal_received:
+            await asyncio.sleep(0)
+        task.cancel()
+        await asyncio.sleep(0)
+        gate.set()
+        with pytest.raises(asyncio.CancelledError):
+            await task
+        assert control.state.terminal_received and control.state.sdk_closed
+>       assert control.state.stop_requested and not control.state.interrupt_acknowledged
+E       assert (True and not True)
+E        +  where True = SessionControlState(stop_requested=True, interrupt_acknowledged=True, terminal_received=True, sdk_closed=True, shutdown_unresolved=False, interrupt_error=None, close_error=None, prompt_submission_started=True).stop_requested
+E        +    where SessionControlState(stop_requested=True, interrupt_acknowledged=True, terminal_received=True, sdk_closed=True, shutdown_unresolved=False, interrupt_error=None, close_error=None, prompt_submission_started=True) = <temporalio.claude_agent_sdk._session_control.SdkSessionControl object at 0x7c949ed8e250>.state
+E        +  and   True = SessionControlState(stop_requested=True, interrupt_acknowledged=True, terminal_received=True, sdk_closed=True, shutdown_unresolved=False, interrupt_error=None, close_error=None, prompt_submission_started=True).interrupt_acknowledged
+E        +    where SessionControlState(stop_requested=True, interrupt_acknowledged=True, terminal_received=True, sdk_closed=True, shutdown_unresolved=False, interrupt_error=None, close_error=None, prompt_submission_started=True) = <temporalio.claude_agent_sdk._session_control.SdkSessionControl object at 0x7c949ed8e250>.state
+
+tests/session_control/test_lifecycle.py:408: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+                              Summary of Failures
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃               ┃               ┃  Function     ┃              ┃               ┃
+┃  File         ┃  Function     ┃  Line         ┃  Error Line  ┃  Error        ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│  tests/sess…  │  test_cance…  │  390          │  408         │  AssertionE…  │
+└───────────────┴───────────────┴───────────────┴──────────────┴───────────────┘
+Results (7.99s):
+         1 failed
+        34 passed
+make: *** [../_shared/python.mk:60: test] Error 1

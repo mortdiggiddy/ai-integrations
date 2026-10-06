@@ -1,0 +1,279 @@
+"""Run the single approved SDK subscription query with a retained reservation."""
+
+import argparse
+import asyncio
+import base64
+import csv
+import hashlib
+import importlib.metadata
+import json
+import math
+import os
+import subprocess
+import tempfile
+import uuid
+from dataclasses import fields, is_dataclass
+from pathlib import Path
+from unittest.mock import patch
+
+IMAGE = "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa"
+VOLUME = "claude-recovery-proof-login"
+APPROVAL = "sdk-subscription-single-20261002"
+MODEL = "claude-haiku-4-5-20251001"
+PROMPT = "Reply with exactly SDK_CONNECTIVITY_OK."
+CLI_HASH = "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07"
+
+
+def encode(value):
+    if is_dataclass(value):
+        return {f.name: encode(getattr(value, f.name)) for f in fields(value)}
+    if isinstance(value, dict):
+        return {key: encode(item) for key, item in value.items()}
+    if isinstance(value, (tuple, list)):
+        return [encode(item) for item in value]
+    return value
+
+
+def verify_sdk():
+    dist = importlib.metadata.distribution("claude-agent-sdk")
+    if dist.version != "0.2.162":
+        raise RuntimeError("SDK version differs")
+    checked = 0
+    for relative, digest, _ in csv.reader(dist.read_text("RECORD").splitlines()):
+        if not digest:
+            continue
+        algorithm, expected = digest.split("=", 1)
+        actual = base64.urlsafe_b64encode(
+            hashlib.new(algorithm, dist.locate_file(relative).read_bytes()).digest()
+        ).decode().rstrip("=")
+        if actual != expected:
+            raise RuntimeError("Installed SDK RECORD mismatch")
+        checked += 1
+    if checked == 0:
+        raise RuntimeError("SDK RECORD has no hashes")
+    return checked
+
+
+async def container_query():
+    from claude_agent_sdk import ClaudeAgentOptions, query
+
+    if os.environ.get("DURABILITY_APPROVED_INVOCATION") != APPROVAL:
+        raise PermissionError("Explicit single invocation declaration required")
+    forbidden = {"CLAUDE_CODE_USE_BEDROCK", "CLAUDE_CODE_USE_VERTEX",
+                 "CLAUDE_CODE_USE_FOUNDRY", "CLAUDE_CODE_OAUTH_TOKEN"}
+    if any(name.startswith("ANTHROPIC_") or name in forbidden for name in os.environ):
+        raise PermissionError("Provider environment forbidden; values withheld")
+    checked = verify_sdk()
+    if hashlib.sha256(Path("/opt/claude").read_bytes()).hexdigest() != CLI_HASH:
+        raise RuntimeError("CLI identity differs")
+    version = subprocess.run(
+        ["/opt/claude", "--version"], check=True, capture_output=True,
+        text=True, timeout=15,
+    ).stdout.strip()
+    print(json.dumps({"kind": "provenance", "sdk": "0.2.162", "cli": version,
+                      "cli_sha256": CLI_HASH, "sdk_record_files": checked,
+                      "probe_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}), flush=True)
+    options = ClaudeAgentOptions(
+        cli_path="/opt/claude", cwd="/work", model=MODEL,
+        system_prompt="Return the requested text without explanation.",
+        tools=[], allowed_tools=[], skills=[], setting_sources=[],
+        mcp_servers='{"mcpServers":{}}', strict_mcp_config=True,
+        permission_mode="default", max_turns=1, max_budget_usd=0.05,
+        parallel_tool_recovery=False,
+        env={"CLAUDE_CODE_MAX_RETRIES": "0", "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "64",
+             "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"},
+        extra_args={"disable-slash-commands": None, "no-chrome": None,
+                    "no-session-persistence": None, "prompt-suggestions": "false"},
+    )
+    async for message in query(prompt=PROMPT, options=options):
+        print(json.dumps({"kind": type(message).__name__, "message": encode(message)}), flush=True)
+
+
+def reserve(path):
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(fd, "w") as stream:
+        stream.write(json.dumps({"approval": APPROVAL, "status": "consumed_before_launch"}))
+        stream.flush()
+        os.fsync(stream.fileno())
+    directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(directory)
+    finally:
+        os.close(directory)
+
+
+def container_args(*, login, network):
+    args = ["docker", "run", "--rm", "--init", "--read-only", "--cap-drop=ALL",
+            "--security-opt=no-new-privileges", "--pids-limit=128", "--memory=2g",
+            "--cpus=2", "--network", network, "--tmpfs", "/tmp:rw,nosuid,nodev,size=256m",
+            "--tmpfs", "/work:rw,nosuid,nodev,uid=1000,gid=1000,size=128m"]
+    if login:
+        args += ["--mount", f"type=volume,source={VOLUME},target=/home/proof"]
+    else:
+        args += ["--tmpfs", "/home/proof:rw,nosuid,nodev,uid=1000,gid=1000,size=128m"]
+    return args
+
+
+def cleanup(name):
+    record = {"confirmed_removed": False}
+    for label, command in (("remove", ["docker", "rm", "--force", name]),
+                           ("inspect", ["docker", "container", "inspect", name])):
+        try:
+            result = subprocess.run(command, capture_output=True, timeout=15)
+            record[f"{label}_code"] = result.returncode
+            if label == "inspect":
+                record["confirmed_removed"] = result.returncode != 0 and b"No such container" in result.stderr
+        except Exception as exc:
+            record[f"{label}_error"] = type(exc).__name__
+    return record
+
+
+def launch(command, name, root):
+    timed_out = False
+    code = -1
+    faults = {}
+    process = None
+    with (root / "stdout.jsonl").open("w") as stdout, (root / "stderr.txt").open("w") as stderr:
+        try:
+            process = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr)
+            code = process.wait(timeout=60)
+        except subprocess.TimeoutExpired:
+            timed_out = True
+            try:
+                subprocess.run(["docker", "kill", name], capture_output=True, timeout=15)
+            except Exception as exc:
+                faults["kill_error"] = type(exc).__name__
+        except BaseException as exc:
+            faults["launch_error"] = type(exc).__name__
+        finally:
+            if process is not None and (timed_out or faults):
+                try:
+                    process.kill()
+                    code = process.wait(timeout=15)
+                except Exception as exc:
+                    faults["client_cleanup_error"] = type(exc).__name__
+            teardown = cleanup(name)
+            teardown.update(faults)
+    return code, timed_out, teardown
+
+
+def assess(events, code, timed_out, teardown):
+    results = [e["message"] for e in events if e.get("kind") == "ResultMessage"]
+    tools = [block for e in events for block in e.get("message", {}).get("content", [])
+             if isinstance(block, dict) and "id" in block and "name" in block and "input" in block]
+    result = results[0] if len(results) == 1 else {}
+    model_usage = result.get("model_usage") or {}
+    usage = result.get("usage") or {}
+    def counts(mapping, names):
+        return all(isinstance(mapping.get(key), int) and not isinstance(mapping.get(key), bool)
+                   and mapping[key] >= 0 for key in names)
+    complete = counts(usage, ("input_tokens", "output_tokens", "cache_read_input_tokens", "cache_creation_input_tokens"))
+    complete = complete and counts(model_usage.get(MODEL, {}),
+                                   ("inputTokens", "outputTokens", "cacheReadInputTokens", "cacheCreationInputTokens"))
+    provenance = [e for e in events if e.get("kind") == "provenance"]
+    pinned = len(provenance) == 1 and provenance[0].get("sdk") == "0.2.162" and provenance[0].get("cli") == "2.1.274 (Claude Code)" and provenance[0].get("cli_sha256") == CLI_HASH and provenance[0].get("probe_sha256") == hashlib.sha256(Path(__file__).read_bytes()).hexdigest() and provenance[0].get("sdk_record_files", 0) > 0
+    cost = result.get("total_cost_usd")
+    return (code == 0 and not timed_out and teardown["confirmed_removed"]
+            and len(results) == 1 and not tools and not result.get("is_error", True)
+            and result.get("subtype") == "success"
+            and result.get("result", "").strip() == "SDK_CONNECTIVITY_OK"
+            and result.get("num_turns") == 1 and complete
+            and set(model_usage) == {MODEL} and isinstance(cost, (int, float))
+            and not isinstance(cost, bool) and math.isfinite(cost) and 0 <= cost < 0.05
+            and pinned and not any(key.endswith("error") for key in teardown))
+
+
+def execute():
+    image = subprocess.run(["docker", "image", "inspect", IMAGE, "--format", "{{.Id}}"],
+                           check=True, capture_output=True, text=True, timeout=15).stdout.strip()
+    if image != IMAGE:
+        raise RuntimeError("Image identity differs")
+    status = subprocess.run(container_args(login=True, network="none") + [IMAGE, "auth", "status"],
+                            capture_output=True, text=True, timeout=30)
+    data = json.loads(status.stdout)
+    if status.returncode != 0 or not data.get("loggedIn") or data.get("authMethod") != "claude.ai" or data.get("apiProvider") != "firstParty":
+        raise RuntimeError("Retained subscription route not ready; raw status withheld")
+    reservation = Path.home() / ".local/state/claude-recovery-proof" / f"{APPROVAL}.json"
+    reserve(reservation)
+    root = Path(tempfile.mkdtemp(prefix="claude-sdk-subscription-"))
+    name = f"claude-sdk-subscription-{uuid.uuid4().hex}"
+    command = container_args(login=True, network="bridge") + [
+        "--name", name, "--mount", f"type=bind,source={Path(__file__).resolve()},target=/probe.py,readonly",
+        "--env", f"DURABILITY_APPROVED_INVOCATION={APPROVAL}", "--entrypoint", "/opt/python/bin/python3.13",
+        IMAGE, "/probe.py", "--container-query",
+    ]
+    (root / "invocation.json").write_text(json.dumps({"command": command, "approval": APPROVAL}, indent=2))
+    code, timed_out, teardown = launch(command, name, root)
+    try:
+        events = [json.loads(line) for line in (root / "stdout.jsonl").read_text().splitlines() if line.strip()]
+    except json.JSONDecodeError:
+        events = []
+    passed = assess(events, code, timed_out, teardown)
+    report = {"status": "passed" if passed else "failed", "exit_code": code,
+              "timed_out": timed_out, "cleanup": teardown, "host_admissions": 1,
+              "approval": APPROVAL, "image_id": IMAGE, "requested_model": MODEL,
+              "cost_kind": "CLI list estimate, not verified subscription billing",
+              "evidence_root": str(root), "event_count": len(events)}
+    (root / "report.json").write_text(json.dumps(report, indent=2))
+    print(json.dumps(report, indent=2))
+    if not passed:
+        raise SystemExit(1)
+
+
+def offline_test():
+    with tempfile.TemporaryDirectory(prefix="sdk-executor-offline-") as directory:
+        root = Path(directory)
+        claim = root / "reservation"
+        reserve(claim)
+        try:
+            reserve(claim)
+        except FileExistsError:
+            pass
+        else:
+            raise AssertionError("Duplicate admission accepted")
+        result = {"is_error": False, "subtype": "success", "result": "SDK_CONNECTIVITY_OK",
+                  "num_turns": 1, "usage": {"input_tokens": 1, "output_tokens": 1, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0},
+                  "model_usage": {MODEL: {"inputTokens": 1, "outputTokens": 1, "cacheReadInputTokens": 0, "cacheCreationInputTokens": 0}},
+                  "total_cost_usd": 0.001}
+        provenance = {"kind": "provenance", "sdk": "0.2.162", "cli": "2.1.274 (Claude Code)", "cli_sha256": CLI_HASH, "probe_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "sdk_record_files": 36}
+        events = [provenance, {"kind": "ResultMessage", "message": result}]
+        assert assess(events, 0, False, {"confirmed_removed": True})
+        assert not assess(events, 0, True, {"confirmed_removed": True})
+        assert not assess(events, 0, False, {"confirmed_removed": False})
+        assert not assess(events + events, 0, False, {"confirmed_removed": True})
+        for key, value in (("subtype", "error_max_budget_usd"), ("model_usage", {}), ("usage", {})):
+            bad = [{"kind": "provenance"}, {"kind": "ResultMessage", "message": {**result, key: value}}]
+            assert not assess(bad, 0, False, {"confirmed_removed": True})
+        with patch("subprocess.Popen") as popen, patch("subprocess.run") as run:
+            popen.return_value.wait.side_effect = [subprocess.TimeoutExpired("docker", 60), -9]
+            run.return_value.returncode = 0
+            run.return_value.stderr = b"No such container"
+            run.side_effect = [run.return_value, run.return_value,
+                               subprocess.CompletedProcess([], 1, b"", b"No such container")]
+            code, timed_out, teardown = launch(["fake"], "offline-owned", root)
+            assert code == -9 and timed_out and teardown["confirmed_removed"]
+            assert popen.call_count == 1
+            assert ["docker", "kill", "offline-owned"] in [c.args[0] for c in run.call_args_list]
+            assert ["docker", "rm", "--force", "offline-owned"] in [c.args[0] for c in run.call_args_list]
+        with patch("subprocess.run", side_effect=subprocess.TimeoutExpired("docker", 15)):
+            uncertain = cleanup("offline-owned")
+            assert not uncertain["confirmed_removed"] and "remove_error" in uncertain
+    print(json.dumps({"status": "offline_executor_checks_passed", "model_calls": 0,
+                      "checks": ["exclusive reservation", "timeout cleanup", "single launch",
+                                 "cap/usage/model/result/cleanup refusal"]}))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--offline-test", action="store_true")
+    mode.add_argument("--execute-approved", choices=[APPROVAL])
+    mode.add_argument("--container-query", action="store_true")
+    args = parser.parse_args()
+    if args.offline_test:
+        offline_test()
+    elif args.execute_approved:
+        execute()
+    else:
+        asyncio.run(container_query())

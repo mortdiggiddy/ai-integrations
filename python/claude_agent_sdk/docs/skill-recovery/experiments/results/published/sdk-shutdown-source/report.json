@@ -1,0 +1,45 @@
+{
+  "after_teardown": {
+    "attempt": "e6718c7a7166466dbed5a2e1ff5bf54a",
+    "host_receipt": "{\"removal_verified\": true, \"resource\": \"42a4bc228d8abfffa360735165328c73d059025abb6072c2adaf75deae48935a\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 0}",
+    "name": "sdk-host-e6718c7a7166466dbed5a2e1ff5bf54a",
+    "observations": null,
+    "removed": 1,
+    "resource": "42a4bc228d8abfffa360735165328c73d059025abb6072c2adaf75deae48935a",
+    "runner": null,
+    "session": "18546671-b2f4-44a8-8aef-55f900140c4c",
+    "singleton": 1,
+    "stopped": 1,
+    "terminated": 1
+  },
+  "before_teardown": {
+    "attempt": "e6718c7a7166466dbed5a2e1ff5bf54a",
+    "host_receipt": null,
+    "name": "sdk-host-e6718c7a7166466dbed5a2e1ff5bf54a",
+    "observations": null,
+    "removed": 0,
+    "resource": "42a4bc228d8abfffa360735165328c73d059025abb6072c2adaf75deae48935a",
+    "runner": null,
+    "session": "18546671-b2f4-44a8-8aef-55f900140c4c",
+    "singleton": 1,
+    "stopped": 0,
+    "terminated": 0
+  },
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "fresh_runner_before_cleanup": "unexecuted",
+  "graceful_engine_shutdown_proved": false,
+  "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "inspect_only": true,
+  "model_calls": 0,
+  "network": "none",
+  "prompt_calls": 0,
+  "recovery_proved": false,
+  "replacement_after_cleanup": true,
+  "replacement_before_cleanup": "Prior host termination and teardown are unresolved",
+  "source_sha256": {
+    "host_session.py": "197433b80ea6e8e2d548a72c5e8efd13ca53c8758e53479e7908b10866dd52bd",
+    "host_session_offline.py": "80b1d89766e6db17d09ba5979f5be3784921327c889108144e1eeb5c3422dc94",
+    "sdk_shutdown_probe.py": "dcdb19193aa979fbc421a60586f1404c30565d0cabc4afa7026c11085a9ccf0e"
+  },
+  "stale_observation": "Stale or absent host ownership"
+}

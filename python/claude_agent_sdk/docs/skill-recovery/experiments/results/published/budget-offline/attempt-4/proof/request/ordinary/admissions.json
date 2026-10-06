@@ -1,0 +1,9 @@
+[
+  {
+    "request": "80231c66-c8ef-43b7-aa43-b23f1f44149f",
+    "body_digest": "6833aac4aa6610fedcf430b5afb95811cec16f1cfda7197287def4537f47d55b",
+    "binding": "{\"caps\": {\"cost_microusd\": 10000, \"input_tokens\": 1000, \"output_tokens\": 1000, \"total_tokens\": 2000}, \"envelope\": {\"cost_microusd\": 332, \"input\": 12, \"output\": 64}, \"model\": \"claude-haiku-4-5-20251001\", \"phase\": \"synthetic-phase\", \"segment\": \"segment-1\", \"test\": \"offline-request-ordinary\"}",
+    "used": 1,
+    "admitted_ns": 181052804217882
+  }
+]

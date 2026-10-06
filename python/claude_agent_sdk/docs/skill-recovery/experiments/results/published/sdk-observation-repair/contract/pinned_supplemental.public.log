@@ -1,0 +1,11 @@
+{"docker_create_argv": ["create", "--pull", "never", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--pids-limit", "128", "--memory", "2g", "--cpus", "2", "--tmpfs", "/tmp:rw,nosuid,nodev,size=512m", "--workdir", "/repo", "-e", "UV_NO_SYNC=1", "-e", "UV_NO_EDITABLE=1", "-e", "PYTHONDONTWRITEBYTECODE=1", "-e", "HOME=/tmp/home", "-e", "CLAUDE_CONFIG_DIR=/tmp/config", "-v", "<experiments>/host_session.py:/repo/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session.py:ro", "-v", "<experiments>/host_session_offline.py:/repo/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py:ro", "-v", "<experiments>/sdk_shutdown_probe.py:/repo/python/claude_agent_sdk/docs/skill-recovery/experiments/sdk_shutdown_probe.py:ro", "-v", "<supplemental>/classifier_checks.py:/checks/classifier_checks.py:ro", "-v", "<supplemental>/collector_checks.py:/checks/collector_checks.py:ro", "-v", "<supplemental>/lifecycle_checks.py:/checks/lifecycle_checks.py:ro", "-v", "<supplemental>/host_predicate_checks.py:/checks/host_predicate_checks.py:ro", "--entrypoint", "/opt/python/bin/python3.13", "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa", "-c", "import subprocess,sys; names=['classifier_checks', 'collector_checks', 'lifecycle_checks', 'host_predicate_checks']; \nfor name in names:\n r=subprocess.run([sys.executable,'/checks/'+name+'.py'],text=True,capture_output=True,timeout=10); print(name+': exit='+str(r.returncode)); print(r.stdout,end=''); print(r.stderr,end=''); assert r.returncode==0"], "diagnostic": false}
+classifier_checks: exit=0
+{"supplemental_classifier_checks": 95, "result": "PASS"}
+collector_checks: exit=0
+{"supplemental_collection_checks": 10, "result": "PASS"}
+lifecycle_checks: exit=0
+{"supplemental_lifecycle_checks": 7, "result": "PASS"}
+host_predicate_checks: exit=0
+{"supplemental_host_predicate_checks": 9, "result": "PASS"}
+
+{"container_exit_code": 0, "diagnostic": false}

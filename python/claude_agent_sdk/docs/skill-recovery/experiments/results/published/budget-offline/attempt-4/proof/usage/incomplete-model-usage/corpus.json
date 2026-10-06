@@ -1,0 +1,72 @@
+{
+  "name": "incomplete-model-usage",
+  "state": {
+    "identity": {
+      "test": "offline-usage-incomplete-model-usage",
+      "segment": "segment-1",
+      "model": "claude-haiku-4-5-20251001"
+    },
+    "semantics": "synthetic-disjoint-input-output-includes-thinking-v1",
+    "seen": {},
+    "epochs": {
+      "epoch-0": {
+        "baseline": {
+          "ordinary_input": 0,
+          "cache_read_input": 0,
+          "cache_write_input": 0,
+          "output": 0,
+          "thinking": 0,
+          "cost_microusd": 0
+        },
+        "complete": true
+      }
+    }
+  },
+  "events": [
+    {
+      "identity": {
+        "test": "offline-usage-incomplete-model-usage",
+        "segment": "segment-1",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "event_id": "final-0",
+      "epoch": "epoch-0",
+      "kind": "final",
+      "complete": true,
+      "crash": false,
+      "model_usage": [],
+      "requests": [
+        "request-0"
+      ],
+      "totals": {
+        "ordinary_input": 12,
+        "cache_read_input": 0,
+        "cache_write_input": 0,
+        "output": 20,
+        "thinking": 0,
+        "cost_microusd": 112
+      }
+    }
+  ],
+  "receipts": [
+    {
+      "identity": {
+        "test": "offline-usage-incomplete-model-usage",
+        "segment": "segment-1",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "request": "request-0",
+      "epoch": "epoch-0",
+      "complete": true,
+      "delta": {
+        "ordinary_input": 12,
+        "cache_read_input": 0,
+        "cache_write_input": 0,
+        "output": 20,
+        "thinking": 0,
+        "cost_microusd": 112
+      }
+    }
+  ],
+  "expected": null
+}

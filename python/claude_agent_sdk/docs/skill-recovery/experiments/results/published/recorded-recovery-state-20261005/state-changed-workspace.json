@@ -1,0 +1,8 @@
+{
+  "fault": "changed-workspace",
+  "reason": "Accepted workspace state missing or changed",
+  "model_calls": 0,
+  "effects": 0,
+  "original_transcript_unchanged": true,
+  "batch_fixture": null
+}

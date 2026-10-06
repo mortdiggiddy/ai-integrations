@@ -1,0 +1,13 @@
+{
+  "name": "bypass",
+  "status": "passed",
+  "synthetic_only": true,
+  "endpoint_bypass": "direct provider refused without valid single-use bound receipt",
+  "inherited_selection": "explicit environment clears all ambient provider/proxy selection",
+  "negative_control": "receipt requirement removed: provider accepted unadmitted work, prevention assertion broke",
+  "admissions": 1,
+  "provider_receipts": 6,
+  "accepted_provider_requests": 2,
+  "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+  "elapsed_seconds": 0.5223777279898059
+}

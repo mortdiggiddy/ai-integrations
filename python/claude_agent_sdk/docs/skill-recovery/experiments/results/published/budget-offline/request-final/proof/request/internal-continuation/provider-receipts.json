@@ -1,0 +1,156 @@
+[
+  {
+    "received_ns": 181156314572222,
+    "receipt": "95669fd6-31f0-41da-8195-070ff95e1267",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "<system-reminder>\nToday's date is 2026-10-02.\n</system-reminder>\n"
+            },
+            {
+              "type": "text",
+              "text": "Return OFFLINE_OK.",
+              "cache_control": {
+                "type": "ephemeral"
+              }
+            }
+          ]
+        }
+      ],
+      "system": [
+        {
+          "type": "text",
+          "text": "x-anthropic-billing-header: cc_version=2.1.274.03a; cc_entrypoint=sdk-py;"
+        },
+        {
+          "type": "text",
+          "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        },
+        {
+          "type": "text",
+          "text": "Return OFFLINE_OK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        }
+      ],
+      "tools": [],
+      "metadata": {
+        "user_id": "{\"device_id\":\"dbea35727cfa76ce272c68fb6f2b0072067c3c5062c22e3173557649728938b3\",\"account_uuid\":\"\",\"session_id\":\"c955bcf1-2b04-4118-a5cc-a9e6c4f415cd\"}"
+      },
+      "max_tokens": 64,
+      "thinking": {
+        "budget_tokens": 1024,
+        "type": "enabled"
+      },
+      "context_management": {
+        "edits": [
+          {
+            "type": "clear_thinking_20251015",
+            "keep": "all"
+          }
+        ]
+      },
+      "stream": true
+    },
+    "accepted": true,
+    "admitted_ns": 181156313055755,
+    "synthetic_input": 12,
+    "synthetic_output": 20,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181156370796838,
+    "receipt": "1410e9b3-6fab-4f57-b7b1-2b5200e2442d",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "<system-reminder>\nToday's date is 2026-10-02.\n</system-reminder>\n"
+            },
+            {
+              "type": "text",
+              "text": "Return OFFLINE_OK."
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "partial"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Output token limit hit. Resume directly \u2014 no apology, no recap of what you were doing. Pick up mid-thought if that is where the cut happened. Break remaining work into smaller pieces.",
+              "cache_control": {
+                "type": "ephemeral"
+              }
+            }
+          ]
+        }
+      ],
+      "system": [
+        {
+          "type": "text",
+          "text": "x-anthropic-billing-header: cc_version=2.1.274.03a; cc_entrypoint=sdk-py;"
+        },
+        {
+          "type": "text",
+          "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        },
+        {
+          "type": "text",
+          "text": "Return OFFLINE_OK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        }
+      ],
+      "tools": [],
+      "metadata": {
+        "user_id": "{\"device_id\":\"dbea35727cfa76ce272c68fb6f2b0072067c3c5062c22e3173557649728938b3\",\"account_uuid\":\"\",\"session_id\":\"c955bcf1-2b04-4118-a5cc-a9e6c4f415cd\"}"
+      },
+      "max_tokens": 64,
+      "thinking": {
+        "budget_tokens": 1024,
+        "type": "enabled"
+      },
+      "context_management": {
+        "edits": [
+          {
+            "type": "clear_thinking_20251015",
+            "keep": "all"
+          }
+        ]
+      },
+      "stream": true
+    },
+    "accepted": true,
+    "admitted_ns": 181156368967847,
+    "synthetic_input": 12,
+    "synthetic_output": 20,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  }
+]

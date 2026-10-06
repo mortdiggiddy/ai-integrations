@@ -1,0 +1,18 @@
+uv run ruff check --select I
+All checks passed!
+uv run ruff format --check
+90 files already formatted
+uv run pyright
+<repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:233:16 - error: Argument of type "Any | list[Unknown] | bool | None" cannot be assigned to parameter "obj" of type "Sized" in function "len"
+    Type "Any | list[Unknown] | bool | None" is not assignable to type "Sized"
+      "bool" is incompatible with protocol "Sized"
+        "__len__" is not present (reportArgumentType)
+<repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:290:40 - error: "_timeout" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:297:73 - error: "messages" is not a known attribute of "None" (reportOptionalMemberAccess)
+3 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.403 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+make: *** [../_shared/python.mk:54: lint] Error 1

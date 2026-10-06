@@ -1,0 +1,12 @@
+{
+  "name": "insufficient",
+  "status": "passed",
+  "synthetic_only": true,
+  "sdk_error": "ResultError: Claude Code returned an error result: API Error: 400 Insufficient cumulative request envelope (exit code: 1)",
+  "stream_events": 4,
+  "admissions": 0,
+  "provider_receipts": 0,
+  "accepted_provider_requests": 0,
+  "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+  "elapsed_seconds": 1.0124214449897408
+}

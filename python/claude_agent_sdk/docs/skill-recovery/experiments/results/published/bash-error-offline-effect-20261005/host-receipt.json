@@ -1,0 +1,13 @@
+{
+  "attempt": "3daac60da68141ad82fad6b54c3f75a9",
+  "host_receipt": "{\"removal_verified\": true, \"resource\": \"5c77fe841a16d3f2d1472a89835034fb35a80b5d76ff72d2ecdeef1cbb36e3d9\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 0}",
+  "name": "sdk-host-3daac60da68141ad82fad6b54c3f75a9",
+  "observations": null,
+  "removed": 1,
+  "resource": "5c77fe841a16d3f2d1472a89835034fb35a80b5d76ff72d2ecdeef1cbb36e3d9",
+  "runner": null,
+  "session": "offline-fixed-bash",
+  "singleton": 1,
+  "stopped": 1,
+  "terminated": 1
+}

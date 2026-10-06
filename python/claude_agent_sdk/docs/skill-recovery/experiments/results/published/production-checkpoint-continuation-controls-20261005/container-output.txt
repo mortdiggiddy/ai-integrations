@@ -1,0 +1,19 @@
+........................................................................ [ 37%]
+........................................................................ [ 74%]
+.................................................                        [100%]
+=============================== warnings summary ===============================
+test_host_admission.py::test_controller_stop_fences_fresh_runner[stop]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[interrupt]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[close]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[wedged]
+  /fixture/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Results (8.23s):
+       193 passed
+         4 warnings
+{"kind": "sdk_observations", "row": {"singleton": 1, "session": "20b13e4f-fefa-4542-bfd1-39777f5d4a23", "attempt": "4146abd027a646b08f047663dd244bfa", "name": "sdk-host-4146abd027a646b08f047663dd244bfa", "resource": "73eca605c52a20636ec1b28cbef7c84ff0217b939376b4e7b93ff71356f7baa4", "runner": "76dd2d4290e44760921dbe87e035fc6b", "stopped": 1, "observations": "{\"close_error\": null, \"interrupt_acknowledged\": true, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"claude_code_version\": \"2.1.274\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": null, \"duration_api_ms\": 0, \"duration_ms\": 1, \"errors\": null, \"is_error\": false, \"model_usage\": null, \"num_turns\": 1, \"origin\": null, \"permission_denials\": null, \"result\": \"done\", \"session_id\": \"session\", \"stop_reason\": null, \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": null, \"total_cost_usd\": null, \"usage\": null, \"uuid\": null}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": true, \"terminal_received\": true}", "terminated": 0, "removed": 0, "host_receipt": null}}
+{"kind": "ready", "child_pid": 45, "child_sid": 45}
+/fixture/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+  self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)

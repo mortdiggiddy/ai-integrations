@@ -1,0 +1,16 @@
+uv run ruff check --select I
+All checks passed!
+uv run ruff format --check
+90 files already formatted
+uv run pyright
+<repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:4:46 - error: "reportUnusedParameter" is an unknown diagnostic rule for pyright comment
+<repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:4:46 - error: "reportUnusedParameter" is an unknown diagnostic rule for pyright comment
+<repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:4:46 - error: "reportUnusedParameter" is an unknown diagnostic rule for pyright comment
+3 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.403 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+make: *** [../_shared/python.mk:54: lint] Error 1

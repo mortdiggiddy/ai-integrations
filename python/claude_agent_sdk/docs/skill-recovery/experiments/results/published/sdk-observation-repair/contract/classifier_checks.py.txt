@@ -1,0 +1,50 @@
+import sys,copy,json
+from pathlib import Path
+sys.path.insert(0,str(Path("python/claude_agent_sdk/docs/skill-recovery/experiments").resolve()))
+import sdk_shutdown_probe as p
+def row(pid=7,start="200",comm="claude",state="S"):
+ return dict(pid=pid,start=start,comm=comm,state=state)
+def inv(*rows):
+ return dict(version=1,enumeration_completed=True,complete=True,errors=[],enumerated_pids=[r["pid"] for r in rows],processes=list(rows))
+parent=row(1,"100","python")
+base=dict(connected=True,stop_requested=True,interrupt_acknowledged=True,sdk_closed=True,shutdown_unresolved=False,prompt_submission_started=False,stage="finished",before_connect=inv(parent),after_connect=inv(parent,row(),row(8,"201","child")),after_disconnect=inv(parent))
+count=0
+def check(label,state,valid=False,absence=False,control=True):
+ global count
+ result=p.classify_observations(state)
+ assert result["process_observations_valid"] is valid,(label,result)
+ assert result["sdk_process_absence_before_host_teardown"] is absence,(label,result)
+ assert result["sdk_control_completed"] is control,(label,result)
+ count+=1
+for key in ("version","enumeration_completed","complete","errors","enumerated_pids","processes"):
+ state=copy.deepcopy(base); del state["after_disconnect"][key]; check("missing:"+key,state)
+for key,values in dict(version=[0,2,1.0,"1",None],enumeration_completed=[1,"true",None],complete=[1,"true",None],errors=[None,{},["unknown"]],enumerated_pids=[{},None,"1",[-1],[0],[1.0],["1"]],processes=[None,{},["unknown"]]).items():
+ for value in values:
+  state=copy.deepcopy(base); state["after_disconnect"][key]=value; check(key+repr(value),state)
+for key,values in dict(pid=[None,0,-1,1.0,"1"],start=[None,"","0","-1","1.0"," 1","１","١"],comm=[None,17,"  "],state=[None,"?","SS"]).items():
+ for value in values:
+  state=copy.deepcopy(base); state["after_disconnect"]["processes"][0][key]=value; check(key+repr(value),state)
+for key in ("pid","start","comm","state"):
+ state=copy.deepcopy(base); del state["after_disconnect"]["processes"][0][key]; check("row missing:"+key,state)
+state=copy.deepcopy(base); state["after_disconnect"]["processes"]*=2; check("duplicate observed only",state)
+state=copy.deepcopy(base); state["after_disconnect"]["enumerated_pids"]*=2; check("duplicate enumerated only",state)
+state=copy.deepcopy(base); state["after_disconnect"]["processes"].append(row(7,"200")); check("unlisted observation",state)
+for key in ("connected","stop_requested","interrupt_acknowledged","sdk_closed","shutdown_unresolved","prompt_submission_started","stage"):
+ state=copy.deepcopy(base); del state[key]; check("control missing:"+key,state,True,key!="sdk_closed",False)
+for key in ("connected","stop_requested","interrupt_acknowledged","sdk_closed","shutdown_unresolved","prompt_submission_started"):
+ state=copy.deepcopy(base); state[key]=1 if base[key] else 0; check("control boolean type:"+key,state,True,key!="sdk_closed",False)
+for key in ("timeout_stage","connect_error","interrupt_error","close_error"):
+ state=copy.deepcopy(base); state[key]=None; check("error presence:"+key,state,True,True,False)
+for malformed in (None,[],{},True,"bad"):
+ if malformed=={}:
+  check("empty state",malformed,False,False,False)
+ else:
+  check("unknown state",malformed,False,False,False)
+check("valid",base,True,True,True)
+state=copy.deepcopy(base); state["after_connect"]["processes"].reverse(); state["after_connect"]["enumerated_pids"].reverse(); check("order only",state,True,True,True)
+state=copy.deepcopy(base); state["after_disconnect"]=inv(); check("explicit empty disconnect",state,True,True,True)
+state=copy.deepcopy(base); state["after_connect"]=inv(); check("empty connect",state,True,False,True)
+for s in ("R","S","D","Z","T","t","X","x","K","W","P","I"):
+ state=copy.deepcopy(base); state["after_disconnect"]=inv(parent,row(8,"201","renamed",s)); check("survivor state:"+s,state,True,False,True)
+state=copy.deepcopy(base); state["after_disconnect"]=inv(parent,row(7,"201")); check("pid reuse",state,True,True,True)
+print(json.dumps(dict(supplemental_classifier_checks=count,result="PASS")))

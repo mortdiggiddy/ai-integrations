@@ -1,0 +1,94 @@
+F                                                                        [100%]test_recorded_checkpoint_refusal.py:231 test_production_runner_commits_recorded_recovery_before_transport [100%]
+=================================== FAILURES ===================================
+______ test_production_runner_commits_recorded_recovery_before_transport _______
+
+tmp_path = PosixPath('/tmp/pytest-of-ubuntu/pytest-0/test_production_runner_commits0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x74b2564acd60>
+
+    @pytest.mark.asyncio
+    async def test_production_runner_commits_recorded_recovery_before_transport(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ):
+        evidence = os.environ.get("RECORDED_CHECKPOINT_EVIDENCE")
+        if not evidence:
+            pytest.skip(
+                "Requires the recorded checkpoint mounted in the isolated SDK image"
+            )
+        from write_recovery import ProofStore, recorded_result
+
+        from temporalio.claude_agent_sdk import (
+            ClaudeAgentSdkRunner,
+            SegmentInput,
+            ToolPolicy,
+            ToolPolicyEntry,
+        )
+
+        sdk = importlib.import_module("claude_agent_sdk")
+        transport_module = importlib.import_module(
+            "claude_agent_sdk._internal.transport.subprocess_cli"
+        )
+        root = Path(evidence)
+        original = json.loads((root / "original-transcript.json").read_text())
+        accepted = json.loads((root / "segment_committed.json").read_text())["accepted"]
+        outcome = json.loads((root / "effect_committed.json").read_text())["outcome"]
+        store = ProofStore(tmp_path / "transcript.db", create=True)
+        await store.append(accepted["key"], original)
+        callbacks = []
+        starts = []
+
+        async def recover(call: Any):
+            callbacks.append(asdict(call))
+            return recorded_result(call, {**accepted, "outcome": outcome})
+
+        class TransportBarrier(Exception):
+            pass
+
+        async def guarded_transport(transport: Any):
+            starts.append(len(callbacks))
+            raise TransportBarrier("Recorded recovery verified; no CLI launch permitted")
+
+        monkeypatch.setattr(
+            transport_module.SubprocessCLITransport, "connect", guarded_transport
+        )
+        policy = ToolPolicy((ToolPolicyEntry("Write", "effect", "repeatable"),))
+        runner = ClaudeAgentSdkRunner(
+            session_store=store,
+            cwd="/state/work",
+            cli_path="/opt/claude",
+            tool_policy=policy,
+            recover_pending_tool=recover,
+        )
+        options = runner._engine_options(
+>           SegmentInput(
+                session_id=accepted["key"]["session_id"],
+                tools=[],
+                builtin_tools=["Write"],
+                tool_policy=policy.canonical_json(),
+            ),
+            {},
+            accepted["key"]["session_id"],
+            True,
+            accepted["segment"]["checkpoint"],
+            str(tmp_path),
+            None,
+        )
+E       TypeError: SegmentInput.__init__() missing 1 required positional argument: 'prompt'
+
+/checks/test_recorded_checkpoint_refusal.py:286: TypeError
+=============================== warnings summary ===============================
+test_recorded_checkpoint_refusal.py::test_production_runner_commits_recorded_recovery_before_transport
+  /checks/test_recorded_checkpoint_refusal.py:278: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    runner = ClaudeAgentSdkRunner(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+                              Summary of Failures
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+┃                ┃               ┃  Function      ┃              ┃             ┃
+┃  File          ┃  Function     ┃  Line          ┃  Error Line  ┃  Error      ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━┩
+│  test_record…  │  test_produ…  │  232           │  286         │  TypeError  │
+└────────────────┴───────────────┴────────────────┴──────────────┴─────────────┘
+Results (0.68s):
+         1 failed
+        17 deselected
+         1 warning

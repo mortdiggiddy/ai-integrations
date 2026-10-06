@@ -1,0 +1,55 @@
+{
+  "after_teardown": {
+    "attempt": "dcc37747a5d44773b676be82e525b6cd",
+    "host_receipt": "{\"removal_verified\": true, \"resource\": \"32fa7f5fff5aa5e0483b55b17cbb428166f56fd04c20c3360d14bbf7cfcacf9d\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}",
+    "name": "sdk-host-dcc37747a5d44773b676be82e525b6cd",
+    "observations": "{\"after_connect\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22394026\", \"state\": \"R\"}, {\"comm\": \"claude\", \"pid\": 8, \"start\": \"22394124\", \"state\": \"S\"}], \"after_disconnect\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22394026\", \"state\": \"R\"}], \"before_connect\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22394026\", \"state\": \"R\"}], \"connected\": true, \"interrupt_acknowledged\": true, \"prompt_submission_started\": false, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stage\": \"finished\", \"stop_requested\": true}",
+    "removed": 1,
+    "resource": "32fa7f5fff5aa5e0483b55b17cbb428166f56fd04c20c3360d14bbf7cfcacf9d",
+    "runner": "83b755ecbbea416196a1f028898af57a",
+    "session": "44ca29b2-fac0-486b-a359-3469f88d2ed9",
+    "singleton": 1,
+    "stopped": 1,
+    "terminated": 1
+  },
+  "before_teardown": {
+    "attempt": "dcc37747a5d44773b676be82e525b6cd",
+    "host_receipt": null,
+    "name": "sdk-host-dcc37747a5d44773b676be82e525b6cd",
+    "observations": "{\"after_connect\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22394026\", \"state\": \"R\"}, {\"comm\": \"claude\", \"pid\": 8, \"start\": \"22394124\", \"state\": \"S\"}], \"after_disconnect\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22394026\", \"state\": \"R\"}], \"before_connect\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22394026\", \"state\": \"R\"}], \"connected\": true, \"interrupt_acknowledged\": true, \"prompt_submission_started\": false, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stage\": \"finished\", \"stop_requested\": true}",
+    "removed": 0,
+    "resource": "32fa7f5fff5aa5e0483b55b17cbb428166f56fd04c20c3360d14bbf7cfcacf9d",
+    "runner": "83b755ecbbea416196a1f028898af57a",
+    "session": "44ca29b2-fac0-486b-a359-3469f88d2ed9",
+    "singleton": 1,
+    "stopped": 1,
+    "terminated": 0
+  },
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "fresh_runner_before_cleanup": "Fresh runner has no current host grant",
+  "graceful_engine_shutdown_proved": false,
+  "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "inspect_only": false,
+  "model_calls": 0,
+  "network": "none",
+  "prompt_calls": 0,
+  "recovery_proved": false,
+  "replacement_after_cleanup": true,
+  "replacement_before_cleanup": "Prior host termination and teardown are unresolved",
+  "sdk_control_completed": true,
+  "sdk_process_absence_before_host_teardown": true,
+  "sdk_processes_observed": [
+    {
+      "comm": "claude",
+      "pid": 8,
+      "start": "22394124",
+      "state": "S"
+    }
+  ],
+  "source_sha256": {
+    "host_session.py": "197433b80ea6e8e2d548a72c5e8efd13ca53c8758e53479e7908b10866dd52bd",
+    "host_session_offline.py": "80b1d89766e6db17d09ba5979f5be3784921327c889108144e1eeb5c3422dc94",
+    "sdk_shutdown_probe.py": "faa397453960d2debe8d8b84ba19a7f33386894d2751a4d0ab304529cd4e3206"
+  },
+  "stale_observation": "Stale or absent host ownership"
+}

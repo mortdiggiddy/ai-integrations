@@ -1,0 +1,259 @@
+{
+  "after": {
+    "complete": true,
+    "enumerated_pids": [
+      1
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "26927231",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "before": {
+    "complete": true,
+    "enumerated_pids": [
+      1
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "26927231",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "callbacks": [],
+  "controller": {
+    "close_error": null,
+    "interrupt_acknowledged": false,
+    "interrupt_error": null,
+    "prompt_submission_started": true,
+    "sdk_closed": true,
+    "shutdown_unresolved": false,
+    "stop_requested": true,
+    "terminal_received": true
+  },
+  "host": {
+    "attempt": "3edaca27d3e5415a8ab3d655ede6c5a7",
+    "host_receipt": null,
+    "name": "sdk-host-3edaca27d3e5415a8ab3d655ede6c5a7",
+    "observations": "{\"close_error\": null, \"interrupt_acknowledged\": false, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"agents\": [\"claude\", \"Explore\", \"general-purpose\", \"Plan\", \"statusline-setup\"], \"analytics_disabled\": true, \"apiKeySource\": \"none\", \"capabilities\": [\"interrupt_receipt_v1\", \"interrupt_cancel_queued_v1\", \"msg_lifecycle_v1\"], \"claude_code_version\": \"2.1.274\", \"cwd\": \"/state/work\", \"fast_mode_disabled_reason\": \"sdk_opt_in_required\", \"fast_mode_state\": \"off\", \"mcp_servers\": [{\"name\": \"durable\", \"source\": \"sdk\", \"status\": \"connected\"}], \"memory_paths\": {\"auto\": \"/home/proof/.claude/projects/-state-work/memory/\"}, \"messaging_socket_path\": \"/tmp/cc-socks/14.sock\", \"model\": \"claude-haiku-4-5-20251001\", \"output_style\": \"default\", \"permissionMode\": \"default\", \"plugins\": [], \"product_feedback_disabled\": true, \"session_id\": \"5d4aa6c3-9414-403a-a22c-672f081cf13b\", \"skills\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\"], \"slash_commands\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\", \"agents\", \"auto-mode-setup\", \"autocompact\", \"clear\", \"color\", \"compact\", \"config\", \"output-style\", \"context\", \"effort\", \"fast\", \"heapdump\", \"init\", \"mcp\", \"model\", \"__remote-workflow\", \"workflow-launch-exec\", \"reload-plugins\", \"reload-skills\", \"rename\", \"security-review\", \"usage\", \"insights\", \"recap\", \"goal\", \"list-agents\", \"team-onboarding\"], \"subtype\": \"init\", \"terminal_slash_commands\": [\"doctor\", \"color\", \"reload-plugins\"], \"tools\": [\"Write\"], \"type\": \"system\", \"uuid\": \"44c5c0ec-4f32-4772-8655-af89f34b30ea\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"content\": [{\"text\": \"Not logged in \\u00b7 Please run /login\"}], \"error\": \"authentication_failed\", \"message_id\": \"139fbe8e-6b5e-4c39-9297-6be6fbaf1e55\", \"model\": \"<synthetic>\", \"parent_tool_use_id\": null, \"session_id\": \"5d4aa6c3-9414-403a-a22c-672f081cf13b\", \"stop_reason\": \"stop_sequence\", \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": null, \"input_tokens\": 0, \"iterations\": null, \"output_tokens\": 0, \"output_tokens_details\": null, \"server_tool_use\": {\"web_fetch_requests\": 0, \"web_search_requests\": 0}, \"service_tier\": null, \"speed\": null}, \"uuid\": \"9c7f33b9-d8dd-411e-95f6-adbcd3678bf2\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": null, \"duration_api_ms\": 0, \"duration_ms\": 68, \"errors\": null, \"is_error\": true, \"model_usage\": {}, \"num_turns\": 1, \"origin\": null, \"permission_denials\": [], \"result\": \"Not logged in \\u00b7 Please run /login\", \"session_id\": \"5d4aa6c3-9414-403a-a22c-672f081cf13b\", \"stop_reason\": \"stop_sequence\", \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": \"api_error\", \"total_cost_usd\": 0, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"\", \"input_tokens\": 0, \"iterations\": [], \"output_tokens\": 0, \"output_tokens_details\": {\"thinking_tokens\": 0}, \"server_tool_use\": {\"web_fetch_requests\": 0, \"web_search_requests\": 0}, \"service_tier\": \"standard\", \"speed\": \"standard\"}, \"uuid\": \"ce7df39e-a59e-4ea8-94a0-7b74ab043cf8\"}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": true, \"terminal_received\": true}",
+    "removed": 0,
+    "resource": "7ce3b32a52ef22fb4a50c3c7267b2cccb0a5bab3319cd88f5756a736526d8288",
+    "runner": "2ec5670fd3c44618b70c51f30c7443ea",
+    "session": "5d4aa6c3-9414-403a-a22c-672f081cf13b",
+    "singleton": 1,
+    "stopped": 1,
+    "terminated": 0
+  },
+  "messages": [
+    {
+      "data": {
+        "agents": [
+          "claude",
+          "Explore",
+          "general-purpose",
+          "Plan",
+          "statusline-setup"
+        ],
+        "analytics_disabled": true,
+        "apiKeySource": "none",
+        "capabilities": [
+          "interrupt_receipt_v1",
+          "interrupt_cancel_queued_v1",
+          "msg_lifecycle_v1"
+        ],
+        "claude_code_version": "2.1.274",
+        "cwd": "/state/work",
+        "fast_mode_disabled_reason": "sdk_opt_in_required",
+        "fast_mode_state": "off",
+        "mcp_servers": [
+          {
+            "name": "durable",
+            "source": "sdk",
+            "status": "connected"
+          }
+        ],
+        "memory_paths": {
+          "auto": "/home/proof/.claude/projects/-state-work/memory/"
+        },
+        "messaging_socket_path": "/tmp/cc-socks/14.sock",
+        "model": "claude-haiku-4-5-20251001",
+        "output_style": "default",
+        "permissionMode": "default",
+        "plugins": [],
+        "product_feedback_disabled": true,
+        "session_id": "5d4aa6c3-9414-403a-a22c-672f081cf13b",
+        "skills": [
+          "deep-research",
+          "dataviz",
+          "update-config",
+          "verify",
+          "debug",
+          "code-review",
+          "simplify",
+          "batch",
+          "fewer-permission-prompts",
+          "doctor",
+          "loop",
+          "claude-api",
+          "workflow-authoring",
+          "run",
+          "run-skill-generator"
+        ],
+        "slash_commands": [
+          "deep-research",
+          "dataviz",
+          "update-config",
+          "verify",
+          "debug",
+          "code-review",
+          "simplify",
+          "batch",
+          "fewer-permission-prompts",
+          "doctor",
+          "loop",
+          "claude-api",
+          "workflow-authoring",
+          "run",
+          "run-skill-generator",
+          "agents",
+          "auto-mode-setup",
+          "autocompact",
+          "clear",
+          "color",
+          "compact",
+          "config",
+          "output-style",
+          "context",
+          "effort",
+          "fast",
+          "heapdump",
+          "init",
+          "mcp",
+          "model",
+          "__remote-workflow",
+          "workflow-launch-exec",
+          "reload-plugins",
+          "reload-skills",
+          "rename",
+          "security-review",
+          "usage",
+          "insights",
+          "recap",
+          "goal",
+          "list-agents",
+          "team-onboarding"
+        ],
+        "subtype": "init",
+        "terminal_slash_commands": [
+          "doctor",
+          "color",
+          "reload-plugins"
+        ],
+        "tools": [
+          "Write"
+        ],
+        "type": "system",
+        "uuid": "44c5c0ec-4f32-4772-8655-af89f34b30ea"
+      },
+      "subtype": "init"
+    },
+    {
+      "content": [
+        {
+          "text": "Not logged in \u00b7 Please run /login"
+        }
+      ],
+      "error": "authentication_failed",
+      "message_id": "139fbe8e-6b5e-4c39-9297-6be6fbaf1e55",
+      "model": "<synthetic>",
+      "parent_tool_use_id": null,
+      "session_id": "5d4aa6c3-9414-403a-a22c-672f081cf13b",
+      "stop_reason": "stop_sequence",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": null,
+        "input_tokens": 0,
+        "iterations": null,
+        "output_tokens": 0,
+        "output_tokens_details": null,
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 0
+        },
+        "service_tier": null,
+        "speed": null
+      },
+      "uuid": "9c7f33b9-d8dd-411e-95f6-adbcd3678bf2"
+    },
+    {
+      "api_error_status": null,
+      "deferred_tool_use": null,
+      "duration_api_ms": 0,
+      "duration_ms": 68,
+      "errors": null,
+      "is_error": true,
+      "model_usage": {},
+      "num_turns": 1,
+      "origin": null,
+      "permission_denials": [],
+      "result": "Not logged in \u00b7 Please run /login",
+      "session_id": "5d4aa6c3-9414-403a-a22c-672f081cf13b",
+      "stop_reason": "stop_sequence",
+      "structured_output": null,
+      "subtype": "success",
+      "terminal_reason": "api_error",
+      "total_cost_usd": 0,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "",
+        "input_tokens": 0,
+        "iterations": [],
+        "output_tokens": 0,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 0
+        },
+        "service_tier": "standard",
+        "speed": "standard"
+      },
+      "uuid": "ce7df39e-a59e-4ea8-94a0-7b74ab043cf8"
+    }
+  ],
+  "transport_starts": [
+    {
+      "recovery_callbacks_before_transport": 0
+    }
+  ],
+  "versions": {
+    "cli": "2.1.274 (Claude Code)",
+    "model": "claude-haiku-4-5-20251001",
+    "sdk": "0.2.162",
+    "sdk_record_files": 36
+  }
+}

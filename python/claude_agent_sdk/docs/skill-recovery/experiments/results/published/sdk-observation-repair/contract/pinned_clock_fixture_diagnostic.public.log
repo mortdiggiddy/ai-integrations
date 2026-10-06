@@ -1,0 +1,23 @@
+{"docker_create_argv": ["create", "--pull", "never", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--pids-limit", "128", "--memory", "2g", "--cpus", "2", "--tmpfs", "/tmp:rw,nosuid,nodev,size=512m", "--workdir", "/repo", "-e", "UV_NO_SYNC=1", "-e", "UV_NO_EDITABLE=1", "-e", "PYTHONDONTWRITEBYTECODE=1", "-e", "HOME=/tmp/home", "-e", "CLAUDE_CONFIG_DIR=/tmp/config", "-v", "<experiments>/host_session.py:/repo/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session.py:ro", "-v", "<experiments>/host_session_offline.py:/repo/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py:ro", "-v", "<experiments>/sdk_shutdown_probe.py:/repo/python/claude_agent_sdk/docs/skill-recovery/experiments/sdk_shutdown_probe.py:ro", "-v", "<supplemental>/lifecycle_clock_fixture_diagnostic.py:/checks/lifecycle_clock_fixture_diagnostic.py:ro", "--entrypoint", "/opt/python/bin/python3.13", "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa", "/checks/lifecycle_clock_fixture_diagnostic.py"], "diagnostic": true}
+
+Traceback (most recent call last):
+  File "/checks/lifecycle_clock_fixture_diagnostic.py", line 58, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/checks/lifecycle_clock_fixture_diagnostic.py", line 57, in main
+    for fault in ("valid","connect","interrupt","disconnect","connect_timeout","interrupt_timeout","disconnect_timeout"):await case(fault)
+                                                                                                                         ^^^^^^^^^^^^^^^^^
+  File "/checks/lifecycle_clock_fixture_diagnostic.py", line 49, in case
+    assert state["timeout_stage"]==expected and state["shutdown_unresolved"] and host.stopped,state
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'stage': 'created', 'connected': False, 'sdk_closed': False, 'stop_requested': False, 'interrupt_acknowledged': False, 'shutdown_unresolved': True, 'prompt_submission_started': False, 'before_connect': {'version': 1, 'enumeration_completed': True, 'complete': True, 'errors': [], 'enumerated_pids': [1], 'processes': [{'pid': 1, 'start': '100', 'comm': 'python', 'state': 'S'}]}, 'timeout_stage': 'created'}
+{"container_exit_code": 1, "diagnostic": true}

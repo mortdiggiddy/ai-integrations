@@ -1,0 +1,44 @@
+F                                                                        [  2%]test_host_admission.py:4 test_scripted_false_ready_marker_from_failed_pytest. [  4%]
+..............................................                           [100%]
+=================================== FAILURES ===================================
+_____________ test_scripted_false_ready_marker_from_failed_pytest ______________
+
+    def test_scripted_false_ready_marker_from_failed_pytest():
+        print('{"kind": "ready", "child_pid": 42}')
+>       assert False, 'scripted pytest failure after stdout ready marker'
+E       AssertionError: scripted pytest failure after stdout ready marker
+E       assert False
+
+/checks/test_host_admission.py:7: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"kind": "ready", "child_pid": 42}
+=============================== warnings summary ===============================
+test_host_admission.py::test_controller_stop_fences_fresh_runner[stop]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[interrupt]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[close]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[wedged]
+  /fixture/host_session.py:281: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    self.runner = ClaudeAgentSdkRunner(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+                              Summary of Failures
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃               ┃               ┃  Function     ┃              ┃               ┃
+┃  File         ┃  Function     ┃  Line         ┃  Error Line  ┃  Error        ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│  test_host_…  │  test_scrip…  │  5            │  7           │  AssertionE…  │
+└───────────────┴───────────────┴───────────────┴──────────────┴───────────────┘
+Results (3.10s):
+         1 failed
+        47 passed
+         4 warnings
+
+Traceback (most recent call last):
+  File "/tmp/shutdown-adversarial-final-d8p1mdih/corrected-fixture/copy/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py", line 298, in <module>
+    host_probe()
+    ~~~~~~~~~~^^
+  File "/tmp/shutdown-adversarial-final-d8p1mdih/corrected-fixture/copy/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py", line 227, in host_probe
+    raise RuntimeError(
+        "Offline child failed or never reached the lifecycle barrier"
+    )
+RuntimeError: Offline child failed or never reached the lifecycle barrier

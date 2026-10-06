@@ -1,0 +1,77 @@
+{
+  "identity": {
+    "test": "offline-usage-restored-baseline",
+    "segment": "segment-1",
+    "model": "claude-haiku-4-5-20251001"
+  },
+  "semantics": "synthetic-disjoint-input-output-includes-thinking-v1",
+  "seen": {
+    "final-0": {
+      "identity": {
+        "test": "offline-usage-restored-baseline",
+        "segment": "segment-1",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "event_id": "final-0",
+      "epoch": "epoch-0",
+      "kind": "final",
+      "complete": true,
+      "crash": false,
+      "model_usage": [
+        "claude-haiku-4-5-20251001"
+      ],
+      "requests": [
+        "request-0"
+      ],
+      "totals": {
+        "ordinary_input": 112,
+        "cache_read_input": 2,
+        "cache_write_input": 3,
+        "output": 60,
+        "thinking": 5,
+        "cost_microusd": 512
+      }
+    }
+  },
+  "epochs": {
+    "epoch-0": {
+      "baseline": {
+        "ordinary_input": 100,
+        "cache_read_input": 2,
+        "cache_write_input": 3,
+        "output": 40,
+        "thinking": 5,
+        "cost_microusd": 400
+      },
+      "complete": true
+    }
+  },
+  "finals": {
+    "epoch-0": {
+      "identity": {
+        "test": "offline-usage-restored-baseline",
+        "segment": "segment-1",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "event_id": "final-0",
+      "epoch": "epoch-0",
+      "kind": "final",
+      "complete": true,
+      "crash": false,
+      "model_usage": [
+        "claude-haiku-4-5-20251001"
+      ],
+      "requests": [
+        "request-0"
+      ],
+      "totals": {
+        "ordinary_input": 112,
+        "cache_read_input": 2,
+        "cache_write_input": 3,
+        "output": 60,
+        "thinking": 5,
+        "cost_microusd": 512
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+uv run ruff check --select I
+All checks passed!
+uv run ruff format --check
+90 files already formatted
+uv run pyright
+<repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:14:6 - error: Import "host_session" could not be resolved (reportMissingImports)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:15:6 - error: Import "write_recovery" could not be resolved (reportMissingImports)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:48:10 - error: Import "subscription_sdk_control" could not be resolved (reportMissingImports)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:342:10 - error: Import "write_recovery_workflow" could not be resolved (reportMissingImports)
+<repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:27:6 - error: Import "host_session" could not be resolved (reportMissingImports)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:125:14 - error: Cannot assign to attribute "on_remove" for class "Container"
+    Expression of type "() -> None" cannot be assigned to attribute "on_remove" of class "Container"
+      "FunctionType" is not assignable to "None" (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:193:12 - error: Import "host_session_offline" could not be resolved (reportMissingImports)
+<repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:244:24 - error: "PermissionResultDeny" is not exported from module "temporalio.claude_agent_sdk._runner" (reportPrivateImportUsage)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:254:39 - error: "PermissionResultDeny" is not exported from module "temporalio.claude_agent_sdk._runner" (reportPrivateImportUsage)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:258:38 - error: "PermissionResultDeny" is not exported from module "temporalio.claude_agent_sdk._runner" (reportPrivateImportUsage)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:363:45 - error: "ResultError" is not exported from module "temporalio.claude_agent_sdk._session_control" (reportPrivateImportUsage)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:375:33 - error: "activity" is not exported from module "temporalio.claude_agent_sdk._runner" (reportPrivateImportUsage)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:376:33 - error: "activity" is not exported from module "temporalio.claude_agent_sdk._runner" (reportPrivateImportUsage)
+<repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:11:8 - error: Import "sdk_shutdown_probe" could not be resolved (reportMissingImports)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:12:6 - error: Import "host_session" could not be resolved (reportMissingImports)
+15 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.403 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+make: *** [../_shared/python.mk:54: lint] Error 1

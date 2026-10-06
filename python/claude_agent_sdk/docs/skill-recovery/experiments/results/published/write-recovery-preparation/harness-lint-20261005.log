@@ -1,0 +1,14 @@
+uv run ruff check --select I
+All checks passed!
+uv run ruff format --check
+90 files already formatted
+uv run pyright
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.403 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+uv run mypy
+Success: no issues found in 59 source files
+uv run basedpyright
+0 errors, 0 warnings, 0 notes
+uv run pydocstyle --ignore-decorators=overload src

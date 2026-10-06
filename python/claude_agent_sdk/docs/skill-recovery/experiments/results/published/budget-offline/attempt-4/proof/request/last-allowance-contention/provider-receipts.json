@@ -1,0 +1,22 @@
+[
+  {
+    "received_ns": 181057695235984,
+    "receipt": "585d7866-31c9-40eb-aecb-b15b21cca3ed",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": true,
+    "admitted_ns": 181057694293293,
+    "synthetic_input": 12,
+    "synthetic_output": 20,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "before": {
+    "blocked": null,
+    "consumed_cost_microusd": 0,
+    "consumed_tokens": 0,
+    "unresolved_reserved_cost_microusd": 10000,
+    "unresolved_reserved_tokens": 2000
+  },
+  "after": {
+    "blocked": null,
+    "consumed_cost_microusd": 0,
+    "consumed_tokens": 0,
+    "unresolved_reserved_cost_microusd": 10000,
+    "unresolved_reserved_tokens": 2000
+  }
+}

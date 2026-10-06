@@ -1,0 +1,77 @@
+[
+  {
+    "stage": "connect",
+    "saved_timeout_state": {
+      "stage": "connect",
+      "connected": false,
+      "sdk_closed": false,
+      "stop_requested": false,
+      "interrupt_acknowledged": false,
+      "shutdown_unresolved": true,
+      "prompt_submission_started": false,
+      "before_connect": [
+        {
+          "pid": 1,
+          "start": "one"
+        }
+      ],
+      "timeout_stage": "connect"
+    },
+    "owner_cancelled": [],
+    "replacement_diagnostic": "Prior host termination and teardown are unresolved"
+  },
+  {
+    "stage": "interrupt",
+    "saved_timeout_state": {
+      "stage": "interrupt",
+      "connected": true,
+      "sdk_closed": false,
+      "stop_requested": true,
+      "interrupt_acknowledged": false,
+      "shutdown_unresolved": true,
+      "prompt_submission_started": false,
+      "before_connect": [
+        {
+          "pid": 1,
+          "start": "one"
+        }
+      ],
+      "after_connect": [
+        {
+          "pid": 1,
+          "start": "one"
+        }
+      ],
+      "timeout_stage": "interrupt"
+    },
+    "owner_cancelled": [],
+    "replacement_diagnostic": "Prior host termination and teardown are unresolved"
+  },
+  {
+    "stage": "disconnect",
+    "saved_timeout_state": {
+      "stage": "disconnect",
+      "connected": true,
+      "sdk_closed": false,
+      "stop_requested": true,
+      "interrupt_acknowledged": true,
+      "shutdown_unresolved": true,
+      "prompt_submission_started": false,
+      "before_connect": [
+        {
+          "pid": 1,
+          "start": "one"
+        }
+      ],
+      "after_connect": [
+        {
+          "pid": 1,
+          "start": "one"
+        }
+      ],
+      "timeout_stage": "disconnect"
+    },
+    "owner_cancelled": [],
+    "replacement_diagnostic": "Prior host termination and teardown are unresolved"
+  }
+]

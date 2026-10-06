@@ -1,0 +1,40 @@
+{
+  "accepted": {
+    "key": {
+      "project_key": "-state-work",
+      "session_id": "160129a5-695f-45d1-9fc7-0b139a0fcfab"
+    },
+    "pending": {
+      "id": "toolu_01GTQfAPk2Lvx9cs5Qx1oYRu",
+      "input": {
+        "content": "WRITE_ONCE_MARKER\n",
+        "file_path": "/state/work/marker.txt"
+      },
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "160129a5-695f-45d1-9fc7-0b139a0fcfab"
+      },
+      "name": "Write",
+      "transcript_uuid": "a34c8fb5-92ad-45c8-863e-0bbb9cc49ba1"
+    },
+    "segment": {
+      "checkpoint": "4545f4ce-7b70-4405-9a9d-ad9134e0b813",
+      "cost_usd": 0.00714,
+      "deferred": {
+        "id": "toolu_01GTQfAPk2Lvx9cs5Qx1oYRu",
+        "input": {
+          "content": "WRITE_ONCE_MARKER\n",
+          "file_path": "/state/work/marker.txt"
+        },
+        "name": "Write"
+      },
+      "error": null,
+      "is_error": false,
+      "result": null,
+      "session_id": "160129a5-695f-45d1-9fc7-0b139a0fcfab"
+    },
+    "transcript_sha256": "b456c062da9d14608e5be09decab8dff66d6c8673e7ae8e95bb76af1e6768d40"
+  },
+  "outcome": null,
+  "stage": "segment_committed"
+}

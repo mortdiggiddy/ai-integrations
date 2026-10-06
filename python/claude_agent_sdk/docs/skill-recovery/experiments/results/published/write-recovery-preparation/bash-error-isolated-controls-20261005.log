@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<repo>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py", line 346, in <module>
+    host_probe(arguments.server, arguments.output)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py", line 243, in host_probe
+    resource = docker.command(*argv)
+  File "<repo>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session.py", line 451, in command
+    raise AdmissionRefused("Docker operation failed: " + args[0])
+host_session.AdmissionRefused: Docker operation failed: create

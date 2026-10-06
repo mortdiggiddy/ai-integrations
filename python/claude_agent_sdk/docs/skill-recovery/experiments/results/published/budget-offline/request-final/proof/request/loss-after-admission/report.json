@@ -1,0 +1,10 @@
+{
+  "name": "loss-after-admission",
+  "status": "passed",
+  "synthetic_only": true,
+  "admissions": 1,
+  "provider_receipts": 0,
+  "accepted_provider_requests": 0,
+  "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+  "elapsed_seconds": 1.0114607390132733
+}

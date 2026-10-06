@@ -1,0 +1,1 @@
+{"accepted": {"pending": {"name": "Bash", "id": "original", "input": {"command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"}}}, "activity_attempt": 1}

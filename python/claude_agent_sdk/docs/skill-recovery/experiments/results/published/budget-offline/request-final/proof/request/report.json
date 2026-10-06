@@ -1,0 +1,119 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "name": "ordinary",
+      "status": "passed",
+      "synthetic_only": true,
+      "sdk_error": null,
+      "stream_events": 10,
+      "admissions": 1,
+      "provider_receipts": 1,
+      "accepted_provider_requests": 1,
+      "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+      "elapsed_seconds": 1.2140576039964799
+    },
+    {
+      "name": "internal-continuation",
+      "status": "passed",
+      "synthetic_only": true,
+      "sdk_error": null,
+      "stream_events": 19,
+      "admissions": 2,
+      "provider_receipts": 2,
+      "accepted_provider_requests": 2,
+      "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+      "elapsed_seconds": 0.9742274550080765
+    },
+    {
+      "name": "internal-retry",
+      "status": "passed",
+      "synthetic_only": true,
+      "sdk_error": null,
+      "stream_events": 11,
+      "admissions": 2,
+      "provider_receipts": 2,
+      "accepted_provider_requests": 2,
+      "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+      "elapsed_seconds": 1.432117254997138
+    },
+    {
+      "name": "insufficient",
+      "status": "passed",
+      "synthetic_only": true,
+      "sdk_error": "ResultError: Claude Code returned an error result: API Error: 400 Insufficient cumulative request envelope (exit code: 1)",
+      "stream_events": 4,
+      "admissions": 0,
+      "provider_receipts": 0,
+      "accepted_provider_requests": 0,
+      "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+      "elapsed_seconds": 1.0124214449897408
+    },
+    {
+      "name": "last-allowance-contention",
+      "status": "passed",
+      "synthetic_only": true,
+      "process_statuses": [
+        400,
+        200
+      ],
+      "admissions": 1,
+      "provider_receipts": 1,
+      "accepted_provider_requests": 1,
+      "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+      "elapsed_seconds": 1.9565435190161224
+    },
+    {
+      "name": "gateway-faults",
+      "status": "passed",
+      "synthetic_only": true,
+      "refusals": [
+        "reject",
+        "timeout",
+        "crash",
+        "absent"
+      ],
+      "admissions": 0,
+      "provider_receipts": 0,
+      "accepted_provider_requests": 0,
+      "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+      "elapsed_seconds": 1.0138975669979118
+    },
+    {
+      "name": "loss-after-admission",
+      "status": "passed",
+      "synthetic_only": true,
+      "admissions": 1,
+      "provider_receipts": 0,
+      "accepted_provider_requests": 0,
+      "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+      "elapsed_seconds": 1.0114607390132733
+    },
+    {
+      "name": "bypass",
+      "status": "passed",
+      "synthetic_only": true,
+      "endpoint_bypass": {
+        "sdk_error": "ResultError: Claude Code returned an error result: Failed to authenticate. API Error: 403 {\"error\":\"missing, forged, replayed or mismatched admission receipt\"} (exit code: 1)",
+        "stream_events": 4
+      },
+      "changed_model": {
+        "sdk_error": "ResultError: Claude Code returned an error result: API Error: 400 Model or output envelope mismatch (exit code: 1)",
+        "stream_events": 4
+      },
+      "inherited_selection": {
+        "sdk_error": null,
+        "stream_events": 10
+      },
+      "negative_control": "receipt requirement removed: provider accepted unadmitted work, prevention assertion broke",
+      "negative_control_receipts": 1,
+      "admissions": 2,
+      "provider_receipts": 7,
+      "accepted_provider_requests": 2,
+      "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+      "elapsed_seconds": 2.2983337470213883
+    }
+  ],
+  "provider_receipts": 14,
+  "limits": "Confined synthetic API route only; subscription routing, real tokens, currency and billing unproved."
+}

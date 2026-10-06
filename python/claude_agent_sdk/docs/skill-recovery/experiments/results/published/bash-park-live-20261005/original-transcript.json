@@ -1,0 +1,469 @@
+[
+  {
+    "content": "Call Bash exactly once with this literal command:\n```sh\necho BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30\n```\nDo not call any other tool or change the command. After its result, reply with exactly BASH_KNOWN_ERROR_EXIT_7.",
+    "operation": "enqueue",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:58.996Z",
+    "type": "queue-operation"
+  },
+  {
+    "operation": "dequeue",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.003Z",
+    "type": "queue-operation"
+  },
+  {
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "message": {
+      "content": "Call Bash exactly once with this literal command:\n```sh\necho BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30\n```\nDo not call any other tool or change the command. After its result, reply with exactly BASH_KNOWN_ERROR_EXIT_7.",
+      "role": "user"
+    },
+    "parentUuid": null,
+    "permissionMode": "default",
+    "promptId": "f37c68b1-4590-430a-be69-f8f17d607a6c",
+    "promptSource": "sdk",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.037Z",
+    "type": "user",
+    "userType": "external",
+    "uuid": "47c6b422-7b22-4311-99fc-e6a3ffef3f22",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "snapshot": {
+        "additionalWorkingDirectories": [],
+        "isGitRepo": false,
+        "isWorktree": false,
+        "osVersion": "Linux 6.6.114.1-microsoft-standard-WSL2",
+        "platform": "linux",
+        "shell": "unknown",
+        "workingDirectory": "/state/work"
+      },
+      "type": "environment"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "47c6b422-7b22-4311-99fc-e6a3ffef3f22",
+    "rendered": [
+      {
+        "content": "<system-reminder>\n# Environment\nYou have been invoked in the following environment: \n - Primary working directory: /state/work\n - Is a git repository: false\n - Platform: linux\n - Shell: unknown\n - OS Version: Linux 6.6.114.1-microsoft-standard-WSL2\n</system-reminder>"
+      }
+    ],
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.025Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "92a3dd02-a977-4aa1-8d91-67e36eb4dca5",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "identity": {
+        "knowledgeCutoff": "February 2025",
+        "marketingName": "Haiku 4.5",
+        "modelId": "claude-haiku-4-5-20251001"
+      },
+      "text": "You are powered by the model named Haiku 4.5. The exact model ID is claude-haiku-4-5-20251001. Assistant knowledge cutoff is February 2025.",
+      "type": "model"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "92a3dd02-a977-4aa1-8d91-67e36eb4dca5",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nYou are powered by the model named Haiku 4.5. The exact model ID is claude-haiku-4-5-20251001. Assistant knowledge cutoff is February 2025.\n</system-reminder>"
+      }
+    ],
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.028Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "a2a63a9e-d363-435e-b55a-78baa486a1c7",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "text": "<total_tokens>15000000 tokens left</total_tokens>",
+      "type": "total_tokens_reminder"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "a2a63a9e-d363-435e-b55a-78baa486a1c7",
+    "rendered": [
+      {
+        "content": "<system-reminder>\n<total_tokens>15000000 tokens left</total_tokens>\n</system-reminder>"
+      }
+    ],
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.028Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "7173dab0-1b62-4e92-9bde-ccfb300d727d",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "remaining": 0.05,
+      "total": 0.05,
+      "type": "budget_usd",
+      "used": 0
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "7173dab0-1b62-4e92-9bde-ccfb300d727d",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nUSD budget: $0/$0.05; $0.05 remaining\n</system-reminder>"
+      }
+    ],
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.028Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "5aef9d45-7d27-43f7-b3c4-d8ed23090108",
+    "version": "2.1.274"
+  },
+  {
+    "atis": "",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "type": "atis-latch"
+  },
+  {
+    "attachment": {
+      "context": {
+        "userEmail": "The user's email address is operator@example.invalid. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrelated service, such as in a request header, URL, or payload, unless the user explicitly asks."
+      },
+      "type": "session_context"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "5aef9d45-7d27-43f7-b3c4-d8ed23090108",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nAs you answer the user's questions, you can use the following context:\n# userEmail\nThe user's email address is operator@example.invalid. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrelated service, such as in a request header, URL, or payload, unless the user explicitly asks.\n\nIMPORTANT: this context may or may not be relevant to your tasks. You should not respond to this context unless it is highly relevant to your task.\n</system-reminder>"
+      }
+    ],
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.052Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "f25b14c4-554d-45fd-8a96-1f1f84431919",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "date": "2026-10-05",
+      "type": "date"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "f25b14c4-554d-45fd-8a96-1f1f84431919",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nToday's date is 2026-10-05.\n</system-reminder>"
+      }
+    ],
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.052Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "edfc6b35-4dd9-40ab-8e48-c6549c1e7945",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "commit": "Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>",
+      "managedCommit": false,
+      "managedPr": false,
+      "pr": "\ud83e\udd16 Generated with [Claude Code](https://claude.com/claude-code)",
+      "sendUserFileHint": false,
+      "type": "remote_session_change",
+      "url": null
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "edfc6b35-4dd9-40ab-8e48-c6549c1e7945",
+    "rendered": [
+      {
+        "content": "<system-reminder>\nAttribution for git commits and pull requests you create from here on (this replaces Claude Code's own earlier attribution guidance, such as a previous copy of this reminder; the user's own instructions about these lines, such as a CLAUDE.md or memory rule, take precedence over this reminder, but do not add attribution lines this reminder leaves out):\n- End git commit messages with:\nCo-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>\n- End pull request descriptions with:\n\ud83e\udd16 Generated with [Claude Code](https://claude.com/claude-code)\n</system-reminder>"
+      }
+    ],
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.053Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "0c91a841-5250-425c-a816-05ed6fd8cd7a",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "systemPrompt": [
+        "Call at most one tool per message, then wait for its result before calling another."
+      ],
+      "type": "prompt_snapshot"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "0c91a841-5250-425c-a816-05ed6fd8cd7a",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:21:59.054Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "b4a0ca76-67c2-4b97-bafb-0304a507033a",
+    "version": "2.1.274"
+  },
+  {
+    "apiBlockIndex": 0,
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "message": {
+      "container": null,
+      "content": [
+        {
+          "signature": "ErIFCtABCBIYAipA/N8+zN0afAcV0HpCY11X1iSUpL4NK+IQFhXplpUvqoUxKLKUUOcJMghRmqJJ50QahWnwgazFzZHtm975IXh+xzIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYmMxMjQ4YzMtMzBhOS00MDQ4LTg1NGQtNDZkNWE3YTY2ZjA3chB9oY7uhvxijGquhYYIC/gSiAEBmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAHY8Y/WBrABAhIMFJ1TTsH7LR9B46oPGgxz1iqtPBLYhVvYUcIiMLn0o1zL3RitDf8/V8UnMDMhVL67fNVmjCDvwAT5E3MtQAbvjcwmLqJOtAYQbXca5yqOA8ienUm1KD6w1VOqCpBKTaD3ATRAWIxahbmleuoQE/+eL9E+558oA+KykicnsFyNvBci6mqZE2p+6DJe286aQv9aoWPj5o5OmnprZJtsTzdavp+x84vVDMeleA64AbkogWmPGZT2k+E4vMMwi3myJMxtyd0zrf1JuLf/MkQxlv7C6idPbMM9ZMlZnId8NxhPTsauNHIR4uJ157UChqDbnoQrcUCk7fgOK4c7/NshTZOqNhotu6JAhONKkAEA2w2n50WyRDYmSdJ1Xb2x45fOYhJYlVOUiU4A4rJhYLqL9TJjekO+EaaTAhCh/opVji1IovPgHOrgpAIn9PfGv50uTdQvFdUcC1F696k/p2aGDLb/hdMm3jaourTRpVdGB1YmwLlIJ+Fi0T5ZkVCqXteDsMC8CnOdoLEokPxodEDTlntGaQCGzDmjFzvH7b3KOP9W/KTJ5f7mfVUSbVDPlAg7caI0S6dOxDRt9b/2Awb7XsJUlL6yjUlQFXntiZKIFpTucBdLPdVHpJ81BG71JM8lGAE=",
+          "thinking": "",
+          "type": "thinking"
+        }
+      ],
+      "context_management": null,
+      "diagnostics": null,
+      "id": "msg_011Cfjdj7s9cFJExnhPFPsj6",
+      "model": "claude-haiku-4-5-20251001",
+      "role": "assistant",
+      "stop_details": null,
+      "stop_reason": "tool_use",
+      "stop_sequence": null,
+      "type": "message",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "not_available",
+        "input_tokens": 4038,
+        "iterations": [],
+        "output_tokens": 185,
+        "output_tokens_details": {
+          "thinking_tokens": 109
+        },
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 0
+        },
+        "service_tier": "standard",
+        "speed": "standard"
+      }
+    },
+    "parentUuid": "b4a0ca76-67c2-4b97-bafb-0304a507033a",
+    "perTurnEffort": null,
+    "requestId": "req_011Cfjdj7MtU8x6DXCsSg4Sg",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:22:00.801Z",
+    "type": "assistant",
+    "userType": "external",
+    "uuid": "8b4f266d-dc31-45b0-b2a9-32702bc188bb",
+    "version": "2.1.274"
+  },
+  {
+    "apiBlockIndex": 1,
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "message": {
+      "container": null,
+      "content": [
+        {
+          "caller": {
+            "type": "direct"
+          },
+          "id": "toolu_011xtx7y28TNYy7cnN7GLrJA",
+          "input": {
+            "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30"
+          },
+          "name": "Bash",
+          "type": "tool_use"
+        }
+      ],
+      "context_management": null,
+      "diagnostics": null,
+      "id": "msg_011Cfjdj7s9cFJExnhPFPsj6",
+      "model": "claude-haiku-4-5-20251001",
+      "role": "assistant",
+      "stop_details": null,
+      "stop_reason": "tool_use",
+      "stop_sequence": null,
+      "type": "message",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "not_available",
+        "input_tokens": 4038,
+        "iterations": [],
+        "output_tokens": 185,
+        "output_tokens_details": {
+          "thinking_tokens": 109
+        },
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 0
+        },
+        "service_tier": "standard",
+        "speed": "standard"
+      }
+    },
+    "parentUuid": "8b4f266d-dc31-45b0-b2a9-32702bc188bb",
+    "perTurnEffort": null,
+    "requestId": "req_011Cfjdj7MtU8x6DXCsSg4Sg",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:22:01.008Z",
+    "type": "assistant",
+    "userType": "external",
+    "uuid": "588795bf-4e16-4397-9908-ee1431e254f2",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "command": "/opt/python/bin/python3.13 /source/temporalio/claude_agent_sdk/_defer_hook.py",
+      "content": "",
+      "durationMs": 23,
+      "exitCode": 0,
+      "hookEvent": "PreToolUse",
+      "hookName": "PreToolUse:Bash",
+      "stderr": "",
+      "stdout": "{\"hookSpecificOutput\": {\"hookEventName\": \"PreToolUse\", \"permissionDecision\": \"defer\"}}\n",
+      "toolUseID": "toolu_011xtx7y28TNYy7cnN7GLrJA",
+      "type": "hook_success"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "588795bf-4e16-4397-9908-ee1431e254f2",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:22:01.043Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "c771b94d-2a21-4ef2-8ab5-8badc76af986",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "hookEvent": "PreToolUse",
+      "hookName": "settings",
+      "permissionMode": "default",
+      "toolInput": {
+        "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30"
+      },
+      "toolName": "Bash",
+      "toolUseID": "toolu_011xtx7y28TNYy7cnN7GLrJA",
+      "type": "hook_deferred_tool"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "c771b94d-2a21-4ef2-8ab5-8badc76af986",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:22:01.044Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "dc4adc8a-f982-4342-afbe-426bef96f841",
+    "version": "2.1.274"
+  },
+  {
+    "attachment": {
+      "cliPrefix": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+      "systemPrompt": [
+        "Call at most one tool per message, then wait for its result before calling another."
+      ],
+      "tools": [
+        {
+          "description": "Executes a given bash command and returns its output.\n\nThe working directory persists between commands, but shell state does not. The shell environment is initialized from the user's profile (bash or zsh).\n\nIMPORTANT: Avoid using this tool to run `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or after you have verified that a dedicated tool cannot accomplish your task. Instead, use the appropriate dedicated tool as this will provide a much better experience for the user:\n\n - Read files: Use Read (NOT cat/head/tail)\n - Edit files: Use Edit (NOT sed/awk)\n - Write files: Use Write (NOT echo >/cat <<EOF)\n - Communication: Output text directly (NOT echo/printf)\nWhile the Bash tool can do similar things, it\u2019s better to use the built-in tools as they provide a better user experience and make it easier to review tool calls and give permission.\n\n# Instructions\n - If your command will create new directories or files, first use this tool to run `ls` to verify the parent directory exists and is the correct location.\n - Always quote file paths that contain spaces with double quotes in your command (e.g., cd \"path with spaces/file.txt\")\n - Try to maintain your current working directory throughout the session by using absolute paths and avoiding usage of `cd`. You may use `cd` if the User explicitly requests it. In particular, never prepend `cd <current-directory>` to a `git` command \u2014 `git` already operates on the current working tree, and the compound triggers a permission prompt.\n - You may specify an optional timeout in milliseconds (up to 600000ms / 10 minutes). By default, your command will timeout after 120000ms (2 minutes).\n - For git commands:\n  - Prefer to create a new commit rather than amending an existing commit.\n  - Before running destructive operations (e.g., git reset --hard, git push --force, git checkout --), consider whether there is a safer alternative that achieves the same goal. Only use destructive operations when they are truly the best approach.\n  - Never skip hooks (--no-verify) or bypass signing (--no-gpg-sign, -c commit.gpgsign=false) unless the user has explicitly asked for it. If a hook fails, investigate and fix the underlying issue.\n - Avoid unnecessary `sleep` commands:\n  - Do not sleep between commands that can run immediately \u2014 just run them.\n  - Do not retry failing commands in a sleep loop \u2014 diagnose the root cause.\n  - If you must poll an external process, use a check command (e.g. `gh run view`) rather than sleeping first.\n  - If you must sleep, keep the duration short to avoid blocking the user.\n - When running `find`, search from `.` (or a specific path), not `/` \u2014 scanning the full filesystem can exhaust system resources on large trees.\n - When using `find -regex` with alternation, put the longest alternative first. Example: use `'.*\\.\\(tsx\\|ts\\)'` not `'.*\\.\\(ts\\|tsx\\)'` \u2014 the second form silently skips `.tsx` files.\n\n\n# Committing changes with git\n\nOnly create commits when requested by the user. If unclear, ask first. When the user asks you to create a new git commit, follow these steps carefully:\n\nYou can call multiple tools in a single response. When multiple independent pieces of information are requested and all commands are likely to succeed, run multiple tool calls in parallel for optimal performance. The numbered steps below indicate which commands should be batched in parallel.\n\nGit Safety Protocol:\n- NEVER update the git config\n- NEVER run destructive git commands (push --force, reset --hard, checkout ., restore ., clean -f, branch -D) unless the user explicitly requests these actions. Taking unauthorized destructive actions is unhelpful and can result in lost work, so it's best to ONLY run these commands when given direct instructions \n- NEVER skip hooks (--no-verify, --no-gpg-sign, etc) unless the user explicitly requests it\n- NEVER run force push to main/master, warn the user if they request it\n- CRITICAL: Always create NEW commits rather than amending, unless the user explicitly requests a git amend. When a pre-commit hook fails, the commit did NOT happen \u2014 so --amend would modify the PREVIOUS commit, which may result in destroying work or losing previous changes. Instead, after hook failure, fix the issue, re-stage, and create a NEW commit\n- When staging files, prefer adding specific files by name rather than using \"git add -A\" or \"git add .\", which can accidentally include sensitive files (.env, credentials) or large binaries\n- NEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive\n\n1. Run the following bash commands in parallel, each using the Bash tool:\n  - Run a git status command to see all untracked files. IMPORTANT: Never use the -uall flag as it can cause memory issues on large repos.\n  - Run a git diff command to see both staged and unstaged changes that will be committed.\n  - Run a git log command to see recent commit messages, so that you can follow this repository's commit message style.\n2. Analyze all staged changes (both previously staged and newly added) and draft a commit message:\n  - Summarize the nature of the changes (eg. new feature, enhancement to an existing feature, bug fix, refactoring, test, docs, etc.). Ensure the message accurately reflects the changes and their purpose (i.e. \"add\" means a wholly new feature, \"update\" means an enhancement to an existing feature, \"fix\" means a bug fix, etc.).\n  - Do not commit files that likely contain secrets (.env, credentials.json, etc). Warn the user if they specifically request to commit those files\n  - Draft a concise (1-2 sentences) commit message that focuses on the \"why\" rather than the \"what\"\n  - Ensure it accurately reflects the changes and their purpose\n3. Run the following commands in parallel:\n   - Add relevant untracked files to the staging area.\n   - Create the commit with a message, ending with the attribution lines given in the conversation's system-reminder, when one is present.\n   - Run git status after the commit completes to verify success.\n   Note: git status depends on the commit completing, so run it sequentially after the commit.\n4. If the commit fails due to pre-commit hook: fix the issue and create a NEW commit\n\nImportant notes:\n- NEVER run additional commands to read or explore code, besides git bash commands\n- NEVER use the TaskCreate or Agent tools\n- DO NOT push to the remote repository unless the user explicitly asks you to do so\n- IMPORTANT: Never use git commands with the -i flag (like git rebase -i or git add -i) since they require interactive input which is not supported.\n- IMPORTANT: Do not use --no-edit with git rebase commands, as the --no-edit flag is not a valid option for git rebase.\n- If there are no changes to commit (i.e., no untracked files and no modifications), do not create an empty commit\n- In order to ensure good formatting, ALWAYS pass the commit message via a HEREDOC, a la this example:\n<example>\ngit commit -m \"$(cat <<'EOF'\n   Commit message here.\n   EOF\n   )\"\n</example>\n\n# Creating pull requests\nUse the gh command via the Bash tool for ALL GitHub-related tasks including working with issues, pull requests, checks, and releases. If given a Github URL use the gh command to get the information needed.\n\nIMPORTANT: When the user asks you to create a pull request, follow these steps carefully:\n\n1. Run the following bash commands in parallel using the Bash tool, in order to understand the current state of the branch since it diverged from the main branch:\n   - Run a git status command to see all untracked files (never use -uall flag)\n   - Run a git diff command to see both staged and unstaged changes that will be committed\n   - Check if the current branch tracks a remote branch and is up to date with the remote, so you know if you need to push to the remote\n   - Run a git log command and `git diff [base-branch]...HEAD` to understand the full commit history for the current branch (from the time it diverged from the base branch)\n2. Analyze all changes that will be included in the pull request, making sure to look at all relevant commits (NOT just the latest commit, but ALL commits that will be included in the pull request!!!), and draft a pull request title and summary:\n   - Keep the PR title short (under 70 characters)\n   - Use the description/body for details, not the title\n3. Run the following commands in parallel:\n   - Create new branch if needed\n   - Push to remote with -u flag if needed\n   - Create PR using gh pr create with the format below. Use a HEREDOC to pass the body to ensure correct formatting. End the body with the attribution lines given in the conversation's system-reminder, when one is present.\n<example>\ngh pr create --title \"the pr title\" --body \"$(cat <<'EOF'\n## Summary\n<1-3 bullet points>\n\n## Test plan\n[Bulleted markdown checklist of TODOs for testing the pull request...]\nEOF\n)\"\n</example>\n\nImportant:\n- DO NOT use the TaskCreate or Agent tools\n- Return the PR URL when you're done, so the user can see it\n\n# Other common operations\n- View comments on a Github PR: gh api repos/foo/bar/pulls/123/comments",
+          "name": "Bash",
+          "schema": {
+            "description": "Executes a given bash command and returns its output.\n\nThe working directory persists between commands, but shell state does not. The shell environment is initialized from the user's profile (bash or zsh).\n\nIMPORTANT: Avoid using this tool to run `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or after you have verified that a dedicated tool cannot accomplish your task. Instead, use the appropriate dedicated tool as this will provide a much better experience for the user:\n\n - Read files: Use Read (NOT cat/head/tail)\n - Edit files: Use Edit (NOT sed/awk)\n - Write files: Use Write (NOT echo >/cat <<EOF)\n - Communication: Output text directly (NOT echo/printf)\nWhile the Bash tool can do similar things, it\u2019s better to use the built-in tools as they provide a better user experience and make it easier to review tool calls and give permission.\n\n# Instructions\n - If your command will create new directories or files, first use this tool to run `ls` to verify the parent directory exists and is the correct location.\n - Always quote file paths that contain spaces with double quotes in your command (e.g., cd \"path with spaces/file.txt\")\n - Try to maintain your current working directory throughout the session by using absolute paths and avoiding usage of `cd`. You may use `cd` if the User explicitly requests it. In particular, never prepend `cd <current-directory>` to a `git` command \u2014 `git` already operates on the current working tree, and the compound triggers a permission prompt.\n - You may specify an optional timeout in milliseconds (up to 600000ms / 10 minutes). By default, your command will timeout after 120000ms (2 minutes).\n - For git commands:\n  - Prefer to create a new commit rather than amending an existing commit.\n  - Before running destructive operations (e.g., git reset --hard, git push --force, git checkout --), consider whether there is a safer alternative that achieves the same goal. Only use destructive operations when they are truly the best approach.\n  - Never skip hooks (--no-verify) or bypass signing (--no-gpg-sign, -c commit.gpgsign=false) unless the user has explicitly asked for it. If a hook fails, investigate and fix the underlying issue.\n - Avoid unnecessary `sleep` commands:\n  - Do not sleep between commands that can run immediately \u2014 just run them.\n  - Do not retry failing commands in a sleep loop \u2014 diagnose the root cause.\n  - If you must poll an external process, use a check command (e.g. `gh run view`) rather than sleeping first.\n  - If you must sleep, keep the duration short to avoid blocking the user.\n - When running `find`, search from `.` (or a specific path), not `/` \u2014 scanning the full filesystem can exhaust system resources on large trees.\n - When using `find -regex` with alternation, put the longest alternative first. Example: use `'.*\\.\\(tsx\\|ts\\)'` not `'.*\\.\\(ts\\|tsx\\)'` \u2014 the second form silently skips `.tsx` files.\n\n\n# Committing changes with git\n\nOnly create commits when requested by the user. If unclear, ask first. When the user asks you to create a new git commit, follow these steps carefully:\n\nYou can call multiple tools in a single response. When multiple independent pieces of information are requested and all commands are likely to succeed, run multiple tool calls in parallel for optimal performance. The numbered steps below indicate which commands should be batched in parallel.\n\nGit Safety Protocol:\n- NEVER update the git config\n- NEVER run destructive git commands (push --force, reset --hard, checkout ., restore ., clean -f, branch -D) unless the user explicitly requests these actions. Taking unauthorized destructive actions is unhelpful and can result in lost work, so it's best to ONLY run these commands when given direct instructions \n- NEVER skip hooks (--no-verify, --no-gpg-sign, etc) unless the user explicitly requests it\n- NEVER run force push to main/master, warn the user if they request it\n- CRITICAL: Always create NEW commits rather than amending, unless the user explicitly requests a git amend. When a pre-commit hook fails, the commit did NOT happen \u2014 so --amend would modify the PREVIOUS commit, which may result in destroying work or losing previous changes. Instead, after hook failure, fix the issue, re-stage, and create a NEW commit\n- When staging files, prefer adding specific files by name rather than using \"git add -A\" or \"git add .\", which can accidentally include sensitive files (.env, credentials) or large binaries\n- NEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive\n\n1. Run the following bash commands in parallel, each using the Bash tool:\n  - Run a git status command to see all untracked files. IMPORTANT: Never use the -uall flag as it can cause memory issues on large repos.\n  - Run a git diff command to see both staged and unstaged changes that will be committed.\n  - Run a git log command to see recent commit messages, so that you can follow this repository's commit message style.\n2. Analyze all staged changes (both previously staged and newly added) and draft a commit message:\n  - Summarize the nature of the changes (eg. new feature, enhancement to an existing feature, bug fix, refactoring, test, docs, etc.). Ensure the message accurately reflects the changes and their purpose (i.e. \"add\" means a wholly new feature, \"update\" means an enhancement to an existing feature, \"fix\" means a bug fix, etc.).\n  - Do not commit files that likely contain secrets (.env, credentials.json, etc). Warn the user if they specifically request to commit those files\n  - Draft a concise (1-2 sentences) commit message that focuses on the \"why\" rather than the \"what\"\n  - Ensure it accurately reflects the changes and their purpose\n3. Run the following commands in parallel:\n   - Add relevant untracked files to the staging area.\n   - Create the commit with a message, ending with the attribution lines given in the conversation's system-reminder, when one is present.\n   - Run git status after the commit completes to verify success.\n   Note: git status depends on the commit completing, so run it sequentially after the commit.\n4. If the commit fails due to pre-commit hook: fix the issue and create a NEW commit\n\nImportant notes:\n- NEVER run additional commands to read or explore code, besides git bash commands\n- NEVER use the TaskCreate or Agent tools\n- DO NOT push to the remote repository unless the user explicitly asks you to do so\n- IMPORTANT: Never use git commands with the -i flag (like git rebase -i or git add -i) since they require interactive input which is not supported.\n- IMPORTANT: Do not use --no-edit with git rebase commands, as the --no-edit flag is not a valid option for git rebase.\n- If there are no changes to commit (i.e., no untracked files and no modifications), do not create an empty commit\n- In order to ensure good formatting, ALWAYS pass the commit message via a HEREDOC, a la this example:\n<example>\ngit commit -m \"$(cat <<'EOF'\n   Commit message here.\n   EOF\n   )\"\n</example>\n\n# Creating pull requests\nUse the gh command via the Bash tool for ALL GitHub-related tasks including working with issues, pull requests, checks, and releases. If given a Github URL use the gh command to get the information needed.\n\nIMPORTANT: When the user asks you to create a pull request, follow these steps carefully:\n\n1. Run the following bash commands in parallel using the Bash tool, in order to understand the current state of the branch since it diverged from the main branch:\n   - Run a git status command to see all untracked files (never use -uall flag)\n   - Run a git diff command to see both staged and unstaged changes that will be committed\n   - Check if the current branch tracks a remote branch and is up to date with the remote, so you know if you need to push to the remote\n   - Run a git log command and `git diff [base-branch]...HEAD` to understand the full commit history for the current branch (from the time it diverged from the base branch)\n2. Analyze all changes that will be included in the pull request, making sure to look at all relevant commits (NOT just the latest commit, but ALL commits that will be included in the pull request!!!), and draft a pull request title and summary:\n   - Keep the PR title short (under 70 characters)\n   - Use the description/body for details, not the title\n3. Run the following commands in parallel:\n   - Create new branch if needed\n   - Push to remote with -u flag if needed\n   - Create PR using gh pr create with the format below. Use a HEREDOC to pass the body to ensure correct formatting. End the body with the attribution lines given in the conversation's system-reminder, when one is present.\n<example>\ngh pr create --title \"the pr title\" --body \"$(cat <<'EOF'\n## Summary\n<1-3 bullet points>\n\n## Test plan\n[Bulleted markdown checklist of TODOs for testing the pull request...]\nEOF\n)\"\n</example>\n\nImportant:\n- DO NOT use the TaskCreate or Agent tools\n- Return the PR URL when you're done, so the user can see it\n\n# Other common operations\n- View comments on a Github PR: gh api repos/foo/bar/pulls/123/comments",
+            "input_schema": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "additionalProperties": false,
+              "properties": {
+                "command": {
+                  "description": "The command to execute",
+                  "type": "string"
+                },
+                "dangerouslyDisableSandbox": {
+                  "description": "Set this to true to dangerously override sandbox mode and run commands without sandboxing.",
+                  "type": "boolean"
+                },
+                "description": {
+                  "description": "Clear, concise description of what this command does in active voice. Never use words like \"complex\" or \"risk\" in the description - just describe what it does.\n\nSay what the command does in plain words: do not echo the command's text, its flags, or file paths - the user reads this description, often without seeing the command.\n\nFor simple commands (git, npm, standard CLI tools), keep it brief (5-10 words):\n- ls \u2192 \"List files in current directory\"\n- git status \u2192 \"Show working tree status\"\n- npm install \u2192 \"Install package dependencies\"\n\nFor commands that are harder to parse at a glance (piped commands, obscure flags, etc.), add enough context to clarify what it does:\n- find . -name \"*.tmp\" -exec rm {} \\; \u2192 \"Find and delete all .tmp files recursively\"\n- git reset --hard origin/main \u2192 \"Discard all local changes and match remote main\"\n- curl -s url | jq '.data[]' \u2192 \"Fetch JSON from URL and extract data array elements\"",
+                  "type": "string"
+                },
+                "timeout": {
+                  "description": "Optional timeout in milliseconds (max 600000)",
+                  "type": "number"
+                }
+              },
+              "required": [
+                "command"
+              ],
+              "type": "object"
+            },
+            "name": "Bash"
+          }
+        }
+      ],
+      "type": "prompt_snapshot"
+    },
+    "cwd": "/state/work",
+    "entrypoint": "sdk-py",
+    "gitBranch": "HEAD",
+    "isSidechain": false,
+    "parentUuid": "dc4adc8a-f982-4342-afbe-426bef96f841",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "timestamp": "2026-10-05T19:22:01.046Z",
+    "type": "attachment",
+    "userType": "external",
+    "uuid": "cad0c9ca-539f-4876-aa17-58d8a0d6e53a",
+    "version": "2.1.274"
+  },
+  {
+    "lastPrompt": "Call Bash exactly once with this literal command: ```sh echo BASH_ONCE_MARKER > /state/work/marker.txt; sleep 30 ``` Do not call any other tool or change the command. After its result, reply with exac\u2026",
+    "leafUuid": "cad0c9ca-539f-4876-aa17-58d8a0d6e53a",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "type": "last-prompt"
+  },
+  {
+    "atis": "",
+    "sessionId": "fc5cc845-889d-48ce-8e29-955a4f04f982",
+    "type": "atis-latch"
+  }
+]

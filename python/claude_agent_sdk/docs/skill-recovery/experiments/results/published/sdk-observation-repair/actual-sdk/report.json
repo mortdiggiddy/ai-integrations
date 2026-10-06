@@ -1,0 +1,57 @@
+{
+  "after_teardown": {
+    "attempt": "7cf9a7f605fa4599b7fcc100b07abe5f",
+    "host_receipt": "{\"removal_verified\": true, \"resource\": \"a1026dfa2a0c6debf67068c151350de1d2da86f0ae085cdf494115e10cb0fdc0\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}",
+    "name": "sdk-host-7cf9a7f605fa4599b7fcc100b07abe5f",
+    "observations": "{\"after_connect\": {\"complete\": true, \"enumerated_pids\": [1, 8], \"enumeration_completed\": true, \"errors\": [], \"processes\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22811175\", \"state\": \"R\"}, {\"comm\": \"claude\", \"pid\": 8, \"start\": \"22811257\", \"state\": \"R\"}], \"version\": 1}, \"after_disconnect\": {\"complete\": true, \"enumerated_pids\": [1], \"enumeration_completed\": true, \"errors\": [], \"processes\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22811175\", \"state\": \"R\"}], \"version\": 1}, \"before_connect\": {\"complete\": true, \"enumerated_pids\": [1], \"enumeration_completed\": true, \"errors\": [], \"processes\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22811175\", \"state\": \"R\"}], \"version\": 1}, \"connected\": true, \"interrupt_acknowledged\": true, \"prompt_submission_started\": false, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stage\": \"finished\", \"stop_requested\": true}",
+    "removed": 1,
+    "resource": "a1026dfa2a0c6debf67068c151350de1d2da86f0ae085cdf494115e10cb0fdc0",
+    "runner": "a80fbb2273d848fc816ae71f4279bd22",
+    "session": "075e5d78-0655-47fc-a9ea-b2c42ef41c9d",
+    "singleton": 1,
+    "stopped": 1,
+    "terminated": 1
+  },
+  "before_teardown": {
+    "attempt": "7cf9a7f605fa4599b7fcc100b07abe5f",
+    "host_receipt": null,
+    "name": "sdk-host-7cf9a7f605fa4599b7fcc100b07abe5f",
+    "observations": "{\"after_connect\": {\"complete\": true, \"enumerated_pids\": [1, 8], \"enumeration_completed\": true, \"errors\": [], \"processes\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22811175\", \"state\": \"R\"}, {\"comm\": \"claude\", \"pid\": 8, \"start\": \"22811257\", \"state\": \"R\"}], \"version\": 1}, \"after_disconnect\": {\"complete\": true, \"enumerated_pids\": [1], \"enumeration_completed\": true, \"errors\": [], \"processes\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22811175\", \"state\": \"R\"}], \"version\": 1}, \"before_connect\": {\"complete\": true, \"enumerated_pids\": [1], \"enumeration_completed\": true, \"errors\": [], \"processes\": [{\"comm\": \"python3.13\", \"pid\": 1, \"start\": \"22811175\", \"state\": \"R\"}], \"version\": 1}, \"connected\": true, \"interrupt_acknowledged\": true, \"prompt_submission_started\": false, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stage\": \"finished\", \"stop_requested\": true}",
+    "removed": 0,
+    "resource": "a1026dfa2a0c6debf67068c151350de1d2da86f0ae085cdf494115e10cb0fdc0",
+    "runner": "a80fbb2273d848fc816ae71f4279bd22",
+    "session": "075e5d78-0655-47fc-a9ea-b2c42ef41c9d",
+    "singleton": 1,
+    "stopped": 1,
+    "terminated": 0
+  },
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "fresh_runner_before_cleanup": "Fresh runner has no current host grant",
+  "graceful_engine_shutdown_proved": false,
+  "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "inspect_only": false,
+  "model_calls": 0,
+  "network": "none",
+  "process_observation_unresolved": [],
+  "process_observations_valid": true,
+  "prompt_calls": 0,
+  "recovery_proved": false,
+  "replacement_after_cleanup": true,
+  "replacement_before_cleanup": "Prior host termination and teardown are unresolved",
+  "sdk_control_completed": true,
+  "sdk_process_absence_before_host_teardown": true,
+  "sdk_processes_observed": [
+    {
+      "comm": "claude",
+      "pid": 8,
+      "start": "22811257",
+      "state": "R"
+    }
+  ],
+  "source_sha256": {
+    "host_session.py": "197433b80ea6e8e2d548a72c5e8efd13ca53c8758e53479e7908b10866dd52bd",
+    "host_session_offline.py": "8521c2b646f9f6ead6a95cf6a1d6432463ce5d724a45cffd3921c0ec108ae2a1",
+    "sdk_shutdown_probe.py": "b5a916f9578e7d4e329f7700f34e19e92d8b4f2c30070ccd56056051d7c3fea7"
+  },
+  "stale_observation": "Stale or absent host ownership"
+}

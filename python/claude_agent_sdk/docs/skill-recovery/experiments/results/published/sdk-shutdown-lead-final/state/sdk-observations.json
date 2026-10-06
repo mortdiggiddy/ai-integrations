@@ -1,0 +1,39 @@
+{
+  "after_connect": [
+    {
+      "comm": "python3.13",
+      "pid": 1,
+      "start": "22511950",
+      "state": "R"
+    },
+    {
+      "comm": "claude",
+      "pid": 9,
+      "start": "22512153",
+      "state": "R"
+    }
+  ],
+  "after_disconnect": [
+    {
+      "comm": "python3.13",
+      "pid": 1,
+      "start": "22511950",
+      "state": "R"
+    }
+  ],
+  "before_connect": [
+    {
+      "comm": "python3.13",
+      "pid": 1,
+      "start": "22511950",
+      "state": "R"
+    }
+  ],
+  "connected": true,
+  "interrupt_acknowledged": true,
+  "prompt_submission_started": false,
+  "sdk_closed": true,
+  "shutdown_unresolved": false,
+  "stage": "finished",
+  "stop_requested": true
+}

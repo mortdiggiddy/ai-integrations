@@ -1,0 +1,44 @@
+{
+  "accepted": {
+    "key": {
+      "project_key": "-state-work",
+      "session_id": "e83c3b9d-a2a4-445a-96ba-4d61363e460e"
+    },
+    "pending": {
+      "id": "toolu_01DJu2fHo3hop4VaWotJLd1k",
+      "input": {
+        "content": "WRITE_ONCE_MARKER\n",
+        "file_path": "/state/work/marker.txt"
+      },
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "e83c3b9d-a2a4-445a-96ba-4d61363e460e"
+      },
+      "name": "Write",
+      "transcript_uuid": "cafe68b8-2a76-4770-a7d0-8667c4bf0e7b"
+    },
+    "segment": {
+      "checkpoint": "2dcee6db-95e1-407b-8034-1cd8e7b12ab3",
+      "cost_usd": 0.002497,
+      "deferred": {
+        "id": "toolu_01DJu2fHo3hop4VaWotJLd1k",
+        "input": {
+          "content": "WRITE_ONCE_MARKER\n",
+          "file_path": "/state/work/marker.txt"
+        },
+        "name": "Write"
+      },
+      "error": null,
+      "is_error": false,
+      "result": null,
+      "session_id": "e83c3b9d-a2a4-445a-96ba-4d61363e460e"
+    },
+    "transcript_sha256": "968003e98871dee0655f5168d29ee80850d061a4cdb5e053a8d9f6c6252ae410"
+  },
+  "outcome": {
+    "content": "WRITE_ONCE_RECORDED_OK",
+    "is_error": false,
+    "tool_use_id": "toolu_01DJu2fHo3hop4VaWotJLd1k"
+  },
+  "stage": "effect_committed"
+}

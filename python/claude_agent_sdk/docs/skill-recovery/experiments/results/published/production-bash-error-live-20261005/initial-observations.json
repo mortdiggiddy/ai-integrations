@@ -1,0 +1,381 @@
+{
+  "after": {
+    "complete": true,
+    "enumerated_pids": [
+      1
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "30989812",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "before": {
+    "complete": true,
+    "enumerated_pids": [
+      1
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "30989812",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "billing_verified": false,
+  "callbacks": [],
+  "controller": {
+    "close_error": null,
+    "interrupt_acknowledged": false,
+    "interrupt_error": null,
+    "prompt_submission_started": true,
+    "sdk_closed": true,
+    "shutdown_unresolved": false,
+    "stop_requested": false,
+    "terminal_received": true
+  },
+  "host": {
+    "attempt": "ad96b52b232044069cd59f8310140b14",
+    "host_receipt": null,
+    "name": "sdk-host-ad96b52b232044069cd59f8310140b14",
+    "observations": "{\"close_error\": null, \"interrupt_acknowledged\": false, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"agents\": [\"claude\", \"Explore\", \"general-purpose\", \"Plan\", \"statusline-setup\"], \"analytics_disabled\": true, \"apiKeySource\": \"none\", \"capabilities\": [\"interrupt_receipt_v1\", \"interrupt_cancel_queued_v1\", \"msg_lifecycle_v1\"], \"claude_code_version\": \"2.1.274\", \"cwd\": \"/state/work\", \"fast_mode_disabled_reason\": \"sdk_opt_in_required\", \"fast_mode_state\": \"off\", \"mcp_servers\": [{\"name\": \"durable\", \"source\": \"sdk\", \"status\": \"connected\"}], \"memory_paths\": {\"auto\": \"/home/proof/.claude/projects/-state-work/memory/\"}, \"messaging_socket_path\": \"/tmp/cc-socks/15.sock\", \"model\": \"claude-haiku-4-5-20251001\", \"output_style\": \"default\", \"permissionMode\": \"default\", \"plugins\": [], \"product_feedback_disabled\": false, \"session_id\": \"c583c4ba-2293-4969-94e7-3e1d882677d6\", \"skills\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"schedule\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\"], \"slash_commands\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"schedule\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\", \"agents\", \"auto-mode-setup\", \"autocompact\", \"clear\", \"color\", \"compact\", \"config\", \"output-style\", \"context\", \"effort\", \"fast\", \"heapdump\", \"init\", \"mcp\", \"model\", \"__remote-workflow\", \"workflow-launch-exec\", \"reload-plugins\", \"reload-skills\", \"rename\", \"security-review\", \"usage-credits\", \"extra-usage\", \"usage\", \"insights\", \"recap\", \"goal\", \"list-agents\", \"team-onboarding\"], \"subtype\": \"init\", \"terminal_slash_commands\": [\"doctor\", \"color\", \"reload-plugins\"], \"tools\": [\"Bash\"], \"type\": \"system\", \"uuid\": \"a1e42dc8-ba57-4173-94e1-1571385f919a\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"data\": {\"estimated_tokens\": 50, \"estimated_tokens_delta\": 50, \"session_id\": \"c583c4ba-2293-4969-94e7-3e1d882677d6\", \"subtype\": \"thinking_tokens\", \"type\": \"system\", \"uuid\": \"c7a6213d-429e-40ae-bbff-bf2164dde0dc\"}, \"subtype\": \"thinking_tokens\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"data\": {\"estimated_tokens\": 158, \"estimated_tokens_delta\": 108, \"session_id\": \"c583c4ba-2293-4969-94e7-3e1d882677d6\", \"subtype\": \"thinking_tokens\", \"type\": \"system\", \"uuid\": \"ba400bb1-39a7-4bde-bef6-1482dfedc0f3\"}, \"subtype\": \"thinking_tokens\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"content\": [{\"signature\": \"EvEECtABCBIYAipAYu5K0S4BE6jiicjBHszwVEOJRSZ7yHElHLjQRo5RzNz54Wnun4Oq2q4elOCrrxN7BSMwNDnSNMCQnc8ZTwHpTzIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYmMxMjQ4YzMtMzBhOS00MDQ4LTg1NGQtNDZkNWE3YTY2ZjA3chB9oY7uhvxijGquhYYIC/gSiAEBmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAHKjZHWBrABAhIMQ8p5NXNRU4Lo/KdBGgw7U17GWrGsfF8woJciMJVy6TdgqAGUnqmR+n35kwPNWhIHH3Q3jl/FiZG1vChbTLgQPtCse+MxywxF5aQEiCrNAp+L4HCOq5QKz6ssM+WluroBFhdnGoqCx7mki/XCIriJ+/LF2e7A0UWskv4y18gFfo2wVpeyzkZRvgunbaw25wixAtxCFdRsOvJ+tcSGT3iMrdhAhPzvqK/kPAIRTpKYjiNaW11mpXXZuDindIBRbzz+GRqFEmpleNn0/5tGROw7CPMkZ/ne8mdLLGRDY7QaIV8Wb5XFUYliGQm330NzAv5+EVng1OF+JVlSSpIO8osR9smBF5ooa5KGWcnVtLXAEn/QnZ0eQ1smTEYvASnxhjjnTI8kkKNkwuT5lsSRaKsgSIHT0EXKWTOIjFoESaxTv/5NnMR9ecCGPgav16I1FseQUoWmIvbLSSQPHM25fI+iXoSgWWVt3SX6waKNeDUqQM0fFpbAWNJXTjvK/TVB1vuP8R87gZZXO6CVGt/lTNlq0ZdiBApbSbD26jDFLhgB\", \"thinking\": \"\"}], \"error\": null, \"message_id\": \"msg_011Cfk562iaLEsZopknMVpVf\", \"model\": \"claude-haiku-4-5-20251001\", \"parent_tool_use_id\": null, \"session_id\": \"c583c4ba-2293-4969-94e7-3e1d882677d6\", \"stop_reason\": null, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 4055, \"output_tokens\": 3, \"service_tier\": \"standard\"}, \"uuid\": \"ef38fdcc-e1d3-4cd8-913b-9289f5cd45d3\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"content\": [{\"id\": \"toolu_013vZh1pgTbu1az5mdaQhqgM\", \"input\": {\"command\": \"echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7\"}, \"name\": \"Bash\"}], \"error\": null, \"message_id\": \"msg_011Cfk562iaLEsZopknMVpVf\", \"model\": \"claude-haiku-4-5-20251001\", \"parent_tool_use_id\": null, \"session_id\": \"c583c4ba-2293-4969-94e7-3e1d882677d6\", \"stop_reason\": null, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 4055, \"output_tokens\": 3, \"service_tier\": \"standard\"}, \"uuid\": \"d893646e-deae-4e8a-b2e5-1273ba031623\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"rate_limit_info\": {\"overage_disabled_reason\": null, \"overage_resets_at\": 1793491200, \"overage_status\": \"allowed\", \"rate_limit_type\": \"overage\", \"raw\": {\"isUsingOverage\": false, \"overageInUse\": true, \"overageResetsAt\": 1793491200, \"overageStatus\": \"allowed\", \"rateLimitType\": \"overage\", \"resetsAt\": 1793491200, \"status\": \"allowed\"}, \"resets_at\": 1793491200, \"status\": \"allowed\", \"utilization\": null}, \"session_id\": \"c583c4ba-2293-4969-94e7-3e1d882677d6\", \"uuid\": \"438e47e0-f489-4cac-bab5-9a5d42c88144\"}, \"type\": \"RateLimitEvent\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": {\"id\": \"toolu_013vZh1pgTbu1az5mdaQhqgM\", \"input\": {\"command\": \"echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7\"}, \"name\": \"Bash\"}, \"duration_api_ms\": 1683, \"duration_ms\": 1736, \"errors\": null, \"is_error\": false, \"model_usage\": {\"claude-haiku-4-5-20251001\": {\"cacheCreationInputTokens\": 0, \"cacheReadInputTokens\": 0, \"canonicalModel\": \"claude-haiku-4-5\", \"contextWindow\": 200000, \"costBasis\": \"list\", \"costUSD\": 0.004934999999999999, \"inputTokens\": 4055, \"maxOutputTokens\": 32000, \"outputTokens\": 176, \"provider\": \"firstParty\", \"thinkingTokens\": 83, \"webSearchRequests\": 0}}, \"num_turns\": 1, \"origin\": null, \"permission_denials\": [], \"result\": \"\", \"session_id\": \"c583c4ba-2293-4969-94e7-3e1d882677d6\", \"stop_reason\": \"tool_deferred\", \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": \"tool_deferred\", \"total_cost_usd\": 0.004934999999999999, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 4055, \"iterations\": [], \"output_tokens\": 176, \"output_tokens_details\": {\"thinking_tokens\": 83}, \"server_tool_use\": {\"web_fetch_requests\": 0, \"web_search_requests\": 0}, \"service_tier\": \"standard\", \"speed\": \"standard\"}, \"uuid\": \"8b3aeaa6-ebf4-4fd7-a641-e5da933e8323\"}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": false, \"terminal_received\": true}",
+    "removed": 0,
+    "resource": "8a4ac48600f6b11c6e12397db62bef742c668576234a9a24bab83d9c6d44ce90",
+    "runner": "0f79a1efc1154489910b4b9cfdaa1fb2",
+    "session": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+    "singleton": 1,
+    "stopped": 0,
+    "terminated": 0
+  },
+  "messages": [
+    {
+      "data": {
+        "agents": [
+          "claude",
+          "Explore",
+          "general-purpose",
+          "Plan",
+          "statusline-setup"
+        ],
+        "analytics_disabled": true,
+        "apiKeySource": "none",
+        "capabilities": [
+          "interrupt_receipt_v1",
+          "interrupt_cancel_queued_v1",
+          "msg_lifecycle_v1"
+        ],
+        "claude_code_version": "2.1.274",
+        "cwd": "/state/work",
+        "fast_mode_disabled_reason": "sdk_opt_in_required",
+        "fast_mode_state": "off",
+        "mcp_servers": [
+          {
+            "name": "durable",
+            "source": "sdk",
+            "status": "connected"
+          }
+        ],
+        "memory_paths": {
+          "auto": "/home/proof/.claude/projects/-state-work/memory/"
+        },
+        "messaging_socket_path": "/tmp/cc-socks/15.sock",
+        "model": "claude-haiku-4-5-20251001",
+        "output_style": "default",
+        "permissionMode": "default",
+        "plugins": [],
+        "product_feedback_disabled": false,
+        "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+        "skills": [
+          "deep-research",
+          "dataviz",
+          "update-config",
+          "verify",
+          "debug",
+          "code-review",
+          "simplify",
+          "batch",
+          "fewer-permission-prompts",
+          "doctor",
+          "loop",
+          "schedule",
+          "claude-api",
+          "workflow-authoring",
+          "run",
+          "run-skill-generator"
+        ],
+        "slash_commands": [
+          "deep-research",
+          "dataviz",
+          "update-config",
+          "verify",
+          "debug",
+          "code-review",
+          "simplify",
+          "batch",
+          "fewer-permission-prompts",
+          "doctor",
+          "loop",
+          "schedule",
+          "claude-api",
+          "workflow-authoring",
+          "run",
+          "run-skill-generator",
+          "agents",
+          "auto-mode-setup",
+          "autocompact",
+          "clear",
+          "color",
+          "compact",
+          "config",
+          "output-style",
+          "context",
+          "effort",
+          "fast",
+          "heapdump",
+          "init",
+          "mcp",
+          "model",
+          "__remote-workflow",
+          "workflow-launch-exec",
+          "reload-plugins",
+          "reload-skills",
+          "rename",
+          "security-review",
+          "usage-credits",
+          "extra-usage",
+          "usage",
+          "insights",
+          "recap",
+          "goal",
+          "list-agents",
+          "team-onboarding"
+        ],
+        "subtype": "init",
+        "terminal_slash_commands": [
+          "doctor",
+          "color",
+          "reload-plugins"
+        ],
+        "tools": [
+          "Bash"
+        ],
+        "type": "system",
+        "uuid": "a1e42dc8-ba57-4173-94e1-1571385f919a"
+      },
+      "subtype": "init"
+    },
+    {
+      "data": {
+        "estimated_tokens": 50,
+        "estimated_tokens_delta": 50,
+        "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+        "subtype": "thinking_tokens",
+        "type": "system",
+        "uuid": "c7a6213d-429e-40ae-bbff-bf2164dde0dc"
+      },
+      "subtype": "thinking_tokens"
+    },
+    {
+      "data": {
+        "estimated_tokens": 158,
+        "estimated_tokens_delta": 108,
+        "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+        "subtype": "thinking_tokens",
+        "type": "system",
+        "uuid": "ba400bb1-39a7-4bde-bef6-1482dfedc0f3"
+      },
+      "subtype": "thinking_tokens"
+    },
+    {
+      "content": [
+        {
+          "signature": "EvEECtABCBIYAipAYu5K0S4BE6jiicjBHszwVEOJRSZ7yHElHLjQRo5RzNz54Wnun4Oq2q4elOCrrxN7BSMwNDnSNMCQnc8ZTwHpTzIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYmMxMjQ4YzMtMzBhOS00MDQ4LTg1NGQtNDZkNWE3YTY2ZjA3chB9oY7uhvxijGquhYYIC/gSiAEBmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAHKjZHWBrABAhIMQ8p5NXNRU4Lo/KdBGgw7U17GWrGsfF8woJciMJVy6TdgqAGUnqmR+n35kwPNWhIHH3Q3jl/FiZG1vChbTLgQPtCse+MxywxF5aQEiCrNAp+L4HCOq5QKz6ssM+WluroBFhdnGoqCx7mki/XCIriJ+/LF2e7A0UWskv4y18gFfo2wVpeyzkZRvgunbaw25wixAtxCFdRsOvJ+tcSGT3iMrdhAhPzvqK/kPAIRTpKYjiNaW11mpXXZuDindIBRbzz+GRqFEmpleNn0/5tGROw7CPMkZ/ne8mdLLGRDY7QaIV8Wb5XFUYliGQm330NzAv5+EVng1OF+JVlSSpIO8osR9smBF5ooa5KGWcnVtLXAEn/QnZ0eQ1smTEYvASnxhjjnTI8kkKNkwuT5lsSRaKsgSIHT0EXKWTOIjFoESaxTv/5NnMR9ecCGPgav16I1FseQUoWmIvbLSSQPHM25fI+iXoSgWWVt3SX6waKNeDUqQM0fFpbAWNJXTjvK/TVB1vuP8R87gZZXO6CVGt/lTNlq0ZdiBApbSbD26jDFLhgB",
+          "thinking": ""
+        }
+      ],
+      "error": null,
+      "message_id": "msg_011Cfk562iaLEsZopknMVpVf",
+      "model": "claude-haiku-4-5-20251001",
+      "parent_tool_use_id": null,
+      "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+      "stop_reason": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "not_available",
+        "input_tokens": 4055,
+        "output_tokens": 3,
+        "service_tier": "standard"
+      },
+      "uuid": "ef38fdcc-e1d3-4cd8-913b-9289f5cd45d3"
+    },
+    {
+      "content": [
+        {
+          "id": "toolu_013vZh1pgTbu1az5mdaQhqgM",
+          "input": {
+            "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"
+          },
+          "name": "Bash"
+        }
+      ],
+      "error": null,
+      "message_id": "msg_011Cfk562iaLEsZopknMVpVf",
+      "model": "claude-haiku-4-5-20251001",
+      "parent_tool_use_id": null,
+      "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+      "stop_reason": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "not_available",
+        "input_tokens": 4055,
+        "output_tokens": 3,
+        "service_tier": "standard"
+      },
+      "uuid": "d893646e-deae-4e8a-b2e5-1273ba031623"
+    },
+    {
+      "rate_limit_info": {
+        "overage_disabled_reason": null,
+        "overage_resets_at": 1793491200,
+        "overage_status": "allowed",
+        "rate_limit_type": "overage",
+        "raw": {
+          "isUsingOverage": false,
+          "overageInUse": true,
+          "overageResetsAt": 1793491200,
+          "overageStatus": "allowed",
+          "rateLimitType": "overage",
+          "resetsAt": 1793491200,
+          "status": "allowed"
+        },
+        "resets_at": 1793491200,
+        "status": "allowed",
+        "utilization": null
+      },
+      "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+      "uuid": "438e47e0-f489-4cac-bab5-9a5d42c88144"
+    },
+    {
+      "api_error_status": null,
+      "deferred_tool_use": {
+        "id": "toolu_013vZh1pgTbu1az5mdaQhqgM",
+        "input": {
+          "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"
+        },
+        "name": "Bash"
+      },
+      "duration_api_ms": 1683,
+      "duration_ms": 1736,
+      "errors": null,
+      "is_error": false,
+      "model_usage": {
+        "claude-haiku-4-5-20251001": {
+          "cacheCreationInputTokens": 0,
+          "cacheReadInputTokens": 0,
+          "canonicalModel": "claude-haiku-4-5",
+          "contextWindow": 200000,
+          "costBasis": "list",
+          "costUSD": 0.004934999999999999,
+          "inputTokens": 4055,
+          "maxOutputTokens": 32000,
+          "outputTokens": 176,
+          "provider": "firstParty",
+          "thinkingTokens": 83,
+          "webSearchRequests": 0
+        }
+      },
+      "num_turns": 1,
+      "origin": null,
+      "permission_denials": [],
+      "result": "",
+      "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+      "stop_reason": "tool_deferred",
+      "structured_output": null,
+      "subtype": "success",
+      "terminal_reason": "tool_deferred",
+      "total_cost_usd": 0.004934999999999999,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "not_available",
+        "input_tokens": 4055,
+        "iterations": [],
+        "output_tokens": 176,
+        "output_tokens_details": {
+          "thinking_tokens": 83
+        },
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 0
+        },
+        "service_tier": "standard",
+        "speed": "standard"
+      },
+      "uuid": "8b3aeaa6-ebf4-4fd7-a641-e5da933e8323"
+    }
+  ],
+  "metered_enterprise_usage_accepted": true,
+  "rate_limit_events": [
+    {
+      "kind": "RateLimitEvent",
+      "message": {
+        "rate_limit_info": {
+          "overage_disabled_reason": null,
+          "overage_resets_at": 1793491200,
+          "overage_status": "allowed",
+          "rate_limit_type": "overage",
+          "raw": {
+            "isUsingOverage": false,
+            "overageInUse": true,
+            "overageResetsAt": 1793491200,
+            "overageStatus": "allowed",
+            "rateLimitType": "overage",
+            "resetsAt": 1793491200,
+            "status": "allowed"
+          },
+          "resets_at": 1793491200,
+          "status": "allowed",
+          "utilization": null
+        },
+        "session_id": "c583c4ba-2293-4969-94e7-3e1d882677d6",
+        "uuid": "438e47e0-f489-4cac-bab5-9a5d42c88144"
+      }
+    }
+  ],
+  "transport_starts": [
+    {
+      "recovery_callbacks_before_transport": 0
+    }
+  ],
+  "versions": {
+    "cli": "2.1.274 (Claude Code)",
+    "model": "claude-haiku-4-5-20251001",
+    "sdk": "0.2.162",
+    "sdk_record_files": 36
+  }
+}

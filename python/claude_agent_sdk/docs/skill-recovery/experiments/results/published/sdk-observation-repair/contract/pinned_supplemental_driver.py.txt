@@ -1,0 +1,39 @@
+"""Run read-only supplemental scripts in the existing pinned offline image."""
+import sys,json
+from pathlib import Path
+sys.path.insert(0,str(Path("python/claude_agent_sdk/docs/skill-recovery/experiments").resolve()))
+from host_session import Docker
+from host_session_offline import IMAGE
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("--diagnostic",action="store_true")
+args=parser.parse_args()
+scratch=Path("<supplemental>")
+experiments=Path("python/claude_agent_sdk/docs/skill-recovery/experiments").resolve()
+docker=Docker()
+assert docker.command("image","inspect",IMAGE,"--format","{{.Id}}")==IMAGE
+names=["lifecycle_clock_fixture_diagnostic"] if args.diagnostic else ["classifier_checks","collector_checks","lifecycle_checks","host_predicate_checks"]
+argv=["create","--pull","never","--network","none","--read-only","--cap-drop","ALL","--security-opt","no-new-privileges","--pids-limit","128","--memory","2g","--cpus","2","--tmpfs","/tmp:rw,nosuid,nodev,size=512m","--workdir","/repo"]
+for value in ["UV_NO_SYNC=1","UV_NO_EDITABLE=1","PYTHONDONTWRITEBYTECODE=1","HOME=/tmp/home","CLAUDE_CONFIG_DIR=/tmp/config"]:
+ argv.extend(["-e",value])
+for name in ["host_session.py","host_session_offline.py","sdk_shutdown_probe.py"]:
+ argv.extend(["-v",str(experiments/name)+":/repo/python/claude_agent_sdk/docs/skill-recovery/experiments/"+name+":ro"])
+for name in names:
+ argv.extend(["-v",str(scratch/(name+".py"))+":/checks/"+name+".py:ro"])
+if args.diagnostic:
+ target=["/checks/lifecycle_clock_fixture_diagnostic.py"]
+else:
+ code="import subprocess,sys; names="+repr(names)+"; "+chr(10)+"for name in names:"+chr(10)+" r=subprocess.run([sys.executable,'/checks/'+name+'.py'],text=True,capture_output=True,timeout=10); print(name+': exit='+str(r.returncode)); print(r.stdout,end=''); print(r.stderr,end=''); assert r.returncode==0"
+ target=["-c",code]
+argv.extend(["--entrypoint","/opt/python/bin/python3.13",IMAGE,*target])
+print(json.dumps({"docker_create_argv":argv,"diagnostic":args.diagnostic}),flush=True)
+resource=docker.command(*argv)
+try:
+ docker.command("container","start",resource)
+ exit_code=docker.wait(resource)
+ logs=docker.command("container","logs",resource)
+ print(logs,flush=True)
+ print(json.dumps({"container_exit_code":exit_code,"diagnostic":args.diagnostic}),flush=True)
+ assert exit_code==(1 if args.diagnostic else 0)
+finally:
+ docker.command("container","rm","-f",resource)

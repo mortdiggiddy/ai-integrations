@@ -1,0 +1,26 @@
+{
+  "docs/skill-recovery/experiments/host_session.py": {
+    "digest": "197433b80ea6e8e2d548a72c5e8efd13ca53c8758e53479e7908b10866dd52bd",
+    "unchanged_from_fresh_copy": true
+  },
+  "docs/skill-recovery/experiments/host_session_offline.py": {
+    "digest": "dec879b93f0b19c6e610acb7afcbb90711d6475ecc878d00b4909711396c6d81",
+    "unchanged_from_fresh_copy": true
+  },
+  "docs/skill-recovery/experiments/sdk_shutdown_probe.py": {
+    "digest": "66fab34d90340df2233eab71a55def8a613138c6b06d3885924824362723164d",
+    "unchanged_from_fresh_copy": true
+  },
+  "src/temporalio/claude_agent_sdk/_runner.py": {
+    "digest": "9f06d775060dfd6a6b73fc7278b13531a8608a558fad2b9822aae9aff06bbc89",
+    "unchanged_from_fresh_copy": true
+  },
+  "src/temporalio/claude_agent_sdk/_session_control.py": {
+    "digest": "4e671058be6d1638eecfccaf65fdab92feef2753f4f1ca3abd8cfd29f5bac8ea",
+    "unchanged_from_fresh_copy": true
+  },
+  "tests/session_control/test_lifecycle.py": {
+    "digest": "f23eef4733c5bdbca2e34c68d9eecebd4e20bc86b92e5d81fd3bb19d69248f9c",
+    "unchanged_from_fresh_copy": true
+  }
+}

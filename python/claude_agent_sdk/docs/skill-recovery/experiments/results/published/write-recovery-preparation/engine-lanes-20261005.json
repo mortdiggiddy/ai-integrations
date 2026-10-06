@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-05",
+  "scope": "Minimum and selected newest preinstalled engine for the bounded recovery harness",
+  "minimum": {
+    "sdk_wheel": "0.2.153",
+    "command": "claude -v",
+    "stdout": "2.1.273 (Claude Code)",
+    "capture": "minimum-cli-version-20261005.log"
+  },
+  "selected_newest": {
+    "sdk_wheel": "0.2.162",
+    "command": "claude -v",
+    "stdout": "2.1.274 (Claude Code)",
+    "capture": "selected-newest-cli-version-20261005.log",
+    "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+    "selection": "Existing approved recovery image selected as the upper installed lane under the instruction to complete the harness using existing artifacts"
+  },
+  "registry_latest_verified": false,
+  "new_cooldown_exception": false,
+  "model_calls": 0,
+  "network": "none",
+  "limits": "Version observation only; no minimum lane model compatibility, Mods promotion or general newest dependency qualification is claimed"
+}

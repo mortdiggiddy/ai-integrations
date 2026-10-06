@@ -1,0 +1,17 @@
+{
+  "test": "offline-request-loss-after-admission",
+  "segment": "segment-1",
+  "phase": "synthetic-phase",
+  "model": "claude-haiku-4-5-20251001",
+  "caps": {
+    "cost_microusd": 10000,
+    "input_tokens": 1000,
+    "output_tokens": 1000,
+    "total_tokens": 2000
+  },
+  "envelope": {
+    "input": 12,
+    "output": 64,
+    "cost_microusd": 332
+  }
+}

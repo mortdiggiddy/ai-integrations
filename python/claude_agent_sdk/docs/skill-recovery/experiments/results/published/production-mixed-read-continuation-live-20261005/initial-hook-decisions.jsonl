@@ -1,0 +1,5 @@
+{"id": "toolu_01P2zQyx437QfEs3WFQVA7Ps", "name": "Read", "event": "PreToolUse", "decision": "none", "reason": null}
+{"id": "toolu_01P2zQyx437QfEs3WFQVA7Ps", "name": "Read", "event": "PostToolUse", "decision": "none", "reason": null}
+{"id": "toolu_01GTQfAPk2Lvx9cs5Qx1oYRu", "name": "Write", "event": "PreToolUse", "decision": "defer", "reason": null}
+{"id": "toolu_01DTuoykcTMjomMDHKZfr1Tx", "name": "Write", "event": "PreToolUse", "decision": "deny", "reason": "Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result."}
+{"id": "toolu_01MJhP6GQa23FJghQCU3aGpi", "name": "Read", "event": "PreToolUse", "decision": "deny", "reason": "Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result."}

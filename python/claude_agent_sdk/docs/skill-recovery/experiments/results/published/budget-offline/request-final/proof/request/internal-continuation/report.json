@@ -1,0 +1,12 @@
+{
+  "name": "internal-continuation",
+  "status": "passed",
+  "synthetic_only": true,
+  "sdk_error": null,
+  "stream_events": 19,
+  "admissions": 2,
+  "provider_receipts": 2,
+  "accepted_provider_requests": 2,
+  "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+  "elapsed_seconds": 0.9742274550080765
+}

@@ -1,0 +1,50 @@
+........................................................................ [ 44%]
+.................................F                                       [ 65%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[missing_after_disconnect]F [ 66%]
+                                                                         [ 66%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[truncated_json]F [ 66%]
+                                                                         [ 66%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[read_error]F [ 67%]
+                                                                         [ 67%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[top_level_list]F [ 67%]
+                                                                         [ 67%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[enumeration_false]F [ 68%]
+                                                                         [ 68%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[enumeration_missing]F [ 69%]
+                                                                         [ 69%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[complete_false]F [ 69%]
+                                                                         [ 69%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[complete_missing]F [ 70%]
+                                                                         [ 70%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[errors_missing]F [ 70%]
+                                                                         [ 70%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[errors_nonempty]F [ 71%]
+                                                                         [ 71%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[pids_missing]F [ 72%]
+                                                                         [ 72%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[pids_string]F [ 72%]
+                                                                         [ 72%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[pid_zero]F [ 73%]
+                                                                         [ 73%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[pid_negative]F [ 74%]
+                                                                         [ 74%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[pid_float]F [ 74%]
+                                                                         [ 74%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[pid_bool]F [ 75%]
+                                                                         [ 75%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[pid_duplicate]F [ 75%]
+                                                                         [ 75%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[row_duplicate]F [ 76%]
+                                                                         [ 76%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[row_missing]F [ 77%]
+                                                                         [ 77%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[row_extra]F [ 77%]
+                                                                         [ 77%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[rows_missing]F [ 78%]
+                                                                         [ 78%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[rows_string]F [ 79%]
+                                                                         [ 79%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[version_missing]F [ 79%]
+                                                                         [ 79%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[version_wrong]F [ 80%]
+                                                                         [ 80%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[version_float]F [ 80%]
+                                                                         [ 80%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[start_empty]F [ 81%]
+                                                                         [ 81%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[start_zero]F [ 82%]
+                                                                         [ 82%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[start_negative]F [ 82%]
+                                                                         [ 82%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[start_space]F [ 83%]
+                                                                         [ 83%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[start_unicode]F [ 83%]
+                                                                         [ 83%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[start_float]F [ 84%]
+                                                                         [ 84%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[start_int]F [ 85%]
+                                                                         [ 85%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[start_missing]F [ 85%]
+                                                                         [ 85%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[state_missing]F [ 86%]
+                                                                         [ 86%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[state_unknown]F [ 87%]
+                                                                         [ 87%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[comm_missing]F [ 87%]
+                                                                         [ 87%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[comm_whitespace]F [ 88%]
+                                                                         [ 88%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[parent_survives]F [ 88%]
+                                                                         [ 88%]test_shutdown_probe.py:262 test_fresh_adversarial_host_probe[descendant_survives]F [ 89%]
+
+Traceback (most recent call last):
+  File "<isolated-copy>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py", line 304, in <module>
+    host_probe()
+    ~~~~~~~~~~^^
+  File "<isolated-copy>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py", line 233, in host_probe
+    raise RuntimeError(
+        "Offline child failed or never reached the lifecycle barrier"
+    )
+RuntimeError: Offline child failed or never reached the lifecycle barrier

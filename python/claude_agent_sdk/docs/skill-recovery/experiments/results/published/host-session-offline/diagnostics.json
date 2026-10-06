@@ -1,0 +1,45 @@
+{
+  "evidence_kind": "preserved_fixture_and_tooling_diagnostics",
+  "attempts": [
+    {
+      "kind": "spawn_import_overlay",
+      "passed": 37,
+      "failed": 1,
+      "duration_seconds": 13.06,
+      "cause": "Spawned test module imported installed plugin rather than source overlay.",
+      "correction": "Pure host contender moved to host_session; it imports no SDK.",
+      "cleanup": "failed container removed"
+    },
+    {
+      "kind": "relocated_test_path",
+      "collection_errors": 1,
+      "duration_seconds": 0.76,
+      "cause": "Fixed parents[2] failed for /checks test mount.",
+      "correction": "Tests locate repository module when available; isolated driver supplies mounted module.",
+      "cleanup": "failed container removed"
+    },
+    {
+      "kind": "terminal_expectation",
+      "passed": 38,
+      "failed": 1,
+      "duration_seconds": 2.85,
+      "cause": "Failed interruption can have no terminal message; fixture incorrectly required one.",
+      "correction": "Assert complete observed message retention; absent terminal retains shutdown uncertainty and host fence.",
+      "cleanup": "failed container removed"
+    },
+    {
+      "kind": "typecheck_source_resolution",
+      "errors": 10,
+      "cause": "Implicit imports resolved installed runner; fixture used __wrapped__ directly and optional gate without narrowing.",
+      "correction": "Explicitly check source runner/controller, getattr fixture unwrap, typed exception import and optional gate assertion.",
+      "result": "final five-file mypy passes"
+    },
+    {
+      "kind": "format_and_import_checks",
+      "result": "final check/import order/format pass"
+    }
+  ],
+  "model_calls": 0,
+  "engine_launches": 0,
+  "provider_spend_usd": 0
+}

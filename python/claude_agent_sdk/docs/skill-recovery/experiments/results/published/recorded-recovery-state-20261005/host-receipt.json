@@ -1,0 +1,13 @@
+{
+  "singleton": 1,
+  "session": "recorded-recovery-state",
+  "attempt": "2e88eaac76294da6b1d52210a3f2c0d4",
+  "name": "sdk-host-2e88eaac76294da6b1d52210a3f2c0d4",
+  "resource": "3c7cc74608f1bbf51f54c84559d2101a3b1b5bb9a21ccac106e5e10659e18e14",
+  "runner": null,
+  "stopped": 1,
+  "observations": null,
+  "terminated": 1,
+  "removed": 1,
+  "host_receipt": "{\"removal_verified\": true, \"resource\": \"3c7cc74608f1bbf51f54c84559d2101a3b1b5bb9a21ccac106e5e10659e18e14\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 0}"
+}

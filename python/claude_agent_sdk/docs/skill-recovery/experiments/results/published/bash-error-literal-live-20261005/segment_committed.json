@@ -1,0 +1,38 @@
+{
+  "accepted": {
+    "key": {
+      "project_key": "-state-work",
+      "session_id": "765db165-88b7-456c-8c42-7ab3c5f6cd07"
+    },
+    "pending": {
+      "id": "toolu_01HzzaXnWSzXNnNfZsQVi66U",
+      "input": {
+        "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"
+      },
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "765db165-88b7-456c-8c42-7ab3c5f6cd07"
+      },
+      "name": "Bash",
+      "transcript_uuid": "3147eacf-5adc-4f92-b993-2346634bf617"
+    },
+    "segment": {
+      "checkpoint": "f9fc222e-670e-4eba-8da7-71a5117c4880",
+      "cost_usd": 0.005135,
+      "deferred": {
+        "id": "toolu_01HzzaXnWSzXNnNfZsQVi66U",
+        "input": {
+          "command": "echo BASH_ONCE_MARKER > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"
+        },
+        "name": "Bash"
+      },
+      "error": null,
+      "is_error": false,
+      "result": null,
+      "session_id": "765db165-88b7-456c-8c42-7ab3c5f6cd07"
+    },
+    "transcript_sha256": "34fe05339e742597813cd7a2948ffda8d2581d2e881d410e72c664d2c3783b62"
+  },
+  "outcome": null,
+  "stage": "segment_committed"
+}

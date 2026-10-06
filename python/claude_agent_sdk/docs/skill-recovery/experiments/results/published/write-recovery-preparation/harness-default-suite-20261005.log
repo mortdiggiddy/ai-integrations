@@ -1,0 +1,41 @@
+uv run pytest -n auto --dist=worksteal -n 4
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>/python/claude_agent_sdk
+configfile: pyproject.toml
+testpaths: tests
+plugins: pretty-1.3.0, anyio-4.15.1, timeout-2.4.0, rerunfailures-16.6.1, xdist-3.8.0, asyncio-0.21.2
+timeout: 60.0s
+timeout method: signal
+timeout func_only: True
+asyncio: mode=Mode.AUTO
+created: 4/4 workers
+4 workers [489 items]
+
+........................................................................ [ 14%]
+.......................................................s................ [ 29%]
+........................................................................ [ 44%]
+........................................................................ [ 58%]
+........................................................................ [ 73%]
+........................................................................ [ 88%]
+...................................................<repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/_pytest/unraisableexception.py:33: RuntimeWarning: coroutine '_WorkflowInstanceImpl._apply_initialize_workflow.<locals>.run_workflow' was never awaited
+  gc.collect()
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+......                [100%]
+=============================== warnings summary ===============================
+tests/test_tool_policy.py: 30 warnings
+  <repo>/python/claude_agent_sdk/tests/test_tool_policy.py:64: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    return ClaudeAgentSdkRunner(
+
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[stop]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[interrupt]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[close]
+tests/session_control/test_host_admission.py::test_controller_stop_fences_fresh_runner[wedged]
+  <repo>/python/claude_agent_sdk/docs/skill-recovery/experiments/host_session.py:490: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    self.runner = (runner_factory or ClaudeAgentSdkRunner)(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Results (184.50s):
+       488 passed
+         1 skipped
+        34 warnings

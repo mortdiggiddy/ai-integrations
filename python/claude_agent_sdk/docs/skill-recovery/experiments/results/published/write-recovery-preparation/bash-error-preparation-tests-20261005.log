@@ -1,0 +1,17 @@
+uv run pytest -n auto --dist=worksteal -n 4 tests/session_control/test_experiment_admission.py
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>/python/claude_agent_sdk
+configfile: pyproject.toml
+plugins: pretty-1.3.0, anyio-4.15.1, timeout-2.4.0, rerunfailures-16.6.1, xdist-3.8.0, asyncio-0.21.2
+timeout: 60.0s
+timeout method: signal
+timeout func_only: True
+asyncio: mode=Mode.AUTO
+created: 4/4 workers
+4 workers [68 items]
+
+.........................................................s..........     [100%]
+Results (2.61s):
+        67 passed
+         1 skipped

@@ -1,0 +1,17 @@
+{
+  "docs/skill-recovery/spec.md": "7bd6d6b09de1add482d8786db0ec468015c0fc323a61bdf7b8cb5d074f7724eb",
+  "docs/skill-recovery/plan.md": "f8377e75e513a27f02bc49c9b09e8c54354de60a860c364b308cd1b9d739f16b",
+  "docs/skill-recovery/work-items.md": "a4c0002df7a605c4a8834dfb50527ef542275f08a0b325cdac608502c99c2b98",
+  "docs/skill-recovery/evidence.md": "b3e517903205e32d343f222167f0509baa6b38d3e9431e7d0d01837d886d2d50",
+  "docs/skill-recovery/comparison-disposition.md": "37263777d8f32df61adbf6ff9cc84cb626ee898dbf72222d1664b64964fbd81e",
+  "docs/skill-recovery/experiments/budget-policy-proposal.md": "024955ddb3fd2bb03455622e1d969c50c485d456dad8ce074674f1b69feea562",
+  "docs/skill-recovery/experiments/budget-enforcement-disposition.md": "12e91d4c540f1398e7af976b66740a1db8a7b28086e34e044a5a28b857ff238e",
+  "docs/skill-recovery/experiments/sdk_shutdown_probe.py": "b5a916f9578e7d4e329f7700f34e19e92d8b4f2c30070ccd56056051d7c3fea7",
+  "docs/skill-recovery/experiments/host_session.py": "197433b80ea6e8e2d548a72c5e8efd13ca53c8758e53479e7908b10866dd52bd",
+  "docs/skill-recovery/experiments/host_session_offline.py": "8521c2b646f9f6ead6a95cf6a1d6432463ce5d724a45cffd3921c0ec108ae2a1",
+  "src/temporalio/claude_agent_sdk/_runner.py": "9f06d775060dfd6a6b73fc7278b13531a8608a558fad2b9822aae9aff06bbc89",
+  "src/temporalio/claude_agent_sdk/_session_control.py": "4e671058be6d1638eecfccaf65fdab92feef2753f4f1ca3abd8cfd29f5bac8ea",
+  "tests/session_control/test_shutdown_probe.py": "777e3aad1d3d0a9c2c9b4dab931d9de20bd53f5b871919cd7fd9ca79bda31988",
+  "tests/session_control/test_host_admission.py": "edd70cdbc6a31ce20827c32d53b0d6de323214fa60cd33e3412184baaa22e98d",
+  "tests/session_control/test_lifecycle.py": "f23eef4733c5bdbca2e34c68d9eecebd4e20bc86b92e5d81fd3bb19d69248f9c"
+}

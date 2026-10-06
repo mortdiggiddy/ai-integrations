@@ -1,0 +1,22 @@
+{
+  "name": "crash-zero",
+  "status": "passed",
+  "accounting_status": "unresolved",
+  "delta": null,
+  "reason": "Incomplete final or crash-zero uncertainty",
+  "continuation_refused": true,
+  "ledger_before": {
+    "blocked": null,
+    "consumed_cost_microusd": 0,
+    "consumed_tokens": 0,
+    "unresolved_reserved_cost_microusd": 10000,
+    "unresolved_reserved_tokens": 2000
+  },
+  "ledger_after": {
+    "blocked": null,
+    "consumed_cost_microusd": 0,
+    "consumed_tokens": 0,
+    "unresolved_reserved_cost_microusd": 10000,
+    "unresolved_reserved_tokens": 2000
+  }
+}

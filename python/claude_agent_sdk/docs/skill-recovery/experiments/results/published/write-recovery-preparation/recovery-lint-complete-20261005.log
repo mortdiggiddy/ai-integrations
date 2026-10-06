@@ -1,0 +1,261 @@
+uv run ruff check --select I
+All checks passed!
+uv run ruff format --check
+90 files already formatted
+uv run pyright
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.403 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+uv run mypy
+Success: no issues found in 59 source files
+uv run basedpyright
+<repo>/python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_session_control.py
+  <repo>/python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_session_control.py:273:16 - warning: Condition will always evaluate to True since the types "Task[None]" and "None" have no overlap (reportUnnecessaryComparison)
+<repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:25:19 - warning: Type annotation is missing for parameter "raw_changes" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:60:9 - error: Argument of type "Literal['rate_limit_info']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['rate_limit_info']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['rate_limit_info']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['rate_limit_info']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:60:9 - error: Argument of type "Literal['raw']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['raw']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['raw']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['raw']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:60:9 - error: "__delitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:60:9 - error: "__delitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:78:63 - warning: Type annotation is missing for parameter "changes" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:88:5 - error: Argument of type "Literal['rate_limit_info']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['rate_limit_info']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['rate_limit_info']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['rate_limit_info']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:88:5 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:98:57 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:98:67 - warning: Type annotation is missing for parameter "monkeypatch" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:110:52 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:119:12 - warning: Type annotation is missing for parameter "monkeypatch" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:125:50 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:125:60 - warning: Type annotation is missing for parameter "config" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:125:68 - warning: Type annotation is missing for parameter "field" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:137:15 - warning: Type annotation is missing for parameter "config" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:137:25 - warning: Type annotation is missing for parameter "changes" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:151:48 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:151:58 - warning: Type annotation is missing for parameter "config" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:151:66 - warning: Type annotation is missing for parameter "reason" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:177:60 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:177:70 - warning: Type annotation is missing for parameter "config" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:177:78 - warning: Type annotation is missing for parameter "changes" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:189:62 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:189:72 - warning: Type annotation is missing for parameter "config" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:211:48 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:211:58 - warning: Type annotation is missing for parameter "config" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:219:59 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:237:54 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:248:45 - warning: Type annotation is missing for parameter "field" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:291:42 - warning: Type annotation is missing for parameter "field" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:291:49 - warning: Type annotation is missing for parameter "value" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:308:64 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:315:28 - warning: Type annotation is missing for parameter "argv" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:335:77 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:391:33 - warning: Type annotation is missing for parameter "name" (reportMissingParameterType)
+<repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:15:8 - error: Import from `test_lifecycle` is implicitly relative and will not work if this file is imported as a module
+    Use a relative import from `.test_lifecycle` instead
+    or specify the full module path: `tests.session_control.test_lifecycle` (reportImplicitRelativeImport)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:16:6 - error: Import from `test_lifecycle` is implicitly relative and will not work if this file is imported as a module
+    Use a relative import from `.test_lifecycle` instead
+    or specify the full module path: `tests.session_control.test_lifecycle` (reportImplicitRelativeImport)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:37:24 - warning: Type annotation is missing for parameter "host" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:37:30 - warning: Type annotation is missing for parameter "attempt" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:44:23 - warning: Type annotation is missing for parameter "resource" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:45:12 - warning: Condition will always evaluate to False since the types "None" and "Literal['inspect']" have no overlap (reportUnnecessaryComparison)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:48:31 - warning: Condition will always evaluate to True since the types "None" and "Literal['identity']" have no overlap (reportUnnecessaryComparison)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:54:20 - warning: Type annotation is missing for parameter "resource" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:54:20 - warning: "resource" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:55:12 - warning: Condition will always evaluate to False since the types "None" and "Literal['kill']" have no overlap (reportUnnecessaryComparison)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:59:20 - warning: Type annotation is missing for parameter "resource" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:59:20 - warning: "resource" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:60:12 - warning: Condition will always evaluate to False since the types "None" and "Literal['wait']" have no overlap (reportUnnecessaryComparison)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:64:22 - warning: Type annotation is missing for parameter "resource" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:64:22 - warning: "resource" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:67:12 - warning: Condition will always evaluate to False since the types "None" and "Literal['remove']" have no overlap (reportUnnecessaryComparison)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:71:22 - warning: Type annotation is missing for parameter "resource" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:71:22 - warning: "resource" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:72:12 - warning: Condition will always evaluate to False since the types "None" and "Literal['enumerate']" have no overlap (reportUnnecessaryComparison)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:74:33 - warning: Condition will always evaluate to True since the types "None" and "Literal['present']" have no overlap (reportUnnecessaryComparison)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:77:11 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:87:56 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:87:66 - warning: Type annotation is missing for parameter "fault" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:100:59 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:117:61 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:133:63 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:150:55 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:171:53 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:193:51 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:193:61 - warning: Type annotation is missing for parameter "monkeypatch" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:193:74 - warning: Type annotation is missing for parameter "fault" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:207:28 - warning: Type annotation is missing for parameter "args" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:212:22 - error: Instance variable "root" is not initialized in the class body or __init__ method (reportUninitializedInstanceVariable)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:213:22 - error: Instance variable "attempt" is not initialized in the class body or __init__ method (reportUninitializedInstanceVariable)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:214:22 - error: Instance variable "session" is not initialized in the class body or __init__ method (reportUninitializedInstanceVariable)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:238:27 - warning: Type annotation is missing for parameter "resource" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:238:27 - warning: "resource" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:254:21 - warning: Type annotation is missing for parameter "monkeypatch" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:260:5 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:260:15 - warning: Type annotation is missing for parameter "monkeypatch" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:260:28 - warning: Type annotation is missing for parameter "client_factory" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:260:44 - warning: Type annotation is missing for parameter "failure" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:274:27 - warning: Type annotation is missing for parameter "args" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_host_admission.py:274:27 - warning: "args" is not accessed (reportUnusedParameter)
+<repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:73:14 - error: Instance variable "initial_input" is not initialized in the class body or __init__ method (reportUninitializedInstanceVariable)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:159:21 - warning: "client_factory" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:174:21 - warning: "client_factory" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:245:21 - warning: "client_factory" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:249:31 - warning: "inputs" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:249:44 - warning: "context" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:285:27 - warning: "args" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:295:21 - warning: "client_factory" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:311:21 - warning: "client_factory" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:325:21 - warning: "client_factory" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:378:21 - warning: "client_factory" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:451:30 - warning: "key" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:455:32 - warning: "key" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:455:42 - warning: "entries" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:458:30 - warning: "args" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:458:43 - warning: "kwargs" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_lifecycle.py:520:21 - warning: "client_factory" is not accessed (reportUnusedParameter)
+<repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:13:6 - error: Import from `test_host_admission` is implicitly relative and will not work if this file is imported as a module
+    Use a relative import from `.test_host_admission` instead
+    or specify the full module path: `tests.session_control.test_host_admission` (reportImplicitRelativeImport)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:16:13 - warning: Type annotation is missing for parameter "pid" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:16:18 - warning: Type annotation is missing for parameter "start" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:16:25 - warning: Type annotation is missing for parameter "comm" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:16:40 - warning: Type annotation is missing for parameter "state" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:20:15 - warning: Type annotation is missing for parameter "rows" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:53:62 - warning: Type annotation is missing for parameter "name" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:53:68 - warning: Type annotation is missing for parameter "value" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:86:39 - warning: Type annotation is missing for parameter "fault" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:90:9 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:90:9 - error: "__setitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:92:9 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:92:9 - error: "__setitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:94:9 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:94:9 - error: "__setitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:96:9 - error: Argument of type "Literal['enumerated_pids']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['enumerated_pids']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['enumerated_pids']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['enumerated_pids']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:96:9 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:96:34 - error: Cannot access attribute "append" for class "str"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:96:34 - error: Cannot access attribute "append" for class "int"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:96:34 - error: Cannot access attribute "append" for class "bool"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:98:9 - error: Argument of type "Literal['enumerated_pids']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['enumerated_pids']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['enumerated_pids']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['enumerated_pids']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:98:9 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:98:34 - error: Cannot access attribute "append" for class "str"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:98:34 - error: Cannot access attribute "append" for class "int"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:98:34 - error: Cannot access attribute "append" for class "bool"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:9 - error: Argument of type "Literal['processes']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['processes']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['processes']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['processes']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:9 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:28 - error: Cannot access attribute "append" for class "str"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:28 - error: Cannot access attribute "append" for class "int"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:28 - error: Cannot access attribute "append" for class "bool"
+    Attribute "append" is unknown (reportAttributeAccessIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:49 - error: "__getitem__" method not defined on type "int" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:49 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:49 - error: Argument of type "Literal['processes']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['processes']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['processes']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['processes']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:99:49 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:101:9 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:101:9 - error: "__setitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:103:9 - error: Argument of type "Literal['processes']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['processes']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['processes']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['processes']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:103:9 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:103:9 - error: "__getitem__" method not defined on type "int" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:103:9 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:103:9 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:105:9 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:105:9 - error: "__setitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:107:9 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:107:9 - error: "__setitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:116:9 - error: Argument of type "Literal['processes']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['processes']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['processes']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['processes']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:116:9 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:116:9 - error: "__getitem__" method not defined on type "int" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:116:9 - error: "__getitem__" method not defined on type "bool" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:116:9 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:127:56 - warning: Type annotation is missing for parameter "pid" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:127:61 - warning: Type annotation is missing for parameter "start" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:127:68 - warning: Type annotation is missing for parameter "state" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:127:75 - warning: Type annotation is missing for parameter "absent" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:134:35 - error: "bool" is not iterable
+    "__iter__" method not defined (reportGeneralTypeIssues)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:174:61 - warning: Type annotation is missing for parameter "field" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:174:68 - warning: Type annotation is missing for parameter "value" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:183:10 - warning: Type annotation is missing for parameter "pid" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:183:17 - warning: Type annotation is missing for parameter "start" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:200:41 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:200:51 - warning: Type annotation is missing for parameter "monkeypatch" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:200:64 - warning: Type annotation is missing for parameter "fault" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:206:14 - warning: Type annotation is missing for parameter "path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:206:21 - warning: Type annotation is missing for parameter "args" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:206:29 - warning: Type annotation is missing for parameter "kwargs" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:226:29 - warning: Type annotation is missing for parameter "path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:226:29 - warning: "path" is not accessed (reportUnusedParameter)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:236:12 - error: "__getitem__" method not defined on type "int" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:236:12 - error: "__getitem__" method not defined on type "Literal[True]" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:246:16 - error: "__getitem__" method not defined on type "int" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:246:16 - error: "__getitem__" method not defined on type "Literal[True]" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:248:16 - error: "__getitem__" method not defined on type "int" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:248:16 - error: "__getitem__" method not defined on type "Literal[True]" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:251:32 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:251:42 - warning: Type annotation is missing for parameter "monkeypatch" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:266:51 - warning: Type annotation is missing for parameter "tmp_path" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:266:61 - warning: Type annotation is missing for parameter "monkeypatch" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:266:74 - warning: Type annotation is missing for parameter "fault" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:271:13 - error: Method "__init__" does not call the method of the same name in parent class (reportMissingSuperCall)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:274:27 - warning: Type annotation is missing for parameter "resource" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:277:28 - warning: Type annotation is missing for parameter "args" (reportMissingParameterType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:279:30 - warning: "IMAGE" is not exported from module "sdk_shutdown_probe" (reportPrivateLocalImportUsage)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:282:22 - error: Instance variable "host" is not initialized in the class body or __init__ method (reportUninitializedInstanceVariable)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:285:22 - error: Instance variable "root" is not initialized in the class body or __init__ method (reportUninitializedInstanceVariable)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:286:22 - error: Instance variable "session" is not initialized in the class body or __init__ method (reportUninitializedInstanceVariable)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:297:21 - error: Argument of type "list[Any]" cannot be assigned to parameter "value" of type "str | bool | dict[str, int | bool | list[Unknown]]" in function "__setitem__"
+    Type "list[Any]" is not assignable to type "str | bool | dict[str, int | bool | list[Unknown]]"
+      "list[Any]" is not assignable to "str"
+      "list[Any]" is not assignable to "bool"
+      "list[Any]" is not assignable to "dict[str, int | bool | list[Unknown]]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:299:21 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_shutdown_probe.py:299:21 - error: "__setitem__" method not defined on type "bool" (reportIndexIssue)
+68 errors, 118 warnings, 0 notes
+make: *** [../_shared/python.mk:56: lint] Error 1

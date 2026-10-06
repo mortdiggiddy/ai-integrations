@@ -1,0 +1,28 @@
+{
+  "status": "failed",
+  "failure": "ambiguous_active_or_unverifiable_overage",
+  "watchdog_fired": false,
+  "exit_code": 0,
+  "removals": [
+    {
+      "reason": "ambiguous_active_or_unverifiable_overage",
+      "confirmed_removed": true,
+      "remove_code": 0,
+      "inspect_code": 1
+    },
+    {
+      "reason": "finally_cleanup",
+      "confirmed_removed": true,
+      "remove_code": 0,
+      "inspect_code": 1
+    }
+  ],
+  "host_admissions": 1,
+  "evidence_root": "<private-host-scratch>",
+  "preventive_budget_enforcement": "unproved",
+  "subscription_billing": "unverified",
+  "provider_request_count": "not independently measured",
+  "final_usage_if_stopped_before_result": "unknown; no zero default",
+  "observed_final_results": [],
+  "accounting": "unknown and unreconciled; stopped before final result"
+}

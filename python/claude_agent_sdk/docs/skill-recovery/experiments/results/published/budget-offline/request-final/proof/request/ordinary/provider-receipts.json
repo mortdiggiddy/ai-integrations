@@ -1,0 +1,70 @@
+[
+  {
+    "received_ns": 181155394276058,
+    "receipt": "065f76f3-97cd-467d-8852-40d5c63a875e",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "<system-reminder>\nToday's date is 2026-10-02.\n</system-reminder>\n"
+            },
+            {
+              "type": "text",
+              "text": "Return OFFLINE_OK.",
+              "cache_control": {
+                "type": "ephemeral"
+              }
+            }
+          ]
+        }
+      ],
+      "system": [
+        {
+          "type": "text",
+          "text": "x-anthropic-billing-header: cc_version=2.1.274.03a; cc_entrypoint=sdk-py;"
+        },
+        {
+          "type": "text",
+          "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        },
+        {
+          "type": "text",
+          "text": "Return OFFLINE_OK.",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        }
+      ],
+      "tools": [],
+      "metadata": {
+        "user_id": "{\"device_id\":\"68ee61c95e0ddfa382ff7f35abc8205f3d6387feccf38f666ffe086e5c015aad\",\"account_uuid\":\"\",\"session_id\":\"2e5e7fc2-db77-4826-a500-89a123a05174\"}"
+      },
+      "max_tokens": 64,
+      "thinking": {
+        "budget_tokens": 1024,
+        "type": "enabled"
+      },
+      "context_management": {
+        "edits": [
+          {
+            "type": "clear_thinking_20251015",
+            "keep": "all"
+          }
+        ]
+      },
+      "stream": true
+    },
+    "accepted": true,
+    "admitted_ns": 181155393103589,
+    "synthetic_input": 12,
+    "synthetic_output": 20,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  }
+]

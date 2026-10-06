@@ -1,0 +1,123 @@
+[
+  {
+    "received_ns": 181060731211764,
+    "receipt": null,
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": false,
+    "admitted_ns": null,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181060732945597,
+    "receipt": "forged",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": false,
+    "admitted_ns": null,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181060735201089,
+    "receipt": "43a7635b-7c55-4524-8273-a51863dbc0ce",
+    "body": {
+      "model": "haiku",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": false,
+    "admitted_ns": 181060734167718,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181060736614083,
+    "receipt": "43a7635b-7c55-4524-8273-a51863dbc0ce",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": true,
+    "admitted_ns": 181060734167718,
+    "synthetic_input": 12,
+    "synthetic_output": 20,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181060738332658,
+    "receipt": "43a7635b-7c55-4524-8273-a51863dbc0ce",
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": false,
+    "admitted_ns": 181060734167718,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token"
+  },
+  {
+    "received_ns": 181060741128982,
+    "receipt": null,
+    "body": {
+      "model": "claude-haiku-4-5-20251001",
+      "max_tokens": 64,
+      "stream": false,
+      "messages": [
+        {
+          "role": "user",
+          "content": "offline"
+        }
+      ]
+    },
+    "accepted": true,
+    "admitted_ns": null,
+    "synthetic_input": null,
+    "synthetic_output": null,
+    "synthetic_price_basis": "input=1/output=5 micro USD per synthetic token",
+    "negative_control": true
+  }
+]

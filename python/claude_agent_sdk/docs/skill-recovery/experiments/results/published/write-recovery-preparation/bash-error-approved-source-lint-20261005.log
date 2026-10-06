@@ -1,0 +1,21 @@
+uv run ruff check --select I
+All checks passed!
+uv run ruff format --check
+90 files already formatted
+uv run pyright
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.403 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+uv run mypy
+Success: no issues found in 59 source files
+uv run basedpyright
+<repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:496:20 - error: Argument of type "Literal['model_result']" cannot be assigned to parameter "key" of type "SupportsIndex | slice[Any, Any, Any]" in function "__getitem__"
+    Type "Literal['model_result']" is not assignable to type "SupportsIndex | slice[Any, Any, Any]"
+      "Literal['model_result']" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "Literal['model_result']" is not assignable to "slice[Any, Any, Any]" (reportArgumentType)
+  <repo>/python/claude_agent_sdk/tests/session_control/test_experiment_admission.py:496:20 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+2 errors, 0 warnings, 0 notes
+make: *** [../_shared/python.mk:56: lint] Error 1

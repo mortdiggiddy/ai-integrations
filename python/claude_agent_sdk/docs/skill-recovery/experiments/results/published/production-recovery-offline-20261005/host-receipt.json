@@ -1,0 +1,13 @@
+{
+  "singleton": 1,
+  "session": "production-recovery-offline",
+  "attempt": "8be4a8bb57a341c18ddf4e8ba9155496",
+  "name": "sdk-host-8be4a8bb57a341c18ddf4e8ba9155496",
+  "resource": "85c0eeb8b88986891d201083040b13a229366a09c75589a0c90ac668ff183a6a",
+  "runner": null,
+  "stopped": 1,
+  "observations": null,
+  "terminated": 1,
+  "removed": 1,
+  "host_receipt": "{\"removal_verified\": true, \"resource\": \"85c0eeb8b88986891d201083040b13a229366a09c75589a0c90ac668ff183a6a\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 1}"
+}

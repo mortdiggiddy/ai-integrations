@@ -1,0 +1,1 @@
+{"accepted": {"pending": {"id": "offline-original", "name": "Bash", "input": {"command": "printf 'BASH_ONCE_MARKER\\n' > /state/work/marker.txt; printf BASH_KNOWN_ERROR_EXIT_7 >&2; exit 7"}}}}

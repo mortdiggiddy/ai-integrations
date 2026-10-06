@@ -1,0 +1,14 @@
+{
+  "name": "last-allowance-contention",
+  "status": "passed",
+  "synthetic_only": true,
+  "process_statuses": [
+    400,
+    200
+  ],
+  "admissions": 1,
+  "provider_receipts": 1,
+  "accepted_provider_requests": 1,
+  "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+  "elapsed_seconds": 1.9565435190161224
+}

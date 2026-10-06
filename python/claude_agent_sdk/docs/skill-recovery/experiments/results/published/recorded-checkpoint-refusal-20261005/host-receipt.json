@@ -1,0 +1,13 @@
+{
+  "singleton": 1,
+  "session": "recorded-checkpoint-refusal",
+  "attempt": "5dabe2f56769487a9668fbc767ee8408",
+  "name": "sdk-host-5dabe2f56769487a9668fbc767ee8408",
+  "resource": "385e7bc12967107e3ae5ecedc75f45a23d4573e8bd5e6b12f7dc1e0f264ba4ce",
+  "runner": null,
+  "stopped": 1,
+  "observations": null,
+  "terminated": 1,
+  "removed": 1,
+  "host_receipt": "{\"removal_verified\": true, \"resource\": \"385e7bc12967107e3ae5ecedc75f45a23d4573e8bd5e6b12f7dc1e0f264ba4ce\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 1}"
+}

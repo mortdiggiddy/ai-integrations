@@ -1,0 +1,16 @@
+[
+  {
+    "request": "933cf975-2870-49c0-97fd-8e496b0549c6",
+    "body_digest": "c34528a5881a52da43cea223109b9cfd34ff65d2ba43dc6e17f1b4ff80fa8474",
+    "binding": "{\"caps\": {\"cost_microusd\": 10000, \"input_tokens\": 1000, \"output_tokens\": 1000, \"total_tokens\": 2000}, \"envelope\": {\"cost_microusd\": 332, \"input\": 12, \"output\": 64}, \"model\": \"claude-haiku-4-5-20251001\", \"phase\": \"synthetic-phase\", \"segment\": \"segment-1\", \"test\": \"offline-request-bypass\"}",
+    "used": 1,
+    "admitted_ns": 181163312212672
+  },
+  {
+    "request": "c163e7c7-1c70-4997-a06f-56519ffe08e3",
+    "body_digest": "596dcc5884569cefc9f0664971d35f51397cdf3c3ffedb3aa19ac2bdec9fc7d2",
+    "binding": "{\"caps\": {\"cost_microusd\": 10000, \"input_tokens\": 1000, \"output_tokens\": 1000, \"total_tokens\": 2000}, \"envelope\": {\"cost_microusd\": 332, \"input\": 12, \"output\": 64}, \"model\": \"claude-haiku-4-5-20251001\", \"phase\": \"synthetic-phase\", \"segment\": \"segment-1\", \"test\": \"offline-request-bypass\"}",
+    "used": 1,
+    "admitted_ns": 181164594643547
+  }
+]

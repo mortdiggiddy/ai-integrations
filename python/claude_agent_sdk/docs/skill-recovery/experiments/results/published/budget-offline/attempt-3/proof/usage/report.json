@@ -1,0 +1,322 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "name": "fresh-final",
+      "status": "passed",
+      "accounting_status": "verified-synthetic-delta",
+      "delta": {
+        "ordinary_input": 12,
+        "cache_read_input": 0,
+        "cache_write_input": 0,
+        "output": 20,
+        "thinking": 0,
+        "cost_microusd": 112
+      },
+      "reason": null,
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 112,
+        "consumed_tokens": 32,
+        "unresolved_reserved_cost_microusd": 0,
+        "unresolved_reserved_tokens": 0
+      }
+    },
+    {
+      "name": "restored-baseline",
+      "status": "passed",
+      "accounting_status": "verified-synthetic-delta",
+      "delta": {
+        "ordinary_input": 12,
+        "cache_read_input": 0,
+        "cache_write_input": 0,
+        "output": 20,
+        "thinking": 0,
+        "cost_microusd": 112
+      },
+      "reason": null,
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 112,
+        "consumed_tokens": 32,
+        "unresolved_reserved_cost_microusd": 0,
+        "unresolved_reserved_tokens": 0
+      }
+    },
+    {
+      "name": "streaming-cumulative",
+      "status": "passed",
+      "accounting_status": "verified-synthetic-delta",
+      "delta": {
+        "ordinary_input": 12,
+        "cache_read_input": 0,
+        "cache_write_input": 0,
+        "output": 20,
+        "thinking": 0,
+        "cost_microusd": 112
+      },
+      "reason": null,
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 112,
+        "consumed_tokens": 32,
+        "unresolved_reserved_cost_microusd": 0,
+        "unresolved_reserved_tokens": 0
+      }
+    },
+    {
+      "name": "identical-duplicate",
+      "status": "passed",
+      "accounting_status": "verified-synthetic-delta",
+      "delta": {
+        "ordinary_input": 12,
+        "cache_read_input": 0,
+        "cache_write_input": 0,
+        "output": 20,
+        "thinking": 0,
+        "cost_microusd": 112
+      },
+      "reason": null,
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 112,
+        "consumed_tokens": 32,
+        "unresolved_reserved_cost_microusd": 0,
+        "unresolved_reserved_tokens": 0
+      }
+    },
+    {
+      "name": "conflicting-duplicate",
+      "status": "passed",
+      "accounting_status": "unresolved",
+      "delta": null,
+      "reason": "Conflicting repeated response",
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      }
+    },
+    {
+      "name": "complete-reset",
+      "status": "passed",
+      "accounting_status": "verified-synthetic-delta",
+      "delta": {
+        "ordinary_input": 24,
+        "cache_read_input": 0,
+        "cache_write_input": 0,
+        "output": 40,
+        "thinking": 0,
+        "cost_microusd": 224
+      },
+      "reason": null,
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 224,
+        "consumed_tokens": 64,
+        "unresolved_reserved_cost_microusd": 0,
+        "unresolved_reserved_tokens": 0
+      }
+    },
+    {
+      "name": "missing-reset-coverage",
+      "status": "passed",
+      "accounting_status": "unresolved",
+      "delta": null,
+      "reason": "Unproved epoch/reset coverage",
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      }
+    },
+    {
+      "name": "cached-input-thinking",
+      "status": "passed",
+      "accounting_status": "verified-synthetic-delta",
+      "delta": {
+        "ordinary_input": 10,
+        "cache_read_input": 20,
+        "cache_write_input": 30,
+        "output": 40,
+        "thinking": 15,
+        "cost_microusd": 390
+      },
+      "reason": null,
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 390,
+        "consumed_tokens": 100,
+        "unresolved_reserved_cost_microusd": 0,
+        "unresolved_reserved_tokens": 0
+      }
+    },
+    {
+      "name": "incomplete-model-usage",
+      "status": "passed",
+      "accounting_status": "unresolved",
+      "delta": null,
+      "reason": "Incomplete per-model usage",
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      }
+    },
+    {
+      "name": "missing-final",
+      "status": "passed",
+      "accounting_status": "unresolved",
+      "delta": null,
+      "reason": "Missing final/budget-crossing response or epoch coverage",
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      }
+    },
+    {
+      "name": "crash-zero",
+      "status": "passed",
+      "accounting_status": "unresolved",
+      "delta": null,
+      "reason": "Incomplete final or crash-zero uncertainty",
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      }
+    },
+    {
+      "name": "unknown-semantics",
+      "status": "passed",
+      "accounting_status": "unresolved",
+      "delta": null,
+      "reason": "Unknown model/category/currency semantics",
+      "continuation_refused": true,
+      "ledger_before": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      },
+      "ledger_after": {
+        "blocked": null,
+        "consumed_cost_microusd": 0,
+        "consumed_tokens": 0,
+        "unresolved_reserved_cost_microusd": 10000,
+        "unresolved_reserved_tokens": 2000
+      }
+    }
+  ],
+  "synthetic_only": true,
+  "controls": {
+    "receipt_verification_removed_breaks_assertion": true,
+    "verified_zero_without_work": true,
+    "invalid_quantity_refusals": [
+      "output",
+      "cost_microusd",
+      "ordinary_input"
+    ]
+  },
+  "limitations": "Fixture schema only; no arbitrary CLI adapter, provider enforcement or billing proof."
+}

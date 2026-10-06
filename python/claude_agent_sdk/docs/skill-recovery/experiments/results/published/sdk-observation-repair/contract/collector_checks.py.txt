@@ -1,0 +1,45 @@
+import sys,copy,json
+from pathlib import Path
+from unittest.mock import patch
+sys.path.insert(0,str(Path("python/claude_agent_sdk/docs/skill-recovery/experiments").resolve()))
+import sdk_shutdown_probe as p
+def stat(pid=7,start="200"):
+ return f"{pid} (claude) "+" ".join(["S"]+["0"]*18+[start])
+class Entry:
+ name="7"
+ def __init__(self,fault): self.fault=fault; self.reads=0
+ def __truediv__(self,name): self.part=name; return self
+ def read_text(self):
+  if self.part=="comm":
+   if self.fault=="comm_race": raise FileNotFoundError("race")
+   return "claude"
+  self.reads+=1
+  if self.reads==2:
+   if self.fault=="stat_repeat_race": raise FileNotFoundError("race")
+   if self.fault=="stat_repeat_denied": raise PermissionError("denied")
+   if self.fault=="stat_repeat_malformed": return "bad"
+  if self.fault=="pid_mismatch": return stat(pid=9)
+  if self.fault=="start_invalid": return stat(start="0")
+  return stat()
+class Root:
+ def __init__(self,e): self.e=e
+ def iterdir(self): return iter([self.e])
+count=0
+for fault,operation in [("comm_race","comm"),("stat_repeat_race","stat_identity"),("stat_repeat_denied","stat_identity"),("stat_repeat_malformed","stat_identity"),("pid_mismatch","stat"),("start_invalid","comm")]:
+ value=p.inventory(Root(Entry(fault)))
+ assert not p.valid_inventory(value) and not value["complete"],(fault,value)
+ assert value["errors"][0]["operation"]==operation,(fault,value)
+ assert value["errors"][0]["vanished_during_collection"] is (fault in ("comm_race","stat_repeat_race")),(fault,value)
+ count+=1
+for name,ticks in [("before_read",[0,0,3]),("after_reads",[0,0,0,3])]:
+ with patch.object(p.time,"monotonic",side_effect=ticks):
+  value=p.inventory(Root(Entry("good")))
+ assert not p.valid_inventory(value) and value["errors"][0]["error"]=="TimeoutError",(name,value)
+ count+=1
+with patch.object(p.time,"monotonic",side_effect=[0,0,0,0]):
+ value=p.inventory(Root(Entry("good")))
+assert p.valid_inventory(value); count+=1
+class Empty:
+ def iterdir(self): return iter([])
+value=p.inventory(Empty()); assert p.valid_inventory(value) and value["processes"]==[];count+=1
+print(json.dumps(dict(supplemental_collection_checks=count,result="PASS")))

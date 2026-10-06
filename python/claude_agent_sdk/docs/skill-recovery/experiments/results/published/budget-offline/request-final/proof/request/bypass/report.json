@@ -1,0 +1,24 @@
+{
+  "name": "bypass",
+  "status": "passed",
+  "synthetic_only": true,
+  "endpoint_bypass": {
+    "sdk_error": "ResultError: Claude Code returned an error result: Failed to authenticate. API Error: 403 {\"error\":\"missing, forged, replayed or mismatched admission receipt\"} (exit code: 1)",
+    "stream_events": 4
+  },
+  "changed_model": {
+    "sdk_error": "ResultError: Claude Code returned an error result: API Error: 400 Model or output envelope mismatch (exit code: 1)",
+    "stream_events": 4
+  },
+  "inherited_selection": {
+    "sdk_error": null,
+    "stream_events": 10
+  },
+  "negative_control": "receipt requirement removed: provider accepted unadmitted work, prevention assertion broke",
+  "negative_control_receipts": 1,
+  "admissions": 2,
+  "provider_receipts": 7,
+  "accepted_provider_requests": 2,
+  "cleanup": "servers closed; unresolved ledger retained; no replacement admitted",
+  "elapsed_seconds": 2.2983337470213883
+}

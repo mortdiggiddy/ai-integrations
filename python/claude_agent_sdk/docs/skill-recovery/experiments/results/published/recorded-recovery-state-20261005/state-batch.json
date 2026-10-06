@@ -1,0 +1,8 @@
+{
+  "fault": "batch",
+  "reason": "Recovery requires exactly one accepted pending call; batch refused",
+  "model_calls": 0,
+  "effects": 0,
+  "original_transcript_unchanged": true,
+  "batch_fixture": "two pending references injected at the SDK parser boundary"
+}

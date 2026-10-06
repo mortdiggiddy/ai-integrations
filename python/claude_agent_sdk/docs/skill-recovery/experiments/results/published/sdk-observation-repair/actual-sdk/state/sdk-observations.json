@@ -1,0 +1,67 @@
+{
+  "after_connect": {
+    "complete": true,
+    "enumerated_pids": [
+      1,
+      8
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "22811175",
+        "state": "R"
+      },
+      {
+        "comm": "claude",
+        "pid": 8,
+        "start": "22811257",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "after_disconnect": {
+    "complete": true,
+    "enumerated_pids": [
+      1
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "22811175",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "before_connect": {
+    "complete": true,
+    "enumerated_pids": [
+      1
+    ],
+    "enumeration_completed": true,
+    "errors": [],
+    "processes": [
+      {
+        "comm": "python3.13",
+        "pid": 1,
+        "start": "22811175",
+        "state": "R"
+      }
+    ],
+    "version": 1
+  },
+  "connected": true,
+  "interrupt_acknowledged": true,
+  "prompt_submission_started": false,
+  "sdk_closed": true,
+  "shutdown_unresolved": false,
+  "stage": "finished",
+  "stop_requested": true
+}

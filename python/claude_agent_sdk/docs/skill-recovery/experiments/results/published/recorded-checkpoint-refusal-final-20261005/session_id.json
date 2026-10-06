@@ -1,0 +1,29 @@
+{
+  "fault": "session_id",
+  "error": {
+    "type": "AdmissionRefused",
+    "message": "Original pending call or recorded result differs"
+  },
+  "pending_seen": [
+    {
+      "id": "toolu_01DJu2fHo3hop4VaWotJLd1k",
+      "name": "Write",
+      "input": {
+        "content": "WRITE_ONCE_MARKER\n",
+        "file_path": "/state/work/marker.txt"
+      },
+      "key": {
+        "project_key": "-state-work",
+        "session_id": "e83c3b9d-a2a4-445a-96ba-4d61363e460e"
+      },
+      "transcript_uuid": "cafe68b8-2a76-4770-a7d0-8667c4bf0e7b"
+    }
+  ],
+  "transport_starts": [],
+  "transcript_sha256": "968003e98871dee0655f5168d29ee80850d061a4cdb5e053a8d9f6c6252ae410",
+  "parallel_tool_recovery": false,
+  "original_transcript_unchanged": true,
+  "result_published": false,
+  "model_calls": 0,
+  "effects": 0
+}

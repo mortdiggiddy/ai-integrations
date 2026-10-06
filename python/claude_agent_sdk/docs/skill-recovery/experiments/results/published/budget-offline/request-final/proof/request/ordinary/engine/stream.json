@@ -1,0 +1,235 @@
+[
+  {
+    "type": "SystemMessage",
+    "data": {
+      "subtype": "init",
+      "data": {
+        "type": "system",
+        "subtype": "init",
+        "cwd": "/tmp/proof/request/ordinary/engine/work",
+        "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+        "tools": [],
+        "mcp_servers": [],
+        "model": "claude-haiku-4-5-20251001",
+        "permissionMode": "default",
+        "slash_commands": [],
+        "apiKeySource": "ANTHROPIC_API_KEY",
+        "claude_code_version": "2.1.274",
+        "output_style": "default",
+        "agents": [
+          "claude",
+          "Explore",
+          "general-purpose",
+          "Plan",
+          "statusline-setup"
+        ],
+        "skills": [],
+        "plugins": [],
+        "capabilities": [
+          "interrupt_receipt_v1",
+          "interrupt_cancel_queued_v1",
+          "msg_lifecycle_v1"
+        ],
+        "analytics_disabled": true,
+        "product_feedback_disabled": true,
+        "uuid": "02201a68-dc40-489d-b8a6-34e0e3df5f74",
+        "fast_mode_state": "off",
+        "fast_mode_disabled_reason": "sdk_opt_in_required"
+      }
+    }
+  },
+  {
+    "type": "SystemMessage",
+    "data": {
+      "subtype": "status",
+      "data": {
+        "type": "system",
+        "subtype": "status",
+        "status": "requesting",
+        "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+        "uuid": "ae5b8f2d-8282-4543-907d-a1911b8a1e41"
+      }
+    }
+  },
+  {
+    "type": "StreamEvent",
+    "data": {
+      "uuid": "48d474b8-6e76-48ee-985b-b76c289efc39",
+      "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+      "event": {
+        "type": "message_start",
+        "message": {
+          "id": "msg_fake0001",
+          "type": "message",
+          "role": "assistant",
+          "model": "claude-haiku-4-5-20251001",
+          "content": [],
+          "stop_reason": null,
+          "stop_sequence": null,
+          "usage": {
+            "input_tokens": 12,
+            "output_tokens": 1,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0
+          }
+        }
+      },
+      "parent_tool_use_id": null
+    }
+  },
+  {
+    "type": "StreamEvent",
+    "data": {
+      "uuid": "d2e715d6-34ba-4cad-9a7c-9e782a213a3c",
+      "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+      "event": {
+        "type": "content_block_start",
+        "index": 0,
+        "content_block": {
+          "type": "text",
+          "text": ""
+        }
+      },
+      "parent_tool_use_id": null
+    }
+  },
+  {
+    "type": "StreamEvent",
+    "data": {
+      "uuid": "5b8bfd6f-3c78-4914-bd83-a32936f68d37",
+      "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+      "event": {
+        "type": "content_block_delta",
+        "index": 0,
+        "delta": {
+          "type": "text_delta",
+          "text": "OFFLINE_OK"
+        }
+      },
+      "parent_tool_use_id": null
+    }
+  },
+  {
+    "type": "AssistantMessage",
+    "data": {
+      "content": [
+        {
+          "text": "OFFLINE_OK"
+        }
+      ],
+      "model": "claude-haiku-4-5-20251001",
+      "parent_tool_use_id": null,
+      "error": null,
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 1,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "message_id": "msg_fake0001",
+      "stop_reason": null,
+      "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+      "uuid": "71ffbd67-e2e8-4d9b-9951-ef27281ce5b6"
+    }
+  },
+  {
+    "type": "StreamEvent",
+    "data": {
+      "uuid": "d1ea06b6-c235-4f0c-9928-ff470604d178",
+      "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+      "event": {
+        "type": "content_block_stop",
+        "index": 0
+      },
+      "parent_tool_use_id": null
+    }
+  },
+  {
+    "type": "StreamEvent",
+    "data": {
+      "uuid": "ebbf52cf-9ea7-45f2-a49c-323ce0cd975a",
+      "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+      "event": {
+        "type": "message_delta",
+        "delta": {
+          "stop_reason": "end_turn",
+          "stop_sequence": null
+        },
+        "usage": {
+          "output_tokens": 20
+        }
+      },
+      "parent_tool_use_id": null
+    }
+  },
+  {
+    "type": "StreamEvent",
+    "data": {
+      "uuid": "52c62ab9-a1ce-448d-afcc-b22bfebbbea8",
+      "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+      "event": {
+        "type": "message_stop"
+      },
+      "parent_tool_use_id": null
+    }
+  },
+  {
+    "type": "ResultMessage",
+    "data": {
+      "subtype": "success",
+      "duration_ms": 80,
+      "duration_api_ms": 49,
+      "is_error": false,
+      "num_turns": 1,
+      "session_id": "2e5e7fc2-db77-4826-a500-89a123a05174",
+      "stop_reason": "end_turn",
+      "total_cost_usd": 0.00011200000000000001,
+      "usage": {
+        "input_tokens": 12,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 20,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "result": "OFFLINE_OK",
+      "structured_output": null,
+      "model_usage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 12,
+          "outputTokens": 20,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.00011200000000000001,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000,
+          "thinkingTokens": 0,
+          "canonicalModel": "claude-haiku-4-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "permission_denials": [],
+      "deferred_tool_use": null,
+      "errors": null,
+      "api_error_status": null,
+      "uuid": "ebba6c4b-0215-4179-85c0-ce3ba3ec897e",
+      "terminal_reason": "completed",
+      "origin": null
+    }
+  }
+]

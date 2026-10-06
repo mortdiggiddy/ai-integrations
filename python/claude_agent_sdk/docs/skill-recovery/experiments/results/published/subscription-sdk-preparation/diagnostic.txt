@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/probe.py", line 132, in <module>
+    asyncio.run(prepare())
+    ~~~~~~~~~~~^^^^^^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/python/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/probe.py", line 112, in prepare
+    "options": asdict(selected),
+               ~~~~~~^^^^^^^^^^
+  File "/opt/python/lib/python3.13/dataclasses.py", line 1408, in asdict
+    return _asdict_inner(obj, dict_factory)
+  File "/opt/python/lib/python3.13/dataclasses.py", line 1419, in _asdict_inner
+    f.name: _asdict_inner(getattr(obj, f.name), dict)
+            ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/python/lib/python3.13/dataclasses.py", line 1476, in _asdict_inner
+    return copy.deepcopy(obj)
+           ~~~~~~~~~~~~~^^^^^
+  File "/opt/python/lib/python3.13/copy.py", line 152, in deepcopy
+    rv = reductor(4)
+TypeError: cannot pickle 'TextIOWrapper' instances

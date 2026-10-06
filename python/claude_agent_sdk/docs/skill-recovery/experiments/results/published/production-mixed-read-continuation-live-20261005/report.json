@@ -1,0 +1,125 @@
+{
+  "billing": "CLI list estimate; subscription charges/headroom unverified",
+  "cleanup": [
+    {
+      "receipt": {
+        "attempt": "94958809cde24b9ba2ed2d8908dd4b1d",
+        "host_receipt": "{\"removal_verified\": true, \"resource\": \"40d086311393d09cd4a73dcb974642d87c1c5b206f454739ac1a4e9a4c95a4f7\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}",
+        "name": "sdk-host-94958809cde24b9ba2ed2d8908dd4b1d",
+        "observations": null,
+        "removed": 1,
+        "resource": "40d086311393d09cd4a73dcb974642d87c1c5b206f454739ac1a4e9a4c95a4f7",
+        "runner": "2d163a0a74aa47b0ae3a121ae1bbd163",
+        "session": "160129a5-695f-45d1-9fc7-0b139a0fcfab",
+        "singleton": 1,
+        "stopped": 1,
+        "terminated": 1
+      },
+      "role": "initial"
+    },
+    {
+      "receipt": {
+        "attempt": "f8799946eff248799ed74ec152870fb1",
+        "host_receipt": "{\"removal_verified\": true, \"resource\": \"4ff3780b4090c1f835fd336a79a24f537648150ca6f0af85b602b8ed76cb5953\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}",
+        "name": "sdk-host-f8799946eff248799ed74ec152870fb1",
+        "observations": "{\"close_error\": null, \"interrupt_acknowledged\": false, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"agents\": [\"claude\", \"Explore\", \"general-purpose\", \"Plan\", \"statusline-setup\"], \"analytics_disabled\": true, \"apiKeySource\": \"none\", \"capabilities\": [\"interrupt_receipt_v1\", \"interrupt_cancel_queued_v1\", \"msg_lifecycle_v1\"], \"claude_code_version\": \"2.1.274\", \"cwd\": \"/state/work\", \"fast_mode_disabled_reason\": \"sdk_opt_in_required\", \"fast_mode_state\": \"off\", \"mcp_servers\": [{\"name\": \"durable\", \"source\": \"sdk\", \"status\": \"connected\"}], \"memory_paths\": {\"auto\": \"/tmp/claude-resume-cbg6tkws/projects/-state-work/memory/\"}, \"messaging_socket_path\": \"/tmp/cc-socks/16.sock\", \"model\": \"claude-haiku-4-5-20251001\", \"output_style\": \"default\", \"permissionMode\": \"default\", \"plugins\": [], \"product_feedback_disabled\": false, \"session_id\": \"160129a5-695f-45d1-9fc7-0b139a0fcfab\", \"skills\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"schedule\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\"], \"slash_commands\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"schedule\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\", \"agents\", \"auto-mode-setup\", \"autocompact\", \"clear\", \"color\", \"compact\", \"config\", \"output-style\", \"context\", \"effort\", \"fast\", \"heapdump\", \"init\", \"mcp\", \"model\", \"__remote-workflow\", \"workflow-launch-exec\", \"reload-plugins\", \"reload-skills\", \"rename\", \"security-review\", \"usage-credits\", \"extra-usage\", \"usage\", \"insights\", \"recap\", \"goal\", \"list-agents\", \"team-onboarding\"], \"subtype\": \"init\", \"terminal_slash_commands\": [\"doctor\", \"color\", \"reload-plugins\"], \"tools\": [\"Read\", \"Write\"], \"type\": \"system\", \"uuid\": \"2c66ebe5-8125-4e06-824e-4fedb8e8a274\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"data\": {\"estimated_tokens\": 50, \"estimated_tokens_delta\": 50, \"session_id\": \"160129a5-695f-45d1-9fc7-0b139a0fcfab\", \"subtype\": \"thinking_tokens\", \"type\": \"system\", \"uuid\": \"53c95484-cc36-4191-bd75-9e042c209b83\"}, \"subtype\": \"thinking_tokens\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"data\": {\"estimated_tokens\": 300, \"estimated_tokens_delta\": 250, \"session_id\": \"160129a5-695f-45d1-9fc7-0b139a0fcfab\", \"subtype\": \"thinking_tokens\", \"type\": \"system\", \"uuid\": \"7a669851-7806-46b2-aa25-b3a5333a90d5\"}, \"subtype\": \"thinking_tokens\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"content\": [{\"signature\": \"EqoJCtABCBIYAipAparNYODlvNi2CHe+0QSl8Vy8ezdnaTds0tWXpdGbbZIGJA6xO+gm0jXfzfl6oujY+cy2tFPzHUilNWF3QC1JCjIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYmMxMjQ4YzMtMzBhOS00MDQ4LTg1NGQtNDZkNWE3YTY2ZjA3chB9oY7uhvxijGquhYYIC/gSiAEBmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAHli5HWBrABAhIMTQTAfDb3OI2TziWBGgyU7pUuvVH7Fd6dnXQiMIR0Ploph38LUJ78NrECFF0mb+JAYHI9M6ldvwyTjq48vO4A9w4PmwpfRe63A/HQ0SqGB5qgOUMD+xjrFfHDUqL9GogV+fgQWxt7sf4BDzYvcNXpd0y4tSDXUzf9bXt2oTgybyhBUzC9c4FaqwIKjbilkGpqwZatKOPzMdN4LnXVGLvs2NH450zYm2G+JiN7PjJO9/Z4JgP9lO6lIDtGfUNzLOUo4ilOQ9/h6PWSFyKGIWy08/8bqwUpZx+uSYYGK47gXwwb6Py9u5gnSusnpncWH7u+UaxsBN4p6C1sdAuzBqadIQDMJzOfuOYv9Yz3FNwg/el3Jx4JLgtNSDZRvKWVUURYfQ9vZvV9rk0wskQ8pcNWLgpTJiBZzGSxE19TgXGr0ccT68SxqtQd1QQab5aJqklgW/DBIeNayrZp8csAOm6oAaMSkF96AjK1icV/gUCDer2iF1XpP7jZtBjZJ4cC9EK8PrcOhJzhhGtuzl/mYgF6S/u1sBcjUrkkYZE+G24mBqWBN9ZfSu3SJuHeO+YAqo5nvsBvH7CEyjUhPDDFyJBgd52ypNEfBIoT94Qaep6Z1+WIjdtI4gFF7uuTZpIOhwu6Pijf8C8Uj1907xrN9ljrWVguKBdu1OhAYsy+o5Ka48G6MdhazWq8lCm02cCfJKjlJyWAWvLFPAsqRHdZyjEbFOSbjF3DTowKewavNxbLuU4ZBqzkhnhSHemjRv2r1ueMbSk/4sBA975Txnbu6GftoD2+EjajdsV7eZKntC5d8QoCr7cskxlUJu1M2hhI1rnQYgusqRSykIW1J1XViSlPCV2MJD5KZWZSnoCrNncJJDY9fj5e5l8eQQ4SbPoQy+t/LrN+nEbsrOe61REdVsjtPgB3o2qwNNo95MpUeH3SVYXfsjk3l80j5/GSiYHEOQwrlCsUkb/piMwSGydJDqlS2hTU8zCThLkVfxF4RQ46XMEWOUytLN5TzNFHSF0eWtGb6CkQl0iW4Qqzt81BsU7vvbpKhvYzBc0Ow8LXvIbIPmjIQJmfgfFomHvJNYovoSxFg4GBEmQaxPhDYdlr6vJBhRK6TrlnXU2DxOveECozDyhRv9G5XGNDVPXIJ4lGNLwO+UQ95k91N1FQrayujqyX0W/b/Ly93bQ3r4p5ZmipUiMaeFfBlZvaVtWroLwKyy+QvomsF9t+X8Bh4X6MCdZeE4nP/RCxxC+spgWYdDc7ORltrm3FCmN6MkXIV0a79aLoxISeSClkUdGbHhaO/DOlS5Lieu2xGAE=\", \"thinking\": \"\"}], \"error\": null, \"message_id\": \"msg_011Cfk4o3A9mm5Yz2NQVEX7R\", \"model\": \"claude-haiku-4-5-20251001\", \"parent_tool_use_id\": null, \"session_id\": \"160129a5-695f-45d1-9fc7-0b139a0fcfab\", \"stop_reason\": null, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 3036, \"output_tokens\": 6, \"service_tier\": \"standard\"}, \"uuid\": \"aea66bea-07e7-4451-8278-67deed59afbe\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"content\": [{\"text\": \"Based on the previous tool results:\\n\\n**Recorded Write Result:** The first Write call returned `WRITE_ONCE_RECORDED_OK`, indicating the write to /state/work/marker.txt was successfully recorded.\\n\\n**Denied Calls:** \\n- The second Write call was denied with the error: \\\"Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result.\\\"\\n- The second Read call was denied with the same error: \\\"Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result.\\\"\\n\\nThis occurred because I attempted to make three tool calls simultaneously (two Writes and one Read), but the system only permits one tool call to execute at a time, so the second and third calls were rejected.\"}], \"error\": null, \"message_id\": \"msg_011Cfk4o3A9mm5Yz2NQVEX7R\", \"model\": \"claude-haiku-4-5-20251001\", \"parent_tool_use_id\": null, \"session_id\": \"160129a5-695f-45d1-9fc7-0b139a0fcfab\", \"stop_reason\": null, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 3036, \"output_tokens\": 6, \"service_tier\": \"standard\"}, \"uuid\": \"0b6b4e59-7ab6-497f-8cc5-4fd1f8066503\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"rate_limit_info\": {\"overage_disabled_reason\": null, \"overage_resets_at\": 1793491200, \"overage_status\": \"allowed\", \"rate_limit_type\": \"overage\", \"raw\": {\"isUsingOverage\": false, \"overageInUse\": true, \"overageResetsAt\": 1793491200, \"overageStatus\": \"allowed\", \"rateLimitType\": \"overage\", \"resetsAt\": 1793491200, \"status\": \"allowed\"}, \"resets_at\": 1793491200, \"status\": \"allowed\", \"utilization\": null}, \"session_id\": \"160129a5-695f-45d1-9fc7-0b139a0fcfab\", \"uuid\": \"a76e60a3-09bf-466a-a816-f5312344d560\"}, \"type\": \"RateLimitEvent\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": null, \"duration_api_ms\": 3532, \"duration_ms\": 3568, \"errors\": null, \"is_error\": false, \"model_usage\": {\"claude-haiku-4-5-20251001\": {\"cacheCreationInputTokens\": 0, \"cacheReadInputTokens\": 0, \"canonicalModel\": \"claude-haiku-4-5\", \"contextWindow\": 200000, \"costBasis\": \"list\", \"costUSD\": 0.005141, \"inputTokens\": 3036, \"maxOutputTokens\": 32000, \"outputTokens\": 421, \"provider\": \"firstParty\", \"thinkingTokens\": 235, \"webSearchRequests\": 0}}, \"num_turns\": 1, \"origin\": null, \"permission_denials\": [], \"result\": \"Based on the previous tool results:\\n\\n**Recorded Write Result:** The first Write call returned `WRITE_ONCE_RECORDED_OK`, indicating the write to /state/work/marker.txt was successfully recorded.\\n\\n**Denied Calls:** \\n- The second Write call was denied with the error: \\\"Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result.\\\"\\n- The second Read call was denied with the same error: \\\"Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result.\\\"\\n\\nThis occurred because I attempted to make three tool calls simultaneously (two Writes and one Read), but the system only permits one tool call to execute at a time, so the second and third calls were rejected.\", \"session_id\": \"160129a5-695f-45d1-9fc7-0b139a0fcfab\", \"stop_reason\": \"end_turn\", \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": \"completed\", \"total_cost_usd\": 0.005141, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 3036, \"iterations\": [], \"output_tokens\": 421, \"output_tokens_details\": {\"thinking_tokens\": 235}, \"server_tool_use\": {\"web_fetch_requests\": 0, \"web_search_requests\": 0}, \"service_tier\": \"standard\", \"speed\": \"standard\"}, \"uuid\": \"bf840abb-b9ba-4ff7-be32-34858e0eeb08\"}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": false, \"terminal_received\": true}",
+        "removed": 1,
+        "resource": "4ff3780b4090c1f835fd336a79a24f537648150ca6f0af85b602b8ed76cb5953",
+        "runner": "cf492d01ae6d4d18bd82e5f559f7466d",
+        "session": "160129a5-695f-45d1-9fc7-0b139a0fcfab",
+        "singleton": 1,
+        "stopped": 1,
+        "terminated": 1
+      },
+      "role": "replacement"
+    },
+    {
+      "receipt": {
+        "attempt": "4aca9b9717284f3f8309ef58c1296027",
+        "host_receipt": "{\"removal_verified\": true, \"resource\": \"7ce1bf353860e69cbc92def03dafc0c53c5ecd80471a73ee973f55f347ef823b\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}",
+        "name": "sdk-host-4aca9b9717284f3f8309ef58c1296027",
+        "observations": null,
+        "removed": 1,
+        "resource": "7ce1bf353860e69cbc92def03dafc0c53c5ecd80471a73ee973f55f347ef823b",
+        "runner": null,
+        "session": "160129a5-695f-45d1-9fc7-0b139a0fcfab",
+        "singleton": 1,
+        "stopped": 1,
+        "terminated": 1
+      },
+      "role": "coordinator"
+    }
+  ],
+  "config": {
+    "allowance_usd": 0.05,
+    "authentication": "retained-claude.ai-volume-only",
+    "authorization": "12358c994456dc2e1f99561c1345f07abd4c47ca63993b252baa8e544bf9e746",
+    "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+    "host_seconds": 180,
+    "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+    "input_limit": 20000,
+    "max_turns": 2,
+    "model": "claude-haiku-4-5-20251001",
+    "output_limit": 2048,
+    "residual_risk_accepted": true,
+    "retries": 0,
+    "scenario": "deferred-mixed-read-fresh-worker-metered-enterprise-v1",
+    "sdk": "0.2.162",
+    "segment_seconds": 45,
+    "segments": 1,
+    "shutdown_seconds": 20
+  },
+  "cumulative_checkpoint_usage": {
+    "cost_usd": 0.012281,
+    "input": 7581,
+    "output": 940,
+    "turns": 5
+  },
+  "effect_activity_count": 1,
+  "error": "ModuleNotFoundError: No module named 'temporalio'",
+  "metered_enterprise_usage_accepted": true,
+  "prior_accounting": {
+    "cost_usd": 0.00714,
+    "input": 4545,
+    "model": "claude-haiku-4-5-20251001",
+    "output": 519,
+    "turns": 4
+  },
+  "provider_prevention_proved": false,
+  "replacement_before_cleanup": "Prior host termination and teardown are unresolved",
+  "result": {
+    "callbacks": [
+      {
+        "id": "toolu_01GTQfAPk2Lvx9cs5Qx1oYRu",
+        "input": {
+          "content": "WRITE_ONCE_MARKER\n",
+          "file_path": "/state/work/marker.txt"
+        },
+        "key": {
+          "project_key": "-state-work",
+          "session_id": "160129a5-695f-45d1-9fc7-0b139a0fcfab"
+        },
+        "name": "Write",
+        "transcript_uuid": "a34c8fb5-92ad-45c8-863e-0bbb9cc49ba1"
+      }
+    ],
+    "effect_count": 1,
+    "segment": {
+      "checkpoint": "0b6b4e59-7ab6-497f-8cc5-4fd1f8066503",
+      "cost_usd": 0.005141,
+      "deferred": null,
+      "error": null,
+      "is_error": false,
+      "result": "Based on the previous tool results:\n\n**Recorded Write Result:** The first Write call returned `WRITE_ONCE_RECORDED_OK`, indicating the write to /state/work/marker.txt was successfully recorded.\n\n**Denied Calls:** \n- The second Write call was denied with the error: \"Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result.\"\n- The second Read call was denied with the same error: \"Only one tool call can run at a time. Your other tool call is running now. Call this tool again after you get that result.\"\n\nThis occurred because I attempted to make three tool calls simultaneously (two Writes and one Read), but the system only permits one tool call to execute at a time, so the second and third calls were rejected.",
+      "session_id": "160129a5-695f-45d1-9fc7-0b139a0fcfab"
+    }
+  },
+  "retained_checkpoint_continuation": true,
+  "status": "nonpassing",
+  "totals": {
+    "cost_usd": 0.005141,
+    "input": 3036,
+    "output": 421,
+    "turns": 1
+  }
+}

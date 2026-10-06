@@ -1,0 +1,160 @@
+{
+  "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "python": "3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]",
+  "sdk": "0.2.162",
+  "cli": "2.1.274 (Claude Code)",
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "sdk_record_hashes": [
+    {
+      "path": "claude_agent_sdk-0.2.162.dist-info/INSTALLER",
+      "sha256": "e6184ce10e266134fdcfa401e8f1a95005bcd4f18d16b62b757323e2833fe9a9"
+    },
+    {
+      "path": "claude_agent_sdk-0.2.162.dist-info/METADATA",
+      "sha256": "b3d7b3b964bdf88302f0098f17a2c98d4389b68dfe954640f6cbe2e5cdedb08c"
+    },
+    {
+      "path": "claude_agent_sdk-0.2.162.dist-info/REQUESTED",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "claude_agent_sdk-0.2.162.dist-info/WHEEL",
+      "sha256": "aad0b0a12256807936d52d4a6f88a1773236ae527564a688bab4e3fe780e8724"
+    },
+    {
+      "path": "claude_agent_sdk-0.2.162.dist-info/direct_url.json",
+      "sha256": "a780487a9f7f42ae067a49cd0e1ad5ba586a7fbb65fa1b138f869050d4318a39"
+    },
+    {
+      "path": "claude_agent_sdk-0.2.162.dist-info/licenses/LICENSE",
+      "sha256": "cebdde8a8fb9ee59e5eaaed19578bf8085aa7047562259c31f38f225c26f6812"
+    },
+    {
+      "path": "claude_agent_sdk-0.2.162.dist-info/uv_cache.json",
+      "sha256": "26ecc5965bee940e836ef0ecf08889af70963e706bf67e639d63a295f7bd157f"
+    },
+    {
+      "path": "claude_agent_sdk/__init__.py",
+      "sha256": "73674adc1d14d02716bd441d3f96265dbfeafb63775140acebb3ecdc9211347e"
+    },
+    {
+      "path": "claude_agent_sdk/_bundled/.gitignore",
+      "sha256": "c1490336e1d0abde90e90589b0b1459095ed0f722ecd87ee38165a07d6d1edff"
+    },
+    {
+      "path": "claude_agent_sdk/_cli_version.py",
+      "sha256": "f1bd445fb3a154ed4ff3a868dca8dd900ef99a0270617356a58da761180a1bff"
+    },
+    {
+      "path": "claude_agent_sdk/_errors.py",
+      "sha256": "3ea0d39326f9cd3b4789e4fcebb2573a55ee2c403d0dac9bfe1a4d06c9bd7a4b"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/__init__.py",
+      "sha256": "cc37608eaa7c488f664e7c196cfd817bec382d696fe1ade403e4d2da2ef98ec3"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/_mcp_compat.py",
+      "sha256": "c71f94d2dd18cd37682424619ac93c79f730e83ff0c403fd2500566a9f2ab2b0"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/_task_compat.py",
+      "sha256": "665abfabdc9ea1a10489f64da0f8b5a5a5e4e514b3b0990812074765ece1dcd3"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/client.py",
+      "sha256": "e8da1d34b949a9c53da2cf900684fa941d68fbc475abfec1a94bbfa2f1c3e772"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/main_agent_recovery.py",
+      "sha256": "7ccd84f73b9fc9f3138dfb20f35b81f61986817ac29a406d826d13a0627837ed"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/message_parser.py",
+      "sha256": "febb1aee19e47e03433d89cd4b1f8c5636950e206df77e4f4ca2738b0c900393"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/query.py",
+      "sha256": "0562517de949f4431177f204fe84cda3265f495d0eb0a949b9ced96cc5bd8276"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/sdk_mcp_bridge.py",
+      "sha256": "5520af384b0d67f93a36450ccd8f752459ee50d88afb1754e5638577e4b230d7"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/session_import.py",
+      "sha256": "d5a79833f11116ce4c53c636fa96d526ea57eaac7f13cdc3ca01c0145bbaef87"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/session_mutations.py",
+      "sha256": "16653fb5dbb6e9963e05ef1522e43ba4b8e28fd0b037e4749dde865ca9e4e675"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/session_resume.py",
+      "sha256": "a80a76ca92406f82537d9f34a27e1e273172ec9c459bcb090e16e3fc51bc4f65"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/session_store.py",
+      "sha256": "865f0aef9260bbaa053dc02ac960d8e0be9bdcbeca10ac8fba1f0a08bf13d136"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/session_store_validation.py",
+      "sha256": "7148efe5f211754e04fb27442b8b1d4c705c01f3513155f533af0bbc61c5c486"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/session_summary.py",
+      "sha256": "358027a03882b497c48c331332aff5a119ce113005dd0a3abfae93259aba18a9"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/sessions.py",
+      "sha256": "d5323963daf711c8bcc684057fd48d0cb786ee04d8329be6dec82444ec505662"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "sha256": "41692fcd5a90ed6f0ab5dae4646149543d6ddd743bf9ee3dc8cd912304905ba8"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/transport/__init__.py",
+      "sha256": "dcc9c77651ad925b80f1392aeaec7ca4998f48a239e45477fb17a9af86fa32a8"
+    },
+    {
+      "path": "claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "sha256": "23c0b35acfcff5426255f1f17433e66fc7f8f6d5b8f339e93e085233c569e11c"
+    },
+    {
+      "path": "claude_agent_sdk/_version.py",
+      "sha256": "3e4c0e0b92d522214af9cdf932c6cacb35e3fba73fc746246a13ce1ff513cdb5"
+    },
+    {
+      "path": "claude_agent_sdk/client.py",
+      "sha256": "4bf6fc1fa61d91b83da5d7eac47c6b99e9a79ef036f42eda65f00eae429c68aa"
+    },
+    {
+      "path": "claude_agent_sdk/py.typed",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "claude_agent_sdk/query.py",
+      "sha256": "5528bc5bc57992f833f7a1056d1e2847eb71b070766764c84365c2e49a05162e"
+    },
+    {
+      "path": "claude_agent_sdk/testing/__init__.py",
+      "sha256": "b84e3f7817f12d18d6c2686c65e4ba79b187fc6f2e2e8ef834a8dc6250096dcd"
+    },
+    {
+      "path": "claude_agent_sdk/testing/session_store_conformance.py",
+      "sha256": "61466bedc3835e7aa528fe38fb355293b5597b48060dfd677a49172e771a004b"
+    },
+    {
+      "path": "claude_agent_sdk/types.py",
+      "sha256": "2ac23b36b71ce523e950e2651ae8d11f04c84866806a0958b73a51ebd9e83886"
+    }
+  ],
+  "fixture_hashes": {
+    "budget_offline_batch.py": "7963f4f1c0c2c089c75c5f823170c4d13af631fdd1f44b56428b41a1467b17cf",
+    "budget_request_offline.py": "a880372a5e394fe00e9372537c64ad419990b1ca2b6e192b0cf859a1bad187a0",
+    "budget_ledger.py": "983021f00f520538e18ff836e980efeaf3e91a1b6bc663b29134dce3106df683",
+    "fake_messages_api.py": "35363fee611118bc0add836f96de5e665300c6214dc98bd5dfbf83832b30be2c",
+    "budget_usage_offline.py": "6e5977162da0782e3a1345ed6474d6c70ca6457432bb6739efa2e2e886d41b4e"
+  }
+}

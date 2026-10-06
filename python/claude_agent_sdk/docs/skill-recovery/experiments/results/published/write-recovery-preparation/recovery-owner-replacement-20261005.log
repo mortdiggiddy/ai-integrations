@@ -1,0 +1,367 @@
+uv run pytest -n auto --dist=worksteal -n 2 tests/test_retries.py::test_retry_after_a_crash_during_the_model_call tests/test_workflow_engine.py::test_real_engine_segment_that_times_out_is_retried_cleanly
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>/python/claude_agent_sdk
+configfile: pyproject.toml
+plugins: pretty-1.3.0, anyio-4.15.1, timeout-2.4.0, rerunfailures-16.6.1, xdist-3.8.0, asyncio-0.21.2
+timeout: 60.0s
+timeout method: signal
+timeout func_only: True
+asyncio: mode=Mode.AUTO
+created: 2/2 workers
+2 workers [2 items]
+
+F                                                                        [ 50%]tests/test_retries.py:140 test_retry_after_a_crash_during_the_model_call. [100%]
+=================================== FAILURES ===================================
+________________ test_retry_after_a_crash_during_the_model_call ________________
+[gw0] linux -- Python 3.13.15 <repo>/python/claude_agent_sdk/.venv/bin/python3
+
+self = <temporalio.claude_agent_sdk._session_control.SdkSessionControl object at 0x79b1427bb750>
+prompt = <async_generator object ClaudeAgentSdkRunner._user_message at 0x79b142698280>
+options = ClaudeAgentOptions(tools=[], allowed_tools=['mcp__durable__count'], system_prompt='Call at most one tool per message, ....GuardedSessionStore object at 0x79b1427df4d0>, session_store_flush='batched', load_timeout_ms=60000, task_budget=None)
+
+    async def stream(
+        self, prompt: Any, options: ClaudeAgentOptions
+    ) -> AsyncGenerator[Message, None]:
+        """Submit once and drain messages before accepting closure or cancellation."""
+        if self._owner is not None:
+            raise RuntimeError("SDK session control is single use")
+        permission = options.can_use_tool
+        if permission is not None:
+
+            async def guarded_permission(
+                name: str, inputs: dict[str, Any], context: Any
+            ) -> Any:
+                if self.state.stop_requested:
+                    return PermissionResultDeny(
+                        message="Session stop requested", interrupt=True
+                    )
+                return await permission(name, inputs, context)
+
+            options = replace(options, can_use_tool=guarded_permission)
+        self._owner = asyncio.create_task(self._drive(prompt, options))
+        try:
+            while True:
+>               message = await self._queue.get()
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py:262:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Queue at 0x79b1427bbd90 maxsize=0 _queue=[None] tasks=3>
+
+    async def get(self):
+        """Remove and return an item from the queue.
+
+        If queue is empty, wait until an item is available.
+
+        Raises QueueShutDown if the queue has been shut down and is empty,
+        or if the queue has been shut down immediately.
+        """
+        while self.empty():
+            if self._is_shutdown and self.empty():
+                raise QueueShutDown
+            getter = self._get_loop().create_future()
+            self._getters.append(getter)
+            try:
+>               await getter
+E               asyncio.exceptions.CancelledError
+
+../../../../.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/asyncio/queues.py:186: CancelledError
+
+During handling of the above exception, another exception occurred:
+
+self = <temporalio.claude_agent_sdk._runner.ClaudeAgentSdkRunner object at 0x79b1427dd160>
+inp = SegmentInput(session_id='ad0ac745-2b2e-4a82-bdff-4900c8244849', prompt=None, tools=[ToolSpec(name='count', description...cted={'toolu_fake0001': ToolOutcome(content={'n': 1}, is_error=False)}, segment_index=1, live_output=False, fork=False)
+injected = {'toolu_fake0001': ToolOutcome(content={'n': 1}, is_error=False)}
+session_id = 'ad0ac745-2b2e-4a82-bdff-4900c8244849', resume = True
+guard = '1c4cf78b-a89a-4961-9f07-5ee0a5feab1c'
+
+    async def _run_engine(
+        self,
+        inp: SegmentInput,
+        injected: dict[str, ToolOutcome],
+        session_id: str,
+        resume: bool,
+        guard: str | None = None,
+    ) -> SegmentOutput:
+        """Run the engine once. With ``guard``, resuming requires the session to end there.
+
+        Raises:
+            _SessionMoved: If the session does not end at ``guard``.
+        """
+        self._check_session_admission(inp.session_id)
+        # Durable tools the engine ran itself (must stay empty).
+        ran_inside: list[str] = []
+        policy = self._effective_policy(inp)
+        seen_tools: dict[str, str] = {}
+
+        def make_stub(spec: ToolSpec) -> Any:
+            @tool(spec.name, spec.description, spec.input_schema)
+            async def stub(args: dict[str, Any]) -> dict[str, Any]:
+                del args
+                self.stub_calls += 1  # never happens while the hook defers
+                ran_inside.append(spec.name)
+                return {
+                    "content": [
+                        {"type": "text", "text": "This tool must run through Temporal."}
+                    ],
+                    "is_error": True,
+                }
+
+            return stub
+
+        hook_dir = tempfile.mkdtemp(prefix="tca-hook-")
+        control = SdkSessionControl(hook_dir)
+        self._session_controls[inp.session_id] = control
+        settings_file = Path(hook_dir) / "settings.json"
+        if policy is not None:
+            Path(hook_dir, "policy.json").write_text(
+                json.dumps(
+                    {
+                        "entries": json.loads(policy.canonical_json()),
+                        "workspace_root": os.path.realpath(self._cwd or os.getcwd()),
+                    }
+                ),
+                encoding="utf-8",
+            )
+        settings_file.write_text(
+            json.dumps(
+                {
+                    "hooks": {
+                        "PreToolUse": [
+                            {
+                                # Every tool: built-in calls after a pause are denied too.
+                                "matcher": ".*",
+                                "hooks": [_hook_entry()],
+                            }
+                        ],
+                        **(
+                            {
+                                event: [{"matcher": ".*", "hooks": [_hook_entry()]}]
+                                for event in ("PostToolUse", "PostToolUseFailure")
+                            }
+                            if policy is not None
+                            else {}
+                        ),
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        options = self._engine_options(
+            inp,
+            injected,
+            session_id,
+            resume,
+            guard,
+            hook_dir,
+            create_sdk_mcp_server(SERVER, tools=[make_stub(t) for t in inp.tools]),
+        )
+        prompt: Any
+        if not resume:
+            prompt = inp.prompt or ""
+        elif injected:
+            prompt = self._user_message(session_id, injected, inp.prompt)
+        else:
+            prompt = inp.prompt  # a new task on the session
+
+        result: ResultMessage | None = None
+        engine_version = "(unknown version)"
+        paused_by_hook: str | None = None
+        paused_request: dict[str, Any] | None = None
+        marker_error: str | None = None
+        last_assistant: str | None = None
+        store_error: str | None = None
+        query_error: Exception | None = None
+        stopped_by_hook = False
+        # When the Activity is cancelled or times out, deny every later tool call
+        # while the SDK shuts the engine down.
+        stopper = (
+            asyncio.ensure_future(_stop_hooks_when_cancelled(control))
+            if activity.in_activity()
+            else None
+        )
+        stream = query(
+            prompt=prompt, options=ClaudeAgentOptions(**options), control=control
+        )
+        try:
+>           async for message in stream:
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:858:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:85: in query
+    async for message in stream:
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py:275: in stream
+    await self.finish()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.claude_agent_sdk._session_control.SdkSessionControl object at 0x79b1427bb750>
+
+    async def finish(self) -> None:
+        """Wait without cancelling SDK cleanup; retain a wedged owner for containment."""
+        if self._owner is None:
+            return
+        if self._deadline_expired:
+            raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+        done, _ = await asyncio.wait({self._owner}, timeout=self._timeout)
+        if not done:
+            self.state.shutdown_unresolved = True
+            self._deadline_expired = True
+            raise SessionShutdownUnresolved("SDK owner did not finish shutdown")
+        if self._owner.cancelled() or self._owner.exception() is not None:
+            self.state.shutdown_unresolved = True
+            raise SessionShutdownUnresolved("SDK owner failed during cleanup")
+        if self.state.shutdown_unresolved:
+>           raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+E           temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: SDK interruption or closure is unresolved
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py:238: SessionShutdownUnresolved
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-operator/pytest-30/popen-gw0/test_retry_after_a_crash_durin0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x79b144b9f6f0>
+
+    async def test_retry_after_a_crash_during_the_model_call(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """The attempt delivered the tool result, then died waiting for Claude."""
+        holder: list[FakeMessagesAPI] = []
+        api = start_api(holder)
+        policy = api.decide
+        arrived, release = threading.Event(), threading.Event()
+        requests = 0
+        from claude_agent_sdk._internal.transport.subprocess_cli import (
+            SubprocessCLITransport,
+        )
+
+        from temporalio.claude_agent_sdk._session_control import SessionShutdownUnresolved
+
+        children: list[Any] = []
+        connect = SubprocessCLITransport.connect
+
+        async def tracked_connect(transport: Any) -> None:
+            await connect(transport)
+            children.append(transport._process)
+
+        monkeypatch.setattr(SubprocessCLITransport, "connect", tracked_connect)
+
+        def hang_once(body: dict[str, Any]) -> list[dict[str, Any]]:
+            nonlocal requests
+            requests += 1
+            if requests == 2:  # the first model call after the tool result
+                arrived.set()
+                release.wait(30)
+            return policy(body)
+
+        api.decide = hang_once
+        try:
+            runner = make_runner(api, tmp_path)
+            s = Session(runner)
+            first = await s.run(s.input("count to 3"))
+            assert first.deferred is not None
+            c1 = first.deferred
+            retry = s.input(injected={c1.id: ToolOutcome({"n": 1})})
+            crashed = asyncio.ensure_future(runner.run(retry, 1))
+            assert await asyncio.to_thread(arrived.wait, 60)
+            crashed.cancel()  # the Worker dies in the middle of the model call
+            with pytest.raises(asyncio.CancelledError):
+>               await crashed
+
+tests/test_retries.py:185:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:713: in run
+    return await self._run_engine(
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_runner.py:931: in _run_engine
+    await control.finish()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <temporalio.claude_agent_sdk._session_control.SdkSessionControl object at 0x79b1427bb750>
+
+    async def finish(self) -> None:
+        """Wait without cancelling SDK cleanup; retain a wedged owner for containment."""
+        if self._owner is None:
+            return
+        if self._deadline_expired:
+            raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+        done, _ = await asyncio.wait({self._owner}, timeout=self._timeout)
+        if not done:
+            self.state.shutdown_unresolved = True
+            self._deadline_expired = True
+            raise SessionShutdownUnresolved("SDK owner did not finish shutdown")
+        if self._owner.cancelled() or self._owner.exception() is not None:
+            self.state.shutdown_unresolved = True
+            raise SessionShutdownUnresolved("SDK owner failed during cleanup")
+        if self.state.shutdown_unresolved:
+>           raise SessionShutdownUnresolved("SDK interruption or closure is unresolved")
+E           temporalio.claude_agent_sdk._session_control.SessionShutdownUnresolved: SDK interruption or closure is unresolved
+
+.venv/lib/python3.13/site-packages/temporalio/claude_agent_sdk/_session_control.py:238: SessionShutdownUnresolved
+---------------------------- Captured stdout setup -----------------------------
+
+------------------------------ Captured log setup ------------------------------
+12:21:58 [   DEBUG] Using selector: EpollSelector (selector_events.py:64)
+12:21:58 [   DEBUG] Using selector: EpollSelector (selector_events.py:64)
+----------------------------- Captured stderr call -----------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 46718)
+Traceback (most recent call last):
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "<repo>/python/claude_agent_sdk/tests/helpers/fake_messages_api.py", line 200, in do_POST
+    api.write(self, body, blocks)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/python/claude_agent_sdk/tests/helpers/fake_messages_api.py", line 291, in write
+    handler.wfile.write(
+    ~~~~~~~~~~~~~~~~~~~^
+        f"event: {event['type']}\ndata: {json.dumps(event)}\n\n".encode()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/operator/.local/share/uv/python/cpython-3.13.15-linux-x86_64-gnu/lib/python3.13/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+------------------------------ Captured log call -------------------------------
+12:21:58 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:21:58 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:21:58 [   DEBUG] Waiting for a run-ending result before closing stdin (sdk_mcp_servers=1, has_hooks=False, has_can_use_tool=False) (query.py:859)
+12:21:58 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:21:59 [   DEBUG] Initializing server 'durable' (server.py:445)
+12:21:59 [    INFO] Using bundled Claude Code CLI: <repo>/python/claude_agent_sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_bundled/claude (subprocess_cli.py:344)
+12:21:59 [   DEBUG] Waiting for a run-ending result before closing stdin (sdk_mcp_servers=1, has_hooks=False, has_can_use_tool=False) (query.py:859)
+12:21:59 [   DEBUG] no handler for notification notifications/initialized (runner.py:273)
+12:21:59 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:21:59 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:21:59 [   DEBUG] Skipping unknown message type: attachment (message_parser.py:394)
+12:21:59 [   DEBUG] Skipping unknown message type: command_lifecycle (message_parser.py:394)
+12:21:59 [   DEBUG] Read task cancelled (query.py:409)
+---------------------------- Captured log teardown -----------------------------
+12:22:05 [   DEBUG] Using selector: EpollSelector (selector_events.py:64)
+                              Summary of Failures
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃               ┃               ┃  Function     ┃              ┃               ┃
+┃  File         ┃  Function     ┃  Line         ┃  Error Line  ┃  Error        ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│  tests/test…  │  test_retry…  │  141          │  185         │  SessionShu…  │
+└───────────────┴───────────────┴───────────────┴──────────────┴───────────────┘
+Results (27.61s):
+         1 failed
+         1 passed
+make: *** [../_shared/python.mk:60: test] Error 1

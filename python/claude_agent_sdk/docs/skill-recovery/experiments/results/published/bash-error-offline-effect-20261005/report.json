@@ -1,0 +1,10 @@
+{
+  "effect_count": 1,
+  "model_calls": 0,
+  "outcome": {
+    "content": "BASH_KNOWN_ERROR_EXIT_7",
+    "is_error": true,
+    "tool_use_id": "offline-original"
+  },
+  "status": "passed offline fixed Bash effect and SDK error block"
+}

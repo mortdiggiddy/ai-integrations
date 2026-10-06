@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "model_calls": 0,
+  "checks": [
+    "Exclusive persistent reservation and duplicate refusal",
+    "Mock timeout kill/removal and uncertain cleanup refusal",
+    "Strict version/probe/model/usage/cost/result acceptance",
+    "Actual SDK query guarded before transport in image with no network/login",
+    "Installed SDK RECORD verification: 36 hashed files"
+  ],
+  "review": "Independent pre-execution review found two gaps; both corrected and rereviewed before launch"
+}

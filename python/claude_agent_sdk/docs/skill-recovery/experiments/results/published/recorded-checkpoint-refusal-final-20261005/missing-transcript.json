@@ -1,0 +1,15 @@
+{
+  "fault": "missing-transcript",
+  "error": {
+    "type": "RuntimeError",
+    "message": "Requested recovery transcript is missing from session storage"
+  },
+  "pending_seen": [],
+  "transport_starts": [],
+  "transcript_sha256": "968003e98871dee0655f5168d29ee80850d061a4cdb5e053a8d9f6c6252ae410",
+  "parallel_tool_recovery": false,
+  "original_transcript_unchanged": true,
+  "result_published": false,
+  "model_calls": 0,
+  "effects": 0
+}

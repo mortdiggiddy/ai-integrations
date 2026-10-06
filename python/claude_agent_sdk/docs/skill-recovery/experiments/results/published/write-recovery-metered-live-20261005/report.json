@@ -1,0 +1,110 @@
+{
+  "billing": "CLI list estimate; subscription charges/headroom unverified",
+  "cleanup": [
+    {
+      "receipt": {
+        "attempt": "0b8c546e9c7a4288b2eb1317af490941",
+        "host_receipt": "{\"removal_verified\": true, \"resource\": \"acea5e177b9bb540b25106631fc505cf7afb0788e06086ef3e8dd6a6c199cc62\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}",
+        "name": "sdk-host-0b8c546e9c7a4288b2eb1317af490941",
+        "observations": "{\"close_error\": null, \"interrupt_acknowledged\": false, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"agents\": [\"claude\", \"Explore\", \"general-purpose\", \"Plan\", \"statusline-setup\"], \"analytics_disabled\": true, \"apiKeySource\": \"none\", \"capabilities\": [\"interrupt_receipt_v1\", \"interrupt_cancel_queued_v1\", \"msg_lifecycle_v1\"], \"claude_code_version\": \"2.1.274\", \"cwd\": \"/state/work\", \"fast_mode_disabled_reason\": \"sdk_opt_in_required\", \"fast_mode_state\": \"off\", \"mcp_servers\": [{\"name\": \"durable\", \"source\": \"sdk\", \"status\": \"connected\"}], \"memory_paths\": {\"auto\": \"/home/proof/.claude/projects/-state-work/memory/\"}, \"messaging_socket_path\": \"/tmp/cc-socks/15.sock\", \"model\": \"claude-haiku-4-5-20251001\", \"output_style\": \"default\", \"permissionMode\": \"default\", \"plugins\": [], \"product_feedback_disabled\": false, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"skills\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"schedule\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\"], \"slash_commands\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"schedule\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\", \"agents\", \"auto-mode-setup\", \"autocompact\", \"clear\", \"color\", \"compact\", \"config\", \"output-style\", \"context\", \"effort\", \"fast\", \"heapdump\", \"init\", \"mcp\", \"model\", \"__remote-workflow\", \"workflow-launch-exec\", \"reload-plugins\", \"reload-skills\", \"rename\", \"security-review\", \"usage-credits\", \"extra-usage\", \"usage\", \"insights\", \"recap\", \"goal\", \"list-agents\", \"team-onboarding\"], \"subtype\": \"init\", \"terminal_slash_commands\": [\"doctor\", \"color\", \"reload-plugins\"], \"tools\": [\"Write\"], \"type\": \"system\", \"uuid\": \"bd609869-9f59-4dcc-b58f-1e28893e74d7\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"data\": {\"estimated_tokens\": 50, \"estimated_tokens_delta\": 50, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"subtype\": \"thinking_tokens\", \"type\": \"system\", \"uuid\": \"9e214c28-516e-4966-b746-4b0f87511d89\"}, \"subtype\": \"thinking_tokens\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"data\": {\"estimated_tokens\": 198, \"estimated_tokens_delta\": 148, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"subtype\": \"thinking_tokens\", \"type\": \"system\", \"uuid\": \"3b7cf16b-a12d-4030-b01f-2bd322835997\"}, \"subtype\": \"thinking_tokens\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"content\": [{\"signature\": \"Eo4GCtABCBIYAipA0f8z0/11BTbJZGtuxPYY4mVfyMWXCBnwppxFPlUecbzphpEzTyAc/mZ3czHIJL4X1lvcSi/cFll4ysNeDeKaRTIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYmMxMjQ4YzMtMzBhOS00MDQ4LTg1NGQtNDZkNWE3YTY2ZjA3chB9oY7uhvxijGquhYYIC/gSiAEBmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAGTyo/WBrABAhIMOuIpuKGB3FEYdPBSGgyp3JpF8Ea5bNYu4VQiMD3lpiktBPVfInfXSQ1Sl1NtxtOXJ1RrPWiQqgVP0bJ8axUH/wTaA7uDFlZJIDv/JirqA7+ceR1te38MF6knOSihw/WnWi2k8M63e8ywvV72viajIfX15FuX8jnKNWKQki+glSSLXih5h9Ne52+vcvrKwbNKg1hAfjnA/rLeJpsBiPfLfCBLXntNH8zmcEPqx3su55llX4IYpUUutSXaBbY7tTnidbqHP9HfoOfq16N4yoiQJcW21IIOFq47C6qApVFtB6OxtwyK6mAu9b7rJR6q4nSqk29k966m2vs7o5ErEyPIaJugVbyjpI5ff4NxcHU1PwZ3WBdnq+k4RVYlQtwc4GfTLVuOBD+VI76XWegcJmO8eUBk3JEmKKeiRaOeqpp8ZvMltpRai64NkDiOFoW1ff/wPhbWSVxdoFQSvki3TrhRsxtlinDwTEPxXQop4DJiIMpJdoMzjw4fOQTeaYNZr2B3oaiTGqiC4qWa+EDvCFKZflsXVTBbpVm4iuLjV8Jc/o+jZKMYZjEZ0tMV78NgkcOLCQD+VGpzuZhZ7x85HUoipn5GE+7dNXCsO3RX2bbUzhoB7gkbGnImjOKRcMusAl6+Pk8PssJqiSi+d58V+LIoNJdOnKKE6RCv3h+g+wASYvmzm4D4iZ30JH62A5Srcxu5Y1mEnv81GwUMAs2XS+z7lUHWfK/25DsXo3BKQslQi1ltcFlqTICccHMYAQ==\", \"thinking\": \"\"}], \"error\": null, \"message_id\": \"msg_011CfjXHz9AArrPBeRZTWbmb\", \"model\": \"claude-haiku-4-5-20251001\", \"parent_tool_use_id\": null, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"stop_reason\": null, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 1377, \"output_tokens\": 6, \"service_tier\": \"standard\"}, \"uuid\": \"371e1768-becb-42d2-bf1f-2131805a92be\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"content\": [{\"id\": \"toolu_01DJu2fHo3hop4VaWotJLd1k\", \"input\": {\"content\": \"WRITE_ONCE_MARKER\\n\", \"file_path\": \"/state/work/marker.txt\"}, \"name\": \"Write\"}], \"error\": null, \"message_id\": \"msg_011CfjXHz9AArrPBeRZTWbmb\", \"model\": \"claude-haiku-4-5-20251001\", \"parent_tool_use_id\": null, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"stop_reason\": null, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 1377, \"output_tokens\": 6, \"service_tier\": \"standard\"}, \"uuid\": \"cafe68b8-2a76-4770-a7d0-8667c4bf0e7b\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"rate_limit_info\": {\"overage_disabled_reason\": null, \"overage_resets_at\": 1793491200, \"overage_status\": \"allowed\", \"rate_limit_type\": \"overage\", \"raw\": {\"isUsingOverage\": false, \"overageInUse\": true, \"overageResetsAt\": 1793491200, \"overageStatus\": \"allowed\", \"rateLimitType\": \"overage\", \"resetsAt\": 1793491200, \"status\": \"allowed\"}, \"resets_at\": 1793491200, \"status\": \"allowed\", \"utilization\": null}, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"uuid\": \"7fb5a42b-60b9-46a4-b4b6-f58781be72b5\"}, \"type\": \"RateLimitEvent\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": {\"id\": \"toolu_01DJu2fHo3hop4VaWotJLd1k\", \"input\": {\"content\": \"WRITE_ONCE_MARKER\\n\", \"file_path\": \"/state/work/marker.txt\"}, \"name\": \"Write\"}, \"duration_api_ms\": 2147, \"duration_ms\": 2198, \"errors\": null, \"is_error\": false, \"model_usage\": {\"claude-haiku-4-5-20251001\": {\"cacheCreationInputTokens\": 0, \"cacheReadInputTokens\": 0, \"canonicalModel\": \"claude-haiku-4-5\", \"contextWindow\": 200000, \"costBasis\": \"list\", \"costUSD\": 0.002497, \"inputTokens\": 1377, \"maxOutputTokens\": 32000, \"outputTokens\": 224, \"provider\": \"firstParty\", \"thinkingTokens\": 136, \"webSearchRequests\": 0}}, \"num_turns\": 1, \"origin\": null, \"permission_denials\": [], \"result\": \"\", \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"stop_reason\": \"tool_deferred\", \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": \"tool_deferred\", \"total_cost_usd\": 0.002497, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 1377, \"iterations\": [], \"output_tokens\": 224, \"output_tokens_details\": {\"thinking_tokens\": 136}, \"server_tool_use\": {\"web_fetch_requests\": 0, \"web_search_requests\": 0}, \"service_tier\": \"standard\", \"speed\": \"standard\"}, \"uuid\": \"6610b482-7f52-4fbd-b26e-cc5414241a92\"}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": false, \"terminal_received\": true}",
+        "removed": 1,
+        "resource": "acea5e177b9bb540b25106631fc505cf7afb0788e06086ef3e8dd6a6c199cc62",
+        "runner": "156318952c2f4987aa507bbf71b1986e",
+        "session": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+        "singleton": 1,
+        "stopped": 1,
+        "terminated": 1
+      },
+      "role": "initial"
+    },
+    {
+      "receipt": {
+        "attempt": "c7f08a9566724b43a504417ffb61561c",
+        "host_receipt": "{\"removal_verified\": true, \"resource\": \"8fccd13c4d05f89750579722e7cc139082666a3c5849ff920d4683e9b286575c\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}",
+        "name": "sdk-host-c7f08a9566724b43a504417ffb61561c",
+        "observations": "{\"close_error\": null, \"interrupt_acknowledged\": false, \"interrupt_error\": null, \"messages\": [{\"message\": {\"data\": {\"agents\": [\"claude\", \"Explore\", \"general-purpose\", \"Plan\", \"statusline-setup\"], \"analytics_disabled\": true, \"apiKeySource\": \"none\", \"capabilities\": [\"interrupt_receipt_v1\", \"interrupt_cancel_queued_v1\", \"msg_lifecycle_v1\"], \"claude_code_version\": \"2.1.274\", \"cwd\": \"/state/work\", \"fast_mode_disabled_reason\": \"sdk_opt_in_required\", \"fast_mode_state\": \"off\", \"mcp_servers\": [{\"name\": \"durable\", \"source\": \"sdk\", \"status\": \"connected\"}], \"memory_paths\": {\"auto\": \"/tmp/claude-resume-az9imiyv/projects/-state-work/memory/\"}, \"messaging_socket_path\": \"/tmp/cc-socks/16.sock\", \"model\": \"claude-haiku-4-5-20251001\", \"output_style\": \"default\", \"permissionMode\": \"default\", \"plugins\": [], \"product_feedback_disabled\": false, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"skills\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"schedule\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\"], \"slash_commands\": [\"deep-research\", \"dataviz\", \"update-config\", \"verify\", \"debug\", \"code-review\", \"simplify\", \"batch\", \"fewer-permission-prompts\", \"doctor\", \"loop\", \"schedule\", \"claude-api\", \"workflow-authoring\", \"run\", \"run-skill-generator\", \"agents\", \"auto-mode-setup\", \"autocompact\", \"clear\", \"color\", \"compact\", \"config\", \"output-style\", \"context\", \"effort\", \"fast\", \"heapdump\", \"init\", \"mcp\", \"model\", \"__remote-workflow\", \"workflow-launch-exec\", \"reload-plugins\", \"reload-skills\", \"rename\", \"security-review\", \"usage-credits\", \"extra-usage\", \"usage\", \"insights\", \"recap\", \"goal\", \"list-agents\", \"team-onboarding\"], \"subtype\": \"init\", \"terminal_slash_commands\": [\"doctor\", \"color\", \"reload-plugins\"], \"tools\": [\"Write\"], \"type\": \"system\", \"uuid\": \"19c31cc2-19cf-41a0-a9db-d5d98661d92d\"}, \"subtype\": \"init\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"data\": {\"estimated_tokens\": 50, \"estimated_tokens_delta\": 50, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"subtype\": \"thinking_tokens\", \"type\": \"system\", \"uuid\": \"554b522f-5b50-4349-814d-3c3c4635b573\"}, \"subtype\": \"thinking_tokens\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"data\": {\"estimated_tokens\": 130, \"estimated_tokens_delta\": 80, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"subtype\": \"thinking_tokens\", \"type\": \"system\", \"uuid\": \"cd002063-43dc-43db-a458-1e414ff76b9b\"}, \"subtype\": \"thinking_tokens\"}, \"type\": \"SystemMessage\"}, {\"message\": {\"content\": [{\"signature\": \"EoAECtABCBIYAipAgNRIEy6w2ZRpeUL5pLwqCKYiDJu68YXcj3+jESwtLjMJ3oiiK/Hf0SaqDpJ0WEY5hnAsI8NSY6TsTjqkDsDh7TIZY2xhdWRlLWhhaWt1LTQtNS0yMDI1MTAwMTgAQgh0aGlua2luZ1okYmMxMjQ4YzMtMzBhOS00MDQ4LTg1NGQtNDZkNWE3YTY2ZjA3chB9oY7uhvxijGquhYYIC/gSiAEBmgEbChljbGF1ZGUtaGFpa3UtNC01LTIwMjUxMDAxqAGXyo/WBrABAhIMW0eju5cRznwLnx0kGgwJU6N3UF67m6ndqS0iMAso3axny2Ry6LAK1gNg8UH2x1NnoGzfXJXxB0TICMktxIGgIqaJOvnim53B1W686ircAatkQfxzX+I74+6I4FXB6dXgzvR1aHVpt5hbHVzD+dxDxNQe6xN9I2NB9NTLLj4JajPaClCRmznslgcp8ZYQUmBbMTgtPAsSNeylkBILuPJv9aBkv5TT7iVP+kFfZ65ZzZZxwHNjIm0IODcBuqe0or3L0S8hh+xKtsBOmrtkDN5wWmx2Ztg41t2bnJhZ4cBZYnbei42+u/E4B4goJKJOX8ld5S22RjeaTIEnmlpAulkE4ceWRgkyuO6CCNyksAGT203/+jEXOYpTu9X0GLGUPt6UiD2x7gvUwPFbVu0YAQ==\", \"thinking\": \"\"}], \"error\": null, \"message_id\": \"msg_011CfjXJNvNbDRC9qQQuP3G3\", \"model\": \"claude-haiku-4-5-20251001\", \"parent_tool_use_id\": null, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"stop_reason\": null, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 1721, \"output_tokens\": 4, \"service_tier\": \"standard\"}, \"uuid\": \"cd64e50a-8aea-45f1-8876-4addacf15c12\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"content\": [{\"text\": \"WRITE_ONCE_RECORDED_OK\"}], \"error\": null, \"message_id\": \"msg_011CfjXJNvNbDRC9qQQuP3G3\", \"model\": \"claude-haiku-4-5-20251001\", \"parent_tool_use_id\": null, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"stop_reason\": null, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 1721, \"output_tokens\": 4, \"service_tier\": \"standard\"}, \"uuid\": \"739b41f6-da2b-44d1-a893-38a372911074\"}, \"type\": \"AssistantMessage\"}, {\"message\": {\"rate_limit_info\": {\"overage_disabled_reason\": null, \"overage_resets_at\": 1793491200, \"overage_status\": \"allowed\", \"rate_limit_type\": \"overage\", \"raw\": {\"isUsingOverage\": false, \"overageInUse\": true, \"overageResetsAt\": 1793491200, \"overageStatus\": \"allowed\", \"rateLimitType\": \"overage\", \"resetsAt\": 1793491200, \"status\": \"allowed\"}, \"resets_at\": 1793491200, \"status\": \"allowed\", \"utilization\": null}, \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"uuid\": \"02da430e-5826-4e99-bdb0-162670a89d3f\"}, \"type\": \"RateLimitEvent\"}, {\"message\": {\"api_error_status\": null, \"deferred_tool_use\": null, \"duration_api_ms\": 1214, \"duration_ms\": 1250, \"errors\": null, \"is_error\": false, \"model_usage\": {\"claude-haiku-4-5-20251001\": {\"cacheCreationInputTokens\": 0, \"cacheReadInputTokens\": 0, \"canonicalModel\": \"claude-haiku-4-5\", \"contextWindow\": 200000, \"costBasis\": \"list\", \"costUSD\": 0.002071, \"inputTokens\": 1721, \"maxOutputTokens\": 32000, \"outputTokens\": 70, \"provider\": \"firstParty\", \"thinkingTokens\": 54, \"webSearchRequests\": 0}}, \"num_turns\": 1, \"origin\": null, \"permission_denials\": [], \"result\": \"WRITE_ONCE_RECORDED_OK\", \"session_id\": \"e83c3b9d-a2a4-445a-96ba-4d61363e460e\", \"stop_reason\": \"end_turn\", \"structured_output\": null, \"subtype\": \"success\", \"terminal_reason\": \"completed\", \"total_cost_usd\": 0.002071, \"usage\": {\"cache_creation\": {\"ephemeral_1h_input_tokens\": 0, \"ephemeral_5m_input_tokens\": 0}, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"inference_geo\": \"not_available\", \"input_tokens\": 1721, \"iterations\": [], \"output_tokens\": 70, \"output_tokens_details\": {\"thinking_tokens\": 54}, \"server_tool_use\": {\"web_fetch_requests\": 0, \"web_search_requests\": 0}, \"service_tier\": \"standard\", \"speed\": \"standard\"}, \"uuid\": \"72f47561-45a0-4ebd-a1e0-6300b883252a\"}, \"type\": \"ResultMessage\"}], \"prompt_submission_started\": true, \"sdk_closed\": true, \"shutdown_unresolved\": false, \"stop_requested\": false, \"terminal_received\": true}",
+        "removed": 1,
+        "resource": "8fccd13c4d05f89750579722e7cc139082666a3c5849ff920d4683e9b286575c",
+        "runner": "c028b2e70f84480d879000ae4e89647e",
+        "session": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+        "singleton": 1,
+        "stopped": 1,
+        "terminated": 1
+      },
+      "role": "replacement"
+    },
+    {
+      "receipt": {
+        "attempt": "349b614c06a64ac4985d44bf64217b18",
+        "host_receipt": "{\"removal_verified\": true, \"resource\": \"dff92059db04ee10acb368a4432290446ed3f3047e03f90fae50e1cd2ebcaa31\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}",
+        "name": "sdk-host-349b614c06a64ac4985d44bf64217b18",
+        "observations": null,
+        "removed": 1,
+        "resource": "dff92059db04ee10acb368a4432290446ed3f3047e03f90fae50e1cd2ebcaa31",
+        "runner": null,
+        "session": "e83c3b9d-a2a4-445a-96ba-4d61363e460e",
+        "singleton": 1,
+        "stopped": 1,
+        "terminated": 1
+      },
+      "role": "coordinator"
+    }
+  ],
+  "config": {
+    "allowance_usd": 0.05,
+    "authentication": "retained-claude.ai-volume-only",
+    "authorization": "e0f3dd11cbe2ab24d37d19b3f59fb62c31bf3011816047e9030d3f16f29d6ad7",
+    "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+    "host_seconds": 180,
+    "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+    "input_limit": 20000,
+    "max_turns": 2,
+    "model": "claude-haiku-4-5-20251001",
+    "output_limit": 2048,
+    "residual_risk_accepted": true,
+    "retries": 0,
+    "scenario": "deferred-write-fresh-worker-metered-enterprise-v1",
+    "sdk": "0.2.162",
+    "segment_seconds": 45,
+    "segments": 2,
+    "shutdown_seconds": 20
+  },
+  "effect_activity_count": 1,
+  "metered_enterprise_usage_accepted": true,
+  "provider_prevention_proved": false,
+  "replacement_before_cleanup": "Prior host termination and teardown are unresolved",
+  "result": {
+    "callbacks": [
+      {
+        "id": "toolu_01DJu2fHo3hop4VaWotJLd1k",
+        "input": {
+          "content": "WRITE_ONCE_MARKER\n",
+          "file_path": "/state/work/marker.txt"
+        },
+        "key": {
+          "project_key": "-state-work",
+          "session_id": "e83c3b9d-a2a4-445a-96ba-4d61363e460e"
+        },
+        "name": "Write",
+        "transcript_uuid": "cafe68b8-2a76-4770-a7d0-8667c4bf0e7b"
+      }
+    ],
+    "effect_count": 1,
+    "segment": {
+      "checkpoint": "739b41f6-da2b-44d1-a893-38a372911074",
+      "cost_usd": 0.002071,
+      "deferred": null,
+      "error": null,
+      "is_error": false,
+      "result": "WRITE_ONCE_RECORDED_OK",
+      "session_id": "e83c3b9d-a2a4-445a-96ba-4d61363e460e"
+    }
+  },
+  "status": "passed bounded Write fixture",
+  "totals": {
+    "cost_usd": 0.004568,
+    "input": 3098,
+    "output": 294,
+    "turns": 2
+  }
+}

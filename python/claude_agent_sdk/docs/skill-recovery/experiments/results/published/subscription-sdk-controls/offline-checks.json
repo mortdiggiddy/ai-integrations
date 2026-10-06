@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-02",
+  "scope": "Offline source/control preparation only; no model call",
+  "probe_sha256": "44754903f656b8c9dd3169a931314f84e8143988fd0473a93c2ab2d01811999e",
+  "offline_checks": {
+    "status": "offline_control_checks_passed",
+    "model_requests": 0,
+    "mock_cases": 7,
+    "replay_consumed_events": 7,
+    "replay_first_stop": "ambiguous_active_or_unverifiable_overage",
+    "queued_continuation_unread": true,
+    "watchdog_success_race_rejected": true,
+    "boolean_turn_count_rejected": true,
+    "whitespace_result_rejected": true,
+    "limits": [
+      "CLI producer can already have started another request before host observation.",
+      "Removal cannot undo provider usage or charges already incurred.",
+      "No currency, input token or phase aggregate preventive cap is proved."
+    ]
+  },
+  "pinned_sdk_preflight": {
+    "kind": "provenance",
+    "sdk": "0.2.162",
+    "cli": "2.1.274 (Claude Code)",
+    "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+    "sdk_record_files": 36,
+    "probe_sha256": "44754903f656b8c9dd3169a931314f84e8143988fd0473a93c2ab2d01811999e",
+    "helper_sha256": "60f18ce20cd2281cfb86f7793653ec5dcf0e9db3fdecc5665f69966493848869",
+    "status": "offline_prepared",
+    "sdk_command": [
+      "/opt/claude",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--system-prompt",
+      "Return the requested text without explanation.",
+      "--tools",
+      "",
+      "--max-turns",
+      "1",
+      "--max-budget-usd",
+      "0.05",
+      "--model",
+      "claude-haiku-4-5-20251001",
+      "--permission-mode",
+      "default",
+      "--mcp-config",
+      "{\"mcpServers\":{}}",
+      "--include-partial-messages",
+      "--strict-mcp-config",
+      "--setting-sources=",
+      "--disable-slash-commands",
+      "--no-chrome",
+      "--no-session-persistence",
+      "--prompt-suggestions",
+      "false",
+      "--thinking",
+      "disabled",
+      "--input-format",
+      "stream-json"
+    ],
+    "env": {
+      "CLAUDE_CODE_MAX_RETRIES": "0",
+      "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "64",
+      "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+    },
+    "guarded_transport_attempts": 1,
+    "model_cli_spawns": 0,
+    "model_requests": 0
+  },
+  "container": {
+    "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+    "network": "none",
+    "login_volume_mounted": false,
+    "readonly_mounts": {
+      "subscription_sdk_control.py": "/probe/subscription_sdk_control.py",
+      "subscription_sdk_run.py": "/probe/subscription_sdk_run.py"
+    },
+    "entrypoint": "/opt/python/bin/python3.13",
+    "arguments": [
+      "/probe/subscription_sdk_control.py",
+      "--container-prepare"
+    ],
+    "exit_code": 0,
+    "controls": [
+      "--rm",
+      "--init",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--pids-limit=128",
+      "--memory=2g",
+      "--cpus=2"
+    ],
+    "tmpfs": [
+      "/tmp:rw,nosuid,nodev,size=256m",
+      "/work:rw,nosuid,nodev,uid=1000,gid=1000,size=128m",
+      "/home/proof:rw,nosuid,nodev,uid=1000,gid=1000,size=128m"
+    ]
+  },
+  "authorization": {
+    "new_invocation_executed": false,
+    "new_reservation_created": false,
+    "original_consumed_reservation_retained": true
+  },
+  "review": {
+    "status": "independent rereview passed",
+    "corrected": [
+      "Watchdog stop after valid terminal/exit 0 must fail",
+      "Boolean turn count refused",
+      "Whitespace around exact result refused"
+    ],
+    "tested_source_sha256": "44754903f656b8c9dd3169a931314f84e8143988fd0473a93c2ab2d01811999e",
+    "independent_offline_checks": "passed"
+  },
+  "lead_checks": [
+    "Fresh static CLI hash/source anchors confirmed",
+    "New offline control checks passed",
+    "Pinned SDK guarded query preflight passed with no network/login",
+    "Explicit probe Ruff import/format checks passed",
+    "Plugin make lint with UV_NO_SYNC=1 passed",
+    "Repository conventions with UV_NO_SYNC=1 passed",
+    "Canonical 59 assumption ID coverage passed",
+    "Maintained local ticket validator passed",
+    "Superseded check_tickets.py reports five already completed criteria blocks as failing; not maintained acceptance gate"
+  ],
+  "limits": [
+    "No live stop latency or provider cancellation tested",
+    "No verified subscription/overage billing",
+    "No provider request count or hard input/total-token/currency/aggregate cap",
+    "Successful connectivity and model recovery acceptance remain open"
+  ]
+}
