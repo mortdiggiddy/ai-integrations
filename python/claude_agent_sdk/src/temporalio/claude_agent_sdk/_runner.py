@@ -846,6 +846,20 @@ class ClaudeAgentSdkRunner:
         settings_file.write_text(
             json.dumps(
                 {
+                    **(
+                        {
+                            "permissions": {
+                                "ask": [
+                                    entry.name
+                                    for entry in policy.entries
+                                    if entry.tool_class != "read"
+                                    or entry.name == "Skill"
+                                ]
+                            }
+                        }
+                        if policy is not None
+                        else {}
+                    ),
                     "hooks": {
                         "PreToolUse": [
                             {
@@ -862,7 +876,7 @@ class ClaudeAgentSdkRunner:
                             if policy is not None
                             else {}
                         ),
-                    }
+                    },
                 }
             ),
             encoding="utf-8",

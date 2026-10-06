@@ -194,7 +194,17 @@ def test_missing_corrupt_and_locked_storage_refuses(tmp_path):
 
 @pytest.mark.parametrize(
     "fault",
-    ["log", "attempt", "session", "code", "boolcode", "pid", "boolpid", "negativepid"],
+    [
+        "log",
+        "logs-error",
+        "attempt",
+        "session",
+        "code",
+        "boolcode",
+        "pid",
+        "boolpid",
+        "negativepid",
+    ],
 )
 def test_driver_requires_bound_completion_receipt(tmp_path, monkeypatch, fault):
     import host_session_offline as driver
@@ -214,6 +224,8 @@ def test_driver_requires_bound_completion_receipt(tmp_path, monkeypatch, fault):
             self.root = tmp_path
             self.attempt = ""
             self.session = ""
+            self.name = ""
+            self.removed = False
 
         def command(self, *args):
             operations.append(args)
@@ -223,8 +235,11 @@ def test_driver_requires_bound_completion_receipt(tmp_path, monkeypatch, fault):
                 self.root = Path(args[args.index("-v") + 1].split(":")[0])
                 self.attempt = args[args.index("--label") + 1].split("=")[1]
                 self.session = args[args.index("--session") + 1]
+                self.name = args[args.index("--name") + 1]
                 return "a" * 64
             if args[:2] == ("container", "logs"):
+                if fault == "logs-error":
+                    raise RuntimeError("Docker log collection failed")
                 if fault != "log":
                     receipt = {
                         "attempt": self.attempt,
@@ -247,18 +262,38 @@ def test_driver_requires_bound_completion_receipt(tmp_path, monkeypatch, fault):
             return ""
 
         def inspect(self, resource):
-            return {"State": {"Running": False}}
+            return {
+                "Id": resource,
+                "Name": "/" + self.name,
+                "Config": {"Labels": {"durability.attempt": self.attempt}},
+                "State": {"Running": False, "Pid": 0},
+            }
+
+        def wait(self, resource):
+            operations.append(("container", "wait", resource))
+            return 1
+
+        def remove(self, resource):
+            operations.append(("container", "rm", resource))
+            self.removed = True
+
+        def absent(self, resource):
+            return self.removed
 
     monkeypatch.setattr(driver, "Docker", FailedChild)
     expected = (
-        "Offline child failed"
-        if fault == "log"
-        else "Offline child completion receipt differs"
+        "Docker log collection failed"
+        if fault == "logs-error"
+        else (
+            "Offline child failed"
+            if fault == "log"
+            else "Offline child completion receipt differs"
+        )
     )
     with pytest.raises(RuntimeError, match=expected):
         driver.host_probe()
-    assert ("container", "rm", "-f", "a" * 64) in operations
-    assert not any(args[:2] == ("container", "wait") for args in operations)
+    assert ("container", "rm", "a" * 64) in operations
+    assert ("container", "wait", "a" * 64) in operations
 
 
 @pytest.fixture(name="client_factory")

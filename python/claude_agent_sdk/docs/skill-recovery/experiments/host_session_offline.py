@@ -74,12 +74,32 @@ def child(args):
 
     temporalio.__path__.insert(0, "/source/temporalio")
     sys.path.insert(0, "/checks")
-    code = pytest.main(
+    checks = (
         [
+            "/checks/test_preventive_backstop.py",
+            "/checks/test_tool_policy.py",
+            "/checks/test_pending_recovery.py",
+            "/checks/test_lifecycle.py",
+            "/checks/test_host_admission.py",
+            "/checks/test_shutdown_probe.py",
+            "/checks/test_experiment_admission.py",
+        ]
+        if args.backstop_case
+        else [
             "/checks/test_host_admission.py",
             "/checks/test_lifecycle.py",
             "/checks/test_shutdown_probe.py",
             "/checks/test_experiment_admission.py",
+        ]
+    )
+    if args.backstop_case:
+        sys.path.insert(0, "/test-root")
+        os.environ["BACKSTOP_CASE"] = args.backstop_case
+        os.environ["BACKSTOP_ATTEMPT"] = args.attempt
+        os.environ["BACKSTOP_SESSION"] = args.session
+    code = pytest.main(
+        [
+            *checks,
             "--confcutdir=/checks",
             "-q",
             "-p",
@@ -90,9 +110,12 @@ def child(args):
     )
     if code:
         return code
-    asyncio.run(
-        child_exchange(HostSession(Path("/state/host.db")), args.attempt, args.session)
-    )
+    if not args.backstop_case:
+        asyncio.run(
+            child_exchange(
+                HostSession(Path("/state/host.db")), args.attempt, args.session
+            )
+        )
     process = subprocess.Popen(
         [sys.executable, "-c", "import time; time.sleep(300)"],
         start_new_session=True,
@@ -122,7 +145,7 @@ def child(args):
     return 0
 
 
-def host_probe(server=None, output=None):
+def host_probe(server=None, output=None, backstop_case=None):
     """Create only the fixed offline probe; never expose a model execution command."""
     plugin = Path(__file__).resolve().parents[3]
     docker = Docker()
@@ -211,6 +234,20 @@ def host_probe(server=None, output=None):
                 "/checks/test_shutdown_probe.py",
             ),
             (
+                plugin / "tests/session_control/test_preventive_backstop.py",
+                "/checks/test_preventive_backstop.py",
+            ),
+            (
+                plugin / "tests/session_control/no_decision_hook.py",
+                "/checks/no_decision_hook.py",
+            ),
+            (plugin / "tests/test_tool_policy.py", "/checks/test_tool_policy.py"),
+            (
+                plugin / "tests/test_pending_recovery.py",
+                "/checks/test_pending_recovery.py",
+            ),
+            (plugin / "tests", "/test-root/tests"),
+            (
                 Path(__file__).with_name("sdk_shutdown_probe.py"),
                 "/fixture/sdk_shutdown_probe.py",
             ),
@@ -240,12 +277,14 @@ def host_probe(server=None, output=None):
                 session,
             ]
         )
+        if backstop_case is not None:
+            argv.extend(["--backstop-case", backstop_case])
         resource = docker.command(*argv)
         host.bind(attempt, resource)
         removed = False
         try:
             docker.command("container", "start", resource)
-            deadline = time.monotonic() + 45
+            deadline = time.monotonic() + (60 if backstop_case else 45)
             while True:
                 logs = docker.command("container", "logs", resource)
                 ready_path = root / "ready.json"
@@ -291,46 +330,70 @@ def host_probe(server=None, output=None):
             except AdmissionRefused:
                 stale_refused = True
             assert stale_refused and replacement != attempt
+            report = {
+                "evidence_kind": "actual_engine_local_provider_backstop"
+                if backstop_case
+                else "scripted_sdk_and_harmless_container_child",
+                "image": IMAGE,
+                "cli_sha256": CLI_HASH,
+                "before_teardown": before,
+                "after_teardown": after,
+                "replacement_before_teardown_refused": blocked,
+                "replacement_after_teardown_admitted": True,
+                "stale_teardown_refused": stale_refused,
+                "network": "none",
+                "credentials_or_login_mounts": False,
+                "model_calls": 0,
+                "engine_launches": 1 if backstop_case else 0,
+                "provider_spend_usd": 0,
+                "installed_plugin_provenance_proved": False,
+                "live_engine_shutdown_or_recovery_proved": False,
+                "source_sha256": {
+                    str(path.relative_to(plugin)): hashlib.sha256(
+                        path.read_bytes()
+                    ).hexdigest()
+                    for path in [
+                        Path(__file__),
+                        Path(__file__).with_name("host_session.py"),
+                        plugin / "tests/session_control/test_preventive_backstop.py"
+                        if backstop_case
+                        else plugin / "tests/session_control/test_host_admission.py",
+                        plugin / "tests/session_control/no_decision_hook.py",
+                        plugin / "tests/helpers/fake_messages_api.py",
+                        plugin / "tests/test_tool_policy.py",
+                        plugin / "tests/test_pending_recovery.py",
+                        plugin / "tests/session_control/test_lifecycle.py",
+                        plugin / "tests/session_control/test_host_admission.py",
+                        plugin / "src/temporalio/claude_agent_sdk/_defer_hook.py",
+                        plugin / "src/temporalio/claude_agent_sdk/_runner.py",
+                        plugin / "src/temporalio/claude_agent_sdk/_session_control.py",
+                    ]
+                },
+            }
+            if output is not None:
+                (root / "report.json").write_text(json.dumps(report, indent=2))
             print(
                 json.dumps(
                     {
-                        "evidence_kind": "scripted_sdk_and_harmless_container_child",
-                        "image": IMAGE,
-                        "cli_sha256": CLI_HASH,
-                        "before_teardown": before,
-                        "after_teardown": after,
-                        "replacement_before_teardown_refused": blocked,
-                        "replacement_after_teardown_admitted": True,
-                        "stale_teardown_refused": stale_refused,
-                        "network": "none",
-                        "credentials_or_login_mounts": False,
-                        "model_calls": 0,
-                        "engine_launches": 0,
-                        "provider_spend_usd": 0,
-                        "installed_plugin_provenance_proved": False,
-                        "live_engine_shutdown_or_recovery_proved": False,
-                        "source_sha256": {
-                            str(path.relative_to(plugin)): hashlib.sha256(
-                                path.read_bytes()
-                            ).hexdigest()
-                            for path in [
-                                Path(__file__),
-                                Path(__file__).with_name("host_session.py"),
-                                plugin / "tests/session_control/test_host_admission.py",
-                                plugin / "src/temporalio/claude_agent_sdk/_runner.py",
-                                plugin
-                                / "src/temporalio/claude_agent_sdk/_session_control.py",
-                            ]
-                        },
-                    },
-                    indent=2,
+                        "evidence_kind": report["evidence_kind"],
+                        "cleanup_verified": True,
+                        "engine_launches": report["engine_launches"],
+                    }
                 ),
                 flush=True,
             )
         finally:
             if not removed:
-                # Failure cleanup does not mint a passing host receipt.
-                docker.command("container", "rm", "-f", resource)
+                try:
+                    logs = docker.command("container", "logs", resource)
+                    if output is not None:
+                        (root / "container-output.txt").write_text(logs)
+                finally:
+                    receipt = host.teardown(attempt, docker)
+                    if output is not None:
+                        (root / "failure-cleanup.json").write_text(
+                            json.dumps(receipt, indent=2)
+                        )
 
 
 if __name__ == "__main__":
@@ -340,7 +403,35 @@ if __name__ == "__main__":
     parser.add_argument("--session")
     parser.add_argument("--server")
     parser.add_argument("--output")
+    parser.add_argument(
+        "--backstop-case",
+        choices=[
+            "write",
+            "removed",
+            "system-prompt",
+            "extra-args",
+            "combined-options",
+            "bash-read",
+            "bash-deny",
+            "bash-defer",
+            "skill-grant",
+            "skill-removed",
+            "skill-batch",
+            "write-ask",
+            "bash-ask",
+            "bash-ask-defer",
+            "skill-ask-batch",
+            "skill-ask-removed-batch",
+            "bash-ask-removed",
+            "write-ask-defer",
+            "edit-ask",
+            "edit-removed",
+            "ask-system-prompt",
+            "ask-extra-args",
+            "ask-combined-options",
+        ],
+    )
     arguments = parser.parse_args()
     if arguments.child:
         raise SystemExit(child(arguments))
-    host_probe(arguments.server, arguments.output)
+    host_probe(arguments.server, arguments.output, arguments.backstop_case)
