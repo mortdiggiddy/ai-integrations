@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Replacement: death proof plus accepted state",
+    "subtitle": "October 8 Issue 31 revision | refused pause or missing state parks",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "failure",
+      "type": "external",
+      "label": "Execution unreachable",
+      "sublabel": "Container, pod or host",
+      "pos": [
+        40,
+        260
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "fence",
+      "type": "security",
+      "label": "Prove termination",
+      "sublabel": "Independent whole-tree receipt",
+      "pos": [
+        370,
+        260
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "verify",
+      "type": "backend",
+      "label": "Verify accepted state",
+      "sublabel": "Trajectory, workspace and authority",
+      "pos": [
+        700,
+        260
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "restore",
+      "type": "cloud",
+      "label": "Restore replacement",
+      "sublabel": "Compatible runtime; exclusive owner",
+      "pos": [
+        1030,
+        260
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "resume",
+      "type": "backend",
+      "label": "Recover original call",
+      "sublabel": "Exact known result through SDK",
+      "pos": [
+        1360,
+        260
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "park",
+      "type": "security",
+      "label": "Park or refuse",
+      "sublabel": "No replacement or redispatch",
+      "pos": [
+        370,
+        480
+      ],
+      "size": [
+        250,
+        86
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "failure-fence",
+      "from": "failure",
+      "to": "fence"
+    },
+    {
+      "id": "fence-verify",
+      "from": "fence",
+      "to": "verify"
+    },
+    {
+      "id": "verify-restore",
+      "from": "verify",
+      "to": "restore"
+    },
+    {
+      "id": "restore-resume",
+      "from": "restore",
+      "to": "resume"
+    },
+    {
+      "id": "fence-park",
+      "from": "fence",
+      "to": "park"
+    },
+    {
+      "id": "verify-park",
+      "from": "verify",
+      "to": "park"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "Failure does not prove death",
+      "items": [
+        "A refused E2B pause leaves the sandbox running.",
+        "Timeout, detach, lease expiry and API deletion alone cannot admit takeover."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Missing or stale state",
+      "items": [
+        "Refuse invalid accepted bytes; never rebuild an empty effect authority.",
+        "Unknown Bash outcomes park with no next model segment."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Current boundaries",
+      "items": [
+        "Main-agent recovery remains the selected bounded route.",
+        "Child and parallel delivery require a selected design and separate proof."
+      ]
+    }
+  ]
+}

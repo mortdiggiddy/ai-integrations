@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "id_pattern": "^DSR-(?:ROOT|P\\d+|\\d+\\.\\d+)$",
+  "types": ["Decision", "Research", "Build", "Verification", "Documentation"],
+  "container_types": ["Epic"],
+  "statuses": ["OPEN", "IN PROGRESS", "DONE", "SUPERSEDED"],
+  "priorities": ["Urgent", "High", "Medium", "Low"],
+  "estimation": {
+    "basis": "recommended-default",
+    "point_definition": "One point is about four focused work hours.",
+    "scale": [
+      {"points": 1, "meaning": "About 4 focused work hours"},
+      {"points": 2, "meaning": "About 8 focused work hours"},
+      {"points": 3, "meaning": "About 12 focused work hours"},
+      {"points": 4, "meaning": "About 16 focused work hours"},
+      {"points": 5, "meaning": "About 20 focused work hours"}
+    ],
+    "criteria": [
+      "Estimate the active work needed to produce the acceptance evidence.",
+      "Raise the estimate for technical complexity, unresolved uncertainty or required coordination."
+    ],
+    "waiting_time": "Exclude passive time spent waiting for reviews, approvals, access or external input.",
+    "large_item_rule": "Split work above five points into independently verifiable tickets, or flag it for explicit review when it cannot be split."
+  },
+  "labels": {
+    "categories": [
+      {"category": "work_type", "prefix": "Type", "minimum": 1, "maximum": 1, "equals_type": true,
+       "values": ["Decision", "Research", "Build", "Verification", "Documentation"]},
+      {"category": "topic", "prefix": "Topic", "minimum": 0, "maximum": 2,
+       "values": ["Engine", "Effects", "Approvals", "Workspace", "Versioning", "Assumptions"]},
+      {"category": "status_flag", "prefix": "Status", "minimum": 0, "maximum": 1,
+       "values": ["Blocked on decision"]}
+    ]
+  },
+  "optional_fields": ["Retires", "Informs", "Owner role"],
+  "strict_links": true,
+  "require_local_statement": true,
+  "forbid_dashes": true,
+  "forbidden_patterns": ["/home/", "Workspace/"],
+  "gates": [
+    {"kind": "exit_review", "ticket": "DSR-1.9", "members": "^DSR-1\\."},
+    {"kind": "exit_review", "ticket": "DSR-2.9", "members": "^DSR-2\\."},
+    {"kind": "exit_review", "ticket": "DSR-3.7", "members": "^DSR-3\\."},
+    {"kind": "exit_review", "ticket": "DSR-4.5", "members": "^DSR-4\\."},
+    {"kind": "exit_review", "ticket": "DSR-5.9", "members": "^DSR-5\\."},
+    {"kind": "starts_after", "ticket": "DSR-1.9", "tickets": "^DSR-2\\."},
+    {"kind": "starts_after", "ticket": "DSR-2.9", "tickets": "^DSR-3\\."},
+    {"kind": "starts_after", "ticket": "DSR-3.7", "tickets": "^DSR-4\\."},
+    {"kind": "starts_after", "ticket": "DSR-4.5", "tickets": "^DSR-5\\."},
+    {"kind": "starts_after", "ticket": "DSR-5.9", "tickets": "^DSR-6\\."},
+    {"kind": "final_gate", "ticket": "DSR-6.4", "reached_from": "^DSR-[0-5]\\."}
+  ],
+  "coverage": [
+    {
+      "name": "assumptions",
+      "source": "../spec.md",
+      "section": "## Assumptions and risks if wrong",
+      "id_regex": "^\\| (A-\\d+) \\|",
+      "field": "Retires",
+      "id_in_field_regex": "\\bA-\\d+\\b"
+    }
+  ],
+  "export": {
+    "linear": {
+      "status_map": {"OPEN": "Backlog", "IN PROGRESS": "In Progress", "DONE": "Done", "SUPERSEDED": "Canceled"},
+      "priority_map": {"Urgent": "Urgent", "High": "High", "Medium": "Medium", "Low": "Low"},
+      "issue_type_map": {"Epic": "Project", "Decision": "Issue", "Research": "Issue", "Build": "Issue", "Verification": "Issue", "Documentation": "Issue"},
+      "backlog_statuses": ["Backlog"],
+      "active_statuses": ["In Progress"],
+      "terminal_statuses": ["Done", "Canceled"]
+    },
+    "jira": {
+      "status_map": {"OPEN": "Backlog", "IN PROGRESS": "In Progress", "DONE": "Done", "SUPERSEDED": "Won't Do"},
+      "priority_map": {"Urgent": "Highest", "High": "High", "Medium": "Medium", "Low": "Low"},
+      "issue_type_map": {"Epic": "Epic", "Decision": "Task", "Research": "Task", "Build": "Story", "Verification": "Task", "Documentation": "Task"},
+      "backlog_statuses": ["Backlog"],
+      "active_statuses": ["In Progress"],
+      "terminal_statuses": ["Done", "Won't Do"]
+    }
+  }
+}

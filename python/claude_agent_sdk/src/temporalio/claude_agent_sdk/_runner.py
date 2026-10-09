@@ -38,6 +38,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -53,6 +54,7 @@ from claude_agent_sdk import (
     AssistantMessage,
     ClaudeAgentOptions,
     MirrorErrorMessage,
+    PermissionResultAllow,
     PermissionResultDeny,
     ResultError,
     ResultMessage,
@@ -69,11 +71,17 @@ from claude_agent_sdk import (
 )
 from temporalio import activity
 
-from ._defer_hook import STOPPED, _read_paused_request, _request_identity
+from ._defer_hook import (
+    STOPPED,
+    _policy_decide,
+    _read_paused_request,
+    _request_identity,
+)
 from ._events import emit
 from ._models import DeferredCall, SegmentInput, SegmentOutput, ToolOutcome, ToolSpec
 from ._policy import ToolPolicy, policy_extra_options
 from ._session_control import SdkSessionControl, SessionShutdownUnresolved
+from ._skill_package import ValidatedSkillPackage
 
 
 async def query(
@@ -522,6 +530,7 @@ class ClaudeAgentSdkRunner:
         max_budget_usd: float | None = None,
         tool_policy: ToolPolicy | None = None,
         recover_pending_tool: Callable[[Any], Awaitable[ToolResultBlock]] | None = None,
+        skill_package: ValidatedSkillPackage | None = None,
     ) -> None:
         """Create the runner.
 
@@ -552,6 +561,8 @@ class ClaudeAgentSdkRunner:
                 accepted pending call on resume. Requires a bound tool policy, SDK
                 recovery support and a store with conditional append. The caller
                 validates workspace, outcome and host ownership before running.
+            skill_package: Validated project skills, bound to cwd and a tool policy.
+                Slash dispatch, ancestor sources and arbitrary plugins are excluded.
 
         Raises:
             ValueError: If ``extra_options`` sets an option the plugin manages, or
@@ -560,6 +571,12 @@ class ClaudeAgentSdkRunner:
                 path, or a path given in another form than its real one).
         """
         _check_extra_options(extra_options or {})
+        if skill_package is not None:
+            if tool_policy is None or cwd is None:
+                raise ValueError("Validated skills require a bound policy and cwd")
+            tool_policy.lookup("Skill")
+            skill_package.verify(cwd)
+        self._skill_package = skill_package
         if recover_pending_tool is not None:
             if tool_policy is None or not callable(recover_pending_tool):
                 raise ValueError(
@@ -738,6 +755,14 @@ class ClaudeAgentSdkRunner:
                 retries the segment).
         """
         policy = self._effective_policy(inp)
+        if (
+            policy is not None
+            and isinstance(inp.prompt, str)
+            and re.search(r"(?m)^\s*/", inp.prompt)
+        ):
+            raise ValueError("Policy mode refuses starting prompt slash dispatch")
+        if self._skill_package is not None:
+            self._skill_package.verify(self._cwd or os.getcwd())
         self._check_session_admission(inp.session_id)
         if policy is not None:
             policy_extra_options(
@@ -839,6 +864,9 @@ class ClaudeAgentSdkRunner:
                     {
                         "entries": json.loads(policy.canonical_json()),
                         "workspace_root": os.path.realpath(self._cwd or os.getcwd()),
+                        "skill_package": self._skill_package.document()
+                        if self._skill_package
+                        else None,
                     }
                 ),
                 encoding="utf-8",
@@ -846,6 +874,11 @@ class ClaudeAgentSdkRunner:
         settings_file.write_text(
             json.dumps(
                 {
+                    **(
+                        {"disableSkillShellExecution": True}
+                        if self._skill_package is not None
+                        else {}
+                    ),
                     **(
                         {
                             "permissions": {
@@ -1246,6 +1279,39 @@ class ClaudeAgentSdkRunner:
             options["permission_mode"] = "default"
             options["can_use_tool"] = _deny_policy_permission
             options["env"]["TCA_POLICY_MODE"] = "1"
+            if self._skill_package is not None:
+                options["setting_sources"] = ["project"]
+                options["skills"] = list(self._skill_package.names)
+                options["plugins"] = []
+                options["env"]["CLAUDE_CODE_DISABLE_BUNDLED_SKILLS"] = "1"
+                options["allowed_tools"] = []
+                settings = Path(hook_dir) / "settings.json"
+                configured = json.loads(settings.read_text())
+                configured["permissions"]["ask"] = [
+                    entry.name for entry in policy.entries
+                ]
+                settings.write_text(json.dumps(configured))
+
+                async def confined_permission(
+                    name: str, inputs: dict[str, Any], context: Any
+                ) -> Any:
+                    entry = policy.lookup(name)
+                    if entry.tool_class != "read":
+                        return await _deny_policy_permission(name, inputs, context)
+                    event = {
+                        "tool_name": name,
+                        "tool_input": inputs,
+                        "tool_use_id": "permission-read",
+                    }
+                    # The command hook and callback read the same per-segment policy.
+                    decision = _policy_decide(event, hook_dir)
+                    if decision.get("permissionDecision") == "deny":
+                        return PermissionResultDeny(
+                            message=decision["permissionDecisionReason"]
+                        )
+                    return PermissionResultAllow(updated_input=inputs)
+
+                options["can_use_tool"] = confined_permission
         return options
 
     def _effective_policy(self, inp: SegmentInput) -> ToolPolicy | None:

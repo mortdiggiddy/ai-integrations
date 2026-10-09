@@ -1165,3 +1165,20 @@ async def test_deep_marker_does_not_replace_runner_cancellation(
         await _runner_in(tmp_path, tool_policy=_policy())._run_engine(
             _input(_policy()), {}, "s", False
         )
+
+
+def test_answered_identity_rejects_changed_pending_request(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    _install_hook_policy(tmp_path, monkeypatch)
+    original = {
+        "tool_name": "Write",
+        "tool_use_id": "paused",
+        "tool_input": {"file_path": "file", "content": "original"},
+    }
+    assert _defer_hook.decide(original)["permissionDecision"] == "defer"
+    retained = (tmp_path / "paused_call").read_text()
+    monkeypatch.setenv("TCA_ANSWERED_IDS", "paused")
+    changed = dict(original, tool_input={"file_path": "file", "content": "changed"})
+    assert _defer_hook.decide(changed)["permissionDecision"] == "deny"
+    assert (tmp_path / "paused_call").read_text() == retained

@@ -1,0 +1,41 @@
+# Temporal and storage recipe reconciliation
+
+Status: research and candidate revision COMPLETE; fresh full verification CONDITIONAL (2026-10-08). This continuation answers the operator's four storage questions. It preserves the earlier frozen candidate and every historical runtime disposition. Recommendations are qualification targets, not deployed guarantees or authorization to implement.
+
+## What Temporal can own
+
+Use a session Workflow with a stable logical Workflow ID for accepted orchestration, pending call identity, decisions and bounded checkpoint receipts. Worker replacement normally resumes the same Workflow Execution and Run ID; a container or host is not a Workflow Run. Continue-As-New deliberately creates a new Run ID while preserving the logical session. Conflicting start and closed ID reuse policies are useful admission controls, but retained closed history is not a permanent tombstone. Immutable logical effect identity must survive Continue-As-New and every supported reset; current Run ID and Activity attempt are unsuitable business deduplication keys across those operations.
+
+The Temporal lane's [report](temporal/report.md) and [primary source capture](../provenance.md#p-033) ground these distinctions. Its [pinned harness source](../provenance.md#p-034) supplies actual outer session management prior art. It does not establish this Claude SDK integration or portable filesystem recovery. The harness README itself distinguishes a replayed filesystem tree from current backing store contents.
+
+Recommend a small accepted head in Workflow state and immutable exact trajectory chunks in durable object storage, with the selected SDK SessionStore serving as a qualified recovery materialization adapter. Preserve two alternatives: bounded opaque deltas directly in Activity completion payloads, or a transactional shared SessionStore. The existing candidate's mandatory transactional primary transcript database was a strategy, not an intrinsic requirement. Queries read accepted state; they do not store it. External Storage/claim check is prior art, with preview/version/lifecycle qualification still required. A live new Workflow Run must retain every old object it references, even after old histories expire.
+
+## What the sandbox and storage can own
+
+Container, microVM and confidential guest features supply execution isolation. Local Docker volumes cover container removal on a surviving host. They do not make host loss durable. The [substrate report](substrate/report.md) and [source ledger](../provenance.md#p-036) support two concrete alternatives: a separately durable filesystem that can be safely reattached, or immutable checkpoint bundles restored into fresh local workspaces. Neither is yet qualified on this project.
+
+Recommend cold workspace restoration as the simpler first comparison target where segment boundary recovery meets the package's needs. Bind trajectory, workspace tree, package/policy/runtime versions, pending call and predecessor head in one immutable receipt. Admit that receipt through Temporal only after publication acknowledgements and integrity checks. Upload before Workflow acceptance is an orphan; an accepted missing object is a recovery refusal. Quiesce writers and preserve required hidden files, executable bits, link relationships, deletion and native tool metadata. Reject mount/secret/device/path traversal assumptions. Do not advertise restoration of active sockets, PTYs or background services.
+
+This expands a private candidate only. The current canonical version 1 shared volume requirement remains authoritative until BD-6 explicitly adopts a change.
+
+## What a Temporal dispatch ledger can own
+
+A separate entity Workflow is a plausible alternative to a SQL intent ledger. It owns a single effect scheduling decision under the logical session and accepted call identity, with one attempt for the existing nonrepeatable effect route. Duplicate requests return status or a recorded result; they never return reusable permission to spawn. The ledger remains independent of an outer session reset and workspace restoration. Its own reset, recreation, retention, deduplication handover and authority loss must be explicitly controlled and tested. This is a composition of sanctioned Entity Workflow and Update patterns, not a demonstrated exactly once shell executor. The [fencing report](fencing/report.md), [source ledger](../provenance.md#p-037) and [source identities](../provenance.md#p-038) record inspected current source, exact precedent boundaries and twelve qualification tests.
+
+For APIs that support idempotency, use a stable key and receiver enforcement. For a database mutation, record key and mutation in one transaction. An outbox records local intent atomically but still needs an idempotent receiver for repeated delivery. Workflow history and Activity IDs alone cannot atomically commit an arbitrary external Bash action. A command with no definitive result remains parked, even if the directory can be restored. Maximum attempts one does not resolve a lost completion or authorize another scheduling identity.
+
+## What still must stop the old execution
+
+Temporal can coordinate cancellation, lifecycle Activities and wait for independent teardown evidence. It cannot turn an Activity timeout into a physical container kill. Workflow admission uniqueness does not prevent an old Activity or child process from continuing. Mount exclusivity, lease expiry and deletion of a Kubernetes object are not evidence of process death or lost network capability.
+
+The required replacement barrier remains: independently verified termination of the original execution and descendants, plus reconciliation of effects that might already have escaped. A provider or infrastructure power fence can be a deployable mechanism to qualify. A restricted downstream effect service can reject obsolete generations if every relevant capability passes through it; arbitrary Bash with unmediated network access cannot inherit that property. Broader capability mediation would change the offered execution contract and requires adoption and proof. A host that is unreachable must park unless effective termination or the chosen complete prevention contract is established.
+
+## Test order and remaining decisions
+
+First prepare deterministic vectors for accepted head reconstruction, stable identity, checkpoint publication gaps, ledger duplicate replies, outer reset and workspace rollback. These prove protocol logic only. Then qualify real backend acknowledgements, cold restore metadata and actual native SDK pending recovery. Finally test independent host destruction and a partition where the old guest can still emit physical requests. Count actual requests/spawns outside both Workers. Existing local Phase 1 evidence cannot replace any of these tests.
+
+BD-1 through BD-6 remain operator/deployment choices. Research can settle the identifier distinction and identify viable patterns; it cannot choose the product's failure envelope, lifetime, platform owner, workload limits or confidential threat model. No implementation, runtime experiments, acquisition, provisioning or contact follows from this revision. The useful next decision is a bounded prototype scope for the Temporal head, immutable bundle and independent entity ledger composition, with separate execution authority if later prepared.
+
+## Verification result
+
+[Fresh full review](verification/report.md) records two independent reviewers, the applied Temporal domain critique, zero unresolved material core/remedy findings and the met source-review exit test. The candidate contains 41 evidence sources, preserving the original 31 source objects, 15 additive assumptions and six open owner decisions. Document and manifest gates passed; convergence appended full pass 3 and froze candidate.snapshot-2026-10-08b. Runtime qualification remains unexecuted. The final P2-S criterion explicitly prevents destructive cleanup from erasing the only readable workspace before complete sealed publication. Skill/connector transcript proof is not-proven in the legacy Claude-only checker and is disclosed separately from the actual source review.

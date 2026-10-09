@@ -50,6 +50,57 @@ class VerifiedPark(Exception):
 
 
 def proof_case(scenario="write") -> dict[str, Any]:
+    if scenario.startswith("question-"):
+        fallback = scenario.endswith("-text")
+        choice = scenario.removesuffix("-text").removeprefix("question-")
+        if choice not in {"single", "multi", "free"}:
+            raise AdmissionRefused("Unknown question scenario")
+        question = "Which output fields?" if choice == "multi" else "Which destination?"
+        labels = (
+            ["Summary", "Details", "References"]
+            if choice == "multi"
+            else ["Blue", "Red"]
+        )
+        questions = [
+            {
+                "question": question,
+                "header": "Fields" if choice == "multi" else "Destination",
+                "multiSelect": choice == "multi",
+                "options": [
+                    {"label": label, "description": "Select " + label}
+                    for label in labels
+                ],
+            }
+        ]
+        selected = (
+            ["Summary", "References"]
+            if choice == "multi"
+            else "Custom green destination"
+            if choice == "free"
+            else "Blue"
+        )
+        answer = {"answers": {question: selected}}
+        content = (
+            "Human answer to " + question + ": " + json.dumps(selected)
+            if fallback
+            else json.dumps(answer, sort_keys=True)
+        )
+        action = json.dumps({"selected": selected}, sort_keys=True)
+        return {
+            "tool": "AskUserQuestion",
+            "mode": None,
+            "result": content,
+            "content": None,
+            "is_error": False,
+            "questions": questions,
+            "next_action": action,
+            "answer_form": "plain text fallback"
+            if fallback
+            else "JSON answers object as text",
+            "prompt": "Call AskUserQuestion exactly once with this exact input: "
+            + json.dumps({"questions": questions})
+            + ". After the human answer, return only a JSON object with one key, selected, whose value is the answer as received (an array for multi-select). Do not guess the answer, do not call another tool and do not include unselected options.",
+        }
     if scenario == "mixed-read":
         case = proof_case("write")
         case["prompt"] = (
@@ -89,13 +140,27 @@ def proof_case(scenario="write") -> dict[str, Any]:
     raise AdmissionRefused("Unknown proof scenario")
 
 
+def exact_json_equal(left, right):
+    """Compare JSON values without equating Boolean and numeric identities."""
+    try:
+        return json.dumps(left, sort_keys=True, allow_nan=False) == json.dumps(
+            right, sort_keys=True, allow_nan=False
+        )
+    except (TypeError, ValueError):
+        return False
+
+
 def validate_effect_input(pending, scenario):
     case = proof_case(scenario)
     inputs = pending["input"]
     if pending["name"] != case["tool"]:
         raise AdmissionRefused("Accepted tool differs from approved scenario")
     if scenario in {"write", "mixed-read"}:
-        valid = inputs == {"file_path": "/state/work/marker.txt", "content": CONTENT}
+        valid = exact_json_equal(
+            inputs, {"file_path": "/state/work/marker.txt", "content": CONTENT}
+        )
+    elif scenario.startswith("question-"):
+        valid = exact_json_equal(inputs, {"questions": case["questions"]})
     else:
         valid = (
             isinstance(inputs, dict)
@@ -111,7 +176,22 @@ def external_effect(accepted, scenario, state=Path("/state"), *, activity_attemp
     """Execute the fixed approved effect once; uncertainty records a park, never a result."""
     validate_effect_input(accepted["pending"], scenario)
     case = proof_case(scenario)
-    if scenario == "bash-reject":
+    if scenario.startswith("question-"):
+        save(
+            state / "question-answer.json",
+            {
+                "accepted": accepted,
+                "answer_form": case["answer_form"],
+                "content": case["result"],
+                "effects": 0,
+            },
+        )
+        return {
+            "tool_use_id": accepted["pending"]["id"],
+            "content": case["result"],
+            "is_error": False,
+        }
+    if scenario == "bash-reject" or scenario.startswith("question-"):
         save(state / "host-rejection.json", {"accepted": accepted, "effects": 0})
         return {
             "tool_use_id": accepted["pending"]["id"],
@@ -164,12 +244,48 @@ def external_effect(accepted, scenario, state=Path("/state"), *, activity_attemp
     }
 
 
+def question_action(text):
+    """Decode one JSON action, optionally enclosed in a complete JSON code fence."""
+    text = text.strip()
+    if text.startswith("```json\n") and text.endswith("\n```"):
+        text = text[len("```json\n") : -len("\n```")]
+    action = json.loads(text)
+    if not isinstance(action, dict) or set(action) != {"selected"}:
+        raise AdmissionRefused("Question response must contain only selected")
+    return action
+
+
 class WriteRateMonitor:
     """Retain allowed Enterprise usage events without claiming verified billing."""
 
-    def __init__(self):
+    def __init__(self, scenario="write"):
         self.events = []
         self.rate_limit_seen = False
+        self.scenario = scenario
+
+    def permits_omitted_status(self, info, raw):
+        """Accept the bounded question event shape while billing remains unverified."""
+        reset = info.get("resets_at")
+        utilization = info.get("utilization")
+        return (
+            self.scenario in {"question-single", "question-multi", "question-free"}
+            and info["rate_limit_type"] == "overage"
+            and raw.get("isUsingOverage") is False
+            and raw.get("overageInUse") is True
+            and "overageStatus" not in raw
+            and "overage_status" in info
+            and info["overage_status"] is None
+            and info.get("overage_disabled_reason") is None
+            and raw.get("overageDisabledReason") is None
+            and type(reset) is int
+            and type(raw.get("resetsAt")) is int
+            and raw["resetsAt"] == reset
+            and reset > time.time()
+            and type(utilization) in (int, float)
+            and type(raw.get("utilization")) in (int, float)
+            and raw["utilization"] == utilization
+            and 0 <= utilization < 1
+        )
 
     def inspect(self, event):
         info = event.get("message", {}).get("rate_limit_info")
@@ -190,13 +306,17 @@ class WriteRateMonitor:
         ):
             return "rate_limit_refused_or_unverifiable"
         if (
-            info["rate_limit_type"] == "overage"
-            or raw.get("isUsingOverage") is True
-            or raw.get("overageInUse") is True
-        ) and (
-            info.get("overage_status") not in {"allowed", "allowed_warning"}
-            or raw.get("overageStatus") != info["overage_status"]
-            or info.get("overage_disabled_reason")
+            (
+                info["rate_limit_type"] == "overage"
+                or raw.get("isUsingOverage") is True
+                or raw.get("overageInUse") is True
+            )
+            and (
+                info.get("overage_status") not in {"allowed", "allowed_warning"}
+                or raw.get("overageStatus") != info["overage_status"]
+                or info.get("overage_disabled_reason")
+            )
+            and not self.permits_omitted_status(info, raw)
         ):
             return "rate_limit_refused_or_unverifiable"
         self.rate_limit_seen = True
@@ -210,13 +330,15 @@ def recorded_result(call, expected, scenario="write"):
     case = proof_case(scenario)
     if (
         expected is None
-        or asdict(call) != expected["pending"]
-        or expected["outcome"]
-        != {
-            "tool_use_id": call.id,
-            "content": case["result"],
-            "is_error": case["is_error"],
-        }
+        or not exact_json_equal(asdict(call), expected["pending"])
+        or not exact_json_equal(
+            expected["outcome"],
+            {
+                "tool_use_id": call.id,
+                "content": case["result"],
+                "is_error": case["is_error"],
+            },
+        )
     ):
         raise AdmissionRefused("Original pending call or recorded result differs")
     return ToolResultBlock(
@@ -241,21 +363,24 @@ def validate_recovery_state(accepted, entries, state, scenario="write"):
         raise AdmissionRefused(
             "Recovery requires exactly one accepted pending call; batch refused"
         )
-    if asdict(pending[0]) != accepted["pending"]:
+    if not exact_json_equal(asdict(pending[0]), accepted["pending"]):
         raise AdmissionRefused("Accepted pending identity differs")
     marker = state / "work/marker.txt"
     claim = state / "effect-invocation.json"
-    if scenario == "bash-reject":
+    if scenario == "bash-reject" or scenario.startswith("question-"):
         if marker.exists() or claim.exists():
             raise AdmissionRefused("Rejected call has unexpected effect state")
-        receipt = state / "host-rejection.json"
+        receipt = state / (
+            "question-answer.json"
+            if scenario.startswith("question-")
+            else "host-rejection.json"
+        )
     else:
         if not marker.exists() or marker.read_text() != proof_case(scenario)["content"]:
             raise AdmissionRefused("Accepted workspace state missing or changed")
         receipt = claim
-    if (
-        not receipt.exists()
-        or json.loads(receipt.read_text()).get("accepted") != accepted
+    if not receipt.exists() or not exact_json_equal(
+        json.loads(receipt.read_text()).get("accepted"), accepted
     ):
         raise AdmissionRefused("Accepted dispatch ownership missing or changed")
 
@@ -573,7 +698,13 @@ async def worker(args):
     info = verify_child(args.scenario)
     host = HostSession(state / "worker-host.db")
     store = ProofStore(state / "transcript.db", create=args.role == "initial")
-    policy_entries = [ToolPolicyEntry(case["tool"], "effect", case["mode"])]
+    policy_entries = [
+        ToolPolicyEntry(
+            case["tool"],
+            "ask" if args.scenario.startswith("question-") else "effect",
+            case["mode"],
+        )
+    ]
     if args.scenario == "mixed-read":
         policy_entries.append(ToolPolicyEntry("Read", "read"))
     policy = ToolPolicy(tuple(policy_entries))
@@ -625,7 +756,7 @@ async def worker(args):
         before = inventory()
         task = asyncio.create_task(owner.run(inp, 1))
         deadline = time.monotonic() + 45
-        observed, monitor = 0, WriteRateMonitor()
+        observed, monitor = 0, WriteRateMonitor(args.scenario)
         failure = None
         try:
             while not task.done():
@@ -750,7 +881,9 @@ async def worker(args):
             assert seed["accepted"]["key"]["session_id"] == session
             await store.append(seed["accepted"]["key"], seed["entries"])
             pending, _ = pending_tool_uses(seed["accepted"]["key"], seed["entries"])
-            assert [asdict(call) for call in pending] == [seed["accepted"]["pending"]]
+            assert exact_json_equal(
+                [asdict(call) for call in pending], [seed["accepted"]["pending"]]
+            )
             assert not (state / "work/marker.txt").exists()
             save(state / "original-transcript.json", seed["entries"])
             return seed["accepted"]
@@ -819,6 +952,8 @@ async def worker(args):
             prompt=(
                 "Include the recorded Write result and describe which later tools were denied. Do not call tools."
                 if args.scenario == "mixed-read"
+                else "Act on the recorded human answer using the original JSON output rule. Do not call tools."
+                if args.scenario.startswith("question-")
                 else "Reply with exactly " + case["result"] + ". Do not call tools."
             ),
             tools=[],
@@ -830,11 +965,16 @@ async def worker(args):
         )
         result = await segment(inp)
         assert not result.deferred and len(callbacks) == 1
+        recovered = await store.load(expected["key"])
+        save(state / "recovered-transcript.json", recovered)
         if args.scenario == "mixed-read":
             assert isinstance(result.result, str) and case["result"] in result.result
+        elif args.scenario.startswith("question-"):
+            assert question_action(result.result or "") == json.loads(
+                case["next_action"]
+            )
         else:
             assert result.result == case["result"]
-        recovered = await store.load(expected["key"])
         assert recovered[: len(entries)] == entries
         blocks = [
             block
@@ -856,7 +996,7 @@ async def worker(args):
             }
         ]
         save(state / "recovered-transcript.json", recovered)
-        if args.scenario == "bash-reject":
+        if args.scenario == "bash-reject" or args.scenario.startswith("question-"):
             assert not Path("/state/work/marker.txt").exists()
             assert not (state / "effect-invocation.json").exists()
         else:
@@ -864,7 +1004,9 @@ async def worker(args):
         return {
             "segment": asdict(result),
             "callbacks": callbacks,
-            "effect_count": 0 if args.scenario == "bash-reject" else 1,
+            "effect_count": 0
+            if args.scenario == "bash-reject" or args.scenario.startswith("question-")
+            else 1,
         }
 
     client = await Client.connect(
@@ -1140,7 +1282,7 @@ def execute(args):
             "content": case["result"],
             "is_error": case["is_error"],
         }
-        if args.scenario == "bash-reject":
+        if args.scenario == "bash-reject" or args.scenario.startswith("question-"):
             assert not (output / "work/marker.txt").exists()
             assert not (output / "effect-invocation.json").exists()
         else:
@@ -1187,9 +1329,13 @@ def execute(args):
                 or cumulative["output"] >= 2048
             ):
                 raise AdmissionRefused("Cumulative checkpoint allowance reached")
-        assert result["effect_count"] == (0 if args.scenario == "bash-reject" else 1)
+        assert result["effect_count"] == (
+            0
+            if args.scenario == "bash-reject" or args.scenario.startswith("question-")
+            else 1
+        )
         assert len(result["callbacks"]) == 1
-        if args.scenario == "bash-reject":
+        if args.scenario == "bash-reject" or args.scenario.startswith("question-"):
             assert not (output / "work/marker.txt").exists()
             assert not (output / "effect-invocation.json").exists()
         else:
@@ -1225,7 +1371,19 @@ if __name__ == "__main__":
     parser.add_argument("--approval")
     parser.add_argument(
         "--scenario",
-        choices=("write", "bash-error", "bash-reject", "bash-park", "mixed-read"),
+        choices=(
+            "write",
+            "bash-error",
+            "bash-reject",
+            "bash-park",
+            "mixed-read",
+            "question-single",
+            "question-multi",
+            "question-free",
+            "question-single-text",
+            "question-multi-text",
+            "question-free-text",
+        ),
         default="write",
     )
     parser.add_argument("--accept-residual-risk", action="store_true")

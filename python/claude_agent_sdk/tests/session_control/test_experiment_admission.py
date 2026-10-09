@@ -30,10 +30,54 @@ from write_recovery import (
     external_effect,
     inspect_mixed_read,
     proof_case,
+    question_action,
     recorded_result,
     retained_seed,
     validate_effect_input,
+    validate_recovery_state,
 )
+
+
+@pytest.mark.parametrize(
+    "scenario",
+    [
+        "question-single",
+        "question-multi",
+        "question-free",
+        "question-single-text",
+        "question-multi-text",
+        "question-free-text",
+    ],
+)
+def test_question_preparation_binds_answers_without_effect(tmp_path, scenario):
+    import dataclasses
+    import json
+
+    from claude_agent_sdk import ToolUseBlock
+
+    case = proof_case(scenario)
+    pending: dict[str, Any] = {
+        "id": "original",
+        "name": "AskUserQuestion",
+        "input": {"questions": case["questions"]},
+    }
+    accepted = {"pending": pending}
+    (tmp_path / "work").mkdir()
+    outcome = external_effect(accepted, scenario, tmp_path, activity_attempt=1)
+    assert not (tmp_path / "work/marker.txt").exists()
+    assert not (tmp_path / "effect-invocation.json").exists()
+    assert json.loads((tmp_path / "question-answer.json").read_text())["effects"] == 0
+    returned = recorded_result(
+        ToolUseBlock(**pending), {**accepted, "outcome": outcome}, scenario
+    )
+    assert returned.tool_use_id == pending["id"] and returned.content == case["result"]
+    assert case["next_action"] not in case["prompt"]
+    assert configuration(scenario)["retries"] == 0
+    assert configuration(scenario)["segments"] == 2
+    changed = dataclasses.asdict(ToolUseBlock(**pending))
+    changed["input"] = {"questions": []}
+    with pytest.raises(AdmissionRefused):
+        validate_effect_input(changed, scenario)
 
 
 @pytest.mark.parametrize(
@@ -468,6 +512,295 @@ def test_write_monitor_refuses_typed_raw_disagreement_and_missing_info():
     assert not monitor.rate_limit_seen
 
 
+@pytest.mark.parametrize(
+    "value", ["Blue", ["Summary", "References"], "Custom green destination"]
+)
+@pytest.mark.parametrize("fenced", [False, True])
+def test_question_action_reads_json_with_optional_complete_fence(value, fenced):
+    import json
+
+    text = json.dumps({"selected": value})
+    if fenced:
+        text = "```json\n" + text + "\n```"
+    assert question_action(text) == {"selected": value}
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "",
+        'Answer: {"selected": "Blue"}',
+        '```json\n{"selected": "Blue"}',
+        '```json\n{"selected": "Blue"}xxxx',
+        '```yaml\n{"selected": "Blue"}\n```',
+        '```json\n{"selected": "Blue"}\n``` trailing prose',
+        '{"selected": "Blue"} {"selected": "Red"}',
+        '{"selected": "Blue", "extra": true}',
+        "[]",
+        "{}",
+    ],
+)
+def test_question_action_refuses_prose_incomplete_fences_and_extra_fields(text):
+    import json
+
+    with pytest.raises((json.JSONDecodeError, AdmissionRefused)):
+        question_action(text)
+
+
+def test_question_action_preserves_a_wrong_answer_for_comparison():
+    assert question_action('```json\n{"selected": "Red"}\n```') != {"selected": "Blue"}
+
+
+def omitted_status_event() -> dict[str, Any]:
+    event = usage_event(status="allowed_warning")
+    info = event["message"]["rate_limit_info"]
+    del info["raw"]["overageStatus"]
+    info.update(
+        overage_status=None,
+        overage_disabled_reason=None,
+        resets_at=1793491200,
+        utilization=0.84,
+    )
+    info["raw"].update(resetsAt=1793491200, utilization=0.84)
+    return event
+
+
+@pytest.mark.parametrize(
+    "scenario", ["question-single", "question-multi", "question-free"]
+)
+@pytest.mark.parametrize("status", ["allowed", "allowed_warning"])
+def test_question_monitor_accepts_scoped_omitted_status(
+    monkeypatch, tmp_path, scenario, status
+):
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    info = event["message"]["rate_limit_info"]
+    info["status"] = info["raw"]["status"] = status
+    monitor = WriteRateMonitor(scenario)
+    assert monitor.inspect(event) is None
+    assert monitor.events == [event]
+    assert monitor.rate_limit_seen
+    config = configuration(scenario)
+    ExperimentAdmission.initialize(tmp_path / "admission.json", config, config)
+
+
+@pytest.mark.parametrize(
+    "scenario",
+    [
+        "write",
+        "bash-error",
+        "bash-reject",
+        "bash-park",
+        "mixed-read",
+        "question-single-text",
+        "question-multi-text",
+        "question-free-text",
+        "unknown",
+    ],
+)
+def test_question_monitor_exception_does_not_extend_other_scenarios(
+    monkeypatch, scenario
+):
+    from subscription_sdk_control import Monitor
+
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    monitor = WriteRateMonitor(scenario)
+    assert monitor.inspect(event) == "rate_limit_refused_or_unverifiable"
+    assert not monitor.rate_limit_seen
+    assert Monitor().inspect(event) == "ambiguous_active_or_unverifiable_overage"
+
+
+@pytest.mark.parametrize(
+    "location,key,value",
+    [
+        ("typed", "status", "rejected"),
+        ("raw", "status", "rejected"),
+        ("typed", "status", "allowed"),
+        ("typed", "rate_limit_type", "five_hour"),
+        ("raw", "rateLimitType", "five_hour"),
+        ("raw", "isUsingOverage", True),
+        ("raw", "isUsingOverage", 0),
+        ("raw", "isUsingOverage", None),
+        ("raw", "overageInUse", False),
+        ("raw", "overageInUse", 1),
+        ("raw", "overageInUse", "true"),
+        ("raw", "overageStatus", None),
+        ("raw", "overageStatus", "rejected"),
+        ("typed", "overage_status", "allowed"),
+        ("typed", "overage_status", "rejected"),
+        ("typed", "overage_disabled_reason", "disabled"),
+        ("raw", "overageDisabledReason", "disabled"),
+        ("raw", "overageDisabledReason", False),
+        ("typed", "resets_at", 1790000000),
+        ("typed", "resets_at", 1793491201),
+        ("typed", "resets_at", 1793491200.0),
+        ("typed", "resets_at", True),
+        ("raw", "resetsAt", 1793491200.0),
+        ("raw", "resetsAt", "1793491200"),
+        ("typed", "utilization", 0.83),
+        ("typed", "utilization", True),
+        ("raw", "utilization", "0.84"),
+        ("typed", "utilization", None),
+    ],
+)
+def test_question_monitor_refuses_changed_omitted_status(
+    monkeypatch, location, key, value
+):
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    info = event["message"]["rate_limit_info"]
+    (info if location == "typed" else info["raw"])[key] = value
+    monitor = WriteRateMonitor("question-single")
+    assert monitor.inspect(event) == "rate_limit_refused_or_unverifiable"
+    assert not monitor.rate_limit_seen
+    assert monitor.events == [event]
+
+
+@pytest.mark.parametrize(
+    "location,key",
+    [
+        ("typed", "overage_status"),
+        ("typed", "resets_at"),
+        ("typed", "utilization"),
+        ("raw", "isUsingOverage"),
+        ("raw", "overageInUse"),
+        ("raw", "resetsAt"),
+        ("raw", "utilization"),
+    ],
+)
+def test_question_monitor_refuses_missing_omitted_status_fields(
+    monkeypatch, location, key
+):
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    info = event["message"]["rate_limit_info"]
+    del (info if location == "typed" else info["raw"])[key]
+    assert (
+        WriteRateMonitor("question-single").inspect(event)
+        == "rate_limit_refused_or_unverifiable"
+    )
+
+
+@pytest.mark.parametrize("utilization", [-0.01, 1, float("nan"), float("inf")])
+def test_question_monitor_refuses_matching_invalid_utilization(
+    monkeypatch, utilization
+):
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    info = event["message"]["rate_limit_info"]
+    info["utilization"] = info["raw"]["utilization"] = utilization
+    assert (
+        WriteRateMonitor("question-single").inspect(event)
+        == "rate_limit_refused_or_unverifiable"
+    )
+
+
+@pytest.mark.parametrize("reset", [1790000000, 1789999999, True, 1793491200.0])
+def test_question_monitor_refuses_matching_invalid_reset(monkeypatch, reset):
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    info = event["message"]["rate_limit_info"]
+    info["resets_at"] = info["raw"]["resetsAt"] = reset
+    assert (
+        WriteRateMonitor("question-single").inspect(event)
+        == "rate_limit_refused_or_unverifiable"
+    )
+
+
+def test_question_monitor_refuses_boolean_utilization_equal_to_raw_zero(monkeypatch):
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    info = event["message"]["rate_limit_info"]
+    info["utilization"] = False
+    info["raw"]["utilization"] = 0
+    monitor = WriteRateMonitor("question-single")
+    assert monitor.inspect(event) == "rate_limit_refused_or_unverifiable"
+    assert not monitor.rate_limit_seen
+
+
+def test_question_monitor_refuses_matching_nonoverage_omitted_status(monkeypatch):
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    info = event["message"]["rate_limit_info"]
+    info["rate_limit_type"] = info["raw"]["rateLimitType"] = "five_hour"
+    monitor = WriteRateMonitor("question-single")
+    assert monitor.inspect(event) == "rate_limit_refused_or_unverifiable"
+    assert not monitor.rate_limit_seen
+
+
+def test_question_monitor_refuses_raw_boolean_utilization_equal_to_typed_zero(
+    monkeypatch,
+):
+    monkeypatch.setattr("write_recovery.time.time", lambda: 1790000000)
+    event = omitted_status_event()
+    info = event["message"]["rate_limit_info"]
+    info["utilization"] = 0
+    info["raw"]["utilization"] = False
+    monitor = WriteRateMonitor("question-single")
+    assert monitor.inspect(event) == "rate_limit_refused_or_unverifiable"
+    assert not monitor.rate_limit_seen
+
+
+def test_offline_host_refuses_unknown_sdk_before_docker(monkeypatch, tmp_path):
+    import host_session_offline
+
+    monkeypatch.setattr(
+        host_session_offline,
+        "__file__",
+        str(
+            tmp_path / "plugin/docs/skill-recovery/experiments/host_session_offline.py"
+        ),
+    )
+
+    def forbidden():
+        pytest.fail("Docker reached before SDK admission")
+
+    monkeypatch.setattr(host_session_offline, "Docker", forbidden)
+    with pytest.raises(ValueError, match="SDK version is outside the approved lanes"):
+        host_session_offline.host_probe(
+            output=str(tmp_path / "unadmitted"), sdk_version="unapproved"
+        )
+    assert not (tmp_path / "unadmitted").exists()
+
+
+@pytest.mark.parametrize(
+    "options,reason",
+    [
+        ({"installed_suite": True}, "Installed suite requires disposable packages"),
+        ({"packages": "unused"}, "Disposable packages require the installed suite"),
+        (
+            {"installed_suite": True, "packages": "unused", "sdk_version": "0.2.153"},
+            "Installed SDK and CLI lane differ",
+        ),
+        (
+            {"installed_suite": True, "packages": "unused", "minimum_cli": "unused"},
+            "Installed SDK and CLI lane differ",
+        ),
+    ],
+)
+def test_offline_host_refuses_inconsistent_installed_lane_before_docker(
+    monkeypatch, tmp_path, options, reason
+):
+    import host_session_offline
+
+    monkeypatch.setattr(
+        host_session_offline,
+        "__file__",
+        str(
+            tmp_path / "plugin/docs/skill-recovery/experiments/host_session_offline.py"
+        ),
+    )
+
+    def forbidden():
+        pytest.fail("Docker reached before installed lane admission")
+
+    monkeypatch.setattr(host_session_offline, "Docker", forbidden)
+    with pytest.raises(ValueError, match=reason):
+        host_session_offline.host_probe(output=str(tmp_path / "unadmitted"), **options)
+    assert not (tmp_path / "unadmitted").exists()
+
+
 def test_output_space_refuses_before_creating_directory(tmp_path, monkeypatch):
     from types import SimpleNamespace
 
@@ -605,6 +938,126 @@ async def test_retained_transcript_cas_refuses_stale_head(tmp_path):
     assert not await store.append_if_unchanged(key, "pending", [{"uuid": "repeat"}])
     retained = await reopened.load(key)
     assert isinstance(retained, list) and len(retained) == 2
+
+
+@pytest.mark.parametrize(
+    "scenario", ["question-single", "question-multi", "question-free"]
+)
+@pytest.mark.parametrize("numeric_type", [int, float])
+def test_question_identity_refuses_numeric_boolean(scenario, numeric_type):
+    import copy
+    import dataclasses
+
+    from claude_agent_sdk import ToolUseBlock
+
+    case = proof_case(scenario)
+    call = ToolUseBlock("original", case["tool"], {"questions": case["questions"]})
+    accepted = dataclasses.asdict(call)
+    expected = {
+        "pending": copy.deepcopy(accepted),
+        "outcome": {
+            "tool_use_id": call.id,
+            "content": case["result"],
+            "is_error": case["is_error"],
+        },
+    }
+    validate_effect_input(accepted, scenario)
+    assert recorded_result(call, expected, scenario).is_error is False
+    question = call.input["questions"][0]
+    question["multiSelect"] = numeric_type(question["multiSelect"])
+    with pytest.raises(
+        AdmissionRefused, match="Accepted input differs from approved scenario"
+    ):
+        validate_effect_input(dataclasses.asdict(call), scenario)
+    with pytest.raises(
+        AdmissionRefused, match="Original pending call or recorded result differs"
+    ):
+        recorded_result(call, expected, scenario)
+
+
+@pytest.mark.parametrize("scenario", ["question-single", "bash-error"])
+@pytest.mark.parametrize("numeric_type", [int, float])
+def test_recorded_result_refuses_numeric_error_flag(scenario, numeric_type):
+    from dataclasses import asdict
+
+    from claude_agent_sdk import ToolUseBlock
+
+    case = proof_case(scenario)
+    call = ToolUseBlock("original", case["tool"], {})
+    expected = {
+        "pending": asdict(call),
+        "outcome": {
+            "tool_use_id": call.id,
+            "content": case["result"],
+            "is_error": case["is_error"],
+        },
+    }
+    assert recorded_result(call, expected, scenario).is_error is case["is_error"]
+    expected["outcome"]["is_error"] = numeric_type(case["is_error"])
+    with pytest.raises(
+        AdmissionRefused, match="Original pending call or recorded result differs"
+    ):
+        recorded_result(call, expected, scenario)
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), object()])
+def test_recorded_result_refuses_non_json_identity(value):
+    from dataclasses import asdict
+
+    from claude_agent_sdk import ToolUseBlock
+
+    call = ToolUseBlock("original", "Write", {"value": value})
+    expected = {
+        "pending": asdict(call),
+        "outcome": {"tool_use_id": call.id, "content": RESULT, "is_error": False},
+    }
+    with pytest.raises(
+        AdmissionRefused, match="Original pending call or recorded result differs"
+    ):
+        recorded_result(call, expected)
+
+
+@pytest.mark.parametrize("fault", ["pending", "receipt"])
+def test_recovery_state_refuses_numeric_boolean_identity(tmp_path, monkeypatch, fault):
+    import copy
+    import hashlib
+    import json
+    from dataclasses import asdict
+
+    from claude_agent_sdk import ToolUseBlock
+
+    main_agent_recovery = pytest.importorskip(
+        "claude_agent_sdk._internal.main_agent_recovery",
+        reason="Original pending recovery requires the qualified SDK capability",
+    )
+
+    case = proof_case("question-single")
+    call = ToolUseBlock("original", case["tool"], {"questions": case["questions"]})
+    entries = [{"uuid": "original"}]
+    accepted: dict[str, Any] = {
+        "key": {"session_id": "original-session"},
+        "pending": asdict(call),
+        "transcript_sha256": hashlib.sha256(
+            json.dumps(entries, sort_keys=True).encode()
+        ).hexdigest(),
+    }
+    monkeypatch.setattr(
+        main_agent_recovery, "pending_tool_uses", lambda key, rows: ([call], None)
+    )
+    receipt = tmp_path / "question-answer.json"
+    receipt.write_text(json.dumps({"accepted": accepted}))
+    validate_recovery_state(accepted, entries, tmp_path, "question-single")
+    changed = copy.deepcopy(accepted)
+    changed["pending"]["input"]["questions"][0]["multiSelect"] = 0
+    if fault == "pending":
+        reason = "Accepted pending identity differs"
+        candidate = changed
+    else:
+        reason = "Accepted dispatch ownership missing or changed"
+        receipt.write_text(json.dumps({"accepted": changed}))
+        candidate = accepted
+    with pytest.raises(AdmissionRefused, match=reason):
+        validate_recovery_state(candidate, entries, tmp_path, "question-single")
 
 
 def test_missing_transcript_store_is_never_recreated(tmp_path):

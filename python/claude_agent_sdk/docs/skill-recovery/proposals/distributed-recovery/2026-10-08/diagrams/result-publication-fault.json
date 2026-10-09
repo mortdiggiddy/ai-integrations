@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Effect succeeded; result publication failed",
+    "subtitle": "Proposed fault oracle | retry must not repeat a physical effect",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "accepted",
+      "type": "backend",
+      "label": "Accepted call",
+      "sublabel": "Original identity committed",
+      "pos": [
+        40,
+        180
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "intent",
+      "type": "security",
+      "label": "Retain intent",
+      "sublabel": "Independent dispatch authority",
+      "pos": [
+        380,
+        180
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "physical",
+      "type": "external",
+      "label": "Effect occurs",
+      "sublabel": "Physical counter increments",
+      "pos": [
+        720,
+        180
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "publish",
+      "type": "database",
+      "label": "Publish result",
+      "sublabel": "Upload plus completion ACK",
+      "pos": [
+        1060,
+        180
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "delivered",
+      "type": "backend",
+      "label": "Recover result",
+      "sublabel": "Exact original pending call",
+      "pos": [
+        1400,
+        180
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "inspect",
+      "type": "security",
+      "label": "Check outcome",
+      "sublabel": "No fresh spawn permission",
+      "pos": [
+        1060,
+        450
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "known",
+      "type": "database",
+      "label": "Known exact result",
+      "sublabel": "Adopt retained evidence only",
+      "pos": [
+        1400,
+        450
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "uncertain",
+      "type": "security",
+      "label": "Unknown: park",
+      "sublabel": "No effect or model redispatch",
+      "pos": [
+        1060,
+        700
+      ],
+      "size": [
+        250,
+        86
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "accept-intent",
+      "from": "accepted",
+      "to": "intent"
+    },
+    {
+      "id": "intent-effect",
+      "from": "intent",
+      "to": "physical"
+    },
+    {
+      "id": "effect-publish",
+      "from": "physical",
+      "to": "publish"
+    },
+    {
+      "id": "publish-deliver",
+      "from": "publish",
+      "to": "delivered"
+    },
+    {
+      "id": "publication-fault",
+      "from": "publish",
+      "to": "inspect",
+      "label": "lost publication",
+      "labelAt": [1185, 340]
+    },
+    {
+      "id": "retained-outcome",
+      "from": "inspect",
+      "to": "known"
+    },
+    {
+      "id": "adopt-outcome",
+      "from": "known",
+      "to": "delivered"
+    },
+    {
+      "id": "unknown-outcome",
+      "from": "inspect",
+      "to": "uncertain"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "Required fault test",
+      "items": [
+        "Fail payload upload or Activity completion after the counter increments.",
+        "The counter must stay at one through retry, reset and replacement."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Qualification boundary",
+      "items": [
+        "Known result recovery requires exact durable identity and state.",
+        "Storage failure is not authorization to rerun the effect."
+      ]
+    }
+  ]
+}

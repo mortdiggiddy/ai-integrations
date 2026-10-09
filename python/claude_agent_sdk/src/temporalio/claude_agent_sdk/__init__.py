@@ -23,6 +23,7 @@ from temporalio.claude_agent_sdk._plugin import ClaudeAgentPlugin
 from temporalio.claude_agent_sdk._policy import ToolPolicy, ToolPolicyEntry
 from temporalio.claude_agent_sdk._runner import ClaudeAgentSdkRunner
 from temporalio.claude_agent_sdk._session_store import FileSessionStore
+from temporalio.claude_agent_sdk._skill_package import ValidatedSkillPackage
 from temporalio.claude_agent_sdk._workflow import (
     SEGMENT_ACTIVITY_NAME,
     DurableClaudeAgent,
@@ -48,6 +49,7 @@ __all__ = [
     "ToolPolicy",
     "ToolPolicyEntry",
     "ToolSpec",
+    "ValidatedSkillPackage",
     "activity_as_tool",
     "follow_agent",
     "make_segment_activity",

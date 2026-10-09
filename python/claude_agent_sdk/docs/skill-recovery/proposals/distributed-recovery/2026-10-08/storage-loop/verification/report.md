@@ -1,0 +1,66 @@
+# Temporal and storage continuation verification
+
+Verdict: CONDITIONAL. Three independent research lanes and two fresh full design reviewers answer the four questions with a concrete Temporal-centered qualification recipe. There are zero unresolved MATERIAL-CORE and zero MATERIAL-REMEDY findings. The scoped exit test is met. This is a viable proposal subject to explicit owner decisions and falsifiable tests, not executed distributed durability.
+
+## Answers and resulting revisions
+
+Temporal can own a logical session, accepted checkpoint head, decisions and dispatch state. Worker/host replacement ordinarily replays the same Workflow Execution and Run ID. Continue-As-New deliberately changes Run ID while retaining Workflow ID. Closed Workflow ID duplicate rejection is retention bounded. The candidate now keeps logical session/effect identities independent of host, Activity attempt and current Run ID; indefinite admission requires a retained identity authority rather than an assumption that Workflow ID policy lasts forever.
+
+Recommended scalable conversation authority is a bounded accepted head in Temporal and exact immutable opaque chunks in durable storage. The existing SDK adapter materializes and conditionally appends the original pending result with head/order/UUID/type checks. Bounded exact deltas in history and a transactional shared SessionStore remain alternatives. Queries read accepted state; they do not persist it. External Storage supplies claim check prior art, with preview/version/backend and live-reference retention qualification. No separate transcript SQL database is intrinsically required.
+
+Workspace recovery now has two lanes: immutable accepted bundles restored into a fresh qualified container, or durable filesystem reattachment. Sandbox/microVM/confidential features do not make host-local bytes survive host loss. One receipt binds workspace tree/deletions/metadata, exact trajectory, pending call, predecessor, package/policy/runtime and cleanup identities. Quiescent capture and accepted publication have explicit crash gaps. Final P2-S also tests access to stopped workspace through sealing: destructive removal cannot delete the sole bytes first. Existing HostSession cleanup supplies no extraction guarantee.
+
+Dispatch authority can be a separately protected Entity Workflow owning one effect scheduling decision, or a unique SQL/equivalent record outside workspace/outer session rollback. A duplicate Update returns status or recorded result, never reusable spawn permission. Logical keys survive Continue-As-New and outer Reset. Ledger reset/recreation/expiry, claim loss, cached Update replies and changed input digest are tested negatives. Receiver-enforced idempotency and same-database key/mutation transactions are sanctioned patterns for suitable effects. Arbitrary Bash has no general atomic transaction with Temporal: an unknown outcome parks without redispatch or model continuation.
+
+Temporal coordinates lifecycle work but cannot equate timeout/cancellation/Workflow admission with process death. Kubernetes force deletion and storage detach are not terminal authority. Independently verified containment/provider/power termination precedes replacement; earlier remote requests still require definitive reconciliation or parking. A complete capability fence is a narrower offered contract to qualify, not a blanket permission to fail over arbitrary networked Bash. Execution host loss is separate from Temporal Service/regional history failover.
+
+## Target and source identities
+
+Reviewed four files and final hashes are in [target-pin.json](../../provenance.md#p-039). It retains the original freeze, the EV-35 provenance correction and the final capture/removal acceptance clarification. Both reviewers reopened those changes and rechecked all hashes. Only convergence ledger row 3 was appended afterward; the final snapshot is candidate.snapshot-2026-10-08b. The prior Mods-only candidate.snapshot-2026-10-08a and all October 7 files remain preserved.
+
+Reference integration: design-base c79bdb516f4a4fe343bb97c1c97b39f0d796c450 plus 14 matching dirty-source hashes. Actual source verification covered Workflow acceptance/policy refusal, runner head/CAS/attempt/fork constraints, local SessionStore, controller, package admission, fixed claims and local daemon cleanup. PolicyExecutorUnavailable remains a real unavailable production seam. No code was changed or new executor built.
+
+Additional outer harness source is temporal-community/temporal-agent-harness f50412138cab078f19c54e683e7ba5e529323f17. Its session-manager and filesystem behavior are experimental prior art, not this Claude recovery implementation. Primary public retrievals, exact queries and source hashes are retained in the three storage-loop research lanes and verifier identity inventories. Issue 31 was read through comment 6043344791; its snapshot proposal and callback findings are not distributed proof.
+
+## Independent reconciliation and precedent
+
+[Contract/source review](../../provenance.md#p-040), [Temporal domain critique](../../provenance.md#p-041) and [adversarial/system review](../../provenance.md#p-042) are fresh independent contexts. Neither read the lead synthesis, prior review verdicts or the other review. They reopened decisive repository/vendor/Temporal sources rather than voting on research conclusions. Root did not pass findings/votes between them. The lead's workspace extraction concern was rechecked against actual HostSession and written as a bounded acceptance condition; both reviewers confirmed the final clarification.
+
+Contract: zero material core/remedy, two grouped owner-decision findings, three acceptance findings, one nonmaterial P10 label mismatch. Adversarial: zero material core/remedy, one grouped owner-decision finding, eight acceptance findings. The minor existing label mismatch does not invalidate M5's readable confidential criteria or the exit test.
+
+Sanctioned pieces include Entity Workflow state, durable Updates, main-method handler-drained Continue-As-New, per-run Update deduplication, receiver idempotency and payload claim check. Accepted exact Claude materialization, independent ledger scheduling across outer Reset and matched cold workspace receipts are partial compositions. No exact complete distributed original-pending/physical-handover or full inference-escrow precedent was found in this bounded search. Absence of exact precedent is not proof none exists; it keeps composition qualification mandatory.
+
+## Gates and disclosures
+
+Both evidence gates passed: spec 23 headings, plan nine headings, seven invariants, 41 mirrored sources, 15 additive assumption IDs, six open decisions, 23 reopened local references and 18 structurally validated URLs with zero failures. The original 31 source objects are unchanged. EV-35 was corrected to a read of the capture batch; EV-37 through EV-41 contain actual query strings. No aggregated search was fabricated. The verification manifest gate passed with status complete. Full convergence pass 3 met the exit test; snapshot created and next returned exit 3 stop. No task writing or implementation followed.
+
+disclosure: The Temporal design review was installed and applied (discovered as `temporal-workflow-design-critic`, invoked by storage_contract_review) and returned findings cited at contract.md#material-claim-ledger, domain.md.
+
+disclosure: Temporal product and SDK behavior claims were grounded through Temporal Docs (21 successful connector calls across lead, storage_contract_review, storage_system_review).
+
+disclosure: Composed Temporal mechanisms were classified against precedent by storage_contract_review: Stable Entity Workflow identity, durable Updates and handler-drained Continue-As-New is sanctioned pattern (source https://docs.temporal.io/design-patterns/entity-workflow#implementation); Per-run Update request deduplication is sanctioned pattern (source atlas://code/features/features/update/deduplication/feature.py); Claim check External Storage payload transport is sanctioned pattern (source https://docs.temporal.io/external-storage); Receiver-enforced idempotency for supported external mutations is sanctioned pattern (source https://docs.temporal.io/activity-definition#idempotency); Accepted Temporal head plus immutable exact Claude trajectory materialization is partial precedent (source https://docs.temporal.io/external-storage); Independent Entity Workflow owns one protected effect scheduling decision across outer Reset is partial precedent (source https://docs.temporal.io/design-patterns/entity-workflow#implementation); Cold workspace and exact trajectory sealed receipt with orphan reconciliation is partial precedent (source https://docs.temporal.io/external-storage#choose-storage); Complete distributed original pending recovery, rollback-resistant intent and physical termination is no precedent found (source https://docs.temporal.io/activity-execution#cancellation); Complete accepted model response escrow with fenced provider and native trajectory recovery is no precedent found (source https://docs.temporal.io/design-patterns/entity-workflow).
+
+disclosure: The Temporal developer skill was installed and applied (discovered as `temporal:temporal-developer`, invoked by storage_system_review) and returned findings cited at adversarial.md#actual-domain-application-and-evidence.
+
+disclosure: The target is a spec-driven-temporal package (spec.md and plan.md), and its evidence gate passed.
+
+The legacy proof checker returned exit zero with disclosed not-proven results. Actual Docs calls were lead two, contract ten and adversarial nine. Skills were applied by shell reads; no native Claude Skill invocation is claimed. The checker resolved one Atlas source, which proves that source exists, not the full composition. Its Claude-only transcript proof does not independently verify these Codex skill reads or connector counts; manifest declarations remain the only enforcement for those rows in this run.
+
+```text
+proof-of-load: disclosed
+  temporal-design-review not-proven   no transcript supplied for role storage_contract_review; pass --role-transcript storage_contract_review=<path>
+  temporal-docs-grounding not-proven   0 of 21 declared calls observed; lead: harness codex but the session transcript could not be resolved (unavailable); pass --transcript; storage_contract_review: no transcript supplied for role storage_contract_review; pass --role-transcript storage_contract_review=<path>; storage_system_review: no transcript supplied for role storage_system_review; pass --role-transcript storage_system_review=<path>
+  pattern-precedent      proven       1 atlas:// sources resolved
+  temporal-developer     not-proven   no transcript supplied for role storage_system_review; pass --role-transcript storage_system_review=<path>
+warning: temporal-design-review is unproven (no transcript supplied for role storage_contract_review; pass --role-transcript storage_contract_review=<path>); the manifest declaration is the only enforcement for it
+warning: temporal-docs-grounding is unproven (0 of 21 declared calls observed; lead: harness codex but the session transcript could not be resolved (unavailable); pass --transcript; storage_contract_review: no transcript supplied for role storage_contract_review; pass --role-transcript storage_contract_review=<path>; storage_system_review: no transcript supplied for role storage_system_review; pass --role-transcript storage_system_review=<path>); the manifest declaration is the only enforcement for it
+warning: temporal-developer is unproven (no transcript supplied for role storage_system_review; pass --role-transcript storage_system_review=<path>); the manifest declaration is the only enforcement for it
+```
+
+## Remaining gates and single next action
+
+No newly DONE ticket or runtime acceptance criterion. DSR-0.6 remains OPEN, with conversation/retention ownership in DSR-0.11 and actual cross-host tests in DSR-4.3. Canonical v1 shared volume/claims remain authority until BD-6 adoption; candidate alternatives do not change the current implementation. All historical failures, exact recovery/minimum dispositions, raw archives, manifests and reservations remain preserved.
+
+BD-1 through BD-6 still require owner failure scope, substrate/security ownership, retention/reset horizon, numeric envelope, optional confidential threat model and adoption/lane scope. M1 needs actual protocol/authority/adapter work and mutation proof; M2 actual backend acknowledgements, metadata and host termination; M3 original pending recovery on the new topology; M4 security, admin policy, lifecycle, versioning and capacity. Optional Mods and M5 remain separately qualified. No runtime test, acquisition, installation, provisioning, credential read, model call, external contact, commit or push occurred.
+
+Single next action: operator review of BD-6's bounded prototype scope for Temporal accepted head plus immutable trajectory/workspace bundles and an independently retained Entity Workflow ledger. Implementation and execution remain separate authorizations; later real host/backend and model qualification need their own exact approved scopes.

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Workspace recovery: qualify publication",
+    "subtitle": "October 8 Issue 31 revision | proposals awaiting backend proof",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "receipt",
+      "type": "backend",
+      "label": "Accepted checkpoint",
+      "sublabel": "Exact trajectory plus workspace",
+      "pos": [
+        40,
+        270
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "bundle",
+      "type": "database",
+      "label": "Sealed durable bundle",
+      "sublabel": "Verified publication receipt",
+      "pos": [
+        410,
+        100
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "cold",
+      "type": "cloud",
+      "label": "Cold restoration",
+      "sublabel": "Fresh workspace on another host",
+      "pos": [
+        780,
+        100
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "volume",
+      "type": "database",
+      "label": "Qualified filesystem",
+      "sublabel": "Atomic claims and durable writes",
+      "pos": [
+        410,
+        440
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "attach",
+      "type": "cloud",
+      "label": "Safe reattachment",
+      "sublabel": "Exclusive admission after fencing",
+      "pos": [
+        780,
+        440
+      ],
+      "size": [
+        250,
+        86
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "receipt-bundle",
+      "from": "receipt",
+      "to": "bundle"
+    },
+    {
+      "id": "bundle-cold",
+      "from": "bundle",
+      "to": "cold"
+    },
+    {
+      "id": "receipt-volume",
+      "from": "receipt",
+      "to": "volume"
+    },
+    {
+      "id": "volume-attach",
+      "from": "volume",
+      "to": "attach"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Provider publication",
+      "items": [
+        "Docker cloud sbx volumes snapshot on exit; test crash before that receipt.",
+        "Concurrent exits can overwrite. Local fsync does not prove cloud publication."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Separate qualification",
+      "items": [
+        "Payload offload does not snapshot the workspace or fence an old actor.",
+        "FUSE sharing does not establish atomic claims. Test the exact backend."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Both recovery lanes",
+      "items": [
+        "Retain matching trajectory, files, deletions, links and metadata.",
+        "Prove old execution and descendants stopped before replacement."
+      ]
+    }
+  ]
+}

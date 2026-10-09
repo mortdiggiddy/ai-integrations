@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "architecture",
+  "input": "durable-session.json",
+  "output": "durable-session.html",
+  "specification": {
+    "sha256": "af7800253ecf014e4709804309cdb9833f117d9229a43b46467bbaba02a78e30",
+    "bytes": 2648
+  },
+  "artifact": {
+    "sha256": "2ee468eb32e8dd0c25dcac010813f2d9c39c6f4a7fcdcdd219638d974b018198",
+    "bytes": 602318
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  },
+  "svg_export": {
+    "format": "standalone SVG",
+    "theme": "dark",
+    "xml_validation": "pass",
+    "visual_review": "skipped (no installed browser or rasterizer found)"
+  },
+  "correction_rounds": 0
+}

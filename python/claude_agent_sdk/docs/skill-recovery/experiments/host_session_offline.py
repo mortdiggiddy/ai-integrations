@@ -66,17 +66,46 @@ def child(args):
     """Run with installed dependencies only, then leave a detached harmless child."""
     if os.environ.get("UV_NO_SYNC") != "1" or os.environ.get("UV_NO_EDITABLE") != "1":
         raise RuntimeError("Dependency synchronization must be disabled")
-    assert importlib.metadata.version("claude-agent-sdk") == "0.2.162"
-    assert hashlib.sha256(Path("/opt/claude").read_bytes()).hexdigest() == CLI_HASH
+    assert importlib.metadata.version("claude-agent-sdk") == args.sdk_version
+    assert hashlib.sha256(
+        Path("/opt/claude").read_bytes()
+    ).hexdigest() == os.environ.get("PROOF_CLI_HASH", CLI_HASH)
     import pytest
 
     import temporalio
 
-    temporalio.__path__.insert(0, "/source/temporalio")
-    sys.path.insert(0, "/checks")
+    if args.installed_suite:
+        sys.path.insert(0, "/plugin")
+        bin_dir = Path("/tmp/pinned-cli")
+        bin_dir.mkdir()
+        (bin_dir / "claude").symlink_to("/opt/claude")
+        os.environ["PATH"] = str(bin_dir) + os.pathsep + os.environ.get("PATH", "")
+        print(
+            json.dumps(
+                {
+                    "kind": "installed_lane",
+                    "sdk_version": importlib.metadata.version("claude-agent-sdk"),
+                    "cli_version": subprocess.run(
+                        ["/opt/claude", "-v"],
+                        capture_output=True,
+                        text=True,
+                        check=True,
+                        timeout=15,
+                    ).stdout.strip(),
+                    "cli_sha256": hashlib.sha256(
+                        Path("/opt/claude").read_bytes()
+                    ).hexdigest(),
+                }
+            ),
+            flush=True,
+        )
+    else:
+        temporalio.__path__.insert(0, "/source/temporalio")
+        sys.path.insert(0, "/checks")
     checks = (
         [
             "/checks/test_preventive_backstop.py",
+            "/checks/test_skill_package.py",
             "/checks/test_tool_policy.py",
             "/checks/test_pending_recovery.py",
             "/checks/test_lifecycle.py",
@@ -93,12 +122,27 @@ def child(args):
         ]
     )
     if args.backstop_case:
-        sys.path.insert(0, "/test-root")
+        if not args.installed_suite:
+            sys.path.insert(0, "/test-root")
         os.environ["BACKSTOP_CASE"] = args.backstop_case
         os.environ["BACKSTOP_ATTEMPT"] = args.attempt
         os.environ["BACKSTOP_SESSION"] = args.session
     code = pytest.main(
         [
+            "/plugin/tests/session_control/test_skill_package.py"
+            if args.backstop_case and args.backstop_case.startswith("package-")
+            else "/plugin/tests/session_control/test_preventive_backstop.py"
+            if args.backstop_case
+            else "/plugin/tests",
+            "-n",
+            "auto",
+            "--dist=worksteal",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+        ]
+        if args.installed_suite
+        else [
             *checks,
             "--confcutdir=/checks",
             "-q",
@@ -110,7 +154,7 @@ def child(args):
     )
     if code:
         return code
-    if not args.backstop_case:
+    if not args.backstop_case and not args.installed_suite:
         asyncio.run(
             child_exchange(
                 HostSession(Path("/state/host.db")), args.attempt, args.session
@@ -145,11 +189,41 @@ def child(args):
     return 0
 
 
-def host_probe(server=None, output=None, backstop_case=None):
+def host_probe(
+    server=None,
+    output=None,
+    backstop_case=None,
+    minimum_cli=None,
+    installed_suite=False,
+    packages=None,
+    sdk_version="0.2.162",
+):
     """Create only the fixed offline probe; never expose a model execution command."""
     plugin = Path(__file__).resolve().parents[3]
+    if installed_suite and packages is None:
+        raise ValueError("Installed suite requires disposable packages")
+    if packages is not None and not installed_suite:
+        raise ValueError("Disposable packages require the installed suite")
+    if sdk_version not in {"0.2.153", "0.2.162"}:
+        raise ValueError("SDK version is outside the approved lanes")
+    if (sdk_version == "0.2.153") != (minimum_cli is not None) and installed_suite:
+        raise ValueError("Installed SDK and CLI lane differ")
     docker = Docker()
     assert docker.command("image", "inspect", IMAGE, "--format", "{{.Id}}") == IMAGE
+    cli_hash = CLI_HASH
+    cli_version = "2.1.274 (Claude Code)"
+    if minimum_cli is not None:
+        selected_cli = Path(minimum_cli).resolve(strict=True)
+        cli_version = subprocess.run(
+            [str(selected_cli), "-v"],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=15,
+        ).stdout.strip()
+        if cli_version != "2.1.273 (Claude Code)":
+            raise RuntimeError("Minimum CLI does not print the approved engine version")
+        cli_hash = hashlib.sha256(selected_cli.read_bytes()).hexdigest()
     if output is not None:
         Path(output).mkdir(parents=True, exist_ok=False)
     with (
@@ -204,6 +278,21 @@ def host_probe(server=None, output=None, backstop_case=None):
             "-v",
             str(plugin / "src") + ":/source:ro",
         ]
+        if installed_suite:
+            argv.extend(
+                [
+                    "-v",
+                    str(Path(packages).resolve(strict=True)) + ":/opt/packages:ro",
+                    "-v",
+                    str(plugin) + ":/plugin:ro",
+                    "-e",
+                    "PYTHONPATH=/opt/packages:/fixture:/plugin",
+                    "-e",
+                    "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+                    "--workdir",
+                    "/plugin",
+                ]
+            )
         for source, destination in (
             (
                 Path(__file__).with_name("subscription_sdk_control.py"),
@@ -238,6 +327,10 @@ def host_probe(server=None, output=None, backstop_case=None):
                 "/checks/test_preventive_backstop.py",
             ),
             (
+                plugin / "tests/session_control/test_skill_package.py",
+                "/checks/test_skill_package.py",
+            ),
+            (
                 plugin / "tests/session_control/no_decision_hook.py",
                 "/checks/no_decision_hook.py",
             ),
@@ -255,6 +348,15 @@ def host_probe(server=None, output=None, backstop_case=None):
             (Path(__file__), "/fixture/host_session_offline.py"),
         ):
             argv.extend(["-v", str(source) + ":" + destination + ":ro"])
+        if minimum_cli is not None:
+            argv.extend(
+                [
+                    "-v",
+                    str(selected_cli) + ":/opt/claude:ro",
+                    "-e",
+                    "PROOF_CLI_HASH=" + cli_hash,
+                ]
+            )
         argv.extend(
             [
                 "-v",
@@ -264,6 +366,14 @@ def host_probe(server=None, output=None, backstop_case=None):
         )
         if server is not None:
             argv.extend(["-v", str(Path(server).resolve()) + ":/opt/temporal:ro"])
+            if installed_suite:
+                argv.extend(
+                    [
+                        "-v",
+                        str(Path(server).resolve())
+                        + ":/tmp/temporal-v1.8.3-server-1.32.0-162.0:ro",
+                    ]
+                )
         argv.extend(
             [
                 "--entrypoint",
@@ -279,12 +389,23 @@ def host_probe(server=None, output=None, backstop_case=None):
         )
         if backstop_case is not None:
             argv.extend(["--backstop-case", backstop_case])
+        argv.extend(["--sdk-version", sdk_version])
+        if installed_suite:
+            argv.append("--installed-suite")
         resource = docker.command(*argv)
         host.bind(attempt, resource)
         removed = False
         try:
             docker.command("container", "start", resource)
-            deadline = time.monotonic() + (60 if backstop_case else 45)
+            deadline = time.monotonic() + (
+                600
+                if installed_suite and not backstop_case
+                else 150
+                if backstop_case and backstop_case.startswith("package-")
+                else 60
+                if backstop_case
+                else 45
+            )
             while True:
                 logs = docker.command("container", "logs", resource)
                 ready_path = root / "ready.json"
@@ -333,9 +454,13 @@ def host_probe(server=None, output=None, backstop_case=None):
             report = {
                 "evidence_kind": "actual_engine_local_provider_backstop"
                 if backstop_case
+                else "installed_plugin_complete_offline_suite"
+                if installed_suite
                 else "scripted_sdk_and_harmless_container_child",
                 "image": IMAGE,
-                "cli_sha256": CLI_HASH,
+                "cli_sha256": cli_hash,
+                "cli_version": cli_version,
+                "sdk_version": sdk_version,
                 "before_teardown": before,
                 "after_teardown": after,
                 "replacement_before_teardown_refused": blocked,
@@ -344,9 +469,15 @@ def host_probe(server=None, output=None, backstop_case=None):
                 "network": "none",
                 "credentials_or_login_mounts": False,
                 "model_calls": 0,
-                "engine_launches": 1 if backstop_case else 0,
+                "engine_launches": None
+                if installed_suite and not backstop_case
+                else 2
+                if backstop_case and backstop_case.startswith("package-resume")
+                else 1
+                if backstop_case
+                else 0,
                 "provider_spend_usd": 0,
-                "installed_plugin_provenance_proved": False,
+                "installed_plugin_provenance_proved": installed_suite,
                 "live_engine_shutdown_or_recovery_proved": False,
                 "source_sha256": {
                     str(path.relative_to(plugin)): hashlib.sha256(
@@ -367,6 +498,8 @@ def host_probe(server=None, output=None, backstop_case=None):
                         plugin / "src/temporalio/claude_agent_sdk/_defer_hook.py",
                         plugin / "src/temporalio/claude_agent_sdk/_runner.py",
                         plugin / "src/temporalio/claude_agent_sdk/_session_control.py",
+                        plugin / "src/temporalio/claude_agent_sdk/_skill_package.py",
+                        plugin / "tests/session_control/test_skill_package.py",
                     ]
                 },
             }
@@ -403,9 +536,26 @@ if __name__ == "__main__":
     parser.add_argument("--session")
     parser.add_argument("--server")
     parser.add_argument("--output")
+    parser.add_argument("--minimum-cli")
+    parser.add_argument("--installed-suite", action="store_true")
+    parser.add_argument("--packages")
+    parser.add_argument(
+        "--sdk-version", default="0.2.162", choices=["0.2.153", "0.2.162"]
+    )
     parser.add_argument(
         "--backstop-case",
         choices=[
+            "package-proof",
+            "package-question",
+            "package-shell",
+            "package-empty",
+            "package-default",
+            "package-plugin",
+            "package-user",
+            "package-resume",
+            "package-resume-main",
+            "package-no-decision",
+            "package-child",
             "write",
             "removed",
             "system-prompt",
@@ -434,4 +584,12 @@ if __name__ == "__main__":
     arguments = parser.parse_args()
     if arguments.child:
         raise SystemExit(child(arguments))
-    host_probe(arguments.server, arguments.output, arguments.backstop_case)
+    host_probe(
+        arguments.server,
+        arguments.output,
+        arguments.backstop_case,
+        arguments.minimum_cli,
+        arguments.installed_suite,
+        arguments.packages,
+        arguments.sdk_version,
+    )

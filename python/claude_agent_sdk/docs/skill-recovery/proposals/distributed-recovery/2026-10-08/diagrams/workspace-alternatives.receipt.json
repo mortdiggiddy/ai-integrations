@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "architecture",
+  "input": "workspace-alternatives.json",
+  "output": "workspace-alternatives.html",
+  "specification": {
+    "sha256": "50fba67745e617a28b4ed9d97948548498020a2c1482c456d7c4a944b6a162a0",
+    "bytes": 2677
+  },
+  "artifact": {
+    "sha256": "054ea0c4bcb07aa519a3e3d2a283b8a2ee485243a0c5ac379bdfde7a1fb7685b",
+    "bytes": 601176
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  },
+  "visual_review": "skipped (no capable browser or SVG rasterizer)",
+  "correction_rounds": 0
+}

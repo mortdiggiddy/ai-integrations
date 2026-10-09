@@ -1,0 +1,427 @@
+{
+  "schema": "evidence-manifest/v1",
+  "artifact": "spec",
+  "generated_for": "Distributed governed Skill execution candidate, complete Issue 31 sweep 2026-10-08",
+  "sources": [
+    {
+      "id": "EV-1",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "source-pin.json and current canonical checkpoint",
+      "result_ref": "../source-pin.json",
+      "used_for": "Source pin; preserved dirty reference tree",
+      "status": "used"
+    },
+    {
+      "id": "EV-2",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Agent A independent shared storage discovery and cross challenge",
+      "result_ref": "../provenance.md#p-022",
+      "used_for": "INV-1 INV-2 INV-5; durable state and existing store limitations",
+      "status": "used"
+    },
+    {
+      "id": "EV-3",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Agent B independent managed sandbox discovery and cross challenge",
+      "result_ref": "../provenance.md#p-023",
+      "used_for": "INV-1 INV-2 INV-5; managed volume alternatives and termination limits",
+      "status": "used"
+    },
+    {
+      "id": "EV-4",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Agent C independent self managed VM runtime discovery",
+      "result_ref": "../provenance.md#p-024",
+      "used_for": "INV-1 INV-2 INV-7; maintained runtime and storage qualification options",
+      "status": "used"
+    },
+    {
+      "id": "EV-5",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What are the official Temporal patterns for deterministic Workflow replay, Activity idempotency and timeouts, Continue-As-New with Update handlers, Worker Versioning, SDK observability, and payload encryption?",
+      "result_ref": "https://docs.temporal.io/workflow-definition#deterministic-constraints",
+      "used_for": "INV-3 Workflow determinism",
+      "status": "used",
+      "outcome": "Lead retrieved; source digest in temporal-source-digests.json"
+    },
+    {
+      "id": "EV-6",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "Temporal Python Workflow Updates Continue-As-New all_handlers_finished payload codec Search Attributes encryption SDK metrics Activity retry Worker Versioning",
+      "result_ref": "https://docs.temporal.io/develop/python/workflows/continue-as-new",
+      "used_for": "INV-4 Continue-As-New and handler drain",
+      "status": "used"
+    },
+    {
+      "id": "EV-7",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "Which Python SDK worker metrics and Temporal Cloud service metrics should monitor task queue latency, Activity execution, failures, worker availability, and Workflow history growth?",
+      "result_ref": "https://docs.temporal.io/develop/worker-performance/metrics",
+      "used_for": "INV-6 SDK metrics and application service objectives",
+      "status": "used",
+      "outcome": "Lead successful retrieval"
+    },
+    {
+      "id": "EV-8",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "How should a Temporal application encrypt payloads and failure attributes, keep sensitive values out of Search Attributes, and monitor SDK worker metrics?",
+      "result_ref": "https://docs.temporal.io/evaluate/features/data-encryption",
+      "used_for": "INV-7 Payload encryption and explicit codec",
+      "status": "used",
+      "outcome": "Lead successful privacy followup recorded in digest inventory"
+    },
+    {
+      "id": "EV-9",
+      "tool": "atlas",
+      "operation": "scripts/atlas/query.sh",
+      "query": "activity timeout fencing shared filesystem exclusive create worker failure",
+      "result_ref": "../provenance.md#p-025",
+      "used_for": "Prior art; no direct complete implementation found, not production proof",
+      "status": "used"
+    },
+    {
+      "id": "EV-10",
+      "tool": "temporal-developer",
+      "operation": "read",
+      "query": "SKILL.md and references/python/python.md",
+      "result_ref": "../provenance.md#p-026",
+      "used_for": "INV-2 INV-3 Python Worker and Activity roles",
+      "status": "used"
+    },
+    {
+      "id": "EV-11",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Existing runner recovery capability and caller responsibilities",
+      "result_ref": "../../../../../../src/temporalio/claude_agent_sdk/_runner.py",
+      "used_for": "Existing mandatory SDK entrypoint and original pending adapter",
+      "status": "used"
+    },
+    {
+      "id": "EV-12",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Phase 1 verification result and limits",
+      "result_ref": "../provenance.md#p-027",
+      "used_for": "Bounded reused evidence and historical failure dispositions",
+      "status": "used"
+    },
+    {
+      "id": "EV-13",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Agent D independent confidential/adversarial discovery",
+      "result_ref": "../provenance.md#p-028",
+      "used_for": "INV-1 INV-5 INV-7; rollback and confidential ownership constraints",
+      "status": "used"
+    },
+    {
+      "id": "EV-14",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "How do Temporal Activity timeouts, cancellation and heartbeats behave when a Worker becomes unreachable, and how does Workflow replay use completed Activity results?",
+      "result_ref": "https://docs.temporal.io/design-patterns/long-running-activity",
+      "used_for": "INV-1 Heartbeat progress and cancellation; no physical host kill guarantee",
+      "status": "used",
+      "outcome": "Lead successful query"
+    },
+    {
+      "id": "EV-15",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What are the official Temporal patterns for deterministic Workflow replay, Activity idempotency and timeouts, Continue-As-New with Update handlers, Worker Versioning, SDK observability, and payload encryption?",
+      "result_ref": "https://docs.temporal.io/worker-versioning#inheritance-semantics",
+      "used_for": "INV-2 Versioned compatible Worker deployment",
+      "status": "used",
+      "outcome": "Lead result digest"
+    },
+    {
+      "id": "EV-16",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What are the official Temporal patterns for deterministic Workflow replay, Activity idempotency and timeouts, Continue-As-New with Update handlers, Worker Versioning, SDK observability, and payload encryption?",
+      "result_ref": "https://docs.temporal.io/handling-messages#message-handler-patterns",
+      "used_for": "INV-4 Update handlers and drain",
+      "status": "used",
+      "outcome": "Lead result digest"
+    },
+    {
+      "id": "EV-17",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "_workflow.py policy dispatch refusal and uv.lock selected SDK",
+      "result_ref": "../../../../../../src/temporalio/claude_agent_sdk/_workflow.py",
+      "used_for": "Existing PolicyExecutorUnavailable seam; dependency lock distinction independently read",
+      "status": "used"
+    },
+    {
+      "id": "EV-18",
+      "tool": "user-source",
+      "operation": "web.open",
+      "query": "Getting started with Claude Code mods",
+      "result_ref": "https://claude.dev/blog/getting-started-with-claude-code-mods/",
+      "used_for": "Optional Mods announcement; >=2.1.287 and session reload state",
+      "status": "used"
+    },
+    {
+      "id": "EV-19",
+      "tool": "user-source",
+      "operation": "web.open",
+      "query": "Pinned Mods declarations at 52c76441cae91f6891e4712306bffb057ff6fec5",
+      "result_ref": "https://github.com/anthropics/claude-code/blob/52c76441cae91f6891e4712306bffb057ff6fec5/mods/types/claude-code.d.ts",
+      "used_for": "INV-1 INV-5 INV-7; declared native mapping, streaming and fail-open limits at 2.1.277",
+      "status": "used"
+    },
+    {
+      "id": "EV-20",
+      "tool": "user-source",
+      "operation": "web.open",
+      "query": "Pinned official Mods README and testing contract",
+      "result_ref": "https://github.com/anthropics/claude-code/blob/52c76441cae91f6891e4712306bffb057ff6fec5/mods/README.md",
+      "used_for": "Prior art maturity; real-host plugin tests do not prove SDK activation",
+      "status": "used"
+    },
+    {
+      "id": "EV-21",
+      "tool": "user-source",
+      "operation": "web.open",
+      "query": "Pinned sec-default README managed admission and denial policy",
+      "result_ref": "https://github.com/anthropics/claude-code/blob/52c76441cae91f6891e4712306bffb057ff6fec5/mods/sec-default/README.md",
+      "used_for": "INV-7 trusted Mod admission and managed security seating limits",
+      "status": "used"
+    },
+    {
+      "id": "EV-22",
+      "tool": "user-source",
+      "operation": "web.open",
+      "query": "Pinned sec-default actual hooks registration",
+      "result_ref": "https://github.com/anthropics/claude-code/blob/52c76441cae91f6891e4712306bffb057ff6fec5/mods/sec-default/hooks/register.ts",
+      "used_for": "Actual managed admission and permission catch implementation reference",
+      "status": "used"
+    },
+    {
+      "id": "EV-23",
+      "tool": "user-source",
+      "operation": "web.open",
+      "query": "Pinned agents-md actual Read hook registration",
+      "result_ref": "https://github.com/anthropics/claude-code/blob/52c76441cae91f6891e4712306bffb057ff6fec5/mods/agents-md/hooks/register.ts",
+      "used_for": "Actual result preservation and loop identity implementation reference",
+      "status": "used"
+    },
+    {
+      "id": "EV-24",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Independent Mods surface and version contract discovery",
+      "result_ref": "../provenance.md#p-029",
+      "used_for": "INV-1 INV-5 INV-7; native/model hooks, state/store split and runtime gaps",
+      "status": "used"
+    },
+    {
+      "id": "EV-25",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Independent Mods and Temporal composition discovery",
+      "result_ref": "../provenance.md#p-030",
+      "used_for": "Optional composition lanes and accepted boundary obligations; MT-1 through MT-10",
+      "status": "used"
+    },
+    {
+      "id": "EV-26",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Independent Mods adversarial discovery",
+      "result_ref": "../provenance.md#p-031",
+      "used_for": "INV-1 INV-5 INV-7; independent native/direct capability controls; MA-01 through MA-21",
+      "status": "used"
+    },
+    {
+      "id": "EV-27",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Surface crosschallenge of composition and adversarial lanes",
+      "result_ref": "../provenance.md#p-032",
+      "used_for": "Correct source attribution and optional observer versus required interception distinction",
+      "status": "used"
+    },
+    {
+      "id": "EV-28",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Current integration README recovery target and retained baseline",
+      "result_ref": "../../../../../../../../README.md",
+      "used_for": "Existing selected recovery baseline and independent preventive control requirement",
+      "status": "used"
+    },
+    {
+      "id": "EV-29",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Canonical historical Mods SDK loading result",
+      "result_ref": "../../../../experiments/results/mods.json",
+      "used_for": "Historical SDK 0.2.154 CLI 2.1.274 unsupported tested invocation only",
+      "status": "used"
+    },
+    {
+      "id": "EV-30",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Pinned Mods source excerpts and full response SHA-256",
+      "result_ref": "../mods-research/surface/pinned-types-excerpts.md",
+      "used_for": "Exact captured 2.1.277 source contract; no current runtime emitted API",
+      "status": "used"
+    },
+    {
+      "id": "EV-31",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Canonical Mods comparison findings and scoped dispositions",
+      "result_ref": "../../../../evidence.md",
+      "used_for": "Preserve original historical loading FAIL and unexecuted negative controls",
+      "status": "used"
+    },
+    {
+      "id": "EV-32",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Temporal session ownership storage and dispatch independent research",
+      "result_ref": "../storage-loop/temporal/report.md",
+      "used_for": "INV-1 INV-4 INV-5; stable identity, accepted trajectory authority alternatives and exact opaque adapter",
+      "status": "used"
+    },
+    {
+      "id": "EV-33",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Workspace substrate cold bundle and durable reattachment independent research",
+      "result_ref": "../storage-loop/substrate/report.md",
+      "used_for": "INV-1 INV-2 INV-5 INV-7; metadata native recovery, publication gaps and physical host-loss tests",
+      "status": "used"
+    },
+    {
+      "id": "EV-34",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Independent dispatch authority and physical termination research",
+      "result_ref": "../storage-loop/fencing/report.md",
+      "used_for": "INV-1 INV-4 INV-5; Entity Workflow scheduling versus unique SQL, replayed permit refusal and host fencing",
+      "status": "used"
+    },
+    {
+      "id": "EV-35",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Captured public primary results from five actual Temporal Docs queries",
+      "result_ref": "../provenance.md#p-033",
+      "used_for": "Captured public primary retrievals; sanctioned primitives distinct from unqualified composition",
+      "status": "used"
+    },
+    {
+      "id": "EV-36",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Pinned temporal-community temporal-agent-harness f50412138cab078f19c54e683e7ba5e529323f17 source",
+      "result_ref": "../provenance.md#p-034",
+      "used_for": "Experimental outer session/message/sandbox prior art and filesystem backing store replay limitation",
+      "status": "used"
+    },
+    {
+      "id": "EV-37",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "WorkflowId reuse conflict retention Activity retry worker failure RunId ContinueAsNew idempotency external effects history payload limits",
+      "result_ref": "https://docs.temporal.io/workflow-execution/workflowid-runid#workflow-id-reuse-policy",
+      "used_for": "INV-1 INV-4; retained closed uniqueness, distinct execution and compute identities",
+      "status": "used"
+    },
+    {
+      "id": "EV-38",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "Temporal Python external storage payload claim check durability retention immutable workflow message passing Query not recorded Signal Update accepted durable",
+      "result_ref": "https://docs.temporal.io/external-storage",
+      "used_for": "INV-4 INV-5; Public Preview claim check, durable storage requirements and live reference retention",
+      "status": "used"
+    },
+    {
+      "id": "EV-39",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "Temporal idempotency keys Run ID Activity ID reset workflow idempotency durable execution exactly once side effects transactional outbox",
+      "result_ref": "https://docs.temporal.io/activity-definition#idempotency",
+      "used_for": "INV-5; receiving service enforced idempotency and effect success/result-loss window",
+      "status": "used"
+    },
+    {
+      "id": "EV-40",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "site docs.temporal.io Workflow Execution Run ID worker crash same run Continue As New new Run ID event history payload 2 MB 4 MB retention",
+      "result_ref": "https://docs.temporal.io/workflow-execution/continue-as-new",
+      "used_for": "INV-4; deliberate new RunId bounded handover and retained state",
+      "status": "used"
+    },
+    {
+      "id": "EV-41",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "Temporal Python external storage payload claim check durability retention immutable workflow message passing Query not recorded Signal Update accepted durable",
+      "result_ref": "https://docs.temporal.io/evaluate/features/workflow-message-passing",
+      "used_for": "INV-3 INV-5; Queries read only, accepted writes/Activity results supply durable state",
+      "status": "used"
+    },
+    {
+      "id": "EV-42",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Complete issue body and twelve comments through 6065563646",
+      "result_ref": "../provenance.md#p-035",
+      "used_for": "Current discussion boundary; four distinct permission routes and reported native replay metadata",
+      "status": "used"
+    },
+    {
+      "id": "EV-43",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Independent full issue Temporal and External Storage sweep",
+      "result_ref": "../priority-sweep/agent-temporal.md",
+      "used_for": "INV-1 INV-4 INV-5; positive child/batch design and post-effect upload failure qualification",
+      "status": "used"
+    },
+    {
+      "id": "EV-44",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Independent full issue industry and substrate sweep",
+      "result_ref": "../priority-sweep/agent-industry.md",
+      "used_for": "INV-1 INV-2 INV-5 INV-7; provider persistence, pause and confidential freshness distinctions",
+      "status": "used"
+    },
+    {
+      "id": "EV-45",
+      "tool": "user-source",
+      "operation": "web.open",
+      "query": "Docker cloud sbx volume persistence and concurrent writer contract",
+      "result_ref": "https://docs.docker.com/reference/cli/sbx/volume/",
+      "used_for": "INV-5; exit-only snapshot publication and last-exit overwrite require backend-specific fault proof",
+      "status": "used"
+    },
+    {
+      "id": "EV-46",
+      "tool": "user-source",
+      "operation": "read",
+      "query": "Complete discussion ownership, positive outcomes and prospective proof map",
+      "result_ref": "../priority-sweep/coverage.md",
+      "used_for": "Entire issue dispositions, I31-H1 through H5 M1 M2 L1 L2 and DSR-7.4 decision ownership",
+      "status": "used"
+    }
+  ]
+}

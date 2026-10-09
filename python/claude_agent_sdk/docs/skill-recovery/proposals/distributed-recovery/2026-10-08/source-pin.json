@@ -1,0 +1,19 @@
+{
+  "head": "c79bdb516f4a4fe343bb97c1c97b39f0d796c450",
+  "files": {
+    "python/claude_agent_sdk/docs/skill-recovery/evidence.md": "c8fb382d665de2a08bf1eab7defb0f2691110a6a351e95081e81676ed8a5c220",
+    "python/claude_agent_sdk/docs/skill-recovery/experiments/budget-enforcement-disposition.md": "e53588f2fa6078d66aacf9e5317e37cd8c62e3f90b2a6519e0a8942e0af5ebdf",
+    "python/claude_agent_sdk/docs/skill-recovery/experiments/host_session_offline.py": "0e4232ef99fb90342bf4ba60f099efe674ca4dfb9f9eced40ac5c67da107fd1e",
+    "python/claude_agent_sdk/docs/skill-recovery/experiments/write_recovery.py": "e2a10298612b7f8b64506cc653e44a0ca260ab8a95da0facdcfb96d6a852c283",
+    "python/claude_agent_sdk/docs/skill-recovery/plan.md": "21def10d602fcfcefdd29106b6dcebdfc69ae047718bf3f5943164026c14e6f4",
+    "python/claude_agent_sdk/docs/skill-recovery/spec.md": "dfd83e440de5a9cc70cf543e2ea4fc5e36faed41361c4d2e3b603bd3ae8b34aa",
+    "python/claude_agent_sdk/docs/skill-recovery/work-items.md": "a51d3d9bae6dcda41525aa64e8a3acbafc784379a7c378997c3b6f01c127e9ff",
+    "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/__init__.py": "b6592d18971603883e878e105071dc98fbcda018c54e61d1cf2b4d98fa42ebfd",
+    "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_defer_hook.py": "5aa60183b1aa46c7ff41e1aaee007f3749d65b55817bc58b1bda9ac713e9f205",
+    "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_runner.py": "4b73db511116e40ce7e53e9e5232ef79162a2c74a162457a755051ab921b21d7",
+    "python/claude_agent_sdk/tests/session_control/test_experiment_admission.py": "70830f2f2b3e00061e9ffe8aa030e49143347e0a2d04e6f6b2e4618a196cb039",
+    "python/claude_agent_sdk/tests/test_tool_policy.py": "ca936dd58a41e3717db83c74ced694b0aae7e7c29e8748636781ef9bc3ff4992",
+    "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_skill_package.py": "62188dc69deedb17aa5255f5b16b4a2a3c357e45470ec03531834c434cb3af99",
+    "python/claude_agent_sdk/tests/session_control/test_skill_package.py": "8eb43b751f811ae6aaef1129eef355012fdcb06772dfaf4c924d179dd82ff7dd"
+  }
+}

@@ -179,8 +179,37 @@ def _read_paused_request(marker: str) -> dict[str, Any]:
     return request
 
 
-def _policy_decide(event: dict[str, Any]) -> dict[str, Any]:
-    directory = os.environ.get("TCA_HOOK_DIR")
+def _skill_decide(document: dict[str, Any], inputs: dict[str, Any]) -> dict[str, Any]:
+    package = document.get("skill_package")
+    if not isinstance(package, dict):
+        return _deny("Skill requires a validated package configuration.")
+    if inputs.get("skill") not in package.get("names", []) or set(inputs) - {
+        "skill",
+        "args",
+    }:
+        return _deny("Skill invocation is not validated.")
+    if "args" in inputs and not isinstance(inputs["args"], str):
+        return _deny("Skill arguments must be text.")
+    try:
+        if __package__:
+            from ._skill_package import package_inventory
+        else:
+            import importlib
+
+            package_inventory = importlib.import_module(
+                "_skill_package"
+            ).package_inventory
+        if package_inventory(package["directory"]) != package["files"]:
+            return _deny("Validated skill package changed.")
+    except (OSError, ValueError, KeyError, TypeError):
+        return _deny("Validated skill package cannot be verified.")
+    return {"hookEventName": "PreToolUse"}
+
+
+def _policy_decide(
+    event: dict[str, Any], directory: str | None = None
+) -> dict[str, Any]:
+    directory = directory or os.environ.get("TCA_HOOK_DIR")
     if not directory or not os.path.isdir(directory):
         return _deny(STOPPED)
     try:
@@ -199,6 +228,8 @@ def _policy_decide(event: dict[str, Any]) -> dict[str, Any]:
             return {"hookEventName": event_name}
         if row is None:
             return _deny("Tool is not offered by policy.")
+        if event.get("agent_id") or event.get("agent_type"):
+            return _deny("Child tool calls are unsupported in policy mode.")
         if os.path.exists(os.path.join(directory, "stop")):
             return _deny(STOPPED)
         marker = os.path.join(directory, "paused_call")
@@ -214,7 +245,7 @@ def _policy_decide(event: dict[str, Any]) -> dict[str, Any]:
                 return _deny()
         if row["class"] == "read":
             if name == "Skill":
-                return _deny("Skill requires a validated package configuration.")
+                return _skill_decide(document, event.get("tool_input", {}))
             tool_input = event.get("tool_input") or {}
             path = tool_input.get("file_path" if name == "Read" else "path")
             if name == "Read" and (not isinstance(path, str) or not path):
@@ -227,6 +258,23 @@ def _policy_decide(event: dict[str, Any]) -> dict[str, Any]:
             target = os.path.realpath(os.path.join(root, path))
             if os.path.commonpath([root, target]) != root:
                 return _deny("Read path is outside the workspace root.")
+            if name in ("Glob", "Grep"):
+                for field in ("pattern", "glob"):
+                    value = tool_input.get(field)
+                    if value is not None and (
+                        not isinstance(value, str)
+                        or value.startswith("/")
+                        or "\\" in value
+                        or ":" in value
+                        or any(part == ".." for part in value.split("/"))
+                    ):
+                        return _deny("Read pattern is outside the workspace root.")
+                if os.path.isdir(target):
+                    for base, directories, files in os.walk(target, followlinks=False):
+                        for item in directories + files:
+                            candidate = os.path.realpath(os.path.join(base, item))
+                            if os.path.commonpath([root, candidate]) != root:
+                                return _deny("Read search includes an outside symlink.")
             return {"hookEventName": "PreToolUse"}
         if row["class"] not in ("effect", "ask"):
             return _deny("Invalid policy classification.")

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "architecture",
+  "input": "recovery-barrier.json",
+  "output": "recovery-barrier.html",
+  "specification": {
+    "sha256": "0ce786da14152aece504bf997df4bdb3974979f96d121ad9bf7204cea7329b45",
+    "bytes": 3063
+  },
+  "artifact": {
+    "sha256": "05269d0d28e2b47cf45d0cb03939e4ff656ae20db35e2eb703551c09a4786bb6",
+    "bytes": 603241
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  },
+  "visual_review": "skipped (no capable browser or SVG rasterizer)",
+  "correction_rounds": 0
+}

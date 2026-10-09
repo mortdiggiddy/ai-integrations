@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Durable Claude session",
+    "subtitle": "Proposed composition | accepted boundaries, independent effect authority",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "session",
+      "type": "backend",
+      "label": "Session Workflow",
+      "sublabel": "Stable logical identity",
+      "pos": [
+        40,
+        300
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "worker",
+      "type": "backend",
+      "label": "SDK Worker",
+      "sublabel": "Existing controller and runner",
+      "pos": [
+        380,
+        300
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "sandbox",
+      "type": "cloud",
+      "label": "Claude sandbox",
+      "sublabel": "Container or microVM",
+      "pos": [
+        720,
+        300
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "objects",
+      "type": "database",
+      "label": "Immutable checkpoints",
+      "sublabel": "Exact trajectory and workspace",
+      "pos": [
+        380,
+        80
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "ledger",
+      "type": "backend",
+      "label": "Effect Entity Workflow",
+      "sublabel": "Independent retained authority",
+      "pos": [
+        380,
+        520
+      ],
+      "size": [
+        250,
+        86
+      ]
+    },
+    {
+      "id": "effects",
+      "type": "external",
+      "label": "External effects",
+      "sublabel": "Unknown Bash outcome parks",
+      "pos": [
+        720,
+        520
+      ],
+      "size": [
+        250,
+        86
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "session-worker",
+      "from": "session",
+      "to": "worker"
+    },
+    {
+      "id": "worker-sandbox",
+      "from": "worker",
+      "to": "sandbox"
+    },
+    {
+      "id": "worker-objects",
+      "from": "worker",
+      "to": "objects"
+    },
+    {
+      "id": "session-ledger",
+      "from": "session",
+      "to": "ledger"
+    },
+    {
+      "id": "ledger-effects",
+      "from": "ledger",
+      "to": "effects"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Acceptance",
+      "items": [
+        "Upload and verify checkpoint before accepting its head.",
+        "Receipt binds trajectory, workspace and original pending call."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Replacement barrier",
+      "items": [
+        "Independent termination proof precedes replacement.",
+        "Timeout and lease expiry do not prove process death."
+      ]
+    }
+  ]
+}

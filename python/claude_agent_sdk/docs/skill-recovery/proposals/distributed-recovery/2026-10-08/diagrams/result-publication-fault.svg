@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1690 854" role="img" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase"><style>text { font-family: Arial, sans-serif; }
+.c-grid{ stroke: #1e293b; fill: none; }
+.c-mask{ fill: #0f172a; stroke: none; }
+.c-backend{ fill: rgba(6, 78, 59, 0.4);    stroke: #34d399; }
+.c-database{ fill: rgba(76, 29, 149, 0.4);   stroke: #a78bfa; }
+.c-security{ fill: rgba(136, 19, 55, 0.4);   stroke: #fb7185; }
+.c-external{ fill: rgba(30, 41, 59, 0.5);   stroke: #94a3b8; }
+.t-primary{ fill: #ffffff; }
+.t-muted{ fill: #94a3b8; }
+.semantic-sigil{
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.35;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.76;
+      pointer-events: none;
+    }
+.s-backend{ color: #34d399; }
+.s-database{ color: #a78bfa; }
+.s-security{ color: #fb7185; }
+.s-external{ color: #94a3b8; }
+.a-default{ stroke: #64748b; fill: none; }
+.m-default{ fill: #64748b; }
+.m-emphasis{ fill: #34d399; }
+.m-security{ fill: #fb7185; }
+.m-dashed{ fill: #a78bfa; }
+.c-grid{
+      stroke-dasharray: 1 4;
+      opacity: 0.48;
+    }
+.c-grid{
+      stroke-dasharray: 1 3;
+      opacity: 0.78;
+    }</style><rect width="100%" height="100%" fill="#020617"/>
+        <title id="archify-diagram-title">Effect succeeded; result publication failed</title>
+        <desc id="archify-diagram-description">Proposed fault oracle | retry must not repeat a physical effect</desc>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-security" />
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- Boundaries (behind everything) -->
+
+
+        <!-- Connection paths (before components for correct z-order) -->
+        <path data-edge-from="accepted" data-edge-to="intent" data-edge-key="0" data-edge-id="accept-intent" data-composition-points="290,223;380,223" d="M 290 223 L 380 223" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="intent" data-edge-to="physical" data-edge-key="1" data-edge-id="intent-effect" data-composition-points="630,223;720,223" d="M 630 223 L 720 223" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="physical" data-edge-to="publish" data-edge-key="2" data-edge-id="effect-publish" data-composition-points="970,223;1060,223" d="M 970 223 L 1060 223" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="publish" data-edge-to="delivered" data-edge-key="3" data-edge-id="publish-deliver" data-composition-points="1310,223;1400,223" d="M 1310 223 L 1400 223" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="publish" data-edge-to="inspect" data-edge-label="lost publication" data-edge-key="4" data-edge-id="publication-fault" data-composition-points="1185,266;1185,450" d="M 1185 266 L 1185 450" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="inspect" data-edge-to="known" data-edge-key="5" data-edge-id="retained-outcome" data-composition-points="1310,493;1400,493" d="M 1310 493 L 1400 493" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="known" data-edge-to="delivered" data-edge-key="6" data-edge-id="adopt-outcome" data-composition-points="1525,450;1525,266" d="M 1525 450 L 1525 266" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="inspect" data-edge-to="uncertain" data-edge-key="7" data-edge-id="unknown-outcome" data-composition-points="1185,536;1185,700" d="M 1185 536 L 1185 700" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+        <!-- Components -->
+        <g id="node-accepted" data-node-id="accepted" data-node-label="Accepted call" tabindex="0" role="button" aria-label="Focus Accepted call, Original identity committed, Architecture component" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Original identity committed" data-node-context="Architecture component">
+          <title>Accepted call · Original identity committed · Architecture component</title>
+          <rect x="40" y="180" width="250" height="86" rx="6" class="c-mask"/>
+          <rect x="40" y="180" width="250" height="86" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(46 186) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-detail-anchor="" x="165" y="221" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Accepted call</text>
+        <text data-detail="context" x="165" y="237" class="t-muted" font-size="9" text-anchor="middle">Original identity committed</text>
+        </g>
+
+        <g id="node-intent" data-node-id="intent" data-node-label="Retain intent" tabindex="0" role="button" aria-label="Focus Retain intent, Independent dispatch authority, Architecture component" aria-pressed="false" data-node-kind="security" data-node-sublabel="Independent dispatch authority" data-node-context="Architecture component">
+          <title>Retain intent · Independent dispatch authority · Architecture component</title>
+          <rect x="380" y="180" width="250" height="86" rx="6" class="c-mask"/>
+          <rect x="380" y="180" width="250" height="86" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(386 186) scale(0.6875)">
+            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
+            <path d="m5.8 8 1.5 1.5 3-3"/>
+          </g>
+          <text data-detail-anchor="" x="505" y="221" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Retain intent</text>
+        <text data-detail="context" x="505" y="237" class="t-muted" font-size="9" text-anchor="middle">Independent dispatch authority</text>
+        </g>
+
+        <g id="node-physical" data-node-id="physical" data-node-label="Effect occurs" tabindex="0" role="button" aria-label="Focus Effect occurs, Physical counter increments, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="Physical counter increments" data-node-context="Architecture component">
+          <title>Effect occurs · Physical counter increments · Architecture component</title>
+          <rect x="720" y="180" width="250" height="86" rx="6" class="c-mask"/>
+          <rect x="720" y="180" width="250" height="86" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(726 186) scale(0.6875)">
+            <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
+            <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
+          </g>
+          <text data-detail-anchor="" x="845" y="221" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Effect occurs</text>
+        <text data-detail="context" x="845" y="237" class="t-muted" font-size="9" text-anchor="middle">Physical counter increments</text>
+        </g>
+
+        <g id="node-publish" data-node-id="publish" data-node-label="Publish result" tabindex="0" role="button" aria-label="Focus Publish result, Upload plus completion ACK, Architecture component" aria-pressed="false" data-node-kind="database" data-node-sublabel="Upload plus completion ACK" data-node-context="Architecture component">
+          <title>Publish result · Upload plus completion ACK · Architecture component</title>
+          <rect x="1060" y="180" width="250" height="86" rx="6" class="c-mask"/>
+          <rect x="1060" y="180" width="250" height="86" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(1066 186) scale(0.6875)">
+            <ellipse cx="8" cy="4" rx="5" ry="2"/>
+            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+          </g>
+          <text data-detail-anchor="" x="1185" y="221" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Publish result</text>
+        <text data-detail="context" x="1185" y="237" class="t-muted" font-size="9" text-anchor="middle">Upload plus completion ACK</text>
+        </g>
+
+        <g id="node-delivered" data-node-id="delivered" data-node-label="Recover result" tabindex="0" role="button" aria-label="Focus Recover result, Exact original pending call, Architecture component" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Exact original pending call" data-node-context="Architecture component">
+          <title>Recover result · Exact original pending call · Architecture component</title>
+          <rect x="1400" y="180" width="250" height="86" rx="6" class="c-mask"/>
+          <rect x="1400" y="180" width="250" height="86" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(1406 186) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-detail-anchor="" x="1525" y="221" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Recover result</text>
+        <text data-detail="context" x="1525" y="237" class="t-muted" font-size="9" text-anchor="middle">Exact original pending call</text>
+        </g>
+
+        <g id="node-inspect" data-node-id="inspect" data-node-label="Check outcome" tabindex="0" role="button" aria-label="Focus Check outcome, No fresh spawn permission, Architecture component" aria-pressed="false" data-node-kind="security" data-node-sublabel="No fresh spawn permission" data-node-context="Architecture component">
+          <title>Check outcome · No fresh spawn permission · Architecture component</title>
+          <rect x="1060" y="450" width="250" height="86" rx="6" class="c-mask"/>
+          <rect x="1060" y="450" width="250" height="86" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(1066 456) scale(0.6875)">
+            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
+            <path d="m5.8 8 1.5 1.5 3-3"/>
+          </g>
+          <text data-detail-anchor="" x="1185" y="491" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Check outcome</text>
+        <text data-detail="context" x="1185" y="507" class="t-muted" font-size="9" text-anchor="middle">No fresh spawn permission</text>
+        </g>
+
+        <g id="node-known" data-node-id="known" data-node-label="Known exact result" tabindex="0" role="button" aria-label="Focus Known exact result, Adopt retained evidence only, Architecture component" aria-pressed="false" data-node-kind="database" data-node-sublabel="Adopt retained evidence only" data-node-context="Architecture component">
+          <title>Known exact result · Adopt retained evidence only · Architecture component</title>
+          <rect x="1400" y="450" width="250" height="86" rx="6" class="c-mask"/>
+          <rect x="1400" y="450" width="250" height="86" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(1406 456) scale(0.6875)">
+            <ellipse cx="8" cy="4" rx="5" ry="2"/>
+            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+          </g>
+          <text data-detail-anchor="" x="1525" y="491" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Known exact result</text>
+        <text data-detail="context" x="1525" y="507" class="t-muted" font-size="9" text-anchor="middle">Adopt retained evidence only</text>
+        </g>
+
+        <g id="node-uncertain" data-node-id="uncertain" data-node-label="Unknown: park" tabindex="0" role="button" aria-label="Focus Unknown: park, No effect or model redispatch, Architecture component" aria-pressed="false" data-node-kind="security" data-node-sublabel="No effect or model redispatch" data-node-context="Architecture component">
+          <title>Unknown: park · No effect or model redispatch · Architecture component</title>
+          <rect x="1060" y="700" width="250" height="86" rx="6" class="c-mask"/>
+          <rect x="1060" y="700" width="250" height="86" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(1066 706) scale(0.6875)">
+            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
+            <path d="m5.8 8 1.5 1.5 3-3"/>
+          </g>
+          <text data-detail-anchor="" x="1185" y="741" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Unknown: park</text>
+        <text data-detail="context" x="1185" y="757" class="t-muted" font-size="9" text-anchor="middle">No effect or model redispatch</text>
+        </g>
+
+        <!-- Connection labels -->
+
+
+
+
+        <g data-detail="context" data-edge-from="publish" data-edge-to="inspect" data-edge-label="lost publication" data-edge-key="4" data-edge-id="publication-fault">
+          <rect x="1141.6" y="330" width="86.8" height="14" rx="3" class="c-mask"/>
+          <text x="1185" y="340" class="t-muted" font-size="8" text-anchor="middle">lost publication</text>
+        </g>
+
+
+
+
+        <!-- Legend -->
+        <g data-legend="" data-legend-bridge="">
+          <text x="40" y="818" class="t-primary" font-size="10" font-weight="600">Legend</text>
+          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Backend" data-legend-x="40" data-legend-baseline="838" data-legend-width="77">
+            <rect x="40" y="830" width="14" height="9" rx="2" class="c-backend" stroke-width="1"/>
+            <text x="61" y="838" class="t-muted" font-size="8">Backend</text>
+          </g>
+          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="Database" data-legend-x="139" data-legend-baseline="838" data-legend-width="82">
+            <rect x="139" y="830" width="14" height="9" rx="2" class="c-database" stroke-width="1"/>
+            <text x="160" y="838" class="t-muted" font-size="8">Database</text>
+          </g>
+          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="243" data-legend-baseline="838" data-legend-width="82">
+            <rect x="243" y="830" width="14" height="9" rx="2" class="c-security" stroke-width="1"/>
+            <text x="264" y="838" class="t-muted" font-size="8">Security</text>
+          </g>
+          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External" data-legend-x="347" data-legend-baseline="838" data-legend-width="82">
+            <rect x="347" y="830" width="14" height="9" rx="2" class="c-external" stroke-width="1"/>
+            <text x="368" y="838" class="t-muted" font-size="8">External</text>
+          </g>
+        </g>
+      </svg>

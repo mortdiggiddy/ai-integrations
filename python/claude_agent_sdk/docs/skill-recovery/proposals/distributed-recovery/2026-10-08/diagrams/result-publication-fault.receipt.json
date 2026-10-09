@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "architecture",
+  "input": "result-publication-fault.json",
+  "output": "result-publication-fault.html",
+  "specification": {
+    "sha256": "6e4042f4afd4a5ca4080cbf418dc5b8df462dfbb6b06bd11e7de7c0ae6295582",
+    "bytes": 3545
+  },
+  "artifact": {
+    "sha256": "892ea7e43e8a98e0c941da387c8d57bf1b55582db4271bf135dcd4c3cfb8c24c",
+    "bytes": 605916
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  },
+  "visual_review": "skipped (no capable browser or SVG rasterizer)",
+  "correction_rounds": 0
+}

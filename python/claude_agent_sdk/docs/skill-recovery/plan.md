@@ -1,5 +1,19 @@
 # Recoverable skill execution plan
 
+Current Phase 1 checkpoint (2026-10-07, approved exit): [Approved Phase 1 continue decision](evidence.md#approved-phase-1-continue-decision-2026-10-07) completes M1 with the recorded bounded route and residual usage limitations. The operator chose continue. Workspace preparation still requires the separate volume/effect isolation decision; later runtime guarantees retain their named proving gates. Earlier pending checkpoint paragraphs are historical.
+
+Current Phase 1 checkpoint (2026-10-07, installed lanes): [Installed engine lane qualification and minimum route decision](evidence.md#installed-engine-lane-qualification-and-minimum-route-decision-2026-10-07) owns both passing noneditable installed suites, minimum native deferral, applicable backstop comparison and separate synthetic/unsupported original recovery dispositions. Minimum real model proof remains unexecuted; the proposed minimum failure disposition requires the operator's decision. Question interpretation remains DONE. The engine exit review remains unprepared. Earlier checkpoints are historical.
+
+Current Phase 1 checkpoint (2026-10-07, retained question closure): [Retained real question interpretation closure](evidence.md#retained-real-question-interpretation-closure-2026-10-07) demonstrates all three answer interpretations and adopts the bounded JSON text answer form. Original runtime failures and incomplete reservations remain preserved. Minimum runtime and complete installed lane suites await environment authorization; the engine exit review remains unprepared. Earlier checkpoints are historical.
+
+Current Phase 1 checkpoint (2026-10-07, approved exception): [Approved question observation exception and fresh execution preparation](evidence.md#approved-question-observation-exception-and-fresh-execution-preparation-2026-10-07) owns the scoped implementation, offline verification and fresh live proposal. No real question criterion advances or answer form is adopted. Separate live approval, minimum runtime and complete lane suites remain pending; the engine exit review is unprepared. Earlier checkpoints are historical.
+
+Current Phase 1 checkpoint (2026-10-07, approved attempt): [Approved question attempt and incomplete overage disposition](evidence.md#approved-question-attempt-and-incomplete-overage-disposition-2026-10-07) owns the retained failure, consumed reservation, verified cleanup and proposed observation policy exception. The approved stop condition prevented the other two runs. No answer form is adopted, no engine floor changes and no exit review is prepared. Resolve the operator policy decision before a fresh source bound live proposal; earlier checkpoints remain historical.
+
+Current Phase 1 checkpoint (2026-10-07): [Question admission revalidation and resumed input discussion](evidence.md#question-admission-revalidation-and-resumed-input-discussion-2026-10-07) owns unchanged prepared commands and the later reported legacy resume failure. Complete independent preparation precedes the exact live execution approval. Question interpretation and applicable version proof remain open; the operator retains the engine exit decision. Earlier checkpoint paragraphs remain historical.
+
+Current Phase 1 checkpoint (2026-10-06): [Validated package and resumed callback disposition](evidence.md#validated-package-and-resumed-callback-disposition-2026-10-06) completes package validation and read confinement. [Question and version proof preparation](evidence.md#question-and-version-proof-preparation-2026-10-06) prepares the next three real model question runs in the existing executor. Explicit live approval, minimum lane execution and both complete plugin suites remain pending. Reuse completed result/backstop evidence. The engine exit review remains mandatory before Phase 2 and its continue or redesign decision belongs to the operator. Earlier checkpoint paragraphs are historical.
+
 Current engine gate: [Scoped permission backstop closure](evidence.md#scoped-permission-backstop-closure-2026-10-05) owns completed policy construction and preventive proof on the qualified pinned configuration. The scoped ask fix preserves deferral and denies execution when interception returns no decision. Next is package validation/read confinement; the engine exit review stays mandatory before Phase 2. Completed result delivery and bounded harness evidence stay complete; strict preventive spending remains M5 acceptance work.
 
 Result delivery closure (2026-10-05): [Production result delivery closure](evidence.md#production-result-delivery-closure-2026-10-05) demonstrates all eight accepted criteria. Actual production success and error return unchanged to original pending calls on fresh Workers, with one external effect after accepted segment commit and authoritative cleanup before replacement. Mixed/Read denial reaches the model; serial state refusal, complete accounting and historical FAILs remain recorded. The bounded harness and result delivery are DONE. Next Phase 1 work is the preventive control implementation before its negative proof; the engine exit review remains mandatory before Phase 2. Earlier checkpoints are historical and do not restate current blockers.
@@ -111,13 +125,36 @@ Test actual SDK Mods loading, full request identity, native result and error met
 
 Prove pending approval and exact call recovery on replacement, recorded outcome reuse without another effect, exclusive ownership and orphan process handling. Missing, partial or mismatched session/workspace/manifest/claim state blocks recovery. Crash after an effect and before outcome recording must produce a consistent supported outcome or a blocked recovery. Bash uncertainty always parks.
 
-Finish [real model harness](work-items.md#real-model-harness), [selected result delivery](work-items.md#selected-result-delivery), [preventive control](work-items.md#preventive-control), [validated skill invocation](work-items.md#validated-skill-invocation), [question answer delivery](work-items.md#question-answer-delivery) and [engine compatibility](work-items.md#engine-compatibility). The implemented policy remains in progress until its real engine proving work closes.
+The bounded [real model harness](work-items.md#real-model-harness), [selected result delivery](work-items.md#selected-result-delivery), [preventive control](work-items.md#preventive-control), [validated skill invocation](work-items.md#validated-skill-invocation), [question answer delivery](work-items.md#question-answer-delivery) and [engine compatibility](work-items.md#engine-compatibility) dispositions are complete. The selected original pending recovery route and scoped ask prevention have retained real/native proof; legacy synthetic callback failure remains DEFECT. Minimum startup refusal is an approved failure disposition, not minimum live recovery proof. [The approved continue decision](evidence.md#approved-phase-1-continue-decision-2026-10-07) closes M1 with the recorded residual usage limitations. Workspace preparation remains gated by the separate volume and effect isolation decision.
 
 Exit gate: the selected mechanism is explicit; actual skill invocation and confinement, exact result delivery, prevention and answer interpretation are proved or contradicted with a recorded design change. Do not start executor work with an unresolved mechanism or unsafe bypass. A candidate source read and an offline test suite cannot satisfy this gate.
 
 Activation is opt in through `tool_policy`; rollback leaves it unset without claiming governed execution.
 
+### M1 assumption dispositions
+
+The specification owns these contracts. This table mirrors its current statuses for the prepared exit review, not final project retirement. Named proving artifacts and recorded limitations are in [Phase 1 exit review preparation](evidence.md#phase-1-exit-review-preparation-2026-10-07). General file/volume, host loss, signed decisions and version promotion obligations remain at their later gates.
+
+| ID | Current specification status |
+| --- | --- |
+| A-01 | M1 verified for selected serial route; legacy synthetic route contradicted |
+| A-02 | M1 verified for bounded serial route |
+| A-03 | M1 verified for qualified scoped ask configurations |
+| A-18 | M1 verified for validated package |
+| A-19 | M1 verified for admitted read routes |
+| A-25 | M1 bounded interpretation verified; M3 untested |
+| A-26 | M1 verified fail closed; child recovery excluded |
+| A-44 | M1 verified for qualified configuration |
+| A-49 | M1 verified for admitted configuration |
+| A-15 | M1 source ownership verified; M3 runtime enforcement open |
+| A-22 | M1 lane dispositions approved; M5 untested |
+| A-57 | rejected for tested invocation; other lanes untested |
+| A-58 | M1 bounded host recovery verified; general host loss open |
+| A-59 | M1 limitations recorded; general file and volume proof open |
+
 ### Effects and prepared workspace
+
+
 
 After the engine exit gate, adoption decision, volume and isolation decisions, complete [prepared workspace and effect identity](work-items.md#prepared-workspace-and-effect-identity), [claimed Bash execution](work-items.md#claimed-bash-execution), [ordered outcomes and refusals](work-items.md#ordered-outcomes-and-refusals), [repeatable file execution](work-items.md#repeatable-file-execution), [tool behavior fidelity](work-items.md#tool-behavior-fidelity), and [process and payload bounds](work-items.md#process-and-payload-bounds).
 

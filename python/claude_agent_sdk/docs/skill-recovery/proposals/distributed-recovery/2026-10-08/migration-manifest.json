@@ -1,0 +1,1009 @@
+{
+  "schema_version": 1,
+  "status": "complete; independently verified documentation migration; private entry points historical",
+  "scope": "Latest maintained untracked ticket set and distributed recovery proposal; historical archives and raw captures excluded",
+  "source_revision": "c79bdb516f4a4fe343bb97c1c97b39f0d796c450 plus retained dirty source",
+  "ticket_prefix": "DSR",
+  "work_tickets": 61,
+  "containers": 9,
+  "tickets": [
+    {
+      "id": "DSR-4.1",
+      "status": "OPEN",
+      "file": "tickets/phase-4.md",
+      "checked": 0,
+      "unchecked": 8
+    },
+    {
+      "id": "DSR-4.2",
+      "status": "OPEN",
+      "file": "tickets/phase-4.md",
+      "checked": 0,
+      "unchecked": 10
+    },
+    {
+      "id": "DSR-4.3",
+      "status": "OPEN",
+      "file": "tickets/phase-4.md",
+      "checked": 0,
+      "unchecked": 9
+    },
+    {
+      "id": "DSR-4.4",
+      "status": "OPEN",
+      "file": "tickets/phase-4.md",
+      "checked": 0,
+      "unchecked": 6
+    },
+    {
+      "id": "DSR-4.5",
+      "status": "OPEN",
+      "file": "tickets/phase-4.md",
+      "checked": 0,
+      "unchecked": 6
+    },
+    {
+      "id": "DSR-ROOT",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 3
+    },
+    {
+      "id": "DSR-P0",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 2
+    },
+    {
+      "id": "DSR-P1",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 1
+    },
+    {
+      "id": "DSR-P2",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 1
+    },
+    {
+      "id": "DSR-P3",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 1
+    },
+    {
+      "id": "DSR-P4",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 1
+    },
+    {
+      "id": "DSR-P5",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 1
+    },
+    {
+      "id": "DSR-P6",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 1
+    },
+    {
+      "id": "DSR-P7",
+      "status": "OPEN",
+      "file": "tickets/epics.md",
+      "checked": 0,
+      "unchecked": 1
+    },
+    {
+      "id": "DSR-6.1",
+      "status": "OPEN",
+      "file": "tickets/phase-6.md",
+      "checked": 0,
+      "unchecked": 8
+    },
+    {
+      "id": "DSR-6.2",
+      "status": "OPEN",
+      "file": "tickets/phase-6.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-6.3",
+      "status": "OPEN",
+      "file": "tickets/phase-6.md",
+      "checked": 0,
+      "unchecked": 10
+    },
+    {
+      "id": "DSR-6.4",
+      "status": "OPEN",
+      "file": "tickets/phase-6.md",
+      "checked": 0,
+      "unchecked": 7
+    },
+    {
+      "id": "DSR-1.1",
+      "status": "DONE (2026-10-05)",
+      "file": "tickets/phase-1.md",
+      "checked": 6,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-1.2",
+      "status": "DONE (2026-10-05 local)",
+      "file": "tickets/phase-1.md",
+      "checked": 6,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-1.3",
+      "status": "DONE (2026-10-05, all eight criteria demonstrated)",
+      "file": "tickets/phase-1.md",
+      "checked": 8,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-1.4",
+      "status": "DONE (2026-10-05 local)",
+      "file": "tickets/phase-1.md",
+      "checked": 9,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-1.5",
+      "status": "DONE (2026-10-06, 8/8 bounded dispositions)",
+      "file": "tickets/phase-1.md",
+      "checked": 8,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-1.6",
+      "status": "DONE (2026-10-07, 5/5 bounded Phase 1 interpretation dispositions)",
+      "file": "tickets/phase-1.md",
+      "checked": 5,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-1.7",
+      "status": "DONE (2026-10-07, 6/6 bounded dispositions; approved minimum failure and unsupported live call exception)",
+      "file": "tickets/phase-1.md",
+      "checked": 6,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-1.8",
+      "status": "DONE (2026-09-30)",
+      "file": "tickets/phase-1.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-1.9",
+      "status": "DONE (2026-10-07, 7/7 bounded exit criteria; operator chose continue)",
+      "file": "tickets/phase-1.md",
+      "checked": 7,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-1.10",
+      "status": "DONE (2026-10-02, approved bounded research disposition)",
+      "file": "tickets/phase-1.md",
+      "checked": 9,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-3.1",
+      "status": "OPEN",
+      "file": "tickets/phase-3.md",
+      "checked": 0,
+      "unchecked": 10
+    },
+    {
+      "id": "DSR-3.2",
+      "status": "OPEN",
+      "file": "tickets/phase-3.md",
+      "checked": 0,
+      "unchecked": 11
+    },
+    {
+      "id": "DSR-3.3",
+      "status": "OPEN",
+      "file": "tickets/phase-3.md",
+      "checked": 0,
+      "unchecked": 8
+    },
+    {
+      "id": "DSR-3.4",
+      "status": "OPEN",
+      "file": "tickets/phase-3.md",
+      "checked": 0,
+      "unchecked": 7
+    },
+    {
+      "id": "DSR-3.5",
+      "status": "OPEN",
+      "file": "tickets/phase-3.md",
+      "checked": 0,
+      "unchecked": 8
+    },
+    {
+      "id": "DSR-3.6",
+      "status": "OPEN",
+      "file": "tickets/phase-3.md",
+      "checked": 0,
+      "unchecked": 6
+    },
+    {
+      "id": "DSR-3.7",
+      "status": "OPEN",
+      "file": "tickets/phase-3.md",
+      "checked": 0,
+      "unchecked": 6
+    },
+    {
+      "id": "DSR-3.8",
+      "status": "SUPERSEDED",
+      "file": "tickets/phase-3.md",
+      "checked": 0,
+      "unchecked": 9
+    },
+    {
+      "id": "DSR-0.1",
+      "status": "IN PROGRESS",
+      "file": "tickets/phase-0.md",
+      "checked": 0,
+      "unchecked": 4
+    },
+    {
+      "id": "DSR-0.2",
+      "status": "DONE (2026-09-30)",
+      "file": "tickets/phase-0.md",
+      "checked": 6,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-0.3",
+      "status": "DONE (2026-10-01)",
+      "file": "tickets/phase-0.md",
+      "checked": 9,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-0.4",
+      "status": "OPEN",
+      "file": "tickets/phase-0.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-0.5",
+      "status": "DONE (2026-10-05 local)",
+      "file": "tickets/phase-0.md",
+      "checked": 5,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-0.6",
+      "status": "OPEN",
+      "file": "tickets/phase-0.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-0.7",
+      "status": "OPEN",
+      "file": "tickets/phase-0.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-0.8",
+      "status": "OPEN",
+      "file": "tickets/phase-0.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-0.9",
+      "status": "OPEN",
+      "file": "tickets/phase-0.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-0.10",
+      "status": "SUPERSEDED",
+      "file": "tickets/phase-0.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-0.11",
+      "status": "OPEN",
+      "file": "tickets/phase-0.md",
+      "checked": 0,
+      "unchecked": 4
+    },
+    {
+      "id": "DSR-0.12",
+      "status": "DONE (2026-10-02, Phase 1 proof target selection)",
+      "file": "tickets/phase-0.md",
+      "checked": 6,
+      "unchecked": 0
+    },
+    {
+      "id": "DSR-7.1",
+      "status": "OPEN",
+      "file": "tickets/phase-7.md",
+      "checked": 0,
+      "unchecked": 7
+    },
+    {
+      "id": "DSR-7.2",
+      "status": "OPEN",
+      "file": "tickets/phase-7.md",
+      "checked": 0,
+      "unchecked": 7
+    },
+    {
+      "id": "DSR-7.3",
+      "status": "OPEN",
+      "file": "tickets/phase-7.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-7.4",
+      "status": "OPEN (2026-10-08; prospective extension decision, no runtime implementation approved)",
+      "file": "tickets/phase-7.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-2.1",
+      "status": "OPEN",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 11
+    },
+    {
+      "id": "DSR-2.2",
+      "status": "OPEN",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 8
+    },
+    {
+      "id": "DSR-2.3",
+      "status": "OPEN",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 13
+    },
+    {
+      "id": "DSR-2.4",
+      "status": "OPEN",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 9
+    },
+    {
+      "id": "DSR-2.5",
+      "status": "SUPERSEDED",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 10
+    },
+    {
+      "id": "DSR-2.6",
+      "status": "OPEN",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 6
+    },
+    {
+      "id": "DSR-2.7",
+      "status": "OPEN",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 7
+    },
+    {
+      "id": "DSR-2.8",
+      "status": "SUPERSEDED",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 8
+    },
+    {
+      "id": "DSR-2.9",
+      "status": "OPEN",
+      "file": "tickets/phase-2.md",
+      "checked": 0,
+      "unchecked": 6
+    },
+    {
+      "id": "DSR-5.1",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 9
+    },
+    {
+      "id": "DSR-5.2",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 6
+    },
+    {
+      "id": "DSR-5.3",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-5.4",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 6
+    },
+    {
+      "id": "DSR-5.5",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-5.6",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-5.7",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 5
+    },
+    {
+      "id": "DSR-5.8",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 11
+    },
+    {
+      "id": "DSR-5.9",
+      "status": "OPEN",
+      "file": "tickets/phase-5.md",
+      "checked": 0,
+      "unchecked": 6
+    }
+  ],
+  "files": [
+    {
+      "path": "tickets/phase-4.md",
+      "sha256": "3f4ab507134d47f67099bdd8c9afa16818a3a0f7b17a1e566839c34a664e811c",
+      "bytes": 28426
+    },
+    {
+      "path": "tickets/epics.md",
+      "sha256": "07d6069cd5fd695867b1914fcbfd83b0aaf13905ff75c01991c2223956487567",
+      "bytes": 14714
+    },
+    {
+      "path": "tickets/tickets.config.json",
+      "sha256": "01cf973635a98afd2c0e80c497f1458bca4936e4228f2eafc3e55544e6813624",
+      "bytes": 4082
+    },
+    {
+      "path": "tickets/phase-6.md",
+      "sha256": "1ca4f133244ab8633536811ea0466e9c0ac4c9a49f0b132b9e0b2f2f01062d04",
+      "bytes": 19864
+    },
+    {
+      "path": "tickets/phase-1.md",
+      "sha256": "506070db250daa541403ae915781eec382cfaed76e151eea7fa00483132b1151",
+      "bytes": 136971
+    },
+    {
+      "path": "tickets/README.md",
+      "sha256": "ca6e3a1e3b616991fb1c29a3ddd8b1f1fc763f47a58ce902e2c02b833e5d8de9",
+      "bytes": 42900
+    },
+    {
+      "path": "tickets/check_tickets.py",
+      "sha256": "e4a0c780d588f4e481c13e5038f4b8c37ab547ff012602dd2b26f23ea13a159b",
+      "bytes": 14465
+    },
+    {
+      "path": "tickets/phase-3.md",
+      "sha256": "61b84bc49210ebea8bf4336254326563f4ca650d1758cc16d8da169e30affc76",
+      "bytes": 45349
+    },
+    {
+      "path": "tickets/status-map.md",
+      "sha256": "db301ddaff54048d059bee43baf1345c147031df06c6bcc6c349aeda4e3737ad",
+      "bytes": 27618
+    },
+    {
+      "path": "tickets/phase-0.md",
+      "sha256": "1b2abf2008f4741b0ee4a41c23a507d24430d66fcdbb99af0b6613f1ad6b6bfb",
+      "bytes": 80171
+    },
+    {
+      "path": "tickets/phase-7.md",
+      "sha256": "5f39323a5aabdd91c2d0a77b8297d3850f7b0fd453890c08d38748babaa8c575",
+      "bytes": 19899
+    },
+    {
+      "path": "tickets/phase-2.md",
+      "sha256": "ab93005967700f0d30754a155a174460cb82ee51d3fd1a9d6ed0b2e1bfc79f67",
+      "bytes": 57839
+    },
+    {
+      "path": "tickets/phase-5.md",
+      "sha256": "94373d55ed4fd208e20263a9d61c8b8502e1a583d7cf55de4f0412510095434c",
+      "bytes": 42785
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/mods-synthesis.md",
+      "sha256": "5ba197b070b9689b6282c500e11f6b2a0da8f96913b9576c0f797cc288803802",
+      "bytes": 7565
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/provenance.md",
+      "sha256": "80cc3701cf0bb07e419d24ae85e6693c94cd7ddebf18129049287f75d7c9311e",
+      "bytes": 10633
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/source-pin.json",
+      "sha256": "fd13125945fb5a9cd5d18804c7333b2ad6cca972f8ff3ae692350c674fcab450",
+      "bytes": 2059
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/README.md",
+      "sha256": "49095f51d3189a5727f1136af1fe011107fca8a729ffe2a116677dbe0f70649d",
+      "bytes": 3445
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/priority-sweep/agent-temporal.md",
+      "sha256": "09ef189543ccb8f5c32f7951befa4d25c5b3213d58233ba0aebd68225f11026b",
+      "bytes": 20530
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md",
+      "sha256": "5485c36e3a9386760a5c33ddf9410dfc3f5ebc04c5194bf496a9dfc0464d0c3b",
+      "bytes": 13263
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/priority-sweep/agent-industry.md",
+      "sha256": "0a4148e692175c08dd5aee47bac14e785f0aa4a05955490386c06da0e3e8c68f",
+      "bytes": 15987
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/candidate/plan.md",
+      "sha256": "de54d53d069cc3467f93a3df773c59a3cfbc49f92a14ccf5d562163a9c87d865",
+      "bytes": 48431
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/candidate/evidence.json",
+      "sha256": "2a590f92ecc8de318d3eef17492218a4ffa379c14b4b8bf56cca6902b9e7ec7b",
+      "bytes": 18683
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+      "sha256": "44e0fd84c77fe32c3936f18ba6ab9a5297be135dc3f8acdbd6ec6676def90867",
+      "bytes": 55052
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/candidate/plan-evidence.json",
+      "sha256": "3a8a02d479fa7a42b30430d0b70547be34d5d413774f73d4ace8827608f1667b",
+      "bytes": 18683
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/storage-loop/synthesis.md",
+      "sha256": "033de37169e2667132e920993d1c67e9a3d758069c832a70d9a2367f48a16667",
+      "bytes": 8187
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/durable-session.json",
+      "sha256": "af7800253ecf014e4709804309cdb9833f117d9229a43b46467bbaba02a78e30",
+      "bytes": 2648
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/recovery-barrier.receipt.json",
+      "sha256": "41550831b47ac78c3898314e8d75c688c59f52412381974cb96e929dae91c5d4",
+      "bytes": 679
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/recovery-barrier.json",
+      "sha256": "0ce786da14152aece504bf997df4bdb3974979f96d121ad9bf7204cea7329b45",
+      "bytes": 3063
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/workspace-alternatives.svg",
+      "sha256": "9d9a001f8f3f370abf024e3d27c113e5b2ed0b125b9ca27365d725132f294756",
+      "bytes": 11176
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/workspace-alternatives.json",
+      "sha256": "50fba67745e617a28b4ed9d97948548498020a2c1482c456d7c4a944b6a162a0",
+      "bytes": 2677
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/result-publication-fault.receipt.json",
+      "sha256": "75889f7f4db755f7a3c61c06af9b7ea3acf8a44fe4d26cadbc13d31cfbba0b3f",
+      "bytes": 695
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/workspace-alternatives.receipt.json",
+      "sha256": "b95c4ab4b662923bd61c98cc7c3061e14f69567bbb10e2b8f5ff9d92b91956fa",
+      "bytes": 691
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/recovery-barrier.svg",
+      "sha256": "83c594d1b86158c1bc209ee7ee7ca54454ddd05d3053b9251e3e4158f67dc821",
+      "bytes": 13361
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/durable-session.receipt.json",
+      "sha256": "75d1015eee9407cdc9c11503af01d5883b36d01ba9d999d650852656b2c12694",
+      "bytes": 788
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/workspace-alternatives.html",
+      "sha256": "054ea0c4bcb07aa519a3e3d2a283b8a2ee485243a0c5ac379bdfde7a1fb7685b",
+      "bytes": 601176
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/result-publication-fault.json",
+      "sha256": "6e4042f4afd4a5ca4080cbf418dc5b8df462dfbb6b06bd11e7de7c0ae6295582",
+      "bytes": 3545
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/README.md",
+      "sha256": "aa51852314cd28444c65b8a203d0197ccea8eb4e857d9503553103a679d348ad",
+      "bytes": 1196
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/durable-session.svg",
+      "sha256": "29d1dccb76b12e736837194bc42eb2f7bf15c62e5222a75e1cc87f5963d39bd7",
+      "bytes": 12342
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/result-publication-fault.svg",
+      "sha256": "5f0e1da858ef1e4e71b7ea74c5bd119b5b67763d747790818a1f3a37a3d879db",
+      "bytes": 16427
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/durable-session.html",
+      "sha256": "2ee468eb32e8dd0c25dcac010813f2d9c39c6f4a7fcdcdd219638d974b018198",
+      "bytes": 602318
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/recovery-barrier.html",
+      "sha256": "05269d0d28e2b47cf45d0cb03939e4ff656ae20db35e2eb703551c09a4786bb6",
+      "bytes": 603241
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/diagrams/result-publication-fault.html",
+      "sha256": "892ea7e43e8a98e0c941da387c8d57bf1b55582db4271bf135dcd4c3cfb8c24c",
+      "bytes": 605916
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/storage-loop/verification/report.md",
+      "sha256": "4f1a846325d7f475c3aa4a3372530fe998cd8d3b428aee099ffef81a5607d36d",
+      "bytes": 13205
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/storage-loop/substrate/report.md",
+      "sha256": "484c122626c1cd0b4c9e1a7b3d551d84922b46f4cc49384f41c5cba3a39be7d8",
+      "bytes": 19974
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/storage-loop/temporal/report.md",
+      "sha256": "39d14d1ce77b8d72c2b06055641d7fdfde94f481211b212c39f39c5e41cc89c1",
+      "bytes": 16340
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/storage-loop/fencing/report.md",
+      "sha256": "15239a70249db3ed5c932a88e6c41a2e9794d34f54797f8d67ee1553293d7189",
+      "bytes": 17241
+    },
+    {
+      "path": "proposals/distributed-recovery/2026-10-08/mods-research/surface/pinned-types-excerpts.md",
+      "sha256": "32b8b0f26be03042d4ce8fdc5f6d6c1f4e19b75b8ad4a36618617ccbb624ceb7",
+      "bytes": 21582
+    },
+    {
+      "path": "canonical-documents.md",
+      "sha256": "a3c888acc64e3419aaa3e0888b1d9ccce9c03c43b9bd09ce7b2cae09d83f2707",
+      "bytes": 3962
+    }
+  ],
+  "provenance": [
+    {
+      "id": "P-001",
+      "label": "DSR-0.2-v1-scope.md",
+      "original_sha256": "7f357840845e137960db28fef135074a3697876f5ea4fd7f5c391bda8b29e4ad",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-002",
+      "label": "2026-10-01-offline-construction.md",
+      "original_sha256": "06e09f332ce04945a03be39694403580c763cc7e94924946ec8220893e82648d",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-003",
+      "label": "2026-09-30-baseline-setup.md",
+      "original_sha256": "dc54411b92937e132513cf9665b84315fbb5417fd0144b476166d1ceb31b74fa",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-004",
+      "label": "2026-10-01-minimum-engine-environment.md",
+      "original_sha256": "549287e50948ee15c7d2c545ae01f0ca009ec5a37a4dc73198cd9e49bd7426d2",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-005",
+      "label": "2026-09-30-engine-option-audit.md",
+      "original_sha256": "224e71447e561f2d813da6894a0aafc399dce46aad85aefd1766af81cd050349",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-006",
+      "label": "DSR-1.2-hook-request-identity.md",
+      "original_sha256": "66536b72c12ef64a6fae7f9e18cdf01cd77e875af233262b508b0390a90d2e81",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-007",
+      "label": "2026-09-30-dsr-1.8-handler-ownership.md",
+      "original_sha256": "739da081e003bbf4f53b56e38977ce661cbfed815a1fdbd5add39fdb493f7c3c",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-008",
+      "label": "23-official-defer-resume-2026-09-30.md",
+      "original_sha256": "68e552a7e79a34251d88dab591b0a099cdaae728e08b7cd05423fc491ad3ab42",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-009",
+      "label": "2026-09-30-contact-drafts.md",
+      "original_sha256": "ef0787701b92d7ff1f8720146e927fe539077ba4c802ca2b2d7f59df426233d1",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-010",
+      "label": "README.md",
+      "original_sha256": "05e9087529c533ce45b4da59df34ad3b388e37a3daad0ea0f82b65e7d3dacdd8",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-011",
+      "label": "synthesis.md",
+      "original_sha256": "21a2cade0a607234da1123b39f67e42ff7efcbd96d04c72f2144c242d3c10192",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-012",
+      "label": "spec.md",
+      "original_sha256": "be4c67ecff23b3d3a79ab9bf79dfc51f381e87b3f368cc2224164ffd383af1e9",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-013",
+      "label": "plan.md",
+      "original_sha256": "15507e831721ae021331760c5b2bc61222dc4f3db8a912cf4b9cd4432a75527c",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-014",
+      "label": "report.md",
+      "original_sha256": "5899981e81efee8510899f4f1474b55986f20be22cf3b247fcaf59d6d235935b",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-015",
+      "label": "spec.md",
+      "original_sha256": "be4c67ecff23b3d3a79ab9bf79dfc51f381e87b3f368cc2224164ffd383af1e9",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-016",
+      "label": "copy-provenance.json",
+      "original_sha256": "4f681ee3fcbc36ee55d8ee5ad6dec58bbaf763c3d05ca7e44321c690eef0a151",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-017",
+      "label": "report.md",
+      "original_sha256": "c19aebcdae7d6989421cddc2d188fa256de0bd9d192cc94ebfc35d79173fd7a8",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-018",
+      "label": "spec.md",
+      "original_sha256": "a0dbff62e7cc33171ed3ea7857cc950d93382adee498f451284a6aa1e5af994c",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-019",
+      "label": "spec.md",
+      "original_sha256": "3084cc598e9a3290f79b20c5b2707d8906c81f3ed8c3bdf902169b413db74323",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-020",
+      "label": "ai-integrations-durability",
+      "original_sha256": null,
+      "disposition": "environment or uncaptured reference; no file proof"
+    },
+    {
+      "id": "P-021",
+      "label": "source-pin.json",
+      "original_sha256": "fd13125945fb5a9cd5d18804c7333b2ad6cca972f8ff3ae692350c674fcab450",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-022",
+      "label": "report.md",
+      "original_sha256": "966818e5503571dbe52789755dca6809bc0720127c7a6b240c52dc9343489849",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-023",
+      "label": "report.md",
+      "original_sha256": "c1d36cac0fe56a4a197fd9d68264406967e549e60aaa3cb9755fd5c0d5e28cd7",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-024",
+      "label": "report.md",
+      "original_sha256": "a2d59c3f315f53a04be2c1e68609b465961cbc83e2c70763b5a49fb4b5526f57",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-025",
+      "label": "evidence.json",
+      "original_sha256": "ef2addcdff47fcf7a41b221d582c51386eb3aa60c40c07b72f3494b604e67875",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-026",
+      "label": "SKILL.md",
+      "original_sha256": "75db7e8c6987c6abc1502c819b85dcdd7a9e76f5444a9fe9c87dc93ff5b9bc06",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-027",
+      "label": "verification-20261007.md",
+      "original_sha256": "362f4bf3d8f201ed689776cfd5a66a9f2e24ef7a97b5409682623c1f4f3b7eed",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-028",
+      "label": "report.md",
+      "original_sha256": "d0ef7dfb772e16320a60b9a6ef2e25e63fb4001d6dcf9b3272209b453c5c4d5f",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-029",
+      "label": "surface.md",
+      "original_sha256": "b02ccd86b9b0a9d1f3a76a32112b51d0dd659e9a18887bb7f46070155a5b5a22",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-030",
+      "label": "temporal.md",
+      "original_sha256": "1a621ef0655ae2fa9f3b28ab1528635a48e49200aa22ddb5a7ab176008bb3515",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-031",
+      "label": "adversarial.md",
+      "original_sha256": "df38f4b407b503b45be4815f877138d8e8ef3bc5d9e59c365e158b69b29adac2",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-032",
+      "label": "surface-challenge.md",
+      "original_sha256": "3ddb8251bdf89e16e4f5b6986db68963fb42917f79f61c3e7576dba03c2e1234",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-033",
+      "label": "primary-docs.json",
+      "original_sha256": "d337d2af25fd5a67811bec192ccf4f219b0785872c1a6c22ef865d9373406b08",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-034",
+      "label": "harness-source-excerpts.json",
+      "original_sha256": "0d50f5399bc2e360d2b909380887444c8198223db28d38b750bca0a906d50885",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-035",
+      "label": "source-capture.json",
+      "original_sha256": "662b626aa1ffa7994ab3826c94db858148c3e723d9049892aedd363739450800",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-036",
+      "label": "sources.json",
+      "original_sha256": "b5210f4bfd53de645327c261aca2931d9f83666d26f66491cb3c959b893d8ab8",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-037",
+      "label": "source-ledger.json",
+      "original_sha256": "8b0b2788ba38a477cecd94349e3db31d1e4d234903f5cd6dbce6246627b7cdaf",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-038",
+      "label": "source-identities.json",
+      "original_sha256": "b381e3386247c5c536e3b2af45995a3506e2db8b0c5f5d10263090e8583a36d7",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-039",
+      "label": "target-pin.json",
+      "original_sha256": "b16f6db23f3521e25be4eb340c6e27ffe9e309b1b15b2833c9aa461395cfb244",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-040",
+      "label": "contract.md",
+      "original_sha256": "0885e8866d9f1a025e841f49fb268ccd8b59bb8669d6f02b922fb7b9d230a0d8",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-041",
+      "label": "domain.md",
+      "original_sha256": "2395fdea04dbc7244ed84d30350cf57836f15c95304a36ddcca37bc1b1ad12be",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-042",
+      "label": "adversarial.md",
+      "original_sha256": "b5e90d635b06575fdfb7ef989d7173b8927723c5d774ef7a50e9a798d1cbe8ea",
+      "disposition": "retained private historical source"
+    },
+    {
+      "id": "P-043",
+      "label": "reviewer.md",
+      "original_sha256": "6e55d7fd2c3a33fc2367666773c31d0f85a6f82515b4d11704ea7bc8dd34c99f",
+      "disposition": "retained private historical source"
+    }
+  ],
+  "limitations": [
+    "Migration supplies no runtime qualification or design adoption.",
+    "Private supporting captures remain unavailable in a fresh clone.",
+    "Legacy ticket checker retains 20 findings; completed tickets were not reopened.",
+    "Visual review skipped; automated diagram and XML checks do not prove perceptual polish."
+  ]
+}
