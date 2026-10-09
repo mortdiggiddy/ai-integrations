@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "verdict": "CONDITIONAL",
+  "target_identities": [
+    "design-base baseline 0e9bb011fd6d5dc414effc446173ce3d046ec745 plus uncommitted documentation preservation preparation 2026-10-09",
+    "preservation-manifest.json binds 29 inspectable supporting evidence projections to original and exported SHA-256 identities"
+  ],
+  "reviewers": [
+    {
+      "reviewer": "temporal-design-review",
+      "applicability": "not_applicable",
+      "applicability_basis": "Documentation evidence preservation, ownership consistency and private directory independence; no Temporal mechanism or execution design is changed or newly qualified",
+      "outcome": "not_applicable"
+    }
+  ]
+}

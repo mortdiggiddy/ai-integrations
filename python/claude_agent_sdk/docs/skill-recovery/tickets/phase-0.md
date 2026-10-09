@@ -365,6 +365,8 @@ Public contact has happened. The operator removed the remaining integrations ask
 
 Status: OPEN
 
+Decision preparation (2026-10-09): [the maintained recommendation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) proposes the bounded canonical shared-volume/container qualification target, compares cold restoration and independent authority, separates surviving-host replacement from host loss and partition, and maps the six owner decisions and smallest experiments. Its [independent review](../proposals/distributed-recovery/2026-10-08/dsr-0.6-review.md) verifies preparation only. No choice, role holder, acceptance checkbox or runtime guarantee is approved. DSR-2.1 remains blocked. Historical discovery paragraphs below retain their dates and source inventories.
+
 - Type: Decision
 - Priority: High
 - Estimate: 3 points (confidence 70 percent)
@@ -409,7 +411,7 @@ Neither the volume class nor the isolation level has an owner or a decision. Pha
 - [ ] The record chooses between the two container rig and the declared untested limit, and names who builds the rig if chosen. Proof: the record.
 - [ ] The record names the isolation level and the Security owner role holder. Proof: the record.
 - [ ] For each choice the record states which assumption rows it affects (A-17, A-27, A-48 and A-37) and what claim the specification may make until Phase 4. Proof: a sentence per row.
-- [ ] The record states a failure boundary: what happens if the chosen volume cannot give atomic exclusive create (the claim guard is dropped or the volume class changes). Proof: the stated rule.
+- [ ] The record states a failure boundary: if the chosen volume cannot give atomic exclusive create and preserve protected claims, claimed execution refuses and the volume class must be changed and qualified. A replacement authority needs a separately approved contract revision and proof; dropping the guard while offering claimed Bash is forbidden. Proof: the stated rule, checked against the canonical protected-claim contract.
 
 #### Dependencies and blockers
 

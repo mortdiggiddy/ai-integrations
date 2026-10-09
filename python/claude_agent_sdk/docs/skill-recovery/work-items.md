@@ -257,6 +257,8 @@ Dependencies: [selected result delivery](#selected-result-delivery), [preventive
 
 ## Prepared workspace and effect identity
 
+[DSR-0.6 preparation](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) owns the proposed selection and qualification alternatives. The owning decision remains OPEN. All criteria below remain unchecked; Phase 1's approved bounded exit is not reopened.
+
 Status: OPEN
 
 Dependencies: engine stage exit, [integration adoption](#integration-adoption), volume/isolation in [deployment prerequisites](#deployment-prerequisites).

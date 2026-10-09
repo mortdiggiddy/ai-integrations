@@ -154,6 +154,8 @@ The specification owns these contracts. This table mirrors its current statuses 
 
 ### Effects and prepared workspace
 
+[DSR-0.6 preparation](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) is the proposed volume/isolation decision basis. Its applicable choices and named ownership remain pending; DSR-1.9 is already complete. It neither adopts the conditional distributed protocol nor authorizes this milestone.
+
 
 
 After the engine exit gate, adoption decision, volume and isolation decisions, complete [prepared workspace and effect identity](work-items.md#prepared-workspace-and-effect-identity), [claimed Bash execution](work-items.md#claimed-bash-execution), [ordered outcomes and refusals](work-items.md#ordered-outcomes-and-refusals), [repeatable file execution](work-items.md#repeatable-file-execution), [tool behavior fidelity](work-items.md#tool-behavior-fidelity), and [process and payload bounds](work-items.md#process-and-payload-bounds).

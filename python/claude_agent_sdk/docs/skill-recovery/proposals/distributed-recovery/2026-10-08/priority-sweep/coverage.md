@@ -4,7 +4,7 @@ Status: research and prospective acceptance preparation. This document owns the 
 
 ## Source boundary
 
-[Issue capture](../provenance.md#p-035) contains the body and all twelve comments through 6065563646, SHA256 `662b626aa1ffa7994ab3826c94db858148c3e723d9049892aedd363739450800`. [Independent earlier reviewer](../provenance.md#p-043) records the complete source ledger. Historical EV-32 ends at 6043344791; the later native replay report is an additive source, not a correction of that historical evidence. A later comment or changed PR requires a new capture and comparison. No issue comment, contact or experiment is performed by this documentation update.
+[Issue capture projection](../supporting-evidence/p-035.json) contains the body and all twelve comments through 6065563646. Its original capture SHA256 is `662b626aa1ffa7994ab3826c94db858148c3e723d9049892aedd363739450800`; the [preservation manifest](../preservation-manifest.json) separately binds the sanitized projection. [Independent earlier reviewer](../supporting-evidence/p-043.json) records the complete source ledger. Historical EV-32 ends at 6043344791; the later native replay report is an additive source, not a correction of that historical evidence. A later comment or changed PR requires a new capture and comparison. No issue comment, contact or experiment is performed by this documentation update.
 
 ## High, Medium and Low outcomes
 

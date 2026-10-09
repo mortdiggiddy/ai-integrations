@@ -22,6 +22,10 @@ No ticket status or acceptance checkbox advances. Historical FAIL, DEFECT, publi
 
 ## Review and use
 
+[Planning evidence preservation](preservation.md) provides inspectable supporting source records, portable coherence checks and the conditions for removing an originating archive directory. Its [manifest](preservation-manifest.json) is separate from the immutable historical migration manifest. Local preparation is not GitHub publication or design approval.
+
+[DSR-0.6 decision preparation](dsr-0.6-preparation.md) and its [independent review](dsr-0.6-review.md) reconcile the canonical deployment decision with the conditional distributed alternative. This additive preparation approves no owner choice, changes no candidate protocol and supplies no runtime qualification.
+
 The [migration verification](migration-review.md) records independent coverage, adversarial counterexamples, private archive cutover and remaining evidence limitations. Migration is complete; the design remains conditional.
 
 Six owner decisions and unexecuted qualification tests remain open. Read the current candidate and coverage together. Diagram checks establish geometry and export integrity, not perceptual polish or distributed durability. Migration verification is documentation verification only. Existing make suite limitations and legacy ticket checker findings retain their recorded scope; no dependency installation or source provenance bypass is part of this migration.

@@ -118,6 +118,8 @@ Accept `extra_options` only from a reviewed, validated allowlist. Freeze nested 
 
 ## Package and filesystem boundary
 
+[DSR-0.6 decision preparation](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) owns the proposed deployment recommendation and alternatives. This section remains the canonical shared-volume/file-claim contract until applicable choices or a replacement design are approved and qualified. Decision preparation establishes no volume or isolation guarantee.
+
 Phase 1 implementation disposition: [Validated package and resumed callback disposition](evidence.md#validated-package-and-resumed-callback-disposition-2026-10-06) demonstrates the supported admission/invocation and read subset on SDK 0.2.162 / CLI 2.1.274. Configured unknown names and starting slash dispatch refuse before engine execution; model generated unknown names are independently denied at invocation. Prepared copy/manifest, deployment volume and hostile concurrent mutation requirements below remain later obligations. No broader engine compatibility or live question interpretation is inferred.
 
 Preparation rejects symlinks and hashes the finished package copy from sorted relative paths, normalized modes and file bytes. The hash covers the complete `.claude/` tree, including commands. Each segment rehashes that tree and records the package hash; a mismatch parks without a model result. Only configured content hashes may execute.
@@ -250,7 +252,7 @@ Failures must remain visible: no missing checkpoint as a new session, no stale w
 
 ## Evidence
 
-The portable canonical review uses two document checks: the specification evidence check requires all nine M1 gate rows plus A-15/A-22 and candidate rows A-57/A-58/A-59 to name bounded dispositions and artifacts in [Phase 1 exit review preparation](evidence.md#phase-1-exit-review-preparation-2026-10-07); the plan evidence check compares all fourteen M1 table IDs and statuses exactly with this specification. Also run canonical four-document/59-assumption coverage, local Markdown links, repository conventions and whitespace checks. Historical private evidence JSON and plan JSON gate results remain preserved provenance rather than current sidecars. These checks establish review consistency; original runtime artifacts supply the technical proof and their limits. Current checker outputs are owned by the evidence review section.
+The portable canonical review uses two document checks: the specification evidence check requires all nine M1 gate rows plus A-15/A-22 and candidate rows A-57/A-58/A-59 to name bounded dispositions and artifacts in [Phase 1 exit review preparation](evidence.md#phase-1-exit-review-preparation-2026-10-07); the plan evidence check compares all fourteen M1 table IDs and statuses exactly with this specification. Run the [portable planning checker](check_planning.py) for canonical four-document/59-assumption coverage, exact specification/plan status parity, bounded ticket dispositions, candidate sidecars, supporting projections and local Markdown links. Also run repository conventions and whitespace checks. Historical private evidence JSON and plan JSON gate results remain preserved provenance rather than current sidecars. These checks establish review consistency; original runtime artifacts supply the technical proof and their limits. Current checker outputs are owned by the evidence review section.
 
 ## Assumptions and risks if wrong
 

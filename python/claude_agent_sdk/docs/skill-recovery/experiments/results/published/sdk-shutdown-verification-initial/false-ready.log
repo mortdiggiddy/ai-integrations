@@ -1,0 +1,82 @@
+................F                                                        [ 42%]test_host_admission.py:269 test_scripted_failed_suite_with_ready_diagnostic. [ 45%]
+......................                                                   [100%]
+=================================== FAILURES ===================================
+_______________ test_scripted_failed_suite_with_ready_diagnostic _______________
+
+    def test_scripted_failed_suite_with_ready_diagnostic():
+        print('{"kind": "ready"}')
+>       raise AssertionError('scripted failure must propagate to driver')
+E       AssertionError: scripted failure must propagate to driver
+
+/checks/test_host_admission.py:272: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"kind": "ready"}
+=============================== warnings summary ===============================
+test_host_admission.py::test_controller_stop_fences_fresh_runner[stop]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[interrupt]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[close]
+test_host_admission.py::test_controller_stop_fences_fresh_runner[wedged]
+  /fixture/host_session.py:281: UserWarning: temporalio.claude_agent_sdk: no API key, cloud provider, or CLAUDE_CODE_OAUTH_TOKEN is set. A Claude app login cannot refresh itself when a session is resumed from a session store, so long-running agents can fail with 'OAuth session expired'. Set ANTHROPIC_API_KEY, use Bedrock or Vertex, or run `claude setup-token` and set CLAUDE_CODE_OAUTH_TOKEN.
+    self.runner = ClaudeAgentSdkRunner(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+                              Summary of Failures                               
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃               ┃               ┃  Function     ┃              ┃               ┃
+┃  File         ┃  Function     ┃  Line         ┃  Error Line  ┃  Error        ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│  test_host_…  │  test_scrip…  │  270          │  272         │  AssertionE…  │
+└───────────────┴───────────────┴───────────────┴──────────────┴───────────────┘
+Results (2.91s):
+         1 failed
+        39 passed
+         4 warnings
+
+{
+  "evidence_kind": "scripted_sdk_and_harmless_container_child",
+  "image": "sha256:cf99136b343499bf8762afe546e24bf728c8db00ceee3931b6dc629275498afa",
+  "cli_sha256": "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07",
+  "before_teardown": {
+    "singleton": 1,
+    "session": "bbf0c2bc-62b8-4cd7-883e-e2c50e875abb",
+    "attempt": "e3afe1c814404f9b91487476f999ffcb",
+    "name": "sdk-host-e3afe1c814404f9b91487476f999ffcb",
+    "resource": "72293600734af061aeed7a8af68962931040762520c5744023aac681641e11de",
+    "runner": null,
+    "stopped": 0,
+    "observations": null,
+    "terminated": 0,
+    "removed": 0,
+    "host_receipt": null
+  },
+  "after_teardown": {
+    "singleton": 1,
+    "session": "bbf0c2bc-62b8-4cd7-883e-e2c50e875abb",
+    "attempt": "e3afe1c814404f9b91487476f999ffcb",
+    "name": "sdk-host-e3afe1c814404f9b91487476f999ffcb",
+    "resource": "72293600734af061aeed7a8af68962931040762520c5744023aac681641e11de",
+    "runner": null,
+    "stopped": 1,
+    "observations": null,
+    "terminated": 1,
+    "removed": 1,
+    "host_receipt": "{\"removal_verified\": true, \"resource\": \"72293600734af061aeed7a8af68962931040762520c5744023aac681641e11de\", \"stopped_state\": {\"Pid\": 0, \"Running\": false}, \"wait_exit_code\": 137}"
+  },
+  "replacement_before_teardown_refused": true,
+  "replacement_after_teardown_admitted": true,
+  "stale_teardown_refused": true,
+  "network": "none",
+  "credentials_or_login_mounts": false,
+  "model_calls": 0,
+  "engine_launches": 0,
+  "provider_spend_usd": 0,
+  "installed_plugin_provenance_proved": false,
+  "live_engine_shutdown_or_recovery_proved": false,
+  "source_sha256": {
+    "docs/skill-recovery/experiments/host_session_offline.py": "80b1d89766e6db17d09ba5979f5be3784921327c889108144e1eeb5c3422dc94",
+    "docs/skill-recovery/experiments/host_session.py": "197433b80ea6e8e2d548a72c5e8efd13ca53c8758e53479e7908b10866dd52bd",
+    "tests/session_control/test_host_admission.py": "8619e0e75bc614eaa10e4587d7b4ad14e3297815f9e0fbf419c19d9975800a68",
+    "src/temporalio/claude_agent_sdk/_runner.py": "9f06d775060dfd6a6b73fc7278b13531a8608a558fad2b9822aae9aff06bbc89",
+    "src/temporalio/claude_agent_sdk/_session_control.py": "4e671058be6d1638eecfccaf65fdab92feef2753f4f1ca3abd8cfd29f5bac8ea"
+  }
+}

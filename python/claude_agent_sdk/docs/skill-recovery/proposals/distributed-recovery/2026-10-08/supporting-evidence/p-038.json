@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "provenance_id": "P-038",
+  "role": "Captured supporting evidence; historical statements retain their recorded scope and do not govern current decisions",
+  "original_sha256": "b381e3386247c5c536e3b2af45995a3506e2db8b0c5f5d10263090e8583a36d7",
+  "transformations": "Operator, contributor attribution and workspace identifiers and local paths generalized; CHD prefix mapped to DSR; JSON escaping preserves decoded Unicode; technical content and source URL/revision/comment identities otherwise retained",
+  "limitations": "Sanitized projection, not original runtime checkpoint or recovery input. Paths and links inside captured content describe historical source context and are not maintained repository dependencies.",
+  "media_type": "application/json",
+  "content": "{\n  \"repository\": \"<repo>\",\n  \"observed_date\": \"2026-10-08\",\n  \"files\": {\n    \"python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_runner.py\": \"4b73db511116e40ce7e53e9e5232ef79162a2c74a162457a755051ab921b21d7\",\n    \"python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_workflow.py\": \"5e841ec47e23680e28b8001964aea2b7b4c32fb415832b4c386e4aa9c036080b\",\n    \"python/claude_agent_sdk/docs/skill-recovery/experiments/host_session.py\": \"666ebb0c380c797905d73a065678783b87d6e5507f0b596122ace867f5f956dc\",\n    \"python/claude_agent_sdk/docs/skill-recovery/experiments/write_recovery.py\": \"e2a10298612b7f8b64506cc653e44a0ca260ab8a95da0facdcfb96d6a852c283\"\n  },\n  \"files_edited\": []\n}\n"
+}

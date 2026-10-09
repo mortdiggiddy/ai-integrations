@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "verdict": "CONDITIONAL",
+  "target_identities": [
+    "design-base commit 0e9bb011fd6d5dc414effc446173ce3d046ec745",
+    "dsr-0.6-preparation.md SHA256 a26d7bbbf3b6ec5eb6d5c2f2bded67775c49d3b370dd01e2f4c8d15b76e78e16",
+    "Seven reference and acceptance documentation edits; no code or candidate artifact changes"
+  ],
+  "pass": {"mode": "full"},
+  "reviewers": [
+    {
+      "reviewer": "temporal-design-review",
+      "applicability": "applicable",
+      "applicability_basis": "Activity retry/cancellation, worker ownership, replay, storage and independent dispatch in a Temporal recovery decision preparation",
+      "outcome": "applied",
+      "discovered_as": "temporal-workflow-design-critic",
+      "invoked_by": "contract_review",
+      "finding_refs": ["C-4", "C-5", "C-6", "C-9"]
+    },
+    {
+      "reviewer": "temporal-docs-grounding",
+      "applicability": "applicable",
+      "applicability_basis": "Cooperative cancellation and Activity timeout claims need primary documentation corroboration",
+      "outcome": "applied",
+      "call_count": 3,
+      "roles": ["lead", "contract_review", "adversarial_review"]
+    },
+    {
+      "reviewer": "pattern-precedent",
+      "applicability": "applicable",
+      "applicability_basis": "Cold receipt, accepted head and independent Entity Workflow dispatch are project-specific compositions",
+      "outcome": "applied",
+      "invoked_by": "contract_review",
+      "classifications": [
+        {
+          "mechanism": "Accepted Temporal head with exact opaque Claude trajectory materialization and sealed workspace receipt",
+          "classification": "partial",
+          "source": "https://docs.temporal.io/external-storage"
+        },
+        {
+          "mechanism": "Independent Entity Workflow dispatch authority across outer reset with conservative ambiguous Bash parking",
+          "classification": "partial",
+          "source": "https://docs.temporal.io/design-patterns/entity-workflow#implementation"
+        },
+        {
+          "mechanism": "Complete distributed original pending recovery with physical handover and rollback-resistant authority",
+          "classification": "none_found",
+          "source": "https://docs.temporal.io/activity-execution#cancellation"
+        }
+      ]
+    },
+    {
+      "reviewer": "temporal-developer",
+      "applicability": "applicable",
+      "applicability_basis": "Python SDK deterministic Workflow and regular Activity separation",
+      "outcome": "applied",
+      "discovered_as": "temporal:temporal-developer",
+      "invoked_by": "lead",
+      "finding_refs": ["C-4", "C-9"]
+    }
+  ]
+}
