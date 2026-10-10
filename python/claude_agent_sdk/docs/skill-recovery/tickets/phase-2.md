@@ -8,6 +8,8 @@ Phase 1 gate disposition (2026-10-07): DSR-1.9 is DONE with the operator's conti
 
 Workspace decision preparation (2026-10-09): [DSR-0.6 preparation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) recommends retaining the shared-volume/file-claim contract. Cold bundle and independent dispatch alternatives require separate adoption before changing this ticket. Finished-directory verification preserves the manifest and generation; the criterion below is corrected to match canonical idempotent preparation. Missing or uncertain claims cannot be repaired by creating an empty claim tree. No implementation or acceptance completion follows.
 
+Integration preparation (2026-10-09): [the proposed upstream boundary contract](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#integration-with-the-accepted-division-of-work) separates pre-effect accepted pending state from post-effect definitive result/file state. This ticket prepares only the route approved by DSR-0.6; it does not adopt snapshots or portable restoration. Missing previously accepted state refuses, even when the original conversation exists. The existing dependency graph and OPEN status remain unchanged.
+
 - Type: Build
 - Priority: High
 - Estimate: 4 points (confidence 70 percent)
@@ -59,7 +61,7 @@ No code creates the run directory layout, the Worker owned claims directory, the
 - [ ] The segment input and the effect input carry `cwd`, and the engine working directory, the session key and the fork copy use the input value, so two runs with different directories in one Worker do not share a session key. Proof: a test that runs two segments with different `cwd` values in one runner and compares the session keys and the engine working directories ([canonical specification](../canonical-documents.md#specification), INV-2, *Workspace*).
 - [ ] The mismatch check runs per segment and does not block the event loop. Proof: an event loop lag assertion during the check in a segment test, and a test that the check still detects a mismatched directory.
 - [ ] The tests in this ticket need no credentials. Proof: the plugin test suite passes with every `CLAUDE` and `ANTHROPIC` variable cleared ([canonical plan](../canonical-documents.md#plan), *Stack*).
-- [ ] The prepared workspace is distinct from conversation history and approval and outcome records. Its manifest identifies the preservation mechanism selected by DSR-0.6 and DSR-0.12, without treating a restored transcript or local Mods store as restored files. Proof: manifest assertions and a test with present conversation state but missing workspace files that refuses or rebuilds only through the approved prepare path.
+- [ ] The prepared workspace is distinct from conversation history and approval and outcome records. Its manifest identifies the preservation mechanism selected by DSR-0.6 and DSR-0.12, without treating a restored transcript or local Mods store as restored files. Proof: manifest assertions and a test with present conversation state but missing previously accepted workspace files that refuses; initial preparation of a genuinely new workspace may use only the approved prepare path. Initial preparation and repair must not reconstruct lost accepted outputs or recreate unresolved claims empty.
 
 #### Dependencies and blockers
 
@@ -160,6 +162,8 @@ Assumptions A-04 and A-05 are unproven. The claim file mechanism, the preserved 
 Status: OPEN
 
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) corrects the earlier nonexecution claim. Affirmative evidence is required to classify not started; an absent hook answer can still allow execution. Otherwise governed Bash parks without another spawn or model continuation. A wrong classification can repeat a mutation. Compare the pinned failure mapping with this ticket's ordered outcome table; source adoption and physical proof remain pending. Status and acceptance criteria are unchanged.
+
+Integration preparation (2026-10-09): [the proposed uncertainty boundary](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#ordered-acceptance-boundaries) requires governed parking before the upstream generic failure-to-tool-result conversion. Interface names or warning text alone cannot establish that behavior. Recovery reconciles the same original identity and required file state; human acknowledgement does not prove nonexecution. This is an implementation comparison requirement, not an adopted upstream API or completed criterion.
 
 - Type: Build
 - Priority: High
@@ -392,6 +396,8 @@ The field name is a one way door once external services see keys. The keyed retr
 Status: OPEN
 
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) owns prospective comparisons for hook failures, trusted settings, override flags, native records, session copies, nested inputs and resume prompts. Wrong assumptions can permit an effect, lose pending identity or alter recovery input. Compare the pinned public port against the selected governed runtime; the wider version report is not local qualification. Status and acceptance criteria are unchanged.
+
+Integration preparation (2026-10-09): [the four smallest qualification cases](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#smallest-integration-qualification-slice) map checkpoint ordering, result/postimage loss, retained claims and strict parking to the existing proof owners. Coordinate these cases with upstream interfaces; reuse completed Phase 1 vectors without repeating paid calls. No new acceptance completion, runtime promotion or experiment authorization follows.
 
 - Type: Verification
 - Priority: High

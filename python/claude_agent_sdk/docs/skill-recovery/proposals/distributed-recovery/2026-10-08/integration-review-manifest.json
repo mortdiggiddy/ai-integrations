@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "verdict": "CONDITIONAL",
+  "target_identities": [
+    "design-base baseline 0da9bd411df1d221ee41a01f644305df6ae04ca7",
+    "dsr-0.6-preparation.md SHA256 aa6fed0e1dcba7a8a8107ca834174469b073bc26b321d480f30d7024a776675b",
+    "Upstream native tool source fb29fc63279bf5178d9fc39496f52f89245edbf4; documentation adjustment only"
+  ],
+  "pass": {
+    "mode": "full"
+  },
+  "reviewers": [
+    {
+      "reviewer": "temporal-design-review",
+      "applicability": "applicable",
+      "applicability_basis": "Temporal Activity failure handling, accepted state, storage and Worker replacement boundaries",
+      "outcome": "applied",
+      "discovered_as": "temporal-workflow-design-critic",
+      "invoked_by": "integration_contract_review",
+      "finding_refs": [
+        "CR-1",
+        "CR-2",
+        "CR-3",
+        "CR-4"
+      ]
+    },
+    {
+      "reviewer": "temporal-docs-grounding",
+      "applicability": "applicable",
+      "applicability_basis": "Activity cancellation and retry semantics and external storage limits",
+      "outcome": "applied",
+      "call_count": 7,
+      "roles": [
+        "lead",
+        "integration_contract_review",
+        "integration_adversarial_review"
+      ]
+    },
+    {
+      "reviewer": "pattern-precedent",
+      "applicability": "applicable",
+      "applicability_basis": "Checkpoint acceptance and strict original recovery compose existing primitives with application-specific filesystem and process guarantees",
+      "outcome": "applied",
+      "invoked_by": "integration_contract_review",
+      "classifications": [
+        {
+          "mechanism": "Accepted pending/result state paired with preserved workspace and immutable references",
+          "classification": "partial",
+          "source": "https://docs.temporal.io/external-storage"
+        },
+        {
+          "mechanism": "Independent Entity Workflow dispatch authority across outer reset",
+          "classification": "partial",
+          "source": "https://docs.temporal.io/design-patterns/entity-workflow#implementation"
+        },
+        {
+          "mechanism": "Complete original pending recovery with rollback-resistant claims and independent physical termination",
+          "classification": "none_found",
+          "source": "https://docs.temporal.io/activity-execution#cancellation"
+        }
+      ]
+    },
+    {
+      "reviewer": "temporal-developer",
+      "applicability": "applicable",
+      "applicability_basis": "Deterministic Workflow orchestration and regular Activity filesystem/publication boundary",
+      "outcome": "applied",
+      "discovered_as": "temporal:temporal-developer",
+      "invoked_by": "lead",
+      "finding_refs": [
+        "IC-2",
+        "IC-4"
+      ]
+    }
+  ]
+}

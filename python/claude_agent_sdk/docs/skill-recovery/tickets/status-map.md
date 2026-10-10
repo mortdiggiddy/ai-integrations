@@ -1,5 +1,23 @@
 # Ticket status and dependency map
 
+Current route (2026-10-09): Phase 1 is complete at its approved bounded exit. Start with DSR-0.6's storage/isolation choice and role holders, using the [reviewed integration preparation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#integration-with-the-accepted-division-of-work). Preparation is complete; the decision is still OPEN. Agree concrete upstream interfaces and the integration revision before implementation. Earlier next-action paragraphs below are historical and do not reopen completed work.
+
+## Work path from the current checkpoint
+
+The sequence below navigates the existing dependency graph, not a new backlog or authorization to execute. Retained completed/superseded prerequisites remain in the detailed map. Exact acceptance criteria and dependencies live in the owning tickets.
+
+| Stage | Existing ticket path | Gate and scope |
+|---|---|---|
+| Immediate decision | DSR-0.6 | Select the applicable canonical storage/isolation route and owners; upstream boundary agreement remains required. DSR-2.1 stays blocked until approval. |
+| Workspace and effect integration | DSR-2.1, then DSR-2.2, then DSR-2.3; DSR-2.4 follows DSR-2.3; DSR-2.7 follows DSR-2.2; DSR-2.6 follows DSR-2.2/2.4 | Reuse compatible upstream engine/native-record work. Scope remains governed workspace/claims, outcome handling and qualification, not a second executor. Exit DSR-2.9. DSR-2.5/2.8 retain their superseded dispositions. |
+| Governed lifecycle and human decisions | DSR-3.1 through DSR-3.6 under their retained prerequisites | Additional DSR-0.7/0.8/0.9 decisions gate their respective tickets. Exit DSR-3.7; DSR-3.8 remains superseded. |
+| Physical isolation and storage qualification | DSR-4.1/4.2/4.3, then DSR-4.4 when its prerequisites are met | DSR-0.11 additionally gates DSR-4.2. Exit DSR-4.5. Controlled surviving-host proof does not establish permanent-loss or partition recovery. |
+| Hardening and acceptance | DSR-5.1 through DSR-5.8 under their retained prerequisites | DSR-0.9/0.11 and DSR-0.4 gate the named rollout/store/budget outcomes. Exit DSR-5.9. New runtime calls, upgrades and rigs still need separate authorization. |
+| Complete governed-design verification | DSR-6.1/6.2, then DSR-6.3, then DSR-6.4 | Full backlog acceptance remains broader than the smallest upstream integration slice. A preparation review is not this PASS. |
+| Upstream/harness publication | DSR-7.1, then DSR-7.2 with DSR-7.3 | Existing Phase 7 rules require DSR-6.4. The accepted discussion split does not waive this release gate or authorize contact/publication. DSR-7.4's positive child/parallel selection is an optional extension decision. |
+
+The four proposed integration qualification cases map to existing tickets in the preparation document; they are not a replacement for the phase gates. Cold restoration and independent dispatch authority remain separately conditional adoption work. No broader governed feature is represented as a prerequisite imposed on the other contributor's current PR.
+
 Current verification checkpoint (2026-10-07): [Phase 1 independent verification checkpoint](../canonical-documents.md#phase-1-independent-verification-checkpoint-2026-10-07) owns the verification continuation. Phase 1 dispositions remain `[X]`; DSR-0.6 remains OPEN and blocks workspace implementation. Earlier checkpoints remain historical.
 
 Current gate checkpoint (2026-10-07, approved exit): [Approved Phase 1 exit checkpoint](../canonical-documents.md#approved-phase-1-exit-checkpoint-2026-10-07) records DSR-1.9 `[X]` at 7/7 and the operator's continue choice with residual usage disposition. DSR-2.1 still requires DSR-0.6's volume and effect isolation decision. The single next action is DSR-0.6 decision preparation. All older pending checkpoints remain historical.
@@ -58,6 +76,8 @@ Synchronization is required in the same change as any ticket addition, status ch
 
 ## Current position
 
+The authoritative current position is the October 9 route above and the approved Phase 1 exit. The following dated position paragraphs are preserved historical records.
+
 Monitored Write preparation (2026-10-03): DSR-1.1's local exact scenario admission criterion is demonstrated. Both DSR-1.1 and DSR-1.3 remain `[~]`; no ticket moved to DONE. Canonical evidence owns 151 focused passing checks, retained local host receipts, the prepared Write scenario/command and remaining proof limits. Live recording/recovery, selected newest lane and installed default suite remain unproved; no live execution is approved. Next: exact approval for the shared Write scenario. DSR-0.4 gates DSR-5.8, and DSR-1.9 remains mandatory before Phase 2. Earlier checkpoints retain their historical scope and dispositions.
 
 Approved budget separation (2026-10-03): DSR-0.4 remains OPEN and now blocks DSR-5.8 final acceptance rather than DSR-1.1. Strict preventive spending and verified cumulative accounting remain required at DSR-5.8; Phase 1 monitored recovery experiments require their own exact authorization and mandatory host/harness controls. No execution approval follows. The next concrete step is to prepare one reviewable deferred Write proposal, not another budget fixture. DSR-1.9 still gates Phase 2 and DSR-5.9 still gates later final acceptance work. Historical checkpoints retain their original dispositions.
@@ -77,11 +97,11 @@ An active ticket normally starts after retained prerequisites are DONE. Supersed
 Phase 0 decisions feed the work tickets individually. Phase 0 and Phase 1 are related groupings, not sequential whole epic gates. The arrows below show phase exit gates; the detailed map retains every ticket's additional prerequisites.
 
 ```text
-Phase 0 decisions ----+----> Phase 1: engine proof  <<< CURRENT
+Phase 0 decisions ----+----> Phase 1: engine proof (approved bounded exit)
                      |              |
                      |          DSR-1.9 [X]  continue
                      |              |
-                     +----> Phase 2: effects and workspace
+                     +----> Phase 2: effects and workspace (next after DSR-0.6)
                      |              |
                      |          DSR-2.9 [ ]  continue/redesign
                      |              |

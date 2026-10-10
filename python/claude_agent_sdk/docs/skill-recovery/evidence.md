@@ -1,5 +1,9 @@
 # Recovery evidence and proof limits
 
+## Workspace integration design review (2026-10-09)
+
+[The focused independent review](proposals/distributed-recovery/2026-10-08/integration-review.md) owns the checkpoint/uncertainty integration findings, source comparisons, reconciled remedies, domain manifest and proof limits. Its Conditional verdict records coherent preparation with deployment/interface decisions and runtime gates still open. The [existing preparation](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#integration-with-the-accepted-division-of-work) owns the technical recommendation. Canonical authority, completed Phase 1 dispositions and the conditional unadopted candidate remain unchanged.
+
 ## Issue 31 collaboration agreement (2026-10-09)
 
 [The maintained collaboration record](proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-collaboration-agreement) owns the accepted division of work, proposed engine interfaces and explicit disconnected-Worker exclusion. This is coordination evidence, not interface implementation, design adoption or runtime qualification. Existing approved Phase 1 dispositions and DSR-0.6's implementation blocker remain unchanged.

@@ -4,6 +4,8 @@ Status: CONDITIONAL, not adopted or runtime qualified. This is the maintained re
 
 ## Maintained documents
 
+- [DSR-0.6 preparation](dsr-0.6-preparation.md), including the proposed upstream integration boundaries, and its [focused integration review](integration-review.md). Choices and interfaces remain pending; the [historical preparation review](dsr-0.6-review.md) retains its original scope.
+
 - [Specification](candidate/spec.md), [plan](candidate/plan.md), [specification evidence](candidate/evidence.json) and [plan evidence](candidate/plan-evidence.json).
 - [Complete Issue 31 coverage](priority-sweep/coverage.md), with all High, Medium and Low outcomes and the additive October 9 release-check reconciliation through comment 6084271103. Earlier captures remain historical.
 - Independent [Temporal research](priority-sweep/agent-temporal.md) and [industry research](priority-sweep/agent-industry.md).
