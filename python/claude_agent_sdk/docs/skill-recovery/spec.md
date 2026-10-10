@@ -28,6 +28,8 @@ Metered Write checkpoint (2026-10-05): [the scenario evidence](evidence.md#meter
 
 ## Status and authority
 
+External source reconciliation (2026-10-09): [the additive evidence record](evidence.md#issue-31-release-check-reconciliation-2026-10-09) updates source availability and comparison obligations, without changing this contract or qualified runtime. A missing hook answer supplies no nonexecution proof. The existing independent prevention, exact original pending recovery and ambiguous Bash parking requirements continue to govern any proposed reuse.
+
 Current M1 disposition (2026-10-07): [the approved continue decision](evidence.md#approved-phase-1-continue-decision-2026-10-07) closes the bounded exit review, including its residual usage disposition. The active governed recovery contract uses the exact original pending adapter on qualified SDK 0.2.162 / CLI 2.1.274 with mandatory host controls. Historical synthetic injection remains a diagnostic DEFECT. Workspace preparation still requires the separate volume and effect isolation decision; later guarantees remain unverified at their named gates. Earlier checkpoint paragraphs retain their dated dispositions.
 
 Current preventive proof: [Scoped permission backstop closure](evidence.md#scoped-permission-backstop-closure-2026-10-05) demonstrates the authorized scoped ask fix, independent Write/Edit/Bash and diagnostic skill-batch refusal, preserved Write/Bash deferral and paired negative failures. Policy construction and preventive proof are DONE on the qualified pinned configuration. The historical detection-only one-effect bound remains refuted and unused. The mandatory engine exit review remains before Phase 2; historical checkpoint paragraphs retain their original scope.

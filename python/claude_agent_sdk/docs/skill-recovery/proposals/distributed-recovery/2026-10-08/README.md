@@ -5,7 +5,7 @@ Status: CONDITIONAL, not adopted or runtime qualified. This is the maintained re
 ## Maintained documents
 
 - [Specification](candidate/spec.md), [plan](candidate/plan.md), [specification evidence](candidate/evidence.json) and [plan evidence](candidate/plan-evidence.json).
-- [Complete Issue 31 coverage](priority-sweep/coverage.md), with all High, Medium and Low outcomes and the discussion boundary through comment 6065563646.
+- [Complete Issue 31 coverage](priority-sweep/coverage.md), with all High, Medium and Low outcomes and the additive October 9 release-check reconciliation through comment 6084271103. Earlier captures remain historical.
 - Independent [Temporal research](priority-sweep/agent-temporal.md) and [industry research](priority-sweep/agent-industry.md).
 - [Storage synthesis](storage-loop/synthesis.md), [Temporal session research](storage-loop/temporal/report.md), [workspace research](storage-loop/substrate/report.md) and [fencing research](storage-loop/fencing/report.md).
 - [Mods synthesis](mods-synthesis.md) and [pinned source contract excerpts](mods-research/surface/pinned-types-excerpts.md).

@@ -86,6 +86,8 @@ No code creates the run directory layout, the Worker owned claims directory, the
 
 Status: OPEN
 
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) owns the pinned hook-exception denial, absent-answer/trusted-settings and permission-flag evidence. A wrong nonexecution classification can permit a second physical effect. Source review and independently witnessed counter cases remain pending; protected claims and no-respawn requirements remain authoritative. Status and acceptance criteria are unchanged.
+
 - Type: Build
 - Priority: High
 - Estimate: 4 points (confidence 65 percent)
@@ -156,6 +158,8 @@ Assumptions A-04 and A-05 are unproven. The claim file mechanism, the preserved 
 ### DSR-2.3 Map every effect outcome by the ordered table and the executor fault
 
 Status: OPEN
+
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) corrects the earlier nonexecution claim. Affirmative evidence is required to classify not started; an absent hook answer can still allow execution. Otherwise governed Bash parks without another spawn or model continuation. A wrong classification can repeat a mutation. Compare the pinned failure mapping with this ticket's ordered outcome table; source adoption and physical proof remain pending. Status and acceptance criteria are unchanged.
 
 - Type: Build
 - Priority: High
@@ -236,6 +240,8 @@ The mapping does not exist in the fork. The wrapper type that stops a tool body 
 ### DSR-2.4 Run Write and Edit as repeatable effects
 
 Status: OPEN
+
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) now pins a public native port and successful plugin CI cells. Compare native record replacement, rejection/error shape and full-file exclusion before overlapping implementation. Incorrect records can break subsequent edits or inflate history. This does not select native replay over the existing repeatable protocol or prove workspace/postimage recovery. Status and acceptance criteria are unchanged.
 
 - Type: Build
 - Priority: High
@@ -385,6 +391,8 @@ The field name is a one way door once external services see keys. The keyed retr
 
 Status: OPEN
 
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) owns prospective comparisons for hook failures, trusted settings, override flags, native records, session copies, nested inputs and resume prompts. Wrong assumptions can permit an effect, lose pending identity or alter recovery input. Compare the pinned public port against the selected governed runtime; the wider version report is not local qualification. Status and acceptance criteria are unchanged.
+
 - Type: Verification
 - Priority: High
 - Estimate: 3 points (confidence 75 percent)
@@ -452,6 +460,8 @@ Nothing yet shows that the executor reproduces the engine's text, error shape an
 ### DSR-2.7 Contain process trees, cancellation, shutdown and payload size
 
 Status: OPEN
+
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) records reported full-file toolUseResult exclusion. Compare payload/privacy behavior with existing limits before reuse; unnecessary file capture can expose content or inflate history. Launcher/lock fixes and Worker-kill tests do not prove exact-incarnation descendant death or distributed cleanup. Status and acceptance criteria are unchanged.
 
 - Type: Build
 - Priority: High

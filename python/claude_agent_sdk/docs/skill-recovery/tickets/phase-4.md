@@ -237,6 +237,8 @@ If an exclusive create is not atomic and visible across hosts, two hosts can bot
 
 Status: OPEN
 
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) owns corrected matched-run timing evidence. Reported native port savings are about 0.1 seconds per step; incorrect savings distort capacity decisions. Matched local measurement remains pending, and no warm optimization or latency target is adopted. Status and acceptance criteria are unchanged.
+
 - Type: Verification
 - Priority: Medium
 - Estimate: 4 points (confidence 55 percent)

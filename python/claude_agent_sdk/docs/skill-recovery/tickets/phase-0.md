@@ -365,6 +365,10 @@ Public contact has happened. The operator removed the remaining integrations ask
 
 Status: OPEN
 
+October 9 collaboration: [the accepted division of work and proposed interfaces](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-collaboration-agreement) establish coordination, not storage adoption or qualified checkpoint restoration. Reconcile checkpoint acceptance/restore ordering with the canonical volume and retained claims before approving the applicable choices. DSR-2.1 remains blocked; a disconnected live Worker remains explicitly unqualified.
+
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) reports improved native recovery but explicitly no workspace snapshot/failover. Conversation and Worker-kill evidence do not settle volume semantics or old-execution termination. The prepared storage/isolation recommendation, owner choices and DSR-2.1 blocker remain unchanged.
+
 Decision preparation (2026-10-09): [the maintained recommendation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) proposes the bounded canonical shared-volume/container qualification target, compares cold restoration and independent authority, separates surviving-host replacement from host loss and partition, and maps the six owner decisions and smallest experiments. Its [independent review](../proposals/distributed-recovery/2026-10-08/dsr-0.6-review.md) verifies preparation only. No choice, role holder, acceptance checkbox or runtime guarantee is approved. DSR-2.1 remains blocked. Historical discovery paragraphs below retain their dates and source inventories.
 
 - Type: Decision

@@ -1,5 +1,13 @@
 # Recovery evidence and proof limits
 
+## Issue 31 collaboration agreement (2026-10-09)
+
+[The maintained collaboration record](proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-collaboration-agreement) owns the accepted division of work, proposed engine interfaces and explicit disconnected-Worker exclusion. This is coordination evidence, not interface implementation, design adoption or runtime qualification. Existing approved Phase 1 dispositions and DSR-0.6's implementation blocker remain unchanged.
+
+## Issue 31 release-check reconciliation (2026-10-09)
+
+[The maintained discussion proof map](proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) owns the corrected latency and nonexecution claims, public pinned native port, observed CI cells, reported regression fixes and owning ticket comparisons. Its additive source capture distinguishes contributor experiments from independently read GitHub statuses and the older PR 33 head. This is external source evidence, not a local runtime checkpoint. The approved SDK/CLI, bounded Phase 1 exit, DSR-0.6 blocker and distributed proposal status are unchanged.
+
 ## Planning evidence preservation (2026-10-09)
 
 [Preservation preparation](proposals/distributed-recovery/2026-10-08/preservation.md) owns the supporting evidence closure and archive cutover conditions. Its [review](proposals/distributed-recovery/2026-10-08/preservation-review.md) records current documentation checks and independent findings. The [portable planning checker](check_planning.py) requires repository files alone. This additive record changes no historical result, Phase 1 disposition, owner approval or runtime qualification.

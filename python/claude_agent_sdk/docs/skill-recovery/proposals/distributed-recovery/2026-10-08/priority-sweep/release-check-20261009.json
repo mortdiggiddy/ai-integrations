@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-10-09",
+  "scope": "Additive Issue 31 release-check evidence; reported experiments were not independently rerun",
+  "issue_comment": {
+    "body": "A follow-up before anything goes to #33. I ran a full release check on these commits first, and it corrects my comment above in three places:\n\n- **Time per tool step.** The numbers above were not measured at the same time, and this machine's speed changes a lot. Measured in turns, at the same time (median of 20, Claude Code 2.1.273): Bash 1.24 s, Edit 0.85 s, Write 0.86 s; the tool step before the port: 1.34 s, 0.97 s and 0.98 s (Edit and Write measured on that runner directly: before the port they could not be tool steps). So the port saves about 0.1 s per step. Its real win is #99041.\n- **\"The step reports that it did not run.\"** Not always. When the hook gives no answer, an allow rule in a settings file Claude Code trusts can still let the call run, and a retry could then run it again. Now a step says \"did not run\" only with proof (the stand-in never sent the call, or the hook or Claude Code refused it). Otherwise it says the call may have run.\n- **The push.** It is bigger than the 5 commits I named (see below), and I'll wait for you to say when.\n\nThe check found 7 problems in all. Each is fixed, with a test that fails without the fix:\n\n1. If the hook failed while it decided, it gave no answer, so Claude Code's own rules decided. Now it denies the call.\n2. The \"did not run\" case above.\n3. An Edit's record kept Claude Code's `toolUseResult`, which holds the whole file, so the file went into the history. It is left out now.\n4. Engine flags in `extra_args` that approve calls (`--permission-mode`, `--dangerously-skip-permissions`, ...) won over the step's own settings. They are refused now.\n5. With a session store, the record went into the session itself, next to the pause's deferral marker. A later copy then made Claude Code take a paused call for interrupted (`[Tool result missing due to internal error]`). The chaos runs found it. The record now goes into a copy.\n6. A tool input nested about 700 levels deep made every later tool step fail (`copy.deepcopy` recursion). Copies go through JSON now, as deep as Temporal's converter goes.\n7. A Worker that set `CLAUDE_CODE_RESUME_PROMPT` changed what Claude saw after a record. The segment pins Claude Code's own line now.\n\nThen my fork's CI found 2 more, on machines unlike mine:\n\n8. On Windows, the stand-in's 401 could get lost: it closed the connection with the request body still unread, and Windows reset the connection before the client read the answer. Now it ends the connection without a reset (with a test that fails without the fix).\n9. A test expected that `json` cannot read 100,000 nested levels. On Python 3.14 that depends on the stack size, and on GitHub's Linux and macOS runners it could. The hook still denied the call there (for its other input). The test now sends 1,000,000 levels and runs the hook in a thread with a 16 MiB stack (the hook itself is unchanged).\n\nWhat ran:\n\n- 5 review passes: security, the tests, every \"tested\" sentence in the README (twice), and the repository's conventions; then a separate review of the 2 fixes from my fork's CI.\n- Chaos runs that kill the Worker at random during segments and tool steps, with the conversation in the Workflow and in a session store: 320 runs, 876 kills (454 during segments, 422 during tool steps), 2,314 tool calls, all passed; the last 60 runs on the final code. No command or edit ran twice, every reported success was real, and Claude never saw \"modified since read\".\n- The tool step tests on every Claude Code release from 2.1.273 to 2.1.295.\n- CI's own steps (`make sync`, `make lint`, `make test`) on Python 3.10, 3.14.7 and 3.14.8 (3.14.8 also with an unlimited stack), and the full suite on 3.14 with the newest (claude-agent-sdk 0.2.165, Claude Code 2.1.294). The 2 changed tests on every Python from 3.10 to 3.14.8, each with an 8 MiB and an unlimited stack.\n\nWhere the port differs from your prototype (932acf3): the record replaces the pause's hook entries (the plugin pauses with a hook); a step with no record (it broke, or the call was rejected) gets one of the same shape; the record leaves out `toolUseResult`; and there is no workspace snapshot yet.\n\n#33 also needs main now: it conflicts with the new release-stage tables. So the push would add 23 commits on top of b1cf384:\n\n- the 11 on the `claude-agent-sdk-warm` branch I linked on Oct 7 (tests, two speed cuts, warm segments as opt-in, the benchmark),\n- 3 for the High items (one attempt for Bash/MCP, with \"may have run\" as the default; fail closed for the launcher and locks; the MCP id test),\n- 5 for the port and the release check,\n- a merge of main (it adds our rows to the new tables: Pre-release, first version 0.0.1), and one commit for main's conventions (`maturity = \"pre-release\"`, the dev-server helper, `temporalio>=1.34.0`),\n- 2 for what my fork's CI found (8 and 9 above).\n\nStill open from your list: workspace failover, durable tools in subagents, parallel built-in calls, the tool policy API, and durable questions.\n\nMy fork's CI on these commits: https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824. Every plugin job is green (Linux 3.10 and 3.14, macOS, Windows). The red jobs are \"Conventions and tooling tests\" and ci-status, which only reports it. Conventions fails on any fork, and on the fork's own `main` too: 2 tests in `scripts/tests/test_release_tool.py` pass only when `GITHUB_REPOSITORY` is unset or `temporalio/ai-integrations`. I can send a small fix for that in its own PR, if you want.\n\nTell me when you want it on #33, or if you want some of it left out (warm segments, say). If you'd like, I can also add a `Co-authored-by` line for you on the port commit before the push.\n\n@mortdiggiddy, the table in my comment above holds on every Claude Code release from 2.1.273 to 2.1.295, and a `deny` rule for one command (`Bash(echo:*)`) refuses that call in the step too. The sentence under the table is corrected by the second point at the top.\n",
+    "created_at": "2026-10-09T15:46:24Z",
+    "html_url": "https://github.com/temporalio/ai-integrations/issues/31#issuecomment-6084271103",
+    "id": 6084271103,
+    "updated_at": "2026-10-09T15:46:24Z"
+  },
+  "issue_comment_boundary": [
+    {
+      "id": 5901169122,
+      "updated_at": "2026-10-01T17:48:11Z"
+    },
+    {
+      "id": 5939515083,
+      "updated_at": "2026-10-01T20:02:46Z"
+    },
+    {
+      "id": 6007959020,
+      "updated_at": "2026-10-06T02:15:39Z"
+    },
+    {
+      "id": 6010287397,
+      "updated_at": "2026-10-06T05:54:35Z"
+    },
+    {
+      "id": 6026506600,
+      "updated_at": "2026-10-06T22:20:22Z"
+    },
+    {
+      "id": 6026827790,
+      "updated_at": "2026-10-06T22:45:44Z"
+    },
+    {
+      "id": 6032736083,
+      "updated_at": "2026-10-07T06:59:37Z"
+    },
+    {
+      "id": 6040777162,
+      "updated_at": "2026-10-07T15:03:06Z"
+    },
+    {
+      "id": 6041782675,
+      "updated_at": "2026-10-07T16:04:51Z"
+    },
+    {
+      "id": 6043320954,
+      "updated_at": "2026-10-07T17:35:15Z"
+    },
+    {
+      "id": 6043344791,
+      "updated_at": "2026-10-07T17:36:36Z"
+    },
+    {
+      "id": 6065563646,
+      "updated_at": "2026-10-09T15:48:21Z"
+    },
+    {
+      "id": 6084271103,
+      "updated_at": "2026-10-09T15:46:24Z"
+    }
+  ],
+  "ci_run": {
+    "conclusion": "failure",
+    "created_at": "2026-10-09T12:29:52Z",
+    "event": "pull_request",
+    "head_branch": "claude-agent-sdk-phase7-check",
+    "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+    "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824",
+    "id": 37930407824,
+    "status": "completed",
+    "updated_at": "2026-10-09T12:40:02Z"
+  },
+  "ci_jobs": [
+    {
+      "conclusion": "failure",
+      "failed_steps": [
+        "Tooling unit tests"
+      ],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113819451879",
+      "name": "Conventions and tooling tests"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113819451967",
+      "name": "Detect changes"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113819495787",
+      "name": "Python (claude_agent_sdk) / matrix"
+    },
+    {
+      "conclusion": "skipped",
+      "failed_steps": [],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113819497491",
+      "name": "Java"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113819574493",
+      "name": "Python (claude_agent_sdk) / claude_agent_sdk (macos-latest, py3.14)"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113819574523",
+      "name": "Python (claude_agent_sdk) / claude_agent_sdk (windows-latest, py3.14)"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113819574563",
+      "name": "Python (claude_agent_sdk) / claude_agent_sdk (ubuntu-latest, py3.14)"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113819574680",
+      "name": "Python (claude_agent_sdk) / claude_agent_sdk (ubuntu-latest, py3.10)"
+    },
+    {
+      "conclusion": "failure",
+      "failed_steps": [
+        "Evaluate required jobs"
+      ],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113823155271",
+      "name": "ci-status"
+    },
+    {
+      "conclusion": "skipped",
+      "failed_steps": [],
+      "head_sha": "fb29fc63279bf5178d9fc39496f52f89245edbf4",
+      "html_url": "https://github.com/osamastro7-droid/ai-integrations/actions/runs/37930407824/job/113823156463",
+      "name": "Nightly report"
+    }
+  ],
+  "pull_request": {
+    "base": {
+      "ref": "main",
+      "sha": "02910a6b18bc21f2ee31a8bdd1e715ce6e1dd160"
+    },
+    "head": {
+      "ref": "claude-agent-sdk",
+      "repo": "osamastro7-droid/ai-integrations",
+      "sha": "b1cf3848b15ad5cd1f009bd19524e3f751140439"
+    },
+    "html_url": "https://github.com/temporalio/ai-integrations/pull/33",
+    "mergeable": false,
+    "mergeable_state": "dirty",
+    "state": "open",
+    "updated_at": "2026-10-06T22:18:17Z"
+  },
+  "updated_previous_comment": {
+    "body": "> **Edit (9 Oct):** the time per step and the sentence under the table are corrected in my next comment.\n\n\nThanks @brianstrauch! I ported your bounded native call replay into the plugin as the tool step executor, with credit in the commit and the README.\n\nWhat a tool step does now:\n\n- It resumes a private copy of the conversation that ends before the call. The stand-in model answers with the exact recorded `tool_use` block, the hook allows only that call (and only with the input the segment reported), and `max_turns=1` ends the turn.\n- An Edit or Write result goes back into the conversation as Claude Code's own record, so anthropics/claude-code#99041 no longer happens. So `Edit` and `Write` can now be in `tool_activities`.\n- Bash and MCP results still go to Claude as a message.\n- Median time per tool step: Bash 0.95 s, Edit 0.65 s, Write 0.68 s (it was about 1.25 s).\n\nTests pass on the locked versions and on the newest ones (claude-agent-sdk 0.2.163, Claude Code 2.1.288), and the tool step tests also pass on 2.1.274.\n\nUnless you prefer otherwise, I'll push these 2 commits to #33, together with the 3 commits for the High items I finished (one attempt for Bash/MCP, with \"may have run\" as the default; fail closed for the launcher and locks), after the fork CI is green. Warm segments stay opt-in.\n\n@mortdiggiddy, an update for your item 1 with Bash. With this change, a tool step never asks a permission callback: only the hook decides, and it lets the step run only the call the segment paused at, with the same input (the input `tool_approvals` shows). I checked on the new code with claude-agent-sdk 0.2.153, Claude Code 2.1.273 and 2.1.288:\n\n| Bash permission rule | Callback asked? | In the tool step |\n|---|---|---|\n| none | no | runs |\n| `ask` | no | refused, does not run |\n| `deny` | no | Bash is not offered to Claude |\n\nSo a tool step has no permission stream that can close. If the hook gives no answer, Claude Code refuses the call, and the step reports that it did not run. On #33's current head (b1cf384) the callback was still asked in the tool step for an `ask` rule. If you need that, tell me, and I'll look at asking it only after the hook allowed the call.\n",
+    "created_at": "2026-10-08T17:36:33Z",
+    "html_url": "https://github.com/temporalio/ai-integrations/issues/31#issuecomment-6065563646",
+    "id": 6065563646,
+    "updated_at": "2026-10-09T15:48:21Z"
+  },
+  "limits": [
+    "Reporter claims are attributed evidence, not local qualification",
+    "CI job status is independently observed; reported tooling failure cause is not independently reproduced",
+    "The tested fork revision differs from PR 33 head",
+    "No source integration, dependency promotion, workspace failover, physical termination or distributed qualification"
+  ]
+}

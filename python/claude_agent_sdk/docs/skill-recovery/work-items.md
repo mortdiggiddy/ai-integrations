@@ -1,5 +1,7 @@
 # Recoverable skill execution work items
 
+External source reconciliation (2026-10-09): [the additive evidence record](evidence.md#issue-31-release-check-reconciliation-2026-10-09) maps the new release-check evidence to existing owning tickets. These references create no second checklist and change no bounded DONE disposition or acceptance criterion.
+
 Repository migration (2026-10-08): the [complete ticket set](tickets/README.md), [phase status map](tickets/status-map.md) and [epic structure](tickets/epics.md) are the sole maintained backlog and acceptance owners. The [distributed recovery proposal](proposals/distributed-recovery/2026-10-08/README.md) remains conditional and unadopted. The retained sections below are the historical work item projection before ticket migration; preserve them as evidence, but do not maintain a second checklist or infer current ticket status from them. Existing implementation, canonical specification and measured evidence remain unchanged.
 
 Independent verification (2026-10-07): [Independent Phase 1 verification and exact JSON correction](evidence.md#independent-phase-1-verification-and-exact-json-correction-2026-10-07) owns the verification findings and narrowed proof fixture identity comparisons. Completed bounded dispositions and the approved continue decision remain unchanged.

@@ -209,6 +209,8 @@ An approval that fails under subscriber load stalls a run until the decision exp
 
 Status: OPEN
 
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) records native tool recording into a session copy. Compare source-session immutability and exact pending/result records under replacement and lost acknowledgement. Recording into the wrong session can turn a deferred call into an interrupted call. Reported conversation recovery does not supply workspace restoration or local store conformance. Status and acceptance criteria are unchanged.
+
 - Type: Verification
 - Priority: Medium
 - Estimate: 3 points (confidence 65 percent)
@@ -345,6 +347,8 @@ If a marker is removed too early, a Query or a Reset of a closed run fails with 
 ### DSR-5.6 Run the daily newest engine job and the engine upgrade resume test
 
 Status: OPEN
+
+October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) pins the tested public fork, four successful plugin cells and separate reported version coverage. Review Windows HTTP refusal, stack-dependent nested-input tests and resume-prompt protection before promotion; platform assumptions can hide failures. The tooling failure cause remains attributed, PR 33 has an older head, and approved dependencies/runtime are unchanged. Status and acceptance criteria are unchanged.
 
 Approved budget separation checkpoint (2026-10-03): see [canonical pointer](../canonical-documents.md), *Approved experiment authorization separation*. Earlier budget gate wording in historical checkpoints is superseded for Phase 1 monitored experiments only. No live run is authorized and strict preventive budgeting remains required at DSR-5.8 final acceptance.
 
