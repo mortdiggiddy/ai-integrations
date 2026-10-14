@@ -66,6 +66,257 @@ def anchors(text):
     return result
 
 
+def ticket_section(text, identifier):
+    """Extract one current ticket, excluding adjacent tickets."""
+    match = re.search(
+        r"^### " + re.escape(identifier) + r"\s[^\n]*\n(.*?)(?=^### DSR-|\Z)",
+        text, re.M | re.S,
+    )
+    return match.group(1) if match else ""
+
+
+# Required fields mirror the maintained decision criteria. Evidence records
+# document selections rather than executed qualifications.
+CLOSURE_FIELDS = {
+    "checkpoint": ("substrate", "exact_version", "accepted_pair", "metadata", "publication"),
+    "portable_cases": ("surviving_host", "original_disk_unavailable", "live_partition_termination", "finite_rig_holder"),
+    "isolation": ("level", "security_holder"),
+    "assumptions": ("A-17", "A-27", "A-48", "A-37"),
+    "refusal": ("independent_authority", "pair_mismatch", "unproven_death", "local_guard", "restore_permission"),
+    "configuration": (
+        "deployment_holder", "storage_holder", "integration_holder",
+        "authority_administration", "trusted_host_permissions", "runtime_pins",
+        "terminal_incarnation", "authentication", "encryption_keys", "reader_matrix",
+        "retention", "component_files_api", "dependency_pins", "license_fit",
+        "maintenance_holder", "upstream_interface_revision", "workload_bounds",
+    ),
+}
+
+
+def closure_errors(root, status, decisions, section):
+    """Validate optional confirmed planning records, mandatory only for DONE.
+
+    The record is an auditable approval attestation bound to exact answers and
+    local evidence bytes. It does not authenticate a human or run qualification.
+    OPEN requires no new artifact; Answered/Superseded rows need approval even while OPEN.
+    """
+    errors = []
+
+    def require(condition, message):
+        if not condition:
+            errors.append("DSR-0.6 closure: " + message)
+
+    require(status in {"OPEN", "DONE"}, "status must be OPEN or DONE")
+    confirmed = {
+        identifier for identifier, cells in decisions.items()
+        if cells[-1].split()[0].lower() in {"answered", "superseded"}
+    }
+    for identifier, cells in decisions.items():
+        require(cells[-1].split()[0].lower() in {"open", "answered", "superseded"}, f"{identifier} has an unsupported disposition")
+    if status == "OPEN" and not confirmed:
+        return errors
+    path = root / "proposals/distributed-recovery/2026-10-08/dsr-0.6-closure.json"
+    try:
+        data = json.loads(
+            path.read_text(), object_pairs_hook=unique_json_object,
+            parse_constant=reject_json_constant,
+        )
+        require(data.get("ticket") == "DSR-0.6", "record ticket identity differs")
+        answers = data["answers"]
+        approval = data["approval"]
+        digest = hashlib.sha256(
+            json.dumps(answers, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        require(approval.get("answers_sha256") == digest, "approval is not bound to the current answers")
+        require(approval.get("status") == "approved", "record is not approved")
+        require(
+            isinstance(approval.get("by"), str) and concrete(approval["by"])
+            and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(approval.get("date", ""))) is not None,
+            "approval holder/date are absent",
+        )
+
+        def evidence(record, label):
+            references = record.get("evidence", [])
+            require(isinstance(references, list) and bool(references), f"{label} lacks evidence")
+            if not isinstance(references, list):
+                return
+            for reference in references:
+                parsed = urlsplit(reference["ref"])
+                destination = (root / unquote(parsed.path)).resolve()
+                local = (
+                    bool(parsed.path) and not parsed.scheme and not parsed.netloc
+                    and not Path(unquote(parsed.path)).is_absolute()
+                    and destination.is_relative_to(root.resolve())
+                )
+                owners = {
+                    "spec.md",
+                    "tickets/phase-0.md",
+                    "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md",
+                    "proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md",
+                }
+                local = local and parsed.path in owners and bool(parsed.fragment)
+                require(local, f"{label} evidence must reference an anchored existing decision/configuration owner")
+                if not local:
+                    continue
+                require(destination.is_file(), f"{label} evidence file is missing")
+                if not destination.is_file():
+                    continue
+                require(
+                    hashlib.sha256(destination.read_bytes()).hexdigest() == reference.get("sha256"),
+                    f"{label} evidence digest differs",
+                )
+                if parsed.fragment:
+                    require(
+                        destination.suffix == ".md" and unquote(parsed.fragment) in anchors(destination.read_text()),
+                        f"{label} evidence anchor is missing",
+                    )
+
+        owner_decisions = answers["decisions"]
+        require(set(owner_decisions) == {f"BD-{n}" for n in range(1, 7)}, "decision answer inventory differs")
+        for identifier in (owner_decisions if status == "DONE" else confirmed):
+            record = owner_decisions.get(identifier, {})
+            require(isinstance(record.get("answer"), str) and concrete(record["answer"]), f"{identifier} lacks a complete recorded answer")
+            require(record.get("approved") is True, f"{identifier} is not approved")
+            evidence(record, identifier)
+        if status != "DONE":
+            return errors
+        criteria = answers["criteria"]
+        require(set(criteria) == set(CLOSURE_FIELDS), "six acceptance evidence groups are incomplete")
+        for label, fields in CLOSURE_FIELDS.items():
+            record = criteria.get(label, {})
+            require(set(record.get("answers", {})) == set(fields), f"{label} answer fields are incomplete")
+            require(all(concrete(record.get("answers", {}).get(field)) for field in fields), f"{label} contains unresolved answers")
+            structured = set(fields) if label == "assumptions" else (
+                {"runtime_pins", "retention", "workload_bounds"} if label == "configuration" else set()
+            )
+            require(
+                all(
+                    isinstance(record.get("answers", {}).get(field), dict) if field in structured
+                    else isinstance(record.get("answers", {}).get(field), str)
+                    for field in fields
+                ),
+                f"{label} answer fields require text or declared structured values",
+            )
+            require(record.get("approved") is True, f"{label} is not approved")
+            evidence(record, label)
+        refusal = criteria.get("refusal", {}).get("answers", {})
+        require(
+            all(refusal.get(field) == "refuse" for field in CLOSURE_FIELDS["refusal"][:-1])
+            and refusal.get("restore_permission") == "never",
+            "refusal matrix must deny missing authority, mismatched pair, uncertain death and local guard failure; restore never recreates permission",
+        )
+        assumptions = criteria.get("assumptions", {}).get("answers", {})
+        require(
+            all(isinstance(assumptions.get(key), dict)
+                and set(assumptions[key]) == {"disposition", "interim_claim"}
+                and assumptions[key]["disposition"] in {"revised", "retained", "superseded"}
+                and isinstance(assumptions[key]["interim_claim"], str)
+                and concrete(assumptions[key]["interim_claim"])
+                for key in CLOSURE_FIELDS["assumptions"]),
+            "each assumption needs a disposition and interim Phase 4 claim",
+        )
+        configuration = criteria.get("configuration", {}).get("answers", {})
+        bounds = configuration.get("workload_bounds", {})
+        bound_fields = {
+            "sessions", "pending_calls", "effects", "workspace_bytes",
+            "model_output_bytes", "raw_result_bytes", "envelope_bytes",
+            "index_bytes", "scratch_bytes", "processes", "cpu_seconds",
+            "deadline_seconds", "clock_skew_seconds", "recovery_window_seconds",
+        }
+        require(
+            isinstance(bounds, dict) and set(bounds) == bound_fields
+            and all(isinstance(value, int) and not isinstance(value, bool)
+                    and value > 0 for value in bounds.values())
+            and all(bounds.get(field) == 1 for field in ("sessions", "pending_calls", "effects")),
+            "synthetic qualification needs exact positive finite bounds and one session/call/effect",
+        )
+        retention = configuration.get("retention", {})
+        require(
+            isinstance(retention, dict)
+            and isinstance(retention.get("minimum_seconds"), int)
+            and not isinstance(retention.get("minimum_seconds"), bool)
+            and retention.get("minimum_seconds", 0) >= 604800
+            and retention.get("minimum_seconds", 0) >= (
+                bounds.get("recovery_window_seconds", 0) if isinstance(bounds, dict) else 0
+            )
+            and retention.get("extend_while_referenced") is True,
+            "retention must cover seven days, the recovery window and all live/parked/reset/replay references",
+        )
+        pins = configuration.get("runtime_pins")
+        require(
+            isinstance(pins, dict) and bool(pins) and all(
+                isinstance(key, str) and concrete(key) and exact_runtime_pin(value)
+                for key, value in pins.items()
+            ),
+            "runtime pins need exact version, commit or content digest strings",
+        )
+        gates = answers["qualification_gates"]
+        require(
+            set(gates) == {"DSR-4.3", "Q-7", "Q-15"}
+            and all(isinstance(record, dict)
+                    and record.get("status") == "unexecuted"
+                    and isinstance(record.get("owner"), str) and concrete(record["owner"])
+                    and isinstance(record.get("required_evidence"), str) and concrete(record["required_evidence"])
+                    for record in gates.values()),
+            "physical and component qualification must remain explicit future gates, with holder and required proof",
+        )
+        require(
+            len(re.findall(r"^- \[x\]", section, re.M)) == 6
+            and not re.search(r"^- \[ \]", section, re.M),
+            "DONE needs all six acceptance criteria checked",
+        )
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+        require(False, f"missing or malformed confirmed record: {error}")
+    return errors
+
+
+def unique_json_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    """Build an evidence object, rejecting repeated keys before values collapse."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key {key!r}")
+        result[key] = value
+    return result
+
+
+def reject_json_constant(value: str) -> None:
+    """Reject nonfinite constants that are outside the JSON evidence format."""
+    raise ValueError(f"invalid JSON constant {value}")
+
+
+def exact_runtime_pin(value: object) -> bool:
+    """Return whether a value names an exact version, commit or content digest."""
+    if not isinstance(value, str):
+        return False
+    version = (
+        r"v?[0-9]+\.[0-9]+\.[0-9]+(?:(?:a|b|rc)[0-9]+)?"
+        r"(?:\.post[0-9]+)?(?:\.dev[0-9]+)?"
+        r"(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?"
+        r"(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?"
+    )
+    return re.fullmatch(
+        "(?:" + version + r"|[0-9a-f]{40}|sha256:[0-9a-f]{64})", value
+    ) is not None
+
+
+def concrete(value):
+    """Reject blank, placeholder and explicitly unresolved decision answers."""
+    if isinstance(value, dict):
+        return bool(value) and all(
+            (key == "extend_while_referenced" and item is True) or concrete(item)
+            for key, item in value.items()
+        )
+    if isinstance(value, list):
+        return bool(value) and all(concrete(item) for item in value)
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return value > 0
+    return isinstance(value, str) and bool(value.strip()) and not re.search(
+        r"\b(?:TBD|TODO|OPEN|unresolved|unselected|unknown|proposed|pending)\b",
+        value, re.I,
+    )
+
+
 def check(root):
     """Return validation errors and the number of checked Markdown links."""
     errors = []
@@ -110,7 +361,6 @@ def check(root):
         ("DSR-1.6", "phase-1.md", "DONE"),
         ("DSR-1.7", "phase-1.md", "DONE"),
         ("DSR-1.9", "phase-1.md", "DONE"),
-        ("DSR-0.6", "phase-0.md", "OPEN"),
         ("DSR-2.1", "phase-2.md", "OPEN"),
     ):
         path = root / "tickets" / filename
@@ -193,11 +443,14 @@ def check(root):
         decisions == {f"BD-{number}" for number in range(1, 7)},
         "candidate owner decision inventory differs from BD-1 through BD-6",
     )
-    for identifier in decisions:
-        require(
-            candidate_spec[identifier][-1] == "Open",
-            f"candidate owner decision {identifier} is not Open",
-        )
+    section = ticket_section((root / "tickets/phase-0.md").read_text(), "DSR-0.6")
+    status_match = re.search(r"^Status: (OPEN|DONE)(?:\s|$)", section, re.M)
+    status = status_match.group(1) if status_match else ""
+    errors.extend(closure_errors(
+        root, status,
+        {identifier: candidate_spec[identifier] for identifier in decisions},
+        section,
+    ))
     require(
         "CONDITIONAL" in (proposal / "README.md").read_text()
         and "not adopted" in (proposal / "README.md").read_text(),
@@ -421,7 +674,7 @@ def main():
             print(f"FAIL: {error}")
         return 1
     print(
-        f"PASS: canonical owners, 59 assumptions, fourteen M1 dispositions, bounded ticket states, candidate evidence, fifteen candidate assumptions, six open decisions and {links} local links/evidence references"
+        f"PASS: canonical owners, 59 assumptions, fourteen M1 dispositions, bounded ticket states, candidate evidence, fifteen candidate assumptions, six owner decision dispositions and {links} local links/evidence references"
     )
     return 0
 

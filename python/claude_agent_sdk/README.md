@@ -2,6 +2,8 @@
 
 ## Development fork goal
 
+The [selected component interfaces](docs/skill-recovery/spec.md#selected-component-boundaries-2026-10-12) separate recovery logic from engine, storage, authority, execution, transport, policy and key adapters. The [deployment profiles and opportunity map](docs/skill-recovery/spec.md#deployment-profiles-and-future-opportunities) records local Temporal/Moto/Linux-worker/controller development, the selected AWS qualification target and future microVM/confidential/store/service extensions. These are documentation requirements, not shipped implementations; exact dependencies, security/license choices and runtime qualification remain open. The existing maintained tickets own downstream proof.
+
 The [bounded real model harness acceptance is complete](docs/skill-recovery/evidence.md#bounded-real-model-harness-closure-2026-10-05), including the existing actual Write/fresh Worker proof, paired installed CLI versions and credential free default suite. Other recovery scenarios and decisive production integration remain open, with the Phase 1 exit review mandatory before Phase 2.
 
 This fork targets validated native Claude skills that run unmodified as recoverable Temporal operations. The integration is intended for application authored Temporal Workflows and a later adapter into [temporal-agent-harness](https://github.com/temporal-community/temporal-agent-harness), not one fixed demo Workflow. Claude owns skill execution; the integration must preserve conversation checkpoints, workspace files, approvals and recorded outcomes. These are target requirements, not implemented guarantees.
@@ -285,3 +287,5 @@ make sync   # install (non-editable) into .venv
 make lint
 make test   # the real Claude Code engine against a local fake Messages API; no credentials
 ```
+
+Current adapter admission: the [typed record and operation contracts](docs/skill-recovery/spec.md#project-owned-adapter-record-and-operation-contracts) and [approved configuration decisions](docs/skill-recovery/proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-admission-decisions-2026-10-12) are the current owners. DSR-0.6 remains OPEN and DSR-2.1 remains blocked while exact bindings, security/key/readers and component/license admission are unresolved. Preserve all selected B-C requirements and historical dispositions.

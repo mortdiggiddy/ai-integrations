@@ -4,6 +4,8 @@ Status: CONDITIONAL, not adopted or runtime qualified. This is the maintained re
 
 ## Maintained documents
 
+- [Selected component interfaces](../../../spec.md#selected-component-boundaries-2026-10-12) and [deployment profiles and future opportunities](../../../spec.md#deployment-profiles-and-future-opportunities) own the 2026-10-12 pluggable boundary selection, local development target, retained AWS qualification target and all discussed extension gates. Plans and existing tickets mirror these owners; no provider parity or new runtime proof is claimed.
+
 - [DSR-0.6 preparation](dsr-0.6-preparation.md), including the proposed upstream integration boundaries, and its [focused integration review](integration-review.md). Choices and interfaces remain pending; the [historical preparation review](dsr-0.6-review.md) retains its original scope.
 
 - [Specification](candidate/spec.md), [plan](candidate/plan.md), [specification evidence](candidate/evidence.json) and [plan evidence](candidate/plan-evidence.json).
@@ -11,6 +13,7 @@ Status: CONDITIONAL, not adopted or runtime qualified. This is the maintained re
 - Independent [Temporal research](priority-sweep/agent-temporal.md) and [industry research](priority-sweep/agent-industry.md).
 - [Storage synthesis](storage-loop/synthesis.md), [Temporal session research](storage-loop/temporal/report.md), [workspace research](storage-loop/substrate/report.md) and [fencing research](storage-loop/fencing/report.md).
 - [Mods synthesis](mods-synthesis.md) and [pinned source contract excerpts](mods-research/surface/pinned-types-excerpts.md).
+- [Context processing, Mods and Temporal execution research](context-execution-research.md), with source pins, the 18-row inspected harness comparison, license and component reuse limits, existing sandbox and Code Mode patterns, independent cross challenges and unexecuted qualification cases. Its [documentation preparation handoff and execution ledger](context-mode-integration-edit-plan.md) separates Class A research/navigation from Class B selected protocol and optional integration changes. The research remains the technical comparison owner; the handoff supplies edit instructions and the bounded preparation receipt. Neither adopts a protocol or qualifies a runtime.
 - [Storage candidate design review](storage-loop/verification/report.md). This is conditional design evidence for its recorded scope; later discussion sweep and migration verification do not supply new runtime qualification.
 - [Diagrams](diagrams/README.md), [retained source provenance](provenance.md) and [migration manifest](migration-manifest.json).
 
@@ -31,3 +34,9 @@ No ticket status or acceptance checkbox advances. Historical FAIL, DEFECT, publi
 The [migration verification](migration-review.md) records independent coverage, adversarial counterexamples, private archive cutover and remaining evidence limitations. Migration is complete; the design remains conditional.
 
 Six owner decisions and unexecuted qualification tests remain open. Read the current candidate and coverage together. Diagram checks establish geometry and export integrity, not perceptual polish or distributed durability. Migration verification is documentation verification only. Existing make suite limitations and legacy ticket checker findings retain their recorded scope; no dependency installation or source provenance bypass is part of this migration.
+
+Current adapter admission is owned by the [typed record and operation contracts](../../../spec.md#project-owned-adapter-record-and-operation-contracts) and the [approved configuration decisions](dsr-0.6-configuration.md#approved-admission-decisions-2026-10-12). Ticket status is owned by the [maintained tickets](../../../tickets/README.md).
+
+## Architecture evaluation input (2026-10-14)
+
+The [architecture review pack](architecture-review.md) contains Mermaid views of the trust boundaries, payload encryption and offload, checkpoint publication, effect outcomes, replacement barriers, harness correlation, Nexus policy, keys and retention, confidential execution and child/parallel recovery, with an independent evaluation checklist. It owns no contract or ticket status. [BD-2](dsr-0.6-configuration.md#six-owner-decisions-and-blockers) owns the reconciliation of the earlier AWS target with the self hosted direction.

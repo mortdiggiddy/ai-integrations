@@ -10,3 +10,7 @@ These views illustrate the conditional proposal. They do not establish runtime s
 | Effect succeeds before result publication fails | [SVG](result-publication-fault.svg) | [HTML](result-publication-fault.html) |
 
 JSON specifications and portable delivery receipts accompany every view. Each original HTML delivery passed nine showcase checks with zero errors and warnings. Specification and HTML bytes are unchanged by export. SVGs passed XML parsing and retain embedded dark theme styles. Visual review was skipped because no capable browser or SVG rasterizer was available. This remains a limitation after migration.
+
+## Complete architecture review views
+
+The [architecture review pack](../architecture-review.md) contains Mermaid views for component/trust boundaries, payload encryption/offload, native checkpoint publication, effect outcomes, replacement barriers, harness/VFS correlation, Nexus policy, key/retention, confidential execution and positive child/parallel requirements. These are evaluation inputs, not qualified deployments. The earlier SVG/HTML exports above retain their historical scope.

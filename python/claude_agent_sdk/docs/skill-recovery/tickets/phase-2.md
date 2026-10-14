@@ -4,6 +4,12 @@
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Prepare typed checkpoint/receipt and configuration compatibility contracts under the [canonical interfaces](../spec.md#selected-component-boundaries-2026-10-12). Use local and AWS adapters behind the same semantic operations. Test unknown capabilities, stale/changed configuration, endpoint injection, exact versions/digests, authorization denial and lost publication replies. Local emulation cannot prove durable ACK or host-loss recovery; existing DSR-0.6 blocker remains.
+
+Selected rebaseline (2026-10-11): validated S3 accepted-pair restore/publication replaces shared-volume-only preparation. The manifest binds exact object versions/digests, predecessor, native pending identity, required workspace image, package/policy/runtime and execution incarnation; DSR-0.6 remains the unresolved prerequisite. Full retained artifacts and exact accepted projection/version identities are included under the selected context seam. Protected local claims remain defense; restore never recreates independent authority or lost accepted outputs.
+
+Portable target alignment (2026-10-09): DSR-0.6 now prepares the confirmed another-host/original-disk-unavailable outcome. This ticket retains its current canonical implementation scope and blocker until a route is approved and its spec/plan/ticket impact reconciled. Do not implement a cold receipt or independent authority by interpreting the existing volume decision as protocol adoption; do not reopen completed Phase 1 prerequisites.
+
 Phase 1 gate disposition (2026-10-07): DSR-1.9 is DONE with the operator's continue decision; canonical `evidence.md`, *Approved Phase 1 continue decision (2026-10-07)*, owns its scope and residual limitations. DSR-0.6 remains OPEN and still blocks workspace preparation. This checkpoint implements no workspace and checks no Phase 2 acceptance criterion.
 
 Workspace decision preparation (2026-10-09): [DSR-0.6 preparation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) recommends retaining the shared-volume/file-claim contract. Cold bundle and independent dispatch alternatives require separate adoption before changing this ticket. Finished-directory verification preserves the manifest and generation; the criterion below is corrected to match canonical idempotent preparation. Missing or uncertain claims cannot be repaired by creating an empty claim tree. No implementation or acceptance completion follows.
@@ -63,6 +69,9 @@ No code creates the run directory layout, the Worker owned claims directory, the
 - [ ] The tests in this ticket need no credentials. Proof: the plugin test suite passes with every `CLAUDE` and `ANTHROPIC` variable cleared ([canonical plan](../canonical-documents.md#plan), *Stack*).
 - [ ] The prepared workspace is distinct from conversation history and approval and outcome records. Its manifest identifies the preservation mechanism selected by DSR-0.6 and DSR-0.12, without treating a restored transcript or local Mods store as restored files. Proof: manifest assertions and a test with present conversation state but missing previously accepted workspace files that refuses; initial preparation of a genuinely new workspace may use only the approved prepare path. Initial preparation and repair must not reconstruct lost accepted outputs or recreate unresolved claims empty.
 
+
+- [ ] Accepted manifests validate complete matching conversation/workspace/pending/result references and selected artifact/projection/version identities before SDK start. Lost upload/head ACK, changed bytes, stale predecessor, unsupported metadata and present-conversation/missing-workspace cases refuse or reconcile the same exact accepted identity. Proof: model-free receipt/restore negatives plus separately authorized native/backend proof; no empty-authority recreation.
+
 #### Dependencies and blockers
 
 - Blocked by DSR-0.6 (volume class and effect isolation level) and DSR-1.9 (Phase 1 continue decision).
@@ -87,6 +96,10 @@ No code creates the run directory layout, the Worker owned claims directory, the
 ### DSR-2.2 Run Bash as a claimed effect with the spawn guard
 
 Status: OPEN
+
+Interface requirements (2026-10-12): Bind dispatch through the [canonical authority adapter](../spec.md#selected-component-boundaries-2026-10-12); only the protected Entity schedules the original nonrepeatable call. Test duplicate/lost replies, mismatched configuration/identity and denied principals without returning reusable spawn permission. Local controller/provider replacement cannot bypass parked ambiguity or protected local guards.
+
+Selected admission requirement (2026-10-11): the protected independent Entity owns sole nonrepeatable scheduling; duplicate/lost admission replies retrieve status/result and cannot authorize another spawn. Preserve local ordinal/key guard tests and one attempt. For any opaque component execution, use the original guarded identity with one attempt; lost outcome parks. General ctx_execute remains unadmitted. Source inspection and this ticket are not proof of physical uniqueness.
 
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) owns the pinned hook-exception denial, absent-answer/trusted-settings and permission-flag evidence. A wrong nonexecution classification can permit a second physical effect. Source review and independently witnessed counter cases remain pending; protected claims and no-respawn requirements remain authoritative. Status and acceptance criteria are unchanged.
 
@@ -116,13 +129,13 @@ Assumptions A-04 and A-05 are unproven. The claim file mechanism, the preserved 
 - Exclusive creation of the claim files `<key>` and `ord-<ordinal>` with `O_CREAT`, `O_EXCL` and `O_NOFOLLOW` before the spawn record and the spawn, each file storing the `workflow_run_id`, the ordinal, the key and the spawn time.
 - Refusal on `EEXIST`, on a preserved heartbeat detail that shows a spawn for the key, and on `attempt` above 1, each raising a non retryable `UnknownOutcome` error.
 - Rejection of `run_in_background`, an environment allow list, and an output cap with the full output in a file.
-- Treatment of a claim whose stored run id differs from the current run id as a reset or Continue-As-New signal, as [canonical specification](../canonical-documents.md#specification) INV-1 states.
+- A different stored Run Id identifies earlier lineage history, not reset versus Continue-As-New. Consult retained independent authority and explicit handover/reset evidence; ambiguity refuses continuation under the [canonical specification](../canonical-documents.md#specification).
 
 #### Out of scope
 
 - The retained ordered outcome table and the `ExecutorFault` park cause (DSR-2.3).
 - Process tree containment, cancellation, shutdown and payload caps (DSR-2.7).
-- Isolation at the decided level (Phase 4, DSR-4.1) and the exclusive create test across two hosts (Phase 4, DSR-4.3).
+- Isolation at the decided level (Phase 4, DSR-4.1) and physical accepted-pair/termination qualification (Phase 4, DSR-4.3).
 - Operator `redo` and `release_claim` are deferred by DSR-0.2. Recovery for ambiguous Bash remains the open DSR-0.8 decision.
 
 #### Acceptance criteria
@@ -133,8 +146,11 @@ Assumptions A-04 and A-05 are unproven. The claim file mechanism, the preserved 
 - [ ] A different command decided at an ordinal whose `ord-<ordinal>` file exists after a Workflow reset is refused and parks without a model result. Proof: a test that resets the Workflow, scripts a different command at the same ordinal, and counts spawns. DSR-0.2 retains the ordinal claim file.
 - [ ] Each of the two claim files is created before the spawn, and a second exclusive create of either fails with a refusal. Proof: a unit test that creates one file in advance and shows the refusal for each file separately.
 - [ ] A claim planted by the effect identity is impossible. Proof: a test under the effect identity that tries to write to the claims directory and fails, because the claims live outside `work/`.
-- [ ] A claim failure other than `EEXIST` and a missing claims directory raises `NotStarted` and nothing spawns. Proof: a fault injection test with a read only claims directory.
-- [ ] The guarantee is stated as at most one spawn absent a removed claim file, with a partitioned host and a daemonized child listed as residuals. Proof: the executor docstring and the README limits text match [canonical specification](../canonical-documents.md#specification), INV-1, *Claimed effect guard*.
+- [ ] Missing local guards or uncertain I/O/admission raise `ExecutorFault` or uncertainty and park; only affirmative reserved pre-admission nonexecution qualifies for `NotStarted`. Proof: separate missing/read-only/partial-claim and safe-pre-admission negatives with zero spawns/model starts.
+- [ ] The conditional guarantee requires qualified independent Entity admission, intact local defense and whole-guest containment; partition denies replacement before exact terminal proof. Proof: reviewed limits match the selected canonical contract; unexecuted qualification remains visible.
+
+
+- [ ] Concurrent duplicate admission, lost successful reply, Activity/outer reset and preclaim restore cause one independent scheduling decision and one physical invocation; absent/regressed authority or opaque execution uncertainty parks. Proof: independent invocation counters and zero next-model/second-spawn assertions; local guard tests remain.
 
 #### Dependencies and blockers
 
@@ -160,6 +176,10 @@ Assumptions A-04 and A-05 are unproven. The claim file mechanism, the preserved 
 ### DSR-2.3 Map every effect outcome by the ordered table and the executor fault
 
 Status: OPEN
+
+Interface requirements (2026-10-12): Apply [canonical typed adapter errors](../spec.md#selected-component-boundaries-2026-10-12) without changing the ordered outcome mapping. Unsupported capability, authorization refusal, accepted-data corruption and postdispatch uncertainty remain distinct. Test timeout/disconnect after dispatch, lost result/postimage/projection and native error/status/metadata preservation; never infer NOT_RUN from a transport error.
+
+Selected outcome requirement (2026-10-11): accept the exact original native result only with its matching required postimage and retained accepted projection. Lost result/postimage/projection publication or acknowledgement reconciles the same identity or parks before generic uncertainty becomes a model result. Rebuilt indexes never recover accepted bytes or establish NOT_RUN. Independent authority loss, metadata mismatch and partial accepted pairs refuse.
 
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) corrects the earlier nonexecution claim. Affirmative evidence is required to classify not started; an absent hook answer can still allow execution. Otherwise governed Bash parks without another spawn or model continuation. A wrong classification can repeat a mutation. Compare the pinned failure mapping with this ticket's ordered outcome table; source adoption and physical proof remain pending. Status and acceptance criteria are unchanged.
 
@@ -221,6 +241,9 @@ The mapping does not exist in the fork. The wrapper type that stops a tool body 
 - [ ] Known safe failures return tool errors with `is_error` true. The exceptional Edit retains its explicit unknown result where the specification permits it. Ambiguous Bash sends no tool result. Proof: tests reading resumed session messages and counting segment starts.
 - [ ] Recorded histories from the fork and from this ticket replay without non determinism, with the new behavior guarded by `workflow.patched`. Proof: the Replayer over recorded histories ([canonical specification](../canonical-documents.md#specification), INV-3, *Determinism inside the Workflow*).
 
+
+- [ ] A physical effect followed by lost result/postimage/projection upload or ACK yields the exact original matching receipt or park, with zero repeat effects and model starts. An index rebuild does not imply NOT_RUN. Proof: separately injected publication faults and changed identity/metadata/pair rejection tests.
+
 #### Dependencies and blockers
 
 - Blocked by DSR-2.1 (state fields) and DSR-2.2 (claimed executor).
@@ -244,6 +267,8 @@ The mapping does not exist in the fork. The wrapper type that stops a tool body 
 ### DSR-2.4 Run Write and Edit as repeatable effects
 
 Status: OPEN
+
+Selected file/native requirement (2026-10-11): pair exact original result and native Read/Edit bookkeeping with the required accepted postimage before continuation. Retain pre/postimage repeatability tests and special Edit single-attempt uncertainty. Arbitrary scripts and opaque processor writes are not repeatable native Write/Edit. Native transformation remains a qualified seam, preserving original identity/status/metadata; no new call identity or unsupported replay is admitted.
 
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) now pins a public native port and successful plugin CI cells. Compare native record replacement, rejection/error shape and full-file exclusion before overlapping implementation. Incorrect records can break subsequent edits or inflate history. This does not select native replay over the existing repeatable protocol or prove workspace/postimage recovery. Status and acceptance criteria are unchanged.
 
@@ -293,6 +318,9 @@ Heartbeats are throttled and not awaited. A Worker that dies after the write and
 - [ ] The overlap case where the old text can match again after replacement has a recorded outcome. Proof: a test or a recorded decision that states the executor result ([canonical specification](../canonical-documents.md#specification), Open issues, and brief 21 R5-09).
 - [ ] The Edit rules for unique match and `replace_all` equal the engine's behavior wherever the differential test of DSR-2.6 shows the engine enforces them. Proof: the DSR-2.6 result linked in this ticket.
 - [ ] If DSR-0.12 adopts native Read/Edit execution, native read metadata, validation failures and file outcome consistency survive the selected recovery boundary. A crash after mutation but before publishing the result yields a consistent recorded outcome or blocks recovery. Proof: native Read/Edit and crash tests covering the supported path and file types; the prototype's single `note.txt` snapshot is not general filesystem proof. If no native path is adopted, record that candidate rejection and prove the retained repeatable protocol instead.
+
+
+- [ ] Native success/error and read-before-edit bookkeeping retain exact original identity, raw native fields and accepted postimage after replacement; mutation-before-publication loss parks. Opaque script writes cannot enter repeatable Write/Edit classification. Proof: native differential and crash tests, plus original-key single-attempt opaque fault negative.
 
 #### Dependencies and blockers
 
@@ -395,6 +423,10 @@ The field name is a one way door once external services see keys. The keyed retr
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Qualify each engine mode and artifact/transport binding against the [canonical interfaces](../spec.md#selected-component-boundaries-2026-10-12). Compare exact native results and accepted projections, unsupported-mode/hook-loss refusal and immutable artifact confinement. Common adapter tests do not qualify a new engine, Mods API, Context Mode dependency or arbitrary permission mode.
+
+Selected fidelity requirements (2026-10-11): Q-3/Q-4/Q-5 compare success/error raw and exact accepted representations, original call identity/status/native metadata and replacement recovery after lost publication. Test absence/unload/skipped callbacks and assert callback coverage. Required output exclusion independently blocks the next model request with zero unintended exposure; raw fallback is not success for that guarantee. Preserve historical loading FAIL and separate original pending PASS; current declared capability is not qualification.
+
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) owns prospective comparisons for hook failures, trusted settings, override flags, native records, session copies, nested inputs and resume prompts. Wrong assumptions can permit an effect, lose pending identity or alter recovery input. Compare the pinned public port against the selected governed runtime; the wider version report is not local qualification. Status and acceptance criteria are unchanged.
 
 Integration preparation (2026-10-09): [the four smallest qualification cases](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#smallest-integration-qualification-slice) map checkpoint ordering, result/postimage loss, retained claims and strict parking to the existing proof owners. Coordinate these cases with upstream interfaces; reuse completed Phase 1 vectors without repeating paid calls. No new acceptance completion, runtime promotion or experiment authorization follows.
@@ -445,6 +477,9 @@ Nothing yet shows that the executor reproduces the engine's text, error shape an
 - [ ] The test runs on the plugin's minimum engine and on the newest engine, or the gap is stated. Proof: two recorded runs with the version printed by `claude -v` ([canonical plan](../canonical-documents.md#plan), *Stack*).
 - [ ] Every difference is recorded as accepted or fixed. Proof: a list in the ticket closing note that has no unclassified entry.
 
+
+- [ ] Q-3/Q-4/Q-5 preserve exact raw/accepted bytes and native identity/status/metadata after lost publication and fresh Worker restore. Required projection absence/unload/skipped callback blocks model continuation independently and exposes zero excluded bytes. Proof: positive callback counters, independent negative controls and full representation comparison; no successful exit with a skipped hook counts.
+
 #### Dependencies and blockers
 
 - Blocked by DSR-2.2 (Bash executor) and DSR-2.4 (Write and Edit executor).
@@ -466,6 +501,10 @@ Nothing yet shows that the executor reproduces the engine's text, error shape an
 ### DSR-2.7 Contain process trees, cancellation, shutdown and payload size
 
 Status: OPEN
+
+Interface requirements (2026-10-12): Implement the [canonical execution/controller boundary](../spec.md#selected-component-boundaries-2026-10-12) outside the disposable worker. Bind create/inspect/terminate to exact incarnations, retain bounded calls and reconcile lost replies. Test inaccessible controller sockets/credentials, detached descendants, cancellation and no replacement before terminal evidence. Containers, local VMs and EC2 require separate capability proof; microVM admission remains future scope.
+
+Selected process/payload requirements (2026-10-11): qualify confined SDK/effects/processor descendants, partial/background negatives and missing-control refusal. Q-1/Q-4/Q-7 measure model input, Temporal history payload and Worker memory separately. Internal processing permits fixed immutable inputs and bounded scratch/index/output only, with zero live-workspace mutation, network, telemetry, install/upgrade or detached descendants. External exact-incarnation termination remains DSR-4.3 proof.
 
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) records reported full-file toolUseResult exclusion. Compare payload/privacy behavior with existing limits before reuse; unnecessary file capture can expose content or inflate history. Launcher/lock fixes and Worker-kill tests do not prove exact-incarnation descendant death or distributed cleanup. Status and acceptance criteria are unchanged.
 
@@ -516,6 +555,9 @@ None of the containment and cap behavior exists. A daemonized child can outlive 
 - [ ] Every effect Activity heartbeats, so a cancellation request reaches it. Proof: a test that cancels a long command and shows the executor stops it at a heartbeat.
 - [ ] The Worker graceful shutdown timeout is set explicitly and a SIGTERM calls the Worker shutdown in a local test. Proof: a process level test that sends SIGTERM and shows in flight completion within the timeout.
 - [ ] Stderr in a failure message is truncated to a stated size. Proof: a test with a large stderr stream.
+
+
+- [ ] Q-1/Q-4/Q-7 reject forbidden processor mutations/egress/background descendants and missing required controls; separate measured model-input/history-payload/Worker-memory limits hold at the boundary. Proof: effect/egress counters, callback coverage and three independent byte measurements on selected runtime; no experiment has run from this preparation.
 
 #### Dependencies and blockers
 
@@ -667,3 +709,5 @@ The evidence from the Phase 2 build tickets is spread across tests and notes. Th
 #### Open questions
 
 - Plugin engineer: confirm retained wrapper and mismatch refusal evidence against Option R; do not reopen deferred keyed defaults or claims high water. A-22 remains Phase 1 and Phase 5 engine compatibility work.
+
+Current adapter admission: [the typed contracts](../spec.md#project-owned-adapter-record-and-operation-contracts) and [approved local configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) own the selected interfaces, container-first sequence, PKI/reader/key policy, component admission and qualification limits. The decision ticket owns its status. Physical and component qualifications remain unexecuted; DSR-2.1 remains blocked while other prerequisites are incomplete.

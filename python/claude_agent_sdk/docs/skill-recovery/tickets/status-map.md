@@ -1,6 +1,14 @@
 # Ticket status and dependency map
 
-Current route (2026-10-09): Phase 1 is complete at its approved bounded exit. Start with DSR-0.6's storage/isolation choice and role holders, using the [reviewed integration preparation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#integration-with-the-accepted-division-of-work). Preparation is complete; the decision is still OPEN. Agree concrete upstream interfaces and the integration revision before implementation. Earlier next-action paragraphs below are historical and do not reopen completed work.
+Interface direction (2026-10-14): [the canonical boundaries](../spec.md#selected-component-boundaries-2026-10-12) and [approved local configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) govern affected owners. The owning tickets retain statuses and dependencies; qualification is unexecuted.
+
+Current decision disposition (2026-10-14): [DSR-0.6](phase-0.md#dsr-06-decide-the-workspace-volume-class-and-the-effect-isolation-level) records the approved local container-first configuration and later portable qualification sequence. Exact build/platform identities and runtime proof remain in Q-7/Q-15 and DSR-4.3. No rig execution, runtime admission or cloud spending follows. Earlier dated checkpoints retain their historical scope.
+
+Current direction (2026-10-10): [DSR-0.6's approved checkpoint direction](phase-0.md#approved-checkpoint-architecture-direction-2026-10-10) selects cold restoration. The remaining immediate work is concrete backend, protected authority, termination/isolation and owner preparation plus canonical rebaseline. The full distributed protocol remains unadopted and DSR-2.1 remains blocked. Earlier requests to choose the architecture direction are historical.
+
+Current objective (2026-10-09): another-host recovery with original disk unavailable is confirmed. DSR-0.6 now owns the [portable target adoption preparation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#confirmed-portable-target-2026-10-09). Cold restoration is the preferred proposed route; execution-host-independent shared storage remains a comparison. The phase path below remains the existing canonical dependency graph, not an approved cold implementation plan. Reconcile it after BD-6/DSR-0.6 route approval; no completed ticket reopens.
+
+Retained integration checkpoint (2026-10-09): Phase 1 is complete at its approved bounded exit. DSR-0.6 and upstream interface agreement still block implementation. The [reviewed integration boundaries](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#integration-with-the-accepted-division-of-work) remain applicable, but their surviving-host slice is preliminary after the portable objective confirmation above. Earlier next-action paragraphs do not reopen completed work.
 
 ## Work path from the current checkpoint
 
@@ -8,15 +16,15 @@ The sequence below navigates the existing dependency graph, not a new backlog or
 
 | Stage | Existing ticket path | Gate and scope |
 |---|---|---|
-| Immediate decision | DSR-0.6 | Select the applicable canonical storage/isolation route and owners; upstream boundary agreement remains required. DSR-2.1 stays blocked until approval. |
+| Current decision | DSR-0.6 | Approved finite local configuration recorded. Follow remaining DSR-0.8/0.11 and upstream admission prerequisites; DSR-2.1 stays blocked. Physical, component and native qualification remains unexecuted. |
 | Workspace and effect integration | DSR-2.1, then DSR-2.2, then DSR-2.3; DSR-2.4 follows DSR-2.3; DSR-2.7 follows DSR-2.2; DSR-2.6 follows DSR-2.2/2.4 | Reuse compatible upstream engine/native-record work. Scope remains governed workspace/claims, outcome handling and qualification, not a second executor. Exit DSR-2.9. DSR-2.5/2.8 retain their superseded dispositions. |
 | Governed lifecycle and human decisions | DSR-3.1 through DSR-3.6 under their retained prerequisites | Additional DSR-0.7/0.8/0.9 decisions gate their respective tickets. Exit DSR-3.7; DSR-3.8 remains superseded. |
 | Physical isolation and storage qualification | DSR-4.1/4.2/4.3, then DSR-4.4 when its prerequisites are met | DSR-0.11 additionally gates DSR-4.2. Exit DSR-4.5. Controlled surviving-host proof does not establish permanent-loss or partition recovery. |
 | Hardening and acceptance | DSR-5.1 through DSR-5.8 under their retained prerequisites | DSR-0.9/0.11 and DSR-0.4 gate the named rollout/store/budget outcomes. Exit DSR-5.9. New runtime calls, upgrades and rigs still need separate authorization. |
 | Complete governed-design verification | DSR-6.1/6.2, then DSR-6.3, then DSR-6.4 | Full backlog acceptance remains broader than the smallest upstream integration slice. A preparation review is not this PASS. |
-| Upstream/harness publication | DSR-7.1, then DSR-7.2 with DSR-7.3 | Existing Phase 7 rules require DSR-6.4. The accepted discussion split does not waive this release gate or authorize contact/publication. DSR-7.4's positive child/parallel selection is an optional extension decision. |
+| Upstream/harness publication | DSR-7.1, then DSR-7.2 with DSR-7.3 | Existing Phase 7 rules require DSR-6.4. The accepted discussion split does not waive this release gate or authorize contact/publication. DSR-7.4's positive child/parallel requirements are selected for documentation; delivery still requires its proof and existing phase gates. |
 
-The four proposed integration qualification cases map to existing tickets in the preparation document; they are not a replacement for the phase gates. Cold restoration and independent dispatch authority remain separately conditional adoption work. No broader governed feature is represented as a prerequisite imposed on the other contributor's current PR.
+The retained qualification cases map to existing ticket owners and remain unexecuted. They do not replace the phase gates. Portable and full B-C documentation selections are recorded; exact configuration, interfaces, license clearance and runtime qualification remain open. No broader governed feature is represented as a prerequisite imposed on the other contributor's current PR.
 
 Current verification checkpoint (2026-10-07): [Phase 1 independent verification checkpoint](../canonical-documents.md#phase-1-independent-verification-checkpoint-2026-10-07) owns the verification continuation. Phase 1 dispositions remain `[X]`; DSR-0.6 remains OPEN and blocks workspace implementation. Earlier checkpoints remain historical.
 
@@ -76,7 +84,7 @@ Synchronization is required in the same change as any ticket addition, status ch
 
 ## Current position
 
-The authoritative current position is the October 9 route above and the approved Phase 1 exit. The following dated position paragraphs are preserved historical records.
+The authoritative current position is the October 14 configuration decision and current work path above, together with the retained approved Phase 1 exit. Other admission prerequisites keep DSR-2.1 blocked. The following dated position paragraphs are preserved historical records.
 
 Monitored Write preparation (2026-10-03): DSR-1.1's local exact scenario admission criterion is demonstrated. Both DSR-1.1 and DSR-1.3 remain `[~]`; no ticket moved to DONE. Canonical evidence owns 151 focused passing checks, retained local host receipts, the prepared Write scenario/command and remaining proof limits. Live recording/recovery, selected newest lane and installed default suite remain unproved; no live execution is approved. Next: exact approval for the shared Write scenario. DSR-0.4 gates DSR-5.8, and DSR-1.9 remains mandatory before Phase 2. Earlier checkpoints retain their historical scope and dispositions.
 
@@ -166,7 +174,7 @@ DSR-P0
 |   requires: none
 +-- [X] DSR-0.5 Record the outcome of contacting the community plugin author
 |   requires: none
-+-- [ ] DSR-0.6 Decide the workspace volume class and the effect isolation level  <<< NEXT
++-- [X] DSR-0.6 Decide the workspace volume class and the effect isolation level
 |   requires: none
 +-- [ ] DSR-0.7 Name the owner of the approval gateway
 |   requires: none
@@ -270,7 +278,7 @@ DSR-P4
 |   requires: DSR-0.6, DSR-3.7
 +-- [ ] DSR-4.2 Remove run directories safely and detect a restored snapshot
 |   requires: DSR-3.7, DSR-0.11
-+-- [ ] DSR-4.3 Prove shared volume behavior on two containers over a network file system
++-- [ ] DSR-4.3 Prove accepted checkpoint restoration and independent execution termination
 |   requires: DSR-3.7
 +-- [ ] DSR-4.4 Measure event loop lag, step cost and process containment
 |   requires: DSR-3.7, DSR-4.1
@@ -337,3 +345,5 @@ DSR-P7
 `-- [ ] DSR-7.4 Select a testable durable child and parallel tool design
     requires: none (BD-6 adoption required before delivery implementation)
 ```
+
+Current adapter admission: [the typed contracts](../spec.md#project-owned-adapter-record-and-operation-contracts) and [approved local configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) own the selected interfaces, container-first sequence, PKI/reader/key policy, component admission and qualification limits. The decision ticket owns its status. Physical and component qualifications remain unexecuted; DSR-2.1 remains blocked while other prerequisites are incomplete.

@@ -1,0 +1,285 @@
+{
+  "ticket": "DSR-0.6",
+  "projection_notice": "Audit projection of existing confirmed decision owners; no independent contract or runtime qualification",
+  "answers": {
+    "decisions": {
+      "BD-1": {
+        "answer": "Accepted-state local container-loss recovery first; required later portable host/disk-loss and partition tests; uncertain original effects park",
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "BD-2": {
+        "answer": "Separate checkpoint/key/controller service containers and Linux execution container on trusted local host; project maintainer holds all assigned roles; later portable provider proof",
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "BD-3": {
+        "answer": "Synthetic 24-hour recovery/reset window and seven-day minimum extended while referenced; authority reset/recreation/rollback denied",
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "BD-4": {
+        "answer": "One session/call/harmless effect with exact approved byte/process/CPU/deadline/skew caps",
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "BD-5": {
+        "answer": "Trusted host/provider boundary, separate PKI/key services, mTLS plus scoped authorization, AES256GCM and Ed25519",
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "BD-6": {
+        "answer": "Approved project-owned typed contracts, exact component source/API/intended-use selections and pinned runtime profile; qualification gates remain unexecuted",
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      }
+    },
+    "criteria": {
+      "checkpoint": {
+        "answers": {
+          "substrate": "Project-owned checkpoint service container with a separately retained protected volume; later S3 exact-version portable reference",
+          "exact_version": "Canonical version-1 tagged wire format; immutable configuration/specification digest; Node22.22.1/Python3.13.15 profile",
+          "accepted_pair": "Temporal Session Workflow owns exact accepted conversation/workspace pair and predecessor",
+          "metadata": "Preserve admitted POSIX hidden/deleted/executable/link metadata and preimage/postimage; validate before materialization",
+          "publication": "Conditional immutable create; persist complete bytes and containing directory before acknowledgement; reconcile original digest/length/version; advance only complete pair"
+        },
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "portable_cases": {
+        "answers": {
+          "surviving_host": "Initial local container failure on surviving trusted host, DSR-4.3 Q-10",
+          "original_disk_unavailable": "Required later H2 restore with original host/disk unavailable, DSR-4.3 Q-11",
+          "live_partition_termination": "Required later live-partition independent exact-incarnation termination, DSR-4.3 Q-12; portable admission denied before proof",
+          "finite_rig_holder": "Project maintainer"
+        },
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "isolation": {
+        "answers": {
+          "level": "Linux Docker Engine29.7.2 execution containers with cgroup confinement and external trusted controller; no restart or logical execution reuse",
+          "security_holder": "Project maintainer"
+        },
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "assumptions": {
+        "answers": {
+          "A-17": {
+            "disposition": "revised",
+            "interim_claim": "Trusted-host container confinement selected; actual isolation is a Phase4 proof"
+          },
+          "A-27": {
+            "disposition": "retained",
+            "interim_claim": "Local container proof first; required later original-disk-unavailable accepted-pair restore before portable use"
+          },
+          "A-48": {
+            "disposition": "retained",
+            "interim_claim": "Exact authenticated terminal container evidence and descendant containment selected; later physical termination proof before portable use"
+          },
+          "A-37": {
+            "disposition": "revised",
+            "interim_claim": "Synthetic 604800-second minimum with referenced extension; client policy required before real client data"
+          }
+        },
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "refusal": {
+        "answers": {
+          "independent_authority": "refuse",
+          "pair_mismatch": "refuse",
+          "unproven_death": "refuse",
+          "local_guard": "refuse",
+          "restore_permission": "never"
+        },
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      },
+      "configuration": {
+        "answers": {
+          "deployment_holder": "Project maintainer",
+          "storage_holder": "Project maintainer",
+          "integration_holder": "Project maintainer",
+          "authority_administration": "Separate trusted authority/gateway identities; deny reset/delete/recreation/rollback; synthetic-only local frontend or enforced gateway/authorizer before protected use",
+          "trusted_host_permissions": "Untrusted job has no issuer/key/store/controller/Temporal administration mounts or sockets; trusted service identities own protected volumes and policy",
+          "runtime_pins": {
+            "Temporal CLI": "1.9.1",
+            "Temporal Server": "1.32.0",
+            "Temporal SDK": "1.33.0",
+            "Moto": "5.1.9",
+            "Python": "3.13.15",
+            "Node": "22.22.1",
+            "Docker Engine": "29.7.2",
+            "esbuild": "0.27.3",
+            "qualified Claude SDK": "0.2.162",
+            "qualified Claude CLI": "2.1.274"
+          },
+          "terminal_incarnation": "External controller binds immutable container ID and original launch operation/configuration; authenticated terminal inspection plus confined descendants; no automatic restart; missing observation denies replacement",
+          "authentication": "mTLS protected root and scoped intermediate CA with separate service leaf identities; validate chain/validity/name/usage then scoped action authorization",
+          "encryption_keys": "AES-256-GCM 256-bit key/96-bit unique nonce/128-bit tag with canonical scope/object/schema AAD; separate broker; Ed25519 human decisions with minimum version1",
+          "reader_matrix": "Configuration owner reader table selects publisher/materializer, authority/controller, processor/VFS, report recipient, janitor and untrusted job capabilities; broker authorizes before retrieval; cross-client/session access denied",
+          "retention": {
+            "minimum_seconds": 604800,
+            "extend_while_referenced": true
+          },
+          "component_files_api": "Approved nine Context Mode source files at abb104847cbb66c2182816a72bb69455bc778b5e; bounded explicit-path ContentStore and registered PolyglotExecutor; full package/arbitrary file access/discovery excluded",
+          "dependency_pins": "Node22.22.1 built-in SQLite only; esbuild0.27.3 plus matching Linux binary build-only; existing SDK/cryptography lock retained; complete reproducible platform inventory required at Q-7 before execution",
+          "license_fit": "Operator approved Elastic-2.0 intended application use inside registered skill jobs/domain reports with license/notices retained; broader functionality reassessed before release; esbuild MIT notices retained",
+          "maintenance_holder": "Project maintainer",
+          "upstream_interface_revision": "Project canonical typed contract/specification digest; harness30b0c7f0affb0629cac4c846d0cb88589571e484 source pin after release0.6.0; exact native mapping qualification Q-15",
+          "workload_bounds": {
+            "sessions": 1,
+            "pending_calls": 1,
+            "effects": 1,
+            "workspace_bytes": 3000000,
+            "model_output_bytes": 65536,
+            "raw_result_bytes": 1048576,
+            "envelope_bytes": 8388608,
+            "index_bytes": 4194304,
+            "scratch_bytes": 16777216,
+            "processes": 8,
+            "cpu_seconds": 120,
+            "deadline_seconds": 600,
+            "clock_skew_seconds": 5,
+            "recovery_window_seconds": 86400
+          }
+        },
+        "approved": true,
+        "evidence": [
+          {
+            "ref": "proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14",
+            "sha256": "0702ea86e3202dddbec12d0356e110b835963d2ef3a398d6be7952019738c270"
+          },
+          {
+            "ref": "spec.md#project-owned-adapter-record-and-operation-contracts",
+            "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+          }
+        ]
+      }
+    },
+    "qualification_gates": {
+      "DSR-4.3": {
+        "status": "unexecuted",
+        "owner": "Project maintainer",
+        "required_evidence": "Local containment/publication proof followed by distinct surviving-host, original-disk-unavailable and live-partition termination cases"
+      },
+      "Q-7": {
+        "status": "unexecuted",
+        "owner": "Project maintainer",
+        "required_evidence": "Reproducible source/build/platform dependency/license inventory and processor denial/limit tests"
+      },
+      "Q-15": {
+        "status": "unexecuted",
+        "owner": "Project maintainer",
+        "required_evidence": "Exact native original-call mapping/projection plus restricted CodeMode and positive child/parallel qualification"
+      }
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "by": "Project maintainer acting as approving operator",
+    "date": "2026-10-14",
+    "answers_sha256": "236f22f8e0812be84f214d0c554fc7375be0a642a14c144109ff44411b46d8ff"
+  }
+}

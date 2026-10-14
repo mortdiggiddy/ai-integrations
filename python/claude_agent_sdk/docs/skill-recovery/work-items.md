@@ -56,6 +56,10 @@ These work items implement the [specification](spec.md) through the [plan](plan.
 
 ## Deployment prerequisites
 
+Interface implications (2026-10-12): the [canonical component boundaries](spec.md#selected-component-boundaries-2026-10-12) and [profile/opportunity table](spec.md#deployment-profiles-and-future-opportunities) govern downstream work. Existing ticket owners must define typed contracts and capability refusal, trusted endpoint/configuration identity, action/resource authorization, secret references and per-profile qualification. Local Temporal/Moto/Linux-worker/controller tests are development evidence only; exact pins/license admission and execution allowance remain prerequisites. No acceptance box closes, no status/dependency changes, and future microVM/confidential/transport/store options do not become blanket blockers.
+
+Selected documentation scope (2026-10-11): DSR-0.6/0.8/0.11 own the approved S3/Entity/EC2 target/protocol and full Context Mode documentation scope. Named role holders, exact component/license/configuration and finite execution policy remain OPEN prerequisites. No checkpoint direction or documentation approval closes acceptance.
+
 Status: OPEN
 
 Dependencies: [specification](spec.md), [plan](plan.md#preparation).
@@ -259,7 +263,9 @@ Dependencies: [selected result delivery](#selected-result-delivery), [preventive
 
 ## Prepared workspace and effect identity
 
-[DSR-0.6 preparation](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) owns the proposed selection and qualification alternatives. The owning decision remains OPEN. All criteria below remain unchecked; Phase 1's approved bounded exit is not reopened.
+Selected documentation scope (2026-10-11): DSR-2.1 owns accepted-pair manifest validation, exact version/digest/native metadata restore, independent authority reference and retained artifact/projection identities. Restore is not claim/authority recreation.
+
+[DSR-0.6](tickets/phase-0.md#dsr-06-decide-the-workspace-volume-class-and-the-effect-isolation-level) owns the selected portable/context requirements and open deployment/license prerequisites. All criteria below remain unchecked; Phase 1's approved bounded exit is not reopened.
 
 Status: OPEN
 
@@ -273,6 +279,8 @@ Dependencies: engine stage exit, [integration adoption](#integration-adoption), 
 
 ## Claimed Bash execution
 
+Selected documentation scope (2026-10-11): DSR-2.2 owns independent Entity scheduling and original-key one-attempt opaque execution negatives; local claims remain defense. Duplicate/lost replies, reset and preclaim restore cannot permit redispatch.
+
 Status: OPEN
 
 Dependencies: [prepared workspace and effect identity](#prepared-workspace-and-effect-identity).
@@ -280,10 +288,12 @@ Dependencies: [prepared workspace and effect identity](#prepared-workspace-and-e
 - [ ] Spawn once with `maximum_attempts=1`, protected key and ordinal claims created before the spawn record/spawn, and explicit timeout, heartbeat, cancellation and output limits.
 - [ ] Refuse an existing claim, preserved spawn record or later attempt. Effect identity cannot create/change/delete either claim or its directory. Missing directory or arbitrary I/O failure spawns nothing and is not misclassified as duplicate evidence.
 - [ ] Timeout, lost Worker, post claim failure, exhausted attempt and Activity reset never spawn twice and block the next model turn. The reset test does not rely on `attempt`, which can return to one.
-- [ ] A different command at an occupied ordinal after Workflow reset refuses and parks. State the claim integrity and supported volume assumptions plus partitioned host/daemon residuals.
+- [ ] A different command at an occupied ordinal refuses against independent authority and local guard defense. State selected authority/containment conditions and partition denial until terminal proof.
 - [ ] Reject background execution and use the selected environment allow list. Claim removal and deliberate redispatch remain outside version 1.
 
 ## Ordered outcomes and refusals
+
+Selected documentation scope (2026-10-11): DSR-2.3 owns definitive original result plus required postimage/projection publication. Missing accepted components park before generic model-facing uncertainty; index rebuild cannot recover accepted bytes or imply NOT_RUN.
 
 Status: OPEN
 
@@ -297,6 +307,8 @@ Dependencies: [claimed Bash execution](#claimed-bash-execution), [prepared works
 
 ## Repeatable file execution
 
+Selected documentation scope (2026-10-11): DSR-2.4 owns original native metadata and result/postimage fidelity; arbitrary script writes remain outside repeatable Write/Edit. Publication gaps and special Edit preserve uncertainty.
+
 Status: OPEN
 
 Dependencies: [prepared workspace and effect identity](#prepared-workspace-and-effect-identity), [ordered outcomes and refusals](#ordered-outcomes-and-refusals).
@@ -308,6 +320,8 @@ Dependencies: [prepared workspace and effect identity](#prepared-workspace-and-e
 - [ ] Adopted native Read/Edit preserves result metadata, errors and file outcome consistency across recovery. Crash after mutation/before publication yields a consistent supported result or blocks recovery; a single prototype file is not general proof.
 
 ## Tool behavior fidelity
+
+Selected documentation scope (2026-10-11): DSR-2.6 owns Q-3/Q-4/Q-5 exact raw/accepted/native identity, replacement and missing projection-hook tests. Required output exclusion blocks model continuation independently; historical FAIL/PASS scopes remain intact.
 
 Status: OPEN
 
@@ -335,6 +349,8 @@ Dependencies: existing outer SDK session controller and disposable container har
 Verified teardown does not resolve Bash uncertainty or grant recovery without retained checkpoint, workspace/claims and accepted outcome/decision checks. No paid execution or Phase 2 work follows from these bounded checks.
 
 ## Process and payload bounds
+
+Selected documentation scope (2026-10-11): DSR-2.7 owns Q-1/Q-4/Q-7 descendant/startup/egress negatives and separate model-input, history-payload and Worker-memory limits.
 
 Status: OPEN
 
@@ -372,6 +388,8 @@ Dependencies: gateway decision, [durable waits](#durable-waits).
 
 ## Parked run actions
 
+Selected documentation scope (2026-10-11): DSR-3.3 owns missing result/postimage/projection park, accepted-pair-only resume and preservation-aware abort. Disposable index/snapshot cannot grant authority.
+
 Status: OPEN
 
 Dependencies: [ordered outcomes and refusals](#ordered-outcomes-and-refusals), [signed decision enforcement](#signed-decision-enforcement).
@@ -391,6 +409,8 @@ Dependencies: [durable waits](#durable-waits), namespace registration decision.
 - [ ] Events include effect key/mode but no raw tool input. Search Attributes contain no tool input/output, workspace paths or question/answer text.
 
 ## Reset identity
+
+Selected documentation scope (2026-10-11): DSR-3.5 owns Q-14 independent authority lifecycle, outer reset, preclaim restoration and deduplication across handover, with no second physical invocation.
 
 Status: OPEN
 
@@ -412,6 +432,8 @@ Dependencies: [durable waits](#durable-waits), [signed decision enforcement](#si
 
 ## Effect isolation
 
+Selected documentation scope (2026-10-11): DSR-4.1 owns selected guest credential/socket/authority and processor capability negatives; trusted-host isolation remains a requirement awaiting actual qualification.
+
 Status: OPEN
 
 Dependencies: decision stage exit, volume/security decision, [process and payload bounds](#process-and-payload-bounds).
@@ -421,6 +443,8 @@ Dependencies: decision stage exit, volume/security decision, [process and payloa
 - [ ] No reachable descendant, including `setsid`, survives reported completion; publish exact unsupported process/partition residuals.
 
 ## Workspace lifecycle
+
+Selected documentation scope (2026-10-11): DSR-4.2 owns Q-13 sole-readable refusal and object/key/authority/artifact/projection retention; index cleanup does not erase accepted state.
 
 Status: OPEN
 
@@ -433,15 +457,17 @@ Dependencies: [effect isolation](#effect-isolation), namespace retention decisio
 
 ## Replacement Worker filesystem proof
 
+Selected documentation scope (2026-10-11): DSR-4.3 owns the three distinct Q-10/Q-11/Q-12 surviving-host, original-disk-unavailable and live-partition/terminal-incarnation qualifications. A safety park is not accepted-data durability PASS.
+
 Status: OPEN
 
 Dependencies: [workspace lifecycle](#workspace-lifecycle), [repeatable file execution](#repeatable-file-execution), selected volume/rig.
 
 - [ ] Remove original local backing disk access and reconstruct accepted transcript, generated files, validated package, manifest/generation, protected claims and outcome from independently retained state. Refuse missing/conflicting state; same host SQLite/snapshot fixtures do not satisfy this check.
-- [ ] On two containers, prepared package/hash and generated files are visible across Workers, with consistent numeric ownership. Remove original Worker local disk and restore generated files, package, manifest, claims, session checkpoint and decision/outcome identity independently.
+- [ ] Q-10 surviving-host replacement and Q-11 H2 accepted-pair restore preserve exact native files/metadata, pending/result/postimage and authority identity; H1 disk access is unavailable in Q-11.
 - [ ] Missing/conflicting state refuses continuation; adopted native paths include post mutation/pre publication crashes. Conversation history alone never satisfies file proof.
-- [ ] Concurrent exclusive claim creation gives one success and one existing file refusal over stated rounds; the other Worker sees the claim and spawns nothing. Test supported per run serialization semantics.
-- [ ] A failed volume test leads to a narrower supported deployment or design change. An unavailable rig stays an explicit untested limit, never a verified cross host guarantee.
+- [ ] Duplicate/lost Entity admission replies, outer reset and preclaim restore never cause a second physical invocation. Q-12 readable-storage/live-partition refuses replacement until independently reconciled exact old-instance terminal evidence; local claim tests remain defense.
+- [ ] Missing accepted bytes is durability FAIL, and unknown effects/authority/death park. Failed or unavailable physical qualification remains explicit and cannot be replaced by a declared-limit PASS.
 
 ## Runtime measurements
 
@@ -483,6 +509,8 @@ Dependencies: [visibility and registration](#visibility-and-registration), [conc
 
 ## Session storage conformance
 
+Selected documentation scope (2026-10-11): DSR-5.4 owns Q-2/Q-3/Q-6 scoped raw/accepted retention, lost ACK, index rebuild and authorized replacement conformance.
+
 Status: OPEN
 
 Dependencies: session storage decision, [bounded recovery comparison](#bounded-recovery-comparison), [replacement Worker filesystem proof](#replacement-worker-filesystem-proof).
@@ -502,6 +530,8 @@ Dependencies: [durable waits](#durable-waits), [signed decision enforcement](#si
 - [ ] Skipping deprecation produces a failing replay negative control. Earlier released plugin/enforcement and reset histories replay or yield an explicit migration correction.
 
 ## Engine promotion
+
+Selected documentation scope (2026-10-11): DSR-5.6 owns selected component/dependency/processor/schema and actual installed native type/SDK/CLI qualification. No source-only version floor or automatic upgrade.
 
 Status: OPEN
 
@@ -580,6 +610,8 @@ Dependencies: [independent final verification](#independent-final-verification),
 
 ## Harness effect identity
 
+Selected documentation scope (2026-10-11): DSR-7.3 owns one identity/correlation authority for restricted Code Mode runner/VFS/host calls; exact interface and holder remain open.
+
 Status: OPEN
 
 Dependencies: selected core integration; required before [harness adapter](#harness-adapter).
@@ -590,6 +622,8 @@ Dependencies: selected core integration; required before [harness adapter](#harn
 
 ## Harness adapter
 
+Selected documentation scope (2026-10-11): DSR-7.2 owns selected Code Mode component, runner/VFS/tool/event dependencies and exact result/projection tests under unchanged post-PASS/upstream/glue gates. DSR-7.4 owns positive child/parallel matrices; current denial remains until proof.
+
 Status: OPEN
 
 Dependencies: upstream landing from [upstream submission](#upstream-submission), [harness effect identity](#harness-effect-identity). Separately verified later integration.
@@ -598,3 +632,5 @@ Dependencies: upstream landing from [upstream submission](#upstream-submission),
 - [ ] Denied approval returns a tool error with no effect; claimed Bash Worker loss parks visibly with no next model segment. Exceptional Edit keeps its separate mapping.
 - [ ] Prove stable effect identity and question/approval mapping across handover, and document/test whether engine reads emit events or bypass harness policy.
 - [ ] Record accepted upstream prerequisites before merging the optional adapter. Rollback removes its import without weakening core safety.
+
+Current admission update (2026-10-14): [the approved local configuration](proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) owns the container-first profile, role holders, exact pins, certificate/key/reader policy, intended-use and source/API selections, finite limits and later qualification gates. Preserve the canonical typed adapter contracts and all selected B-C requirements. DSR-0.6 closure requires the complete confirmed decision record and verification; DSR-2.1 remains blocked while other prerequisites are incomplete.

@@ -1,5 +1,11 @@
 # Recoverable skill execution plan
 
+Concrete configuration preparation (2026-10-11): [DSR-0.6 configuration](proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md) proposes the first product stack, applicable owner choices, canonical/ticket change map and finite qualification sequence. Select the qualification target before applying the mapped protocol rebaseline. The direction is already approved; product/configuration and complete protocol adoption remain pending. Model-free preparation, separately authorized physical rig and later native differential proof are distinct gates; no implementation or experiment starts from this preparation.
+
+Current architecture direction (2026-10-14): [the confirmed local configuration](proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) selects separate service and execution containers for initial qualification. DSR-4.3 retains later original-host/disk-loss and partition proof; the candidate remains conditional and runtime qualification is unexecuted.
+
+Current required outcome (2026-10-09): [portable recovery with the original disk unavailable](evidence.md#confirmed-portable-recovery-objective-2026-10-09) is confirmed. Next prepare adoption/rebaseline of the [preferred distributed target](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#confirmed-portable-target-2026-10-09), comparing independently durable shared storage. The earlier surviving-host route is a preliminary control or storage alternative, not the final objective. DSR-0.6/BD-6 choices and upstream integration agreement still precede any DSR-2.1 implementation; no cold protocol is approved by this goal statement.
+
 Current integration preparation (2026-10-09): [the proposed boundary contract](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#integration-with-the-accepted-division-of-work) defines the upstream comparison and four additional qualification cases within existing owners. Sequence: approve applicable DSR-0.6 choices and agree interface ownership/revision, then implement only the selected canonical route and qualify the named gaps. Permanent loss/partition and alternate authority adoption retain separate gates. No implementation starts from this preparation alone.
 
 Current collaboration agreement (2026-10-09): [the accepted division of work](evidence.md#issue-31-collaboration-agreement-2026-10-09) focuses this contribution on workspace recovery, governed uncertain effects and safe replacement qualification while reusing compatible upstream engine/native-record/conversation work. Proposed checkpoint and uncertainty interfaces require integration agreement and applicable DSR-0.6 approvals before DSR-2.1. No completed ticket is reopened, executor duplicated or distributed candidate adopted.
@@ -119,6 +125,16 @@ The [approved separation decision](experiments/budget-enforcement-disposition.md
 
 ## Preparation
 
+Selected interface direction (2026-10-12): implement against the [canonical component boundaries](spec.md#selected-component-boundaries-2026-10-12) and [deployment profiles and opportunities](spec.md#deployment-profiles-and-future-opportunities). Define typed semantic contracts, capabilities and trusted configuration before provider plumbing. Existing DSR-0.6/0.7/0.11 decisions admit the concrete profiles; DSR-2.1/2.2/2.6/2.7 build storage, authority, engine and lifecycle adapters; DSR-3.2/3.4 and DSR-5.2/5.3/5.4 qualify policy, transport and key/storage behavior. No new phase, ticket or duplicate contract is introduced.
+
+Use the approved container-first local profile and its configuration owner for credential-free contract and fault tests after separate build/execution admission. The checkpoint service has a distinct retained volume and identity on the trusted development host. Prove local container failure first, then the required DSR-4.3 portable host/disk-loss and live-partition cases. Use local VMs where isolation tests require them. The selected AWS S3/Entity/EC2 profile retains separate physical/security/model qualifications. LocalStack is an alternative, not the default. Apply common domain cases to both profiles and retain provider-specific cases; a local PASS cannot retire A-17/A-27/A-38/A-48 or prove AWS semantics.
+
+Future microVM/confidential providers, alternate stores/SQL authority, managed reattachment, transport/service delivery, encryption backends, complete response escrow and regional disaster recovery have explicit gates in the canonical opportunity table. Selected native projection, restricted Code Mode/harness and positive child/parallel requirements retain their existing mandatory qualification scope. The approved hosted API service and its additive SDK use the same interfaces; actual license and encryption policies remain admission decisions.
+
+The operator selected the portable rebaseline and full B-C documentation scope on 2026-10-11. Existing ticket owners contain all implementation and qualification requirements; no new preliminary phase is introduced. The project maintainer holds the approved deployment/storage, Security, integration, finite rig and component maintenance responsibilities. Exact remaining execution configuration and component/license clearance remain unresolved. Six BD rows remain Open while their applicable details are unresolved; no checker inventory transition is implied.
+
+The [maintained context processing research](proposals/distributed-recovery/2026-10-08/context-execution-research.md#recommendation-and-owner-impact) compares artifact reuse, harness limits, license routes and unexecuted qualifications. The selected B-C processing, native projection, restricted Code Mode and positive child/parallel requirements remain required at their existing gates. Independent portable work can proceed while their admission decisions are unresolved. [The documentation execution ledger](proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md#documentation-ledger-class-a-preparation) separates research/navigation edits from selected protocol and optional integration changes; it grants no implementation or experiment approval.
+
 Resolve the public technical decisions in [deployment prerequisites](work-items.md#deployment-prerequisites): supported storage and volume semantics, effect isolation, gateway responsibilities, reset and uncertainty handling, retention, Search Attributes and deployment order. Record model test prerequisites separately from credentials. Do not publish credential values or private authorization records.
 
 Offline construction can continue only within its existing bounded scope. Paid calls remain disabled until the real model test requirements are satisfied. No documentation change authorizes external contact, dependency promotion or a new integration.
@@ -160,13 +176,13 @@ The specification owns these contracts. This table mirrors its current statuses 
 
 ### Effects and prepared workspace
 
-[DSR-0.6 preparation](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md) is the proposed volume/isolation decision basis. Its applicable choices and named ownership remain pending; DSR-1.9 is already complete. It neither adopts the conditional distributed protocol nor authorizes this milestone.
+[DSR-0.6](tickets/phase-0.md#dsr-06-decide-the-workspace-volume-class-and-the-effect-isolation-level) records the approved S3/Entity/EC2 portable documentation route and full Context Mode integration requirements. The current configuration records approved owners, local deployment/API/runtime choices, finite retention and intended-use assessment; build and runtime qualification remain prerequisites; DSR-1.9 is complete and DSR-2.1 remains blocked. This rebaseline authorizes no implementation or experiment.
 
 
 
 After the engine exit gate, adoption decision, volume and isolation decisions, complete [prepared workspace and effect identity](work-items.md#prepared-workspace-and-effect-identity), [claimed Bash execution](work-items.md#claimed-bash-execution), [ordered outcomes and refusals](work-items.md#ordered-outcomes-and-refusals), [repeatable file execution](work-items.md#repeatable-file-execution), [tool behavior fidelity](work-items.md#tool-behavior-fidelity), and [process and payload bounds](work-items.md#process-and-payload-bounds).
 
-The current proposal creates a lineage scoped run directory and a Worker owned claims directory outside the effect writable tree. It copies the validated package through a temporary path, renames the finished copy, hashes it and records a manifest generation. Carry package, policy and engine versions and stable pending effect identity. Never infer file restoration from a restored transcript.
+Prepare validates and materializes the exact accepted S3 conversation/workspace pair, preserving package/native metadata, original pending identity and protected local guards. The independently protected Entity owns nonrepeatable dispatch; local claims and generation are defense rather than restore authority. Receipt/schema and upstream interface agreement precede construction. DSR-2.1/2.3 additionally bind full artifacts and exact accepted projection, with lost publication parking before continuation.
 
 Claimed Bash uses one attempt plus both key and ordinal claim guards before spawning. A missing claim directory or arbitrary I/O failure is not safe evidence that an effect never ran. The result mapping distinguishes safe pre execution refusals from tool failures and uncertainty. Enforce the stop before a next segment immediately, not only after signed recovery is implemented.
 
@@ -188,13 +204,15 @@ Exit gate: questions and approvals survive Worker loss and repeated handovers, e
 
 Complete [effect isolation](work-items.md#effect-isolation), [workspace lifecycle](work-items.md#workspace-lifecycle), [replacement Worker filesystem proof](work-items.md#replacement-worker-filesystem-proof), and [runtime measurements](work-items.md#runtime-measurements).
 
-Protect the package, settings, claims and Worker environment from the effect identity. Contain descendants or name the exact residual. A replacement Worker restores generated files, package, manifest and protected claims independently of conversation state and Workflow decisions. Test real cross container volume semantics, including concurrent exclusive create, or state an explicit untested deployment limit.
+DSR-4.1 qualifies the dedicated guest, credential/socket/authority denial and whole descendant containment. DSR-4.3 separately proves surviving-host replacement, exact accepted-pair restore on H2 without H1 disk access and live partition denial until external exact-incarnation termination. Missing accepted bytes are durability FAIL; unknown effects park. Shared-filesystem tests remain a comparison route and cannot substitute for these selected proofs.
 
-The janitor checks Temporal status and run identity, preserves live idle/parked runs, fails safe when status is unavailable, and retains claims through namespace retention. Manifest generation detects restore before the last prepare; it does not establish arbitrary mid run snapshot rollback detection. Keep that limitation visible.
+DSR-4.2 preserves referenced objects, projections, keys and independent authority through all supported recovery windows. Routine cleanup refuses while required result/postimage sealing or publication is unresolved and bytes remain sole-readable locally. Index cleanup cannot remove authoritative artifacts. Generation alone does not establish freshness; urgent containment and actual host loss preserve explicit park/data-loss outcomes.
 
 Exit gate: supported filesystem recovery and isolation are proved; any untested environment remains labeled and cannot become a guarantee by wording alone. Record event loop lag, process containment and real model step cost under a stated sample and budget.
 
 ### Hardening and reusable Workflow acceptance
+
+Selected Context Mode conformance remains under DSR-5.4/5.6: exact raw/accepted bytes and scoped authorization survive lost ACK, index deletion/rebuild and replacement. Bind exact component, dependency, processor/schema and emitted native runtime identities; historical loading FAIL and original pending PASS remain distinct. All new Q-1 through Q-15 qualifications are unexecuted recipes, not another completed milestone.
 
 Complete [deployment versioning](work-items.md#deployment-versioning), [encrypted payloads](work-items.md#encrypted-payloads), [approval load](work-items.md#approval-load), [session storage conformance](work-items.md#session-storage-conformance), [patch retirement](work-items.md#patch-retirement), [engine promotion](work-items.md#engine-promotion), [shutdown and operational metrics](work-items.md#shutdown-and-operational-metrics), and [application Workflow acceptance](work-items.md#application-workflow-acceptance).
 
@@ -216,6 +234,8 @@ The core completion boundary is the evidenced durable skill integration, includi
 
 ### Upstream and harness adapter
 
+The full integration documentation scope is selected now. DSR-7.2/7.3 retain their upstream/post-PASS dependencies and own restricted Code Mode runner/VFS/tool/event contracts plus one ordinal/key owner. DSR-7.4 owns positive native child/parallel identity, partial failure, conflict and descendant qualification. Native child denial remains active until that proof and boundary revision pass; serial denial tests cannot complete it.
+
 After final core verification, complete [upstream submission](work-items.md#upstream-submission) under repository conventions. Keep the API additive, verify every reviewed commit using the target CI commands and read CI for the exact pushed revision. Submission is not authorized by this plan.
 
 After upstream landing, resolve [harness effect identity](work-items.md#harness-effect-identity) and prove [harness adapter](work-items.md#harness-adapter) separately. Use the harness tool call identity, approval Updates and event vocabulary. Retain the uncertainty park rule. Document that engine reads bypass the harness effect policy. The adapter is optional; rollback removes its import, not the core safety contract.
@@ -223,3 +243,5 @@ After upstream landing, resolve [harness effect identity](work-items.md#harness-
 ## Evidence maintenance
 
 For every stage exit, update [specification](spec.md), this plan, [work items](work-items.md) and [evidence](evidence.md) together. Record exact versions, reproducible commands, full results and declared environment limits. Never mark a requirement complete because a related source exists, a candidate was rejected, or a deferred feature was removed from scope. New integration selection requires an explicit criteria disposition before implementation.
+
+Current admission update (2026-10-14): [the approved local configuration](proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) owns the container-first profile, role holders, exact pins, certificate/key/reader policy, intended-use and source/API selections, finite limits and later qualification gates. Preserve the canonical typed adapter contracts and all selected B-C requirements. DSR-0.6 closure requires the complete confirmed decision record and verification; DSR-2.1 remains blocked while other prerequisites are incomplete.

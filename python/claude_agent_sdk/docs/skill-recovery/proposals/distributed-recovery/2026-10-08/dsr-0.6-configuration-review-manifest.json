@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "verdict": "CONDITIONAL",
+  "target_identities": [
+    "design-base baseline 4553c340ed4ba8477de09af4888bd00008db8e41 plus preserved pending planning edits",
+    "dsr-0.6-configuration.md SHA256 50f1cc273eb3ac182a8526c379529679437bc7260369ec0f926f01234d70b2f4"
+  ],
+  "pass": { "mode": "full" },
+  "reviewers": [
+    {
+      "reviewer": "temporal-design-review",
+      "applicability": "applicable",
+      "applicability_basis": "Independent effect authority, Activity uncertainty and storage/Worker recovery",
+      "outcome": "applied",
+      "discovered_as": "temporal-workflow-design-critic",
+      "invoked_by": "integration_contract_review",
+      "finding_refs": ["CK1", "CK2", "CK3", "CK4"]
+    },
+    {
+      "reviewer": "temporal-docs-grounding",
+      "applicability": "applicable",
+      "applicability_basis": "Entity state/Continue-As-New and cancellation behavior",
+      "outcome": "applied",
+      "call_count": 3,
+      "roles": ["lead", "integration_contract_review", "integration_adversarial_review"]
+    },
+    {
+      "reviewer": "pattern-precedent",
+      "applicability": "applicable",
+      "applicability_basis": "Independent Entity scheduling composed with immutable native checkpoints and provider termination",
+      "outcome": "applied",
+      "invoked_by": "integration_contract_review",
+      "classifications": [
+        {
+          "mechanism": "Protected Entity owns scheduling and retained application dedup",
+          "classification": "partial",
+          "source": "https://docs.temporal.io/design-patterns/entity-workflow#implementation"
+        },
+        {
+          "mechanism": "Exact native conversation/workspace receipt plus independently terminated EC2 recovery",
+          "classification": "none_found",
+          "source": "https://docs.temporal.io/activity-execution#cancellation"
+        }
+      ]
+    },
+    {
+      "reviewer": "temporal-developer",
+      "applicability": "applicable",
+      "applicability_basis": "Deterministic orchestration versus external publication and process inspection",
+      "outcome": "applied",
+      "discovered_as": "temporal:temporal-developer",
+      "invoked_by": "lead",
+      "finding_refs": ["CK2"]
+    }
+  ]
+}

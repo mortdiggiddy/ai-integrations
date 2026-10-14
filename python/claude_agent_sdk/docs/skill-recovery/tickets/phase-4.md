@@ -4,6 +4,10 @@
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Apply the [canonical policy/execution interfaces](../spec.md#selected-component-boundaries-2026-10-12): deny worker access to controller, authority, keys, unauthorized store readers and unapproved egress. Local containers/VMs and selected EC2 remain separately qualified profiles. Future microVM/confidential admission requires explicit threat boundary, measurement/freshness/key release/revocation and external-model disclosure policy; ordinary isolation or attestation alone does not prove confidentiality, rollback safety or old-execution death.
+
+Selected isolation qualification (2026-10-11): dedicated Linux EC2 guest with unprivileged container/cgroup execution and external controller is the selected target. Qualify package/claim/authority, credentials/metadata-service/runtime-socket denial, permitted egress and detached descendants. Q-1/Q-7 also deny processor live writes/network/startup telemetry/healing and require no forbidden outbound requests. Trusted-host protection does not establish confidential execution; exact policies/pins and named Security/deployment holders remain OPEN.
+
 - Type: Build
 - Priority: Medium
 - Estimate: 5 points (confidence 50 percent)
@@ -56,6 +60,9 @@ The design cannot claim confinement until a test shows the decided level closes 
 - [ ] The effect identity cannot create, change or delete a claim file or the claims directory, because both live outside `work/`. Proof: an integration test for a claimed Bash effect that attempts each action.
 - [ ] The specification text and the limits text state the decided level, its security owner role and its residuals, and no confinement claim remains void. Proof: the reviewed diff recorded in DSR-4.5.
 
+
+- [ ] Q-1/Q-7 deny processor startup/executor/telemetry/healing surfaces and live workspace/network access; confined SDK/effect descendants cannot escape the exact guest. Protected provider/Temporal/key credentials and sockets are inaccessible to effects. Proof: synthetic marker/egress/descendant negatives and selected-instance terminal witness; no credential inspection.
+
 #### Dependencies and blockers
 
 - Blocked by DSR-0.6, which decides the level and the security owner.
@@ -82,6 +89,10 @@ The design cannot claim confinement until a test shows the decided level closes 
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Use the [canonical checkpoint/key retention interface](../spec.md#selected-component-boundaries-2026-10-12) for version-specific authorized cleanup. Preserve accepted objects, projections, keys and independent authority; unknown retention refuses deletion. Disposable worker/index cleanup cannot delete the sole readable accepted copy or revoke unresolved authority. Test stale references/configuration and denied cross-resource deletion for each admitted backend.
+
+Selected preservation/cleanup requirement (2026-10-11): Q-13 refuses routine destruction while required result/postimage/projection remains sole-readable locally or publication is unresolved. Retain referenced artifacts, accepted projection, exact S3 versions, keys, local claims and independent authority through every supported recovery window; indexes are disposable cache. Urgent containment or genuine host loss records park/data loss. Namespace expiry, not-found, lease or generation alone never authorizes deletion/recreation.
+
 - Type: Build
 - Priority: Medium
 - Estimate: 5 points (confidence 55 percent)
@@ -96,9 +107,9 @@ Status: OPEN
 
 #### Context
 
-The specification describes a janitor that runs outside the Workflow. It removes `work/` and `.claude/` of a run only when Temporal reports the Workflow closed or not found, after a grace period. It uses no lease file and no modification time, because an idle human wait or a park runs no segment and leaves the directory untouched for days.
+The external janitor requires established namespace/lineage identity, safe lifecycle and complete retained references before routine deletion. Closure/not-found and grace alone are insufficient. It refuses unresolved publication or deletion of sole-readable required result/postimage/projection. Live, idle and parked runs remain preserved; no lease or modification time establishes authority.
 
-The janitor removes the claims directory only after the namespace retention ends, because a reset can reopen a closed run. The manifest holds the namespace, the Workflow Id, the lineage id, the start time and the package hash. The janitor requires the lineage id of a described run to match the manifest.
+Retain local guards, accepted object versions, keys and independent authority across the complete approved recovery/reset/replay horizon. Namespace retention alone is insufficient. Validate namespace, Workflow/lineage identity, accepted pair and live references; unknown identity or references refuse deletion.
 
 The manifest `generation` counts prepare and `reprepare` calls, and the Workflow stores it as `volume_generation`. Approved Option R drops the claims high water counter. Generation checks can detect a snapshot older than a recorded prepare, but do not prove detection of a mid run snapshot that removes later claims or file edits.
 
@@ -108,35 +119,38 @@ A janitor that deletes the files of a live run, or a restored volume that diverg
 
 #### Scope
 
-- The janitor, with the status based rule, the grace period, the lineage match and the retention rule for claims.
+- The janitor, with identity/status/lifecycle checks, sole-readable publication refusal and reference/key/authority retention across the complete approved horizon.
 - The manifest check on every segment and the `reprepare` step, to the extent that DSR-2.1 did not already build them. If DSR-2.1 built part of this, this ticket proves it and builds the remainder.
 - Manifest generation checks, the operator visible refusal and park that follow a stale value, and a defined baseline after a legitimate `reprepare`.
 
 #### Out of scope
 
-- Behavior on a network file system. DSR-4.3 owns it.
+- Physical accepted-pair restore and exact-incarnation termination qualification. DSR-4.3 owns it.
 - Isolation of effects. DSR-4.1 owns it.
 - The choice of the retention value. The deployment owner sets it (OI-10).
 - Complete mid run snapshot detection for claim files or Write and Edit file state. Approved Option R retains manifest generation checks, not the claims high water mechanism.
 
 #### Acceptance criteria
 
-- [ ] The janitor removes `work/` and `.claude/` of a run whose Workflow was terminated, timed out or cancelled, after the grace period. Proof: a test against a dev server with a short grace period.
+- [ ] Closed-run cleanup after the grace period additionally requires sole-readable publication, reference-retention and exact-incarnation lifecycle checks; Workflow closure alone is insufficient. Proof: dev-server status and unresolved-publication/old-execution negatives.
 - [ ] The janitor never removes the directory of a live idle run or of a live parked run that waits for days. Proof: a test that leaves a run idle past the grace period with an old modification time and shows the directory intact.
 - [ ] The janitor removes nothing when Temporal is unreachable or returns any answer other than closed or not found. Proof: a test with a failing status call.
-- [ ] The janitor keeps the claims directory until the namespace retention ends and then removes it. Proof: a test with a short retention value, and the written statement of how the janitor reads the value.
+- [ ] Cleanup retains claims, objects, keys and independent authority through the complete approved recovery/reset/replay horizon and refuses unknown or unresolved references. Namespace expiry alone does not authorize removal. Proof: finite-policy and live/reference/expiry negatives.
 - [ ] A run whose Workflow Id was reused keeps its own directory. A described run whose lineage id differs from the manifest is not treated as the same run. Proof: a test for each case.
 - [ ] A janitor pointed at a wrong namespace never deletes the directory of a live run. Proof: a test where the wrong namespace reports not found for a live run and the directory remains.
-- [ ] A segment fails when the manifest is missing, and `reprepare` repairs the directory so the next segment starts. Proof: a test that shows the failure, the repair and the next segment.
+- [ ] A missing manifest refuses; reprepare resumes only after validating the exact accepted pair, intact independent authority and required old-incarnation cleanup. Missing accepted bytes fail rather than becoming new state. Proof: authorized restoration positive and missing/mismatched-state negatives.
 - [ ] A volume restored from a snapshot taken before the last prepare reports a lower `volume_generation`. The run parks with the cause named and the model receives no message about it. Proof: a test with a restored volume.
 - [ ] After a legitimate `reprepare`, the next claimed effect is not refused as stale. The specification states how `reprepare` and `resume` set the stored `volume_generation`, and a test shows the next effect running. Proof: the specification text and the test output.
 - [ ] The limits text states that restore detection is best effort and names the file state that it does not cover. Proof: the reviewed text recorded in DSR-4.5.
+
+
+- [ ] Q-13 refuses routine cleanup of sole-readable required result/postimage/projection and preserves live/reset/replay artifacts, keys and authority. Index deletion is safe only when authenticated full artifacts and exact accepted projection survive. Proof: sealing/upload failure, unknown status/retention, restored-cache and reference reachability negatives.
 
 #### Dependencies and blockers
 
 - Blocked by DSR-3.7, the Phase 3 exit review.
 - Blocks DSR-4.5.
-- Related to DSR-4.3, which tests the same volume on two hosts.
+- Related to DSR-4.3, which qualifies accepted-pair restoration and independent execution termination.
 - DSR-0.2 retains both claim guards and manifest generation but drops claims high water detection. Mid run snapshot restore remains an explicit limitation, not a verified guarantee.
 
 #### Source evidence
@@ -156,9 +170,13 @@ A janitor that deletes the files of a live run, or a restored volume that diverg
 - Plugin engineer: the claims high water feature is deferred. State clearly that manifest generation alone does not detect every mid run snapshot restore.
 - The estimate is 5 points. Split the janitor from the generation checks in review if the rebaseline design grows.
 
-### DSR-4.3 Prove shared volume behavior on two containers over a network file system
+### DSR-4.3 Prove accepted checkpoint restoration and independent execution termination
 
 Status: OPEN
+
+Interface requirements (2026-10-12): Run common [canonical lifecycle/checkpoint cases](../spec.md#selected-component-boundaries-2026-10-12) plus actual AWS storage/host-loss/partition/termination proof. Moto and local container/VM tests provide only their declared development evidence. Managed reattachment, microVM clones, confidential providers and alternate stores need independent publication, freshness and terminal-incarnation proof before claiming parity.
+
+Selected portable proof (2026-10-11): the operator approved the S3/Entity/EC2 protocol rebaseline. This ticket now owns Q-10 surviving-host control, Q-11 accepted-pair H2 restore without H1 disk and Q-12 live-partition denial until independently confirmed exact-incarnation termination. Each is a separate physical proof; mocks, directory appearance and safety parking do not establish accepted-data durability.
 
 - Type: Verification
 - Priority: Medium
@@ -174,9 +192,9 @@ Status: OPEN
 
 #### Context
 
-Version 1 needs one shared volume that every segment and effect Worker mounts at the same absolute path. The volume must give POSIX semantics, close to open consistency and one user and group mapping on every host. Cross host behavior is untested, and the specification calls it a limit until a two container rig exists.
+The selected contract requires exact accepted S3 pair restoration on a compatible EC2 guest after independent old-incarnation termination. Local POSIX and protected claims remain defense. Surviving-host replacement, original-disk-unavailable restore and live control partition are separate qualification cases; none is demonstrated by documentation.
 
-DSR-0.6 decides the volume class and whether the rig is built or the untested limit is declared. The claim file guard uses an exclusive create (`O_CREAT | O_EXCL | O_NOFOLLOW`). The first design rejected a ledger on the volume because it needed this same property.
+DSR-0.6 owns exact configuration, responsible holders and qualification prerequisites for the approved target. Protected independent Entity authority must survive outer reset/restored preclaim files. The retained local exclusive-create guard is additional defense; declaring an untested limit cannot complete portable durability acceptance.
 
 **Complete Issue 31 disposition (2026-10-08)**
 
@@ -184,54 +202,55 @@ October 8 full issue sweep: [I31-H4/H5](../proposals/distributed-recovery/2026-1
 
 #### Problem
 
-If an exclusive create is not atomic and visible across hosts, two hosts can both create a claim file and both spawn the command. The at most one spawn guarantee then fails without any error. Stale or missing files on a second host also cause divergent steps.
+Mixed or missing accepted state can lose acknowledged work. Restored or regressed authority can repeat Bash, and premature replacement can race a still-live old execution. Exact accepted-pair validation, independent admission and terminal-incarnation proof resolve separate hazards.
 
 #### Scope
 
-- A rig of two containers that run the one image of the plugin, each with the segment and effect roles, on a real network file system of the class that DSR-0.6 records.
-- Tests for tree visibility, close to open behavior, user and group mapping, concurrent exclusive create and the per run exclusive lock.
-- A recorded pass or fail result for each test.
+- Prove Q-10 surviving-host replacement as a control, preserving exact native files/records and whole descendant cleanup.
+- Prove Q-11 H2 restore of the accepted conversation/workspace/result pair with all H1 disk access denied, exact object versions/digests and native metadata.
+- Prove Q-12 live control partition with old effect egress still active: H2 dispatch is denied until an independent controller reconciles exact terminal incarnation.
+- Test conditional publication/head ACK loss, stale/mixed pairs, preclaim restoration, independent authority loss and unresolved postimage cleanup with the existing owners.
+- Record independently witnessed physical counters and each case's failure boundary. Mocks do not qualify provider/storage semantics.
 
 #### Out of scope
 
-- Production tuning or performance of the file system.
-- The choice of the volume class. DSR-0.6 owns it.
-- Janitor and snapshot behavior. DSR-4.2 owns it.
-- A microVM or object storage strategy.
+- Infrastructure execution without separate exact configuration, named owners and finite allowance.
+- Production density, region-loss guarantees and live-memory restoration.
+- Treating another provider, shared filesystem or volume detach as equivalent proof.
+- Completing native child/parallel recovery from serial tests; DSR-7.4 owns the positive requirement.
 
 #### Acceptance criteria
 
-- [ ] A tree written by a prepare Activity on container A is visible with a matching package hash to a segment that starts afterward on container B. Proof: a rig test that compares the hash on both containers.
-- [ ] A file written by an effect on container A in `work/` is visible to a Read call in the engine on container B after the effect reports. Proof: a rig test that records the read result.
-- [ ] After container A and its local session directory disappear, container B restores the generated files, package and manifest through the approved workspace preservation mechanism and restores conversation state separately. A surviving transcript alone does not satisfy this case. Proof: a replacement Worker test with file hashes, matching manifest, session checkpoint and recorded approval and outcome identity; missing or conflicting state refuses continuation. Any adopted native path includes the crash boundary from DSR-2.4.
-- [ ] Both containers map the same user and group to the same owner on every file in the tree. Proof: a rig test that lists numeric owners from both sides.
-- [ ] Two containers that issue an exclusive create for the same claim file name at the same time give exactly one success and one `EEXIST` result, repeated over a stated number of rounds. Proof: a rig test log with the round count and the result of each side.
-- [ ] A claim file created by container A is seen by container B at its next attempt, so container B refuses to spawn. Proof: a rig test that shows the refusal on container B.
-- [ ] The per run exclusive lock serializes two effects of one run that start on different containers, or the test records that lock semantics on this file system do not hold and names the consequence. Proof: a rig test result and its recorded interpretation.
-- [ ] A failed test records the contradiction, and a design change is recorded for the affected assumption. A proposal is to restrict claimed effects to one host. Proof: the recorded design change that DSR-4.5 reads.
-- [ ] If the rig cannot be built, the README limits text lists the untested cross host behavior, and the rows A-27 and A-48 keep a status that says the limit is declared. Proof: the limits text and the row status. DSR-6.1 and DSR-6.2 decide whether a declared limit settles the row.
+- [ ] Q-10 restores exact generated files, package, manifest, native pending/result records and approvals on a replacement after independently verified whole-execution cleanup. Proof: surviving-host hashes/identity and descendant witness.
+- [ ] Q-11 restores the exact accepted pair on H2 without any H1 disk access, preserving hidden files, deletions, executable bits and admitted link/ownership metadata. Missing acknowledged bytes is FAIL. Proof: independently witnessed restore and corrupted/missing/mixed-pair negatives.
+- [ ] Q-12 keeps old effect egress alive during control partition while readable S3 fails to admit H2. Lost termination reply reconciles account/region/instance/launch identity and authoritative terminated status before replacement. Proof: physical canary/effect counters and zero replacement before the witness.
+- [ ] Duplicate/lost publication and admission replies reconcile original identity/bytes; preclaim rollback, authority recreation/regression and changed ordinal cannot schedule another physical effect. Proof: independent counters and exact status/result or park.
+- [ ] Result/postimage/projection gaps and sole-readable cleanup failures park with no repeated effect or next model segment. Proof: publication-fault and cleanup-refusal records under DSR-2.3/4.2.
+- [ ] Accepted native metadata and exact raw/accepted result identity survive replacement; unsupported paths/devices/metadata refuse before SDK startup. Proof: DSR-2.4/2.6 conformance vectors on the selected stack.
+- [ ] An absent/stale terminal identity, timeout, cancellation, shutting-down or API disappearance never admits replacement. Earlier remote requests remain exact-outcome reconciliation or park. Proof: each negative and late-request witness.
+- [ ] Every failed/unexecuted case retains its disposition and assumption gate; a safety park or declared limit is not portable durability PASS. Proof: DSR-4.5 reviewed evidence and unchanged historical failures.
 
 #### Dependencies and blockers
 
 - Blocked by DSR-3.7, the Phase 3 exit review.
 - Blocks DSR-4.5.
-- Related to DSR-4.1 and DSR-4.2, which share the volume layout.
-- DSR-0.2 retains claimed Bash and both claim guards in approved Option R. The claim file criteria remain required; DSR-0.6 still decides the volume class and rig availability.
+- Related to DSR-4.1 and DSR-4.2, which own isolation and retained state lifecycle.
+- DSR-0.2 retains claimed Bash and both local guards in approved Option R. DSR-0.6 prerequisites remain open; selected independent authority and physical qualification supplement those guards without closing acceptance.
 
 #### Source evidence
 
-- Specification, INV-2, *Workspace* paragraph, for the volume requirements and the untested limit.
-- Specification, INV-1, *Claimed effect guard* paragraph, for the exclusive create of the claim files.
-- Specification, Alternatives considered, A10, for the rejected ledger.
+- Canonical specification, *Package and filesystem boundary*, for exact accepted-pair validation and cold restoration.
+- Canonical specification, *Effect identity, execution and outcomes* and *Timeouts and process lifetime*, for independent admission, retained local guards and exact-incarnation termination.
+- Historical specification alternative A10 records the rejected volume ledger; it does not supply selected portable authority.
 - Assumptions A-27 and A-48, and open issue OI-2.
 - Review of revision 5, finding R5-08, for the atomicity assumption.
 - SDK sessions do not preserve the filesystem: https://code.claude.com/docs/en/agent-sdk/sessions
 
 #### Open questions
 
-- Operator: which network file system class does DSR-0.6 name, and who provides the rig hosts?
-- Operator: does a declared untested limit settle A-27 and A-48 for PASS? The ticket set index defines a settled row as verified at source or changed by a recorded design change. A declared limit meets neither text. DSR-6.1 and DSR-6.2 need an answer.
-- Plugin engineer: Option R drops claims high water. This volume rig must still prove both retained claim guards and must not claim complete snapshot restore detection.
+- Deployment/storage and Security owners: record exact S3 policy/key/region and EC2/AMI/kernel/container/controller identities and finite rig allowance before execution.
+- Integration owner: pin accepted receipt schema and native adapter/API revision before proof.
+- Retention owner: approve authority/object/key survival and administration denial; no numeric policy is inferred.
 
 ### DSR-4.4 Measure event loop lag, step cost and process containment
 
@@ -372,3 +391,5 @@ Without a recorded review, evidence stays in test output and the specification r
 #### Open questions
 
 - Operator: who confirms a redesign decision if the Plugin engineer and the Security owner disagree? The pack names no escalation role.
+
+Current adapter admission: [the typed contracts](../spec.md#project-owned-adapter-record-and-operation-contracts) and [approved local configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) own the selected interfaces, container-first sequence, PKI/reader/key policy, component admission and qualification limits. The decision ticket owns its status. Physical and component qualifications remain unexecuted; DSR-2.1 remains blocked while other prerequisites are incomplete.

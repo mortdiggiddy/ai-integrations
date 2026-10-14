@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "verdict": "CONDITIONAL",
+  "target_identities": [
+    "design-base baseline 4553c340ed4ba8477de09af4888bd00008db8e41",
+    "DSR-0.6 preparation SHA256 1a5ef407f5150474da47d4bb19de4b7f17463d3236b830e7036d48df9dca7f1a",
+    "Confirmed portable goal; candidate artifacts unchanged; no implementation"
+  ],
+  "pass": {
+    "mode": "full"
+  },
+  "reviewers": [
+    {
+      "reviewer": "temporal-design-review",
+      "applicability": "applicable",
+      "applicability_basis": "Storage, Activity failure and Worker replacement in portable recovery",
+      "outcome": "applied",
+      "discovered_as": "temporal-workflow-design-critic",
+      "invoked_by": "integration_contract_review",
+      "finding_refs": [
+        "PT1",
+        "PT2",
+        "PT3"
+      ]
+    },
+    {
+      "reviewer": "temporal-docs-grounding",
+      "applicability": "applicable",
+      "applicability_basis": "External Storage and Activity cancellation limits",
+      "outcome": "applied",
+      "call_count": 1,
+      "roles": [
+        "lead"
+      ]
+    },
+    {
+      "reviewer": "pattern-precedent",
+      "applicability": "applicable",
+      "applicability_basis": "Immutable workspace and independent effect authority compose existing primitives",
+      "outcome": "applied",
+      "invoked_by": "integration_contract_review",
+      "classifications": [
+        {
+          "mechanism": "Accepted head and immutable exact conversation/workspace receipts",
+          "classification": "partial",
+          "source": "https://docs.temporal.io/external-storage"
+        },
+        {
+          "mechanism": "Independent Entity Workflow effect admission",
+          "classification": "partial",
+          "source": "https://docs.temporal.io/design-patterns/entity-workflow#implementation"
+        },
+        {
+          "mechanism": "Complete original pending recovery with physical host termination",
+          "classification": "none_found",
+          "source": "https://docs.temporal.io/activity-execution#cancellation"
+        }
+      ]
+    },
+    {
+      "reviewer": "temporal-developer",
+      "applicability": "applicable",
+      "applicability_basis": "Existing SDK boundary guidance reused; no SDK API change or implementation in this adjustment",
+      "outcome": "applied",
+      "discovered_as": "temporal:temporal-developer",
+      "invoked_by": "lead",
+      "finding_refs": ["PT2"]
+    }
+  ]
+}

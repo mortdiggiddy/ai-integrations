@@ -4,6 +4,8 @@
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Preserve the [canonical embeddable SDK/service boundary](../spec.md#deployment-profiles-and-future-opportunities) in any upstream proposal. SDK distribution, private use and hosted commercial delivery remain owner/license choices. No service wrapper may create a second dispatch/result authority or embed provider SDK logic in the core. Record applicable Context Mode reuse/license obligations before distribution.
+
 - Type: Build
 - Priority: Low
 - Estimate: 4 points (confidence 50 percent)
@@ -79,6 +81,10 @@ If a commit carries an internal identifier or fails the target CI, the target ju
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Map the [canonical component interfaces](../spec.md#selected-component-boundaries-2026-10-12) into the receiving harness without moving identity/outcome authority or adding another agent loop. Name engine, runner/VFS/tool/event, transport, policy, store and lifecycle seams; qualify restricted Code Mode and exact projection. Future microVM/confidential/service providers share semantic contracts, not assumed compatibility. Retain post-PASS/upstream/glue prerequisites.
+
+Selected full integration documentation (2026-10-11): restricted Code Mode/harness qualification is included now, with runner, VFS, registered host tool, approval and event dependencies explicitly bound. The mandatory Claude SDK loop remains; no general package execution is admitted. This ticket retains post-PASS/upstream/glue dependencies. A required wider harness change needs a separately explicit boundary revision; selection does not authorize it silently.
+
 - Type: Build
 - Priority: Low
 - Estimate: 5 points (confidence 40 percent)
@@ -130,6 +136,9 @@ If the harness and the plugin both compute keys, or neither does, keys collide o
 - [ ] An uncertain claimed Bash outcome appears as an operator visible park, not a plain failure or model result, and the harness starts no next model segment. Proof: a claimed effect Worker loss test. Exceptional Edit uncertainty preserves its distinct retained mapping.
 - [ ] The glue module merges only after the DSR-7.1 pull requests are accepted under the harness entry gate. Proof: the pull request state recorded before the merge.
 
+
+- [ ] Selected restricted Code Mode runner/VFS/registered tool/events preserve host-call original identity, approval and exact result/projection. Pure computation is not effect admission; every admitted host effect has its explicit governed boundary. Proof: pinned adapter contract and positive/negative harness tests after existing gates; broader harness modifications need separate boundary approval.
+
 #### Dependencies and blockers
 
 - Blocked by DSR-6.4, the PASS verdict.
@@ -154,6 +163,10 @@ If the harness and the plugin both compute keys, or neither does, keys collide o
 ### DSR-7.3 Name the owner of the effect ordinal and key for the harness port
 
 Status: OPEN
+
+Interface requirements (2026-10-12): Keep the single effect ordinal/key owner across all [canonical adapter boundaries](../spec.md#selected-component-boundaries-2026-10-12). Transport IDs, provider instance IDs, processor IDs and agent IDs cannot replace the retained original call identity. Require explicit receiving-harness ownership agreement before binding; changed adapters never mint a new identity for uncertain execution.
+
+Selected identity requirement (2026-10-11): one integration owner must assign runner/VFS/host-call correlation and ordinal/key construction/storage under the selected restricted Code Mode seam. Bind original native identity and authority receipt without recomputation or a second identity owner. Actual holder and exact harness interface remain OPEN; no copied component owns dispatch by implication.
 
 - Type: Decision
 - Priority: Low
@@ -195,6 +208,9 @@ Two owners give colliding or unstable keys. No owner gives no key. The port cann
 - [ ] The row for A-36 records the decision and its date. Proof: the edited row.
 - [ ] If no owner agrees, the record declares the port excluded, and DSR-7.2 is marked superseded. Proof: the record and the status change.
 
+
+- [ ] The selected component contracts name one ordinal/key owner and exact runner/VFS/host-event correlation, stable across retry and handover. Proof: confirmed owner/interface record and conflicting-owner/changed-call negatives under DSR-7.2.
+
 #### Dependencies and blockers
 
 - Blocks DSR-7.2.
@@ -215,6 +231,10 @@ Two owners give colliding or unstable keys. No owner gives no key. The port cann
 ### DSR-7.4 Select a testable durable child and parallel tool design
 
 Status: OPEN (2026-10-08; prospective extension decision, no runtime implementation approved)
+
+Interface requirements (2026-10-12): Selected positive child/parallel requirements remain mandatory design/proof work under the [canonical opportunity map](../spec.md#deployment-profiles-and-future-opportunities). Reconcile per-child/batch identity, approval, workspace conflict, partial completion and whole-tree lifecycle with engine and execution adapter capabilities. Current denial stays enforced; mode/provider flexibility cannot imply unsupported child recovery.
+
+Selected positive requirements (2026-10-11): full B-C documentation scope includes positive child and parallel recovery qualification now. Context Mode adapters/diagnostics and restricted Code Mode are reuse references, not a child recovery API. Preserve the existing child/batch criterion matrices, authority/result/postimage/projection association, partial failure/conflict and descendant proof. Current main-agent-only capability gap remains OPEN; serial denial is not completion. DSR-1.5 and current child denial remain intact until positive proof and explicit runtime boundary revision.
 
 - Type: Decision
 - Priority: Medium
@@ -256,6 +276,9 @@ The selected experimental recovery API is main-agent-only. Reusing it for active
 - [ ] Both matrices include physical effect counters, after-effect result upload failure, rollback-independent intent, ambiguity parking, exact accepted workspace/trajectory, lost cleanup receipt and unchanged serial behavior with extension disabled. Proof: named fault oracles and baseline compatibility tests prepared for the selected delivery scope.
 - [ ] The record preserves canonical v1 and all completed dispositions until adoption. It names separately required source acquisition, installation, infrastructure and live execution approvals, if applicable. Proof: the scope and authorization boundary in the record.
 
+
+- [ ] Context Mode reuse never substitutes retrieval, summary or main-agent restoration for positive child/batch native recovery. Both existing matrices include exact raw/accepted per-call representations and missing-projection refusal where promised. Proof: qualified native child/parallel tests with physical counters and disabled-extension serial compatibility; all remain unexecuted.
+
 #### Dependencies and blockers
 
 - BD-6 adoption and selected source/runtime capability are required before prototype or delivery implementation.
@@ -275,3 +298,5 @@ The selected experimental recovery API is main-agent-only. Reusing it for active
 
 - Operator: which bounded extension prototype should BD-6 adopt, given the main-agent-only API and exact state/containment requirements?
 - Integration owner: what published child recovery API and batch conflict contract can deliver both outcomes with the existing controller and executor seam?
+
+Current adapter admission: [the typed contracts](../spec.md#project-owned-adapter-record-and-operation-contracts) and [approved local configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) own the selected interfaces, container-first sequence, PKI/reader/key policy, component admission and qualification limits. The decision ticket owns its status. Physical and component qualifications remain unexecuted; DSR-2.1 remains blocked while other prerequisites are incomplete.

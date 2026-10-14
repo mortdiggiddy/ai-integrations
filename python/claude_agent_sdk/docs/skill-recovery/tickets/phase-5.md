@@ -81,6 +81,8 @@ If the rollout order slips or an old version drains early, a pinned run can send
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Apply the [canonical key/codec boundary](../spec.md#selected-component-boundaries-2026-10-12), with credential/key resolution outside Workflow code and compatibility across retained key horizons. Keep transport TLS, backend SSE-S3/KMS and payload encryption distinct. Test configured codec/failure coverage and denied key access; never infer encrypted history from TLS or object-store encryption.
+
 - Type: Verification
 - Priority: Medium
 - Estimate: 2 points (confidence 70 percent)
@@ -144,6 +146,8 @@ If Update payloads bypass the codec, approval decisions, tokens and answers are 
 ### DSR-5.3 Prove approvals under subscriber load with live output on
 
 Status: OPEN
+
+Interface requirements (2026-10-12): Apply the [canonical endpoint/observation interface](../spec.md#selected-component-boundaries-2026-10-12): authenticated and authorized subscribers, bounded streams/backpressure and independent decision discovery. A future SSE/WebSocket binding needs its own disconnect/reconnect/load proof; an observation cannot advance accepted state or bypass approval. Remote service delivery remains unselected.
 
 - Type: Verification
 - Priority: Medium
@@ -209,6 +213,10 @@ An approval that fails under subscriber load stalls a run until the decision exp
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Qualify each admitted [checkpoint/session adapter](../spec.md#selected-component-boundaries-2026-10-12) against the same exact-version, native identity, conditional head, authorization and retention contract, with provider-specific ACK/loss/concurrency/key tests. Moto API coverage is not durable-store proof; SQL/S3-compatible alternatives require admission. Cross-resource denial and secret/configuration substitution must refuse.
+
+Selected storage/projection conformance (2026-10-11): Q-2/Q-3/Q-6 cover exact raw records and stored accepted projection, lost ACK, duplicate/conflicting UUID/head, corruption/missing accepted versions and cross-session authorization. Delete/rebuild the index on H2 and preserve accepted bytes unchanged. Artifact/key/authority retention and sole-readable cleanup are tested together; S3 is not itself a native SDK materializer.
+
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) records native tool recording into a session copy. Compare source-session immutability and exact pending/result records under replacement and lost acknowledgement. Recording into the wrong session can turn a deferred call into an interrupted call. Reported conversation recovery does not supply workspace restoration or local store conformance. Status and acceptance criteria are unchanged.
 
 - Type: Verification
@@ -256,6 +264,9 @@ If the store is not shared, a Worker that resumes a session cannot read it. If i
 - [ ] A store that drops a write makes the segment fail and retry inside the Schedule-To-Close bound, and no wrong checkpoint commits. Proof: a test with a fault injecting store.
 - [ ] The integration selected by DSR-0.12 restores its session and exact pending call on a replacement Worker without local disk from the first Worker. Lost, partial or mismatched stored state refuses continuation. Conversation conformance does not count as filesystem restoration or durable approval publication. Proof: store fault and replacement process tests, with DSR-4.3 linked for workspace recovery and the recorded workflow state checked independently.
 - [ ] The limits text states that the shipped store writes plain text and names the conformance suite as the production bar. Proof: the reviewed text recorded in DSR-5.9.
+
+
+- [ ] Q-2/Q-3/Q-6 verify authorized raw/accepted record restore, lost ACK reconciliation and cross-session denial; rebuilt index cannot change accepted projection. Accepted-data loss fails qualification. Proof: exact byte/hash/native identity comparisons on replacement and corruption/conflict negatives.
 
 #### Dependencies and blockers
 
@@ -348,6 +359,10 @@ If a marker is removed too early, a Query or a Reset of a closed run fails with 
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Bind admitted engine/mode/adapter/API/schema/configuration identities to the [canonical compatibility contract](../spec.md#selected-component-boundaries-2026-10-12). Test unsupported capability and required-hook loss, old accepted record/projection restoration and pinned lane compatibility. Preserve historical minimum/loading FAIL/DEFECT; no dependency promotion follows source inspection or documentation review.
+
+Selected promotion qualification (2026-10-11): Q-3/Q-5/Q-7 bind Context Mode component/dependency/processor/schema identities and actual SDK/CLI emitted contract, installed loading, required callback coverage and absence/unload refusal. Source declarations and live documentation do not set a compatible version floor. Preserve historical loading FAIL; promotion requires fresh native raw/accepted fidelity and replacement proof without repeating completed Phase 1 experiments.
+
 October 9 source reconciliation: [the maintained release-check comparison](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-release-check-reconciliation) pins the tested public fork, four successful plugin cells and separate reported version coverage. Review Windows HTTP refusal, stack-dependent nested-input tests and resume-prompt protection before promotion; platform assumptions can hide failures. The tooling failure cause remains attributed, PR 33 has an older head, and approved dependencies/runtime are unchanged. Status and acceptance criteria are unchanged.
 
 Approved budget separation checkpoint (2026-10-03): see [canonical pointer](../canonical-documents.md), *Approved experiment authorization separation*. Earlier budget gate wording in historical checkpoints is superseded for Phase 1 monitored experiments only. No live run is authorized and strict preventive budgeting remains required at DSR-5.8 final acceptance.
@@ -397,6 +412,9 @@ A newer engine can stop honoring `defer` or the synthetic result. Without a dail
 - [ ] The promotion step reads the latest job result, and a failing result blocks the promotion of a Deployment Version. Proof: a rehearsal that shows a blocked promotion and an allowed promotion.
 - [ ] A session written by the minimum engine resumes on a newer engine at a Continue-As-New boundary. The run continues, the transcript is intact, and tool results are retained. Proof: a test that records the `claude -v` output of both engines.
 - [ ] The row for A-01 records the daily job result on the newest engine as the M5 evidence. The row for A-22 records the resume test. Proof: the edited rows in DSR-5.9.
+
+
+- [ ] Q-3/Q-5/Q-7 qualify actual selected component/dependency/runtime/type identities, installed callback delivery and absence/unload/startup negatives before promotion. Proof: emitted contract and native differential/replacement records; documentation or historical unrelated PASS is insufficient.
 
 #### Dependencies and blockers
 
@@ -627,3 +645,5 @@ Phase 6 records the evidence for every row. If Phase 5 leaves rows with old stat
 #### Open questions
 
 - Plugin engineer: no Phase 5 ticket lists A-29 under Retires, although the plan assigns its M5 part to pinning the SDK version. This review records the pin as a stopgap. The lead should confirm the owner of that part.
+
+Current adapter admission: [the typed contracts](../spec.md#project-owned-adapter-record-and-operation-contracts) and [approved local configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) own the selected interfaces, container-first sequence, PKI/reader/key policy, component admission and qualification limits. The decision ticket owns its status. Physical and component qualifications remain unexecuted; DSR-2.1 remains blocked while other prerequisites are incomplete.

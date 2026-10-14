@@ -1,5 +1,31 @@
 # Recovery evidence and proof limits
 
+## Pluggable interface documentation selection (2026-10-12)
+
+The operator asked to lock the discussed component boundaries, development direction, selected technologies and future opportunities into all relevant maintained documentation. The [canonical interfaces](spec.md#selected-component-boundaries-2026-10-12) own the semantic contract; [profiles and opportunities](spec.md#deployment-profiles-and-future-opportunities) own the selected local development direction, retained AWS qualification target and extension gates. Plans, existing tickets, candidate four files and navigation mirror those owners. No implementation, installation, deployment, acceptance completion or runtime qualification follows.
+
+Read-only primary documentation supports the distinction between Moto API emulation and durable storage, LocalStack Docker-backed EC2 emulation, Firecracker snapshots and Nitro enclave network/storage limits. The canonical owner links those sources. Temporal Docs corroborated local development and the separation of deterministic Workflow logic, codecs, transport protection and explicit payload/failure encryption. Atlas query failed on an unresolved script merge marker; it supplied no new ecosystem evidence. These observations do not change historical source pins, add an engine capability or prove adapter parity. Exact dependency/license/configuration, key/retention/security and commercial delivery choices remain unresolved at their existing owners.
+
+## Context Mode documentation preparation (2026-10-11)
+
+[The maintained research comparison](proposals/distributed-recovery/2026-10-08/context-execution-research.md) owns the component, harness capability, license and unexecuted qualification findings. [The documentation handoff](proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md#sequential-review-record-and-lead-reconciliation) records four sequential preparation roles: reuse/parity reviewer, contract/adversarial reviewer, writer and final verifier. This is a separate preparation record from the research note's earlier three-agent cross challenge.
+
+The handoff's final bounded review returned PASS for documentation preparation only. It records planning PASS with 1,229 local references, synchronization-disabled conventions PASS, tracked and new-file whitespace checks, and 42 existing owner files unchanged. Source tests were inspected, not run. Its declaration gate passed, but automated skill-loading proof was disclosed as not proven; retained reads and role receipts supply the manual record. Atlas query and lookup failures remain disclosed in the handoff. This checkpoint records those preparation results, not a new runtime or architecture verdict.
+
+Class A transfers the accepted research clarifications and navigation only. Runtime qualification, license fit, applicable owner choices and selected protocol adoption remain pending. No assumption retires, acceptance checkbox closes or runtime version changes. Completed Phase 1 dispositions remain intact; DSR-0.6 remains OPEN and DSR-2.1 stays blocked by its applicable choices. Optional processing and projection can remain deferred without becoming portable-work blockers.
+
+## Concrete checkpoint configuration preparation (2026-10-11)
+
+[The configuration recommendation](proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md) owns concrete stack selection preparation and the proposed canonical/ticket impact. Existing storage/authority research is reused; fresh official Temporal and AWS documentation corroborates service primitives, not the complete project composition. [Independent configuration review](proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration-review.md) records the verdict and limits. No backend approval, infrastructure operation, runtime qualification, acceptance completion or engine version change is inferred. Direction approval remains owned by DSR-0.6.
+
+## Approved checkpoint architecture direction (2026-10-10)
+
+[DSR-0.6's decision record](tickets/phase-0.md#approved-checkpoint-architecture-direction-2026-10-10) owns the operator's approval of the recommended cold checkpoint architecture direction and its precise limits. This settles the direction beyond the October 9 goal confirmation. It adds no runtime evidence, concrete backend/authority/termination choice, complete candidate adoption or acceptance completion. The existing preparation and portable target review remain historical evidence for the reviewed recommendation. Completed Phase 1 dispositions and the implementation blocker remain unchanged.
+
+## Confirmed portable recovery objective (2026-10-09)
+
+The operator explicitly confirmed that the intended outcome is portable recovery on another host when the original disk is unavailable. [The adjusted DSR-0.6 preparation](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#confirmed-portable-target-2026-10-09) owns the now-preferred distributed comparison and remaining choices. Goal confirmation does not approve a mechanism or BD-6 adoption; the canonical contract and completed Phase 1 remain unchanged. [The portable target review](proposals/distributed-recovery/2026-10-08/portable-target-review.md) records independent alignment verification. Surviving-host controls alone do not demonstrate the required outcome.
+
 ## Workspace integration design review (2026-10-09)
 
 [The focused independent review](proposals/distributed-recovery/2026-10-08/integration-review.md) owns the checkpoint/uncertainty integration findings, source comparisons, reconciled remedies, domain manifest and proof limits. Its Conditional verdict records coherent preparation with deployment/interface decisions and runtime gates still open. The [existing preparation](proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#integration-with-the-accepted-division-of-work) owns the technical recommendation. Canonical authority, completed Phase 1 dispositions and the conditional unadopted candidate remain unchanged.

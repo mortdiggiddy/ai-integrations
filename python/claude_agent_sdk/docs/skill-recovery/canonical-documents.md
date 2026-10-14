@@ -40,6 +40,8 @@ See [canonical evidence](evidence.md) for the owning contract and recorded check
 
 ## Specification
 
+For selected adapter contracts and future extension gates, see [component boundaries](spec.md#selected-component-boundaries-2026-10-12) and [deployment profiles and opportunities](spec.md#deployment-profiles-and-future-opportunities). Existing tickets own implementation proof; these are target requirements, not shipped capabilities.
+
 See [specification](spec.md) for the owning contract and recorded checkpoint. Technical content is maintained there; this section preserves the checkpoint reference location.
 
 ## Plan
@@ -65,3 +67,9 @@ See [canonical evidence](evidence.md) for the owning contract and recorded check
 ## Validation and phase boundaries
 
 See [canonical evidence](evidence.md) for the owning contract and recorded checkpoint. Technical content is maintained there; this section preserves the checkpoint reference location.
+
+Current adapter admission is owned by the [typed record and operation contracts](spec.md#project-owned-adapter-record-and-operation-contracts) and the [approved configuration decisions](proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-admission-decisions-2026-10-12). Ticket status is owned by the [maintained tickets](tickets/README.md).
+
+## Architecture evaluation input (2026-10-14)
+
+See the [architecture review pack](proposals/distributed-recovery/2026-10-08/architecture-review.md). It is evaluation input and owns no contract or ticket status.

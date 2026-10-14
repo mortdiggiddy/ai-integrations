@@ -1,7 +1,7 @@
 {
   "schema": "evidence-manifest/v1",
   "artifact": "spec",
-  "generated_for": "Distributed governed Skill execution candidate, complete Issue 31 sweep 2026-10-08",
+  "generated_for": "Distributed governed Skill execution candidate, complete Issue 31 sweep 2026-10-08; maintained 2026-10-11 selected portable/context requirements and 2026-10-12 canonical interface/profile references, no new source receipt or runtime proof",
   "sources": [
     {
       "id": "EV-1",

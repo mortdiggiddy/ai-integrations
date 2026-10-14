@@ -363,7 +363,25 @@ Public contact has happened. The operator removed the remaining integrations ask
 
 ### DSR-0.6 Decide the workspace volume class and the effect isolation level
 
-Status: OPEN
+Status: DONE (2026-10-14), approved finite local configuration decision; runtime qualification remains unexecuted.
+
+Interface requirements (2026-10-12): Lock the component interfaces and local/AWS profile direction in the [canonical contract](../spec.md#selected-component-boundaries-2026-10-12). Admit exact adapters, capability matrices, trusted endpoints, dependency/license pins and isolation before use. Moto/local Linux workers are development targets; LocalStack, microVM and confidential providers remain gated alternatives. Missing capabilities or unknown terminal state refuse. Configuration/role/security/retention gaps keep this decision OPEN and DSR-2.1 blocked.
+
+Approved documentation selections (2026-10-11): the operator approved the S3 exact-version checkpoint, protected independent Entity scheduling, dedicated Linux EC2 guest and external exact-incarnation termination protocol in the configuration/preparation owners, then approved the full B-C documentation scope. The operator confirmed accountability for deployment, storage, Security, integration, retention and license decisions. This assigns decision accountability, not implementation roles, technical clearance or execution permission. The canonical specification now owns the selected requirements. Context Mode component reuse, native projection, restricted Code Mode/harness and positive child/parallel requirements are selected for qualification, not runtime admission. Exact copied files/API, dependency/license clearance, maintenance holder, responsible implementation role assignments, key/read permissions, finite horizons and installed pins remain OPEN prerequisites. DSR-2.1 stays blocked; this selection closes no checkbox and authorizes no execution. Dated earlier preparation statements retain their historical scope.
+
+#### Approved checkpoint architecture direction (2026-10-10)
+
+Additive execution research (2026-10-11): [the three-agent research comparison](../proposals/distributed-recovery/2026-10-08/context-execution-research.md) records Context Mode artifact processing, current native Mods projection, restricted Code Mode and existing Temporal sandbox Activity/lifecycle adapters. It owns the new source comparison and smallest qualification cases. These components do not establish exact Claude pending call compatibility, portable checkpoint pairing or whole old execution termination. No tool or runtime is admitted, no architecture choice changes, and no acceptance criterion closes. Optional scope remains deferred unless selected explicitly; DSR-2.1 stays blocked by the applicable DSR-0.6 choices.
+
+Concrete target prepared (2026-10-11): [configuration and rebaseline map](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md) proposes AWS S3 immutable checkpoint objects, independent protected Entity scheduling authority and dedicated Linux EC2 execution instances with external exact-instance termination. This is product/configuration preparation under the approved direction, not product approval or implementation. The document owns alternatives, risks, six owner-decision split and smallest qualification cases. Next select this target or name an alternative, then settle role holders and exact deployment/retention/finite rig values before applicable protocol adoption and canonical rebaseline. This ticket and its existing acceptance criteria remain OPEN; DSR-2.1 stays blocked.
+
+The operator approved the recommended architecture direction by replying "do the recommendation": immutable exact conversation/workspace checkpoints preserved outside the execution host, restoration of the accepted pair on another host, protected dispatch authority outside restored files, and independent proof of old-execution/descendant termination before replacement. This selects cold checkpoint recovery over shared-filesystem recovery as the design direction for the confirmed original-disk-unavailable objective. The [reviewed preparation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#confirmed-portable-target-2026-10-09) owns the technical alternatives, risks and smallest qualification cases. Its earlier proposed status records the preparation-time disposition and does not override this approval.
+
+Approval is limited to that direction. The complete distributed candidate remains conditional and unadopted: no backend/version, receipt protocol, authority implementation/lifecycle, termination provider, isolation level or role holder is selected. Applicable BD-1/BD-2/BD-3/BD-6 choices, upstream interface agreement and canonical contract rebaseline remain required before DSR-2.1. The current shared-volume/file-claim contract cannot silently become a cold restore contract. This ticket stays OPEN and no acceptance checkbox closes.
+
+Next prepare the concrete storage, authority and independent termination configuration under this selected direction, with acknowledgement/metadata semantics, role holders and the corresponding canonical/ticket impact. Retain independently durable shared storage as a fallback comparison if the checkpoint route cannot meet its proof obligations. Wrong checkpoint pairing loses accepted bytes or misrepresents an effect; restored dispatch permission can repeat Bash; an unreachable old execution can continue acting. Qualification must include original disk unavailability, rollback/publication gaps and a live partitioned old execution. Ambiguous Bash remains parked with no next model call or effect dispatch. No execution, commit, push or external contact is authorized by this architecture approval.
+
+Portable objective confirmed (2026-10-09): recovery on another host with the original disk unavailable is required. [The current target preparation](../proposals/distributed-recovery/2026-10-08/dsr-0.6-preparation.md#confirmed-portable-target-2026-10-09) supersedes the surviving-host-only recommendation as the next product target, while retaining it as a control/alternative. Cold restoration and independent dispatch authority remain proposed, requiring BD-6 adoption and canonical rebaseline; independently durable shared storage remains a valid comparison. Concrete storage, authority, termination and role choices stay OPEN. Goal confirmation completes no acceptance criterion.
 
 October 9 collaboration: [the accepted division of work and proposed interfaces](../proposals/distributed-recovery/2026-10-08/priority-sweep/coverage.md#october-9-collaboration-agreement) establish coordination, not storage adoption or qualified checkpoint restoration. Reconcile checkpoint acceptance/restore ordering with the canonical volume and retained claims before approving the applicable choices. DSR-2.1 remains blocked; a disconnected live Worker remains explicitly unqualified.
 
@@ -387,7 +405,7 @@ Decision preparation (2026-10-09): [the maintained recommendation](../proposals/
 
 #### Context
 
-Version 1 needs a shared volume that every segment and effect Worker mounts at one absolute path. Cross host behavior is untested ([canonical specification](../canonical-documents.md#specification), OI-2 and A-27). The claimed effect guard relies on an exclusive create of a claim file that must be atomic and visible on every host (A-48). Bash runs scripts from a skill. Without a separate operating system user, a container or a PID namespace, Bash can read the Worker launch environment, write the package copy and leave a child process that survives (OI-6, A-17). Until the isolation level is decided, every confinement claim and the at most one spawn guarantee are void (A-17 risk text).
+The current approved first profile uses separate trusted checkpoint/key/controller service containers and a disposable Linux execution container. The later portable reference restores the exact accepted conversation/workspace pair from S3 on a compatible dedicated Linux EC2 guest. Protected independent Entity admission owns nonrepeatable scheduling; local ordinal/key claims remain defense, not cross-host restore authority. A-27/A-48 remain qualification gates. Bash containment must protect Worker credentials/package state and prevent surviving descendants. Exact deployment, permissions, role holders and physical isolation/termination proof remain prerequisites under A-17 and the [canonical specification](../canonical-documents.md#specification).
 
 **Complete Issue 31 disposition (2026-10-08)**
 
@@ -395,12 +413,12 @@ October 8 full issue sweep: [complete proof map](../proposals/distributed-recove
 
 #### Problem
 
-Neither the volume class nor the isolation level has an owner or a decision. Phase 2 builds the workspace and the executor on both, and Phase 4 builds the isolation.
+The current configuration owner records the approved local container profile, exact service/runtime/source/API selections, owner roles, scoped PKI/key/read permissions, finite limits and license intended-use assessment. Local execution comes first; DSR-4.3 retains later portable proof. This closes the configuration decision, not qualification or other DSR-2.1 prerequisites.
 
 #### Scope
 
-- Choose the volume class for version 1 and state its required semantics (POSIX behavior, close to open consistency, one user and group mapping on every host).
-- Decide how cross host behavior is covered: a two container rig over a real network file system in Phase 4, or a declared untested limit in the README.
+- Record the local immutable checkpoint service and canonical accepted-pair/metadata/publication semantics, with the selected later S3 exact-version reference and protected independent Entity admission; retain local guard defense.
+- Require separate surviving-host, original-disk-unavailable H2 restore and live-partition/terminal-incarnation qualifications in DSR-4.3; a declared untested limit cannot establish this target.
 - Choose the isolation level for effects: a separate unprivileged user plus a subreaper (the stated version 1 minimum), a container or PID namespace with a restricted `/proc`, or a microVM per run.
 - Name the Security owner for the isolation level.
 - State the interim wording the specification may use for confinement claims until Phase 4 proves the level.
@@ -411,13 +429,19 @@ Neither the volume class nor the isolation level has an owner or a decision. Pha
 - The retention value (A-37) and the production session store (A-38). They need an owner too (see Open questions).
 - Cross host tests. DSR-4.3 owns those.
 
+
+Decision completion (2026-10-14): [the approved local configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) owns the container-first profile, role holders, exact pins, certificate/key/reader policy, intended-use and source/API selections, finite limits and later qualification gates. Preserve the canonical typed adapter contracts and all selected B-C requirements. The [confirmed closure projection](../proposals/distributed-recovery/2026-10-08/dsr-0.6-closure.json) binds the six decision criteria to their existing owners; DSR-2.1 remains blocked while other prerequisites are incomplete.
+
 #### Acceptance criteria
 
-- [ ] A decision record names the volume class and its required semantics. Proof: the record.
-- [ ] The record chooses between the two container rig and the declared untested limit, and names who builds the rig if chosen. Proof: the record.
-- [ ] The record names the isolation level and the Security owner role holder. Proof: the record.
-- [ ] For each choice the record states which assumption rows it affects (A-17, A-27, A-48 and A-37) and what claim the specification may make until Phase 4. Proof: a sentence per row.
-- [ ] The record states a failure boundary: if the chosen volume cannot give atomic exclusive create and preserve protected claims, claimed execution refuses and the volume class must be changed and qualified. A replacement authority needs a separately approved contract revision and proof; dropping the guard while offering claimed Bash is forbidden. Proof: the stated rule, checked against the canonical protected-claim contract.
+- [x] A decision record names the selected checkpoint substrate and accepted-pair/metadata/publication semantics. Proof: the confirmed record.
+- [x] The record requires the three distinct DSR-4.3 portable/termination cases and names who builds the finite rig. Proof: the confirmed record; execution requires separate allowance.
+- [x] The record names the isolation level and the Security owner role holder. Proof: the record.
+- [x] For each choice the record states which assumption rows it affects (A-17, A-27, A-48 and A-37) and what claim the specification may make until Phase 4. Proof: a sentence per row.
+- [x] Missing/regressed independent authority, accepted-pair mismatch or unproven old-incarnation death refuses; retained local guard failures also refuse. No file restore recreates permission. Proof: the selected canonical contract and admission/termination negative matrix.
+
+
+- [x] The selected stack record resolves deployment/storage, Security and integration holders; exact object version/conditional publication, authority administration, trusted-host permissions, runtime pins and terminal-incarnation proof configuration are recorded before implementation/qualification. Context Mode copied files/API, Elastic license fit and maintenance ownership are approved before reuse. Proof: confirmed owner/configuration records and Q-7/Q-15 gate disposition; no source-only capability is marked qualified.
 
 #### Dependencies and blockers
 
@@ -469,6 +493,8 @@ This reference does not adopt cold restoration, reattachment, Temporal entity au
 
 Status: OPEN
 
+Interface requirements (2026-10-12): The [canonical identity/transport boundaries](../spec.md#selected-component-boundaries-2026-10-12) require distinct caller authentication and action/resource authorization, approved endpoints and protected transport, no anonymous fallback, separate administrative credentials and redacted allowed/denied evidence. Select the concrete gateway binding and policy before service deployment. Test missing, expired, wrong-resource and cross-lineage credentials independently of signed-token validation.
+
 - Type: Decision
 - Priority: High
 - Estimate: 1 point (confidence 85 percent)
@@ -483,11 +509,11 @@ Status: OPEN
 
 #### Context
 
-The design accepts human answers only through Updates that carry a signed token. The documentation read for the pack shows no way for an Update validator to read an authenticated caller identity ([canonical specification](../canonical-documents.md#specification), OI-11 and A-14). The design therefore uses one gateway that holds the only credentials able to send Updates and that signs each decision (INV-7). Nobody owns the gateway today. A pending decision must be found by the gateway through the Query and the `AgentPhase` Search Attribute, because live output is off by default (Interfaces, *Events*).
+The design accepts human answers only through Updates that carry a signed token. The documentation read for the pack shows no way for an Update validator to read an authenticated caller identity ([canonical specification](../canonical-documents.md#specification), OI-11 and A-14). The design therefore uses one gateway that holds the only credentials able to send Updates and that signs each decision (INV-7). The project maintainer holds gateway/key administration and Security responsibilities. [The current configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#certificates-encryption-keys-and-readers) records the Python gateway, Ed25519/minimum version, certificate policy, restricted Update route and reader/key matrix; implementation and conformance remain unexecuted. A pending decision must be found by the gateway through the Query and the `AgentPhase` Search Attribute, because live output is off by default (Interfaces, *Events*).
 
 #### Problem
 
-A security boundary of the design has no owner. The signature scheme, the key set, the minimum token version and the retry behavior need one accountable party before Phase 3 builds the verifier.
+The approved configuration assigns the project maintainer, selects the Python gateway and Ed25519/minimum token version 1, and preserves exact decision identity on retries. Actual admitted public keys, deployment enforcement and denial/replay tests remain Phase 3 requirements before use.
 
 #### Scope
 
@@ -527,6 +553,10 @@ A security boundary of the design has no owner. The signature scheme, the key se
 ### DSR-0.8 Decide how a Workflow reset is detected and handled
 
 Status: OPEN
+
+Interface requirements (2026-10-12): Changing execution/storage adapters cannot reset original intent, lineage or independent authority. Apply the [canonical interface contract](../spec.md#selected-component-boundaries-2026-10-12) to reset, configuration compatibility and duplicate/lost-reply cases; snapshot/clone restore never revives permission. Alternate authority providers and regional failover require separate fault/rollback selection and proof.
+
+Selected reset contract (2026-10-11): outer reset must retain original lineage/key/ordinal and consult protected independent Entity authority outside restored files. Duplicate or lost replies reconcile status/exact result, never a spawn permit. Authority reset/delete/recreation/unsupported rollback is forbidden while recoverable or unresolved records exist; missing/regressed authority parks. DSR-3.5 must prove lifecycle, handover and preclaim-restore negatives. Operator recovery steps and concrete administration controls remain open; approval does not resolve ambiguous Bash.
 
 DSR-0.2 approved Option R and excluded `redo` and keyed external service effects. The reset detection method and safe operator procedure remain open. No claim clearing, repeated Bash or model resumption is authorized for unresolved Bash uncertainty.
 
@@ -570,6 +600,9 @@ The reset detection method and the operator procedure for an ambiguous Bash park
 - [ ] The record cites DSR-0.2's exclusion of `redo`, `release_claim` and keyed external service recovery. It states which signed actions, if any, safely resolve an ambiguous Bash park without bypassing unresolved uncertainty or authorizing another spawn. Proof: the cited scope record and explicit action rules; no recovery choice is inferred from scope approval.
 - [ ] The record states whether the starter mints the lineage id and who keeps it unique. Proof: the record.
 - [ ] The record states that missing or unverified workspace and claim integrity parks or blocks the run with the cause named, rather than treating a restored tree as safe by default. Proof: the stated rule consistent with the manifest generation limitation in [canonical specification](../canonical-documents.md#specification).
+
+
+- [ ] Outer reset/preclaim restore and lost admission reply never reset independent authority or mint another permission; unknown/missing/regressed authority parks. Proof: confirmed reset runbook and DSR-3.5 negative matrix, preserving original call identity and no redispatch.
 
 #### Dependencies and blockers
 
@@ -717,6 +750,10 @@ The specification names no keyed service and no retention window. Without the wi
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Apply the [canonical storage/key interfaces](../spec.md#selected-component-boundaries-2026-10-12): version/digest-specific reader authorization, key/credential references, retention through every offered recovery horizon and refusal of missing accepted bytes. SSE-S3 versus customer-managed KMS, concrete encryption/key policies and commercial distribution/license route remain decisions. TLS, storage encryption and payload codecs are independent; local synthetic data waives no production requirement.
+
+Selected retention/integration requirements (2026-10-11): S3 is the selected checkpoint substrate; the native session adapter remains to be specified and qualified. The operator is accountable for retention and session storage decisions under the shared assignment recorded in DSR-0.6. Retain exact authoritative records, complete artifacts and accepted projections separately from disposable indexes. Bind original identity/raw result/native status and metadata, exact accepted bytes, processor/schema/version and digests. Scope readers by namespace/session/artifact and preserve encryption keys, object versions and authority through live/parked/reset/replay windows. Unknown retention denies deletion. Responsible implementation roles, concrete encryption/read permissions and finite horizon remain OPEN. Context Mode Elastic License 2.0 component fit and maintained file/API selection remain DSR-0.6 prerequisites.
+
 - Type: Decision
 - Priority: High
 - Estimate: 1 point (confidence 80 percent)
@@ -731,7 +768,7 @@ Status: OPEN
 
 #### Context
 
-The plan's decision (g) covers the security owner, the isolation level, the retention value and the session store requirement. DSR-0.6 covers the isolation level and the volume. The rest has no ticket ([canonical plan](../canonical-documents.md#plan), M0 decision (g); [canonical specification](../canonical-documents.md#specification), OI-10, A-37, A-38). The specification assumes a namespace retention of 7 days and says the deployment owner sets the real value. The janitor keeps claim files until retention ends, so the value affects how long a reset stays safe. The session store holds the transcript with every tool input and result, so a production store must be shared by every Worker, encrypted at rest and deduplicate by `uuid`.
+DSR-0.11 owns the retention, key and reader choices linked from plan preparation; DSR-0.6 owns selected storage/deployment and isolation. The synthetic qualification minimum of seven days, extended through live/parked/reset/replay references, is approved at the configuration owner. Production client retention remains unselected. The finite policy must cover every admitted recovery/reset/replay window and preserve referenced accepted conversation/workspace/results/projections, keys, local guards and independent authority. Namespace expiry alone does not authorize removal. Production storage must provide authenticated authorized encrypted access and preserve exact native records and UUID deduplication under the [canonical specification](../canonical-documents.md#specification), A-37/A-38.
 
 **Complete Issue 31 disposition (2026-10-08)**
 
@@ -739,25 +776,28 @@ October 8 full issue sweep: [complete proof map](../proposals/distributed-recove
 
 #### Problem
 
-Nobody owns the retention value or the session store requirement. Phase 4 builds the janitor on the first, and Phase 5 tests the second.
+The operator's accountability is confirmed. The project maintainer holds the approved adapter/rig and Security responsibilities. The synthetic qualification retention, key administration holder and scoped reader/key policy are approved in the current configuration. Production client retention and actual enforcement/conformance remain prerequisites before real client data. Phase 4 builds the janitor on that policy, and Phase 5 tests storage conformance.
 
 #### Scope
 
-- Name the owner of the namespace retention value and record the value, or record that the 7 day assumption stands until the owner sets another.
+- Retain the approved project maintainer and finite synthetic seven-day minimum, extended while referenced. Require a separate client-approved policy before real client data.
 - Name the owner of the production session store requirement and record the three requirements: shared by every Worker, encrypted at rest, deduplicating by `uuid`.
 - Record the compliance input that sets the retention value, or state that it is unknown.
 
 #### Out of scope
 
 - Building the janitor or the conformance test. DSR-4.2 and DSR-5.4 own those.
-- Choosing a session store product.
+- Implementing or operating the selected checkpoint substrate or native session adapter.
 
 #### Acceptance criteria
 
 - [ ] A decision record names the retention owner role holder and states the retention value or the open assumption with a date to settle it. Proof: the record.
 - [ ] The record names the session store owner and lists the three requirements. Proof: the record.
 - [ ] The record states what the janitor does when the retention value is unknown: it keeps claim files and does not remove them. Proof: the stated rule.
-- [ ] The record states the consequence of a store that loses writes: the run stalls with retries and does not lose a decision silently. Proof: a sentence that cites A-38.
+- [ ] The record classifies missing acknowledged accepted bytes as durability FAIL and missing required outcome/projection as park; retries cannot fabricate accepted data. Proof: the stated A-38 contract.
+
+
+- [ ] Object, key, authority and exact raw/accepted artifact retention covers live/parked/reset/replay references; unauthorized cross-session reads and unknown retention refuse. Lost acknowledged accepted bytes is durability FAIL, while missing required outcome/projection parks. Proof: owner-approved finite policy and DSR-5.4/Q-2/Q-6 conformance requirements.
 
 #### Dependencies and blockers
 

@@ -82,6 +82,10 @@ Without this loop, a question pending at a handover is lost, an answer and a han
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Enforce the [canonical principal/action/resource boundary](../spec.md#selected-component-boundaries-2026-10-12) at the gateway while preserving deterministic signed-decision enforcement and historical replay. Test wrong namespace/lineage/resource, expired/absent credentials, endpoint-policy failure and unsigned bypass. Transport authentication does not replace complete token binding, and provider clients remain outside Workflow logic.
+
+Selected recovery requirements (2026-10-11): missing definitive result, required postimage or exact accepted projection parks the original call. Restore only the accepted pair with intact independent authority and verified old-incarnation death. Restored index/snapshot is not authority. Retry/checkpoint resume never clears uncertainty; abort invokes preservation-aware cleanup rather than unconditional destruction.
+
 - Type: Build
 - Priority: High
 - Estimate: 4 points (confidence 65 percent)
@@ -186,7 +190,7 @@ The parked phase and the park causes have no implementation, and the classificat
 - Credential and quota errors marked non retryable at the segment Activity, and a segment Schedule-To-Close bound of 1 hour with the fork's 10 minute Start-To-Close.
 - `retry` and `resume_from_checkpoint` for supported safe causes, returning the phase to running and delivering a recorded safe `NOT_RUN` when applicable. Neither action may imply that ambiguous Bash is safe. DSR-0.8 remains OPEN for that cause.
 - `abort`, which ends the Workflow with a stated aborted result and calls cleanup.
-- The `reprepare` step that lays out the run directory and the claims directory again.
+- `reprepare` validates/materializes the accepted pair while preserving independent authority and unresolved local guards; it never recreates lost accepted state or permission.
 
 #### Out of scope
 
@@ -206,6 +210,9 @@ The parked phase and the park causes have no implementation, and the classificat
 - [ ] `abort` ends the Workflow with a stated aborted result and calls cleanup. Proof: a test that checks the result and the cleanup call.
 - [ ] A `resume` token with a stale park id or sequence number is rejected. Proof: a test that replays a token after a second park.
 - [ ] A parked run waits for days across handovers without failing, and the Query returns the parked state after each handover. Proof: a time skipping test with 20 wakes while parked.
+
+
+- [ ] Missing accepted raw result/postimage/projection or independent authority parks without another segment; restored cache never authorizes resume. Abort and reprepare preserve sole-readable required state and reconcile the same identity. Proof: safe positive cases and each missing/mismatched component negative.
 
 #### Dependencies and blockers
 
@@ -228,6 +235,8 @@ The parked phase and the park causes have no implementation, and the classificat
 ### DSR-3.4 Check Search Attributes at start and discover pending decisions with live output off
 
 Status: OPEN
+
+Interface requirements (2026-10-12): Use the [canonical observation transport contract](../spec.md#selected-component-boundaries-2026-10-12). SSE/WebSocket are future bindings; stream loss cannot hide durable pending decisions or become acceptance/dispatch authority. Keep Query/Search Attribute discovery with streaming off, authorized redacted resource scope and independent gateway availability tests.
 
 - Type: Build
 - Priority: High
@@ -297,6 +306,10 @@ The start check, the attribute set at start and the discovery path are proposed 
 
 Status: OPEN
 
+Interface requirements (2026-10-12): Apply the [canonical adapter compatibility and authority boundary](../spec.md#selected-component-boundaries-2026-10-12) across reset, handover, changed endpoint/configuration and snapshot restoration. Preserve exact original identity and independent deduplication. Neither local emulation nor confidential attestation proves authority freshness; changed providers require their own reset/rollback negatives.
+
+Selected reset qualifications (2026-10-11): Q-14 races duplicate/lost replies, outer reset and unchanged-generation preclaim restore against protected Entity authority. Require one physical invocation, exact retained outcome or park, and zero next model starts. Test denial of authority reset/recreation/rollback, deduplication across handover and missing/expired authority. Local claim Run ID alone is not reset proof.
+
 - Type: Verification
 - Priority: High
 - Estimate: 3 points (confidence 65 percent)
@@ -341,6 +354,9 @@ The seed claim comes from the Rust core and Python SDK by reading, not by runnin
 - [ ] A different Bash command at the same ordinal after reset is refused and parks without model continuation. Proof: a test linked to the retained ordinal claim guard in DSR-2.2.
 - [ ] A Workflow Id reuse gives a different lineage id from the first run. Proof: a test with the reuse policy that allows a duplicate.
 - [ ] The result states whether a starter supplied id can collide between two starts. Proof: a recorded decision or a uniqueness test (review item R5-13).
+
+
+- [ ] Q-14 denies authority reset/delete/recreation/rollback and retains original application deduplication across Continue-As-New. Lost replies, preclaim restore and outer reset cannot spawn twice. Proof: independent physical counters, status/exact-result reconciliation and missing-authority park negatives.
 
 #### Dependencies and blockers
 
@@ -564,3 +580,5 @@ The `redo` mechanism, `release_claim`, and the split of `pending_unknown` and `u
 - Plugin engineer: confirm that a rejected keyed `redo` leaves the unknown outcome for `retry` to deliver, and that the model then decides.
 - Tool author: confirm the retention window of each keyed tool, because the retention rule depends on it.
 - Plugin engineer: the severity of A-23 should be rated High if the keyed duplicate branch is real (review item R6-08). Confirm in DSR-3.7.
+
+Current adapter admission: [the typed contracts](../spec.md#project-owned-adapter-record-and-operation-contracts) and [approved local configuration](../proposals/distributed-recovery/2026-10-08/dsr-0.6-configuration.md#approved-local-configuration-2026-10-14) own the selected interfaces, container-first sequence, PKI/reader/key policy, component admission and qualification limits. The decision ticket owns its status. Physical and component qualifications remain unexecuted; DSR-2.1 remains blocked while other prerequisites are incomplete.
