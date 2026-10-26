@@ -1,19 +1,12 @@
 # Distributed recovery proposal diagrams
 
-These views illustrate the conditional proposal. They do not establish runtime support or close ticket acceptance criteria. The candidate specification and plan own the design; older diagram revisions remain historical outside this export.
-
-| View | SVG | Interactive HTML |
-|---|---|---|
-| Durable session and independent effect authority | [SVG](durable-session.svg) | [HTML](durable-session.html) |
-| Workspace recovery and publication | [SVG](workspace-alternatives.svg) | [HTML](workspace-alternatives.html) |
-| Termination and replacement barrier | [SVG](recovery-barrier.svg) | [HTML](recovery-barrier.html) |
-| Effect succeeds before result publication fails | [SVG](result-publication-fault.svg) | [HTML](result-publication-fault.html) |
-
-JSON specifications and portable delivery receipts accompany every view. Each original HTML delivery passed nine showcase checks with zero errors and warnings. Specification and HTML bytes are unchanged by export. SVGs passed XML parsing and retain embedded dark theme styles. Visual review was skipped because no capable browser or SVG rasterizer was available. This remains a limitation after migration.
+These views illustrate the conditional proposal. They do not establish runtime support or close ticket acceptance criteria. The candidate specification and plan own the design. Earlier diagram revisions are removed from this folder; Git history keeps them.
 
 ## Complete architecture review views
 
-The [architecture review pack](../architecture-review.md) contains Mermaid views for component/trust boundaries, payload encryption/offload, native checkpoint publication, effect outcomes, replacement barriers, harness/VFS correlation, Nexus policy, key/retention, confidential execution and positive child/parallel requirements. These are evaluation inputs, not qualified deployments. The earlier SVG/HTML exports above retain their historical scope.
+The [assessment durability walkthrough](assessment-durability/assessment-durability.html) presents the historical assessment design. Its [artifact receipt](assessment-durability/artifact-receipt.json) identifies the exact delivered bytes. Receipt paths are portable projections: local checkout, generator and browser executable prefixes are removed; timestamps, results and artifact digests are unchanged. Records under `history/` describe earlier review inputs and do not prove the current artifact. These views do not define the staged runtime specification.
+
+The [architecture review pack](../architecture-review.md) contains Mermaid views for component/trust boundaries, payload encryption/offload, native checkpoint publication, effect outcomes, replacement barriers, harness/VFS correlation, Nexus policy, key/retention, confidential execution and positive child/parallel requirements. These are evaluation inputs, not qualified deployments.
 
 ## Skill package and engine attachment views
 
@@ -31,4 +24,4 @@ The engine attachment view is a typed operation map, not a physical deployment t
 
 Independent source review on 2026-10-14 passed the three SVGs for scoped semantic fidelity. All three passed XML parsing. Candidate validation, delivery and strict checks passed, but full finalization did not pass because browser checks were skipped. No rendered visual review occurred. A Windows process launch failure from the review environment prevented the permitted browser routes; no software was installed to repair it. Browser rendering, clipping, routing and interactive behavior remain unverified.
 
-The separate architecture review pack still needs three corrections: route the overview's direct SDK effect path through the governed intent/Entity boundary; separate or label the reader-to-operation route as read only; and distinguish the selected reader broker from its unimplemented qualification. These SVGs do not fix those Mermaid sources or establish runtime admission. Preserve historical diagrams and the dated handoff when correcting the maintained pack.
+The maintained architecture review pack now routes pending intent through the governed runner/Session/Entity boundary, separates the read-only viewer Activity from effect operations, and identifies the selected reader broker with unimplemented scope propagation and runtime qualification. These are documentation corrections; they establish no runtime admission. Frozen evidence and the dated handoff remain unchanged. The recorded browser/visual review limitation still applies to the three SVGs.

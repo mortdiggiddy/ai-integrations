@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "candidate.json",
+    "sha256": "f4b14d9f6481b078f7ec036b498d251d6479cfd59ab3b059c2ac2b01936432fa",
+    "bytes": 22689
+  },
+  "artifact": {
+    "path": "architecture.html",
+    "sha256": "5a4591363683ae04d1ccab94aa8129bd58d76a741d197e4e0e4898624b23c9e4",
+    "bytes": 812507
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "architecture.finalize.json",
+    "summaryReceipt": "architecture.finalize-summary.json",
+    "browserCheckReceipt": "architecture.browser-check.json"
+  },
+  "update": {
+    "status": "update_available",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.1.0",
+    "releaseNotes": "https://github.com/tt-a1i/archify/releases/tag/v3.1.0",
+    "severity": "normal",
+    "checkedAt": "2026-10-14T15:53:28.776Z",
+    "source": "cache",
+    "noticeRequired": true,
+    "noticeText": "Archify update: 3.0.1 → 3.1.0. A previous check at 2026-10-14T15:53:28.776Z found a newer release. Release notes: https://github.com/tt-a1i/archify/releases/tag/v3.1.0. The installed Skill has not changed; ask to snooze or ignore this reminder.",
+    "eventKey": "archify@sha256:ffedc53390c9da6e859f41e432c5d2d0615a23cf00a503181f07efbba88a7ce8"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 4356,
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 5,
+      "routesOverSuggestedBends": 1
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "handoff-10",
+            "from": "s11",
+            "to": "s12",
+            "label": "",
+            "collectionIndex": 9,
+            "artifactIndex": 10
+          },
+          "right": {
+            "id": "next-cycle",
+            "from": "s20",
+            "to": "s10",
+            "label": "next admitted segment",
+            "collectionIndex": 26,
+            "artifactIndex": 27
+          },
+          "point": [
+            918,
+            1322
+          ]
+        },
+        {
+          "left": {
+            "id": "handoff-14",
+            "from": "s15",
+            "to": "s16",
+            "label": "Entity only",
+            "collectionIndex": 13,
+            "artifactIndex": 14
+          },
+          "right": {
+            "id": "next-cycle",
+            "from": "s20",
+            "to": "s10",
+            "label": "next admitted segment",
+            "collectionIndex": 26,
+            "artifactIndex": 27
+          },
+          "point": [
+            918,
+            1669
+          ]
+        },
+        {
+          "left": {
+            "id": "handoff-16",
+            "from": "s17",
+            "to": "s18",
+            "label": "",
+            "collectionIndex": 15,
+            "artifactIndex": 16
+          },
+          "right": {
+            "id": "next-cycle",
+            "from": "s20",
+            "to": "s10",
+            "label": "next admitted segment",
+            "collectionIndex": 26,
+            "artifactIndex": 27
+          },
+          "point": [
+            918,
+            1839
+          ]
+        },
+        {
+          "left": {
+            "id": "recover",
+            "from": "s20",
+            "to": "s21",
+            "label": "failure",
+            "collectionIndex": 23,
+            "artifactIndex": 24
+          },
+          "right": {
+            "id": "recover-exact",
+            "from": "s21",
+            "to": "s19",
+            "label": "exact retained result",
+            "collectionIndex": 25,
+            "artifactIndex": 26
+          },
+          "point": [
+            680.6999999999999,
+            2179
+          ],
+          "sharedNode": "s21"
+        },
+        {
+          "left": {
+            "id": "recover-exact",
+            "from": "s21",
+            "to": "s19",
+            "label": "exact retained result",
+            "collectionIndex": 25,
+            "artifactIndex": 26
+          },
+          "right": {
+            "id": "next-cycle",
+            "from": "s20",
+            "to": "s10",
+            "label": "next admitted segment",
+            "collectionIndex": 26,
+            "artifactIndex": 27
+          },
+          "point": [
+            679.7000000000004,
+            2026.4000000001497
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "next-cycle",
+            "from": "s20",
+            "to": "s10",
+            "label": "next admitted segment",
+            "collectionIndex": 26,
+            "artifactIndex": 27
+          },
+          "bends": 5,
+          "stretch": 1
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "s11 → s12 crosses s20 → s10: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "s15 → s16 crosses s20 → s10: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "s17 → s18 crosses s20 → s10: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "s20 → s21 and s21 → s19 cross next to s21: move node s20 or s19 so the two reach s21 from different sides (for example one level with it, one directly above or below it).",
+      "s21 → s19 crosses s20 → s10: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "s20 → s10 needs 5 bends: move node s20 or s10 so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

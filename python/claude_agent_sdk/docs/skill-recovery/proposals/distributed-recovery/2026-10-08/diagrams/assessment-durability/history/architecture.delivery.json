@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "ba373f14-da57-4edc-b218-afb166d03d41",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "candidate.json",
+  "output": "architecture.html",
+  "specification": {
+    "sha256": "a2f2b42f925ccd59d952512ceb276f82c69a1cb2215bbc39f28807023cbd5ba7",
+    "bytes": 23588
+  },
+  "artifact": {
+    "sha256": "2f99790592cb2c50771af1cbb363ce565c6bbb49487c5f594d16a570dca23347",
+    "bytes": 815675
+  }
+}

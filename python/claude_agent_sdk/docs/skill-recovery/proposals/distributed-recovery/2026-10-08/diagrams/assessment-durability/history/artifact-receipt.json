@@ -1,0 +1,72 @@
+{
+  "diagram_type": "architecture",
+  "output": "assessment-durability.html",
+  "source_revision": "cad28f3e6024ccd992df44cba4306a74ff50140a",
+  "specification_sha256": "a2f2b42f925ccd59d952512ceb276f82c69a1cb2215bbc39f28807023cbd5ba7",
+  "artifact_sha256": "df068522ae73c444c9dcadd259c999581667407496512bfce33f6b01119f3f7b",
+  "archify_base": {
+    "validation": "9/9 showcase, 0 errors, 0 warnings",
+    "strict_check": "pass",
+    "browser_evidence": "pass",
+    "receipt": "review-2/architecture.finalize.json"
+  },
+  "extended_html": {
+    "browser_evidence": "pass",
+    "interaction_checks": 17,
+    "receipt": "walkthrough-browser.json",
+    "viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        1920,
+        1080
+      ],
+      [
+        2048,
+        1320
+      ]
+    ],
+    "automatic_external_requests": 0
+  },
+  "independent_reviews": [
+    {
+      "role": "contract and adversarial fidelity",
+      "outcome": "one material completion acceptance ownership defect corrected; bounded remedy PASS",
+      "identity": "diagram_contract_review",
+      "temporal_docs_calls": 1
+    },
+    {
+      "role": "structural invariants",
+      "outcome": "PASS; full detail on click, summary on hover",
+      "identity": "diagram_structure_review",
+      "temporal_docs_calls": 0
+    }
+  ],
+  "visual_review": {
+    "status": "passed",
+    "scope": "Inspected dark/light 1440x900 captures and capture/outcome panels; page scroll and zoom retained",
+    "resolved_crossovers": 4,
+    "qualification": "Diagram review does not qualify runtime behavior"
+  },
+  "geometry_correction_rounds": 2,
+  "semantic_corrections": 1,
+  "preserved": {
+    "paused_documentation": "unchanged during diagram production",
+    "action_policy": "unresolved; no abort-only approval inferred",
+    "runtime_implementation": "not performed",
+    "installations": "none",
+    "commits_or_pushes": "none"
+  },
+  "checks": {
+    "planning": "PASS, 1351 references",
+    "conventions": "PASS with synchronization disabled",
+    "tracked_and_authored_new_file_whitespace": "PASS"
+  },
+  "limitation": "Full runtime integration is unimplemented/unqualified. Domain boxes represent responsibilities, not independent physical hosts. The modified full HTML has its own browser receipt; Archify base provenance applies only to architecture.html."
+}

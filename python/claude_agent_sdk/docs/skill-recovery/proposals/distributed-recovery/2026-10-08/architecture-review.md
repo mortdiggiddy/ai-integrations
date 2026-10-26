@@ -52,13 +52,17 @@ flowchart TB
             Bridge[Trusted scoped SDK bridge]
         end
         subgraph JobUntrusted[Untrusted job zone with no key or controller access]
-            SDK[Claude SDK and registered skill]
+            Runner[Governed project runner binds admitted package workspace tools and policy]
+            SDK[Claude Agent SDK launches Claude Code with admitted SKILL.md scripts and references]
             Effects[Isolated client code effects]
             Context[Confined Context Mode processing and analysis]
             Cache[Per job rebuildable cache and index]
         end
-        Bridge --> SDK
-        SDK --> Effects
+        Bridge --> Runner
+        Runner --> SDK
+        SDK --> Intent[Original pending intent through trusted runner adapter]
+        Intent --> Session
+        IO --> Effects
         SDK --> Context
         Context --> Cache
     end
@@ -67,7 +71,7 @@ flowchart TB
     Keys --> Bridge
 ```
 
-The restore/key arrows end in the trusted job zone. They represent authorized trusted processing, not keys exposed to arbitrary client code. The harness adapter dispatches effects only through the protected Entity, as in the harness view below. Separate privileges, process/container placement and scoped credentials must enforce this. Effects cannot read controller sockets, host credentials or authority administration keys. The controller and accepted storage remain outside the disposable worker failure domain. Sharing a physical host is allowed in a trusted-host development profile, but that host cannot independently prove its own death.
+The restore/key arrows end in the trusted job zone. They represent authorized trusted processing, not keys exposed to arbitrary client code. Application execution follows the governed project runner, Claude Agent SDK and Claude Code. The runner binds admitted package metadata, dependencies, tools, permissions and workspace before native skill loading. Mods are not required for native loading and remain a separately qualified inner hook candidate. The pending intent returns through the trusted adapter to accepted Session state and Entity scheduling; no direct SDK-to-effect dispatch is admitted. The harness adapter dispatches effects only through the protected Entity, as in the harness view below. Separate privileges, process/container placement and scoped credentials must enforce this. Effects cannot read controller sockets, host credentials or authority administration keys. The controller and accepted storage remain outside the disposable worker failure domain. Sharing a physical host is allowed in a trusted-host development profile, but that host cannot independently prove its own death.
 
 Workflow logic handles deterministic state and recorded outcomes. Network, filesystem, provider and key operations execute in the appropriate Activity, SDK codec/client or external service/controller boundary. An ordinary local call inside Workflow logic is suitable only for deterministic computation. The Python Workflow sandbox is not the security isolation mechanism for arbitrary client code.
 
@@ -194,15 +198,15 @@ flowchart TB
     Raw --> Pair[Project accepted checkpoint and projection owner]
     Pair --> Projected[Bounded accepted model projection]
     Projected --> Native
-    Viewer[Standalone VFS viewer or graph request] --> Reader[Independent reader authorization]
-    Reader --> Act
+    Viewer[Standalone VFS viewer or graph request] --> Reader[Independent read only authorization]
+    Reader --> ReadAct[Registered read only Activity on authorized immutable bytes]
 ```
 
 This is a proposed adapter, not current native compatibility. The harness driver generates its own deterministic host-call UUIDs. They do not automatically equal the Claude native tool-use ID or project authority key. Retain an explicit mapping for parent/script/host calls, ordinal and lineage. Missing or conflicting mappings refuse before effects. Preserve approvals, exact raw results and the accepted projection; JSON rendering alone is not exact native output preservation.
 
 Monty runs restricted computation with pooled processes from Workflow stepping. Its suspension dump is transient Workflow memory; replay regenerates it from recorded host outcomes. It is not a durable native checkpoint. Preserve the pinned replay/timeout semantics when adapting it. Context Mode's subprocess analysis is a different mechanism and must be separately confined.
 
-Harness FileIndex reads current backing-store contents, not a historical accepted snapshot. VFS view/graph Activities can be called independently of the model tool path. Enforce job authorization there, not only at `run_code` or model approval. Caller supplied filesystem configuration is not entitlement. The package's default local payload directory is a development facility; it does not qualify cross-host recovery, per-job isolation or retained-reference deletion safety.
+Harness FileIndex reads current backing-store contents, not a historical accepted snapshot. VFS view/graph Activities can be called independently of the model tool path. The viewer route above is read only and cannot reach the mixed effect operation or bypass Entity scheduling. Enforce job authorization there, not only at `run_code` or model approval. Caller supplied filesystem configuration is not entitlement. The package's default local payload directory is a development facility; it does not qualify cross-host recovery, per-job isolation or retained-reference deletion safety.
 
 Current Claude source requires original-session/first-attempt native pending recovery in the inspected lane. The adapter must preserve required refusals rather than loosening them to make reuse work. Keep the qualified native proof lane distinct from the current integration lock. No new runtime, optional interpreter or fork dependency is admitted by this pack. [Context/harness source research](context-execution-research.md) owns the fuller comparison and dependency evidence; [DSR-7.2/7.3](../../../tickets/phase-7.md) own the restricted runner and identity integration gates.
 
@@ -241,7 +245,7 @@ Nexus is an optional service transport. Local services/Activities can satisfy th
 
 The pinned harness Nexus handler constructs Workflow IDs from supplied session IDs and uses request IDs for Update deduplication. That is routing/deduplication evidence, not client/job authorization. Do not expose its full agent/approval/callback service as the registered hosted API without policy enforcement. Request deduplication is not lifetime authority or permission to rerun an uncertain effect.
 
-External retrieval happens before codec decode. Therefore authorization only inside decryption is too late for the required before-retrieval policy. The inspected Python SDK `StorageDriverRetrieveContext` carries no fields, so it supplies no authenticated reader identity. `StorageDriverStoreContext` does carry a Workflow or Activity target, so job scope is available when objects are written but not when they are read. An admitted driver/service must receive trusted scope through a verified binding. Scoped driver instances or a reader broker are candidate approaches, not selected implementations. Every direct VFS/UI/CLI reader needs the same enforcement. Source: [Nexus security](https://docs.temporal.io/nexus/security).
+External retrieval happens before codec decode. Therefore authorization only inside decryption is too late for the required before-retrieval policy. The inspected Python SDK `StorageDriverRetrieveContext` carries no fields, so it supplies no authenticated reader identity. `StorageDriverStoreContext` does carry a Workflow or Activity target, so job scope is available when objects are written but not when they are read. The [approved configuration](dsr-0.6-configuration.md#certificates-encryption-keys-and-readers) selects the scoped reader broker. Trusted SDK-to-broker scope propagation, enforcement on every direct VFS/UI/CLI entrance and runtime qualification remain unimplemented. Broker selection does not prove that an offload reference carries reader identity. Source: [Nexus security](https://docs.temporal.io/nexus/security).
 
 ## Key services, readers and retention
 

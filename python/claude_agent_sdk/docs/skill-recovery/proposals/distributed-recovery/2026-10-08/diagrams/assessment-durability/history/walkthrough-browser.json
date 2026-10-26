@@ -1,0 +1,131 @@
+{
+  "status": "pass",
+  "artifact": "assessment-durability.html",
+  "sha256": "df068522ae73c444c9dcadd259c999581667407496512bfce33f6b01119f3f7b",
+  "checks": [
+    {
+      "name": "Walkthrough initialized",
+      "pass": true
+    },
+    {
+      "name": "Complete numbered/detail inventory",
+      "pass": true,
+      "evidence": {
+        "steps": 23,
+        "nodes": 26,
+        "options": 23
+      }
+    },
+    {
+      "name": "No horizontal overflow at 1440",
+      "pass": true,
+      "evidence": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "height": 900,
+        "scrollHeight": 3555
+      }
+    },
+    {
+      "name": "No horizontal overflow at 1600",
+      "pass": true,
+      "evidence": {
+        "width": 1600,
+        "scrollWidth": 1585,
+        "height": 1000,
+        "scrollHeight": 3635
+      }
+    },
+    {
+      "name": "No horizontal overflow at 1920",
+      "pass": true,
+      "evidence": {
+        "width": 1920,
+        "scrollWidth": 1905,
+        "height": 1080,
+        "scrollHeight": 3581
+      }
+    },
+    {
+      "name": "No horizontal overflow at 2048",
+      "pass": true,
+      "evidence": {
+        "width": 2048,
+        "scrollWidth": 2033,
+        "height": 1320,
+        "scrollHeight": 3617
+      }
+    },
+    {
+      "name": "Real pointer hover shows description",
+      "pass": true
+    },
+    {
+      "name": "Real click opens full handoff details",
+      "pass": true
+    },
+    {
+      "name": "Escape closes details",
+      "pass": true
+    },
+    {
+      "name": "Keyboard opens outcome gap details",
+      "pass": true
+    },
+    {
+      "name": "Next advances to 18",
+      "pass": true
+    },
+    {
+      "name": "Previous returns to 17",
+      "pass": true
+    },
+    {
+      "name": "Jump reaches retention",
+      "pass": true
+    },
+    {
+      "name": "Separate completion acceptance detail",
+      "pass": true
+    },
+    {
+      "name": "Unresolved action policy preserved",
+      "pass": true
+    },
+    {
+      "name": "No automatic external network request",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "name": "No browser script exceptions",
+      "pass": true,
+      "evidence": []
+    }
+  ],
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      1600,
+      1000
+    ],
+    [
+      1920,
+      1080
+    ],
+    [
+      2048,
+      1320
+    ]
+  ],
+  "captures": [
+    "overview-dark.png",
+    "overview-light.png",
+    "capture-details.png",
+    "outcome-gap-details.png"
+  ],
+  "scope": "Extended HTML interactions and viewport bounds; not runtime architecture qualification."
+}

@@ -586,11 +586,13 @@ def check(root):
         "preservation dispositions do not partition all 43 provenance identities",
     )
 
-    receipts = list((proposal / "diagrams").glob("*.receipt.json"))
+    diagrams = proposal / "diagrams"
+    receipts = list(diagrams.glob("*.receipt.json"))
     require(
-        len(receipts) == 4,
-        "diagram delivery receipt inventory differs from four maintained views",
+        not receipts,
+        "superseded diagram receipts remain in the maintained inventory",
     )
+    receipts = [diagrams / "assessment-durability/architecture.delivery.json"]
     for path in receipts:
         receipt = json.loads(path.read_text())
         for filename, record in (
@@ -609,7 +611,20 @@ def check(root):
                     and len(content) == record["bytes"],
                     f"diagram digest/size mismatch: {filename}",
                 )
-        ElementTree.parse(path.with_name(path.name.replace(".receipt.json", ".svg")))
+    extended = diagrams / "assessment-durability/artifact-receipt.json"
+    receipt = json.loads(extended.read_text())
+    require(
+        receipt["output"] == "assessment-durability.html"
+        and hashlib.sha256((extended.parent / receipt["output"]).read_bytes()).hexdigest()
+        == receipt["artifact_sha256"],
+        "assessment diagram digest or output differs from its receipt",
+    )
+    for name in (
+        "skill-execution-binding.svg",
+        "engine-adapter-boundaries.svg",
+        "recovery-proof-sequence.svg",
+    ):
+        ElementTree.parse(diagrams / name)
 
     markdown_paths = {root / name for name in (*owners, "canonical-documents.md")}
     markdown_paths.update((root / "tickets").rglob("*.md"))
