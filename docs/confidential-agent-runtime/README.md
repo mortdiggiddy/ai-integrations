@@ -15,6 +15,8 @@ Status: ACTIVE PROJECT HOME, 2026-10-26. Independent review returned **PASS for 
 | [Evidence](evidence/README.md) | Sanitized research extraction, primary source pins and actual proof limits |
 | [Verification report](verification-report.md) and [manifest](verification-manifest.json) | Formal evidence gate results, independent findings and review limits |
 | [Transition proposal](rebaseline-plan.md) | Historical basis for this cutover; subsequent status is owned here |
+| [Local backlog](tickets/README.md) | M1 implementation tickets and gated later milestone outcomes |
+| [Collaboration handoff](collaboration-handoff.md) | Proposed ownership boundary, shared interface checks and the first demo sequence |
 
 This is the only active project design package. The [older recovery tree](../../python/claude_agent_sdk/docs/skill-recovery/ARCHIVED.md) is archived in place. Its source, fixtures, experiments and historical states remain inspectable, but its open work is not the active implementation backlog for this architecture.
 
@@ -30,6 +32,6 @@ The final provider direction remains AWS EC2 NitroTPM, a mutually approved Attes
 
 The [cutover validation record](cutover-validation.json) records source preservation, complete coverage, independent review and proving limits. Run `python3 docs/confidential-agent-runtime/check_documents.py` from the repository root to check document links, source identities, ticket preservation and obligation coverage. This is a document integrity check, not formal specification or runtime validation.
 
-The current review approves the complete [M1 external runtime contract](plan.md#m1-explicit-external-runtime-support). Hand only that scope to `write-tickets`, then implementation and `verify-change`. Maintainer acceptance gates upstream merge; the endorsed additive proposal can be prepared without settling future confidential business policies. The review ledger preserves the initial broader review separately. Do not resume the archived DSR queue or issue a broad replacement backlog by default.
+The current review approves the complete [M1 external runtime contract](plan.md#m1-explicit-external-runtime-support). The [local backlog](tickets/README.md) details only that implementation scope and keeps later phases as unestimated milestone containers. Start with CNR-2, then use scoped implementation and `verify-change`. Maintainer acceptance gates upstream merge; the endorsed additive proposal can be prepared without settling future confidential business policies. The review ledger preserves the initial broader review separately. Do not resume the archived DSR queue or issue a broad replacement backlog by default.
 
 The first useful implementation target is explicit external runtime placement and narrow capability checks in the existing harness. This cutover does not implement it. The private native supervisor and replacement test follow their decision gates. Final confidential activation requires separate deployment evidence.

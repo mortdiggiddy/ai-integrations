@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id_pattern": "^CNR-\\d+$",
+  "types": ["Feature", "Bug", "Task", "Spike", "Decision"],
+  "container_types": ["Epic"],
+  "statuses": ["OPEN", "IN PROGRESS", "DONE", "SUPERSEDED"],
+  "priorities": ["Urgent", "High", "Medium", "Low"],
+  "estimation": {
+    "basis": "recommended-default",
+    "point_definition": "One point is about four focused work hours.",
+    "scale": [
+      {"points": 1, "meaning": "About 4 focused work hours"},
+      {"points": 2, "meaning": "About 8 focused work hours"},
+      {"points": 3, "meaning": "About 12 focused work hours"},
+      {"points": 4, "meaning": "About 16 focused work hours"},
+      {"points": 5, "meaning": "About 20 focused work hours"}
+    ],
+    "criteria": [
+      "Estimate active work to produce the stated acceptance evidence.",
+      "Include compatibility, failure tests and review preparation within the ticket boundary."
+    ],
+    "waiting_time": "Exclude passive review, access and external approval waits.",
+    "large_item_rule": "Split work above five points into independently accepted outcomes; do not force larger work into five points."
+  },
+  "labels": {
+    "categories": [
+      {"category": "work_type", "prefix": "Type", "minimum": 1, "maximum": 1, "equals_type": true, "values": ["Feature", "Bug", "Task", "Spike", "Decision"]},
+      {"category": "topic", "prefix": "Topic", "minimum": 0, "maximum": 2, "values": ["External runtime"]}
+    ]
+  },
+  "optional_fields": ["Owner role", "Requirements"],
+  "strict_links": true,
+  "ignore_files": ["README.md"],
+  "require_local_statement": true,
+  "forbid_dashes": true,
+  "forbidden_patterns": ["/home/", "/Users/", "/mnt/"],
+  "forbidden_path_components": ["customers", "engagements", "logs", "log", "inbox"],
+  "forbidden_ancestor_files": ["customer-profile.md", "tracker-routing.md"],
+  "gates": [
+    {"kind": "exit_review", "ticket": "CNR-6", "members": "^CNR-[2-6]$"}
+  ],
+  "coverage": [],
+  "export": {
+    "linear": {
+      "status_map": {"OPEN": "Backlog", "IN PROGRESS": "In Progress", "DONE": "Done", "SUPERSEDED": "Canceled"},
+      "priority_map": {"Urgent": "Urgent", "High": "High", "Medium": "Medium", "Low": "Low"},
+      "issue_type_map": {"Epic": "Project", "Feature": "Issue", "Bug": "Issue", "Task": "Issue", "Spike": "Issue", "Decision": "Issue"},
+      "backlog_statuses": ["Backlog"], "active_statuses": ["In Progress"], "terminal_statuses": ["Done", "Canceled"]
+    },
+    "jira": {
+      "status_map": {"OPEN": "Backlog", "IN PROGRESS": "In Progress", "DONE": "Done", "SUPERSEDED": "Won't Do"},
+      "priority_map": {"Urgent": "Highest", "High": "High", "Medium": "Medium", "Low": "Low"},
+      "issue_type_map": {"Epic": "Epic", "Feature": "Story", "Bug": "Bug", "Task": "Task", "Spike": "Task", "Decision": "Task"},
+      "backlog_statuses": ["Backlog"], "active_statuses": ["In Progress"], "terminal_statuses": ["Done", "Won't Do"]
+    }
+  }
+}
