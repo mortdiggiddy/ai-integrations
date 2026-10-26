@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "source": "packaged offline Temporal Source Map",
+  "scope": [
+    "python/claude_agent_sdk/src/**",
+    "python/claude_agent_sdk/tests/**"
+  ],
+  "aggregate_status": "failed",
+  "aggregate_failure": {
+    "reason": "22 archived escaping symlink fixtures encountered by inventory outside selected maintained code",
+    "count": 22,
+    "example": "python/claude_agent_sdk/docs/skill-recovery/experiments/results/lane-preparation-20261007/minimum-package-question/package/work/link"
+  },
+  "source_snapshot": {
+    "content_fingerprint": "sha256:e157cfb4e532a0ef95f09ccba860da608ec42fb7237dd43f11c5aabf6606636f",
+    "dirty_tree_fingerprint": null,
+    "git_revision": null,
+    "git_worktree_fingerprint": null,
+    "identity": "sha256:e5b61eb6ed214782c768bba34fc245132634cbff3012a3381d9be534d6ae213f",
+    "kind": "non_git"
+  },
+  "host_git": {
+    "revision": "cad28f3e6024ccd992df44cba4306a74ff50140a",
+    "dirty": true,
+    "qualification": "Separate host Git observation; mapper supplied no Git revision"
+  },
+  "python": {
+    "status": "complete",
+    "analyzed_input_files": [
+      "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/__init__.py",
+      "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_activity.py",
+      "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_events.py",
+      "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_models.py",
+      "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_plugin.py",
+      "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_runner.py",
+      "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_workflow.py",
+      "python/claude_agent_sdk/tests/conftest.py",
+      "python/claude_agent_sdk/tests/endless/activities.py",
+      "python/claude_agent_sdk/tests/endless/policy.py",
+      "python/claude_agent_sdk/tests/endless/workflows.py",
+      "python/claude_agent_sdk/tests/hardening/workflows.py",
+      "python/claude_agent_sdk/tests/helpers/broken_engine_hook.py",
+      "python/claude_agent_sdk/tests/helpers/fake_messages_api.py",
+      "python/claude_agent_sdk/tests/helpers/offline_harness.py",
+      "python/claude_agent_sdk/tests/helpers/plugin_meta.py",
+      "python/claude_agent_sdk/tests/helpers/provenance.py",
+      "python/claude_agent_sdk/tests/helpers/storage.py",
+      "python/claude_agent_sdk/tests/lifecycle/policy.py",
+      "python/claude_agent_sdk/tests/lifecycle/workflows.py",
+      "python/claude_agent_sdk/tests/refund/activities.py",
+      "python/claude_agent_sdk/tests/refund/policy.py",
+      "python/claude_agent_sdk/tests/refund/worker.py",
+      "python/claude_agent_sdk/tests/refund/workflows.py",
+      "python/claude_agent_sdk/tests/storage/workflows.py"
+    ],
+    "missing_input_files": [],
+    "assertion_count": 552,
+    "graph_element_count": 552,
+    "sdk_versions": [
+      "1.33.0"
+    ],
+    "diagnostics": []
+  },
+  "coverage_counts": {
+    "by_adapter": [
+      {
+        "count": 1,
+        "key": "temporal-python-libcst"
+      }
+    ],
+    "by_api_form": [
+      {
+        "count": 12,
+        "key": "api.py.activity.defn"
+      },
+      {
+        "count": 4,
+        "key": "api.py.worker.constructor"
+      },
+      {
+        "count": 24,
+        "key": "api.py.workflow.defn-run"
+      },
+      {
+        "count": 38,
+        "key": "api.py.workflow.message-decorator"
+      },
+      {
+        "count": 4,
+        "key": "api.py.workflow.update-validator"
+      },
+      {
+        "count": 223,
+        "key": "protocol.declares.python"
+      },
+      {
+        "count": 24,
+        "key": "protocol.evidence.python"
+      },
+      {
+        "count": 223,
+        "key": "protocol.source-symbol.python"
+      }
+    ],
+    "by_capability": [
+      {
+        "count": 13,
+        "key": "activity_identity_binding"
+      },
+      {
+        "count": 8,
+        "key": "query_handler"
+      },
+      {
+        "count": 3,
+        "key": "signal_handler"
+      },
+      {
+        "count": 496,
+        "key": "unclassified"
+      },
+      {
+        "count": 5,
+        "key": "update_handler"
+      },
+      {
+        "count": 2,
+        "key": "worker_task_queue"
+      },
+      {
+        "count": 25,
+        "key": "workflow_identity_binding"
+      }
+    ],
+    "by_cell_status": [
+      {
+        "count": 110,
+        "key": "absent"
+      },
+      {
+        "count": 16,
+        "key": "passed"
+      }
+    ],
+    "by_construct_type": [
+      {
+        "count": 6,
+        "key": "ACTIVITY"
+      },
+      {
+        "count": 223,
+        "key": "DECLARES"
+      },
+      {
+        "count": 8,
+        "key": "HANDLES_QUERY"
+      },
+      {
+        "count": 3,
+        "key": "HANDLES_SIGNAL"
+      },
+      {
+        "count": 5,
+        "key": "HANDLES_UPDATE"
+      },
+      {
+        "count": 6,
+        "key": "IMPLEMENTS_ACTIVITY"
+      },
+      {
+        "count": 12,
+        "key": "IMPLEMENTS_WORKFLOW"
+      },
+      {
+        "count": 10,
+        "key": "MESSAGE_DEFINITION"
+      },
+      {
+        "count": 16,
+        "key": "MESSAGE_HANDLER"
+      },
+      {
+        "count": 1,
+        "key": "POLLS_TASK_QUEUE"
+      },
+      {
+        "count": 1,
+        "key": "REGISTERS_ACTIVITY"
+      },
+      {
+        "count": 1,
+        "key": "REGISTERS_WORKFLOW"
+      },
+      {
+        "count": 24,
+        "key": "SOURCE_MODULE"
+      },
+      {
+        "count": 223,
+        "key": "SOURCE_SYMBOL"
+      },
+      {
+        "count": 1,
+        "key": "WORKER_DEFINITION"
+      },
+      {
+        "count": 12,
+        "key": "WORKFLOW"
+      }
+    ],
+    "by_derivation": [
+      {
+        "count": 302,
+        "key": "declared"
+      },
+      {
+        "count": 250,
+        "key": "structural"
+      }
+    ],
+    "by_extractor": [
+      {
+        "count": 552,
+        "key": "temporal-python-libcst"
+      }
+    ],
+    "by_language": [
+      {
+        "count": 552,
+        "key": "python"
+      }
+    ],
+    "by_resolution": [
+      {
+        "count": 257,
+        "key": "exact"
+      },
+      {
+        "count": 3,
+        "key": "unresolved"
+      }
+    ]
+  },
+  "limitations": [
+    {
+      "affected_coverage": "source-selection",
+      "language_id": "not_applicable",
+      "limitation_id": "cross-repository-boundary",
+      "observed_count": 22,
+      "site_kind": "source_file",
+      "source": "inventory"
+    },
+    {
+      "affected_coverage": "source-selection",
+      "language_id": "not_applicable",
+      "limitation_id": "generated-code",
+      "observed_count": 30623,
+      "site_kind": "source_file",
+      "source": "inventory"
+    }
+  ],
+  "fidelity_qualification": "not_qualified",
+  "graph_traces": [
+    {
+      "assertion_id": "assertion:sha256:d28b2cf63406a6bd3fa044a4c30cdef8d49eceb88676af0a667a90be0993f88d",
+      "api_form": "api.py.worker.constructor",
+      "relation_type": "REGISTERS_WORKFLOW",
+      "derivation": "structural",
+      "source_truth_basis": "Worker.workflows",
+      "target": {
+        "reason": "workflow_registration_not_statically_resolved",
+        "resolution": "unresolved"
+      },
+      "evidence": [
+        {
+          "end": {
+            "column_utf16": 38,
+            "line": 48
+          },
+          "end_byte": 1523,
+          "path": "python/claude_agent_sdk/tests/refund/worker.py",
+          "region_sha256": "sha256:132880b684f9f045cb12284f4fdd855983ab49508ea359c4d0579c00e530f618",
+          "start": {
+            "column_utf16": 19,
+            "line": 48
+          },
+          "start_byte": 1504
+        }
+      ]
+    },
+    {
+      "assertion_id": "assertion:sha256:f9dc87380c070c092e92e123195153e0fa0c8800bec2c50203099df8ccc7b5bc",
+      "api_form": "api.py.worker.constructor",
+      "relation_type": "POLLS_TASK_QUEUE",
+      "derivation": "structural",
+      "source_truth_basis": "Worker.task_queue",
+      "target": {
+        "reason": "computed_or_missing_task_queue",
+        "resolution": "unresolved"
+      },
+      "evidence": [
+        {
+          "end": {
+            "column_utf16": 34,
+            "line": 47
+          },
+          "end_byte": 1483,
+          "path": "python/claude_agent_sdk/tests/refund/worker.py",
+          "region_sha256": "sha256:a7015a64a98bd98271af1402ba63e5ce672fdfd0e885b3d47014cb951f8af6fe",
+          "start": {
+            "column_utf16": 19,
+            "line": 47
+          },
+          "start_byte": 1468
+        }
+      ]
+    },
+    {
+      "assertion_id": "assertion:sha256:fd3131529cd3dba49f8fc073fec2628bb420cf21023579123b39d2824ed36cab",
+      "api_form": "api.py.worker.constructor",
+      "relation_type": "REGISTERS_ACTIVITY",
+      "derivation": "structural",
+      "source_truth_basis": "Worker.activities",
+      "target": {
+        "reason": "computed_activities_list",
+        "resolution": "unresolved"
+      },
+      "evidence": [
+        {
+          "end": {
+            "column_utf16": 22,
+            "line": 49
+          },
+          "end_byte": 1548,
+          "path": "python/claude_agent_sdk/tests/refund/worker.py",
+          "region_sha256": "sha256:b5c7aed7cd2a308523e7d2847b7815909e864b2fd9c4ea88b00d35adb2ecdfd7",
+          "start": {
+            "column_utf16": 19,
+            "line": 49
+          },
+          "start_byte": 1545
+        }
+      ]
+    }
+  ],
+  "region_recheck": {
+    "checked": 556,
+    "mismatches": []
+  },
+  "canonical_artifact_sha256": {
+    "run.json": "5cf5ac8dea1dc2b296ee4354dac6c20a7cfb96dfab42244f8e6d0e39cee13142",
+    "facts.ndjson": "73d8b0d4e0547e23409cf73640c0cc12275dd1a1ebde6fce4da65394b2c973db",
+    "graph.json": "34329354b8f740486df06b915bc78f0614b26ca73e292e6236a2706c10b586ca",
+    "coverage.json": "bd77a70cfeec8fdf2b1fa949d650b7052425f021a88389705b3a38259f903de6",
+    "support-manifest.json": "afad8953770d2103ead33ee180678aeb975697e1b448ca84fd6a187defb846e0"
+  },
+  "interpretation": "Usable finalized Python source-derived lower bound, not a successful full-repository run or complete runtime topology. Dynamic registration and queue targets remain unresolved. Raw canonical outputs retained locally; this portable receipt is derived evidence, not a replacement canonical map."
+}

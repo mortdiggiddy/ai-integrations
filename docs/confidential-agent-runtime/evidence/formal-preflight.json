@@ -1,0 +1,17 @@
+{
+  "recorded_on": "2026-10-26",
+  "classification": "brownfield",
+  "classification_basis": "The project owner selected extension of the existing code.",
+  "confirmed_repository": "https://github.com/mortdiggiddy/ai-integrations",
+  "local_checkout_confirmed": true,
+  "existing_project_sources": ["prepared project package", "historical DSR ticket set", "retained recovery specification and evidence"],
+  "account_scope": "operator owned development fork, not a customer engagement",
+  "existing_map_search": "No canonical map found in the project and checked internal locations.",
+  "map_selection": "The project owner selected a fresh map, then selected maintained Claude code and Worker examples instead of archived fixtures.",
+  "map_scope": ["python/claude_agent_sdk/src/**", "python/claude_agent_sdk/tests/**"],
+  "rigor": "spec-first",
+  "rigor_basis": "Bounded prototype with explicit high consequence trust and recovery decisions; automatic code/spec drift enforcement is not claimed.",
+  "required_sources": {"temporal_docs": "read succeeded", "atlas_wrappers": "query and source read succeeded"},
+  "supporting_skills": {"temporal_developer": "read and applied", "temporal_design": "read and applied by independent reviewers", "map_temporal_application": "packaged offline analyzer invoked; final recorded limits preserved"},
+  "upstream_source_permission": "The project owner authorized bringing in PR work where useful. The current head was fetched to a separate review ref; no merge or dependency adoption occurred."
+}

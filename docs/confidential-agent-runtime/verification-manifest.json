@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "verdict": "PASS",
+  "target_identities": [
+    "Selected outcome: M1 Sandbox Orchestration Harness external runtime mode and capability admission design only; M2-M4 remain later stages without a whole-project PASS",
+    "Harness https://github.com/temporal-community/sandbox-orchestration-harness at 24f09129335f8057750f09f84a45b9c76c99d9c1; current main independently checked unchanged",
+    "Local application cad28f3e6024ccd992df44cba4306a74ff50140a plus uncommitted design documents; runtime source, tests and lock unchanged",
+    "Python topology content fingerprint sha256:e157cfb4e532a0ef95f09ccba860da608ec42fb7237dd43f11c5aabf6606636f; failed aggregate and unresolved dynamic targets retained as disclosed limits",
+    "Optional Claude PR169 32969f3ffa7688cb1cde250f1245e4ed70eb53d6 is a later integration candidate, not adopted by M1"
+  ],
+  "package": {
+    "spec": "spec.md",
+    "plan": "plan.md",
+    "gate_result": "pass"
+  },
+  "pass": {
+    "mode": "full"
+  },
+  "reviewers": [
+    {
+      "reviewer": "temporal-design-review",
+      "applicability": "applicable",
+      "applicability_basis": "M1 affects Child Workflow resource ownership, Activity routing, provider retry identity and replay compatibility.",
+      "outcome": "applied",
+      "discovered_as": "temporal-design",
+      "invoked_by": "protocol_contract_validation",
+      "finding_refs": [
+        "S1-C1",
+        "S1-C2",
+        "S1-C3",
+        "S1-C4"
+      ]
+    },
+    {
+      "reviewer": "temporal-docs-grounding",
+      "applicability": "applicable",
+      "applicability_basis": "Replay, Activity retry and workflow lifetime claims were grounded through official sources; earlier calls in this review effort were reused after phase scoping.",
+      "outcome": "applied",
+      "call_count": 5,
+      "roles": [
+        "protocol_contract_validation",
+        "protocol_adversarial_validation"
+      ]
+    },
+    {
+      "reviewer": "pattern-precedent",
+      "applicability": "applicable",
+      "applicability_basis": "M1 retains the existing owner and extends Activity/provider routing without replacing the lifecycle.",
+      "outcome": "applied",
+      "invoked_by": "protocol_contract_validation",
+      "classifications": [
+        {
+          "mechanism": "Existing sandbox Child Workflow remains the sole compute lifecycle owner",
+          "classification": "partial",
+          "source": "Direct pinned source https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/workflow/workflow.go and sdk/sandbox.go"
+        },
+        {
+          "mechanism": "Mode-specific external start and capability checks reuse provider Activity boundaries and stable identity",
+          "classification": "partial",
+          "source": "Direct pinned source https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/workflow/activities.go and sdk/compute/smolcloud/provider.go; additive external branch is proposed"
+        },
+        {
+          "mechanism": "Preserve legacy replay by retaining old command selection and adding an explicit external branch",
+          "classification": "partial",
+          "source": "https://docs.temporal.io/develop/go/workflows/versioning#patching-with-getversion and pinned harness source; exact implementation replay remains acceptance evidence"
+        }
+      ]
+    },
+    {
+      "reviewer": "temporal-developer",
+      "applicability": "applicable",
+      "applicability_basis": "Worker/Activity placement and explicit legacy compatibility inform M1.",
+      "outcome": "applied",
+      "discovered_as": "temporal:temporal-developer",
+      "invoked_by": "protocol_adversarial_validation",
+      "finding_refs": [
+        "S1-C1",
+        "S1-C3",
+        "S1-C4"
+      ]
+    }
+  ]
+}

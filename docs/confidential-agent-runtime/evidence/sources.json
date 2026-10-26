@@ -1,0 +1,260 @@
+{
+  "catalog_version": 1,
+  "recorded_on": "2026-10-26",
+  "kind": "sanitized-research-source-catalog",
+  "formal_spec_evidence_manifest": false,
+  "imported_sources": [
+    {
+      "id": "SR01",
+      "label": "Trust and execution reconciliation, October 14, updated October 15",
+      "sha256": "b24df2e32a187a5684f6b80f9f6f15a391f65af53d73f3f251ffc87afe28db45",
+      "disposition": "synthesized",
+      "topics": [
+        "trust",
+        "key-release",
+        "input-output",
+        "workspace",
+        "external-placement",
+        "threat-scope"
+      ]
+    },
+    {
+      "id": "SR02",
+      "label": "Earlier reconciliation snapshot",
+      "sha256": "a46a513d2c495edafc6c9138167191d69b377616cd77ceb1816dcc661a5ba084",
+      "disposition": "archival-only",
+      "topics": [
+        "superseded-placement-history"
+      ]
+    },
+    {
+      "id": "SR03",
+      "label": "Unrun Python lifecycle sketch, October 15",
+      "sha256": "e3dfdb0cd6d125dfb0ca7920fab845cc4e4df3f544d98b1b36b23e78d7871748",
+      "disposition": "synthesized-with-code-kept-historical",
+      "topics": [
+        "supervisor-ordering",
+        "watcher-lifetime",
+        "cleanup",
+        "assumed-interfaces"
+      ]
+    },
+    {
+      "id": "SR04",
+      "label": "Session recovery comparison, October 16",
+      "sha256": "9e57ef5cfe882a416a47952b16d13dcee618b6bef4502d08a03a12648d35e166",
+      "disposition": "synthesized-with-default-recommendation-superseded",
+      "topics": [
+        "native-vs-recorded-recovery",
+        "mirror-barrier",
+        "workspace-consistency",
+        "external-effects",
+        "rollover",
+        "qualification"
+      ]
+    },
+    {
+      "id": "SR05",
+      "label": "Agent adapter reuse research, October 16",
+      "sha256": "406250dda57f03880885d127e9b190b082017182c7cae1f8baf006886ff6c882",
+      "disposition": "synthesized",
+      "topics": [
+        "native-prototypes",
+        "result-carriers",
+        "trusted-runtime-placement",
+        "version-qualification"
+      ]
+    },
+    {
+      "id": "SR06",
+      "label": "Sandbox provider research, October 16",
+      "sha256": "237ab95e095b4f9c1085e6dc431cd7602231dd171bdbfaf8546be30dca312806",
+      "disposition": "synthesized-with-upstream-status-refreshed",
+      "topics": [
+        "placement",
+        "capabilities",
+        "readiness",
+        "reconciliation",
+        "snapshot-limits"
+      ]
+    },
+    {
+      "id": "SR07",
+      "label": "Ecosystem integration research, October 16",
+      "sha256": "536eba0e2526a91dd8d291335055d1b9b289172146cdaa57835c19f1734c9723",
+      "disposition": "synthesized",
+      "topics": [
+        "adjacent-adapters",
+        "secret-indirection",
+        "attestation-candidates",
+        "optional-service-boundaries"
+      ]
+    },
+    {
+      "id": "SR08",
+      "label": "Sandbox reuse roadmap, October 16",
+      "sha256": "3b72a288a40e78b6f523f3485d456002d73c6ab5957932ef55a88998ea412bc1",
+      "disposition": "synthesized-not-adopted-as-a-program",
+      "topics": [
+        "ownership",
+        "controller-reuse",
+        "bounded-contribution",
+        "second-harness",
+        "broader-exit"
+      ]
+    },
+    {
+      "id": "SR09",
+      "label": "Integration alignment review, October 26",
+      "sha256": "34032fadc8a0dacf63c9c57dae8a6ee53ffccb450c2cfbadbfdc8325131ba77d",
+      "disposition": "synthesized",
+      "topics": [
+        "native-direction",
+        "trusted-worker-assumption",
+        "announced-interface-change",
+        "recovery-scope"
+      ]
+    },
+    {
+      "id": "SR10",
+      "label": "Next step validation, October 26",
+      "sha256": "ef053ec05d7c696bf9fec7d9a4b8368b2ded8071616b2c0b881c385d178cbe33",
+      "disposition": "synthesized",
+      "topics": [
+        "launch-race",
+        "runtime-replacement-gap",
+        "custom-transport-store",
+        "minimal-prototype",
+        "optional-interoperability"
+      ]
+    }
+  ],
+  "public_source_pins": [
+    {
+      "id": "P01",
+      "url": "https://github.com/temporalio/ai-integrations/pull/169",
+      "revision": "18bc31e5005cbf403ebab38cb51e5cde4aa930a4",
+      "state_at_retrieval": "open draft",
+      "retrieved_on": "2026-10-26",
+      "role": "historical-integration-source-at-document-cutover",
+      "superseded_as_current_by": "P08"
+    },
+    {
+      "id": "P02",
+      "url": "https://github.com/anthropics/claude-agent-sdk-python/tree/1ef6d8c71bb0e44a6b33fe61497864f21e17fdb7",
+      "revision": "1ef6d8c71bb0e44a6b33fe61497864f21e17fdb7",
+      "version": "0.2.163",
+      "role": "current-integration-sdk-pin"
+    },
+    {
+      "id": "P03",
+      "url": "https://github.com/temporal-community/sandbox-orchestration-harness/tree/24f09129335f8057750f09f84a45b9c76c99d9c1",
+      "revision": "24f09129335f8057750f09f84a45b9c76c99d9c1",
+      "role": "lifecycle-source"
+    },
+    {
+      "id": "P04",
+      "url": "https://github.com/anthropics/claude-agent-sdk-python/tree/f7529348747235da34af3ed202251228ff31db08",
+      "revision": "f7529348747235da34af3ed202251228ff31db08",
+      "version": "0.2.165",
+      "role": "historical-mirror-implementation"
+    },
+    {
+      "id": "P05",
+      "url": "https://github.com/temporalio/ai-integrations/tree/2f1c9b561384fab2e7b415dde91eb0b5900ea42f/python/claude_agent_sdk",
+      "revision": "2f1c9b561384fab2e7b415dde91eb0b5900ea42f",
+      "role": "historical-native-continuation-prototype"
+    },
+    {
+      "id": "P06",
+      "url": "https://github.com/temporalio/ai-integrations/tree/9b968eb01e271bbf6d5e4d5cefbd6986871ed90d/python/claude_agent_sdk",
+      "revision": "9b968eb01e271bbf6d5e4d5cefbd6986871ed90d",
+      "role": "historical-mods-prototype"
+    },
+    {
+      "id": "P07",
+      "url": "https://github.com/temporalio/ai-integrations/tree/fd9fe9c2e67adb287d20bfa3d1c3ab673b4d07a6/python/claude_agent_sdk",
+      "revision": "fd9fe9c2e67adb287d20bfa3d1c3ab673b4d07a6",
+      "role": "historical-native-batch-prototype"
+    },
+    {
+      "id": "P08",
+      "url": "https://github.com/temporalio/ai-integrations/tree/2c722ff59250d3427ba5e43ea9713ecef959ee71/python/claude_agent_sdk",
+      "revision": "2c722ff59250d3427ba5e43ea9713ecef959ee71",
+      "retrieved_on": "2026-10-26",
+      "role": "historical-optional-integration-extension",
+      "superseded_as_current_by": "P09",
+      "state_at_retrieval": "open draft",
+      "local_adoption": "fetched to a review ref only; no branch merge or dependency change"
+    },
+    {
+      "id": "P09",
+      "url": "https://github.com/temporalio/ai-integrations/tree/32969f3ffa7688cb1cde250f1245e4ed70eb53d6/python/claude_agent_sdk",
+      "revision": "32969f3ffa7688cb1cde250f1245e4ed70eb53d6",
+      "retrieved_on": "2026-10-26",
+      "role": "current-optional-integration-extension",
+      "state_at_retrieval": "open draft",
+      "delta_from_P08": "README clarification and cancellation test only; production source and dependency files unchanged",
+      "local_adoption": "review ref only; no branch merge or dependency change"
+    },
+    {
+      "id": "P10",
+      "url": "https://github.com/temporalio/samples-python/tree/347cff1a1efce1afdc6ead9eaf2d565a29be99ad/claude_agent_sdk_plugin",
+      "revision": "347cff1a1efce1afdc6ead9eaf2d565a29be99ad",
+      "retrieved_on": "2026-10-26",
+      "role": "ordinary-transport-and-native-rollover-partial-precedent",
+      "integration_dependency_revision": "f2218a3672dacaf9b88272278b06b614ad9d6d5e",
+      "resolved_claude_sdk": "0.2.165",
+      "resolved_temporal_sdk": "1.34.0",
+      "local_adoption": "source reads only; no sample execution or dependency change"
+    }
+  ],
+  "refresh_operations": [
+    {
+      "tool": "GitHub API",
+      "operation": "read pull request metadata and pinned source",
+      "used_for": [
+        "P01 revision",
+        "launch identity window",
+        "watcher replacement scope",
+        "P02 custom Transport materialization"
+      ],
+      "result": "source reads succeeded; no runtime test"
+    },
+    {
+      "tool": "Temporal Docs",
+      "operation": "search",
+      "query": "Where does plaintext exist when Temporal payload codecs encrypt data, and can a codec hide content from the Worker executing the application?",
+      "used_for": [
+        "codec trust placement",
+        "failure and viewer boundaries"
+      ],
+      "result": "succeeded; official codec and data encryption material returned"
+    },
+    {
+      "tool": "Temporal Docs",
+      "operation": "search",
+      "query": "What do official Temporal Activity idempotency and Continue-As-New documentation require for safe external side effects and explicitly retained recovery state?",
+      "used_for": [
+        "external side effect idempotency"
+      ],
+      "result": "succeeded; Activity idempotency material returned; rollover statement remains supported by retained official source link"
+    },
+    {
+      "tool": "Atlas wrapper",
+      "operation": "query",
+      "query": "Activity idempotency codec sandbox external runtime",
+      "used_for": [
+        "bounded ecosystem discovery"
+      ],
+      "result": "completed; pinned GitHub source remains the target implementation evidence"
+    }
+  ],
+  "limitations": [
+    "Source digests identify transferred research, not independent proof of its claims.",
+    "Current findings are source analysis, not failure injection results.",
+    "No live model, provider, attestation, key release or recovery test ran during consolidation.",
+    "Diagrams, private transcripts and superseded code sketches were not promoted to specification authority.",
+    "Formal spec-driven-temporal metadata and validation have not run."
+  ]
+}

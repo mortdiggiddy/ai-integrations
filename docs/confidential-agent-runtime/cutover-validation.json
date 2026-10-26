@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "scope": "Documentation consolidation and archival cutover",
+  "status": "complete",
+  "formal_spec_driven_temporal": "pending; not invoked",
+  "application_implementation": "not performed",
+  "runtime_acceptance": "not executed",
+  "active_package": "docs/confidential-agent-runtime",
+  "legacy_archive": {
+    "path": "python/claude_agent_sdk/docs/skill-recovery",
+    "mode": "in-place",
+    "reason": "Retain experiment imports, approval-bound source bytes and historical evidence",
+    "historical_ticket_statuses": "unchanged"
+  },
+  "research_transfer": {
+    "source_documents": 10,
+    "archived_digests_verified": 10,
+    "source_location_active_maintenance": "retired",
+    "raw_private_transcripts_imported": false
+  },
+  "coverage": {
+    "tickets_and_epics": 70,
+    "historical_acceptance_criteria": 460,
+    "canonical_assumptions": 59,
+    "candidate_assumptions": 15,
+    "legacy_decisions": 6,
+    "invariants": 7,
+    "qualification_cases": 15,
+    "trust_requirements": 8,
+    "engine_requirements": 11,
+    "roadmap_items": 10,
+    "total_mapped_items": 201
+  },
+  "preservation": {
+    "preexisting_tracked_deltas": 20,
+    "changed_preexisting_deltas": 0,
+    "preexisting_untracked_files": 33,
+    "missing_or_modified_preexisting_untracked_files": 0,
+    "retained_navigation_source_documents": 7,
+    "altered_retained_source_documents": 0,
+    "local_backup_artifacts": {
+      "untracked.tar": "802bbf5acd51db0d72989a4720fb11819109a2b4d5c8b74954c33ae2f9b03065",
+      "navigation-before.tar": "8ecf3e952bdb6eaab0514eae6e40b6b67682519107d3f14f0e354aa75b165ff3",
+      "untracked-paths": "dc6a94ef31ee1e219711af49274da989212b9600cb38ea104fb4c49aa757736f",
+      "preexisting.patch": "a5acbd67b9c4afab11ce7392b4738d49c36c2fb976cde54e18d626d58a28403c"
+    }
+  },
+  "validation": {
+    "command": "python3 docs/confidential-agent-runtime/check_documents.py",
+    "result": "PASS",
+    "checks": [
+      "discovered legacy identifier set equality",
+      "all replacement owner references resolve",
+      "all source digests match",
+      "all 70 ticket block digests and historical statuses match",
+      "all 460 historical acceptance criteria retained",
+      "local Markdown links and heading anchors resolve"
+    ],
+    "negative_controls": {
+      "missing_ticket": "rejected",
+      "forged_historical_status": "rejected",
+      "unknown_owner": "rejected",
+      "source_digest_drift": "rejected"
+    },
+    "python_compile": "PASS",
+    "historical_checker": {
+      "before": "FAIL: diagram delivery receipt inventory differs from four maintained views",
+      "after": "FAIL: diagram delivery receipt inventory differs from four maintained views",
+      "new_legacy_validation_errors": 0
+    }
+  },
+  "independent_reviews": [
+    {
+      "role": "cutover_spec",
+      "scope": "integration and hot obligation mapping plus independent 70 ticket block digest recomputation",
+      "material_findings_remaining": 0
+    },
+    {
+      "role": "cutover_evidence",
+      "scope": "prepared requirements, decisions, delivery plan and archive scope against extracted research",
+      "material_findings_remaining": 0
+    }
+  ],
+  "limitations": [
+    "Coverage and source integrity do not prove semantic equivalence of every historical acceptance criterion.",
+    "Owner decisions BD-01 through BD-09 remain open.",
+    "The later formal specification pass must reconcile changed guarantees before dependent implementation or claims.",
+    "No branch switch, dependency update, application code change, paid call, allocation, commit or publication occurred."
+  ]
+}

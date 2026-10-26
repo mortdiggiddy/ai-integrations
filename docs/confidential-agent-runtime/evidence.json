@@ -1,0 +1,300 @@
+{
+  "schema": "evidence-manifest/v1",
+  "artifact": "spec",
+  "generated_for": "Confidential native agent runtime",
+  "sources": [
+    {
+      "id": "EV-1",
+      "tool": "map-temporal-application",
+      "operation": "read finalized analyzer outcome and portable receipt",
+      "query": "docs/confidential-agent-runtime/evidence/topology-receipt.json",
+      "result_ref": "docs/confidential-agent-runtime/evidence/topology-receipt.json",
+      "used_for": "INV-2 INV-3 source pin and static topology residual",
+      "status": "used",
+      "outcome": "Aggregate failed from archived symlink inventory; finalized Python lower bound is usable. Mapper reported non_git without a Git revision; host Git corroboration is separate. Three dynamic targets remain unresolved."
+    },
+    {
+      "id": "EV-2",
+      "tool": "user-source",
+      "operation": "read retained source",
+      "query": "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_models.py:54-90",
+      "result_ref": "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_models.py:54",
+      "used_for": "INV-3 INV-7 existing plaintext segment models",
+      "status": "used"
+    },
+    {
+      "id": "EV-3",
+      "tool": "user-source",
+      "operation": "read retained source",
+      "query": "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_session_control.py:86-119",
+      "result_ref": "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_session_control.py:86",
+      "used_for": "INV-1 local SDK lifecycle reference",
+      "status": "used"
+    },
+    {
+      "id": "EV-4",
+      "tool": "user-source",
+      "operation": "read retained source",
+      "query": "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_plugin.py:29-43",
+      "result_ref": "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_plugin.py:29",
+      "used_for": "INV-2 generated segment Activity registration",
+      "status": "used"
+    },
+    {
+      "id": "EV-5",
+      "tool": "user-source",
+      "operation": "read retained lock and package metadata",
+      "query": "python/claude_agent_sdk/uv.lock and pyproject.toml",
+      "result_ref": "python/claude_agent_sdk/uv.lock",
+      "used_for": "INV-2 dependency baseline; SDK 0.2.154 and Temporal 1.33.0",
+      "status": "used"
+    },
+    {
+      "id": "EV-6",
+      "tool": "user-source",
+      "operation": "read retained source",
+      "query": "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_workflow.py:447-490,577-597,766-776",
+      "result_ref": "python/claude_agent_sdk/src/temporalio/claude_agent_sdk/_workflow.py:447",
+      "used_for": "INV-2 INV-3 INV-4 current helper, segment and tool scheduling",
+      "status": "used"
+    },
+    {
+      "id": "EV-7",
+      "tool": "user-source",
+      "operation": "read owner decision register",
+      "query": "docs/confidential-agent-runtime/decisions.md",
+      "result_ref": "docs/confidential-agent-runtime/decisions.md",
+      "used_for": "INV-1 INV-5 INV-7 open owner decisions and bounded authority",
+      "status": "used"
+    },
+    {
+      "id": "EV-8",
+      "tool": "user-source",
+      "operation": "read complete obligation map",
+      "query": "docs/confidential-agent-runtime/obligation-map.json",
+      "result_ref": "docs/confidential-agent-runtime/obligation-map.json",
+      "used_for": "INV-5 inherited obligations and historical acceptance limits",
+      "status": "used"
+    },
+    {
+      "id": "EV-9",
+      "tool": "user-source",
+      "operation": "read consolidated research",
+      "query": "docs/confidential-agent-runtime/evidence/research.md",
+      "result_ref": "docs/confidential-agent-runtime/evidence/research.md",
+      "used_for": "INV-1 INV-5 INV-7 pinned native recovery and trust boundary research",
+      "status": "used"
+    },
+    {
+      "id": "EV-10",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What do official Temporal Python documentation require for Activity timeouts, retries, heartbeats and cancellation, and why must external process termination be verified separately?",
+      "result_ref": "https://docs.temporal.io/develop/python/activities/timeouts",
+      "used_for": "INV-1 Activity timeout, retry and heartbeat semantics",
+      "status": "used"
+    },
+    {
+      "id": "EV-11",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What do official Temporal documentation require for deterministic Workflow code, explicit state transfer and unfinished handlers at Continue-As-New, and Activity idempotency?",
+      "result_ref": "https://docs.temporal.io/workflow-definition#deterministic-constraints",
+      "used_for": "INV-3 deterministic Workflow behavior",
+      "status": "used"
+    },
+    {
+      "id": "EV-12",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What do official Temporal documentation require for deterministic Workflow code, explicit state transfer and unfinished handlers at Continue-As-New, and Activity idempotency?",
+      "result_ref": "https://docs.temporal.io/activity-definition#idempotency",
+      "used_for": "INV-1 INV-5 repeated execution after lost completion",
+      "status": "used"
+    },
+    {
+      "id": "EV-13",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What do official Temporal documentation require for deterministic Workflow code, explicit state transfer and unfinished handlers at Continue-As-New, and Activity idempotency?",
+      "result_ref": "https://docs.temporal.io/workflow-execution/continue-as-new",
+      "used_for": "INV-4 explicit application state transfer and handler completion",
+      "status": "used"
+    },
+    {
+      "id": "EV-14",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What do official Temporal documentation say about payload codec placement, failure encoding and Search Attribute confidentiality, Worker Versioning, and SDK metrics versus Cloud metrics?",
+      "result_ref": "https://docs.temporal.io/production-deployment/data-encryption",
+      "used_for": "INV-7 codec placement and failure attributes",
+      "status": "used"
+    },
+    {
+      "id": "EV-15",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "What do official Temporal documentation say about payload codec placement, failure encoding and Search Attribute confidentiality, Worker Versioning, and SDK metrics versus Cloud metrics?",
+      "result_ref": "https://docs.temporal.io/search-attribute",
+      "used_for": "INV-7 readable visibility fields",
+      "status": "used"
+    },
+    {
+      "id": "EV-16",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "Which official Temporal documentation describe SDK worker metrics and Temporal Cloud metrics, and how should metrics distinguish Worker execution health from application service level objectives?",
+      "result_ref": "https://docs.temporal.io/references/sdk-metrics",
+      "used_for": "INV-6 SDK observation surface",
+      "status": "used"
+    },
+    {
+      "id": "EV-17",
+      "tool": "temporal-docs",
+      "operation": "search_temporal_knowledge_sources",
+      "query": "Which official Temporal documentation describe SDK worker metrics and Temporal Cloud metrics, and how should metrics distinguish Worker execution health from application service level objectives?",
+      "result_ref": "https://docs.temporal.io/cloud/metrics/openmetrics",
+      "used_for": "INV-6 complementary Cloud metrics",
+      "status": "used"
+    },
+    {
+      "id": "EV-18",
+      "tool": "atlas",
+      "operation": "query then bounded source read",
+      "query": "sdk-python continue_as_new all_handlers_finished execute_activity heartbeat worker registration; read features/features/continue_as_new/updates_do_not_block_continue_as_new/feature.py lines 1:110",
+      "result_ref": "atlas://code/features/features/continue_as_new/updates_do_not_block_continue_as_new/feature.py",
+      "used_for": "INV-4 bounded Update and Continue-As-New conformance precedent",
+      "status": "used",
+      "outcome": "The conformance test explicitly forbids its blocking synchronization in real Workflows; it does not prove this runtime handoff."
+    },
+    {
+      "id": "EV-19",
+      "tool": "temporal-developer",
+      "operation": "read installed Python SDK reference",
+      "query": "references/python/python.md in installed plugin version 0.4.3",
+      "result_ref": "https://github.com/temporalio/codex-temporal-plugin",
+      "used_for": "INV-2 INV-3 Python registration and source organization guidance",
+      "status": "used",
+      "outcome": "Public distribution locator for the installed reference read; the URL was not used as proof of a specific source revision."
+    },
+    {
+      "id": "EV-20",
+      "tool": "user-source",
+      "operation": "read transition proposal",
+      "query": "docs/confidential-agent-runtime/rebaseline-plan.md",
+      "result_ref": "docs/confidential-agent-runtime/rebaseline-plan.md",
+      "used_for": "Objective, scope and authorized document transition",
+      "status": "used"
+    },
+    {
+      "id": "EV-21",
+      "tool": "user-source",
+      "operation": "read provider sample entry point",
+      "query": "python/claude_agent_sdk/tests/refund/worker.py:37-50",
+      "result_ref": "python/claude_agent_sdk/tests/refund/worker.py:37",
+      "used_for": "INV-2 example queue is configuration, not a fixed production topology",
+      "status": "used"
+    },
+    {
+      "id": "EV-22",
+      "tool": "user-source",
+      "operation": "read fetched current upstream source without checkout",
+      "query": "git show 32969f3ffa7688cb1cde250f1245e4ed70eb53d6:python/claude_agent_sdk/README.md",
+      "result_ref": "https://github.com/temporalio/ai-integrations/blob/32969f3ffa7688cb1cde250f1245e4ed70eb53d6/python/claude_agent_sdk/README.md",
+      "used_for": "Current optional TransportActivities seam, Worker subprocess default and trusted outside SDK topology",
+      "status": "used",
+      "outcome": "Fetched review ref only; current branch and dependencies were not changed. Older Sandbox and broad replacement claims are not assumed current."
+    },
+    {
+      "id": "EV-23",
+      "tool": "user-source",
+      "operation": "read fetched upstream dependency metadata",
+      "query": "git show 32969f3ffa7688cb1cde250f1245e4ed70eb53d6:python/claude_agent_sdk/pyproject.toml",
+      "result_ref": "https://github.com/temporalio/ai-integrations/blob/32969f3ffa7688cb1cde250f1245e4ed70eb53d6/python/claude_agent_sdk/pyproject.toml",
+      "used_for": "Candidate dependency transition SDK >=0.2.163,<0.2.166 and Temporal >=1.34.0,<2",
+      "status": "used",
+      "outcome": "Candidate metadata is not the retained local lock or an adopted upgrade."
+    },
+    {
+      "id": "EV-24",
+      "tool": "user-source",
+      "operation": "read proposed application protocol",
+      "query": "docs/confidential-agent-runtime/runtime-protocol.md",
+      "result_ref": "docs/confidential-agent-runtime/runtime-protocol.md",
+      "used_for": "Proposed sealed operations, stopped capture, strict admission and retained trust profile; not implementation proof",
+      "status": "used"
+    },
+    {
+      "id": "EV-25",
+      "tool": "user-source",
+      "operation": "read proposed native recovery protocol",
+      "query": "docs/confidential-agent-runtime/native-recovery-protocol.md",
+      "result_ref": "docs/confidential-agent-runtime/native-recovery-protocol.md",
+      "used_for": "Proposed original pending identity, typed outcome projection and prelaunch recovery; active child capability gap retained",
+      "status": "used"
+    },
+    {
+      "id": "EV-26",
+      "tool": "user-source",
+      "operation": "read AWS primary documentation",
+      "query": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm-attestation.html",
+      "result_ref": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm-attestation.html",
+      "used_for": "NitroTPM measured instance and KMS recipient encryption; not deployed qualification",
+      "status": "used"
+    },
+    {
+      "id": "EV-27",
+      "tool": "user-source",
+      "operation": "read model contract",
+      "query": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+      "result_ref": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+      "used_for": "Candidate exact model identity and context/output bounds; mutable vendor contract revalidated at admission",
+      "status": "used"
+    },
+    {
+      "id": "EV-28",
+      "tool": "user-source",
+      "operation": "read provider tariff",
+      "query": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "result_ref": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "used_for": "Candidate conservative per-attempt pricing envelope; not spending authorization or immutable tariff",
+      "status": "used"
+    },
+    {
+      "id": "EV-29",
+      "tool": "user-source",
+      "operation": "read native subagent continuation",
+      "query": "https://code.claude.com/docs/en/agent-sdk/subagents#resume-subagents",
+      "result_ref": "https://code.claude.com/docs/en/agent-sdk/subagents#resume-subagents",
+      "used_for": "Parent session follow-up continuation is distinct from exact interrupted parent-call recovery",
+      "status": "used"
+    },
+    {
+      "id": "EV-30",
+      "tool": "user-source",
+      "operation": "read pinned harness source",
+      "query": "gh api repos/temporal-community/sandbox-orchestration-harness/contents/sdk/compute/provider.go?ref=24f09129335f8057750f09f84a45b9c76c99d9c1",
+      "result_ref": "https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/compute/provider.go",
+      "used_for": "Existing Worker-oriented Start and StartFromSnapshot contracts; additive external mode avoids empty queue sentinel",
+      "status": "used"
+    },
+    {
+      "id": "EV-31",
+      "tool": "user-source",
+      "operation": "read pinned harness source",
+      "query": "gh api repos/temporal-community/sandbox-orchestration-harness/contents/sdk/workflow/activities.go?ref=24f09129335f8057750f09f84a45b9c76c99d9c1",
+      "result_ref": "https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/workflow/activities.go",
+      "used_for": "Existing provider lookup and StartSandbox activity route; preallocation validation and compatibility impact",
+      "status": "used"
+    },
+    {
+      "id": "EV-32",
+      "tool": "user-source",
+      "operation": "read pinned harness source",
+      "query": "gh api repos/temporal-community/sandbox-orchestration-harness/contents/sdk/compute/smolcloud/provider.go?ref=24f09129335f8057750f09f84a45b9c76c99d9c1",
+      "result_ref": "https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/compute/smolcloud/provider.go",
+      "used_for": "Existing stable creation/adoption path and TEMPORAL_TASK_QUEUE injection; first external provider extension",
+      "status": "used"
+    }
+  ]
+}

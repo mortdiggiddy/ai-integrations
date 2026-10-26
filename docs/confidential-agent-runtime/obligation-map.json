@@ -1,0 +1,2909 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-10-26",
+  "status": "Prepared obligation disposition; owner decisions and runtime qualification remain open",
+  "scope": "Document cutover only; source ticket status and completed evidence are unchanged.",
+  "source_identity_note": "sha256 captures the input snapshot; current_sha256 records the retained source at final cutover. Archive status is held outside approval-bound source bytes. Source row and ticket block hashes independently identify unchanged mapped obligations.",
+  "dispositions": {
+    "retained_objective": "The objective and applicable proof obligation survive. New runtime qualification is not inherited.",
+    "replaced_mechanism": "The old mechanism or sequence is no longer the default candidate; all safety objectives remain until explicit decision.",
+    "deferred_owner_decision": "The outcome or mechanism remains open at named owner decisions; this is not retirement or acceptance.",
+    "historically_retired": "The old source already records supersession. This cutover adds no new retirement."
+  },
+  "sources": [
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+      "sha256": "07d6069cd5fd695867b1914fcbfd83b0aaf13905ff75c01991c2223956487567",
+      "current_sha256": "07d6069cd5fd695867b1914fcbfd83b0aaf13905ff75c01991c2223956487567"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+      "sha256": "8bcf8ee3f6f2646ab1365bb1e5f3d0ca5e40f591016a3bdcfcd219ea4e165c83",
+      "current_sha256": "8bcf8ee3f6f2646ab1365bb1e5f3d0ca5e40f591016a3bdcfcd219ea4e165c83"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+      "sha256": "506070db250daa541403ae915781eec382cfaed76e151eea7fa00483132b1151",
+      "current_sha256": "506070db250daa541403ae915781eec382cfaed76e151eea7fa00483132b1151"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+      "sha256": "07466bfac24d3f4f93c333736befd4e3609f3e3e4ac08fdb9d76c99fe05a4f24",
+      "current_sha256": "07466bfac24d3f4f93c333736befd4e3609f3e3e4ac08fdb9d76c99fe05a4f24"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+      "sha256": "296e78f1c2433eda5feaa98d76024bf65f934d4d066beae9b18172fae98be18f",
+      "current_sha256": "296e78f1c2433eda5feaa98d76024bf65f934d4d066beae9b18172fae98be18f"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-4.md",
+      "sha256": "151d82d8b0fe78d39f959f9995648f1c8324c6e216182c979a08a6cc98e66c43",
+      "current_sha256": "151d82d8b0fe78d39f959f9995648f1c8324c6e216182c979a08a6cc98e66c43"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+      "sha256": "3411deb8f89a01dc4408da912acb789d28693ad9ee9921bb6f1c1a590c80f4d6",
+      "current_sha256": "3411deb8f89a01dc4408da912acb789d28693ad9ee9921bb6f1c1a590c80f4d6"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-6.md",
+      "sha256": "1ca4f133244ab8633536811ea0466e9c0ac4c9a49f0b132b9e0b2f2f01062d04",
+      "current_sha256": "1ca4f133244ab8633536811ea0466e9c0ac4c9a49f0b132b9e0b2f2f01062d04"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-7.md",
+      "sha256": "b8a1afaf47bfe7922eebafdff130c4c524a50a0ceb8781fa1ad58c99e4266aef",
+      "current_sha256": "b8a1afaf47bfe7922eebafdff130c4c524a50a0ceb8781fa1ad58c99e4266aef"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+      "sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599",
+      "current_sha256": "c88ab4236e2dd319177b5f7e0f7017aae0691a91f802b7e82488113978525599"
+    },
+    {
+      "path": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+      "sha256": "3fd084387305de2705d88b02c41601cd90bdc757198ae33390eda3460c64eb12",
+      "current_sha256": "3fd084387305de2705d88b02c41601cd90bdc757198ae33390eda3460c64eb12"
+    }
+  ],
+  "coverage": {
+    "tickets": 70,
+    "assumptions": 59,
+    "candidate_assumptions": 15,
+    "candidate_decisions": 6,
+    "invariants": 7,
+    "qualification_cases": 15,
+    "trust_requirements": 8,
+    "engine_requirements": 11,
+    "roadmap": 10
+  },
+  "families": {
+    "tickets": [
+      {
+        "id": "DSR-ROOT",
+        "title": "Reach a PASS verdict on the durable skill execution design",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "3c4cd51337d86980d0fc2bc3683f4a18325fb5aa8034d1227a33bec34ccde838",
+        "criteria_count": 3,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Replace the old phase graph with bounded qualification; preserve evidence and every unresolved guarantee."
+      },
+      {
+        "id": "DSR-P0",
+        "title": "Phase 0: Ground the design and make the owner decisions",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "e4d0832b993cb4319f3f6b41816e9058bc89f9114dc25266b509701f4cabc565",
+        "criteria_count": 2,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-18",
+          "BD-01",
+          "BD-02",
+          "BD-03"
+        ],
+        "treatment": "Carry decision provenance into the new owner register; no old choice approves a changed guarantee."
+      },
+      {
+        "id": "DSR-P1",
+        "title": "Phase 1: Prove the engine mechanism with a real model",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "56dac33ac2dbadf577a038fab9e784482daa5cb35ac57934aff6ab83b8a2a7cd",
+        "criteria_count": 1,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-01",
+          "CR-18"
+        ],
+        "treatment": "Retain bounded engine evidence at its original pins; new native runtime needs qualification."
+      },
+      {
+        "id": "DSR-P2",
+        "title": "Phase 2: Build and prove the effect executor and workspace",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "41ce3240b8f16b8fae11c244d57f4790c6496f3942338344c8894d4b55b6b701",
+        "criteria_count": 1,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "CR-10",
+          "BD-01",
+          "BD-02"
+        ],
+        "treatment": "Replace segment and effect decomposition only after exact recovery and authority choices."
+      },
+      {
+        "id": "DSR-P3",
+        "title": "Phase 3: Build and prove human decisions, signed tokens and parked runs",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "2ea414834d913baae8813cf0072906ae92f9bc8c07b5a734a8c48d8d77c63b2c",
+        "criteria_count": 1,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "CR-14",
+          "BD-06",
+          "BD-09"
+        ],
+        "treatment": "Retain authenticated decisions and safe waits; confidential interaction policy remains open."
+      },
+      {
+        "id": "DSR-P4",
+        "title": "Phase 4: Build and prove isolation and workspace lifecycle",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "ad83e8be3ce1cb07d163e4bab8628886356a0b79829eefa64fc5c55d7769420d",
+        "criteria_count": 1,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-09",
+          "CR-11",
+          "CR-16"
+        ],
+        "treatment": "Retain isolation, coherent restore, whole execution termination and reference safe cleanup."
+      },
+      {
+        "id": "DSR-P5",
+        "title": "Phase 5: Harden, version and accept the plugin",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "9635214b6e8064716e70960717d79effe27d6df1c0dda4f51b7cc5e374252bd2",
+        "criteria_count": 1,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-13",
+          "CR-17",
+          "CR-18",
+          "BD-03"
+        ],
+        "treatment": "Retain hardening objectives; changed runtime and budget contract need new evidence."
+      },
+      {
+        "id": "DSR-P6",
+        "title": "Phase 6: Pass the independent verification gate",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "6d1f274f27a8ecfaa64a75b8b3ef9360c9a719d2987be75adf0f0d590b81afaa",
+        "criteria_count": 1,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Formal specification and independent qualification are still required; this cutover is not PASS."
+      },
+      {
+        "id": "DSR-P7",
+        "title": "After PASS: Submit upstream and port to the agent harness",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/epics.md",
+        "source_block_sha256": "6451f185aa001dfe3396f4edfeda21832e304c8f833062596d6df546f643a35d",
+        "criteria_count": 1,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-06",
+          "CR-15",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Replace plugin-first sequencing with lifecycle reuse; broader harness and child outcomes remain open."
+      },
+      {
+        "id": "DSR-0.1",
+        "title": "Record the official defer and resume protocol",
+        "historical_status": "IN PROGRESS",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "4f664e502352430d90dd3d089648983152348451e509c06c59eb8338367bae45",
+        "criteria_count": 4,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-01",
+          "BD-01"
+        ],
+        "treatment": "Exact original call recovery or its explicit replacement must be decided; native resume is not equivalence."
+      },
+      {
+        "id": "DSR-0.2",
+        "title": "Approve the version 1 scope",
+        "historical_status": "DONE (2026-09-30)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "c62698e00905f2ba314bd9e4e7b7e95058d7e573158c71a1dcade0a9841615e4",
+        "criteria_count": 6,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-10",
+          "CR-18"
+        ],
+        "treatment": "Preserve approved reduced scope and uncertain Bash refusal; new scope changes need explicit decisions."
+      },
+      {
+        "id": "DSR-0.3",
+        "title": "Rebaseline the specification and plan to the approved version 1 scope",
+        "historical_status": "DONE (2026-10-01)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "34b280c6625a2c9390ca0d076af7981e68240cda9cb9063342b37bd008e2e235",
+        "criteria_count": 9,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Retain completed rebaseline evidence for its original contract only."
+      },
+      {
+        "id": "DSR-0.4",
+        "title": "Name the budget owner and credentials for real model runs",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "e558250abd30d3b2aaf237434071398c037b455ff15cb3aa26592d56559a6637",
+        "criteria_count": 5,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-17",
+          "BD-03"
+        ],
+        "treatment": "Retain experiment owner, credentials, model and finite allowance gates; strict prevention remains open."
+      },
+      {
+        "id": "DSR-0.5",
+        "title": "Record the outcome of contacting the community plugin author",
+        "historical_status": "DONE (2026-10-05 local)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "b0ad12166e31f4d891e31acb7270b50b93dcfa70987b75d4c06d6ad28585541e",
+        "criteria_count": 5,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Retain recorded contact outcome; it is not upstream acceptance or an agreement for new interfaces."
+      },
+      {
+        "id": "DSR-0.6",
+        "title": "Decide the workspace volume class and the effect isolation level",
+        "historical_status": "DONE (2026-10-14), approved finite local configuration decision; runtime qualification remains unexecuted.",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "45074476d9d16a72cfbe3622310a99be14228cf6fb2c8e62a3b7528299840fd4",
+        "criteria_count": 6,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-11",
+          "CR-15",
+          "BD-02",
+          "BD-05"
+        ],
+        "treatment": "Retain DONE finite local configuration and holders, not runtime proof or automatic approval of a new profile."
+      },
+      {
+        "id": "DSR-0.7",
+        "title": "Name the owner of the approval gateway",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "493b5a1d6da816994c8cd3f981d1187259726feaab0087c25c3c6c261139263a",
+        "criteria_count": 5,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "BD-06"
+        ],
+        "treatment": "Reconcile gateway ownership and sealed question/output policy; no plaintext human approval default."
+      },
+      {
+        "id": "DSR-0.8",
+        "title": "Decide how a Workflow reset is detected and handled",
+        "historical_status": "IN PROGRESS",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "d636cc7fb08b02224c2829ccb0634e313bc6cd8d2099e8ea55160f7a2ea7b9ba",
+        "criteria_count": 6,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-10",
+          "BD-09"
+        ],
+        "treatment": "Preserve partial reset procedure and refusal of uncertain continuation; unresolved action choice stays open."
+      },
+      {
+        "id": "DSR-0.9",
+        "title": "Name who registers Search Attributes and who owns rollout order",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "a022d08cece3b0874084dd40aaafbbb7f8e1d44c589b387f091bd43a380dda76",
+        "criteria_count": 5,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-13",
+          "CR-18",
+          "BD-09"
+        ],
+        "treatment": "Preserve visibility registration and rollout responsibilities; exact deployed configuration needs qualification."
+      },
+      {
+        "id": "DSR-0.10",
+        "title": "Record the idempotency key retention window of each keyed service",
+        "historical_status": "SUPERSEDED",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "094ad057007bc50c73d2b1691edd5dabb96629431acaaa48e08a18b419178d5e",
+        "criteria_count": 5,
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10"
+        ],
+        "treatment": "Already excluded keyed service retention mechanism remains historical, not newly implemented."
+      },
+      {
+        "id": "DSR-0.11",
+        "title": "Name the owners of namespace retention and the session store requirement",
+        "historical_status": "DONE (2026-10-14)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "92cfdfa201661348bc646587e40a4fe1e7673f4e5ef8c07e1cf05a0eebae04a0",
+        "criteria_count": 5,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-16",
+          "BD-09"
+        ],
+        "treatment": "Retain DONE synthetic retention and owners; client production policy and enforcement remain unqualified."
+      },
+      {
+        "id": "DSR-0.12",
+        "title": "Decide which recovery integration the next implementation uses",
+        "historical_status": "DONE (2026-10-02, Phase 1 proof target selection)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-0.md",
+        "source_block_sha256": "19c2bb57c5d38c052856bd6d34bddecdae775414042dbacf9c8b076b4c9e9699",
+        "criteria_count": 6,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-01"
+        ],
+        "treatment": "Retain completed Phase 1 proof target choice; it does not select the replacement native recovery guarantee."
+      },
+      {
+        "id": "DSR-1.1",
+        "title": "Build the bounded real model experiment harness",
+        "historical_status": "DONE (2026-10-05)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "e1b907d218079ee9fb156615708312c037412ab206d7e954b90486e1edbdc627",
+        "criteria_count": 6,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-17",
+          "CR-18"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.2",
+        "title": "Enforce the tool policy and the preventive backstop in the plugin",
+        "historical_status": "DONE (2026-10-05 local)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "061537ba719c3574897c43b474088f4d4fdbcb502f5fbbf429fafd6e3f776730",
+        "criteria_count": 6,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-12",
+          "CR-18"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.3",
+        "title": "Prove that a deferred call resumes with a host supplied result on a real model",
+        "historical_status": "DONE (2026-10-05, all eight criteria demonstrated)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "b1586ae3619c68d15bdf71597be75beac512a794783ac9b75541edc803155791",
+        "criteria_count": 8,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-01"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.4",
+        "title": "Prove the preventive backstop and its negative control",
+        "historical_status": "DONE (2026-10-05 local)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "d9271ccd2230b29fe19c20fa6d77c6b77ea044c2c85be5c73036636885b41510",
+        "criteria_count": 9,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-12",
+          "CR-18"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.5",
+        "title": "Validate skill packages and confine reads",
+        "historical_status": "DONE (2026-10-06, 8/8 bounded dispositions)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "874f77ea5dd8008ff4b9614788d3673cc8978cb4fd03ebb7ebb870803aa11592",
+        "criteria_count": 8,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-11",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.6",
+        "title": "Prove how a real model reads a deferred question answer",
+        "historical_status": "DONE (2026-10-07, 5/5 bounded Phase 1 interpretation dispositions)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "19239df6ff8f34d9a4362ec9401e039cdc23c1ffd5203953cf614d0655e1c5b2",
+        "criteria_count": 5,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-12",
+          "CR-18",
+          "BD-06"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.7",
+        "title": "Prove deferral on the minimum and newest engine versions",
+        "historical_status": "DONE (2026-10-07, 6/6 bounded dispositions; approved minimum failure and unsupported live call exception)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "db47d9992dcbce0a18524dadda5efb8571444d1ea56f57ad635ffef0590d1510",
+        "criteria_count": 6,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.8",
+        "title": "Settle who declares the handlers and where the token check is enforced",
+        "historical_status": "DONE (2026-09-30)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "4d223766d7e0fb99d39401772b9a6f30a01f15d7dd2189fc688d5e070ed5a712",
+        "criteria_count": 5,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "CR-18"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.9",
+        "title": "Review Phase 1 evidence and decide continue or redesign",
+        "historical_status": "DONE (2026-10-07, 7/7 bounded exit criteria; operator chose continue)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "6a4f9a24b40d67f6db656b7597d5dcaaf9e169a3288bcfc6200d2581daea02f0",
+        "criteria_count": 7,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-1.10",
+        "title": "Establish the recovery compatibility boundary of the candidate integrations",
+        "historical_status": "DONE (2026-10-02, approved bounded research disposition)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-1.md",
+        "source_block_sha256": "e918d6ccf2491db71fda19849fbec11640e1388f9f877d4138f68caa313770f1",
+        "criteria_count": 9,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-01"
+        ],
+        "treatment": "Retain DONE at its exact original runtime, scope and approved limitations; no new native or confidential qualification is inherited."
+      },
+      {
+        "id": "DSR-2.1",
+        "title": "Prepare the per run workspace, claims directory, manifest, counters and effect identity state",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "45ad2658b139c9d23a14109e53382ea652d6a2e67caca1e525a9387880cc13d3",
+        "criteria_count": 12,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-08",
+          "CR-09",
+          "BD-02",
+          "BD-04"
+        ],
+        "treatment": "Retain immutable accepted state, metadata and identity; new capture and authority bindings need decision."
+      },
+      {
+        "id": "DSR-2.2",
+        "title": "Run Bash as a claimed effect with the spawn guard",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "740cb30e3fa6e446b0f483afdc72348a46521f74d40f872511491a47b7edd922",
+        "criteria_count": 9,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-10",
+          "CR-11",
+          "BD-02"
+        ],
+        "treatment": "Do not retire protected Entity scheduling or claimed spawn guard by adopting native tools."
+      },
+      {
+        "id": "DSR-2.3",
+        "title": "Map every effect outcome by the ordered table and the executor fault",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "4aa4f98777eb02c49cb2e3c3ec47d6c434a26c1294558aae7dd5332f8e7068fc",
+        "criteria_count": 14,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-10",
+          "BD-01",
+          "BD-02"
+        ],
+        "treatment": "Retain honest outcome classes and no continuation for uncertainty; reconcile native execution mapping."
+      },
+      {
+        "id": "DSR-2.4",
+        "title": "Run Write and Edit as repeatable effects",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "a792910c7bd87e3df91dac6a17a43fc9c9b3a7e2d6f1d6be2dd0595e57f3c6e3",
+        "criteria_count": 10,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "CR-10",
+          "BD-04"
+        ],
+        "treatment": "Native file execution replaces proposed wrapper only after postimage and repeat semantics are specified."
+      },
+      {
+        "id": "DSR-2.5",
+        "title": "Run keyed author tools with the idempotency key and retry policy",
+        "historical_status": "SUPERSEDED",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "e7ea78b673831137a9331510876401b6b481eddada1ff88debf3420881fb7d33",
+        "criteria_count": 10,
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10"
+        ],
+        "treatment": "Keyed author tools were already superseded; future selection needs new scope."
+      },
+      {
+        "id": "DSR-2.6",
+        "title": "Match engine behavior by differential test",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "7dac098450f98b453e59ba4070d8620f7828be93200bbc17147b7766feabc429",
+        "criteria_count": 10,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-08",
+          "CR-18",
+          "BD-01",
+          "BD-08"
+        ],
+        "treatment": "Keep exact native success/error/metadata and child/parallel differential obligations."
+      },
+      {
+        "id": "DSR-2.7",
+        "title": "Contain process trees, cancellation, shutdown and payload size",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "7027cec8bcdfd31e433d7031b4ae5970bf61fa8b9651a558c929d11e233480da",
+        "criteria_count": 8,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-11",
+          "CR-14"
+        ],
+        "treatment": "Keep containment, shutdown, payload and cancellation evidence; local transport does not supply it."
+      },
+      {
+        "id": "DSR-2.8",
+        "title": "Refuse version mismatches with a contract version",
+        "historical_status": "SUPERSEDED",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "49c12a0c6bb2bee7e8b49ce6700a743931b6a6cb13081832aa689613d7a9b408",
+        "criteria_count": 8,
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Additional contract_version field was already superseded; preserve retained compatibility obligations."
+      },
+      {
+        "id": "DSR-2.9",
+        "title": "Review Phase 2 evidence and decide continue or redesign",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-2.md",
+        "source_block_sha256": "7eeb995d7b8e4a216a434a5f55b499d8bbf3b9a05d897e2d87df5be37f7c35e0",
+        "criteria_count": 6,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Preserve historical exit criteria; new milestones need their own evidence, not old phase completion."
+      },
+      {
+        "id": "DSR-3.1",
+        "title": "Carry waits and state across Continue-As-New",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+        "source_block_sha256": "a864ce593b742f9d26cfcb431ae1c1e0c35743b4bd71b36ebaa0d990146f0df3",
+        "criteria_count": 10,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "CR-16",
+          "BD-09"
+        ],
+        "treatment": "Carry bounded state and unapplied decisions across handover without losing ownership or references."
+      },
+      {
+        "id": "DSR-3.2",
+        "title": "Verify signed tokens in an interceptor",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+        "source_block_sha256": "d11af4d8faac94a3097c3d37b1eda676cd20d096c46f0871ef60d80c6f298e98",
+        "criteria_count": 11,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "BD-06"
+        ],
+        "treatment": "Retain authentication and anti-replay objective; outside plaintext token/handler design is not adopted."
+      },
+      {
+        "id": "DSR-3.3",
+        "title": "Park runs and apply the retry, checkpoint resume and abort actions",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+        "source_block_sha256": "86d508be2d16678bb6e322aa57e315867452a63dd70ecb4adb2c7694257ca832",
+        "criteria_count": 9,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-10",
+          "CR-12",
+          "BD-06",
+          "BD-09"
+        ],
+        "treatment": "Retain durable stopped state and authorized safe actions; uncertain Bash action policy remains open."
+      },
+      {
+        "id": "DSR-3.4",
+        "title": "Check Search Attributes at start and discover pending decisions with live output off",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+        "source_block_sha256": "aee3b677b90157b5882be6c245c7e7d73afeef00c10d5533b08afa5feb3f85a8",
+        "criteria_count": 7,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-13",
+          "CR-12"
+        ],
+        "treatment": "Retain discoverability with streaming disabled and content free visibility; metadata never authorizes actions."
+      },
+      {
+        "id": "DSR-3.5",
+        "title": "Prove reset behavior for the lineage id and claim files",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+        "source_block_sha256": "558d515b49c80110d17f82af5beda967b5717ae04de7ade5c339317d58c009ce",
+        "criteria_count": 9,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-10",
+          "BD-02",
+          "BD-09"
+        ],
+        "treatment": "Preserve first-task/reset/reuse and independent authority tests; no fresh identity can bypass uncertainty."
+      },
+      {
+        "id": "DSR-3.6",
+        "title": "Prove Update behavior at the Continue-As-New boundary and under concurrency",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+        "source_block_sha256": "f1830dbb9e7f29bcb9dbc41b1e5cdcf6a0cbf0f46996efdc44a0b6494f42af62",
+        "criteria_count": 6,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "CR-14",
+          "BD-06",
+          "BD-09"
+        ],
+        "treatment": "Retain decision race and deduplication across handover on the selected sealed interaction route."
+      },
+      {
+        "id": "DSR-3.7",
+        "title": "Review Phase 3 evidence and decide continue or redesign",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+        "source_block_sha256": "9c724d4c613ef95cfb262c9cd08f7bdcb6b9e8d37d57de9f3c2e22661093417f",
+        "criteria_count": 6,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Replace phase navigation, retain evidence review and explicit residuals."
+      },
+      {
+        "id": "DSR-3.8",
+        "title": "Run redo to repeat or redispatch an unknown outcome on purpose",
+        "historical_status": "SUPERSEDED",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-3.md",
+        "source_block_sha256": "4d381026680e5de35eaf3b365a946112b41e0e271e3966e6024169e24e67de7b",
+        "criteria_count": 9,
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10"
+        ],
+        "treatment": "redo and claim release were already superseded and are not revived."
+      },
+      {
+        "id": "DSR-4.1",
+        "title": "Isolate effects at the decided level",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-4.md",
+        "source_block_sha256": "5e1d5a0245cf328e44227f1fb2096b8fd8ebed587bda442f4b350356ee7e750c",
+        "criteria_count": 9,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-05"
+        ],
+        "treatment": "Retain actual isolation of effects from credentials, protected state and supervisor controls."
+      },
+      {
+        "id": "DSR-4.2",
+        "title": "Remove run directories safely and detect a restored snapshot",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-4.md",
+        "source_block_sha256": "0533b61f52c9dc285393a0f78500a2e1c45f2f995dcc891d24253884cb18afbe",
+        "criteria_count": 11,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-16",
+          "BD-09"
+        ],
+        "treatment": "Retain preservation-aware cleanup and reference/key/authority retention; no empty repair."
+      },
+      {
+        "id": "DSR-4.3",
+        "title": "Prove accepted checkpoint restoration and independent execution termination",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-4.md",
+        "source_block_sha256": "e63145f2cd674a9d620d673362803d022e256c70d9c03dca277137d142acc15b",
+        "criteria_count": 8,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-08",
+          "CR-09",
+          "CR-10"
+        ],
+        "treatment": "Keep separate local replacement, original-host/disk loss and live partition/termination oracles."
+      },
+      {
+        "id": "DSR-4.4",
+        "title": "Measure event loop lag, step cost and process containment",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-4.md",
+        "source_block_sha256": "53814f82860846999724ec2b418e58da005117cf3f87bc27b7b493fa468c844b",
+        "criteria_count": 6,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-13",
+          "CR-18"
+        ],
+        "treatment": "Measure selected runtime cost and containment; historical per-segment figures are not a forecast."
+      },
+      {
+        "id": "DSR-4.5",
+        "title": "Review Phase 4 evidence and decide continue or redesign",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-4.md",
+        "source_block_sha256": "1724888c38756ff0bb4bf2e7b5cb5b154323b239145bd949355378886bc14725",
+        "criteria_count": 6,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Retain independent evidence review; new acceptance does not inherit old phase status."
+      },
+      {
+        "id": "DSR-5.1",
+        "title": "Document and test Worker Deployment rollout and drain",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "8ea6bbc670bbe1a1339fc9575db8e1c554eb98a709bce331ede5c14751d395e2",
+        "criteria_count": 9,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "CR-18",
+          "BD-09"
+        ],
+        "treatment": "Retain compatible versions, rollout/drain and retained-history replay; exact deployment route is open."
+      },
+      {
+        "id": "DSR-5.2",
+        "title": "Prove codec coverage of Update payloads",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "2276e41f0e15659fc7edd557284327058ff0657ae413c2fef576035204bc2a8a",
+        "criteria_count": 6,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-02",
+          "CR-13"
+        ],
+        "treatment": "Replace outside codec-only placement with sealing before outside processing; still prove every payload and failure path."
+      },
+      {
+        "id": "DSR-5.3",
+        "title": "Prove approvals under subscriber load with live output on",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "492e1611789404c76d03d41726ddda68ae64e944b041c1b1f5e99dae5f3ea9fd",
+        "criteria_count": 5,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-12",
+          "CR-13",
+          "BD-06"
+        ],
+        "treatment": "Keep bounded subscriber and decision load proof for the selected confidential interaction path."
+      },
+      {
+        "id": "DSR-5.4",
+        "title": "Prove session store conformance",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "765f25871c71d90aa390b88f198885cde6c3a0956a57bd52f019f62ee0322c60",
+        "criteria_count": 7,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-16",
+          "BD-04"
+        ],
+        "treatment": "Retain exact accepted bytes, conflicting append refusal, scoped readers and mirror-versus-barrier qualification."
+      },
+      {
+        "id": "DSR-5.5",
+        "title": "Rehearse patch retirement",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "fa1ac80b23dddf2f19aa57f5f99bafa494a7fc85891492bb764a63182d3f210e",
+        "criteria_count": 5,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "CR-18",
+          "BD-09"
+        ],
+        "treatment": "Retain replay/Reset compatibility and evidence-driven patch retirement for supported histories."
+      },
+      {
+        "id": "DSR-5.6",
+        "title": "Run the daily newest engine job and the engine upgrade resume test",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "19d7c00faede6b9d3d9325ee9048be56f8c49cee73ba5b9edb4eba4de497ad93",
+        "criteria_count": 7,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18"
+        ],
+        "treatment": "Retain exact SDK/CLI qualification and supported upgrade/resume tests; no automatic latest adoption."
+      },
+      {
+        "id": "DSR-5.7",
+        "title": "Prove shutdown, metrics and paid retry rate",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "dbf93f72f580b062bd923853004b128a78070113d6961c8eedc2c29faacd8692",
+        "criteria_count": 5,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-13",
+          "CR-17"
+        ],
+        "treatment": "Retain safe shutdown, diagnostic limits and measured request/retry cost."
+      },
+      {
+        "id": "DSR-5.8",
+        "title": "Prove strict budgeting and real model application acceptance",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "3c32a7d76bb0a48968d33e54ead0a6926beb1b57ba5ee8aa306490a0d53466d0",
+        "criteria_count": 11,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-17",
+          "CR-18",
+          "BD-03"
+        ],
+        "treatment": "Strict before-request token/currency enforcement and complete accounting remain unresolved final obligations."
+      },
+      {
+        "id": "DSR-5.9",
+        "title": "Review Phase 5 evidence and decide continue or redesign",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-5.md",
+        "source_block_sha256": "a2009bb8f7b230e7aaf5598bce9e91b4d50ff17f21639618dc0a7b3607452e24",
+        "criteria_count": 6,
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Retain evidence-based continuation decision; replace old phase navigation."
+      },
+      {
+        "id": "DSR-6.1",
+        "title": "Record evidence and status for every assumption row",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-6.md",
+        "source_block_sha256": "bed14cd385b7e0b2907c81a16e99dbf8c1a5a9b9c6ba564345712e1dff10da49",
+        "criteria_count": 8,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "This map preserves all assumption rows; it does not settle or verify them."
+      },
+      {
+        "id": "DSR-6.2",
+        "title": "Confirm that no open decision blocks the stated outcome",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-6.md",
+        "source_block_sha256": "97043517d762ae0ef246ac1a5455679af35265510cbdfc307f43628d9914ef6e",
+        "criteria_count": 5,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18",
+          "BD-01",
+          "BD-02",
+          "BD-03",
+          "BD-04",
+          "BD-05",
+          "BD-06",
+          "BD-07",
+          "BD-08",
+          "BD-09"
+        ],
+        "treatment": "Every applicable owner decision must have an explicit answer before its dependent guarantee is offered."
+      },
+      {
+        "id": "DSR-6.3",
+        "title": "Run the independent verification pass on the evidenced design",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-6.md",
+        "source_block_sha256": "357a03d8108d94947fa52f972141c85981065bc9f7dc0ea81f029bb66212a4a6",
+        "criteria_count": 10,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Formal specification and independent review remain later work; no verification PASS is claimed here."
+      },
+      {
+        "id": "DSR-6.4",
+        "title": "Resolve findings and reach a PASS verdict",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-6.md",
+        "source_block_sha256": "5ea8cee9701299dff7f1771c9f4918aa215f474b7399e5fdb5133fbcd6d35535",
+        "criteria_count": 7,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Supported findings and proposed remedies need actual reconciliation before a final verdict."
+      },
+      {
+        "id": "DSR-7.1",
+        "title": "Submit the plugin additions upstream",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-7.md",
+        "source_block_sha256": "a46ae05344bcd697eca29bb289a3cf2724f046b560e88f2949936e335e92cf33",
+        "criteria_count": 7,
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Upstream contributions are separately scoped; local preparation grants no commit or publication authority."
+      },
+      {
+        "id": "DSR-7.2",
+        "title": "Port the integration to the agent harness",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-7.md",
+        "source_block_sha256": "9a4453593b46158cddb064cd026302233fea50bda96733e9b0d66f767b1d2f6c",
+        "criteria_count": 8,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-06",
+          "CR-15",
+          "BD-08"
+        ],
+        "treatment": "Replace old late glue-only port sequence; optional richer harness features retain explicit qualification."
+      },
+      {
+        "id": "DSR-7.3",
+        "title": "Name the owner of the effect ordinal and key for the harness port",
+        "historical_status": "OPEN",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-7.md",
+        "source_block_sha256": "f67c3814d597045d4087073112fef9cd8343d4d8d9eb0fa2d60bfeb985115cb7",
+        "criteria_count": 6,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-10",
+          "BD-02",
+          "BD-07"
+        ],
+        "treatment": "Retain one original call/ordinal identity owner and no recomputation for uncertain execution."
+      },
+      {
+        "id": "DSR-7.4",
+        "title": "Select a testable durable child and parallel tool design",
+        "historical_status": "OPEN (2026-10-08; prospective extension decision, no runtime implementation approved)",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/tickets/phase-7.md",
+        "source_block_sha256": "8166f25ad6b385b223ece09b499a464acd989667b13bdaec49b2a5ceba5667c8",
+        "criteria_count": 6,
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-01",
+          "CR-08",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Positive child and parallel recovery remain selected open outcomes; serial denial is not completion."
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "A-57",
+        "legacy_statement": "A Mods adapter can load through the selected Python SDK and cover the retained tool paths without bypassing permission, package or read confinement controls.",
+        "historical_status": "rejected for tested invocation; other lanes untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "aa6f63d12bcef6f5fe7be43d54e009b2651079b0060495552f19738ccabd8a7e",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Mods remain optional and unqualified outside tested lanes; preserve historical rejection and confinement objectives."
+      },
+      {
+        "id": "A-58",
+        "legacy_statement": "The selected recovery integration can restore an accepted pending main agent request on another Worker while excluding stale owners and surviving CLI processes.",
+        "historical_status": "M1 bounded host recovery verified; general host loss open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "43bb11a2906721ae3d5c7c1463ccb2b82fadaf7044e2df7ad7253d9bde3cd655",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-08",
+          "CR-09",
+          "BD-01"
+        ],
+        "treatment": "Retain bounded host recovery evidence and unresolved real host loss; no automatic qualification transfer."
+      },
+      {
+        "id": "A-59",
+        "legacy_statement": "A selected native tool integration couples original Read/Edit metadata, exact result and required accepted workspace postimage without repeat execution; Context Mode projection preserves raw/native fields and the stored accepted representation.",
+        "historical_status": "M1 limitations recorded; general file and volume proof open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "0660cedd8edc6dd7735a16581ae3ebb9914e697fbea7f67f4e2836c90cadde8e",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-18",
+          "BD-01",
+          "BD-04",
+          "BD-08"
+        ],
+        "treatment": "Retain native metadata/result/postimage and accepted projection association; new route needs evidence."
+      },
+      {
+        "id": "A-01",
+        "legacy_statement": "The selected original pending recovery adapter returns the exact committed call result or error to the real model without repeating the effect, on qualified SDK 0.2.162 / CLI 2.1.274. Legacy synthetic injection is excluded from governed recovery.",
+        "historical_status": "M1 verified for selected serial route; legacy synthetic route contradicted",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "f34d668f35fdde68884ef5850a30330bf0a72ab213beb23e9a35298ba3f27b9a",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-01",
+          "CR-08",
+          "BD-01"
+        ],
+        "treatment": "Exact original pending result remains an open guarantee choice; do not equate native continuation."
+      },
+      {
+        "id": "A-02",
+        "legacy_statement": "The qualified serial route preserves real model mixed call ordering, recorded read denial and original effect outcomes; extra deferred effects in a batch fail closed.",
+        "historical_status": "M1 verified for bounded serial route",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "ebba45d51e7288dc7a62d8b7f988c9ee337f685c6cdb002321b01b2a7d7daeca",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Retain serial proof and explicit batch denial limit; positive parallel behavior remains open."
+      },
+      {
+        "id": "A-03",
+        "legacy_statement": "Independent permission handling must prevent effects missed by interception while preserving deferral. [Scoped ask rules](evidence.md#scoped-permission-backstop-closure-2026-10-05) qualify Write/Edit/Bash and diagnostic skill-granted Writes on the pinned SDK/CLI route.",
+        "historical_status": "M1 verified for qualified scoped ask configurations",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "fd8ddc1330dbfec94f92ea8711270da1c19736c9c1811403929190490e36edfe",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-12",
+          "CR-18"
+        ],
+        "treatment": "Retain prevention objective and negative controls; qualify the new local runtime rather than inheriting hook proof."
+      },
+      {
+        "id": "A-04",
+        "legacy_statement": "Protected independent Entity scheduling plus one Activity attempt and retained local claim/heartbeat refusals must prevent a second Bash spawn across outer reset or restored preclaim files.",
+        "historical_status": "inferred",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "1877c7d206b1bcf720b9d4244e197e3f332119febf4cf4e1f4909c8b1072f1ae",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-10",
+          "BD-02",
+          "BD-09"
+        ],
+        "treatment": "Protected independent dispatch and retained guards are not retired by native execution."
+      },
+      {
+        "id": "A-05",
+        "legacy_statement": "Independent authority retains original ordinal/key/input binding; a local ordinal claim adds defense against changed commands but cannot alone establish reset safety after restoration.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "4651662259361a99955f4662ac732d3a791d82ca536950220a525b30d4658287",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-10",
+          "BD-02"
+        ],
+        "treatment": "Original ordinal/input binding and independent authority remain unresolved for native dispatch."
+      },
+      {
+        "id": "A-06",
+        "legacy_statement": "A Workflow reset keeps the lineage id, and Workflow Id reuse changes it, because the SDK seeds `workflow.uuid4()` from the original execution run id.",
+        "historical_status": "inferred",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "2e178c55f58cb6e80fb731414ef73650967fc58ed1ba9ba9e382081933ab6956",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "BD-09"
+        ],
+        "treatment": "Requalify reset and Workflow ID reuse; no deterministic UUID assumption transfers."
+      },
+      {
+        "id": "A-07",
+        "legacy_statement": "The starter can mint the lineage id and pass it in the run input, so a reset to the first Workflow Task replays the same id.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "6e18448d18acefefa589ee1e07c3b647db686385a88875da6a6d8d148b58ccb4",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "BD-09"
+        ],
+        "treatment": "Retain starter-owned unique lineage and lost start reconciliation; exact binding awaits specification."
+      },
+      {
+        "id": "A-08",
+        "legacy_statement": "A Schedule-To-Start timeout parks every retained effect; ordinary repeatable effects record NOT_RUN, special one attempt Edit retains unknown handling, and uncertain Bash never resumes the model.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "ecc692005c471c85d552f6437fcaf19ea3305dbfdfd97521299a36e1c8443d4b",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-10",
+          "BD-02",
+          "BD-09"
+        ],
+        "treatment": "Timeout or missing completion does not prove nonexecution; preserve no uncertain continuation."
+      },
+      {
+        "id": "A-09",
+        "legacy_statement": "Special Edit whose new text contains old text, with one attempt and explicit unknown handling, avoids double application; other Edit inputs are safe to repeat despite lost heartbeat details.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "e875b7d4dfdbd598eca29b4cd16dc9432f15f11313cd9a5af71e22dedb17f22c",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "CR-10",
+          "BD-04"
+        ],
+        "treatment": "Edit postimage and repeated application semantics need a native capture contract."
+      },
+      {
+        "id": "A-10",
+        "legacy_statement": "The retained ordered outcome mapping distinguishes benign executor NotStarted before every claim/spawn, ExecutorFault park, repeatable failure and uncertain Bash park; tool exceptions cannot impersonate safe validation.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "96b66ffecc4b1a30eefaacabfc86ac9a8d2c3e8a58301d06031902b5a4ae4af9",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-10",
+          "BD-01",
+          "BD-02"
+        ],
+        "treatment": "Retain honest nonexecution/fault/uncertainty distinctions; native error mapping remains open."
+      },
+      {
+        "id": "A-11",
+        "legacy_statement": "Superseded from version 1: Adding the key to a keyed tool's arguments in the reserved field `idempotency_key` is honored by the external service, so a retry or a replayed call after a reset returns the earlier result.",
+        "historical_status": "superseded",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "254365842dde6ddd12809ad04b501ec5a313e0649915202aab95c36c83493f4a",
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10",
+          "CR-18"
+        ],
+        "treatment": "This mechanism was already superseded by the approved legacy scope. Preserve that status; future use requires explicit new selection."
+      },
+      {
+        "id": "A-12",
+        "legacy_statement": "Signature verification of the approval token runs inside the Workflow sandbox in an Update validator, using a package outside the sandbox passthrough set.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "c4043a1d6c87849d88d2d270b6dc79f9b14b72fa7a134a2ffd5ffbf80511d539",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "BD-06"
+        ],
+        "treatment": "Retain authenticated interaction; Workflow-side signature placement is not selected for confidential plaintext."
+      },
+      {
+        "id": "A-13",
+        "legacy_statement": "The token definitions (subject is the decision id or the park id, SHA 256 over canonical JSON, expiry rule, key set, minimum version, per park id) bind a decision so a captured token cannot answer another question or replay against a later park.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "d366479dcb777b4c0718087f060f51658413ad8f97987d61f18555e0f2f48a18",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "BD-06"
+        ],
+        "treatment": "Retain exact purpose/resource/expiry/replay binding for every permitted sealed decision."
+      },
+      {
+        "id": "A-14",
+        "legacy_statement": "No documented mechanism lets an Update validator read an authenticated caller identity, and one gateway holding the only credentials that may send Updates is sufficient.",
+        "historical_status": "inferred",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "73d0a3f121fc222450bc3b1f70d6a04e2bbb4c32d4e9363028854361bf5e35f2",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "BD-06",
+          "BD-07"
+        ],
+        "treatment": "Retain restricted gateway objective; caller identity and protocol authorization need qualification."
+      },
+      {
+        "id": "A-15",
+        "legacy_statement": "Plugin base plus validated concrete Workflow registration, required validators and one inbound token authority protect only registered handler paths; concrete Pinned configuration and explicit handover are required.",
+        "historical_status": "M1 source ownership verified; M3 runtime enforcement open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "0ea24d49c44039ec63e2bd8de6b7beba8c68353de18d3b265bc012c5f9b6bb8b",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-14",
+          "CR-18"
+        ],
+        "treatment": "Retain registered API enforcement and replay-safe policy; no decorator-only trust assumption."
+      },
+      {
+        "id": "A-16",
+        "legacy_statement": "Roll out all queues before handover, retain pinned Workers, and validate package_hash, policy_version and engine_version; these checks do not identify every executor only change.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "a128d87db117e0480c26f951cb82ab0dbfdb87d7a0c5117f1186b6ba03d3e535",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-09"
+        ],
+        "treatment": "Keep exact package/policy/runtime identities and compatible rollout; requalify all changed components."
+      },
+      {
+        "id": "A-17",
+        "legacy_statement": "The approved first profile uses disposable Linux execution containers and separate trusted service containers, with an external exact-incarnation controller and required container/cgroup confinement. EC2 remains a later portable provider reference.",
+        "historical_status": "selected requirement; configuration and isolation proof open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "1fc39da4dd35aa50c115fce66fb118bf31474b9da223fc19e786f698f4e8506e",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-15",
+          "BD-05"
+        ],
+        "treatment": "Preserve approved local container profile as development evidence, not an attested confidentiality claim."
+      },
+      {
+        "id": "A-18",
+        "legacy_statement": "ValidatedSkillPackage admission rejects shell injection, hooks, fork and tool grants; controlled project loading, exact names and native shell disable confine supported invocations and deny hidden, bundled and plugin invocation.",
+        "historical_status": "M1 verified for validated package",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "821811fdb90f62117a11b9707bc73c5c7f96ee92f3757ddf433da079de564751",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-11",
+          "CR-12",
+          "CR-18"
+        ],
+        "treatment": "Keep immutable reviewed skill admission and injection refusal; unrestricted native skills need explicit qualification."
+      },
+      {
+        "id": "A-19",
+        "legacy_statement": "Shared hook and permission callback confinement denies supported Read/Glob/Grep outside admitted workspace and package roots, including symlink, absolute and parent traversal inputs.",
+        "historical_status": "M1 verified for admitted read routes",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "ca8386bd7b3f8c10d6e28e9c3029e382cac4f5fa1deafd92c8437cb252c1f36e",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-18"
+        ],
+        "treatment": "Retain filesystem and read confidentiality objectives; callback checks do not replace OS isolation."
+      },
+      {
+        "id": "A-20",
+        "legacy_statement": "An approval Update that arrives at a Continue-As-New boundary is delivered to the new run or rejected visibly, and carried `answered_decision_ids` stop a double acceptance.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "f347a6c0b1790d944095f071945d5efe2137df08062b04e89276297f4f19a606",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-12",
+          "CR-14",
+          "BD-06",
+          "BD-09"
+        ],
+        "treatment": "Keep decision acceptance and deduplication races across handover."
+      },
+      {
+        "id": "A-21",
+        "legacy_statement": "Janitor preserves live, parked, reset/replay references, keys, local claims and independent authority; routine cleanup refuses sole-readable required result/postimage destruction.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "27e9e825b0a9906efc7e94d03db95ffae956502281b808e75d3a56de94d87b68",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-16",
+          "BD-09"
+        ],
+        "treatment": "Keep referenced bytes, keys and independent authority through every offered horizon; preserve unresolved sole copy."
+      },
+      {
+        "id": "A-23",
+        "legacy_statement": "Superseded from version 1: `redo` can remove the claim files through a `release_claim` Activity on the segment queue, dispatch the call at a new ordinal with a new key, reject an ordinal not in `pending_unknown`, redispatch a keyed effect under its stored key, and work when the effect queue is down.",
+        "historical_status": "superseded",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "a8452b47aa03f11ab2d4d11ad5c2d9c32db6674afa97fc15ff707e7ad41849c9",
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10",
+          "CR-18"
+        ],
+        "treatment": "This mechanism was already superseded by the approved legacy scope. Preserve that status; future use requires explicit new selection."
+      },
+      {
+        "id": "A-36",
+        "legacy_statement": "One owner for internal effect ordinal and claim identity is agreed when the harness owns the loop; external keyed services are deferred from version 1.",
+        "historical_status": "open decision",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "3ecc6997582cb899270d7c025123897a3af5ea02097e7e85b5a6d057578dc57c",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-07",
+          "CR-10",
+          "BD-02",
+          "BD-07"
+        ],
+        "treatment": "One call identity owner remains required; ordinary runtime attachment does not decide effect identity."
+      },
+      {
+        "id": "A-45",
+        "legacy_statement": "Superseded from version 1: A keyed effect's retry horizon (its Schedule-To-Close bound) stays inside the external service's idempotency key retention window.",
+        "historical_status": "superseded",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "1c98a586f5d75fd616d0979b97bbb669e5f9f7556672e4e4a6c68ae26160ddb8",
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10",
+          "CR-18"
+        ],
+        "treatment": "This mechanism was already superseded by the approved legacy scope. Preserve that status; future use requires explicit new selection."
+      },
+      {
+        "id": "A-48",
+        "legacy_statement": "Protected independent Entity admission survives outer reset and preclaim restoration; retained local ordinal/key guards remain defense, not portable authority.",
+        "historical_status": "selected requirement; admission proof open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "930034211765033ece53ac121111e5c326ce7ad430b3ae195ca85d9114eaf48f",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-10",
+          "BD-02",
+          "BD-09"
+        ],
+        "treatment": "Protected Entity or equivalently approved independent authority cannot be removed implicitly."
+      },
+      {
+        "id": "A-49",
+        "legacy_statement": "Immutable reviewed extra_options and exact extra_args restrictions deny unadmitted permission, tool and interception configuration, including nested mutation.",
+        "historical_status": "M1 verified for admitted configuration",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "e06c2a8e756e6eb2b30d5382488a37234417ea9c7d914bb20d5609c21e88b6d5",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-12",
+          "CR-18"
+        ],
+        "treatment": "Retain immutable reviewed configuration and refusal of policy override escape paths."
+      },
+      {
+        "id": "A-50",
+        "legacy_statement": "Worker Versioning is deployed, so the wake check for a changed target Deployment Version is live.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "3bfe7d1068178710705564178ffdf22201e97909e97d818790daba6b453d8a2d",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "CR-18",
+          "BD-09"
+        ],
+        "treatment": "Qualify actual Worker deployment mode; it is not supplied by a local runtime transport."
+      },
+      {
+        "id": "A-51",
+        "legacy_statement": "The janitor can map a run directory to its Workflow and namespace, and a described Workflow whose lineage id differs from the manifest is not treated as the same run.",
+        "historical_status": "inferred",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "fb851a86daf2779a4c2c6c65a75542204b4e15495fbe615fdfae6a730731d04a",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-16"
+        ],
+        "treatment": "Keep exact job/lineage/namespace cleanup authorization, including ID reuse and unknown identity."
+      },
+      {
+        "id": "A-52",
+        "legacy_statement": "Superseded from version 1: monotone claims high-water ordering under shared volume locking.",
+        "historical_status": "superseded",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "d230d66c6b11d6ea3f265e70a901bb0e8a1c85345f96a43d0fdce9dd8ea1d83b",
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10",
+          "CR-18"
+        ],
+        "treatment": "This mechanism was already superseded by the approved legacy scope. Preserve that status; future use requires explicit new selection."
+      },
+      {
+        "id": "A-54",
+        "legacy_statement": "Reserved executor and segment refusals reach parked operator state without a model result.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "fe21c2872fe220a2067a94e9c10e69f681da01058c81aaeb163e907c9c3526bb",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-10"
+        ],
+        "treatment": "Keep unresolved executor or segment faults out of model-facing definitive results."
+      },
+      {
+        "id": "A-55",
+        "legacy_statement": "Superseded from version 1: parked keyed effect duration stays within service key retention before redo.",
+        "historical_status": "superseded",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "80c34b089aeb0192c78e87772c7be7aedeee5bca82367956b5c890a1892dcfea",
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10",
+          "CR-18"
+        ],
+        "treatment": "This mechanism was already superseded by the approved legacy scope. Preserve that status; future use requires explicit new selection."
+      },
+      {
+        "id": "A-56",
+        "legacy_statement": "Interceptor accept/drop logic and accepted handler reconstruction remain deterministic across plugin versions and replay; validators are conditional, not assumed to run on every replay.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "2bdd7be63c238d4f093add4a9d1d4961b3ef63812ae03362068d1dfde73c5bad",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "CR-18",
+          "BD-09"
+        ],
+        "treatment": "Keep deterministic handler reconstruction and mixed version replay proof."
+      },
+      {
+        "id": "A-22",
+        "legacy_statement": "Recovery eligibility is qualified by exact SDK capability and CLI lane; native deferral success does not imply original pending recovery or safe synthetic resume.",
+        "historical_status": "M1 lane dispositions approved; M5 untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "c38a39ff5eef301f0a1631447b12e42a336e59ee8814bffb06fb19faa91d7a42",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-01"
+        ],
+        "treatment": "Retain exact lane eligibility; native deferral or resume is not proof of original call recovery."
+      },
+      {
+        "id": "A-24",
+        "legacy_statement": "Credential and quota errors can be classified as non retryable at the segment Activity so the run parks instead of retrying, and Schedule-To-Close of 1 hour with the fork's 10 minute Start-To-Close bounds paid retries correctly.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "72fd827643a7384ab0ce9c04e1cba2053c4f5bbdef952c6680134034c7b727c1",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-10",
+          "CR-17"
+        ],
+        "treatment": "Retain fault classification and bounded paid retry objectives; do not import untested numeric timeout defaults."
+      },
+      {
+        "id": "A-25",
+        "legacy_statement": "A real model interprets the recorded AskUserQuestion JSON answers object encoded as text through the selected original pending recovery adapter.",
+        "historical_status": "M1 bounded interpretation verified; M3 untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "e2bc3fd12ea223a2a938d2fdcf8ff8617e7db0246fbb8100ea2207ac8f517123",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-12",
+          "CR-18",
+          "BD-06"
+        ],
+        "treatment": "Retain bounded question interpretation result; sealed question release remains a separate open decision."
+      },
+      {
+        "id": "A-26",
+        "legacy_statement": "An actual child tool request fails closed with zero effects; child recovery is unsupported and denied in version 1.",
+        "historical_status": "M1 verified fail closed; child recovery excluded",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "f9f48d9133071ff54155e3c43123827560e26d4b90ee6b67e392cb1992b5f704",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Retain child denial evidence; positive child recovery remains open and cannot be satisfied by denial."
+      },
+      {
+        "id": "A-27",
+        "legacy_statement": "The approved local checkpoint service exercises exact accepted conversation/workspace bytes and metadata on the surviving host. Later portable qualification retains the S3 exact-version reference and restoration on another host with the original disk unavailable.",
+        "historical_status": "selected requirement; portable proof open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "bee743831bff3d3f1e5ff9f15d4485515e37b0aa79fd27fed581cd55268f904d",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-09",
+          "CR-18"
+        ],
+        "treatment": "Preserve distinct local restoration and original-host/disk loss acceptance."
+      },
+      {
+        "id": "A-28",
+        "legacy_statement": "The async segment Activity does not block the event loop, the Python SDK's metric facility emits counters from Workflow code replay safely, and throttled heartbeats on every output line do not create one server call per line.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "c390277832827954592ab5c0669b7eea1ecf8aa5ee0f41511fa33de9badad082",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-13",
+          "CR-18"
+        ],
+        "treatment": "Measure event loop lag, heartbeat and metric behavior for the new topology; no inherited rate claim."
+      },
+      {
+        "id": "A-29",
+        "legacy_statement": "The Continue-As-New suggestion fires near 4,096 events with about 12 to 22 events per step, a pending result stays under 2 MB, and External Storage (public preview) plus the 64 KiB output cap keep payloads in bounds.",
+        "historical_status": "inferred",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "ba3c53c10a13fea909b6931702ed4c7092c7bc25a80da9f79f1dae58fbaf6bf3",
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-14",
+          "CR-18"
+        ],
+        "treatment": "Keep bounded history/payload objective; replace unverified fixed event and per-step forecasts with measured limits."
+      },
+      {
+        "id": "A-30",
+        "legacy_statement": "Upgrade on Continue-As-New (Public Preview) works on the SDK version the plugin pins, with an explicit opt in at handover.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "83954e206d8a487d17dff45c5945b6ba1885fbe0724e584924f6f9dc7bbb35a4",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "CR-18",
+          "BD-09"
+        ],
+        "treatment": "Qualify the selected SDK rollout/handover mechanism; preview assumptions and pins are not universal."
+      },
+      {
+        "id": "A-31",
+        "legacy_statement": "Update arguments and results pass through the Payload Codec like Signals.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "2c4a0cd59b3994059d6da89bb8e4bbdbc67b1af13c7d97e631959a805cc7c959",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-02",
+          "CR-13"
+        ],
+        "treatment": "Prove sealed content on every relevant message/failure path, not codec placement alone."
+      },
+      {
+        "id": "A-32",
+        "legacy_statement": "Search Attributes can be registered in every namespace before the first run, and an upsert of an unregistered attribute stalls the Workflow Task with no error to the operator.",
+        "historical_status": "relayed",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "69105bd4bcfc176a9f6285dcfb046688a23f2146d53de2cb1303e06ecf15d008",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-13",
+          "CR-18"
+        ],
+        "treatment": "Retain declared nonsecret visibility schema and startup validation; qualify actual service behavior."
+      },
+      {
+        "id": "A-33",
+        "legacy_statement": "The gateway learns of a pending decision through the Query and the `AgentPhase` Search Attribute while live output is off, and the \"older than half its timeout\" alert reads `OldestPendingAt`.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "1c42c0030fc21a2e7644409db7b39d47efe7aa4fcf33eceae6d2c29369c2a7dd",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-12",
+          "CR-13"
+        ],
+        "treatment": "Retain pending interaction discovery without live streaming under the approved content policy."
+      },
+      {
+        "id": "A-34",
+        "legacy_statement": "With live output on, about ten concurrent subscribers can starve approvals, and a gateway retry on `RESOURCE_EXHAUSTED` is safe because the question id is the Update id.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "039ae762a467ec277541313a9e42bae31057cbd5a63cf5a1955988930d867c53",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-12",
+          "CR-13",
+          "BD-06"
+        ],
+        "treatment": "Retain subscriber/load/decision retry proof; no inherited ten-subscriber capacity assumption."
+      },
+      {
+        "id": "A-35",
+        "legacy_statement": "Public coordination permits local additive construction; future upstream placement still requires agreement. The known source set contains the implementation inventory.",
+        "historical_status": "local contact decision complete under approved scope; upstream agreement open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "7a104f014e8eb2f0e16952eef1366d99483958fbb845af691442d390c17f5fbe",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Keep historical contact evidence; new source inventory and interface agreement remain separate."
+      },
+      {
+        "id": "A-37",
+        "legacy_statement": "Object versions, keys, history and independent authority must survive every offered live, parked, reset and replay horizon. The synthetic horizon and holder are approved; real client retention remains a separate owner decision.",
+        "historical_status": "open decision",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "51e372d7fcd426ad80327a7287fe8342f7a80a59abfc9a675e7be2e52d673f0a",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-16",
+          "BD-09"
+        ],
+        "treatment": "Keep approved synthetic policy and holders; production retention and enforcement stay open."
+      },
+      {
+        "id": "A-38",
+        "legacy_statement": "The approved local checkpoint service and native session adapter must retain exact acknowledged opaque records with authenticated encryption, scoped readers and conditional UUID/head semantics. S3 remains a later portable reference; actual session-store/native compatibility is unqualified.",
+        "historical_status": "open decision",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "a7462c4650ba74f228b8577a309a7db7102d331eca56abc6dcdf23b06f4a13e1",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-16",
+          "BD-04"
+        ],
+        "treatment": "Retain exact acknowledged bytes, scoped readers and conflict refusal; SessionStore mirror is not barrier proof."
+      },
+      {
+        "id": "A-39",
+        "legacy_statement": "The executor reproduces the engine's Bash, Write and Edit semantics and result text, including relative path differences between `work/` and the run directory.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "5479aa3991386c6d1c5e9b19b589563a61c09604f82118aa051d3dc682fbe14c",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-08",
+          "CR-18",
+          "BD-01"
+        ],
+        "treatment": "Retain native file/result differential fidelity; abandoning wrappers does not settle recovery fidelity."
+      },
+      {
+        "id": "A-40",
+        "legacy_statement": "The Python Worker shutdown default is zero and the SDK installs no SIGTERM handler, so an explicit graceful shutdown timeout and handler are needed.",
+        "historical_status": "relayed",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "8b35315f51b2fcfd1a2ce93a89f630df696a99848759df864a742ad8787c4069",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-11",
+          "CR-18"
+        ],
+        "treatment": "Qualify whole process shutdown and signal handling in selected runtime; no default-value claim transfers."
+      },
+      {
+        "id": "A-41",
+        "legacy_statement": "The process tree wait and group kill contain an effect's children, and a daemonized child or a partitioned host remain documented residuals.",
+        "historical_status": "relayed",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "1184a57768d3459b9031d4414169483de2f5b2f99f9c788e07beeda64f87ee57",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-11"
+        ],
+        "treatment": "Retain whole descendant containment and live partition tests; cooperative cancellation is not a death witness."
+      },
+      {
+        "id": "A-46",
+        "legacy_statement": "A Reset of a closed run replays its patch and deprecation markers against the deployed code, so a patch is removed only when no replayable run carries its marker.",
+        "historical_status": "inferred",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "bec3e1f5055b3f06edb9f74bd8fcb04ff5cb7a456b97eda49d9fea743ff9294f",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "CR-18",
+          "BD-09"
+        ],
+        "treatment": "Retain compatibility across retained replay/Reset histories and explicit patch retirement."
+      },
+      {
+        "id": "A-47",
+        "legacy_statement": "Superseded from version 1: The keyed effect retry policy (SDK defaults, a 10 minute Schedule-To-Close bound, `ToolDefinitiveError` non retryable at the throw site) suits the tools authors write.",
+        "historical_status": "superseded",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "8cb9d8ca89bad62fed75bfcfeed66e1436c90e686e76d556aa9d7c6dcda455c0",
+        "disposition": "historically_retired",
+        "owners": [
+          "CR-10",
+          "CR-18"
+        ],
+        "treatment": "This mechanism was already superseded by the approved legacy scope. Preserve that status; future use requires explicit new selection."
+      },
+      {
+        "id": "A-53",
+        "legacy_statement": "Executor exception wrapping preserves cancellation and safe pre claim versus post claim failure classification.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "7eb4091b01e7f460a0036f22962541e3d533f806be393d65f00fde243a9a5980",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-10"
+        ],
+        "treatment": "Retain pre/post admission distinction and cancellation preservation in native error handling."
+      },
+      {
+        "id": "A-42",
+        "legacy_statement": "Stamping `wait_started_in_run` at each run's wait entry, with a cooldown of one wake interval, prevents a handover on every wake.",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "5d0a519ec38e9dc70f58c2c3949315d7044cf3d2fe93a7eccb817b0d9655fc38",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "BD-09"
+        ],
+        "treatment": "Retain stable wait deadlines and bounded rollover; exact timer/cooldown numbers remain selected-profile choices."
+      },
+      {
+        "id": "A-43",
+        "legacy_statement": "Per step cost of 0.7 to 0.9 seconds and about 270 MB per segment, measured with an instant local model, approximates real cost.",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "aa049659fd6de52efcb098b96187160168fef5f543ae0ec906f6049c44668ce7",
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-18"
+        ],
+        "treatment": "Measure actual selected runtime cost; old per-segment latency and memory are historical only."
+      },
+      {
+        "id": "A-44",
+        "legacy_statement": "The selected controlled project loading and runner configuration invoke only admitted exact Skill names; starting slash dispatch refuses before startup and AskUserQuestion defers under pinned default mode. Native Bash effects always defer.",
+        "historical_status": "M1 verified for qualified configuration",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/spec.md",
+        "source_row_sha256": "bc3edd6ede4253d9aac5ff8dc70d6dc3ea33255cbc8479cd285d887c74995bb2",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-12",
+          "CR-18"
+        ],
+        "treatment": "Keep controlled native invocation and policy enforcement; qualify local native tool execution as a new lane."
+      }
+    ],
+    "candidate_assumptions": [
+      {
+        "id": "A-60",
+        "legacy_statement": "Selected accepted-head/opaque blob or bounded-history/store authority and exact conditional SDK adapter preserve ordered ACKed prefix",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "7f6698bdfcb7632d65bb3120f844d80162700439ddd948ae358c4715cf99bc0c",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "BD-04"
+        ],
+        "treatment": "Retain accepted ordered prefix and acknowledged-data loss obligation; choose actual storage acceptance mechanism."
+      },
+      {
+        "id": "A-61",
+        "legacy_statement": "Selected cold bundle/reattachment preserves native workspace metadata and protected spawn claims",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "b0c75cd7c596c9ae45f95318322c0047141b6c296e9980cfb3f6eb3d480a3220",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-09",
+          "CR-11"
+        ],
+        "treatment": "Keep metadata-complete workspace and guard restoration; no independent authority repair from files."
+      },
+      {
+        "id": "A-62",
+        "legacy_statement": "Independent Entity Workflow/unique store retains stable intent across outer reset, handover and supported rollback",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "8f25d10f7005027bef1b61d7ce262eeb8dda83673c9c4a3ce3e0e18316199a17",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-10",
+          "BD-02",
+          "BD-09"
+        ],
+        "treatment": "Independent intent across reset, handover and supported rollback remains an open mechanism choice."
+      },
+      {
+        "id": "A-63",
+        "legacy_statement": "Sealed receipt and orphan reconciliation refuse inconsistent cross store states",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "d0aa0e713a321505925006cff8e165367f73bc9851f6f6df64e7f1ce60c3c3d5",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "BD-04"
+        ],
+        "treatment": "Keep coherent receipt and orphan handling; cross-store transactions are not assumed."
+      },
+      {
+        "id": "A-64",
+        "legacy_statement": "Supervisor verifies prior execution termination before replacement",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "8c40841f1151e82ed499ccabfff41a302be3194a5759a546432ed025e8f11712",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-09",
+          "CR-11"
+        ],
+        "treatment": "Keep independently reconciled old execution exclusion before replacement."
+      },
+      {
+        "id": "A-65",
+        "legacy_statement": "Effects cannot access protected keys/state and cannot survive teardown",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "9316e84f451e7ae0196644828fbda4998e1e8d171e1e7092ae494b5aa7f9e2d0",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-05"
+        ],
+        "treatment": "Keep effects isolated from protected keys, state and control capabilities."
+      },
+      {
+        "id": "A-66",
+        "legacy_statement": "Signed decisions/dedup/cancellation survive recovery/handover",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "2c221bc72ca188ef62d95f33be28dd2de421d2bf678ed4f21f7d4f237b4da9c7",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "CR-14",
+          "BD-06"
+        ],
+        "treatment": "Keep authenticated decisions and deduplication across recovery, cancellation and handover."
+      },
+      {
+        "id": "A-67",
+        "legacy_statement": "Qualified retained versions support compatible original pending recovery",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "ea2305bab69daa21be9dc8c926256297df5f50a2a92dceb8ee7bc96328a20711",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-01"
+        ],
+        "treatment": "Retain exact recovery compatibility requirement until native continuation choice is explicit."
+      },
+      {
+        "id": "A-68",
+        "legacy_statement": "Retention/reset policy retains authority throughout every recoverable window",
+        "historical_status": "open decision",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "1652d90bf4e82fd2b64329559647c3d0d7f286650230652158f154c427aec72e",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-16",
+          "BD-09"
+        ],
+        "treatment": "Retain authority/object/key lifetime through every supported recovery window."
+      },
+      {
+        "id": "A-69",
+        "legacy_statement": "Chosen workload/objectives fit bounded history/storage/cleanup capacity",
+        "historical_status": "open decision",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "6d41af3e803c29f1e656c8d387a722982ff678122fe889534d5a0d6aae014e57",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-13",
+          "CR-14",
+          "CR-18"
+        ],
+        "treatment": "Select bounded workload and measured service objectives; no invented production capacity."
+      },
+      {
+        "id": "A-70",
+        "legacy_statement": "Optional confidential lane preserves key/freshness and recovery boundaries",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "35030a93b5893fe3f2cc4a566d65e69cc5b06ebdc47e7b8542672ade334d878e",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-05",
+          "CR-08",
+          "BD-05",
+          "BD-09"
+        ],
+        "treatment": "Confidential mode is now a project objective; specific key/freshness/rollback promises need qualification."
+      },
+      {
+        "id": "A-71",
+        "legacy_statement": "Chosen trusted Mod and exact required hooks load in production SDK with package/child restrictions intact across reloads",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "34badd2527d4861d1ab6ce254588a5f871d0eaa81a6ed9403c487a1c943d0826",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-01",
+          "CR-11",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Optional trusted Mods require actual loading and confinement proof if selected; not a new prerequisite."
+      },
+      {
+        "id": "A-72",
+        "legacy_statement": "Independent controller/capability boundary prevents native and direct plugin effects when a required bridge fails or disappears",
+        "historical_status": "proposed fix",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "28a8abb4faa7f00ad7bb87c96c3a27c021d01057bfa944e353387a03ceb2b8f2",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-11",
+          "CR-12",
+          "BD-02",
+          "BD-08"
+        ],
+        "treatment": "Required bridge fail-open prevention remains an activation condition for any selected Mod lane."
+      },
+      {
+        "id": "A-73",
+        "legacy_statement": "Native projection and suspension preserve complete typed original pending identity/outcome through selected SDK adapter",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "094572893f15f964980a937950f1268dfca698d6c34f3df976fef7e6111fe8d4",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "CR-18",
+          "BD-01",
+          "BD-08"
+        ],
+        "treatment": "Keep typed original pending identity and projection fidelity if this optional route is selected."
+      },
+      {
+        "id": "A-74",
+        "legacy_statement": "Optional accepted complete response escrow has lossless effective request/outer stream/trajectory and fenced durable recovery",
+        "historical_status": "untested",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "source_row_sha256": "5e50054ba20b545714ff392495f4d1b1c611c3181fafaa69cdbb58ffbcee4750",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "CR-17",
+          "BD-01",
+          "BD-04",
+          "BD-08"
+        ],
+        "treatment": "Complete model response escrow remains optional; no new promise of saved model requests is adopted."
+      }
+    ],
+    "candidate_decisions": [
+      {
+        "id": "BD-1",
+        "legacy_statement": "Which failures resume or park and what accepted state loss contract applies?",
+        "historical_status": "Open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "BD-01",
+          "BD-04"
+        ],
+        "treatment": "Original failure/loss contract remains open; new design must preserve or explicitly replace it."
+      },
+      {
+        "id": "BD-2",
+        "legacy_statement": "Which substrate/storage/isolation and named security/deployment owners apply?",
+        "historical_status": "Open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "BD-02",
+          "BD-05",
+          "BD-07"
+        ],
+        "treatment": "Keep selected local owner/configuration evidence; new authority, substrate and deployment binding require decisions."
+      },
+      {
+        "id": "BD-3",
+        "legacy_statement": "What retention/reset/replay/backup restore policy applies?",
+        "historical_status": "Open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "BD-09"
+        ],
+        "treatment": "Preserve approved synthetic horizons and holders; offered Reset, backup and production policies remain explicit."
+      },
+      {
+        "id": "BD-4",
+        "legacy_statement": "What workload/deadlines/payload bounds and measured SLOs apply?",
+        "historical_status": "Open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-13",
+          "CR-14",
+          "CR-17"
+        ],
+        "treatment": "Select finite workload, deadlines and measured objectives before affected execution."
+      },
+      {
+        "id": "BD-5",
+        "legacy_statement": "Is confidential execution required against which adversary?",
+        "historical_status": "Open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-02",
+          "CR-04",
+          "CR-05",
+          "BD-05"
+        ],
+        "treatment": "Confidentiality is now required as an outcome; concrete adversary/deployment/key qualification remains open."
+      },
+      {
+        "id": "BD-6",
+        "legacy_statement": "Adopt protocol extension/proposed rigor tier and which optional Mods lanes, revise scope or reject?",
+        "historical_status": "Open",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "BD-01",
+          "BD-02",
+          "BD-08",
+          "CR-18"
+        ],
+        "treatment": "The old distributed protocol was conditional; cutover does not adopt its mechanisms or optional lanes."
+      }
+    ],
+    "invariants": [
+      {
+        "id": "INV-1",
+        "legacy_statement": "Failure model",
+        "historical_status": "conditional candidate; legacy references also occur in tickets",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-09",
+          "CR-10",
+          "BD-01"
+        ],
+        "treatment": "Retain explicit loss, uncertainty and cancellation contract; old step boundaries require reconciliation."
+      },
+      {
+        "id": "INV-2",
+        "legacy_statement": "Worker and task queue topology",
+        "historical_status": "conditional candidate; legacy references also occur in tickets",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-02",
+          "CR-03",
+          "CR-06",
+          "CR-15"
+        ],
+        "treatment": "Replace segment/effect Worker topology with outside control and inside native runtime."
+      },
+      {
+        "id": "INV-3",
+        "legacy_statement": "Workflow and activity modeling",
+        "historical_status": "conditional candidate; legacy references also occur in tickets",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-12",
+          "CR-14"
+        ],
+        "treatment": "Retain deterministic outside orchestration and native policy; no confidential plaintext in Workflow code."
+      },
+      {
+        "id": "INV-4",
+        "legacy_statement": "Long running behavior",
+        "historical_status": "conditional candidate; legacy references also occur in tickets",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-14",
+          "CR-16",
+          "BD-09"
+        ],
+        "treatment": "Retain bounded handover, decisions and referenced state."
+      },
+      {
+        "id": "INV-5",
+        "legacy_statement": "State ownership and idempotency",
+        "historical_status": "conditional candidate; legacy references also occur in tickets",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-08",
+          "CR-10",
+          "BD-02",
+          "BD-04"
+        ],
+        "treatment": "Retain authority and state distinctions; native runtime does not decide acceptance or independent dispatch."
+      },
+      {
+        "id": "INV-6",
+        "legacy_statement": "Observability and service levels",
+        "historical_status": "conditional candidate; legacy references also occur in tickets",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-13",
+          "CR-18"
+        ],
+        "treatment": "Retain content-safe observability and measured objectives."
+      },
+      {
+        "id": "INV-7",
+        "legacy_statement": "Security and privacy",
+        "historical_status": "conditional candidate; legacy references also occur in tickets",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/candidate/spec.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-04",
+          "CR-05",
+          "CR-11",
+          "CR-12"
+        ],
+        "treatment": "Retain confidentiality, identity, package and execution isolation."
+      }
+    ],
+    "qualification_cases": [
+      {
+        "id": "Q-1",
+        "legacy_statement": "A nominal processor changes workspace or external systems",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "c034dfbe4434280eeb3845d154c2273045e7d44751b861320b066a3aed547f85",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "BD-08"
+        ],
+        "treatment": "Retain immutable processor input and forbidden mutation/egress controls if artifact processing is selected."
+      },
+      {
+        "id": "Q-2",
+        "legacy_statement": "Index rebuilding silently changes accepted model input",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "d097da99d85b6a173da742aa595d87a5be63a5889ab78b4bebf1b6917ba412fd",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-16",
+          "BD-08"
+        ],
+        "treatment": "Keep raw and accepted projections independent of disposable indexes."
+      },
+      {
+        "id": "Q-3",
+        "legacy_statement": "Wrong identity/status or missing native bookkeeping advances a pending call",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "4f958cad3d2b0a3e5a3d249802bc9fd8f64df5a5423b40c5c33606fac6f4cbe5",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "BD-01",
+          "BD-04"
+        ],
+        "treatment": "Retain exact original success/error identity and metadata qualification."
+      },
+      {
+        "id": "Q-4",
+        "legacy_statement": "Missing projection hook exposes excluded output",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "cfce65bdaa7efd76134f5d28c97304408c91b70e2473bbd2d77d682b4111eee8",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-12",
+          "BD-08"
+        ],
+        "treatment": "Missing required projection cannot disclose excluded output or silently continue."
+      },
+      {
+        "id": "Q-5",
+        "legacy_statement": "Source adapter flags are mistaken for host enforcement",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "4cf429dd3f6ac61ebb2aaa471dec431003070d0ecc878d0110c6fd431f414070",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-11",
+          "CR-18"
+        ],
+        "treatment": "Source flags are not installed prevention proof; preserve actual positive and disabled control tests."
+      },
+      {
+        "id": "Q-6",
+        "legacy_statement": "Artifact labels or paths allow cross-session exposure",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "80f314b5232488e1c7954fbab59f1cba3c16688b4fdd032414135933ca9d401c",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-04",
+          "CR-07",
+          "CR-16"
+        ],
+        "treatment": "Retain exact scoped reader authorization and cross-session denial."
+      },
+      {
+        "id": "Q-7",
+        "legacy_statement": "Component import starts executor, telemetry, healer or config mutation",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "0b93cd007773ce5b1949adc616d0564373a8d557735d4f550be1f0abc1978270",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-11",
+          "CR-18"
+        ],
+        "treatment": "Retain dependency/startup, network, configuration and installation surface qualification."
+      },
+      {
+        "id": "Q-8",
+        "legacy_statement": "Outer Activity retry repeats hidden inner mutation",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "8b6ff39e37af2244e816c21f8c3725e89f74fabd78c0ff932664d598bbbd9a48",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-10",
+          "BD-02"
+        ],
+        "treatment": "Retain lost completion and physical invocation counter proof; no hidden retry bypass."
+      },
+      {
+        "id": "Q-9",
+        "legacy_statement": "Remote submit reply loss duplicates jobs or loses completed output",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "c693390c6fb4a81c499947a8c5c309b3745454fc0f3d1bae663c105b96883b93",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-10",
+          "BD-02"
+        ],
+        "treatment": "Lost submit/result replies reconcile the same original operation; optional keyed service scope stays conditional."
+      },
+      {
+        "id": "Q-10",
+        "legacy_statement": "Local replacement retains transcript but loses file/claim or descendant consistency",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "b3e75ec5a1c9f1f2e1ed605d91d1675481d4ec53696948c5c1b225f58c578860",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-08",
+          "CR-09"
+        ],
+        "treatment": "Keep local replacement and whole execution cleanup oracle."
+      },
+      {
+        "id": "Q-11",
+        "legacy_statement": "Local-only state is mistaken for portable recovery",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "861f73daeaefbc9698e3f1867e2f49e209acdb1df1a50344c96a81d97aecf1ff",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-09"
+        ],
+        "treatment": "Keep original host/disk inaccessible and accepted-data loss failure oracle."
+      },
+      {
+        "id": "Q-12",
+        "legacy_statement": "Two partitioned live executions act concurrently",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "eaf10c75a27fdafb70dca456496365442ac19f09b4078813067d6b54b861daa1",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-09",
+          "CR-11"
+        ],
+        "treatment": "Keep live partition and lost termination receipt reconciliation before replacement."
+      },
+      {
+        "id": "Q-13",
+        "legacy_statement": "Unresolved local postimage is destroyed during planned cleanup",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "249bc9405eb17aae146d94cd38abd8db006578d6dcc1f7dff03bc0589f5a1418",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-16"
+        ],
+        "treatment": "Routine cleanup must retain required sole-readable local outcome/postimage."
+      },
+      {
+        "id": "Q-14",
+        "legacy_statement": "Logical authority can be reset into an empty reusable permission",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "1057a7929c6a3910f6b9544ec7d76529c0496c52c41f893a07982ebeb72ddd05",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-10",
+          "BD-02",
+          "BD-09"
+        ],
+        "treatment": "Independent authority reset/recreation must not produce reusable dispatch permission."
+      },
+      {
+        "id": "Q-15",
+        "legacy_statement": "Unnecessary fork creates unowned maintenance or improper copying",
+        "historical_status": "qualification case; no new execution proof",
+        "source": "python/claude_agent_sdk/docs/skill-recovery/proposals/distributed-recovery/2026-10-08/context-mode-integration-edit-plan.md",
+        "source_row_sha256": "b3c8ed75a782aa8e6180b6624b85313f551e2feec82f76ea8faabe273b7a94ba",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Retain exact selected source/license/maintenance review; optional components require a concrete reuse need."
+      }
+    ],
+    "trust_requirements": [
+      {
+        "id": "R1",
+        "legacy_statement": "Service history and object storage hold ciphertext.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-02",
+          "CR-13"
+        ],
+        "treatment": "Keep encryption before outside handling, including failures and content export."
+      },
+      {
+        "id": "R2",
+        "legacy_statement": "Recover on a replacement host without accepted data loss.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "CR-09",
+          "BD-01",
+          "BD-04"
+        ],
+        "treatment": "No-loss meaning and acknowledged progress boundary remain decisions, not silently reduced native continuation."
+      },
+      {
+        "id": "R3",
+        "legacy_statement": "The client cannot inspect protected skill material.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-04",
+          "CR-12"
+        ],
+        "treatment": "Keep output release and separate reader policy; model access is a separately declared boundary."
+      },
+      {
+        "id": "R4",
+        "legacy_statement": "Operator administrators cannot inspect client code or conversation.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-02",
+          "CR-04",
+          "CR-11"
+        ],
+        "treatment": "Keep all confidential plaintext processing inside the approved trusted runtime."
+      },
+      {
+        "id": "R5",
+        "legacy_statement": "Neither party can decrypt protected material alone.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-04",
+          "CR-05",
+          "BD-05"
+        ],
+        "treatment": "Keep mutual approval and gated key release; concrete scheme needs qualification."
+      },
+      {
+        "id": "R6",
+        "legacy_statement": "Operator-controlled environment cannot steer or observe protected execution.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-05",
+          "CR-11",
+          "CR-12",
+          "CR-13"
+        ],
+        "treatment": "Keep approved launch policy, restricted administration, egress and telemetry."
+      },
+      {
+        "id": "R7",
+        "legacy_statement": "Protection from the cloud hypervisor is a distinct stronger profile.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-05",
+          "BD-05"
+        ],
+        "treatment": "Do not claim this from protected VM attestation alone; select only when threat scope requires it."
+      },
+      {
+        "id": "R8",
+        "legacy_statement": "Model-provider plaintext access is a separate inference trust boundary.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-04",
+          "BD-05"
+        ],
+        "treatment": "External native model inference does not hide prompts from that provider; stronger inference remains separate."
+      }
+    ],
+    "engine_requirements": [
+      {
+        "id": "E1",
+        "legacy_statement": "All durable content must pass through a protected persistence boundary.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-02",
+          "CR-08"
+        ],
+        "treatment": "Replace payload-only mechanism with encrypted accepted state; native local files are not durable until accepted."
+      },
+      {
+        "id": "E2",
+        "legacy_statement": "Compose payload and failure protection with execution.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-02",
+          "CR-13"
+        ],
+        "treatment": "Preserve converter/failure coverage while moving content sealing inside trust boundary."
+      },
+      {
+        "id": "E3",
+        "legacy_statement": "No confidential content in identifiers, visibility, logs or metric labels.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-13"
+        ],
+        "treatment": "Keep all plaintext metadata surfaces within explicit content policy."
+      },
+      {
+        "id": "E4",
+        "legacy_statement": "Bind workspace capture to the corresponding accepted engine state.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-08",
+          "BD-04"
+        ],
+        "treatment": "Per-step hook is not assumed available; capture boundary must be selected and qualified."
+      },
+      {
+        "id": "E5",
+        "legacy_statement": "Distinguish did not run, completed and may have run outcomes.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-10",
+          "BD-01",
+          "BD-02"
+        ],
+        "treatment": "Keep uncertainty visible to the service; no fabricated definitive model result."
+      },
+      {
+        "id": "E6",
+        "legacy_statement": "Support headless execution and constrained egress.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-01",
+          "CR-11"
+        ],
+        "treatment": "Keep native SDK route and trusted configuration; no required interception proxy follows."
+      },
+      {
+        "id": "E7",
+        "legacy_statement": "Authenticate sealed inbound content and bind job and sequence.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-12",
+          "BD-07"
+        ],
+        "treatment": "Keep client input identity and replay refusal; exact wire/key protocol remains open."
+      },
+      {
+        "id": "E8",
+        "legacy_statement": "Confidential tool decisions use fixed local policy rather than content-revealing human approvals.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-12",
+          "BD-06"
+        ],
+        "treatment": "Retain permitted sealed questions and output release as separate decisions."
+      },
+      {
+        "id": "E9",
+        "legacy_statement": "Fence accepted checkpoints by current generation and predecessor.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-08",
+          "BD-04",
+          "BD-07"
+        ],
+        "treatment": "Keep stale acceptance refusal; exact Temporal Update shape remains proposed."
+      },
+      {
+        "id": "E10",
+        "legacy_statement": "Capture only at a consistency boundary accounting for every writer.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-08",
+          "CR-11",
+          "BD-04",
+          "BD-08"
+        ],
+        "treatment": "No post-tool copy or background writer assumption supplies a coherent accepted state."
+      },
+      {
+        "id": "E11",
+        "legacy_statement": "The trusted runtime seals output, authenticates input, enforces policy, validates restore and confines Bash.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-02",
+          "CR-03",
+          "CR-07",
+          "CR-08",
+          "CR-11",
+          "CR-12"
+        ],
+        "treatment": "Replace dropped-SDK/Mod topology with native local SDK candidate; keep plaintext invariant."
+      }
+    ],
+    "roadmap": [
+      {
+        "id": "R01",
+        "legacy_statement": "Pin integration baseline and preserve compatible existing provider behavior.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-15",
+          "CR-18"
+        ],
+        "treatment": "Keep pinning and compatibility; old PR routing import is no longer a mandatory prerequisite."
+      },
+      {
+        "id": "R02",
+        "legacy_statement": "Add explicit placement and capability checks before allocation.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-03",
+          "CR-15"
+        ],
+        "treatment": "Keep the bounded generic external runtime contribution."
+      },
+      {
+        "id": "R03",
+        "legacy_statement": "Harden controller identity, retries, transitions, readiness, cleanup and history.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-14",
+          "CR-16"
+        ],
+        "treatment": "Retain affected lifecycle outcomes; select narrowly rather than requiring all hardening before first mode."
+      },
+      {
+        "id": "R04",
+        "legacy_statement": "Compose controller generation with a conversation adapter and runtime bridge.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "replaced_mechanism",
+        "owners": [
+          "CR-06",
+          "CR-07",
+          "CR-14",
+          "BD-07"
+        ],
+        "treatment": "Keep single ownership; Python client and ordinary remote SDK bridge are not private prototype prerequisites."
+      },
+      {
+        "id": "R05",
+        "legacy_statement": "Qualify one attested provider and locked supervisor image.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-05",
+          "CR-11",
+          "BD-05"
+        ],
+        "treatment": "Keep final confidential activation gate; local container proof is not attestation."
+      },
+      {
+        "id": "R06",
+        "legacy_statement": "Publish and restore coherent encrypted accepted recovery state.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-07",
+          "CR-08",
+          "CR-09",
+          "BD-04"
+        ],
+        "treatment": "Keep original host loss, late upload, conflict and corrupted state refusal."
+      },
+      {
+        "id": "R07",
+        "legacy_statement": "Qualify native execution adapters and required child behavior.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-01",
+          "CR-08",
+          "CR-18",
+          "BD-01",
+          "BD-08"
+        ],
+        "treatment": "Prefer one native SDK route; optional turn/Mods adapters and positive child/parallel outcomes remain open."
+      },
+      {
+        "id": "R08",
+        "legacy_statement": "Complete gateway, fixed policy, question and output controls.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-04",
+          "CR-07",
+          "CR-10",
+          "CR-12",
+          "CR-13"
+        ],
+        "treatment": "Keep unauthorized zero-effect, sealed sequencing and content release tests."
+      },
+      {
+        "id": "R09",
+        "legacy_statement": "Deliver reference application, recovery evidence and operational contract.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "retained_objective",
+        "owners": [
+          "CR-06",
+          "CR-09",
+          "CR-13",
+          "CR-16",
+          "CR-18"
+        ],
+        "treatment": "Keep end-to-end qualified profile and measured limits before confidentiality claims."
+      },
+      {
+        "id": "R10",
+        "legacy_statement": "Qualify another agent harness and optional service facade using the same lifecycle and recovery contracts.",
+        "historical_status": "extracted historical requirement; no runtime qualification claimed",
+        "source": "docs/confidential-agent-runtime/evidence/research.md",
+        "disposition": "deferred_owner_decision",
+        "owners": [
+          "CR-15",
+          "CR-18",
+          "BD-08"
+        ],
+        "treatment": "Retain as a later activation outcome after the first complete profile and a concrete second harness owner; not satisfied by first Claude prototype."
+      }
+    ]
+  }
+}
