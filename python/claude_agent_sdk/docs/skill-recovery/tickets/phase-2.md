@@ -4,6 +4,25 @@
 
 Status: OPEN
 
+#### Remaining admission conditions (2026-10-14)
+
+DSR-0.6 is DONE for the approved finite local configuration, and DSR-1.9 is DONE for the retained bounded Phase 1 exit. Those recorded prerequisites are satisfied. The dated OPEN statements below are historical. This build remains OPEN because no prepared-workspace implementation or acceptance proof exists. Documentation selection is not implementation or execution authority. Use the [reset procedure](../proposals/distributed-recovery/2026-10-08/dsr-0.8-reset.md) and [retention decision reconciliation](../proposals/distributed-recovery/2026-10-08/dsr-0.11-retention.md) for their owning decisions.
+
+| Remaining condition | Owner | Required evidence | Gate |
+|---|---|---|---|
+| Complete reset action decision for the affected reset/recovery surface | Operator; maintainer records it at DSR-0.8 | Confirmed action policy and exact-run detection/lineage procedure; runtime negatives remain DSR-3.5 | Design, before dependent reset actions; does not block independent store/schema work |
+| Exact native conversation/workspace callback mapping and compatible upstream integration revision | Project maintainer for project adapters; engine maintainer for changed engine seam | Agreed concrete pre-effect admission, post-effect result/postimage and replacement/uncertainty mapping to the existing runner/native-record APIs, with pinned compatible revision | Design before native integration changes; independent project work can proceed under its own approved contracts |
+| Typed workspace preparation, accepted-pair manifest and stable starter/call/ordinal mapping | Plugin engineer under project maintainer | Implementation and meaningful model-free tests for idempotent initial preparation, exact restoration, mismatch refusal, lost ACK reconciliation and no empty claim/authority repair; all existing criteria below | Implementation and DSR-2.1 acceptance, then DSR-2.9 exit |
+| Protected Entity scheduling and controller/reader bindings used by preparation | Project maintainer | Implemented current authority lookup, authenticated exact-incarnation barrier and scoped authorization before retrieval; no reusable spawn permit or direct bypass | Implementation at DSR-2.1/2.2/2.7; runtime proof at the owning later gates |
+| Reproducible selected component/build/platform closure | Project maintainer and Security holder, already assigned | Built revision, immutable image/package digests, complete admitted dependency/platform inventory and notices; actual Linux/kernel/daemon identities; compatible capability/configuration checks | Implementation admission Q-7/Q-15; no new source/license/owner decision unless scope changes |
+| Finite local test proposal with actual admitted identities and clean shutdown oracle | Project maintainer; operator authorizes execution | Exact model-free local cases and limits from approved configuration, actual artifacts/controller revision, synthetic-only inputs, retained references and cleanup plan | Execution authorization; no installations, infrastructure or models authorized in this documentation session |
+| Native fidelity on the selected original-pending lane | Plugin engineer | DSR-2.6 differential success/error, full identity/status/metadata and exact projection tests using retained proof where applicable; SDK lock 0.2.154 is distinct from proof SDK 0.2.162/CLI 2.1.274 | Execution and native admission; fake engines cannot qualify native recovery |
+| Reset, signed actions, deletion and store conformance | Maintainer through DSR-3.3/3.5/4.2/5.4 | Reset/authority negatives, signed action refusals, referenced-object/key retention and cross-reader denial at their existing gates | Later implementation/execution; not completed by decision closure |
+| Host/disk loss and live partition with old effect egress | Maintainer builds finite rig; operator authorizes it | DSR-4.3 restores on another host without original disk and refuses replacement until independent exact-incarnation termination | Later portable qualification, after initial surviving-host/container proof; not an initial local-test prerequisite |
+| Real client data policy | Client approves; maintainer binds and enforces | Client retention/compliance/readers/key lifecycle policy and required production qualifications | Later production admission; no production policy is invented for the synthetic profile |
+
+Native projection, restricted Code Mode/harness integration and positive child/parallel qualification remain selected at their existing owners. They need not delay unrelated project implementation, and their present denial/qualification boundaries remain enforced until positive proof. Native skill loading needs no Mods; announced Mods CLI 2.1.287 is a distinct, unqualified candidate lane. No substitute engine or model-free store test retires native fidelity. No AWS spending is required for initial local proof.
+
 Interface requirements (2026-10-12): Prepare typed checkpoint/receipt and configuration compatibility contracts under the [canonical interfaces](../spec.md#selected-component-boundaries-2026-10-12). Use local and AWS adapters behind the same semantic operations. Test unknown capabilities, stale/changed configuration, endpoint injection, exact versions/digests, authorization denial and lost publication replies. Local emulation cannot prove durable ACK or host-loss recovery; existing DSR-0.6 blocker remains.
 
 Selected rebaseline (2026-10-11): validated S3 accepted-pair restore/publication replaces shared-volume-only preparation. The manifest binds exact object versions/digests, predecessor, native pending identity, required workspace image, package/policy/runtime and execution incarnation; DSR-0.6 remains the unresolved prerequisite. Full retained artifacts and exact accepted projection/version identities are included under the selected context seam. Protected local claims remain defense; restore never recreates independent authority or lost accepted outputs.
@@ -74,7 +93,7 @@ No code creates the run directory layout, the Worker owned claims directory, the
 
 #### Dependencies and blockers
 
-- Blocked by DSR-0.6 (volume class and effect isolation level) and DSR-1.9 (Phase 1 continue decision).
+- Recorded prerequisites DSR-0.6 (approved finite local configuration) and DSR-1.9 (bounded Phase 1 continue decision) are DONE. Remaining conditions are classified above; preserve the recorded dependency edges without interpreting them as unresolved decisions or execution authorization.
 - DSR-0.2 selects Option R: keep manifest generation and stable claim identity; omit claims high water state and the additional contract version.
 - Blocks every other Phase 2 build ticket and the Phase 2 exit review.
 

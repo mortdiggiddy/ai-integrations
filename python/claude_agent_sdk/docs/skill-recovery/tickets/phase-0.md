@@ -552,7 +552,9 @@ The approved configuration assigns the project maintainer, selects the Python ga
 
 ### DSR-0.8 Decide how a Workflow reset is detected and handled
 
-Status: OPEN
+Status: IN PROGRESS
+
+Current design record (2026-10-14): [reset detection and the ordered operator procedure](../proposals/distributed-recovery/2026-10-08/dsr-0.8-reset.md) owns the exact-run history probe, trusted starter/lineage reservation, authority and integrity barriers, operator signal and action proposal. Four decision-record criteria are satisfied. The uncertain Bash action choice remains pending; the criterion requiring DSR-3.5 negative execution evidence remains open. No reset, implementation or runtime action is authorized. The dated notes below retain their historical scope.
 
 Interface requirements (2026-10-12): Changing execution/storage adapters cannot reset original intent, lineage or independent authority. Apply the [canonical interface contract](../spec.md#selected-component-boundaries-2026-10-12) to reset, configuration compatibility and duplicate/lost-reply cases; snapshot/clone restore never revives permission. Alternate authority providers and regional failover require separate fault/rollback selection and proof.
 
@@ -595,18 +597,18 @@ The reset detection method and the operator procedure for an ambiguous Bash park
 
 #### Acceptance criteria
 
-- [ ] A decision record states the detection method for a reset and the signal an operator sees, without treating a changed claim Run Id alone as reset proof. Proof: the record names the evidence and the Query or Search Attribute that shows it, with a check that distinguishes reset from Continue-As-New.
-- [ ] The record holds the operator runbook outline with ordered steps for a reset of a run that has claimed effects, including earlier outcome investigation, surviving process handling, workspace and claim integrity, and the undetected mid run snapshot limitation. Proof: the numbered outline.
+- [x] A decision record states the detection method for a reset and the signal an operator sees, without treating a changed claim Run Id alone as reset proof. Proof: the record names the evidence and the Query or Search Attribute that shows it, with a check that distinguishes reset from Continue-As-New.
+- [x] The record holds the operator runbook outline with ordered steps for a reset of a run that has claimed effects, including earlier outcome investigation, surviving process handling, workspace and claim integrity, and the undetected mid run snapshot limitation. Proof: the numbered outline.
 - [ ] The record cites DSR-0.2's exclusion of `redo`, `release_claim` and keyed external service recovery. It states which signed actions, if any, safely resolve an ambiguous Bash park without bypassing unresolved uncertainty or authorizing another spawn. Proof: the cited scope record and explicit action rules; no recovery choice is inferred from scope approval.
-- [ ] The record states whether the starter mints the lineage id and who keeps it unique. Proof: the record.
-- [ ] The record states that missing or unverified workspace and claim integrity parks or blocks the run with the cause named, rather than treating a restored tree as safe by default. Proof: the stated rule consistent with the manifest generation limitation in [canonical specification](../canonical-documents.md#specification).
+- [x] The record states whether the starter mints the lineage id and who keeps it unique. Proof: the record.
+- [x] The record states that missing or unverified workspace and claim integrity parks or blocks the run with the cause named, rather than treating a restored tree as safe by default. Proof: the stated rule consistent with the manifest generation limitation in [canonical specification](../canonical-documents.md#specification).
 
 
 - [ ] Outer reset/preclaim restore and lost admission reply never reset independent authority or mint another permission; unknown/missing/regressed authority parks. Proof: confirmed reset runbook and DSR-3.5 negative matrix, preserving original call identity and no redispatch.
 
 #### Dependencies and blockers
 
-- DSR-0.2 is DONE and supplies the approved Option R scope. The Operator's reset and ambiguous Bash recovery procedure remains open.
+- DSR-0.2 is DONE and supplies Option R. Detection and the ordered procedure are specified in the current record; the uncertain Bash action choice and DSR-3.5 execution evidence remain open.
 - Blocks DSR-3.3 (parking and resume actions) and DSR-3.5 (reset tests).
 
 #### Source evidence
@@ -618,11 +620,8 @@ The reset detection method and the operator procedure for an ambiguous Bash park
 
 #### Open questions
 
-- Operator: who restores the workspace after a reset, and from which snapshot?
-- Operator: which signed actions, if any, can resolve an ambiguous Bash park with claims preserved and the external outcome or surviving process established? Until decided and tested, continuation remains blocked.
-- Plugin engineer: which evidence distinguishes reset from Continue-As-New, given that a different stored claim Run Id alone identifies only an earlier run of the lineage?
-- Plugin engineer: does a reset to the first Workflow Task replay the starter supplied id? DSR-3.5 proves it, and the decision here only chooses the design.
-- The reset reproduction described in the specification rests on the SDK source and a relayed statement. Official sample repositories were not inspected.
+- Operator: the current record distinguishes exact retained outcome reconciliation from missing outcome/postimage uncertainty. The proposed abort-only action choice is not approved. Decide its final scope after review; no manual observation can manufacture a native result.
+- Plugin engineer: qualify exact-run detection, replay-safe observation delivery, first-task reset and all authority/identity negatives at DSR-3.5. Source grounding supports the design, not runtime proof.
 
 ### DSR-0.9 Name who registers Search Attributes and who owns rollout order
 
@@ -748,7 +747,9 @@ The specification names no keyed service and no retention window. Without the wi
 
 ### DSR-0.11 Name the owners of namespace retention and the session store requirement
 
-Status: OPEN
+Status: DONE (2026-10-14)
+
+Decision completion: [the retention/session-store decision record](../proposals/distributed-recovery/2026-10-08/dsr-0.11-retention.md#acceptance-mapping) maps all five criteria to existing approved maintainer, synthetic retention and reader/key policy. This closes the finite synthetic decision scope only. DSR-4.2 and DSR-5.4 still implement and qualify enforcement; real client data requires its separate client-approved policy. Earlier dated OPEN narratives below retain their original scope.
 
 Interface requirements (2026-10-12): Apply the [canonical storage/key interfaces](../spec.md#selected-component-boundaries-2026-10-12): version/digest-specific reader authorization, key/credential references, retention through every offered recovery horizon and refusal of missing accepted bytes. SSE-S3 versus customer-managed KMS, concrete encryption/key policies and commercial distribution/license route remain decisions. TLS, storage encryption and payload codecs are independent; local synthetic data waives no production requirement.
 
@@ -791,13 +792,13 @@ The operator's accountability is confirmed. The project maintainer holds the app
 
 #### Acceptance criteria
 
-- [ ] A decision record names the retention owner role holder and states the retention value or the open assumption with a date to settle it. Proof: the record.
-- [ ] The record names the session store owner and lists the three requirements. Proof: the record.
-- [ ] The record states what the janitor does when the retention value is unknown: it keeps claim files and does not remove them. Proof: the stated rule.
-- [ ] The record classifies missing acknowledged accepted bytes as durability FAIL and missing required outcome/projection as park; retries cannot fabricate accepted data. Proof: the stated A-38 contract.
+- [x] A decision record names the retention owner role holder and states the retention value or the open assumption with a date to settle it. Proof: the record.
+- [x] The record names the session store owner and lists the three requirements. Proof: the record.
+- [x] The record states what the janitor does when the retention value is unknown: it keeps claim files and does not remove them. Proof: the stated rule.
+- [x] The record classifies missing acknowledged accepted bytes as durability FAIL and missing required outcome/projection as park; retries cannot fabricate accepted data. Proof: the stated A-38 contract.
 
 
-- [ ] Object, key, authority and exact raw/accepted artifact retention covers live/parked/reset/replay references; unauthorized cross-session reads and unknown retention refuse. Lost acknowledged accepted bytes is durability FAIL, while missing required outcome/projection parks. Proof: owner-approved finite policy and DSR-5.4/Q-2/Q-6 conformance requirements.
+- [x] Object, key, authority and exact raw/accepted artifact retention covers live/parked/reset/replay references; unauthorized cross-session reads and unknown retention refuse. Lost acknowledged accepted bytes is durability FAIL, while missing required outcome/projection parks. Proof: owner-approved finite policy and DSR-5.4/Q-2/Q-6 conformance requirements.
 
 #### Dependencies and blockers
 
@@ -811,8 +812,7 @@ The operator's accountability is confirmed. The project maintainer holds the app
 
 #### Open questions
 
-- Operator: which compliance requirement applies to the first deployment?
-- Operator: is the session store a shared service that already exists?
+- No remaining owner question for the approved synthetic decision. Before real client data, obtain the client's production compliance/retention and reader/key policy. DSR-4.2/5.4 own actual implementation and conformance.
 
 ### DSR-0.12 Decide which recovery integration the next implementation uses
 
