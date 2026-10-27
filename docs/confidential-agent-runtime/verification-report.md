@@ -4,6 +4,8 @@ Date: 2026-10-26. Verdict: **PASS for M1 design**. Both independent reviewers fo
 
 ## Selected scope
 
+Subsequent supplemental research at EV-33 adds candidate reuse decisions and more concrete proof cases for later stages. It was not part of this independent M1 review. The M1 contract and tickets remain unchanged; later component selection and recovery mechanisms still require their own scoped review. Current evidence gate counts may therefore exceed the historical counts recorded below without representing another independent pass.
+
 The project owner explicitly requested staged sandbox work. The immediate scope is the full M1 contract in [the plan](plan.md#m1-explicit-external-runtime-support): explicit external runtime placement, narrow capability admission, one existing provider extension, an ordinary example and compatibility checks. Future recovery and confidential environment requirements remain in the specification and their later milestones. They are not prerequisites for M1 and are not waived.
 
 The earlier full roadmap review returned CONDITIONAL. Its blanket reopening of nine approvals was corrected against the retained local configuration and retention records. A subsequent full outcome investigation identified the unresolved active-child recovery mechanism. This report does not relabel that broader outcome PASS. It records the later, explicitly selected phase scope.

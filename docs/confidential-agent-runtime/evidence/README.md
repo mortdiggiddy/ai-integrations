@@ -6,6 +6,8 @@ Status: consolidated research, 2026-10-26. This directory is the maintained evid
 
 [Integration and samples alignment](upstream-alignment.md) records the later PR #169 delta and PR #403 source review. It distinguishes reusable transport and rollover examples from the project's confidential recovery requirements. It also states why the raw mapper inventory remains local rather than a shared dependency.
 
+[Sandbox landscape review](sandbox-landscape-review.md) records the MXC discussion research, pinned primary sources, supervisor and checkpoint alternatives, and phase appropriate recommendations. It adds no dependency, acceptance change or runtime qualification.
+
 The replacement specification owns requirements. Its decision record owns unresolved changes to guarantees. The obligation map owns the disposition of historical tickets and assumptions. This directory owns source observations and proposed proving cases. It does not duplicate ticket status or grant execution authority.
 
 The imported research has been converted to technical descriptions. Private transcripts, individual attribution, environment specific paths and explanatory diagrams are not required to use this package. Historical records remain evidence for their stated version and scenario. The catalog distinguishes synthesized current material from archival material that is not a current design input.

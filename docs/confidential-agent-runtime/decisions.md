@@ -38,6 +38,8 @@ The [runtime protocol](runtime-protocol.md) now proposes sealed service operatio
 
 ## How to close a decision
 
+The [supplemental sandbox research](evidence/sandbox-landscape-review.md) adds candidates to existing decision owners, not new approvals. BD-07 owns the bounded reuse/reject record for native confinement and supervisor components before full M2/M4 custom implementation. BD-01/BD-04/BD-08 own any selection of portable RAM/disk capture and its active-child/effect proof. BD-05/BD-06 own plaintext broker placement and deployment trust. MXC, OpenShell, nono and SmolVM remain unselected; no capability flag, draft protocol or vendor checkpoint claim closes these gates. The reviewed M1 contract and early trusted local demo path retain their scope.
+
 For carried forward choices, cite the existing approval and preserve its scope instead of asking again. For genuine new choices, record the owner response, retained or changed guarantees, affected obligations and proof. Engineering owners may settle mechanisms within retained guarantees, but must supply implementable contracts rather than defer unresolved design premises to tests. Update the obligation map if an obligation changes. Source inspection cannot approve product risk or qualify deployment.
 
 An open decision blocks only the behavior it governs. Credential free document preparation, source inspection and the generic external runtime API proposal can continue where they do not assume that answer. A pending decision never permits advertising the final confidential or recovery guarantee.

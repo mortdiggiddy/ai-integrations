@@ -295,6 +295,15 @@
       "result_ref": "https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/compute/smolcloud/provider.go",
       "used_for": "Existing stable creation/adoption path and TEMPORAL_TASK_QUEUE injection; first external provider extension",
       "status": "used"
+    },
+    {
+      "id": "EV-33",
+      "tool": "user-source",
+      "operation": "read supplemental sandbox primary sources and record phase implications",
+      "query": "MXC policy validation; native sandbox-runtime; OpenShell supervisor; nono draft NEP-0007; SmolVM checkpoint and trust contracts",
+      "result_ref": "docs/confidential-agent-runtime/evidence/sandbox-landscape-review.md",
+      "used_for": "Later stage component reuse decisions, confinement proof cases and optional portable capture evaluation; no M1 contract or dependency change",
+      "status": "used"
     }
   ]
 }

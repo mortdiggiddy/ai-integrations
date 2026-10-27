@@ -38,6 +38,8 @@ This container authorizes no implementation by itself. Host loss recovery belong
 - [ ] Reconnect retains resource identity; connection close, CLI shutdown and compute deletion follow their separate contracts. No Temporal Worker or Namespace credential is bootstrapped inside the runtime. Source: M2 plan and H2/U1.
 - [ ] Full M2 acceptance additionally proves sealed operations, caller/job/generation binding and selected acknowledgment meanings. Synthetic canary checks inspect outside payloads, history, failures, logs, telemetry and observers for content exposure and cross job access. Source: M2 plan and runtime protocol.
 - [ ] Scoped `verify-change` covers the implemented M2 slice and states which full M2 criteria remain open. Ordinary containers do not establish host operator confidentiality. Source: M2 plan.
+- [ ] Before full M2/M4 custom confinement implementation, a bounded comparison records reuse or rejection of the relevant native sandbox-runtime, nono and OpenShell components, exact pins and lifecycle/trust fit under BD-07. This does not block the early trusted local skill demo. Source: M2 plan and supplemental sandbox research.
+- [ ] Full M2 confinement tests prove the admitted profile rejects native/child read bypass, unsafe startup/configuration inputs, inherited control descriptors/sockets, direct egress bypass and permissive audit/override modes. Policy update tests state whether existing connections require restart or explicit closure. Source: CR-01/CR-11/CR-12 and supplemental sandbox research.
 
 #### Dependencies and blockers
 
@@ -45,7 +47,7 @@ CNR-1 supplies the generic lifecycle seam. The native SDK integration maintainer
 
 #### Source evidence
 
-[M2 plan](../plan.md#m2-native-supervisor-and-sealed-content-path); [decision register](../decisions.md); [runtime protocol](../runtime-protocol.md); [U1 and H2](../ticket-evidence.md#inspected-sources).
+[M2 plan](../plan.md#m2-native-supervisor-and-sealed-content-path); [decision register](../decisions.md); [runtime protocol](../runtime-protocol.md); [U1 and H2](../ticket-evidence.md#inspected-sources); [supplemental sandbox sources and proof mapping](../ticket-evidence.md#supplemental-later-stage-evidence).
 
 #### Open questions
 
@@ -89,6 +91,7 @@ This container does not approve a recovery algorithm, waive positive child/paral
 - [ ] Lost replies, stale producers, missing/corrupt accepted bytes and mutation before result acceptance have explicit tests. Unknown outcomes stop without repeating uncertain actions or inventing definitive output. Source: M3 plan and native recovery protocol.
 - [ ] Positive child and parallel recovery requirements receive proof or an explicit owner disposition before broader recovery is claimed. Parking an active-child crash is not positive recovery. Source: BD-08 and the retained obligation map.
 - [ ] Scoped implementation verification reports the supported workload and recovery limits and preserves required state/keys across rollback and retention. Source: M3 plan and BD-09.
+- [ ] The recovery mechanism decision records evaluation or justified rejection of portable RAM/disk capture against the native active-child gap. If selected, admitted fault tests cover compatible replacement without original host/disk, accepted identity, an active child, lost external response, stale generations and credential/control rebinding; restore success alone is insufficient. Source: M3 plan, BD-01/BD-04/BD-08 and supplemental sandbox research.
 
 #### Dependencies and blockers
 
@@ -96,7 +99,7 @@ CNR-10 supplies the native composition. Exact active-child resume remains unreso
 
 #### Source evidence
 
-[M3 plan](../plan.md#m3-coherent-replacement-recovery); [native recovery protocol](../native-recovery-protocol.md); [decision register](../decisions.md); [obligation map](../obligation-map.md).
+[M3 plan](../plan.md#m3-coherent-replacement-recovery); [native recovery protocol](../native-recovery-protocol.md); [decision register](../decisions.md); [obligation map](../obligation-map.md); [supplemental checkpoint source and proof mapping](../ticket-evidence.md#supplemental-later-stage-evidence).
 
 #### Open questions
 
@@ -140,6 +143,7 @@ No cloud allocation, paid inference, production activation, provider substitutio
 - [ ] Preventive spending has actual admission proof; retention preserves all live, parked, reset and replay references. Cleanup and version/reset/Continue-As-New tests use the supported deployment boundary. Source: M4 plan and BD-03/BD-09.
 - [ ] Broader native feature, processing and second harness obligations are proved or explicitly retired by their owner, with the obligation map updated. They are not silently dropped from the service exit. Source: broader service exit and BD-08.
 - [ ] Final implementation and deployment evidence supports only the selected profile and declared guarantee. Failed attestation, unauthorized disclosure or accepted state loss keeps that profile disabled. Source: M4 plan.
+- [ ] The reviewed deployment data flow identifies every protected plaintext processor, including credential/TLS brokers, and proves its placement inside the approved content boundary. Negative checks cover selected backend enforcement, unsafe mode fallback and content in diagnostics, telemetry and checkpoint caches. Source: CR-04/CR-05/CR-11/CR-13, M4 plan and supplemental sandbox research.
 
 #### Dependencies and blockers
 
@@ -147,7 +151,7 @@ CNR-20 supplies qualified recovery. Actual final policy and deployment bindings 
 
 #### Source evidence
 
-[M4 plan and broader service exit](../plan.md#m4-confidential-activation-and-bounded-operational-qualification); [decision register](../decisions.md); [runtime protocol](../runtime-protocol.md); [specification](../spec.md).
+[M4 plan and broader service exit](../plan.md#m4-confidential-activation-and-bounded-operational-qualification); [decision register](../decisions.md); [runtime protocol](../runtime-protocol.md); [specification](../spec.md); [supplemental trust and confinement evidence](../ticket-evidence.md#supplemental-later-stage-evidence).
 
 #### Open questions
 

@@ -47,4 +47,6 @@ Send this handoff first, followed by the [M1 ticket set](tickets/m1-external-run
 
 Current inspected integration head: [PR #169](https://github.com/temporalio/ai-integrations/pull/169), `32969f3ffa7688cb1cde250f1245e4ed70eb53d6`. Current inspected sample head: [PR #403](https://github.com/temporalio/samples-python/pull/403), `347cff1a1efce1afdc6ead9eaf2d565a29be99ad`. Harness baseline: `24f09129335f8057750f09f84a45b9c76c99d9c1`. Recheck implementation deltas before building against a newer revision. Source roles and immutable links are in the [ticket evidence](ticket-evidence.md).
 
-This handoff is prepared for review. No message or PR comment has been sent on the project owner's behalf.
+This handoff is prepared for review. Sharing it is separate from the approved upstream PR comments.
+
+The later [sandbox landscape review](evidence/sandbox-landscape-review.md) supplies confinement and checkpoint candidates for this project's M2/M3/M4 work. It changes no M1 duty or first demo dependency and adds no requirement to the integration PR. Candidate selection remains subject to the existing trust and mechanism review gates.
