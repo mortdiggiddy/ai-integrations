@@ -43,7 +43,7 @@ This container authorizes no implementation by itself. Host loss recovery belong
 
 #### Dependencies and blockers
 
-CNR-1 supplies the generic lifecycle seam. The native SDK integration maintainer must confirm the joint seam before a shared demo is represented as agreed. Local trusted profile approval carries forward; exact M2 mechanisms still require review.
+CNR-1 supplies the generic lifecycle seam. The integration maintainer confirmed the ownership split through the operator's supplied message on 2026-10-27: the harness owns host provisioning, attachment and deletion; the integration starts and stops Claude Code. The orchestrator prepares skill files and runtime secrets on the CLI host. The current Connector candidate, exact source pins and sample ownership differences are recorded in the [collaboration handoff](../collaboration-handoff.md). This replaces the pending ownership confirmation only. The resource binding, readiness, safe retries, Worker loss behavior and package/secret delivery mechanisms still require the bounded demo design and scoped review. Local trusted profile approval carries forward; no integration dependency is adopted here.
 
 #### Source evidence
 
@@ -71,6 +71,12 @@ Status: OPEN
 #### Context
 
 The [M3 plan](../plan.md#m3-coherent-replacement-recovery) requires recovery of one accepted native session/workspace state without the original host or disk.
+
+**Storage decision note (2026-10-28):** The operator requested this comparison before recovery implementation. No storage mechanism is selected. Under BD-04, compare provider volume reattachment with reconstruction of an accepted workspace version. Evaluate reuse of the Durable Workspace prototype and the existing `persist_workspace` / `hydrate_workspace` hooks identified in the [October 15 discussion](https://temporal.enterprise.slack.com/archives/C0C97MWGGH4/p1792102367306279). The discussion states that TemporalZFS did not proceed; it is not a selected dependency. The [Durable Workspace brief](https://app.notion.com/p/3318fc56773881798fb6efb73dce06e3) and [design](https://app.notion.com/p/32b8fc567738817abc9cdffc29d08d09) are prototype evidence, not proof of released support or compliance with this ticket.
+
+Volume reattachment can retain files across Worker replacement, but depends on volume availability and attachment constraints. Reconstruction can use fresh storage, but requires capture, transfer, restoration and retention controls. Compare capture and restore cost, supported placement, partial writes, background writers, encryption and cleanup. A volume for normal operation plus accepted immutable snapshots for disk loss is a candidate only. Record reuse or rejection reasons and the selected ownership and commit mechanism before dependent code.
+
+Preserve the existing acceptance criteria: restore matching accepted session/workspace/sidecar state, enforce rejection of stale writes or state publication, and stop on uncertain external outcomes. Retained files alone do not restore process memory or active children. Reattachment of the original volume is a separate Worker replacement test; it cannot replace the test with original host/disk access disabled. Test failure during mutation, capture, upload and result acceptance, plus a late producer and a completed action with a lost response. An incorrect storage choice can expose partial or stale state or repeat an uncertain effect; the existing M3 fault tests must detect these failures. This note adds no M1 volume capability and changes no specification guarantee or delivery order.
 
 #### Problem
 

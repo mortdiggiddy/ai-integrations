@@ -17,11 +17,11 @@ Status: OPEN
 
 #### Context
 
-The [approved M1 plan](../plan.md#m1-explicit-external-runtime-support) extends the existing Go harness. The M1 design review passed; implementation is pending.
+The [M1 plan](../plan.md#m1-explicit-external-runtime-support) uses the existing Go harness. The earlier mode/interface design review passed; the revised configuration based mechanism requires scoped review and implementation verification.
 
 #### Problem
 
-The current provider start contract bootstraps a Temporal Worker inside compute. Autonomous native runtimes need explicit external placement and one retained lifecycle owner.
+The maintainer confirmed that the existing provider interface supports compute without an inside Temporal Worker. Native process launch should use provider configuration and the existing lifecycle owner.
 
 #### Scope
 
@@ -51,7 +51,7 @@ Maintainers may request different additive API names. Record any material semant
 
 ### CNR-2 Launch an explicit external runtime without changing legacy execution
 
-Status: OPEN
+Status: DONE (2026-10-27)
 
 - Type: Feature
 - Priority: High
@@ -66,27 +66,27 @@ Status: OPEN
 
 #### Context
 
-The current harness uses `Provider.Start(ctx, taskQueueName)`. M1 selects optional external start and mode scoped capability interfaces while retaining that contract.
+The harness uses `Provider.Start(ctx, taskQueueName)`. The maintainer clarified through the operator on 2026-10-27 that the Worker bootstrap comment is historical and provider configuration is the preferred way to select a host without a Worker. This replaces the earlier separate mode/start interface selection.
 
 #### Problem
 
-An empty queue or a provider fallback cannot distinguish external execution safely. A retry must retain the original launch identity, and old histories must retain their command selection.
+A configured native process must not receive unintended Worker bootstrap or change existing configurations. Retries must retain resource identity and configuration; old histories must retain their command selection.
 
 #### Scope
 
-Implement explicit opt in external placement through the SDK, existing controller and receiving start Activity. Validate requested capabilities before allocation. Retain the admitted mode, profile version, normalized provider configuration and stable sandbox/launch identity in controller state.
+Revise the launch contribution to use provider configuration and the existing start Activity and controller. Remove the separate mode/start interface requirement. Prove stable input, resource identity and legacy compatibility with recording fake providers and fresh histories. Provider admission belongs to CNR-3; initial and later lifecycle policy belongs to CNR-4. Keep earlier verification evidence as historical and run a fresh full verification pass for this revised scope.
 
 #### Out of scope
 
-Actual SmolCloud external provisioning is CNR-3. Enforcement of later operations and attached references is CNR-4. No new controller, Python harness SDK or Nexus service is required.
+Actual SmolCloud native configuration, allocation/adoption admission and configuration specific restore refusal are CNR-3. Initial idle/snapshot admission, later operations and attached references are CNR-4. This compatibility contribution does not claim those policies are enforced or the complete native process feature is ready. No new controller, Python harness SDK or Nexus service is required.
 
 #### Acceptance criteria
 
-- [ ] Recording provider tests prove omitted and zero mode use legacy `Start` with the original queue and command selection. A retained legacy history replays without a nondeterminism error. Source: M1 plan and H1/H2/T2.
-- [ ] An explicit external request reaches only the optional external start interface with nonempty, retained `SandboxID` and `LaunchIdentity`. A retry test shows identical identity and configuration on both attempts. Source: M1 plan and T1.
-- [ ] Unsupported or unknown modes, absent optional interfaces, failed capability lookup and unsupported requested capabilities produce zero allocation calls. Tests cover both SDK/controller entry and direct receiving Activity input. Source: M1 plan and H1/H2.
-- [ ] The first external profile requires explicit `NoIdleTimeout` and refuses snapshot, restore, suspend/resume and unsupported idle policies before dispatch. Tests prove external failure never falls back to legacy `Start`. Source: M1 plan and H1/H2.
-- [ ] New external Activity names and explicit inputs preserve the old serialized input interpretation and registrations. Tests inspect retained controller mode/profile/configuration and fresh external history. Any historical command change requires a separate activation/versioning plan. Source: M1 plan and T2/G1.
+- [x] Recording provider tests prove unchanged configurations use existing `Start` with the original queue, defaults and command selection. Retained legacy parent and controller histories replay without a nondeterminism error. Source: M1 plan and H1/H2/T2.
+- [x] A native process configuration uses the same `Start` interface without requiring an inside Worker. A retry test proves identical stable start identity and configuration on both attempts; no second launch identity is required unless existing identity is insufficient. Source: M1 plan and T1.
+- [x] Unknown providers and invalid configuration rejected by the configured provider constructor produce zero start/allocation calls through existing SDK/controller and direct receiving Activity routes. Valid unchanged configurations require no new optional interface or capability lookup. Do not add global rejection of unknown configuration keys. Source: M1 plan and H1/H2.
+- [x] Tests show existing default and explicit `NoIdleTimeout` options and initial snapshot selection retain their original interpretation and routing. Fake native execution explicitly selects `NoIdleTimeout`. Native configuration specific idle/snapshot/restore admission remains required under CNR-3/CNR-4 and is not claimed by these compatibility tests. Source: M1 plan and H1/H2/T2.
+- [x] Existing serialized inputs and registrations remain compatible. Fresh history and retained state show the selected provider configuration and stable resource identity through the existing start path. No parallel external Activity family is added merely for placement. Any historical command change requires a separate activation/versioning plan. Source: M1 plan and T2/G1.
 
 #### Dependencies and blockers
 
@@ -96,13 +96,51 @@ Start against harness revision H0. Inspect the changed registration and caller p
 
 [M1 plan](../plan.md#m1-explicit-external-runtime-support); [H0, H1, H2, T1, T2 and G1](../ticket-evidence.md#inspected-sources).
 
+**Current combined acceptance:** CNR-2 was verified again with the concrete CNR-3 provider contribution at `2a6c1db1bdc2d16ae34da428ca8a8cfaed6b21a7`, against `24f09129335f8057750f09f84a45b9c76c99d9c1`, in [the same draft PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7). The compatibility tests and retained fixtures remain; exact wire coverage now also includes four existing snapshot input/output records. The CNR-3 acceptance evidence below owns the combined verification result and limits.
+
+**Prior compatibility-only implementation acceptance evidence:**
+
+Verified and published revision: `9addcda9e6cf7dd03bb194dbec37c138e2a7ab82`, base `24f09129335f8057750f09f84a45b9c76c99d9c1`, [PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7). The operator requested one combined commit. It replaces the two draft commits and has the identical tree `a8794c1d81313c2f89b8c4f32d247f6c6ddbb7b8` as independently verified source revision `028bd08d69ea592972d352908b06881215479c2c`. Canonical per commit verification passed again on the replacement. Upstream still matched the reviewed baseline before publication. The executable provider/SDK/controller paths match that baseline; only the provider contract comment changes in production source. The revised contribution removes the earlier separate mode/interfaces and Activity family. The committed tree matches source snapshot SHA256 `81974bdad209e2bc8707c66a1f278e37bfa656d222620ef4cac17b57c5863cab`, computed over the compact sorted path-to-SHA256 map of all 72 tracked files.
+
+- Existing start and retry proof: `TestExistingStartRetriesPreserveProviderConfiguration` and `TestLocalNativeProcessHistory` run a bounded local process through a fake provider, retain queue/configuration across actual Activity attempts and observe one fake resource. No inside Worker polls the resource queue. [Conformance tests](https://github.com/temporal-community/sandbox-orchestration-harness/blob/9addcda9e6cf7dd03bb194dbec37c138e2a7ab82/sdk/provider_start_test.go) and [fresh history tests](https://github.com/temporal-community/sandbox-orchestration-harness/blob/9addcda9e6cf7dd03bb194dbec37c138e2a7ab82/sdk/provider_start_history_test.go).
+- Refusal and compatibility proof: direct Activity and public SDK invalid provider/configuration matrices produce zero start/allocation calls; opaque provider fields remain valid. `TestExistingSandboxWireShapes`, `TestExistingSandboxRegistrationContract`, option forwarding and snapshot routing tests pass. Both retained legacy histories and four fresh parent/controller histories replay.
+- Fresh independent contract, mutation and structural invariant reviews pass. The final matrix detects 42 distinct relevant faults, with no unresolved survivor. A default timer mutation exposed a test gap; corrected assertions now reject both the six minute timer and any timer under `NoIdleTimeout`. Unrelated controls preserve all 695 materialized wire bytes. Six focused compiler probes reject broken interface/record contracts with intended diagnostics.
+- Lead rerun and canonical per commit verification pass on the exact revision: 33 top level tests and 53 passing results including subtests, two expected skips for live cloud execution and fixture regeneration, vet, all 12 Makefile binary targets and the database example build. Focused race verification passes eight top level tests and 26 results including subtests, with no skips. Builds use the documented temporary replacement for the baseline's unavailable SDK pseudo version; tracked dependency files remain unchanged.
+
+Local CNR-2 acceptance is complete. GitHub CodeQL and its Go analysis passed on source revision `028bd08d69ea592972d352908b06881215479c2c`, completed at 2026-10-28T00:00:35Z. Fresh CodeQL is running on the published combined commit; the earlier CI result does not qualify that revision. Maintainer acceptance remains separate. CNR-3/CNR-4 still own concrete provider admission and initial/later lifecycle policy. Full native process acceptance still needs both plus the demo. No cloud allocation, paid inference, recovery, attestation or confidential deployment was performed.
+
+**Earlier implementation evidence, superseded mechanism:**
+
+The maintainer's clarification and the operator's direction on 2026-10-27 replaced the mode/interface mechanism with provider configuration through existing `Start`. The ticket was reopened for that revision. The following evidence remains valid for the earlier implementation only; the completed revised acceptance is recorded above and does not transfer the earlier verdict.
+
+The operator subsequently approved the minimal division on 2026-10-27: CNR-2 proves existing start and compatibility; CNR-3 owns concrete provider admission; CNR-4 owns initial and later lifecycle policy. Existing `Start` receives no controller idle option, so its direct calls validate the provider information they actually receive. CNR-4 must inspect actual idle/snapshot choices at controller initialization. Complete native process acceptance still requires CNR-3/CNR-4 and the CNR-5 demo; no guarantee is removed by this reassignment.
+
+Implementation: `temporal-community/sandbox-orchestration-harness`, branch `external-runtime-launch`, commit `b9b5675810895efdaa030d4db7d67a4491bf0339`, base `24f09129335f8057750f09f84a45b9c76c99d9c1`. Upstream matched H0 before editing and before the PR attempt. The committed source matches reviewed snapshot SHA256 `90cd3e948bcf9a5ea9a622302856c7d5fc885c11fb4bd6088b8d2e50206be86c`, computed over the sorted path-to-SHA256 map for the 16 changed files using compact JSON.
+
+Draft PR: https://github.com/temporal-community/sandbox-orchestration-harness/pull/7, published under the operator's later PR request after SAML SSO reauthorization. The published revision is the earlier implementation commit. Per commit verification passed, including the SDK suite, retained and fresh histories, vet and all example builds. At publication, GitHub CodeQL was running; this note does not assert its current result. Maintainer feedback now requires the configuration based revision. This documentation update does not change the PR or its code.
+
+The five superseded criteria are retained here as the exact acceptance basis for that proof:
+
+- Recording provider tests prove omitted and zero mode use legacy `Start` with the original queue and command selection. A retained legacy history replays without a nondeterminism error. Source: M1 plan and H1/H2/T2.
+- An explicit external request reaches only the optional external start interface with nonempty, retained `SandboxID` and `LaunchIdentity`. A retry test shows identical identity and configuration on both attempts. Source: M1 plan and T1.
+- Unsupported or unknown modes, absent optional interfaces, failed capability lookup and unsupported requested capabilities produce zero allocation calls. Tests cover both SDK/controller entry and direct receiving Activity input. Source: M1 plan and H1/H2.
+- The first external profile requires explicit `NoIdleTimeout` and refuses snapshot, restore, suspend/resume and unsupported idle policies before dispatch. Tests prove external failure never falls back to legacy `Start`. Source: M1 plan and H1/H2.
+- New external Activity names and explicit inputs preserve the old serialized input interpretation and registrations. Tests inspect retained controller mode/profile/configuration and fresh external history. Any historical command change requires a separate activation/versioning plan. Source: M1 plan and T2/G1.
+
+- Legacy proof: `TestSDKPlacementSelection`, `TestLegacyStartKeepsQueueWithoutCapabilities`, `TestLegacyInputSerializationUnchanged` and `TestRetainedLegacyReplay` pass. The retained parent and controller histories were captured from unchanged H0 production source. Their fixture SHA256 values are `04af535e512909d0dc1ef31558d6461f05bba13615383f20145ea6333fc9a2a4` and `7cef88826f8dcfba7950d6d5bcaf9e74f59c41620fa94922d40c18acdab33d3e`.
+- External proof: `TestFreshExternalHistory`, `TestControllerRetainsExternalAdmissionAndRetry` and the controller/direct Activity refusal matrices pass. Tests cover retained configuration, retry identity after a lost reply, each disabled initial policy, missing interfaces, failed capability lookup, no fallback and conflicting initialization. `TestAcceptedExternalHandlerInterleaving` also checks handlers without a second validator call.
+- Independent `verify-change --mutation-sensitive` with structural invariants: PASS. Three isolated initial contexts reviewed the contract, mutation sensitivity and structural invariants. The final mutation matrix has 55 killed faults, two equivalent validator checks confirmed by a second reader and one passing unrelated provider control. No relevant survivor remains.
+- Lead rerun: `GOWORK=off HARNESS_LOCAL_TEST=1 go test -json -count=1 ./...` passes 45 top level tests and 94 results including subtests, with two expected skips for live cloud testing and fixture regeneration. Vet, all 12 existing Makefile binary targets and the database example build pass. The existing example modules reference an unavailable SDK pseudo version; builds use a temporary workspace replacement to the local SDK, with tracked module files unchanged. The placement unit test retains an enabled ten second detector allowance for SDK binary checksum setup; production defaults and all acceptance assertions are unchanged.
+
+Scope remains CNR-2. Actual provider provisioning/adoption is CNR-3. Later operation and attachment enforcement is CNR-4. The generic demo and complete M1 acceptance remain open. No live allocation, paid inference, recovery, attestation or confidential deployment was performed.
+
 #### Open questions
 
-Exact additive names remain subject to maintainer review. The mode, admission and compatibility outcomes are fixed by the reviewed contract.
+Prove the existing contract and identify only demonstrated missing checks in scope. Concrete provider and lifecycle policy mechanisms remain owned by CNR-3/CNR-4 rather than added to this compatibility contribution.
 
 ### CNR-3 Provision an external SmolCloud runtime with stable ownership
 
-Status: OPEN
+Status: DONE (2026-10-27)
 
 - Type: Feature
 - Priority: High
@@ -125,7 +163,7 @@ External execution must not inherit Worker credentials or adopt a conflicting le
 
 #### Scope
 
-Extend the existing provider through the M1 optional interfaces. Reuse creation and cleanup only where external identity, ownership, configuration and network checks remain enforced. Keep legacy requests unchanged.
+Use the existing provider `Start` with the selected native process configuration. Reuse creation, adoption and cleanup where ownership, stable identity, configuration and network checks remain enforced. Add only the provider configuration changes required for that behavior. Keep unchanged configuration requests compatible.
 
 #### Out of scope
 
@@ -133,19 +171,29 @@ Other provider implementations, a new reconciliation framework, snapshot recover
 
 #### Acceptance criteria
 
-- [ ] Fake HTTP request tests show external creation omits `TEMPORAL_TASK_QUEUE` and Worker/Namespace credential bootstrap. Provider credentials remain on the outside Activity Worker. Legacy provisioning request tests retain existing behavior. Source: M1 plan and H3.
-- [ ] External names use a separate domain from legacy queue names. Creation labels bind harness ownership, external mode, stable sandbox/launch identity and normalized nonsecret image/configuration digest. Tests inspect exact requests across retries. Source: M1 plan and H3/T1.
-- [ ] A simulated lost create reply followed by a retry returns the original matching external resource. Same name legacy resources, changed image/configuration, wrong network policy and multiple matches are refused without modifying or deleting conflicting resources. Source: M1 plan and H3/T1.
-- [ ] An unexpectedly paused external resource refuses rather than using the legacy resume helper. Tests also prove owned creation failure cleanup and retained legacy adoption behavior. Source: M1 plan and H3.
-- [ ] All acceptance tests use a fake provider endpoint. The contribution labels the live example path as unqualified until a separately authorized live check runs. Source: M1 plan.
+- [x] Fake HTTP request tests show native process configuration uses existing `Start` and omits `TEMPORAL_TASK_QUEUE` and Worker/Namespace credential bootstrap. Missing, unknown or unsupported selected configuration and forbidden restoration refuse before allocation, including direct provider calls. Provider credentials remain on the outside Activity Worker. Unchanged configuration requests retain existing behavior. Source: M1 plan and H3.
+- [x] Creation/adoption binds harness ownership, stable identity and selected nonsecret image/configuration. Tests inspect exact requests across retries and reject incompatible resources. Reuse existing naming and metadata where sufficient; a separate domain or identity field requires demonstrated need. Source: M1 plan and H3/T1.
+- [x] A simulated lost create reply followed by a retry returns the original matching external resource. Same name legacy resources, changed image/configuration, wrong network policy and multiple matches are refused without modifying or deleting conflicting resources. Source: M1 plan and H3/T1.
+- [x] An unexpectedly paused external resource refuses rather than using the legacy resume helper. Tests also prove owned creation failure cleanup and retained legacy adoption behavior. Source: M1 plan and H3.
+- [x] All acceptance tests use a fake provider endpoint. The contribution labels the live example path as unqualified until a separately authorized live check runs. Source: M1 plan.
 
 #### Dependencies and blockers
 
-CNR-2 supplies the explicit start contract and retained identity. The provider implementation must reject unsupported external configurations before allocation.
+CNR-2 proves the existing start contract and stable retry inputs. This ticket supplies concrete configuration and provider admission; it cannot verify controller idle options absent from provider input. CNR-4 owns actual initialization/lifecycle options. Native feature acceptance waits for both and the demo.
 
 #### Source evidence
 
 [M1 provider contract](../plan.md#first-actual-provider-and-example); [H3 and T1](../ticket-evidence.md#inspected-sources).
+
+**Implementation acceptance:** [Combined commit `2a6c1db1bdc2d16ae34da428ca8a8cfaed6b21a7`](https://github.com/temporal-community/sandbox-orchestration-harness/commit/2a6c1db1bdc2d16ae34da428ca8a8cfaed6b21a7), base `24f09129335f8057750f09f84a45b9c76c99d9c1`, in [existing draft PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7). This includes CNR-2 compatibility and CNR-3 provider behavior in one commit. Maintainer acceptance remains separate.
+
+- Configuration and request proof: `TestNativeProcessConfigurationAdmission`, `TestSmolCloudNativeDirectActivityAdmission` and `TestSmolCloudNativeExistingActivityRetry` exercise `workload=native-process` through existing interfaces. Native CPU/memory values must fit the API int32 wire domain; legacy and disk parsing retain their existing host integer domain. Requests contain no Worker/Namespace bootstrap or provider credential in guest data. Native restoration refuses before HTTP.
+- Binding and retry proof: `TestNativeProcessRequestAndLostCreateReply` and `TestNativeProcessAdoptionRefusals` cover byte-identical retries, original resource adoption, exact name/ownership/configuration/network checks and untouched conflicts. The existing name and ownership label remain; one digest label binds the full queue and admitted nonsecret configuration. Exact digest assertions cover image/resources/allowlists and order-only equivalence.
+- Failure proof: `TestNativeProcessOwnedCreateCleanup`, `TestNativeProcessCreateRequiresIdentity` and `TestNativeProcessPausedDuringReadiness` cover partial decode with a known ID, missing-ID refusal, owned failure cleanup and paused refusal at both adoption observations. Legacy adoption/resume tests pass. Cleanup observations prove the tested DELETE requests, not universal process death.
+- Combined verification: fresh independent contract, mutation and activated structural invariant reviews pass. The final matrix detects 132 faults, with three independently confirmed equivalent guards and no unresolved relevant survivor. Eleven compiler probes reject invalid interface/record contracts. All eleven materialized public wire records exactly match compiled upstream output and fixed literals.
+- Lead exact-commit checks pass: `GOWORK=off HARNESS_LOCAL_TEST=1 SMOL_CLOUD_LIVE=0 go test -json -count=1 ./...` executes 41 top level tests and 108 passing results including subtests, with only live cloud execution and fixture regeneration skipped. Both retained histories and four fresh histories replay. Vet, all twelve Makefile binary targets and the database build pass with the documented temporary local SDK replacement. Focused race detection passes 17 top level tests and 84 results, with no skips or race reports.
+
+Local CNR-2/CNR-3 acceptance is complete. [CodeQL Go analysis](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/40616745937/job/122580906082) and the CodeQL check pass for exact pushed revision `2a6c1db1bdc2d16ae34da428ca8a8cfaed6b21a7`, completed on 2026-10-28 UTC. CNR-4 actual initial idle/snapshot choices, later operations and attachments, the generic demo and full M1 acceptance remain OPEN. Live SmolCloud execution, account capacity, recovery, attestation and confidential deployment remain unqualified. No cloud allocation or paid inference occurred.
 
 #### Open questions
 
@@ -168,7 +216,7 @@ Status: OPEN
 
 #### Context
 
-The existing SDK distinguishes owned and attached sandbox references. M1 adds retained external policy to the existing lifecycle controller.
+The existing SDK distinguishes owned and attached sandbox references. M1 uses provider configuration and existing lifecycle boundaries to preserve the selected native process policy.
 
 #### Problem
 
@@ -176,7 +224,7 @@ Creation checks alone do not prevent later commands, attachments or direct Activ
 
 #### Scope
 
-Enforce the retained mode, capability/profile version, normalized configuration and resource binding at later controller operations and receiving external Activities. Preserve one resource owner and existing legacy behavior.
+Enforce actual initial idle/snapshot policy, selected configuration, allowed operations and resource binding at existing SDK/controller, receiving Activity and provider boundaries. Add checks only where existing enforcement is insufficient. Preserve one resource owner and unchanged configuration behavior; do not add a parallel external operation family merely for placement.
 
 #### Out of scope
 
@@ -184,15 +232,16 @@ New snapshot, suspend/resume or restore support, replacement recovery and runtim
 
 #### Acceptance criteria
 
-- [ ] Tests prove an attached reference routes to the same external resource without resetting its mode or acquiring ownership. Closing an attachment does not delete compute. Source: M1 plan and H2.
+- [ ] Tests prove an attached reference routes to the same resource without resetting its configuration or acquiring ownership. Closing an attachment does not delete compute. Source: M1 plan and H2.
+- [ ] SDK/controller initialization rejects omitted/default or unsupported idle policy and initial snapshot/restore for the selected fresh native configuration before allocation. Require actual `NoIdleTimeout`; a declaration in provider config alone does not prove the controller selected it. Direct receiving calls validate the configuration and identity information available there, without claiming to inspect absent controller fields. Source: M1 plan and H1/H2.
 - [ ] Unsupported execute, snapshot, restore, suspend/resume and idle requests produce zero forbidden provider calls after startup and through attachments. Source: M1 plan and H1/H2.
-- [ ] Direct external Activity tests reject missing or conflicting mode/profile/configuration/resource binding independently of the SDK route. Retries retain admitted context. Source: M1 plan and H2/T1.
+- [ ] Direct receiving Activity/provider tests reject missing or conflicting required configuration/resource binding independently of the SDK route. Retries retain the selected context. Existing input signatures remain compatible. Source: M1 plan and H2/T1.
 - [ ] Owner completion/cancellation tests exercise the existing stop/cleanup path; attached callers cannot become a second cleanup owner. Report provider teardown observations accurately rather than claiming proof of all process death. Source: M1 plan and H2/G1.
 - [ ] Legacy command and attachment tests retain their original routing without a new capability prerequisite. Source: M1 plan and H2/T2.
 
 #### Dependencies and blockers
 
-CNR-2 supplies retained external state and receiving Activity inputs. This work can proceed beside CNR-3 after that contract exists.
+CNR-2 supplies the revised configuration and identity contract through existing inputs. This work can proceed beside CNR-3 after that revision is reviewed and verified.
 
 #### Source evidence
 
@@ -227,7 +276,7 @@ Reviewers need a reproducible example of external placement, capability refusal 
 
 #### Scope
 
-Add one harmless bounded process example, a fake provider conformance test and instructions for an optional real SmolCloud run. Use explicit external mode and `NoIdleTimeout`.
+Add one harmless bounded process example through provider configuration and existing `Start`, a fake provider conformance test and instructions for an optional real SmolCloud run. Use explicit `NoIdleTimeout`; no separate execution mode is required.
 
 #### Out of scope
 
@@ -270,7 +319,7 @@ Status: OPEN
 
 #### Context
 
-The M1 design is approved for implementation. Implementation acceptance needs evidence from the actual changed harness revision.
+The revised M1 mechanism requires scoped design review before implementation. Implementation acceptance then needs evidence from the actual changed harness revision; earlier mode/interface verification does not satisfy this gate.
 
 #### Problem
 

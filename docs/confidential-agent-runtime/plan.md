@@ -12,7 +12,7 @@ The current application is Python and retains the plugin package layout. Its loc
 
 The proposed confidential composition uses the native SDK/CLI locally inside a supervisor, outside deterministic job orchestration and lifecycle/service Activities, and the existing Go Sandbox Orchestration Harness for compute ownership. It does not require a Python harness SDK or Nexus. BD-07 carries forward the approved local provider/ownership profile; compatible native service binding remains engineering design work.
 
-The current PR #169 candidate at `32969f3ffa7688cb1cde250f1245e4ed70eb53d6` locks SDK 0.2.163 and Temporal 1.34.0, with the SDK manifest range >=0.2.163,<0.2.166 (EV-22, EV-23). Its `TransportActivities` seam and Worker subprocess default are separate from the retained local plugin. This candidate requires a dependency qualification decision. Do not update the existing lock, replace imported code or adopt a moving branch as a side effect of this specification. Preserve the current mode and tests while the new profile remains opt in.
+The earlier PR #169 candidate at `32969f3ffa7688cb1cde250f1245e4ed70eb53d6` locks SDK 0.2.163 and Temporal 1.34.0, with the SDK manifest range >=0.2.163,<0.2.166 (EV-22, EV-23). Its historical `TransportActivities` seam is superseded for the next composition review by the Connector candidate recorded in the [collaboration handoff](collaboration-handoff.md#share-only-the-useful-files). That handoff owns the current inspected pins and confirmed host/process ownership split. The newer candidate still requires a dependency qualification decision; the earlier dependency values are not asserted for it. Do not update the existing lock, replace imported code or adopt a moving branch as a side effect of this specification. Preserve the current mode and tests while the new profile remains opt in.
 
 ## Architecture
 
@@ -65,62 +65,29 @@ Activation: issue only the selected bounded implementation work through `write-t
 
 Outcome: the existing Sandbox Orchestration Harness can explicitly manage an autonomous runtime that is not a Temporal Worker. This is useful independently of Claude and confidential compute.
 
-Prerequisites: the bounded additive contribution is already endorsed. Prepare its implementation and draft proposal in the harness repository against an explicit source revision. Maintainer acceptance is required before upstream merge; discuss larger or breaking changes first. No final confidential policy, native recovery adapter, attested image, paid inference path or live cloud test is a prerequisite for this phase.
+Prerequisites: use provider configuration and the existing start/lifecycle interfaces, as clarified by the harness maintainer through the operator on 2026-10-27. CNR-2 compatibility and CNR-3 concrete provider admission have fresh combined implementation acceptance; their tickets own the exact evidence. The earlier mode/interface design review and launch verification remain historical. CNR-4 still requires actual initial and later lifecycle policy, followed by the generic demo and complete M1 verification. Maintainer acceptance is required before upstream merge. No final confidential policy, native recovery adapter, attested image, paid inference path or live cloud test is a prerequisite for this phase.
 
 #### Source contract and extension surface
 
-At harness pin `24f09129335f8057750f09f84a45b9c76c99d9c1`, [compute.Provider](https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/compute/provider.go) explicitly requires `Start(ctx, taskQueueName)` to bootstrap an in-resource Worker. [StartSandbox](https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/workflow/activities.go) calls that method. Retain both unchanged for legacy execution. Do not use an empty task queue as a mode sentinel.
+At harness pin `24f09129335f8057750f09f84a45b9c76c99d9c1`, the [compute.Provider](https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/compute/provider.go) comment describes Worker bootstrap. The maintainer clarified that this comment is historical and the intended interface permits compute without an inside Worker. [StartSandbox](https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/workflow/activities.go) calls `Start(ctx, taskQueueName)` and the controller retains its returned identity without requiring an inside Worker to poll. Retain that interface and normal queue argument. Select the native process through provider configuration, not an empty queue sentinel.
 
 The existing [SDK ownership and options](https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/sandbox.go) already distinguish owned and attached references. Its idle timeout is driven by command activity and defaults to five minutes; zero does not disable it. Reuse that lifecycle owner and explicitly request `NoIdleTimeout` for the first external profile. Add no controller.
 
-The following names are concrete additive proposals for maintainer review, not existing upstream APIs or unresolved architecture choices:
+Keep `compute.Provider`, the existing start Activity and the existing controller as the integration surface. Do not require `ExecutionMode`, `StartExternal`, a parallel external Activity family or a mode scoped capability interface merely to run compute without a Worker. Use existing provider configuration and options first; add only the smallest provider change needed for the bounded demonstration. Correct misleading bootstrap documentation where it affects that path. Existing configurations, serialized inputs, defaults, registrations and historical command selection remain compatible.
 
-```go
-type ExecutionMode int
-const (
-    WorkerRuntime ExecutionMode = iota // zero value retains legacy behavior
-    ExternalRuntime
-)
+The first native process configuration permits fresh start, stop and only its supported ordinary commands. Require explicit `NoIdleTimeout`; snapshots, restore, suspend/resume and runtime idle detection remain unsupported for this selected configuration. Refuse invalid or unsupported combinations before allocation and reject later forbidden operations before effects. Identify the enforcement owner at each existing SDK/controller, receiving Activity and provider configuration boundary. Direct or retried calls must not bypass the selected policy. Do not impose new capability prerequisites on unchanged configurations or introduce a general capability framework without a demonstrated need and scoped review.
 
-type ExternalRuntimeStartRequest struct {
-    SandboxID      string
-    LaunchIdentity string
-}
+The operator approved this delivery division on 2026-10-27: CNR-2 proves the existing start contract and compatibility with fake providers; CNR-3 implements concrete provider configuration, allocation/adoption admission and provider restoration refusal; CNR-4 enforces actual initial idle/snapshot choices and subsequent lifecycle policy. Existing `Start` has no controller idle parameter, so direct calls validate only the configuration and identity available at that boundary. Controller initialization must validate actual controller options. The full native process feature remains incomplete until CNR-3/CNR-4 and the demo pass; CNR-2 alone supplies no native policy enforcement claim.
 
-type ExternalRuntimeProvider interface {
-    StartExternal(context.Context, ExternalRuntimeStartRequest) (*ProviderStatus, error)
-}
-
-type ProviderCapabilities struct {
-    ExternalRuntime bool
-    ExecuteCommand  bool
-    Restore         bool
-    Snapshot        bool
-    SuspendResume   bool
-    CommandIdle     bool
-    RuntimeIdle     bool
-}
-
-type CapabilityProvider interface {
-    Capabilities(context.Context, ExecutionMode) (ProviderCapabilities, error)
-}
-```
-
-Keep `compute.Provider` unchanged; these optional interfaces live beside it. Add an opt in SDK option for `ExternalRuntime`. Omitted options and zero mode retain the Worker path, including existing Activity selection and legacy defaults. Unknown modes refuse. The external route requires both interfaces; it never falls back to `Start`, even if the task queue string is empty or a provider returns unsupported.
-
-Capabilities describe the admitted provider configuration and requested mode, not an unconditional property of a provider brand. Unknown capabilities, lookup failure or requested false flags refuse before allocation. The first external profile permits fresh start, stop and the provider's declared ordinary command support; restore, snapshots and suspend/resume are disabled. Require explicit `NoIdleTimeout`; a default or command based idle timeout, runtime idle request, initial snapshot or restore request refuses in this profile even if a legacy provider supports it. Validate at SDK/controller entry and again in the receiving external Activity before calling the provider, so direct/retried inputs cannot bypass the policy. Legacy requests do not acquire a new capability prerequisite.
-
-Persist the admitted mode, capability/profile version and normalized provider configuration in controller state. Apply that profile to every later command and lifecycle request, including attached references; attachment cannot reset the mode or gain capabilities. Disabled suspend, resume, snapshot and restore requests refuse before provider dispatch. Receiving external Activities validate the same mode/profile and resource binding independently of the SDK route. New external operation names/inputs retain this explicit context; omitted fields on historical legacy inputs retain their old interpretation. Include post-start, attachment and direct external Activity negative cases, not only creation preflight.
-
-The controller supplies nonempty stable `SandboxID` and `LaunchIdentity` from retained lifecycle input before scheduling the external start Activity. Retries preserve both values and the provider/image/configuration binding. A receiver rejects missing identity and conflicting reuse. Do not generate a new resource identity per Activity attempt. Return the existing `ProviderStatus` resource identity and reuse the owning controller's stop/cleanup path; an attachment never becomes an owner.
+Retain the selected provider/image/configuration and existing sandbox/resource identity across retries and attachments. Reuse the existing stable start input and naming where sufficient; do not require a second launch identity solely because the earlier proposal introduced one. Prove that retries adopt only the matching owned resource and refuse conflicting configuration. Return the existing `ProviderStatus` identity. Attachments cannot reset configuration, gain operations or become a second cleanup owner. Add state or validation only where a concrete test shows the existing boundary cannot preserve these guarantees.
 
 #### First actual provider and example
 
-Extend the existing [SmolCloud provider](https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/compute/smolcloud/provider.go). Its current `Start` constructs a named machine, injects `TEMPORAL_TASK_QUEUE`, and uses `adopt` for create result handling. Factor shared creation without changing that legacy request. The external entry uses the stable external launch identity for the machine identity, omits queue injection and Worker/Namespace credential bootstrap, and reuses existing adoption and cleanup behavior. Keep provider credentials on the outside Activity Worker. Do not broaden this phase into a new distributed lifecycle framework or assert whole-host replacement safety from existing adoption behavior.
+Use the existing [SmolCloud provider](https://github.com/temporal-community/sandbox-orchestration-harness/blob/24f09129335f8057750f09f84a45b9c76c99d9c1/sdk/compute/smolcloud/provider.go) through `Start`. Its current implementation constructs a named machine, injects `TEMPORAL_TASK_QUEUE`, and uses `adopt` for create result handling. Supply the bounded native process through provider/image configuration and omit Worker bootstrap and Namespace credentials for that configuration. Preserve the request for unchanged configurations. Keep provider credentials on the outside Activity Worker. Do not broaden this phase into a new distributed lifecycle framework or assert whole-host replacement safety from existing adoption behavior.
 
-External naming uses its own domain/prefix and retained launch identity, distinct from legacy queue-derived names. Creation labels bind harness ownership, external mode, sandbox/launch identity and normalized nonsecret image/configuration digest. On conflict, adopt only an exact matching external resource with the expected network policy; mismatched mode/configuration or multiple matches refuse without modifying or deleting the conflicting resource. Preserve legacy naming and adoption behavior. The existing `startRecovered` automatically resumes a paused machine; the first external profile must instead refuse a paused or otherwise restoration-dependent resource, because suspend/resume is not admitted. Reuse helpers only where these mode-specific checks remain enforced. Required fake cases include a same-name legacy resource, changed image/configuration and an unexpectedly paused external resource.
+Creation and adoption must bind harness ownership, stable resource identity, selected nonsecret image/configuration and network policy. On conflict, refuse mismatched configuration or multiple matches without modifying or deleting the conflicting resource. Reuse existing naming and ownership mechanisms where sufficient; a separate naming domain or metadata is needed only if those mechanisms cannot distinguish conflicting resources. Preserve behavior for unchanged configurations. The existing `startRecovered` resumes a paused machine; the fresh native process configuration must refuse paused or restoration dependent adoption because that policy does not admit resume. Required fake cases include a same-name incompatible resource, changed image/configuration and an unexpectedly paused resource.
 
-This SmolCloud extension demonstrates the generic harness seam. It does not replace the approved Docker profile for M2 synthetic integration or the AWS direction for later attested execution. Other providers retain their legacy implementations and refuse external placement until explicitly extended.
+This SmolCloud configuration demonstrates the existing generic harness surface. It does not replace the approved Docker profile for M2 synthetic integration or the AWS direction for later attested execution. Other providers retain their current interfaces and behavior; this contribution makes no new support claim for them.
 
 Add one external example whose image entrypoint runs an ordinary harmless bounded native process. It requires no model credential, invokes no LLM and contains no Temporal Worker or Namespace credential inside the resource. An outside Worker hosts the existing sandbox Child Workflow lifecycle and stops the owned resource on the selected normal completion/cancellation path. Use `NoIdleTimeout`; do not present command completion as autonomous runtime idleness. Live SmolCloud execution is opt in and separately authorized, not a prerequisite for reviewing this contract or running fake-provider conformance.
 
@@ -128,15 +95,15 @@ Add one external example whose image entrypoint runs an ordinary harmless bounde
 
 M1 covers CR-03, CR-06 and CR-15 and the applicable AC-03/AC-04 subset:
 
-- Recording-provider tests prove omitted/zero mode calls legacy `Start` with the original queue, while explicit external mode calls `StartExternal` with the same retained identities across retries.
-- A provider without the optional interfaces, an unknown/unsupported mode, and rejected snapshot/restore/suspend/idle combinations produce zero allocation calls. Exercise SDK/controller preflight and direct receiving Activity validation. External failure never calls legacy `Start` as fallback.
+- Recording-provider tests prove unchanged configurations retain the original `Start` queue and command selection. The native process configuration uses that same interface and stable inputs across retries, without an inside Worker requirement.
+- Unknown or unsupported configuration and rejected snapshot/restore/suspend/idle combinations produce zero allocation calls. Exercise the existing SDK/controller and receiving Activity/provider boundaries. A rejected native configuration must not silently substitute Worker bootstrap or a different configuration.
 - SmolCloud request tests compare legacy provisioning behavior and verify external creation omits `TEMPORAL_TASK_QUEUE` and Worker/Namespace credential bootstrap. Cover stable naming, repeated identity, conflicting identity/configuration, adoption and cleanup without contacting the cloud API.
 - A fake-provider example test proves one external resource owner, no Worker bootstrap in the resource, explicit stop/cleanup on normal completion and the existing cancellation path, and retained legacy examples. Record limitations of provider teardown observations rather than claiming stronger death proof.
-- Preserve old serialized inputs and command histories. Use new external Activity names and additive optional fields omitted on legacy inputs; do not change commands for zero mode. Replay a retained legacy fixture and test fresh external histories. If implementation changes historical command selection, require a separate versioning/activation plan rather than accepting replay drift.
+- Preserve old serialized inputs, registrations and command histories. Do not add new Activity names solely to distinguish native process placement. Replay a retained legacy fixture and test fresh configured native process histories. If implementation changes historical command selection, require a separate versioning/activation plan rather than accepting replay drift.
 
 Implementation verification must inspect the changed registrations/callers, provider fake request records and legacy replay fixture. A source link or real-provider example alone cannot establish these checks. The actual provider example may later receive a separately authorized live check; do not call its unexecuted live path qualified.
 
-Activation: external mode is explicit and limited to the admitted fresh-start profile. Stop on fallback to Worker bootstrap, unsupported allocation, identity conflict or replay incompatibility. Keep legacy mode as default and stop creating new external resources if the opt in path fails. Do not rewrite existing histories. Broader lifecycle reconciliation, restoration, native agent recovery and confidential execution remain separate phases.
+Activation: the native process configuration is explicit and limited to the selected fresh start policy. Stop on substituted Worker bootstrap, unsupported allocation, identity conflict or replay incompatibility. Existing configurations retain their behavior. Do not rewrite existing histories. Broader lifecycle reconciliation, restoration, native agent recovery and confidential execution remain separate phases.
 
 ### M2: native supervisor and sealed content path
 
@@ -198,7 +165,7 @@ The specification owns the premises and risks. This table owns their proving seq
 |---|---|---|---|
 | A-75 | M2 | Run one admitted native skill through the selected inside SDK/CLI supervisor and inspect sealed outside messages. | BD-07 |
 | A-76 | M1 | Resolve the relevant map residuals and trace changed registrations, callers and bypass paths through source and compatibility tests. | BD-07 |
-| A-77 | M1 | Prove retained defaults, explicit external mode and zero allocation for rejected requested combinations. | BD-07 |
+| A-77 | M1 | Prove retained defaults, explicit native process configuration and zero allocation for rejected requested combinations. | BD-07 |
 | A-78 | M1 and M2 | Inject concurrent create/launch and lost replies; reconcile to one runtime and one native input consumer. | BD-07 |
 | A-79 | M3 | Publish, lose, corrupt and mismatch session/workspace state around acceptance and prove the declared capture boundary. | BD-04 |
 | A-80 | M3 | Inject controlled mutation before execution and after execution before outcome acceptance; prove no unclassified repeat or invented result. | BD-01 and BD-02 |
@@ -219,7 +186,7 @@ The full roadmap and all retained CR/AC obligations remain visible. Future nativ
 
 Hand the M1 contract and its actual harness source impact to `verify-design` for a fresh phase appropriate independent pass, then follow bounded convergence bookkeeping. Its exit test is an internally coherent additive placement contract with no material unresolved M1 mechanism or compatibility finding. Later phase choices remain explicit roadmap gates. The initial full CONDITIONAL result is not relabeled PASS. Concrete native authority/outcome and coherent capture designs remain required for their later phase.
 
-For M1, verification inspects the actual harness provider/SDK/controller paths, optional interface compatibility, capability refusal, identity/adoption, ownership/cleanup and legacy replay. Later phase reviews additionally inspect native content models, accepted recovery, key/release policy and version compatibility. Proposed fixes are reviewed as claims rather than accepted solely because their diagnosis was correct.
+For M1, verification inspects reuse of the actual provider/SDK/controller paths, configuration and operation refusal, identity/adoption, ownership/cleanup and legacy replay. The changed mechanism needs scoped review; the earlier optional interface verdict is not transferred to it. Later phase reviews additionally inspect native content models, accepted recovery, key/release policy and version compatibility. Proposed fixes are reviewed as claims rather than accepted solely because their diagnosis was correct.
 
 | Decision | Blocks |
 |---|---|

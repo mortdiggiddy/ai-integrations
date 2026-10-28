@@ -1,5 +1,7 @@
 # Stage appropriate design verification
 
+Current applicability, 2026-10-27: this report preserves the review of the earlier mode/interface design. The maintainer subsequently clarified that provider configuration and existing `Start` are preferred; the operator selected that revision in the [M1 plan](plan.md#m1-explicit-external-runtime-support). This historical PASS does not approve the revised mechanism. The [CNR-2 ticket](tickets/m1-external-runtime.md#cnr-2-launch-an-explicit-external-runtime-without-changing-legacy-execution) and [CNR-3 ticket](tickets/m1-external-runtime.md#cnr-3-provision-an-external-smolcloud-runtime-with-stable-ownership) own fresh combined acceptance of compatibility and concrete provider admission. CNR-4 lifecycle policy, the generic demo and complete M1 verification remain pending. The original review results below are retained without reinterpretation.
+
 Date: 2026-10-26. Verdict: **PASS for M1 design**. Both independent reviewers found zero material core findings and zero material remedy findings in the selected Sandbox Orchestration Harness contribution. This approves the design for implementation and testing. It is not an implementation PASS, upstream merge approval or a PASS for the complete future runtime.
 
 ## Selected scope
