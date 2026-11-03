@@ -96,7 +96,7 @@ Start against harness revision H0. Inspect the changed registration and caller p
 
 [M1 plan](../plan.md#m1-explicit-external-runtime-support); [H0, H1, H2, T1, T2 and G1](../ticket-evidence.md#inspected-sources).
 
-**Current combined acceptance:** CNR-2 was verified again with CNR-3 and automatic local test CI at `28e521cc7b067c2902e38442386fd131ec6667a0`, against `24f09129335f8057750f09f84a45b9c76c99d9c1`, in [the same draft PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7). The compatibility tests and retained fixtures remain; exact wire coverage includes four existing snapshot input/output records. The CNR-3 acceptance evidence below owns the combined result and limits.
+**Current contribution:** [PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7) is open at `56c51dfe7fd1995ffb749ad0c064c555f605680d`, after the verified combined CNR-2/CNR-3 commit `28e521cc7b067c2902e38442386fd131ec6667a0`. Both hosted test jobs, Go analysis and CodeQL pass at the current revision. The [current contribution evidence](../ticket-evidence.md#current-contribution-evidence) supplies the check links and remaining scope. The existing combined verification remains evidence for its named revision; this status reconciliation does not claim a new independent implementation review.
 
 **Prior compatibility-only implementation acceptance evidence:**
 
@@ -203,7 +203,7 @@ If the actual provider API cannot enforce the selected ownership/configuration b
 
 ### CNR-4 Preserve external policy across commands and attached references
 
-Status: OPEN
+Status: OPEN (remaining attachment authority and resource binding need reconciliation and current verification)
 
 - Type: Feature
 - Priority: High
@@ -255,7 +255,9 @@ Record any existing attachment or cancellation path that cannot preserve the sel
 
 **Implementation source impact, 2026-10-28:** The existing attachment addresses only its owner Workflow and already preserves controller configuration and resource identity. Its `RequestStop` also signals owner shutdown. The bounded correction issues version 2 references for fresh native configurations and refuses attachment shutdown through those references; version 1 legacy references retain their behavior. Native status adds an optional typed resource binding, omitted for legacy status. Direct native stop checks this binding and current machine metadata before deletion. The controller retains all ownership and operation routing. No new Activity family or lifecycle controller is introduced. References and labels remain reconciliation data in a trusted environment, not authentication against forged inputs or direct signals.
 
-Activation is limited to fresh native executions. Pre-policy experimental native histories are not a compatible deployment baseline and require a separate activation/versioning decision before migration. The retained legacy command sequence and fixtures must continue to replay unchanged. This does not authorize such a migration or a live provider run. Implementation and fresh combined verification remain in progress; acceptance is not yet recorded.
+The reviewed [PR revision](https://github.com/temporal-community/sandbox-orchestration-harness/tree/56c51dfe7fd1995ffb749ad0c064c555f605680d) already includes independent bootstrap/lifecycle/branchability settings and applicable initial/later fresh lifecycle admission. Resource binding across references and attachment cleanup ownership remain separate work. The local candidate `0cff218` implements an earlier ownership approach but also contains obsolete provider code and test organization. Reconcile its missing ownership behavior against the current reviewed source, preserve the independent settings and review corrections, and run the complete CNR-4 acceptance matrix before marking this ticket DONE. Existing tests or source presence alone do not establish that result.
+
+Activation is limited to fresh native executions. Earlier experimental native histories require a separate activation/versioning decision before migration. Retained baseline histories must replay unchanged. No migration or live provider run is authorized by this reconciliation. CNR-5 owns the generic process demo and CNR-6 owns full M1 acceptance.
 
 ### CNR-5 Demonstrate a controller owned external process
 

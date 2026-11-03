@@ -43,7 +43,7 @@ This container authorizes no implementation by itself. Host loss recovery belong
 
 #### Dependencies and blockers
 
-CNR-1 supplies the generic lifecycle seam. The integration maintainer confirmed the ownership split through the operator's supplied message on 2026-10-27: the harness owns host provisioning, attachment and deletion; the integration starts and stops Claude Code. The orchestrator prepares skill files and runtime secrets on the CLI host. The current Connector candidate, exact source pins and sample ownership differences are recorded in the [collaboration handoff](../collaboration-handoff.md). This replaces the pending ownership confirmation only. The resource binding, readiness, safe retries, Worker loss behavior and package/secret delivery mechanisms still require the bounded demo design and scoped review. Local trusted profile approval carries forward; no integration dependency is adopted here.
+CNR-1 supplies the generic lifecycle seam. The confirmed ownership split assigns host provisioning, attachment and deletion to the harness, and Claude Code start/stop to the integration. The orchestrator composition prepares skill files and runtime secrets on the CLI host. The [collaboration handoff](../collaboration-handoff.md#share-only-the-useful-files) records merged integration PR #169 and merged samples PR #403, exact source pins and the current Connector contract. Qualify exact dependency and bundled CLI versions rather than adopting a moving branch or the closed PR #33 implementation. Resource binding, readiness, overlapping calls, Worker loss behavior and package/secret delivery still require the bounded demo design and scoped review. Local trusted profile approval carries forward; no integration dependency is adopted here.
 
 #### Source evidence
 
@@ -82,7 +82,7 @@ Preserve the existing acceptance criteria: restore matching accepted session/wor
 
 #### Problem
 
-Best effort transcript mirroring, surviving files or a watcher retry do not prove coherent replacement recovery or safe treatment of uncertain effects.
+Best effort transcript mirroring, surviving files or a watcher retry do not prove coherent replacement recovery or safe treatment of uncertain effects. The merged integration's [restart contract](https://github.com/temporalio/ai-integrations/blob/b09ddf4039c1eaca4b4970d941aff43fd8525dee/python/claude_agent_sdk/README.md#when-claude-code-stops) redoes an interrupted turn with `resume_session_at`; tool calls and callbacks can repeat. Its required surviving session storage does not restore matching accepted workspace/sidecar state or settle an external effect whose result was lost. Reuse that transport where it fits, while retaining this ticket's stronger acceptance criteria.
 
 #### Scope
 

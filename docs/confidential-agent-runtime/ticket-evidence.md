@@ -1,6 +1,6 @@
 # Ticket evidence and delivery baseline
 
-Baseline date: 2026-10-26; direction updated 2026-10-27. This record supports the local CNR backlog and adds no runtime qualification. The current [M1 plan](plan.md#m1-explicit-external-runtime-support) selects provider configuration and existing `Start` after maintainer clarification supplied by the operator. The [M1 review](verification-report.md) and its source interpretation remain historical for the earlier mode/interface design; their verdict does not transfer to the revised mechanism. Later containers retain the plan's outcomes without approving their proposed mechanisms.
+Baseline date: 2026-10-26; source and hosted status reconciliation: 2026-11-03. This record supports the local CNR backlog and adds no runtime qualification. The current [M1 plan](plan.md#m1-explicit-external-runtime-support) selects provider configuration and existing `Start`. The [M1 review](verification-report.md) remains historical for the earlier mode/interface design; its verdict does not transfer to the revised mechanism. Later containers retain the plan's outcomes without approving their proposed mechanisms.
 
 ## Inspected sources
 
@@ -20,6 +20,16 @@ Temporal Docs was queried for Activity retry/idempotency and Go replay/versionin
 The versioned package documentation endpoint could not be fetched. The official SDK source at the resolved 1.42.0 commit supplied the replay API contract instead. No dependency, repository source or lock was changed during this ticket pass.
 
 ## M1 evidence and acceptance map
+
+### Current contribution evidence
+
+[Harness PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7) is open at `56c51dfe7fd1995ffb749ad0c064c555f605680d`, after `28e521cc7b067c2902e38442386fd131ec6667a0`, against base `24f09129335f8057750f09f84a45b9c76c99d9c1`. Both [PR tests](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/40785335820/job/123156991806) and [push tests](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/40785330200/job/123156972834) pass. [Go analysis](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/40785331444/job/123156981792) and [CodeQL](https://github.com/temporal-community/sandbox-orchestration-harness/runs/123158434310) also pass. These are hosted results for that exact revision, not a new local implementation review.
+
+The PR separates bootstrap, lifecycle and branchability. Its SDK/controller, receiving Activities and provider enforce applicable fresh lifecycle checks. Its stated remaining scope includes resource binding across references, attachment cleanup ownership and the generic process demo. CNR-4 therefore retains these unresolved criteria; the existing lifecycle checks must be reused rather than rebuilt.
+
+The local policy candidate `0cff218` contains attachment and resource binding changes but is based on the older provider implementation. Its tree differs from the reviewed PR in provider configuration, test locations and fixture names as well as ownership behavior. Source presence is not proof that the candidate satisfies the current PR contract. Reconcile only the missing behavior onto the reviewed PR basis and obtain current verification before closing CNR-4. Do not replace the reviewed branch or restack the PR as a documentation side effect.
+
+The [collaboration handoff](collaboration-handoff.md#share-only-the-useful-files) owns merged integration and sample pins. The merged transport can redo tool calls after an interrupted turn and requires surviving session files. Its merge does not close CNR-20's exact outcome, accepted state restoration or uncertain effect requirements.
 
 Each material criterion names proof and a source ID in its ticket. The M1 plan supplies the revised configuration based contract; current source supplies the baseline, not proof of the selected configuration or missing checks.
 
