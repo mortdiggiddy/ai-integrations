@@ -96,6 +96,8 @@ Start against harness revision H0. Inspect the changed registration and caller p
 
 [M1 plan](../plan.md#m1-explicit-external-runtime-support); [H0, H1, H2, T1, T2 and G1](../ticket-evidence.md#inspected-sources).
 
+[BD-10](../decisions.md#decision-and-design-register) records the replay scope for configuration keys that a policy resolver reads.
+
 **Current contribution:** [PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7) is open at `56c51dfe7fd1995ffb749ad0c064c555f605680d`, after the verified combined CNR-2/CNR-3 commit `28e521cc7b067c2902e38442386fd131ec6667a0`. Both hosted test jobs, Go analysis and CodeQL pass at the current revision. The [current contribution evidence](../ticket-evidence.md#current-contribution-evidence) supplies the check links and remaining scope. The existing combined verification remains evidence for its named revision; this status reconciliation does not claim a new independent implementation review.
 
 **Prior compatibility-only implementation acceptance evidence:**
@@ -184,6 +186,8 @@ CNR-2 proves the existing start contract and stable retry inputs. This ticket su
 #### Source evidence
 
 [M1 provider contract](../plan.md#first-actual-provider-and-example); [H3 and T1](../ticket-evidence.md#inspected-sources).
+
+[BD-11](../decisions.md#decision-and-design-register) records the `int32` bound for CPU and memory values.
 
 **Current implementation acceptance (2026-10-28):** [Combined commit `28e521cc7b067c2902e38442386fd131ec6667a0`](https://github.com/temporal-community/sandbox-orchestration-harness/commit/28e521cc7b067c2902e38442386fd131ec6667a0), base `24f09129335f8057750f09f84a45b9c76c99d9c1`, retains one commit in [draft PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7). Fresh full contract, mutation and activated structural invariant reviews pass. Mutation review found two disk validation test gaps; three new zero/negative/overflow assertions now detect both weakened guards. Final disposition: 147 of 152 Go/provider/public faults killed, three equivalent, one unreachable and one invalid mutation; eight additional CI guard faults killed, with no relevant survivor. Eleven compiler negative probes and exact baseline wire comparisons pass. The lead exact-commit rerun passes 111 results, with only live cloud and fixture capture skipped, plus vet and all example builds. Both retained histories and four fresh histories replay. [Hosted PR SDK tests](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/40733050664), [push SDK tests](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/40733041473), [CodeQL Go analysis](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/40733043794/job/122974175082) and the CodeQL check pass on this revision. The GitHub hosted runner uses a local headless Temporal CLI server, fake HTTP and local subprocesses; no AWS resources or Docker are needed. Maintainer acceptance remains separate. CNR-4, the generic demo and full M1 acceptance remain open.
 
