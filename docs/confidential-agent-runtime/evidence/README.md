@@ -8,6 +8,8 @@ Status: consolidated research, 2026-10-26. This directory is the maintained evid
 
 [Sandbox landscape review](sandbox-landscape-review.md) records the MXC discussion research, pinned primary sources, supervisor and checkpoint alternatives, and phase appropriate recommendations. It adds no dependency, acceptance change or runtime qualification.
 
+[Docker Sandbox coding demo](docker-sandbox-demo.md) records a pinned public example, supplemental webinar observations, skill and tool placement, and the proposed Temporal ownership split. It distinguishes ordinary runtime reuse from recovery and confidential execution guarantees.
+
 The replacement specification owns requirements. Its decision record owns unresolved changes to guarantees. The obligation map owns the disposition of historical tickets and assumptions. This directory owns source observations and proposed proving cases. It does not duplicate ticket status or grant execution authority.
 
 The imported research has been converted to technical descriptions. Private transcripts, individual attribution, environment specific paths and explanatory diagrams are not required to use this package. Historical records remain evidence for their stated version and scenario. The catalog distinguishes synthesized current material from archival material that is not a current design input.
