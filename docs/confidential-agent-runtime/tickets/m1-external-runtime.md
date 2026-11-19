@@ -98,7 +98,7 @@ Start against harness revision H0. Inspect the changed registration and caller p
 
 [BD-10](../decisions.md#decision-and-design-register) records the replay scope for configuration keys that a policy resolver reads.
 
-**Current contribution:** [PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7) is open at `56c51dfe7fd1995ffb749ad0c064c555f605680d`, after the verified combined CNR-2/CNR-3 commit `28e521cc7b067c2902e38442386fd131ec6667a0`. Both hosted test jobs, Go analysis and CodeQL pass at the current revision. The [current contribution evidence](../ticket-evidence.md#current-contribution-evidence) supplies the check links and remaining scope. The existing combined verification remains evidence for its named revision; this status reconciliation does not claim a new independent implementation review.
+**Merged contribution:** [PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7) is merged at `d8a7d5b8b3782e26ff803678b097eed548c8c8ac`, with final head `26df2abc0ad3eb86efbb6259a70a3cfab1e79005`. Both hosted SDK test runs, Go analysis and CodeQL pass for that head. The [current contribution evidence](../ticket-evidence.md#current-contribution-evidence) supplies exact check links. Maintainer acceptance applies to that merged scope; CNR-4 completion and full M1 acceptance remain separate. Earlier independent verification remains evidence for its named revision.
 
 **Prior compatibility-only implementation acceptance evidence:**
 
@@ -207,7 +207,7 @@ If the actual provider API cannot enforce the selected ownership/configuration b
 
 ### CNR-4 Preserve external policy across commands and attached references
 
-Status: OPEN (remaining attachment authority and resource binding need reconciliation and current verification)
+Status: DONE (2026-11-18, corrected initialization ownership and fresh whole-contribution verification; maintainer acceptance pending)
 
 - Type: Feature
 - Priority: High
@@ -238,12 +238,16 @@ New snapshot, suspend/resume or restore support, replacement recovery and runtim
 
 #### Acceptance criteria
 
-- [ ] Tests prove an attached reference routes to the same resource without resetting its configuration or acquiring ownership. Closing an attachment does not delete compute. Source: M1 plan and H2.
-- [ ] SDK/controller initialization rejects omitted/default or unsupported idle policy and initial snapshot/restore for the selected fresh native configuration before allocation. Require actual `NoIdleTimeout`; a declaration in provider config alone does not prove the controller selected it. Direct receiving calls validate the configuration and identity information available there, without claiming to inspect absent controller fields. Source: M1 plan and H1/H2.
-- [ ] Unsupported execute, snapshot, restore, suspend/resume and idle requests produce zero forbidden provider calls after startup and through attachments. Source: M1 plan and H1/H2.
-- [ ] Direct receiving Activity/provider tests reject missing or conflicting required configuration/resource binding independently of the SDK route. Retries retain the selected context. Existing input signatures remain compatible. Source: M1 plan and H2/T1.
-- [ ] Owner completion/cancellation tests exercise the existing stop/cleanup path; attached callers cannot become a second cleanup owner. Report provider teardown observations accurately rather than claiming proof of all process death. Source: M1 plan and H2/G1.
-- [ ] Legacy command and attachment tests retain their original routing without a new capability prerequisite. Source: M1 plan and H2/T2.
+- [x] Tests prove an attached reference routes to the same resource without resetting its configuration or acquiring ownership. Closing an attachment does not delete compute. Source: M1 plan and H2.
+- [x] SDK/controller initialization rejects omitted/default or unsupported idle policy and initial snapshot/restore for the selected fresh native configuration before allocation. Require actual `NoIdleTimeout`; a declaration in provider config alone does not prove the controller selected it. Direct receiving calls validate the configuration and identity information available there, without claiming to inspect absent controller fields. Source: M1 plan and H1/H2.
+- [x] Unsupported execute, snapshot, restore, suspend/resume and idle requests produce zero forbidden provider calls after startup and through attachments. Source: M1 plan and H1/H2.
+- [x] Direct receiving Activity/provider tests reject missing or conflicting required configuration/resource binding independently of the SDK route. Retries retain the selected context. Existing input signatures remain compatible. Source: M1 plan and H2/T1.
+- [x] Owner completion/cancellation tests exercise the existing stop/cleanup path; attached callers cannot become a second cleanup owner. Report provider teardown observations accurately rather than claiming proof of all process death. Source: M1 plan and H2/G1.
+- [x] Legacy command and attachment tests retain their original routing without a new capability prerequisite. Source: M1 plan and H2/T2.
+
+#### Customer decisions
+
+Coverage: complete
 
 #### Dependencies and blockers
 
@@ -253,19 +257,30 @@ CNR-2 supplies the revised configuration and identity contract through existing 
 
 [M1 contract](../plan.md#source-contract-and-extension-surface); [H1, H2, T1, T2 and G1](../ticket-evidence.md#inspected-sources).
 
+- Customer decision review: zero. Reviewed: all CNR-4 sections, active criteria, dependencies, prior implementation decisions, source evidence and current local verification. No held update file exists. Result: this generic controller correction requires engineering work, not a customer action, fact, choice or approval. Maintainer acceptance and publication remain separate.
+- Current qualification: revision `549bd175eeba39f33fe606c49a91cd5f67c55f74` closes the inherited overlapping initialization failure. New controllers claim the pinned SDK's native Workflow mutex before policy changes or awaited Start work; validator and receiving handler reject competing initialization. Same Update ID retries preserve the original result. `TestLocalConcurrentInitializationOwnership/{same,changed,invalid,legacy}/{stop,cancel}` proves all eight held-create interleavings retain original configuration/status, one create, one matching Stop/DELETE and replay. The direct handler test and isolated validator bypass prove independent receiving enforcement; removing the claim in the isolated copy fails the regression. Three fresh roles and the final lead suite, gate, vet and builds accept the corrected 101 file source map in the [combined M1 acceptance record](../evidence/m1-implementation-acceptance.md). The version marker preserves old histories; older pending initialization must finish before deployment and marked active controllers require a verified rollback transition. The operator authorizes this correction, whole verification and publication on 2026-11-18. Maintainer acceptance remains separate.
+
 #### Open questions
 
 Record any existing attachment or cancellation path that cannot preserve the selected profile before changing it. Such a source impact requires a bounded correction, not a second lifecycle controller.
 
-**Implementation source impact, 2026-10-28:** The existing attachment addresses only its owner Workflow and already preserves controller configuration and resource identity. Its `RequestStop` also signals owner shutdown. The bounded correction issues version 2 references for fresh native configurations and refuses attachment shutdown through those references; version 1 legacy references retain their behavior. Native status adds an optional typed resource binding, omitted for legacy status. Direct native stop checks this binding and current machine metadata before deletion. The controller retains all ownership and operation routing. No new Activity family or lifecycle controller is introduced. References and labels remain reconciliation data in a trusted environment, not authentication against forged inputs or direct signals.
+**Implementation decision, 2026-11-17:** The operator authorizes completion after review against merged main `d8a7d5b8b3782e26ff803678b097eed548c8c8ac`. Preserve version 1 references and explicit attachment `RequestStop` delegation to the same owner. Ordinary attachment completion/cancellation must not create a cleanup owner or delete compute. The earlier version 2 refusal is an unadopted candidate, not an acceptance requirement. Fresh SmolCloud status carries optional typed resource context, with provider/configuration/instance checks at the receiving boundaries and metadata reconciliation before supported command/stop effects. Legacy status omits that context. A caller that erases every profile marker cannot be distinguished from a legacy caller using local input alone; labels and references are trusted reconciliation data, not authentication.
 
-The reviewed [PR revision](https://github.com/temporal-community/sandbox-orchestration-harness/tree/56c51dfe7fd1995ffb749ad0c064c555f605680d) already includes independent bootstrap/lifecycle/branchability settings and applicable initial/later fresh lifecycle admission. Resource binding across references and attachment cleanup ownership remain separate work. The local candidate `0cff218` implements an earlier ownership approach but also contains obsolete provider code and test organization. Reconcile its missing ownership behavior against the current reviewed source, preserve the independent settings and review corrections, and run the complete CNR-4 acceptance matrix before marking this ticket DONE. Existing tests or source presence alone do not establish that result.
+**Cancellation and activation:** The same owner uses the pinned SDK's `WithWaitForCancellation` and disconnected `AllHandlersFinished` drain to retain a terminal initialization result before cleanup. The `wait-for-fresh-start-cancellation` `GetVersion` gate preserves historical command selection. Tests distinguish successful initialization, failed initialization, recovered adoption and lost replies. Cleanup uses only a known matching instance. Stricter fresh status validation requires compatible receiving Workers before new starts. Existing fresh executions with unbound status must finish on compatible code or receive a separately verified transition; this ticket authorizes no automatic migration. Baseline/default executions retain their existing path. The contribution records the cutover and rollback prerequisites because old Workers can ignore new context and unknown start results can prevent cleanup.
+
+Merged [PR #7](https://github.com/temporal-community/sandbox-orchestration-harness/pull/7), final head `26df2abc0ad3eb86efbb6259a70a3cfab1e79005`, supplies independent bootstrap/lifecycle/branchability settings and applicable initial/later fresh lifecycle admission. Fresh lifecycle permits supported commands. The CNR-4 contribution builds on merged main rather than the historical candidate `0cff218` and preserves those settings and the original fixture bytes.
+
+**Local acceptance, 2026-11-17:** Implementation revision `133786bb5e805495532db85ef08bc2075e2bf005` completes this ticket on merged baseline `d8a7d5b8b3782e26ff803678b097eed548c8c8ac`. `TestLocalAttachmentOwnershipHistory` proves all eight fresh/legacy owner shutdown routes and harmless ordinary attachment completion/cancellation. Initial admission and later operation matrices prove zero forbidden calls. `TestResourceBindingLocalContract`, direct receiving Activity/provider matrices and lost-reply adoption tests prove independent binding checks and retention. `TestLocalPendingStartCancellationCleanup` proves late success cleanup and canceled/uncanceled initialization failure. Retained legacy and both fresh controller histories replay; all ten merged baseline fixtures remain byte identical. Version 1 references, legacy wire data, registrations, default configuration and supported commands retain their contracts.
+
+Fresh contract, mutation and activated structural reviews accept all six criteria. The lead rerun passes 287 test/subtest results with three expected live/capture skips, the exact automatic CI required-test script, vet, all 12 Makefile example targets and the database example build. The single commit passes the same checks in a separate checkout. Mutation evidence records 97 unique current killed faults, four equivalent clauses and five invalid candidates retained against unchanged production sources; no relevant survivor remains. Retained acceptance report SHA256: `bc8c909b00fc4ad765caf0e7a925746e7c900823c70dafffbd44dd7c05560f24`. This is local acceptance, not maintainer acceptance or full M1 acceptance.
+
+[Draft PR #13](https://github.com/temporal-community/sandbox-orchestration-harness/pull/13) contains the exact implementation revision above. Its [PR SDK tests](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/44189142854), [push SDK tests](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/44189088202), [Go analysis](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/44189133829/job/134413533800) and [CodeQL](https://github.com/temporal-community/sandbox-orchestration-harness/runs/134415565869) pass for that revision. The PR retains the existing reviewer and draft status. Merged PR #7 remains unchanged.
 
 Activation is limited to fresh native executions. Earlier experimental native histories require a separate activation/versioning decision before migration. Retained baseline histories must replay unchanged. No migration or live provider run is authorized by this reconciliation. CNR-5 owns the generic process demo and CNR-6 owns full M1 acceptance.
 
 ### CNR-5 Demonstrate a controller owned external process
 
-Status: OPEN
+Status: DONE (2026-11-18, local implementation acceptance; contribution revision 549bd175eeba39f33fe606c49a91cd5f67c55f74)
 
 - Type: Task
 - Priority: High
@@ -296,11 +311,15 @@ No LLM call, model credential, new cloud allocation, live run, skill execution, 
 
 #### Acceptance criteria
 
-- [ ] A documented local fake provider command runs the example and proves one resource owner, process completion and explicit cleanup. A second run exercises cancellation and cleanup. Source: M1 plan and H2/G1.
-- [ ] Captured launch configuration contains no in-resource Temporal Worker bootstrap or Namespace credential. The real example's image entrypoint runs only the bounded native process. Source: M1 plan and H1/H3.
-- [ ] A deliberately unsupported profile fails before allocation and produces an actionable error. The example does not treat command completion as autonomous runtime idleness. Source: M1 plan.
-- [ ] A reviewer can find exact prerequisites, commands, expected results and limits without private records. Optional real execution is labeled separately and not reported as tested by fake conformance. Source: M1 plan.
-- [ ] The example and collaboration handoff identify the next early M2 skill demo without making that later integration an M1 acceptance dependency. Source: M1/M2 plan.
+- [x] A documented local fake provider command runs the example and proves one resource owner, process completion and explicit cleanup. A second run exercises cancellation and cleanup. Source: M1 plan and H2/G1.
+- [x] Captured launch configuration contains no in-resource Temporal Worker bootstrap or Namespace credential. The real example's image entrypoint runs only the bounded native process. Source: M1 plan and H1/H3.
+- [x] A deliberately unsupported profile fails before allocation and produces an actionable error. The example does not treat command completion as autonomous runtime idleness. Source: M1 plan.
+- [x] A reviewer can find exact prerequisites, commands, expected results and limits without private records. Optional real execution is labeled separately and not reported as tested by fake conformance. Source: M1 plan.
+- [x] The example and collaboration handoff identify the next early M2 skill demo without making that later integration an M1 acceptance dependency. Source: M1/M2 plan.
+
+#### Customer decisions
+
+Coverage: complete
 
 #### Dependencies and blockers
 
@@ -310,13 +329,21 @@ CNR-3 and CNR-4 supply actual provider behavior and lifecycle enforcement. Fake 
 
 [M1 example and acceptance contract](../plan.md#focused-acceptance-and-compatibility); [collaboration handoff](../collaboration-handoff.md); [H1, H2, H3 and G1](../ticket-evidence.md#inspected-sources).
 
+- Customer decision review: zero. Reviewed: all CNR-5 sections, CNR-3/CNR-4 dependencies, CNR-6 boundary, M1 plan, collaboration handoff and available local ticket history. No held update file exists. Result: this generic local example requires no customer action, fact, choice or approval. Live execution and later integration retain separate authorization.
+- Reviewed implementation: branch `external-runtime-demo`, revision `549bd175eeba39f33fe606c49a91cd5f67c55f74`, based on verified PR #13 head `133786bb5e805495532db85ef08bc2075e2bf005`. The corrected combined 101 file inventory has SHA256 `3808089139e9dc1cd7de6f0ec8265306467b8870a044cfebf4ccef7c56f1320d`, computed over compact sorted JSON from repository relative paths to file SHA256 values. CNR-4 owns the controller correction; dependency files and existing fixtures match the base. The combined acceptance record owns current verification and publication qualification.
+- Completion and cancellation: `sdk/external_process_example_test.go`, SHA256 `e733779d77430a7974b820894f0a3f4a7ce619f32e0aa7a1e7534d40ad34f6a3`, supplies `TestLocalExternalProcessExample/completion` and `/cancellation`. Each runs the real SmolCloud provider against a loopback fake API, observes one controller/create/DELETE/Stop Activity and confirms local process reaping before fallback cleanup. Cancellation interrupts a running process. An isolated DELETE acknowledgement without process stop fails with `cancellation did not interrupt the process`.
+- Launch and refusal: the same test captures `env:{}`, rejects Temporal bootstrap keys and synthetic Namespace/provider credentials in launch data, and uses explicit `NoIdleTimeout`. `/unsupported-profile` rejects fresh lifecycle with branching using `fresh lifecycle requires branchable=false`, with zero HTTP requests and no process. Controller history contains no idle timer. `examples/external-process/Dockerfile`, SHA256 `b70d8025adcad6ddf04af66e26552c640eb20fe65ee8ff8b4d836451b296b525`, contains the same bounded `printf process-output; exec sleep 2` entrypoint.
+- Reproduction: `examples/external-process/README.md`, SHA256 `f551262a1cb1d31a76f938f57e999c5a8dc73c496dbdfa0b7183c2126fba98d0`, contains prerequisites, the local server command, three exact case commands, expected results, cleanup and optional real execution limits. Each documented case command passes independently. The example and collaboration handoff identify the separate early M2 local Docker/Connector skill demo.
+- Final lead checks: from `sdk`, `GOWORK=off HARNESS_LOCAL_TEST=1 SMOL_CLOUD_LIVE=0 HARNESS_HISTORY_CAPTURE= go test -json -count=1 -timeout=5m ./...` passes 301 test/subtest results with three expected live/capture skips. The exact CI required-name gate and `go vet ./...` pass. All 12 `make bins` targets and the database example build pass with an isolated workspace using the same local SDK. Focused race checks pass. CI guard counterexamples reject absent, skipped and wrong-package demo and initialization results. The canonical per-commit verifier repeats the full suite, gate, vet and builds on the actual committed checkout.
+- Fresh verification: independent contract, adversarial containment and activated structural invariant reviews accept all five example criteria and the corrected whole M1 implementation with no unresolved material finding. Current report identities and all 26 criteria are retained in the [combined M1 acceptance record](../evidence/m1-implementation-acceptance.md). Five compiler probes reject invalid record/interface contracts. Verification uses local Temporal, fake HTTP and local processes only. Real image boot, provider readiness/observation and cloud teardown remain unqualified. CNR-6 completes local M1 acceptance; maintainer approval is separate.
+
 #### Open questions
 
-Choose the smallest bounded process and image that match the provider example convention. It must not require paid model access.
+None for local acceptance. Optional real execution requires separate authorization and qualification of short entrypoint readiness, image publication and a provider supported process observer. No model access is required by this example.
 
 ### CNR-6 Verify M1 and prepare the upstream review handoff
 
-Status: OPEN
+Status: DONE (2026-11-18, whole M1 implementation and local review package accepted; maintainer acceptance pending)
 
 - Type: Task
 - Priority: High
@@ -347,11 +374,15 @@ Publishing a PR or message, paid execution, live provider qualification and upst
 
 #### Acceptance criteria
 
-- [ ] Independent implementation verification maps every CNR-2 through CNR-5 criterion to exact revision evidence and reports no unresolved material defect for the selected M1 scope. Source: M1 verification contract.
-- [ ] A lead rerun confirms applicable target CI commands, legacy history replay, fresh external histories, fake provider retry/adoption cases, direct Activity refusal, attachment isolation and completion/cancellation cleanup. Source: M1 plan, T1/T2 and G1.
-- [ ] A clean example run and negative configuration run reproduce CNR-5 results. Retain actionable evidence without requiring private raw diagnostics to review the contribution. Source: M1 plan.
-- [ ] The draft upstream description states the problem, additive behavior, compatibility, proof and limits. The collaboration handoff separates harness ownership from the native SDK/Transport work and lists unresolved joint seam questions. Source: M1 plan.
-- [ ] The M1 exit record distinguishes implementation acceptance, pending maintainer acceptance and unexecuted live checks. It identifies the bounded early M2 design/ticket handoff instead of expanding all later work. Source: M1/M2 plan.
+- [x] Independent implementation verification maps every CNR-2 through CNR-5 criterion to exact revision evidence and reports no unresolved material defect for the selected M1 scope. Source: M1 verification contract.
+- [x] A lead rerun confirms applicable target CI commands, legacy history replay, fresh external histories, fake provider retry/adoption cases, direct Activity refusal, attachment isolation and completion/cancellation cleanup. Source: M1 plan, T1/T2 and G1.
+- [x] A clean example run and negative configuration run reproduce CNR-5 results. Retain actionable evidence without requiring private raw diagnostics to review the contribution. Source: M1 plan.
+- [x] The draft upstream description states the problem, additive behavior, compatibility, proof and limits. The collaboration handoff separates harness ownership from the native SDK/Transport work and lists unresolved joint seam questions. Source: M1 plan.
+- [x] The M1 exit record distinguishes implementation acceptance, pending maintainer acceptance and unexecuted live checks. It identifies the bounded early M2 design/ticket handoff instead of expanding all later work. Source: M1/M2 plan.
+
+#### Customer decisions
+
+Coverage: complete
 
 #### Dependencies and blockers
 
@@ -361,6 +392,10 @@ CNR-5 transitively requires every other M1 work ticket. Maintainer review gates 
 
 [M1 acceptance and compatibility](../plan.md#focused-acceptance-and-compatibility); [M1 design review](../verification-report.md); [T1, T2 and G1](../ticket-evidence.md#inspected-sources).
 
+- Customer decision review: zero. Reviewed: all CNR-6 sections, active CNR-2 through CNR-5 criteria, dependencies, current review reports and the local plan/handoff. No held update file exists. Result: the generic local implementation review needs no customer action, fact, choice or approval. Operator authority for a controller correction, publication and maintainer acceptance remain separate.
+
+The [current M1 implementation acceptance record](../evidence/m1-implementation-acceptance.md) binds revision `549bd175eeba39f33fe606c49a91cd5f67c55f74` and the 101 file source map to all 21 active implementation criteria and five package criteria. Three fresh roles accept the whole implementation; the lead independently repeats 301 passing results, three expected skips, the CI event gate, vet and all example builds. Three documented example commands pass independently. [PR #14](https://github.com/temporal-community/sandbox-orchestration-harness/pull/14) publishes the correction and demo together on PR #13. Its description states behavior, compatibility, proof and limits. The collaboration handoff states compute/process ownership and unresolved early M2 seams. Both [PR SDK CI](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/44370319316) and [push SDK CI](https://github.com/temporal-community/sandbox-orchestration-harness/actions/runs/44370261128) pass on that exact head. Local M1 acceptance is complete; maintainer approval, upstream merge and live qualification remain separate.
+
 #### Open questions
 
-Select the actual review revision after implementation. Do not reuse a prior design verdict as implementation proof.
+None for local acceptance. The operator authorizes correction, full verification and publication on 2026-11-18. Maintainer approval, upstream merge and unexecuted live qualification remain separate.
